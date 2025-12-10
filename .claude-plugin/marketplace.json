@@ -14,7 +14,7 @@
       "author": {
         "name": "Max Ghenis"
       },
-      "source": "./plugins/farness",
+      "source": "./claude-plugin",
       "category": "productivity"
     }
   ]

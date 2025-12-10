@@ -60,28 +60,51 @@ Ask: "What information would most change these estimates?"
 
 ## Step 6: Log the Decision
 
-After completing the analysis, save to the decisions log:
+After completing the analysis, use Python to save the decision using the farness package:
 
-```bash
-# Create log entry
-cat >> ~/.farness/decisions.jsonl << 'ENTRY'
-{
-  "id": "<generate-uuid>",
-  "timestamp": "<ISO-8601>",
-  "decision": "<the decision>",
-  "kpis": ["<list>"],
-  "options": ["<list>"],
-  "forecasts": {<option: {kpi: {estimate, confidence, assumptions}}>},
-  "chosen_option": "<if decided>",
-  "review_date": "<timestamp + 3 months>",
-  "outcome_scored": false
-}
-ENTRY
+```python
+from datetime import datetime, timedelta
+from farness import Decision, KPI, Option, Forecast, DecisionStore
+
+# Create the decision object with all the data from the analysis
+decision = Decision(
+    question="<the decision question>",
+    context="<any relevant context>",
+    kpis=[
+        KPI(name="<kpi1>", description="<desc>", weight=1.0),
+        # ... more KPIs
+    ],
+    options=[
+        Option(
+            name="<option1>",
+            description="<desc>",
+            forecasts={
+                "<kpi1>": Forecast(
+                    point_estimate=<value>,
+                    confidence_interval=(<low>, <high>),
+                    confidence_level=0.8,
+                    reasoning="<why>",
+                    assumptions=["<assumption1>", "<assumption2>"],
+                ),
+                # ... more KPI forecasts
+            }
+        ),
+        # ... more options
+    ],
+    review_date=datetime.now() + timedelta(days=90),
+)
+
+# If user made a choice
+decision.chosen_option = "<chosen option name>"
+decision.decided_at = datetime.now()
+
+# Save
+store = DecisionStore()
+store.save(decision)
+print(f"Decision logged: {decision.id[:8]}")
 ```
 
-Create ~/.farness directory if it doesn't exist.
-
-Tell the user: "Decision logged. I'll remind you to score the outcome in 3 months."
+Tell the user: "Decision logged. Run `farness pending` in 3 months to review outcomes."
 
 ## Key Principles
 
