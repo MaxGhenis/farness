@@ -1,0 +1,21 @@
+{
+  "$schema": "https://anthropic.com/claude-code/marketplace.schema.json",
+  "name": "farness",
+  "version": "0.1.0",
+  "description": "Forecasting as a harness - reframe decisions as KPI predictions",
+  "owner": {
+    "name": "Max Ghenis"
+  },
+  "plugins": [
+    {
+      "name": "farness",
+      "description": "Decision-making framework that reframes subjective questions as forecasting problems with explicit KPIs, option expansion, and calibration tracking",
+      "version": "0.1.0",
+      "author": {
+        "name": "Max Ghenis"
+      },
+      "source": "./plugins/farness",
+      "category": "productivity"
+    }
+  ]
+}
