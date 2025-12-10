@@ -33,6 +33,10 @@ def main():
     # Pending reviews
     subparsers.add_parser("pending", help="Show decisions pending review")
 
+    # Score a decision
+    score_parser = subparsers.add_parser("score", help="Score a decision's outcomes")
+    score_parser.add_argument("id", nargs="?", help="Decision ID (or prefix)")
+
     args = parser.parse_args()
     store = DecisionStore()
 
@@ -121,6 +125,121 @@ def main():
                 days_past = (datetime.now() - d.review_date).days if d.review_date else 0
                 print(f"  [{d.id[:8]}] {d.question[:50]}")
                 print(f"           Review was {days_past} days ago")
+
+    elif args.command == "score":
+        # Find the decision to score
+        if args.id:
+            decisions = store.list_all()
+            matches = [d for d in decisions if d.id.startswith(args.id)]
+        else:
+            # Show unscored decisions and prompt
+            matches = store.list_unscored()
+            if not matches:
+                print("No unscored decisions to score.")
+                sys.exit(0)
+            print("Unscored decisions:\n")
+            for i, d in enumerate(matches, 1):
+                print(f"  {i}. [{d.id[:8]}] {d.question[:50]}")
+            print()
+            try:
+                choice = input("Enter number to score (or q to quit): ").strip()
+                if choice.lower() == "q":
+                    sys.exit(0)
+                idx = int(choice) - 1
+                if 0 <= idx < len(matches):
+                    matches = [matches[idx]]
+                else:
+                    print("Invalid selection.")
+                    sys.exit(1)
+            except (ValueError, EOFError):
+                print("Invalid input.")
+                sys.exit(1)
+
+        if not matches:
+            print(f"No decision found with ID starting with '{args.id}'")
+            sys.exit(1)
+        if len(matches) > 1:
+            print(f"Multiple matches for '{args.id}':")
+            for d in matches:
+                print(f"  {d.id}")
+            sys.exit(1)
+
+        d = matches[0]
+
+        if d.scored_at:
+            print(f"Decision [{d.id[:8]}] has already been scored.")
+            sys.exit(1)
+
+        if not d.chosen_option:
+            print(f"Decision [{d.id[:8]}] has no chosen option yet.")
+            sys.exit(1)
+
+        # Find the chosen option
+        chosen = None
+        for opt in d.options:
+            if opt.name == d.chosen_option:
+                chosen = opt
+                break
+
+        if not chosen:
+            print(f"Chosen option '{d.chosen_option}' not found in decision.")
+            sys.exit(1)
+
+        # Display decision and forecasts
+        print(f"\nScoring: {d.question}")
+        print(f"Chosen option: {d.chosen_option}")
+        print(f"\nOriginal forecasts:")
+        for kpi in d.kpis:
+            if kpi.name in chosen.forecasts:
+                f = chosen.forecasts[kpi.name]
+                ci_low, ci_high = f.confidence_interval
+                unit = f" {kpi.unit}" if kpi.unit else ""
+                print(f"  {kpi.name}: {f.point_estimate}{unit} ({ci_low}-{ci_high} @ {f.confidence_level:.0%})")
+
+        # Gather actual outcomes
+        print(f"\nEnter actual outcomes:")
+        actual_outcomes = {}
+        for kpi in d.kpis:
+            if kpi.name in chosen.forecasts:
+                unit = f" ({kpi.unit})" if kpi.unit else ""
+                try:
+                    value = input(f"  {kpi.name}{unit}: ").strip()
+                    if value:
+                        actual_outcomes[kpi.name] = float(value)
+                except (ValueError, EOFError):
+                    print(f"  Skipping {kpi.name} (invalid input)")
+
+        if not actual_outcomes:
+            print("\nNo outcomes entered. Aborting.")
+            sys.exit(1)
+
+        # Optional reflections
+        print()
+        try:
+            reflections = input("Reflections (optional, press Enter to skip): ").strip()
+        except EOFError:
+            reflections = ""
+
+        # Update decision
+        d.actual_outcomes = actual_outcomes
+        d.scored_at = datetime.now()
+        d.reflections = reflections
+        store.update(d)
+
+        # Show results
+        print(f"\nDecision scored!")
+        print(f"\nResults:")
+        for kpi_name, actual in actual_outcomes.items():
+            f = chosen.forecasts[kpi_name]
+            ci_low, ci_high = f.confidence_interval
+            in_ci = "✓" if ci_low <= actual <= ci_high else "✗"
+            error = actual - f.point_estimate
+            print(f"  {kpi_name}: predicted {f.point_estimate}, actual {actual} (error: {error:+.2f}) {in_ci}")
+
+        # Show updated calibration
+        tracker = CalibrationTracker(store.list_all())
+        if tracker.scores:
+            print(f"\nCalibration: {tracker.coverage:.0%} coverage ({tracker.expected_coverage:.0%} expected)")
 
     else:
         parser.print_help()

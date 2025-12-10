@@ -34,6 +34,7 @@ ruff check farness tests
 farness list              # List all decisions
 farness list --pending    # Decisions past review date
 farness show <id>         # Show decision details (supports prefix match)
+farness score [id]        # Score a decision's actual outcomes (interactive)
 farness calibration       # Show calibration statistics
 farness pending           # Alias for list --pending
 ```
