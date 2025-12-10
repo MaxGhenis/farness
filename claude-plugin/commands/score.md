@@ -10,63 +10,82 @@ arguments:
 
 Review a past decision and score how the forecasts performed.
 
-## Step 1: Find the Decision
+## Option A: Use the CLI (Recommended)
 
-If no ID provided, read ~/.farness/decisions.jsonl and show recent unscored decisions:
+Run the interactive scoring command:
 
 ```bash
-cat ~/.farness/decisions.jsonl | grep '"outcome_scored": false'
+farness score $ARGUMENTS
 ```
 
-Display as a list:
-- [id] Decision summary (date) - KPIs: X, Y, Z
+This will:
+1. Show unscored decisions (or find by ID if provided)
+2. Display original forecasts for the chosen option
+3. Prompt for actual outcomes per KPI
+4. Calculate errors and CI coverage
+5. Save results and show updated calibration
 
-Ask user which to score.
+## Option B: Guided Scoring (if CLI unavailable)
 
-## Step 2: Review Original Forecasts
+### Step 1: Find the Decision
 
-Load the decision and display:
+List unscored decisions:
+
+```bash
+farness list --unscored
+```
+
+Or show a specific decision:
+
+```bash
+farness show <id>
+```
+
+### Step 2: Review Original Forecasts
+
+Display:
 - The decision question
-- Options considered
-- The forecasts made for each option × KPI
-- Which option was chosen
+- The chosen option
+- Forecasts for each KPI (point estimate, confidence interval)
 - Key assumptions at the time
 
-## Step 3: Gather Outcomes
+### Step 3: Gather Outcomes
 
-For each KPI, ask:
+For each KPI, ask the user:
 "What was the actual outcome for [KPI]?"
 
-Get specific numbers where possible.
+Get specific numbers.
 
-## Step 4: Score Forecasts
+### Step 4: Update via Python
 
-For each forecast:
-- Compare prediction to actual
-- Calculate error (for point estimates) or whether actual fell in CI (for ranges)
-- Note if key assumptions held or not
+```python
+from datetime import datetime
+from farness import DecisionStore
 
-## Step 5: Update Log
+store = DecisionStore()
+decision = store.get("<decision_id>")
 
-```bash
-# Update the decision entry with outcomes
-# Add: actual_outcomes, forecast_errors, scored_at, notes
+decision.actual_outcomes = {
+    "<kpi1>": <actual_value>,
+    "<kpi2>": <actual_value>,
+}
+decision.scored_at = datetime.now()
+decision.reflections = "<user reflections>"
+
+store.update(decision)
 ```
 
-## Step 6: Show Calibration
+### Step 5: Show Calibration
 
-Read all scored decisions and show:
-- Overall calibration curve (% of actuals falling within stated CIs)
-- Brier score trend over time
-- Systematic biases (overconfident? underconfident on certain domains?)
+```bash
+farness calibration
+```
 
-"Your calibration: X% of outcomes fell within your confidence intervals (target: match your stated confidence levels)"
+## Reflection Questions
 
-## Step 7: Reflection
-
-Ask:
+After scoring, ask:
 - "What did you learn from this decision?"
 - "Would you make the same choice with hindsight?"
 - "What would you do differently in the analysis?"
 
-Log reflections with the scored decision.
+Record reflections in the decision.

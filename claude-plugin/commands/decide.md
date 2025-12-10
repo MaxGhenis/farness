@@ -104,7 +104,7 @@ store.save(decision)
 print(f"Decision logged: {decision.id[:8]}")
 ```
 
-Tell the user: "Decision logged. Run `farness pending` in 3 months to review outcomes."
+Tell the user: "Decision logged. Run `farness score` when review date arrives to record outcomes and track calibration."
 
 ## Key Principles
 
