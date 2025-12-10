@@ -1,8 +1,8 @@
 {
   "$schema": "https://anthropic.com/claude-code/marketplace.schema.json",
-  "name": "farness",
+  "name": "maxghenis-plugins",
   "version": "0.1.0",
-  "description": "Forecasting as a harness - reframe decisions as KPI predictions",
+  "description": "Max Ghenis plugins - forecasting, decision-making tools",
   "owner": {
     "name": "Max Ghenis"
   },
