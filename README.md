@@ -131,6 +131,30 @@ pip install -e ".[dev]"
 pytest
 ```
 
+### Publishing to PyPI
+
+The package is automatically published to PyPI when a new release is created on GitHub.
+
+**Setup (one-time):**
+1. Add `PYPI_API_TOKEN` secret to the GitHub repository
+   - Go to repository Settings > Secrets and variables > Actions
+   - Add a new repository secret named `PYPI_API_TOKEN`
+   - Value should be your PyPI API token (starts with `pypi-`)
+
+**To publish a new version:**
+1. Update version in `pyproject.toml`
+2. Create a new release on GitHub with a tag (e.g., `v0.1.1`)
+3. The GitHub Actions workflow will automatically build and publish to PyPI
+
+**Manual publishing:**
+```bash
+# Build the package
+python -m build
+
+# Upload to PyPI
+twine upload dist/* --username __token__ --password $PYPI_API_TOKEN
+```
+
 ## License
 
 MIT
