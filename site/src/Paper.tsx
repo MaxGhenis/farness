@@ -54,7 +54,7 @@ function Paper() {
             Measuring Decision Framework Effectiveness in LLMs
           </p>
           <p style={{ fontSize: '0.85rem', color: 'var(--color-text-muted)', marginTop: '1rem' }}>
-            Max Ghenis &middot; Draft v0.1 &middot; December 2024
+            Max Ghenis &middot; Draft v0.1 &middot; December 2025
           </p>
         </header>
 

@@ -2,7 +2,7 @@
 
 **Authors:** Max Ghenis, [collaborators TBD]
 
-**Status:** Draft v0.1 - December 2024
+**Status:** Draft v0.1 - December 2025
 
 ---
 
