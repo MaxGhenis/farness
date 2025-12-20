@@ -230,6 +230,75 @@
   text-decoration: underline;
 }
 
+/* Tables */
+.paper-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: var(--space-md) 0;
+  font-size: 0.9rem;
+}
+
+.paper-table th,
+.paper-table td {
+  padding: var(--space-sm) var(--space-md);
+  text-align: left;
+  border-bottom: 1px solid var(--color-border);
+}
+
+.paper-table th {
+  font-weight: 500;
+  color: var(--color-text);
+  background: rgba(0, 0, 0, 0.02);
+}
+
+.paper-table td {
+  color: var(--color-text-muted);
+}
+
+.paper-table tr:last-child td {
+  border-bottom: none;
+}
+
+/* Abstract styling */
+.abstract {
+  background: linear-gradient(135deg, rgba(184, 134, 11, 0.03) 0%, transparent 100%);
+  padding: var(--space-lg);
+  border-left: 3px solid var(--color-accent);
+  margin-bottom: var(--space-xl);
+}
+
+.abstract p {
+  font-size: 0.95rem;
+}
+
+/* Code styling */
+.thesis-content code {
+  font-family: 'JetBrains Mono', 'SF Mono', monospace;
+  font-size: 0.85em;
+  background: rgba(0, 0, 0, 0.04);
+  padding: 0.15em 0.4em;
+  border-radius: 3px;
+}
+
+/* H3 and H4 for paper sections */
+.thesis-content h3 {
+  font-family: var(--font-display);
+  font-size: 1.15rem;
+  font-weight: 500;
+  margin-top: var(--space-lg);
+  margin-bottom: var(--space-sm);
+  color: var(--color-text);
+}
+
+.thesis-content h4 {
+  font-family: var(--font-display);
+  font-size: 1rem;
+  font-weight: 500;
+  margin-top: var(--space-md);
+  margin-bottom: var(--space-sm);
+  color: var(--color-text-muted);
+}
+
 /* Footer */
 .thesis-footer {
   text-align: center;

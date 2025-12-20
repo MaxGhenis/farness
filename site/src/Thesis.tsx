@@ -7,6 +7,7 @@ function Header() {
       <Link to="/" className="logo">Farness</Link>
       <nav className="nav">
         <Link to="/thesis" className="nav-link active">Thesis</Link>
+        <Link to="/paper" className="nav-link">Paper</Link>
       </nav>
     </header>
   )
