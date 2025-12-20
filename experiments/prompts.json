@@ -1,0 +1,102 @@
+[
+  {
+    "case_id": "hiring_chemistry",
+    "condition": "naive",
+    "prompt": "You are a helpful assistant. Answer this question directly:\n\n\"I'm a hiring manager. I really liked candidate A in our conversation -\ngreat chemistry, they reminded me of our best performer. Candidate B was more reserved\nbut had slightly better test scores. Who should I hire?\"\n\nGive your recommendation and reasoning."
+  },
+  {
+    "case_id": "hiring_chemistry",
+    "condition": "farness",
+    "prompt": "You are a decision analyst using the \"farness\" framework. This framework requires you to:\n\n1. Define explicit, measurable KPIs for the decision\n2. Make numeric forecasts with confidence intervals for each option\n3. Cite base rates from research (outside view) before adjusting with inside view\n4. Identify cognitive biases that might be affecting the framing\n5. Give a clear recommendation based on expected value\n6. Set a review date to score the decision against actuals\n\nApply this framework to:\n\n\"I'm a hiring manager. I really liked candidate A in our conversation -\ngreat chemistry, they reminded me of our best performer. Candidate B was more reserved\nbut had slightly better test scores. Who should I hire?\""
+  },
+  {
+    "case_id": "sunk_cost",
+    "condition": "naive",
+    "prompt": "You are a helpful assistant. Answer this question directly:\n\n\"We've invested $2M and 18 months into a software project. It's behind\nschedule, over budget, and the team is demoralized. But we're 'almost there' - maybe\nanother $500K and 3 months. Should we continue or cut our losses?\"\n\nGive your recommendation and reasoning."
+  },
+  {
+    "case_id": "sunk_cost",
+    "condition": "farness",
+    "prompt": "You are a decision analyst using the \"farness\" framework. This framework requires you to:\n\n1. Define explicit, measurable KPIs for the decision\n2. Make numeric forecasts with confidence intervals for each option\n3. Cite base rates from research (outside view) before adjusting with inside view\n4. Identify cognitive biases that might be affecting the framing\n5. Give a clear recommendation based on expected value\n6. Set a review date to score the decision against actuals\n\nApply this framework to:\n\n\"We've invested $2M and 18 months into a software project. It's behind\nschedule, over budget, and the team is demoralized. But we're 'almost there' - maybe\nanother $500K and 3 months. Should we continue or cut our losses?\""
+  },
+  {
+    "case_id": "planning_software",
+    "condition": "naive",
+    "prompt": "You are a helpful assistant. Answer this question directly:\n\n\"My team estimates this feature will take 2 weeks. They're confident\nand have detailed task breakdowns. Should I trust their estimate for planning purposes?\"\n\nGive your recommendation and reasoning."
+  },
+  {
+    "case_id": "planning_software",
+    "condition": "farness",
+    "prompt": "You are a decision analyst using the \"farness\" framework. This framework requires you to:\n\n1. Define explicit, measurable KPIs for the decision\n2. Make numeric forecasts with confidence intervals for each option\n3. Cite base rates from research (outside view) before adjusting with inside view\n4. Identify cognitive biases that might be affecting the framing\n5. Give a clear recommendation based on expected value\n6. Set a review date to score the decision against actuals\n\nApply this framework to:\n\n\"My team estimates this feature will take 2 weeks. They're confident\nand have detailed task breakdowns. Should I trust their estimate for planning purposes?\""
+  },
+  {
+    "case_id": "mna_acquisition",
+    "condition": "naive",
+    "prompt": "You are a helpful assistant. Answer this question directly:\n\n\"A competitor is available for acquisition. Our CEO is excited -\n'strategic fit', 'synergies', market consolidation. The price is fair based on their\nfinancials. Should we acquire them?\"\n\nGive your recommendation and reasoning."
+  },
+  {
+    "case_id": "mna_acquisition",
+    "condition": "farness",
+    "prompt": "You are a decision analyst using the \"farness\" framework. This framework requires you to:\n\n1. Define explicit, measurable KPIs for the decision\n2. Make numeric forecasts with confidence intervals for each option\n3. Cite base rates from research (outside view) before adjusting with inside view\n4. Identify cognitive biases that might be affecting the framing\n5. Give a clear recommendation based on expected value\n6. Set a review date to score the decision against actuals\n\nApply this framework to:\n\n\"A competitor is available for acquisition. Our CEO is excited -\n'strategic fit', 'synergies', market consolidation. The price is fair based on their\nfinancials. Should we acquire them?\""
+  },
+  {
+    "case_id": "expert_vs_algorithm",
+    "condition": "naive",
+    "prompt": "You are a helpful assistant. Answer this question directly:\n\n\"We can either have our experienced analysts make predictions, or use\na simple statistical model based on historical data. The analysts have domain expertise\nand can account for nuance. Which should we trust?\"\n\nGive your recommendation and reasoning."
+  },
+  {
+    "case_id": "expert_vs_algorithm",
+    "condition": "farness",
+    "prompt": "You are a decision analyst using the \"farness\" framework. This framework requires you to:\n\n1. Define explicit, measurable KPIs for the decision\n2. Make numeric forecasts with confidence intervals for each option\n3. Cite base rates from research (outside view) before adjusting with inside view\n4. Identify cognitive biases that might be affecting the framing\n5. Give a clear recommendation based on expected value\n6. Set a review date to score the decision against actuals\n\nApply this framework to:\n\n\"We can either have our experienced analysts make predictions, or use\na simple statistical model based on historical data. The analysts have domain expertise\nand can account for nuance. Which should we trust?\""
+  },
+  {
+    "case_id": "base_rate_neglect",
+    "condition": "naive",
+    "prompt": "You are a helpful assistant. Answer this question directly:\n\n\"A patient tests positive for a rare disease. The test is 95% accurate\n(95% sensitivity, 95% specificity). The disease affects 1 in 1000 people.\nHow worried should they be?\"\n\nGive your recommendation and reasoning."
+  },
+  {
+    "case_id": "base_rate_neglect",
+    "condition": "farness",
+    "prompt": "You are a decision analyst using the \"farness\" framework. This framework requires you to:\n\n1. Define explicit, measurable KPIs for the decision\n2. Make numeric forecasts with confidence intervals for each option\n3. Cite base rates from research (outside view) before adjusting with inside view\n4. Identify cognitive biases that might be affecting the framing\n5. Give a clear recommendation based on expected value\n6. Set a review date to score the decision against actuals\n\nApply this framework to:\n\n\"A patient tests positive for a rare disease. The test is 95% accurate\n(95% sensitivity, 95% specificity). The disease affects 1 in 1000 people.\nHow worried should they be?\""
+  },
+  {
+    "case_id": "startup_pivot",
+    "condition": "naive",
+    "prompt": "You are a helpful assistant. Answer this question directly:\n\n\"Our startup has been trying to get traction for 18 months. We have\nsome users but growth is flat. The team believes in the vision and has ideas to try.\nShould we persist or pivot?\"\n\nGive your recommendation and reasoning."
+  },
+  {
+    "case_id": "startup_pivot",
+    "condition": "farness",
+    "prompt": "You are a decision analyst using the \"farness\" framework. This framework requires you to:\n\n1. Define explicit, measurable KPIs for the decision\n2. Make numeric forecasts with confidence intervals for each option\n3. Cite base rates from research (outside view) before adjusting with inside view\n4. Identify cognitive biases that might be affecting the framing\n5. Give a clear recommendation based on expected value\n6. Set a review date to score the decision against actuals\n\nApply this framework to:\n\n\"Our startup has been trying to get traction for 18 months. We have\nsome users but growth is flat. The team believes in the vision and has ideas to try.\nShould we persist or pivot?\""
+  },
+  {
+    "case_id": "anchoring_negotiation",
+    "condition": "naive",
+    "prompt": "You are a helpful assistant. Answer this question directly:\n\n\"I'm negotiating salary. The recruiter asked what I'm looking for first.\nI'm not sure if I should give a number or wait for them to make an offer. What should I do?\"\n\nGive your recommendation and reasoning."
+  },
+  {
+    "case_id": "anchoring_negotiation",
+    "condition": "farness",
+    "prompt": "You are a decision analyst using the \"farness\" framework. This framework requires you to:\n\n1. Define explicit, measurable KPIs for the decision\n2. Make numeric forecasts with confidence intervals for each option\n3. Cite base rates from research (outside view) before adjusting with inside view\n4. Identify cognitive biases that might be affecting the framing\n5. Give a clear recommendation based on expected value\n6. Set a review date to score the decision against actuals\n\nApply this framework to:\n\n\"I'm negotiating salary. The recruiter asked what I'm looking for first.\nI'm not sure if I should give a number or wait for them to make an offer. What should I do?\""
+  },
+  {
+    "case_id": "hot_hand",
+    "condition": "naive",
+    "prompt": "You are a helpful assistant. Answer this question directly:\n\n\"Our basketball player has made his last 5 shots. He's 'hot'. Should we\nkeep feeding him the ball, or stick to our normal offense?\"\n\nGive your recommendation and reasoning."
+  },
+  {
+    "case_id": "hot_hand",
+    "condition": "farness",
+    "prompt": "You are a decision analyst using the \"farness\" framework. This framework requires you to:\n\n1. Define explicit, measurable KPIs for the decision\n2. Make numeric forecasts with confidence intervals for each option\n3. Cite base rates from research (outside view) before adjusting with inside view\n4. Identify cognitive biases that might be affecting the framing\n5. Give a clear recommendation based on expected value\n6. Set a review date to score the decision against actuals\n\nApply this framework to:\n\n\"Our basketball player has made his last 5 shots. He's 'hot'. Should we\nkeep feeding him the ball, or stick to our normal offense?\""
+  },
+  {
+    "case_id": "diversification",
+    "condition": "naive",
+    "prompt": "You are a helpful assistant. Answer this question directly:\n\n\"I have $100K to invest. My friend works at a tech startup that's growing\nfast and says it's a sure thing. Should I put most of my money there, or diversify\nacross index funds?\"\n\nGive your recommendation and reasoning."
+  },
+  {
+    "case_id": "diversification",
+    "condition": "farness",
+    "prompt": "You are a decision analyst using the \"farness\" framework. This framework requires you to:\n\n1. Define explicit, measurable KPIs for the decision\n2. Make numeric forecasts with confidence intervals for each option\n3. Cite base rates from research (outside view) before adjusting with inside view\n4. Identify cognitive biases that might be affecting the framing\n5. Give a clear recommendation based on expected value\n6. Set a review date to score the decision against actuals\n\nApply this framework to:\n\n\"I have $100K to invest. My friend works at a tech startup that's growing\nfast and says it's a sure thing. Should I put most of my money there, or diversify\nacross index funds?\""
+  }
+]
