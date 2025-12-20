@@ -376,6 +376,17 @@ main {
   }
 }
 
+/* Inline links */
+.inline-link {
+  color: var(--color-accent);
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.inline-link:hover {
+  text-decoration: underline;
+}
+
 /* Responsive */
 @media (max-width: 600px) {
   .hero {

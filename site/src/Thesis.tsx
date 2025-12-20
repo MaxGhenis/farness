@@ -138,6 +138,10 @@ function Thesis() {
             <p>
               The AI becomes a structured thinking partner, not an oracle.
             </p>
+            <p className="thesis-callout">
+              <strong>See our research:</strong> We've developed a methodology called "stability-under-probing"
+              to empirically test whether frameworks reduce sycophancy. <Link to="/paper">Read the paper →</Link>
+            </p>
           </section>
 
           <section>

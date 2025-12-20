@@ -335,6 +335,24 @@
   }
 }
 
+/* Callout box */
+.thesis-callout {
+  background: var(--color-bg-alt);
+  border-left: 3px solid var(--color-accent);
+  padding: var(--space-md);
+  margin: var(--space-lg) 0;
+  border-radius: 0 4px 4px 0;
+}
+
+.thesis-callout a {
+  color: var(--color-accent);
+  text-decoration: none;
+}
+
+.thesis-callout a:hover {
+  text-decoration: underline;
+}
+
 /* Responsive */
 @media (max-width: 600px) {
   .header {

@@ -117,7 +117,7 @@ function Paper() {
             <h3>1.1 The Farness Framework</h3>
             <p>
               We evaluate a specific framework called "farness" (Forecasting as a Harness for
-              Decision-Making) that requires:
+              Decision-Making) that requires (<Link to="/thesis">see full thesis</Link>):
             </p>
             <ol>
               <li>Defining explicit, measurable KPIs</li>

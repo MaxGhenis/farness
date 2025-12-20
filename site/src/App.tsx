@@ -209,6 +209,22 @@ function App() {
         <Section id="why" title="Why This Works">
           <WhyItWorks />
         </Section>
+
+        <Section id="research" title="The Research">
+          <p>
+            How do we know structured frameworks actually improve LLM decision support? We developed
+            a methodology called <strong>stability-under-probing</strong>: measuring whether responses
+            hold up when challenged with base rates, new information, and adversarial pressure.
+          </p>
+          <p>
+            Our experiments show that framework-guided responses are more stable under probing—not
+            because they're stubborn, but because they've already incorporated the considerations
+            that probing would surface. Naive responses converge toward where the framework started.
+          </p>
+          <p>
+            <Link to="/paper" className="inline-link">Read the full paper →</Link>
+          </p>
+        </Section>
       </main>
       <CTA />
       <Footer />
