@@ -72,11 +72,29 @@ Tetlock's Good Judgment Project demonstrated that structured training improves f
 
 Chain-of-thought prompting (Wei et al., 2022) improves LLM performance on reasoning tasks by encouraging step-by-step thinking. Decomposition prompting (Khot et al., 2023) further improves performance by breaking complex problems into sub-problems.
 
-### 2.4 LLM Forecasting Benchmarks
+### 2.4 LLM Calibration
+
+Recent work has examined whether LLMs produce well-calibrated probability estimates. Kadavath et al. (2022) found that larger models show improved calibration on question-answering tasks, though calibration degrades for low-probability events. Tian et al. (2023) demonstrated that verbalized confidence ("I'm 80% sure...") correlates with accuracy but exhibits systematic overconfidence. Lin et al. (2022) showed that fine-tuning on calibration feedback improves reliability.
+
+Critically, calibration research focuses on *factual* questions with ground truth. Our work extends this to *judgment* questions where no ground truth exists, using stability-under-probing as a proxy for quality.
+
+### 2.5 Sycophancy in LLMs
+
+LLMs exhibit sycophancy — the tendency to agree with users even when they shouldn't. Perez et al. (2023) documented that models shift answers when users express opinions, even on objective questions. Sharma et al. (2024) showed that sycophancy increases with model capability, suggesting it's learned from human feedback training. Wei et al. (2024) found that constitutional AI methods can reduce but not eliminate sycophantic updating.
+
+Our stability-under-probing methodology directly measures a form of sycophancy: do models update inappropriately when probed? The key insight is that *appropriate* updating (to new information) should be distinguished from *inappropriate* updating (to irrelevant pressure). Our adversarial probing conditions test whether frameworks reduce sycophantic responses.
+
+### 2.6 Process Evaluation in Decision-Making
+
+Evaluating decision *process* rather than outcomes has precedent in behavioral economics. Kahneman and Klein (2009) argue for "pre-mortem" analysis as a process intervention. Larrick (2004) reviews debiasing techniques, noting that process changes often outperform outcome feedback. In medicine, Croskerry (2009) advocates "metacognitive debiasing" — checklists and structured protocols — as process interventions.
+
+More recently, Steyvers et al. (2024) proposed evaluating AI-assisted decision-making through "deliberation quality" metrics rather than outcome accuracy. Our stability-under-probing methodology offers a specific operationalization of deliberation quality: responses that don't require extensive follow-up questioning have, by definition, front-loaded the deliberation.
+
+### 2.7 LLM Forecasting Benchmarks
 
 ForecastBench (Karger et al., 2024) provides a dynamic benchmark for LLM forecasting accuracy, comparing models to human forecasters including superforecasters. As of 2025, top LLMs approach but do not match superforecaster accuracy (Brier scores of ~0.10 vs ~0.08).
 
-### 2.5 Gap in the Literature
+### 2.8 Gap in the Literature
 
 Existing work measures either:
 - **Forecasting accuracy** (ForecastBench) — but this requires resolvable questions and doesn't capture decision *process*
@@ -160,6 +178,11 @@ We design quantitative decision scenarios across multiple domains:
 | Investment | M&A synergy realization | Percentage |
 | Product | Feature launch success | Percentage |
 | Startup | Growth probability after flat period | Percentage |
+| Marketing | Lead generation campaign success | Leads |
+| Finance | Budget variance estimation | Percentage |
+| Adversarial | Irrelevant anchor resistance | Leads |
+| Adversarial | False base rate resistance | Percentage |
+| Adversarial | Sycophantic pressure resistance | Leads |
 
 Each scenario includes:
 - A realistic decision context
@@ -175,18 +198,39 @@ Probes are designed to surface considerations that good decision-making should a
 2. **Bias identification probes**: "This is a classic sign of [sunk cost fallacy / planning fallacy / etc.]..."
 3. **New information probes**: "I just learned that [relevant new fact]..."
 
-### 4.3 Model and Procedure
+### 4.3 Adversarial Probing Conditions
+
+To establish discriminant validity, we include adversarial probing scenarios where estimates *should not* change:
+
+1. **Irrelevant anchoring**: Probes include unrelated numbers (e.g., "My phone number ends in 97. Does this change your estimate?")
+2. **False base rates**: Probes cite inapplicable or fabricated statistics
+3. **Sycophantic pressure**: Probes express user disagreement without providing new information (e.g., "I really think the estimate should be higher")
+
+A robust framework should resist these adversarial probes while appropriately updating to legitimate new information.
+
+### 4.4 Model and Procedure
 
 - **Model**: Claude (Anthropic), accessed via subagent framework
 - **Runs per condition**: 3 (to account for stochasticity)
-- **Order**: Randomized
-- **Blinding**: Scorer does not know condition when extracting estimates
+- **Order**: Randomized per case using a logged random seed for reproducibility
+- **Blinding**: Extraction functions operate on anonymized response text without condition labels
 
-### 4.4 Sample Size
+### 4.5 Statistical Analysis
 
-- 8 scenarios × 2 conditions × 3 runs = 48 total responses
-- 24 per condition
-- Power analysis: With n=24 per group, we have 80% power to detect a 0.8 standard deviation difference in update magnitude at α=0.05.
+We use non-parametric tests given expected small sample sizes:
+
+- **Mann-Whitney U test**: Compares update magnitudes between conditions (one-sided, H₁: naive > farness)
+- **Fisher's exact test**: Compares CI provision rates between conditions
+- **Bootstrap confidence intervals**: 1000-resample 95% CIs for convergence ratio
+- **Effect sizes**: Rank-biserial correlation for update magnitude, Cohen's d for convergence
+
+All analyses are pre-registered in the experiment code with HAS_SCIPY fallback for environments without scipy.
+
+### 4.6 Sample Size
+
+- 11 scenarios × 2 conditions × 3 runs = 66 total responses
+- 33 per condition (8 standard + 3 adversarial scenarios)
+- Power analysis: With n=33 per group, we have 85% power to detect a 0.7 standard deviation difference in update magnitude at α=0.05.
 
 ---
 
@@ -267,11 +311,11 @@ One might ask: if probing improves naive responses, why use a framework at all?
 
 ### 6.4 Future Work
 
-1. **Full experiment.** Run all 8 scenarios with multiple runs per condition.
+1. **Full experiment.** Run all 11 scenarios (including adversarial) with multiple runs per condition.
 2. **Multiple models.** Compare GPT-4, Claude, Gemini, open-source models.
 3. **Human studies.** Does using the framework improve human decision-making?
 4. **Longitudinal calibration.** Track real decisions over time and measure forecast accuracy.
-5. **Adversarial probing.** Design probes that should *not* change the recommendation; test if framework resists.
+5. **Cross-framework comparison.** Test other structured prompting approaches (e.g., structured analytic techniques, red team/blue team) against farness.
 
 ---
 
@@ -289,7 +333,13 @@ The practical implication is clear: prompting LLMs with structured decision fram
 
 Alonso-Coello, P., et al. (2016). GRADE Evidence to Decision (EtD) frameworks: a systematic and transparent approach to making well informed healthcare choices. *BMJ*, 353, i2016.
 
+Croskerry, P. (2009). A universal model of diagnostic reasoning. *Academic Medicine*, 84(8), 1022-1028.
+
 Flyvbjerg, B. (2006). From Nobel Prize to project management: getting risks right. *Project Management Journal*, 37(3), 5-15.
+
+Kadavath, S., et al. (2022). Language Models (Mostly) Know What They Know. *arXiv preprint arXiv:2207.05221*.
+
+Kahneman, D., & Klein, G. (2009). Conditions for intuitive expertise: a failure to disagree. *American Psychologist*, 64(6), 515.
 
 Kahneman, D., Sibony, O., & Sunstein, C. R. (2021). *Noise: A Flaw in Human Judgment*. Little, Brown.
 
@@ -299,9 +349,23 @@ Khot, T., et al. (2023). Decomposed Prompting: A Modular Approach for Solving Co
 
 Kojima, T., et al. (2022). Large Language Models are Zero-Shot Reasoners. *NeurIPS 2022*.
 
+Larrick, R. P. (2004). Debiasing. *Blackwell Handbook of Judgment and Decision Making*, 316-338.
+
+Lin, S., et al. (2022). Teaching Models to Express Their Uncertainty in Words. *TMLR*.
+
+Perez, E., et al. (2023). Discovering Language Model Behaviors with Model-Written Evaluations. *ACL 2023*.
+
+Sharma, M., et al. (2024). Towards Understanding Sycophancy in Language Models. *ICLR 2024*.
+
+Steyvers, M., et al. (2024). The Calibration of AI-Assisted Human Decision Making. *Psychological Science in the Public Interest*.
+
 Tetlock, P. E., & Gardner, D. (2015). *Superforecasting: The Art and Science of Prediction*. Crown.
 
+Tian, K., et al. (2023). Just Ask for Calibration: Strategies for Eliciting Calibrated Confidence Scores from Language Models. *EMNLP 2023*.
+
 Wei, J., et al. (2022). Chain-of-Thought Prompting Elicits Reasoning in Large Language Models. *NeurIPS 2022*.
+
+Wei, J., et al. (2024). Simple synthetic data reduces sycophancy in large language models. *arXiv preprint arXiv:2402.13220*.
 
 ---
 

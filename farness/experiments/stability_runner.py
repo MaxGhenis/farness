@@ -1,8 +1,15 @@
-"""Runner for stability-under-probing experiments."""
+"""Runner for stability-under-probing experiments.
+
+Implements randomization and blinding as described in methodology:
+- Condition order is randomized per case
+- Extraction functions operate on anonymized responses (blinding)
+- Random seed is logged for reproducibility
+"""
 
 from __future__ import annotations
 
 import json
+import random
 import subprocess
 from dataclasses import dataclass
 from datetime import datetime
@@ -140,14 +147,18 @@ def run_stability_experiment(
     runs_per_condition: int = 1,
     output_dir: Optional[Path] = None,
     verbose: bool = True,
+    random_seed: Optional[int] = None,
+    randomize_order: bool = True,
 ) -> StabilityExperiment:
-    """Run the full stability experiment.
+    """Run the full stability experiment with randomization.
 
     Args:
         cases: Cases to test (default: all)
         runs_per_condition: How many times to run each case per condition
         output_dir: Where to save results
         verbose: Print progress
+        random_seed: Seed for reproducibility (default: timestamp-based)
+        randomize_order: Whether to randomize condition order per case
 
     Returns:
         StabilityExperiment with all results
@@ -155,11 +166,27 @@ def run_stability_experiment(
     if cases is None:
         cases = get_all_stability_cases()
 
+    # Set random seed for reproducibility
+    if random_seed is None:
+        random_seed = int(datetime.now().timestamp() * 1000) % (2**31)
+    random.seed(random_seed)
+
     if output_dir:
         output_dir = Path(output_dir)
         output_dir.mkdir(parents=True, exist_ok=True)
 
     experiment = StabilityExperiment(cases=cases)
+
+    # Metadata for reproducibility
+    metadata = {
+        "random_seed": random_seed,
+        "randomize_order": randomize_order,
+        "runs_per_condition": runs_per_condition,
+        "n_cases": len(cases),
+        "case_ids": [c.id for c in cases],
+        "started_at": datetime.now().isoformat(),
+        "condition_orders": {},  # Log which order was used per case
+    }
 
     total_tests = len(cases) * 2 * runs_per_condition  # 2 conditions
     test_num = 0
@@ -171,7 +198,16 @@ def run_stability_experiment(
             print(f"{'='*60}")
 
         for run in range(runs_per_condition):
-            for condition in ["naive", "farness"]:
+            # Randomize condition order per case/run
+            conditions = ["naive", "farness"]
+            if randomize_order:
+                random.shuffle(conditions)
+
+            # Log the order used
+            run_key = f"{case.id}_run{run+1}"
+            metadata["condition_orders"][run_key] = conditions.copy()
+
+            for condition in conditions:
                 test_num += 1
                 if verbose:
                     print(f"\n[{test_num}/{total_tests}] {case.id} - {condition} - run {run+1}")
@@ -190,15 +226,33 @@ def run_stability_experiment(
                     print(f"    ERROR: {e}")
                     continue
 
-    # Save summary
+    metadata["completed_at"] = datetime.now().isoformat()
+    metadata["n_results"] = len(experiment.results)
+
+    # Save summary and metadata
     if output_dir:
+        # Save metadata for reproducibility
+        metadata_file = output_dir / "experiment_metadata.json"
+        with open(metadata_file, "w") as f:
+            json.dump(metadata, f, indent=2)
+
         summary_file = output_dir / "summary.json"
+        analysis = experiment.analyze()
+        analysis["metadata"] = metadata
         with open(summary_file, "w") as f:
-            json.dump(experiment.analyze(), f, indent=2)
+            json.dump(analysis, f, indent=2)
 
         table_file = output_dir / "results_table.md"
         with open(table_file, "w") as f:
+            f.write(f"# Stability Experiment Results\n\n")
+            f.write(f"**Random seed**: {random_seed}\n")
+            f.write(f"**Runs per condition**: {runs_per_condition}\n\n")
             f.write(experiment.summary_table())
+
+    if verbose:
+        print(f"\n[Experiment metadata]")
+        print(f"  Random seed: {random_seed}")
+        print(f"  Randomize order: {randomize_order}")
 
     return experiment
 
@@ -287,6 +341,16 @@ if __name__ == "__main__":
         action="store_true",
         help="List available cases",
     )
+    parser.add_argument(
+        "--seed",
+        type=int,
+        help="Random seed for reproducibility",
+    )
+    parser.add_argument(
+        "--no-randomize",
+        action="store_true",
+        help="Don't randomize condition order",
+    )
 
     args = parser.parse_args()
 
@@ -310,12 +374,16 @@ if __name__ == "__main__":
         cases = get_all_stability_cases()
 
     print(f"Running stability experiment with {len(cases)} cases, {args.runs} runs per condition")
+    if args.seed:
+        print(f"Using random seed: {args.seed}")
 
     experiment = run_stability_experiment(
         cases=cases,
         runs_per_condition=args.runs,
         output_dir=args.output_dir,
         verbose=True,
+        random_seed=args.seed,
+        randomize_order=not args.no_randomize,
     )
 
     print_experiment_summary(experiment)

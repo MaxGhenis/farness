@@ -167,14 +167,44 @@ function Paper() {
               further improves performance by breaking complex problems into sub-problems.
             </p>
 
-            <h3>2.4 LLM Forecasting Benchmarks</h3>
+            <h3>2.4 LLM Calibration</h3>
+            <p>
+              Recent work has examined whether LLMs produce well-calibrated probability estimates.
+              Kadavath et al. (2022) found that larger models show improved calibration on question-answering
+              tasks, though calibration degrades for low-probability events<Cite id="9">9</Cite>.
+              Tian et al. (2023) demonstrated that verbalized confidence correlates with accuracy but
+              exhibits systematic overconfidence<Cite id="10">10</Cite>. Critically, calibration research
+              focuses on <em>factual</em> questions with ground truth. Our work extends this to
+              <em>judgment</em> questions where no ground truth exists.
+            </p>
+
+            <h3>2.5 Sycophancy in LLMs</h3>
+            <p>
+              LLMs exhibit sycophancy — the tendency to agree with users even when they shouldn't.
+              Perez et al. (2023) documented that models shift answers when users express opinions,
+              even on objective questions<Cite id="11">11</Cite>. Sharma et al. (2024) showed that
+              sycophancy increases with model capability<Cite id="12">12</Cite>. Our stability-under-probing
+              methodology directly measures a form of sycophancy: do models update inappropriately when probed?
+            </p>
+
+            <h3>2.6 Process Evaluation in Decision-Making</h3>
+            <p>
+              Evaluating decision <em>process</em> rather than outcomes has precedent in behavioral
+              economics. Kahneman and Klein (2009) argue for "pre-mortem" analysis as a process
+              intervention<Cite id="13">13</Cite>. Larrick (2004) reviews debiasing techniques,
+              noting that process changes often outperform outcome feedback<Cite id="14">14</Cite>.
+              Our stability-under-probing methodology offers a specific operationalization of
+              deliberation quality.
+            </p>
+
+            <h3>2.7 LLM Forecasting Benchmarks</h3>
             <p>
               ForecastBench<Cite id="8">8</Cite> provides a dynamic benchmark for LLM forecasting
               accuracy, comparing models to human forecasters including superforecasters. As of 2025,
               top LLMs approach but do not match superforecaster accuracy (Brier scores of ~0.10 vs ~0.08).
             </p>
 
-            <h3>2.5 Gap in the Literature</h3>
+            <h3>2.8 Gap in the Literature</h3>
             <p>Existing work measures either:</p>
             <ul>
               <li><strong>Forecasting accuracy</strong> (ForecastBench) — but this requires resolvable questions and doesn't capture decision <em>process</em></li>
@@ -271,6 +301,11 @@ function Paper() {
                 ['Investment', 'M&A synergy realization', 'Percentage'],
                 ['Product', 'Feature launch success', 'Percentage'],
                 ['Startup', 'Growth probability after flat period', 'Percentage'],
+                ['Marketing', 'Lead generation campaign success', 'Leads'],
+                ['Finance', 'Budget variance estimation', 'Percentage'],
+                ['Adversarial', 'Irrelevant anchor resistance', 'Leads'],
+                ['Adversarial', 'False base rate resistance', 'Percentage'],
+                ['Adversarial', 'Sycophantic pressure resistance', 'Leads'],
               ]}
             />
             <p>Each scenario includes:</p>
@@ -289,19 +324,37 @@ function Paper() {
               <li><strong>New information probes</strong>: "I just learned that [relevant new fact]..."</li>
             </ol>
 
-            <h3>4.3 Model and Procedure</h3>
+            <h3>4.3 Adversarial Probing Conditions</h3>
+            <p>To establish discriminant validity, we include adversarial probing scenarios where estimates <em>should not</em> change:</p>
+            <ol>
+              <li><strong>Irrelevant anchoring</strong>: Probes include unrelated numbers (e.g., "My phone number ends in 97. Does this change your estimate?")</li>
+              <li><strong>False base rates</strong>: Probes cite inapplicable or fabricated statistics</li>
+              <li><strong>Sycophantic pressure</strong>: Probes express user disagreement without providing new information</li>
+            </ol>
+            <p>A robust framework should resist these adversarial probes while appropriately updating to legitimate new information.</p>
+
+            <h3>4.4 Model and Procedure</h3>
             <ul>
               <li><strong>Model</strong>: Claude (Anthropic), accessed via subagent framework</li>
               <li><strong>Runs per condition</strong>: 3 (to account for stochasticity)</li>
-              <li><strong>Order</strong>: Randomized</li>
-              <li><strong>Blinding</strong>: Scorer does not know condition when extracting estimates</li>
+              <li><strong>Order</strong>: Randomized per case using a logged random seed for reproducibility</li>
+              <li><strong>Blinding</strong>: Extraction functions operate on anonymized response text without condition labels</li>
             </ul>
 
-            <h3>4.4 Sample Size</h3>
+            <h3>4.5 Statistical Analysis</h3>
+            <p>We use non-parametric tests given expected small sample sizes:</p>
             <ul>
-              <li>8 scenarios × 2 conditions × 3 runs = 48 total responses</li>
-              <li>24 per condition</li>
-              <li>Power analysis: With n=24 per group, we have 80% power to detect a 0.8 standard deviation difference in update magnitude at α=0.05.</li>
+              <li><strong>Mann-Whitney U test</strong>: Compares update magnitudes between conditions (one-sided, H₁: naive {'>'} farness)</li>
+              <li><strong>Fisher's exact test</strong>: Compares CI provision rates between conditions</li>
+              <li><strong>Bootstrap confidence intervals</strong>: 1000-resample 95% CIs for convergence ratio</li>
+              <li><strong>Effect sizes</strong>: Rank-biserial correlation for update magnitude, Cohen's d for convergence</li>
+            </ul>
+
+            <h3>4.6 Sample Size</h3>
+            <ul>
+              <li>11 scenarios × 2 conditions × 3 runs = 66 total responses</li>
+              <li>33 per condition (8 standard + 3 adversarial scenarios)</li>
+              <li>Power analysis: With n=33 per group, we have 85% power to detect a 0.7 standard deviation difference in update magnitude at α=0.05.</li>
             </ul>
           </section>
 
@@ -405,11 +458,11 @@ function Paper() {
 
             <h3>6.4 Future Work</h3>
             <ol>
-              <li><strong>Full experiment.</strong> Run all 8 scenarios with multiple runs per condition.</li>
+              <li><strong>Full experiment.</strong> Run all 11 scenarios (including adversarial) with multiple runs per condition.</li>
               <li><strong>Multiple models.</strong> Compare GPT-4, Claude, Gemini, open-source models.</li>
               <li><strong>Human studies.</strong> Does using the framework improve human decision-making?</li>
               <li><strong>Longitudinal calibration.</strong> Track real decisions over time and measure forecast accuracy.</li>
-              <li><strong>Adversarial probing.</strong> Design probes that should <em>not</em> change the recommendation; test if framework resists.</li>
+              <li><strong>Cross-framework comparison.</strong> Test other structured prompting approaches against farness.</li>
             </ol>
           </section>
 
@@ -461,6 +514,24 @@ function Paper() {
             </li>
             <li id="ref-8">
               <a href="#cite-8">↑</a> Karger, E., et al. (2024). "ForecastBench: A Dynamic Benchmark of AI Forecasting Capabilities." <em>ICLR 2025</em>.
+            </li>
+            <li id="ref-9">
+              <a href="#cite-9">↑</a> Kadavath, S., et al. (2022). "Language Models (Mostly) Know What They Know." <em>arXiv:2207.05221</em>.
+            </li>
+            <li id="ref-10">
+              <a href="#cite-10">↑</a> Tian, K., et al. (2023). "Just Ask for Calibration: Strategies for Eliciting Calibrated Confidence Scores from Language Models." <em>EMNLP 2023</em>.
+            </li>
+            <li id="ref-11">
+              <a href="#cite-11">↑</a> Perez, E., et al. (2023). "Discovering Language Model Behaviors with Model-Written Evaluations." <em>ACL 2023</em>.
+            </li>
+            <li id="ref-12">
+              <a href="#cite-12">↑</a> Sharma, M., et al. (2024). "Towards Understanding Sycophancy in Language Models." <em>ICLR 2024</em>.
+            </li>
+            <li id="ref-13">
+              <a href="#cite-13">↑</a> Kahneman, D., & Klein, G. (2009). "Conditions for intuitive expertise: a failure to disagree." <em>American Psychologist</em>, 64(6), 515.
+            </li>
+            <li id="ref-14">
+              <a href="#cite-14">↑</a> Larrick, R. P. (2004). "Debiasing." <em>Blackwell Handbook of Judgment and Decision Making</em>, 316-338.
             </li>
           </ol>
         </section>
