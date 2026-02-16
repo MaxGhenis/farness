@@ -31,6 +31,8 @@ ruff check farness tests
 ### CLI
 
 ```bash
+farness new "question"    # Create a new decision
+farness new "q" --context "details"  # With context
 farness list              # List all decisions
 farness list --pending    # Decisions past review date
 farness show <id>         # Show decision details (supports prefix match)

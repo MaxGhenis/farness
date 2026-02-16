@@ -21,10 +21,7 @@ classifiers = [
     "Programming Language :: Python :: 3.12",
 ]
 keywords = ["forecasting", "decision-making", "calibration", "prediction"]
-dependencies = [
-    "numpy>=1.24",
-    "scipy>=1.10",
-]
+dependencies = []
 
 [project.scripts]
 farness = "farness.cli:main"
@@ -35,6 +32,10 @@ Repository = "https://github.com/MaxGhenis/farness"
 Issues = "https://github.com/MaxGhenis/farness/issues"
 
 [project.optional-dependencies]
+experiments = [
+    "numpy>=1.24",
+    "scipy>=1.10",
+]
 dev = [
     "pytest>=7.0",
     "pytest-cov>=4.0",

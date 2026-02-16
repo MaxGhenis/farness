@@ -114,6 +114,37 @@ class TestDecisionStore:
         result = temp_store.get("nonexistent-id")
         assert result is None
 
+    def test_get_by_prefix(self, temp_store, sample_decision):
+        """get() should support prefix matching."""
+        temp_store.save(sample_decision)
+        prefix = sample_decision.id[:8]
+        retrieved = temp_store.get(prefix)
+        assert retrieved is not None
+        assert retrieved.id == sample_decision.id
+
+    def test_get_by_full_id(self, temp_store, sample_decision):
+        """get() should still work with full ID."""
+        temp_store.save(sample_decision)
+        retrieved = temp_store.get(sample_decision.id)
+        assert retrieved is not None
+
+    def test_get_prefix_no_match(self, temp_store, sample_decision):
+        """get() should return None when prefix matches nothing."""
+        temp_store.save(sample_decision)
+        result = temp_store.get("zzzzz-no-match")
+        assert result is None
+
+    def test_get_prefix_multiple_matches(self, temp_store):
+        """get() should return None when prefix matches multiple decisions."""
+        # Create two decisions with known IDs sharing a prefix
+        d1 = Decision(question="First")
+        d2 = Decision(question="Second")
+        temp_store.save(d1)
+        temp_store.save(d2)
+        # Using empty string prefix would match both — should return None
+        result = temp_store.get("")
+        assert result is None
+
     def test_empty_store(self, temp_store):
         assert temp_store.list_all() == []
         assert temp_store.list_unscored() == []

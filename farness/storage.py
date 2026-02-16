@@ -42,10 +42,15 @@ class DecisionStore:
                 f.write(json.dumps(d.to_dict()) + "\n")
 
     def get(self, decision_id: str) -> Optional[Decision]:
-        """Get a decision by ID."""
-        for decision in self.list_all():
-            if decision.id == decision_id:
-                return decision
+        """Get a decision by exact ID or unique prefix.
+
+        Returns None if no match or if the prefix matches multiple decisions.
+        """
+        if not decision_id:
+            return None
+        matches = [d for d in self.list_all() if d.id.startswith(decision_id)]
+        if len(matches) == 1:
+            return matches[0]
         return None
 
     def list_all(self) -> list[Decision]:

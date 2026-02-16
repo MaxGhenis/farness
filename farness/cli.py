@@ -4,7 +4,7 @@ import argparse
 import sys
 from datetime import datetime, timedelta
 
-from farness import DecisionStore, CalibrationTracker
+from farness import Decision, DecisionStore, CalibrationTracker
 
 
 def main():
@@ -33,6 +33,11 @@ def main():
     # Pending reviews
     subparsers.add_parser("pending", help="Show decisions pending review")
 
+    # Create a new decision
+    new_parser = subparsers.add_parser("new", help="Create a new decision")
+    new_parser.add_argument("question", help="The decision question")
+    new_parser.add_argument("--context", default="", help="Additional context")
+
     # Score a decision
     score_parser = subparsers.add_parser("score", help="Score a decision's outcomes")
     score_parser.add_argument("id", nargs="?", help="Decision ID (or prefix)")
@@ -55,21 +60,24 @@ def main():
             status = "✓ scored" if d.scored_at else ("⏳ pending" if d.chosen_option else "○ open")
             print(f"  [{d.id[:8]}] {d.question[:50]} ({status})")
 
+    elif args.command == "new":
+        decision = Decision(question=args.question, context=args.context)
+        store.save(decision)
+        print(f"Created decision [{decision.id[:8]}]: {decision.question}")
+
     elif args.command == "show":
-        # Find by prefix
-        decisions = store.list_all()
-        matches = [d for d in decisions if d.id.startswith(args.id)]
-
-        if not matches:
-            print(f"No decision found with ID starting with '{args.id}'")
+        d = store.get(args.id)
+        if not d:
+            # Check if multiple matches for better error message
+            all_decisions = store.list_all()
+            matches = [dd for dd in all_decisions if dd.id.startswith(args.id)]
+            if len(matches) > 1:
+                print(f"Multiple matches for '{args.id}':")
+                for dd in matches:
+                    print(f"  {dd.id}")
+            else:
+                print(f"No decision found with ID starting with '{args.id}'")
             sys.exit(1)
-        if len(matches) > 1:
-            print(f"Multiple matches for '{args.id}':")
-            for d in matches:
-                print(f"  {d.id}")
-            sys.exit(1)
-
-        d = matches[0]
         print(f"Decision: {d.question}")
         print(f"ID: {d.id}")
         print(f"Created: {d.created_at.strftime('%Y-%m-%d %H:%M')}")

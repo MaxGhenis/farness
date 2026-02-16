@@ -1,16 +1,23 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import './App.css'
 
-// Components
 function Header() {
   return (
     <header className="header">
-      <Link to="/" className="logo">Farness</Link>
-      <nav className="nav">
-        <Link to="/thesis" className="nav-link">Thesis</Link>
-        <Link to="/paper" className="nav-link">Paper</Link>
-      </nav>
+      <div className="header-inner">
+        <Link to="/" className="logo">
+          <span className="logo-mark">F</span>
+          <span className="logo-text">arness</span>
+        </Link>
+        <nav className="nav">
+          <Link to="/thesis" className="nav-link">Thesis</Link>
+          <Link to="/paper" className="nav-link">Paper</Link>
+          <a href="https://github.com/MaxGhenis/farness" className="nav-link nav-link-gh">
+            GitHub
+          </a>
+        </nav>
+      </div>
     </header>
   )
 }
@@ -18,65 +25,304 @@ function Header() {
 function Hero() {
   return (
     <div className="hero">
-      <h1>
-        Stop asking <em>"Is this good?"</em>
-        <br />
-        Start asking <em>"What will happen?"</em>
-      </h1>
-      <p className="subtitle">
-        A framework for better decisions through explicit forecasting and calibration.
-      </p>
+      <div className="hero-grid" />
+      <div className="hero-content">
+        <p className="hero-label">Decision framework</p>
+        <h1>
+          Stop asking <em>"Is this good?"</em>
+          <br />
+          Start asking <em>"What will happen?"</em>
+        </h1>
+        <p className="subtitle">
+          Farness reframes decisions as forecasting problems—with explicit KPIs,
+          confidence intervals, and calibration tracking.
+        </p>
+        <div className="hero-actions">
+          <a href="#demo" className="btn btn-accent">See it work</a>
+          <a href="https://pypi.org/project/farness/" className="btn btn-ghost">
+            <span className="mono">pip install farness</span>
+          </a>
+        </div>
+      </div>
     </div>
   )
 }
 
-function Section({ id, title, children }: { id: string; title: string; children: React.ReactNode }) {
+function Section({ id, label, title, children }: {
+  id: string; label: string; title: string; children: React.ReactNode
+}) {
   return (
     <section id={id} className="section">
-      <h2>{title}</h2>
-      {children}
+      <div className="section-head">
+        <span className="section-label">{label}</span>
+        <h2>{title}</h2>
+      </div>
+      <div className="section-body">
+        {children}
+      </div>
     </section>
   )
 }
+
+/* ── Interactive Decision Demo ── */
+
+interface DemoScenario {
+  question: string
+  kpis: { name: string; unit: string }[]
+  options: {
+    name: string
+    forecasts: { value: number; ci: [number, number] }[]
+  }[]
+}
+
+const SCENARIOS: DemoScenario[] = [
+  {
+    question: 'Which job should I take?',
+    kpis: [
+      { name: 'Total Comp (Year 1)', unit: '$k' },
+      { name: 'Learning & Growth', unit: '/10' },
+      { name: 'Work-Life Balance', unit: '/10' },
+    ],
+    options: [
+      {
+        name: 'Startup',
+        forecasts: [
+          { value: 180, ci: [140, 240] },
+          { value: 8.5, ci: [7, 10] },
+          { value: 5, ci: [3, 7] },
+        ],
+      },
+      {
+        name: 'Big Co',
+        forecasts: [
+          { value: 250, ci: [230, 270] },
+          { value: 5, ci: [4, 6] },
+          { value: 7.5, ci: [6, 9] },
+        ],
+      },
+    ],
+  },
+  {
+    question: 'Should we launch this feature?',
+    kpis: [
+      { name: 'User Retention', unit: '%' },
+      { name: 'Revenue Impact', unit: '$k/mo' },
+      { name: 'Eng Effort', unit: 'weeks' },
+    ],
+    options: [
+      {
+        name: 'Launch Now',
+        forecasts: [
+          { value: 72, ci: [65, 80] },
+          { value: 45, ci: [20, 80] },
+          { value: 6, ci: [4, 10] },
+        ],
+      },
+      {
+        name: 'Wait & Polish',
+        forecasts: [
+          { value: 78, ci: [72, 85] },
+          { value: 60, ci: [35, 90] },
+          { value: 12, ci: [8, 18] },
+        ],
+      },
+    ],
+  },
+  {
+    question: 'Continue or kill this project?',
+    kpis: [
+      { name: 'P(Ship on Time)', unit: '%' },
+      { name: 'Added Burn', unit: '$k' },
+      { name: 'Strategic Value', unit: '/10' },
+    ],
+    options: [
+      {
+        name: 'Continue',
+        forecasts: [
+          { value: 25, ci: [10, 45] },
+          { value: 500, ci: [300, 900] },
+          { value: 7, ci: [5, 9] },
+        ],
+      },
+      {
+        name: 'Kill It',
+        forecasts: [
+          { value: 100, ci: [100, 100] },
+          { value: 0, ci: [0, 0] },
+          { value: 2, ci: [1, 3] },
+        ],
+      },
+    ],
+  },
+]
+
+function ConfidenceBar({ value, ci, max, color, animate }: {
+  value: number; ci: [number, number]; max: number; color: string; animate: boolean
+}) {
+  const pct = (v: number) => `${(v / max) * 100}%`
+
+  return (
+    <div className="ci-bar-container">
+      {/* CI range */}
+      <div
+        className={`ci-range ${animate ? 'animate' : ''}`}
+        style={{
+          left: pct(ci[0]),
+          width: `${((ci[1] - ci[0]) / max) * 100}%`,
+          background: `${color}20`,
+          borderLeft: `1px solid ${color}40`,
+          borderRight: `1px solid ${color}40`,
+        }}
+      />
+      {/* Point estimate */}
+      <div
+        className={`ci-point ${animate ? 'animate' : ''}`}
+        style={{
+          left: pct(value),
+          background: color,
+          boxShadow: `0 0 8px ${color}60`,
+        }}
+      />
+    </div>
+  )
+}
+
+function InteractiveDemo() {
+  const [activeScenario, setActiveScenario] = useState(0)
+  const [animate, setAnimate] = useState(true)
+  const scenario = SCENARIOS[activeScenario]
+
+  useEffect(() => {
+    setAnimate(false)
+    const t = setTimeout(() => setAnimate(true), 50)
+    return () => clearTimeout(t)
+  }, [activeScenario])
+
+  const colors = ['#e8a825', '#5b9bd5']
+
+  return (
+    <div className="demo" id="demo">
+      <div className="demo-header">
+        <span className="demo-label">Interactive demo</span>
+        <h3 className="demo-question">{scenario.question}</h3>
+        <div className="demo-tabs">
+          {SCENARIOS.map((s, i) => (
+            <button
+              key={i}
+              className={`demo-tab ${i === activeScenario ? 'active' : ''}`}
+              onClick={() => setActiveScenario(i)}
+            >
+              {s.question.length > 25 ? s.question.slice(0, 25) + '...' : s.question}
+            </button>
+          ))}
+        </div>
+      </div>
+
+      <div className="demo-grid">
+        {scenario.kpis.map((kpi, ki) => {
+          const allVals = scenario.options.flatMap(o => [
+            o.forecasts[ki].ci[0], o.forecasts[ki].ci[1]
+          ])
+          const max = Math.max(...allVals) * 1.15
+
+          return (
+            <div key={kpi.name} className="demo-kpi">
+              <div className="demo-kpi-header">
+                <span className="demo-kpi-name">{kpi.name}</span>
+                <span className="demo-kpi-unit">{kpi.unit}</span>
+              </div>
+              <div className="demo-kpi-bars">
+                {scenario.options.map((opt, oi) => (
+                  <div key={opt.name} className="demo-option-row">
+                    <span className="demo-option-label" style={{ color: colors[oi] }}>
+                      {opt.name}
+                    </span>
+                    <div className="demo-bar-wrap">
+                      <ConfidenceBar
+                        value={opt.forecasts[ki].value}
+                        ci={opt.forecasts[ki].ci}
+                        max={max}
+                        color={colors[oi]}
+                        animate={animate}
+                      />
+                    </div>
+                    <span className="demo-value mono">
+                      {opt.forecasts[ki].value}
+                    </span>
+                  </div>
+                ))}
+              </div>
+              {/* Scale ticks */}
+              <div className="demo-scale">
+                <span className="mono">0</span>
+                <span className="mono">{Math.round(max / 2)}</span>
+                <span className="mono">{Math.round(max)}</span>
+              </div>
+            </div>
+          )
+        })}
+      </div>
+
+      <div className="demo-footer">
+        <span className="demo-legend">
+          <span className="demo-legend-dot" /> Point estimate
+          <span className="demo-legend-bar" /> 80% confidence interval
+        </span>
+      </div>
+    </div>
+  )
+}
+
+/* ── Reframe Examples ── */
 
 function ReframeDemo() {
   const examples = [
     {
       before: '"Should I take job A or job B?"',
-      after: '"If I value income and learning, what\'s P(income > $200k | Job A) vs P(income > $200k | Job B)? What\'s my confidence interval?"'
+      after: '"What\'s P(income > $200k | Job A) vs P(income > $200k | Job B)? What\'s my 80% CI?"'
     },
     {
       before: '"Is this a good investment?"',
-      after: '"What\'s P(ROI > 10% at 5 years)? What are the key assumptions driving that estimate?"'
+      after: '"What\'s P(ROI > 10% at 5 years)? What are the key assumptions?"'
     },
     {
       before: '"Should we launch this feature?"',
-      after: '"What\'s P(retention improves > 5% | launch)? What would make us update that forecast?"'
+      after: '"What\'s P(retention > 5% | launch)? What would make us update?"'
     }
   ]
 
-  const [currentExample, setCurrentExample] = useState(0)
+  const [current, setCurrent] = useState(0)
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrent(c => (c + 1) % examples.length)
+    }, 5000)
+    return () => clearInterval(interval)
+  }, [])
 
   return (
     <div className="reframe">
-      <div className="question-pair">
-        <div className="question-box before">
-          <div className="question-label">Instead of asking</div>
-          <div className="question-text">{examples[currentExample].before}</div>
+      <div className="reframe-pair">
+        <div className="reframe-box reframe-before">
+          <span className="reframe-tag">vague</span>
+          <p>{examples[current].before}</p>
         </div>
-        <div className="arrow">↓</div>
-        <div className="question-box after">
-          <div className="question-label">Ask</div>
-          <div className="question-text">{examples[currentExample].after}</div>
+        <div className="reframe-arrow">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+            <path d="M5 12h14m-7-7 7 7-7 7"/>
+          </svg>
+        </div>
+        <div className="reframe-box reframe-after">
+          <span className="reframe-tag">precise</span>
+          <p>{examples[current].after}</p>
         </div>
       </div>
-      <div className="example-nav">
+      <div className="reframe-dots">
         {examples.map((_, i) => (
           <button
             key={i}
-            className={`example-dot ${i === currentExample ? 'active' : ''}`}
-            onClick={() => setCurrentExample(i)}
-            aria-label={`Example ${i + 1}`}
+            className={`reframe-dot ${i === current ? 'active' : ''}`}
+            onClick={() => setCurrent(i)}
           />
         ))}
       </div>
@@ -84,78 +330,131 @@ function ReframeDemo() {
   )
 }
 
+/* ── Framework Steps ── */
+
+const StepIcons = {
+  '01': (
+    <svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round">
+      <rect x="2" y="6" width="4" height="12" rx="1" /><rect x="8" y="3" width="4" height="15" rx="1" /><rect x="14" y="9" width="4" height="9" rx="1" />
+    </svg>
+  ),
+  '02': (
+    <svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round">
+      <path d="M3 10h6" /><path d="M9 10l5-6" /><path d="M9 10l5 0" /><path d="M9 10l5 6" />
+      <circle cx="16" cy="4" r="2" /><circle cx="16" cy="10" r="2" /><circle cx="16" cy="16" r="2" />
+    </svg>
+  ),
+  '03': (
+    <svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round">
+      <path d="M2 14l4-4 3 3 4-6 5 5" /><line x1="2" y1="18" x2="18" y2="18" />
+    </svg>
+  ),
+  '04': (
+    <svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round">
+      <circle cx="10" cy="8" r="6" /><line x1="10" y1="14" x2="10" y2="18" />
+      <line x1="10" y1="5" x2="10" y2="9" /><line x1="8" y1="7" x2="12" y2="7" />
+    </svg>
+  ),
+  '05': (
+    <svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round">
+      <polyline points="2,12 6,16 18,4" />
+    </svg>
+  ),
+} as const
+
 function FrameworkSteps() {
   const steps = [
     {
+      num: '01' as const,
       title: 'Define KPIs',
-      description: "What outcomes matter? Income, satisfaction, optionality, time? Pick 1-3 you'd actually use to judge success in hindsight."
+      text: "What outcomes matter? Income, satisfaction, optionality, time? Pick 1-3 you'd actually use to judge success in hindsight.",
     },
     {
-      title: 'Expand Options',
-      description: "Don't just compare A vs B. What about C? Waiting? A hybrid approach? The best option is often one you didn't initially consider."
+      num: '02' as const,
+      title: 'Expand options',
+      text: "Don't just compare A vs B. What about C? Waiting? A hybrid? The best option is often one you didn't initially consider.",
     },
     {
-      title: 'Decompose & Forecast',
-      description: 'For each option × KPI: start with base rates (outside view), adjust for specifics (inside view), break into components (Fermi-style), and give a point estimate with confidence interval.'
+      num: '03' as const,
+      title: 'Decompose & forecast',
+      text: 'For each option x KPI: start with base rates (outside view), adjust for specifics (inside view), give a point estimate with confidence interval.',
     },
     {
-      title: 'Surface Assumptions',
-      description: "What are you assuming? What would change the estimate? This is where the real thinking happens."
+      num: '04' as const,
+      title: 'Surface assumptions',
+      text: "What are you assuming? What would change the estimate? This is where the real thinking happens.",
     },
     {
-      title: 'Log & Score Later',
-      description: 'Record your forecasts. In 3-6 months, compare to reality. Build a calibration curve. Get better over time.'
-    }
+      num: '05' as const,
+      title: 'Log & score',
+      text: 'Record your forecasts. In 3-6 months, compare to reality. Build a calibration curve. Get better over time.',
+    },
   ]
 
   return (
-    <ol className="steps">
-      {steps.map((step, i) => (
-        <li key={i}>
+    <div className="steps-grid">
+      {steps.map(step => (
+        <div key={step.num} className="step-card">
+          <div className="step-header">
+            <span className="step-icon">{StepIcons[step.num]}</span>
+            <span className="step-num mono">{step.num}</span>
+          </div>
           <h3>{step.title}</h3>
-          <p>{step.description}</p>
-        </li>
-      ))}
-    </ol>
-  )
-}
-
-function WhyItWorks() {
-  const reasons = [
-    { bold: 'Reduces sycophancy.', text: "It's harder to just agree when you have to produce a number with a confidence interval." },
-    { bold: 'Forces mechanism thinking.', text: "You can't forecast without reasoning about cause and effect." },
-    { bold: 'Separates values from facts.', text: 'You choose what to optimize (values); the forecast is about what will happen (facts).' },
-    { bold: 'Creates accountability.', text: "Predictions can be scored. Opinions can't." },
-    { bold: 'Builds calibration.', text: "Track predictions over time. Learn whether you're overconfident, underconfident, or biased in specific domains." }
-  ]
-
-  return (
-    <div className="reasons">
-      {reasons.map((reason, i) => (
-        <div key={i} className="reason">
-          <span className="reason-marker">→</span>
-          <p><strong>{reason.bold}</strong> {reason.text}</p>
+          <p>{step.text}</p>
         </div>
       ))}
     </div>
   )
 }
 
+/* ── Why It Works ── */
+
+function WhyItWorks() {
+  const reasons = [
+    { title: 'Reduces sycophancy', text: "It's harder to just agree when you have to produce a number with a confidence interval." },
+    { title: 'Forces mechanism thinking', text: "You can't forecast without reasoning about cause and effect." },
+    { title: 'Separates values from facts', text: 'You choose what to optimize (values); the forecast is about what will happen (facts).' },
+    { title: 'Creates accountability', text: "Predictions can be scored. Opinions can't." },
+    { title: 'Builds calibration', text: "Track predictions over time. Learn whether you're overconfident or biased in specific domains." },
+  ]
+
+  return (
+    <div className="reasons-grid">
+      {reasons.map((r, i) => (
+        <div key={i} className="reason-card">
+          <h3>{r.title}</h3>
+          <p>{r.text}</p>
+        </div>
+      ))}
+    </div>
+  )
+}
+
+/* ── CTA ── */
+
 function CTA() {
   return (
     <div className="cta">
-      <h2>Try It</h2>
-      <p>Farness is open source. Use it as a Python library, CLI tool, or Claude Code plugin.</p>
-      <div className="cta-buttons">
-        <a href="https://github.com/MaxGhenis/farness" className="btn btn-primary">
-          <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
-            <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/>
-          </svg>
-          View on GitHub
-        </a>
-        <a href="https://pypi.org/project/farness/" className="btn btn-secondary">
-          pip install farness
-        </a>
+      <div className="cta-inner">
+        <h2>Start making better decisions</h2>
+        <p>Farness is open source. Use it as a Python library, CLI tool, or Claude Code plugin.</p>
+        <div className="cta-buttons">
+          <a href="https://github.com/MaxGhenis/farness" className="btn btn-accent">
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
+              <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/>
+            </svg>
+            View on GitHub
+          </a>
+          <a href="https://pypi.org/project/farness/" className="btn btn-ghost">
+            <span className="mono">pip install farness</span>
+          </a>
+        </div>
+        <div className="cta-cli">
+          <code className="mono">
+            $ farness new "Should I take this job?"<br/>
+            Created decision [a3f8b2c1]: Should I take this job?
+          </code>
+        </div>
       </div>
     </div>
   )
@@ -174,11 +473,11 @@ function Footer() {
 
 function App() {
   return (
-    <>
+    <div className="app-dark">
       <Header />
       <Hero />
       <main>
-        <Section id="problem" title="The Problem">
+        <Section id="problem" label="01" title="The problem">
           <p>
             When we ask AI (or advisors, or ourselves) <strong>"Should I do X?"</strong>,
             we get opinions dressed as answers. The response depends on unstated assumptions
@@ -190,7 +489,7 @@ function App() {
           </p>
         </Section>
 
-        <Section id="reframe" title="The Reframe">
+        <Section id="reframe" label="02" title="The reframe">
           <p>
             Instead of asking for advice, ask for <strong>forecasts conditional on actions</strong>.
             Define what you're optimizing for, then predict outcomes.
@@ -202,15 +501,17 @@ function App() {
           </p>
         </Section>
 
-        <Section id="framework" title="The Framework">
+        <InteractiveDemo />
+
+        <Section id="framework" label="03" title="The framework">
           <FrameworkSteps />
         </Section>
 
-        <Section id="why" title="Why This Works">
+        <Section id="why" label="04" title="Why this works">
           <WhyItWorks />
         </Section>
 
-        <Section id="research" title="The Research">
+        <Section id="research" label="05" title="The research">
           <p>
             How do we know structured frameworks actually improve LLM decision support? We developed
             a methodology called <strong>stability-under-probing</strong>: measuring whether responses
@@ -228,7 +529,7 @@ function App() {
       </main>
       <CTA />
       <Footer />
-    </>
+    </div>
   )
 }
 

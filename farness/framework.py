@@ -78,11 +78,62 @@ class Decision:
     scored_at: Optional[datetime] = None
     reflections: str = ""
 
+    def option_scores(self) -> dict[str, float]:
+        """Compute normalized weighted scores for each option.
+
+        Uses min-max normalization within each KPI so that KPIs on different
+        scales (e.g., $300k income vs 7.5 satisfaction) contribute proportionally
+        to their weights rather than being dominated by scale.
+
+        Returns:
+            Dict mapping option name to normalized score in [0, 1].
+        """
+        if not self.options or not self.kpis:
+            return {}
+
+        # For each KPI, find the range of point estimates across all options
+        kpi_ranges: dict[str, tuple[float, float]] = {}
+        for kpi in self.kpis:
+            values = [
+                o.forecasts[kpi.name].point_estimate
+                for o in self.options
+                if kpi.name in o.forecasts
+            ]
+            if values:
+                kpi_ranges[kpi.name] = (min(values), max(values))
+
+        # Compute normalized weighted score for each option
+        scores: dict[str, float] = {}
+        for option in self.options:
+            total_weight = 0.0
+            weighted_sum = 0.0
+            for kpi in self.kpis:
+                if kpi.name not in option.forecasts or kpi.name not in kpi_ranges:
+                    continue
+                val = option.forecasts[kpi.name].point_estimate
+                lo, hi = kpi_ranges[kpi.name]
+                if hi - lo > 0:
+                    normalized = (val - lo) / (hi - lo)
+                else:
+                    normalized = 0.5  # All options equal on this KPI
+                weighted_sum += kpi.weight * normalized
+                total_weight += kpi.weight
+            scores[option.name] = weighted_sum / total_weight if total_weight > 0 else 0.0
+
+        return scores
+
     def best_option(self) -> Optional[Option]:
-        """Return the option with highest expected value."""
+        """Return the option with highest normalized weighted score."""
         if not self.options:
             return None
-        return max(self.options, key=lambda o: o.expected_value(self.kpis))
+        scores = self.option_scores()
+        if not scores:
+            return None
+        best_name = max(scores, key=scores.get)
+        for o in self.options:
+            if o.name == best_name:
+                return o
+        return None
 
     def sensitivity_analysis(self) -> dict[str, str]:
         """Show which option wins under different KPI weightings."""

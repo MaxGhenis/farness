@@ -121,7 +121,7 @@
   border-left: 3px solid var(--color-accent);
   padding: var(--space-md) var(--space-lg);
   margin: var(--space-lg) 0;
-  background: linear-gradient(135deg, rgba(184, 134, 11, 0.03) 0%, transparent 100%);
+  background: linear-gradient(135deg, rgba(232, 168, 37, 0.04) 0%, transparent 100%);
 }
 
 .thesis-content blockquote p {
@@ -261,7 +261,7 @@
 
 /* Abstract styling */
 .abstract {
-  background: linear-gradient(135deg, rgba(184, 134, 11, 0.03) 0%, transparent 100%);
+  background: linear-gradient(135deg, rgba(232, 168, 37, 0.04) 0%, transparent 100%);
   padding: var(--space-lg);
   border-left: 3px solid var(--color-accent);
   margin-bottom: var(--space-xl);
@@ -337,7 +337,7 @@
 
 /* Callout box */
 .thesis-callout {
-  background: var(--color-bg-alt);
+  background: var(--color-bg-surface);
   border-left: 3px solid var(--color-accent);
   padding: var(--space-md);
   margin: var(--space-lg) 0;
