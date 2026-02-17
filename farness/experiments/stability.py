@@ -3,7 +3,6 @@
 from __future__ import annotations
 
 import json
-import random
 import re
 from dataclasses import dataclass, field
 from datetime import datetime
@@ -305,16 +304,61 @@ class StabilityResult:
         }
 
 
+def extract_structured(text: str) -> tuple[Optional[float], Optional[float], Optional[float]]:
+    """Extract estimate, CI low, and CI high from structured JSON output.
+
+    Expects the response to contain a JSON block like:
+    {"estimate": 4.0, "ci_low": 2.5, "ci_high": 7.0}
+
+    Returns: (estimate, ci_low, ci_high) — any may be None if not found.
+    """
+    # Try to find JSON block in response
+    json_patterns = [
+        r'```json\s*(\{[^}]+\})\s*```',  # ```json {...} ```
+        r'```\s*(\{[^}]+\})\s*```',  # ``` {...} ```
+        r'(\{"estimate"[^}]+\})',  # {"estimate": ...}
+    ]
+
+    for pattern in json_patterns:
+        match = re.search(pattern, text, re.DOTALL)
+        if match:
+            try:
+                data = json.loads(match.group(1))
+                estimate = data.get("estimate")
+                ci_low = data.get("ci_low")
+                ci_high = data.get("ci_high")
+                if estimate is not None:
+                    estimate = float(estimate)
+                if ci_low is not None:
+                    ci_low = float(ci_low)
+                if ci_high is not None:
+                    ci_high = float(ci_high)
+                # Swap CI if reversed
+                if ci_low is not None and ci_high is not None and ci_low > ci_high:
+                    ci_low, ci_high = ci_high, ci_low
+                return estimate, ci_low, ci_high
+            except (json.JSONDecodeError, ValueError, TypeError):
+                continue
+
+    return None, None, None
+
+
 def extract_estimate(text: str, unit: str) -> Optional[float]:
-    """Extract numeric estimate from response text."""
-    # Look for patterns like "4 weeks", "15%", "$500K"
+    """Extract numeric estimate from response text.
+
+    First tries structured JSON, then falls back to regex patterns.
+    """
+    # Try structured extraction first
+    estimate, _, _ = extract_structured(text)
+    if estimate is not None:
+        return estimate
+
+    # Fallback to regex
     patterns = [
-        rf"(\d+\.?\d*)\s*{unit}",  # "4 weeks"
-        rf"{unit}\s*(\d+\.?\d*)",  # "weeks: 4"
-        r"(?:estimate|prediction|forecast)[:\s]+(\d+\.?\d*)",  # "estimate: 4"
-        r"(?:point estimate)[:\s]+(\d+\.?\d*)",  # "point estimate: 4"
-        r"\*\*(\d+\.?\d*)\*\*",  # "**4**" (markdown bold)
-        r"^(\d+\.?\d*)$",  # Just a number
+        rf"(?:point estimate|estimate|prediction|forecast)[:\s]+\**(\d+\.?\d*)\**\s*{re.escape(unit)}",
+        rf"\*\*(\d+\.?\d*)\s*{re.escape(unit)}\*\*",  # **4 weeks**
+        rf"(\d+\.?\d*)\s*{re.escape(unit)}",  # "4 weeks"
+        r"(?:point estimate)[:\s]+\**(\d+\.?\d*)\**",
     ]
 
     for pattern in patterns:
@@ -322,35 +366,46 @@ def extract_estimate(text: str, unit: str) -> Optional[float]:
         if match:
             return float(match.group(1))
 
-    # Fallback: find any standalone number
-    numbers = re.findall(r'\b(\d+\.?\d*)\b', text)
-    if numbers:
-        return float(numbers[0])
-
     return None
 
 
 def extract_ci(text: str) -> tuple[Optional[float], Optional[float]]:
-    """Extract confidence interval from response text."""
-    patterns = [
-        r"(\d+\.?\d*)%?\s*[-–—]\s*(\d+\.?\d*)%?",  # "2.5-7" or "15%-35%"
-        r"(\d+\.?\d*)%?\s+to\s+(\d+\.?\d*)%?",  # "2.5 to 7" or "15% to 35%"
-        r"between\s+(\d+\.?\d*)%?\s+(?:and|to)\s+(\d+\.?\d*)%?",  # "between 3 to 8"
-        r"CI[:\s]+(\d+\.?\d*)\s*[-–—,]\s*(\d+\.?\d*)",  # "CI: 2.5-7"
-        r"(?:80%|80 percent)\s*(?:CI|confidence)[:\s]+(\d+\.?\d*)\s*[-–—,to]+\s*(\d+\.?\d*)",
-        r"\[(\d+\.?\d*)\s*,\s*(\d+\.?\d*)\]",  # "[2.5, 7]"
-        r"\((\d+\.?\d*)\s*,\s*(\d+\.?\d*)\)",  # "(2.5, 7)"
+    """Extract confidence interval from response text.
+
+    First tries structured JSON, then falls back to context-aware regex.
+    """
+    # Try structured extraction first
+    _, ci_low, ci_high = extract_structured(text)
+    if ci_low is not None and ci_high is not None:
+        return ci_low, ci_high
+
+    # Fallback: context-aware regex — only match CIs near CI-related keywords
+    ci_patterns = [
+        r"(?:confidence interval|CI|80%\s*CI)[:\s]*\[?\s*(\d+\.?\d*)%?\s*[-–—,]\s*(\d+\.?\d*)%?\s*\]?",
+        r"(?:confidence interval|CI|80%\s*CI)[:\s]*\[?\s*(\d+\.?\d*)%?\s+to\s+(\d+\.?\d*)%?\s*\]?",
+        r"(?:range|interval)[:\s]*\[?\s*(\d+\.?\d*)%?\s*[-–—,]\s*(\d+\.?\d*)%?\s*\]?",
+        r"(?:range|interval)[:\s]*\[?\s*(\d+\.?\d*)%?\s+to\s+(\d+\.?\d*)%?\s*\]?",
+        r"\[(\d+\.?\d*)%?\s*,\s*(\d+\.?\d*)%?\]",  # [2.5, 7]
     ]
 
-    for pattern in patterns:
+    for pattern in ci_patterns:
         match = re.search(pattern, text, re.IGNORECASE)
         if match:
             low, high = float(match.group(1)), float(match.group(2))
-            if low < high:
-                return low, high
-            return high, low  # Swap if reversed
+            if low > high:
+                low, high = high, low
+            return low, high
 
     return None, None
+
+
+_JSON_INSTRUCTION = """
+
+After your reasoning, output your final answer as a JSON block:
+```json
+{"estimate": <number>, "ci_low": <number>, "ci_high": <number>}
+```
+where ci_low and ci_high are the bounds of your 80% confidence interval."""
 
 
 def generate_naive_prompt(case: QuantitativeCase) -> str:
@@ -359,7 +414,7 @@ def generate_naive_prompt(case: QuantitativeCase) -> str:
 
 {case.scenario}
 
-Question: {case.estimate_question} Give a single number."""
+Question: {case.estimate_question} Give a single number and an 80% confidence interval.{_JSON_INSTRUCTION}"""
 
 
 def generate_farness_prompt(case: QuantitativeCase) -> str:
@@ -371,7 +426,7 @@ def generate_farness_prompt(case: QuantitativeCase) -> str:
 
 {case.scenario}
 
-Question: {case.estimate_question} Give a point estimate and 80% confidence interval."""
+Question: {case.estimate_question} Give a point estimate and 80% confidence interval.{_JSON_INSTRUCTION}"""
 
 
 def generate_probe_prompt(
@@ -394,7 +449,7 @@ Follow-up information:
 
 {probes_text}
 
-Given this new information, what's your revised estimate ({case.estimate_unit})? Also provide an 80% confidence interval."""
+Given this new information, what's your revised estimate ({case.estimate_unit})? Also provide an 80% confidence interval.{_JSON_INSTRUCTION}"""
     else:
         return f"""You previously estimated {initial_estimate} {case.estimate_unit}{ci_text} for this scenario.
 
@@ -402,7 +457,7 @@ Follow-up information:
 
 {probes_text}
 
-Given this new information, what's your revised estimate and 80% CI?"""
+Given this new information, what's your revised estimate and 80% CI?{_JSON_INSTRUCTION}"""
 
 
 @dataclass

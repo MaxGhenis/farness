@@ -53,17 +53,18 @@ class TestEstimateExtraction:
 
     def test_extract_point_estimate_label(self):
         """Should extract labeled point estimates."""
-        assert extract_estimate("Point estimate: 3.5", "weeks") == 3.5
-        assert extract_estimate("My estimate is 25", "%") == 25
+        assert extract_estimate("Point estimate: 3.5 weeks", "weeks") == 3.5
+        assert extract_estimate("My estimate is 25%", "%") == 25
 
     def test_extract_bold_number(self):
         """Should extract markdown bold numbers."""
-        assert extract_estimate("The answer is **4** weeks", "weeks") == 4
+        assert extract_estimate("The answer is **4 weeks**", "weeks") == 4
         assert extract_estimate("Probability: **15%**", "%") == 15
 
-    def test_extract_fallback_to_first_number(self):
-        """Should fall back to first number found."""
-        assert extract_estimate("Given the factors, 6 seems reasonable", "weeks") == 6
+    def test_extract_structured_json(self):
+        """Should extract from JSON block."""
+        text = 'After analysis:\n```json\n{"estimate": 4.5, "ci_low": 3, "ci_high": 7}\n```'
+        assert extract_estimate(text, "weeks") == 4.5
 
     def test_extract_decimal(self):
         """Should handle decimal numbers."""
@@ -80,14 +81,13 @@ class TestCIExtraction:
         assert extract_ci("Range: 10-25%") == (10, 25)
 
     def test_extract_to_format(self):
-        """Should extract CI with 'to'."""
-        assert extract_ci("between 3 to 8 weeks") == (3, 8)
-        assert extract_ci("15% to 35%") == (15, 35)
+        """Should extract CI with 'to' near CI keywords."""
+        assert extract_ci("confidence interval: 3 to 8") == (3, 8)
+        assert extract_ci("range: 15% to 35%") == (15, 35)
 
     def test_extract_bracket_format(self):
         """Should extract CI with brackets."""
         assert extract_ci("[2, 6]") == (2, 6)
-        assert extract_ci("(5, 15)") == (5, 15)
 
     def test_no_ci_returns_none(self):
         """Should return None when no CI found."""
@@ -95,7 +95,17 @@ class TestCIExtraction:
 
     def test_swaps_if_reversed(self):
         """Should swap if low > high."""
-        assert extract_ci("7-2") == (2, 7)
+        assert extract_ci("CI: 7-2") == (2, 7)
+
+    def test_structured_json_ci(self):
+        """Should extract CI from JSON block."""
+        text = '```json\n{"estimate": 4, "ci_low": 2, "ci_high": 7}\n```'
+        assert extract_ci(text) == (2, 7)
+
+    def test_rejects_random_number_ranges(self):
+        """Should NOT extract year ranges or random number ranges as CIs."""
+        assert extract_ci("The project ran from 2015-2020") == (None, None)
+        assert extract_ci("We invested $500-1000 in equipment") == (None, None)
 
 
 class TestPromptGeneration:
