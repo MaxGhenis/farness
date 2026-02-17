@@ -259,7 +259,7 @@ function ReframeDemo() {
   const examples = [
     {
       before: '"Should I take job A or job B?"',
-      after: '"What\'s my 80% CI for Year 1 total comp at Job A vs Job B? What about work-life balance?"'
+      after: '"What\'s my 80% CI on E[salary] at Job A vs Job B? What about work-life balance?"'
     },
     {
       before: '"Is this a good investment?"',
