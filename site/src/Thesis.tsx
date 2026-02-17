@@ -1,30 +1,12 @@
 import { Link } from 'react-router-dom'
-import './Thesis.css'
+import { lightTheme } from './styles/theme.css'
+import { Header } from './components/Header'
+import * as t from './Thesis.css'
+import * as s from './styles/shared.css'
 
-function Header() {
-  return (
-    <header className="header">
-      <div className="header-inner">
-        <Link to="/" className="logo">
-          <span className="logo-mark">F</span>
-          <span className="logo-text">arness</span>
-        </Link>
-        <nav className="nav">
-          <Link to="/thesis" className="nav-link active">Thesis</Link>
-          <Link to="/paper" className="nav-link">Paper</Link>
-          <a href="https://github.com/MaxGhenis/farness" className="nav-link nav-link-gh">
-            GitHub
-          </a>
-        </nav>
-      </div>
-    </header>
-  )
-}
-
-// Citation component
 function Cite({ id, children }: { id: string; children: React.ReactNode }) {
   return (
-    <sup className="citation">
+    <sup className={t.citation}>
       <a href={`#ref-${id}`} id={`cite-${id}`}>[{children}]</a>
     </sup>
   )
@@ -32,18 +14,18 @@ function Cite({ id, children }: { id: string; children: React.ReactNode }) {
 
 function Thesis() {
   return (
-    <>
-      <Header />
-      <article className="thesis">
-        <header className="thesis-header">
-          <p className="thesis-label">The Farness Thesis</p>
+    <div className={lightTheme}>
+      <Header activePage="thesis" />
+      <article className={t.thesis}>
+        <header className={t.thesisHeader}>
+          <p className={t.thesisLabel}>The Farness Thesis</p>
           <h1>Forecasting as a Harness</h1>
-          <p className="thesis-subtitle">
+          <p className={t.thesisSubtitle}>
             Why reframing decisions as predictions leads to better outcomes—and how to do it.
           </p>
         </header>
 
-        <div className="thesis-content">
+        <div className={t.thesisContent}>
           <section>
             <h2>The Problem with Advice</h2>
             <p>
@@ -157,7 +139,7 @@ function Thesis() {
             <p>
               The AI becomes a structured thinking partner, not an oracle.
             </p>
-            <p className="thesis-callout">
+            <p className={t.thesisCallout}>
               <strong>See our research:</strong> We've developed a methodology called "stability-under-probing"
               to empirically test whether frameworks reduce sycophancy. <Link to="/paper">Read the paper →</Link>
             </p>
@@ -321,15 +303,15 @@ function Thesis() {
               tool, or a Claude Code plugin. Log your decisions. Score your predictions.
               Get better over time.
             </p>
-            <p className="thesis-cta">
-              <Link to="/" className="btn btn-primary">Get Started →</Link>
+            <p className={t.thesisCta}>
+              <Link to="/" className={`${s.btn} ${t.thesisCtaBtn}`}>Get Started →</Link>
             </p>
           </section>
         </div>
 
-        <section className="references">
+        <section className={t.references}>
           <h2>References</h2>
-          <ol className="reference-list">
+          <ol className={t.referenceList}>
             <li id="ref-1">
               <a href="#cite-1">↑</a> Sharma, M., et al. (2023). "Towards Understanding Sycophancy in Language Models." <em>arXiv:2310.13548</em>.{' '}
               <a href="https://arxiv.org/abs/2310.13548" target="_blank" rel="noopener noreferrer">arxiv.org/abs/2310.13548</a>
@@ -432,14 +414,14 @@ function Thesis() {
           </ol>
         </section>
 
-        <footer className="thesis-footer">
+        <footer className={t.thesisFooter}>
           <p>
             Written by <a href="https://github.com/MaxGhenis">Max Ghenis</a>.
             Farness is <a href="https://github.com/MaxGhenis/farness">open source</a>.
           </p>
         </footer>
       </article>
-    </>
+    </div>
   )
 }
 
