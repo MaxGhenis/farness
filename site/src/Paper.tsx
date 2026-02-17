@@ -4,11 +4,19 @@ import './Thesis.css'
 function Header() {
   return (
     <header className="header">
-      <Link to="/" className="logo">Farness</Link>
-      <nav className="nav">
-        <Link to="/thesis" className="nav-link">Thesis</Link>
-        <Link to="/paper" className="nav-link active">Paper</Link>
-      </nav>
+      <div className="header-inner">
+        <Link to="/" className="logo">
+          <span className="logo-mark">F</span>
+          <span className="logo-text">arness</span>
+        </Link>
+        <nav className="nav">
+          <Link to="/thesis" className="nav-link">Thesis</Link>
+          <Link to="/paper" className="nav-link active">Paper</Link>
+          <a href="https://github.com/MaxGhenis/farness" className="nav-link nav-link-gh">
+            GitHub
+          </a>
+        </nav>
+      </div>
     </header>
   )
 }
@@ -148,8 +156,19 @@ function Paper() {
               <li>Delaying intuitive synthesis until after analytical assessment</li>
             </ul>
             <p>
+              The evidence for structured over unstructured judgment is extensive. Dawes, Faust, and
+              Meehl (1989) reviewed nearly 100 studies and found that actuarial (structured) prediction
+              equaled or surpassed clinical (unstructured) judgment in every domain
+              tested<Cite id="15">15</Cite>. Grove and Zald (2000) confirmed this across 136 studies,
+              finding mechanical prediction was ~10% more accurate on average, with clinical prediction
+              substantially winning in only 6-16% of comparisons<Cite id="16">16</Cite>.
+            </p>
+            <p>
               The GRADE Evidence-to-Decision framework in healthcare shows that structured approaches
-              lead to more consistent, transparent recommendations<Cite id="6">6</Cite>.
+              lead to more consistent, transparent recommendations<Cite id="6">6</Cite>. Howard's
+              Decision Quality framework provides six auditable elements — frame, alternatives,
+              information, values, reasoning, and commitment — allowing decision quality to be assessed
+              independent of outcomes<Cite id="17">17</Cite>.
             </p>
 
             <h3>2.2 Superforecasting and Calibration</h3>
@@ -165,6 +184,9 @@ function Paper() {
               Chain-of-thought prompting<Cite id="1">1</Cite> improves LLM performance on reasoning
               tasks by encouraging step-by-step thinking. Decomposition prompting<Cite id="7">7</Cite>
               further improves performance by breaking complex problems into sub-problems.
+              Wang et al. (2023) showed that sampling diverse reasoning paths and selecting the most
+              consistent answer improves chain-of-thought performance by up to 17.9%<Cite id="18">18</Cite>,
+              providing the theoretical basis for structured ensemble approaches.
             </p>
 
             <h3>2.4 LLM Calibration</h3>
@@ -173,18 +195,39 @@ function Paper() {
               Kadavath et al. (2022) found that larger models show improved calibration on question-answering
               tasks, though calibration degrades for low-probability events<Cite id="9">9</Cite>.
               Tian et al. (2023) demonstrated that verbalized confidence correlates with accuracy but
-              exhibits systematic overconfidence<Cite id="10">10</Cite>. Critically, calibration research
-              focuses on <em>factual</em> questions with ground truth. Our work extends this to
-              <em>judgment</em> questions where no ground truth exists.
+              exhibits systematic overconfidence<Cite id="10">10</Cite>.
+            </p>
+            <p>
+              Crucially, Xiong et al. (2024) showed that structured elicitation strategies — multi-step
+              prompting, top-k sampling — significantly reduce LLM overconfidence, with human-inspired
+              prompting strategies mitigating the worst miscalibration<Cite id="19">19</Cite>. This
+              suggests that <em>how</em> you ask for probabilities matters as much as the model's
+              underlying capability. Calibration research typically focuses on <em>factual</em> questions
+              with ground truth. Our work extends this to <em>judgment</em> questions where no ground
+              truth exists.
             </p>
 
-            <h3>2.5 Sycophancy in LLMs</h3>
+            <h3>2.5 Sycophancy and Cognitive Bias in LLMs</h3>
             <p>
               LLMs exhibit sycophancy — the tendency to agree with users even when they shouldn't.
               Perez et al. (2023) documented that models shift answers when users express opinions,
               even on objective questions<Cite id="11">11</Cite>. Sharma et al. (2024) showed that
-              sycophancy increases with model capability<Cite id="12">12</Cite>. Our stability-under-probing
-              methodology directly measures a form of sycophancy: do models update inappropriately when probed?
+              sycophancy increases with model capability<Cite id="12">12</Cite>.
+            </p>
+            <p>
+              Beyond sycophancy, LLMs exhibit broader cognitive biases. Echterhoff et al. (2024)
+              tested 13,465 prompts for prompt-induced, sequential, and inherent biases, proposing
+              "BiasBuster" — a framework for LLMs to debias their own human-like cognitive
+              biases<Cite id="20">20</Cite>. Anchoring bias in particular persists even with
+              chain-of-thought prompting; effective mitigation requires comprehensive structured
+              elicitation<Cite id="21">21</Cite>. Christian and Mazor (2026) demonstrated that LLMs
+              can mitigate their own biases through "self-blinding" — calling a blinded replica of
+              themselves to achieve fairer decisions<Cite id="22">22</Cite>, operationalizing decision
+              hygiene for AI systems.
+            </p>
+            <p>
+              Our stability-under-probing methodology directly measures these phenomena: do models
+              update inappropriately when probed, and does structured framing reduce such updates?
             </p>
 
             <h3>2.6 Process Evaluation in Decision-Making</h3>
@@ -197,14 +240,28 @@ function Paper() {
               deliberation quality.
             </p>
 
-            <h3>2.7 LLM Forecasting Benchmarks</h3>
+            <h3>2.7 LLM-Assisted Structured Decision-Making</h3>
             <p>
-              ForecastBench<Cite id="8">8</Cite> provides a dynamic benchmark for LLM forecasting
-              accuracy, comparing models to human forecasters including superforecasters. As of 2025,
-              top LLMs approach but do not match superforecaster accuracy (Brier scores of ~0.10 vs ~0.08).
+              Chiang et al. (2024) showed that LLM-powered "devil's advocates" — agents that argue
+              against AI recommendations — promote appropriate reliance on AI in group decisions by
+              grounding discussion in concrete evidence and surfacing assumptions<Cite id="23">23</Cite>.
+              Du et al. (2024) demonstrated that multi-agent debate between LLM instances
+              significantly enhances reasoning while reducing hallucinations, structurally analogous
+              to Analysis of Competing Hypotheses<Cite id="24">24</Cite>.
             </p>
 
-            <h3>2.8 Gap in the Literature</h3>
+            <h3>2.8 LLM Forecasting Benchmarks</h3>
+            <p>
+              ForecastBench<Cite id="8">8</Cite> provides a dynamic benchmark for LLM forecasting
+              accuracy, comparing models to human forecasters including superforecasters. Halawi et al.
+              (2024) built a retrieval-augmented system that approaches competitive forecaster accuracy
+              through a structured pipeline of search, reasoning, and aggregation<Cite id="25">25</Cite>.
+              As of 2025, superforecasters still outperform leading LLMs (Brier ~0.08 vs ~0.10), but
+              the gap is narrowing — LLMs now surpass the median public forecaster, with projected
+              parity by late 2026.
+            </p>
+
+            <h3>2.9 Gap in the Literature</h3>
             <p>Existing work measures either:</p>
             <ul>
               <li><strong>Forecasting accuracy</strong> (ForecastBench) — but this requires resolvable questions and doesn't capture decision <em>process</em></li>
@@ -532,6 +589,50 @@ function Paper() {
             </li>
             <li id="ref-14">
               <a href="#cite-14">↑</a> Larrick, R. P. (2004). "Debiasing." <em>Blackwell Handbook of Judgment and Decision Making</em>, 316-338.
+            </li>
+            <li id="ref-15">
+              <a href="#cite-15">↑</a> Dawes, R. M., Faust, D., & Meehl, P. E. (1989). "Clinical Versus Actuarial Judgment." <em>Science</em>, 243(4899), 1668-1674.{' '}
+              <a href="https://doi.org/10.1126/science.2648573" target="_blank" rel="noopener noreferrer">DOI</a>
+            </li>
+            <li id="ref-16">
+              <a href="#cite-16">↑</a> Grove, W. M., & Zald, D. H. (2000). "Clinical Versus Mechanical Prediction: A Meta-Analysis." <em>Psychological Assessment</em>, 12(1), 19-30.{' '}
+              <a href="https://doi.org/10.1037/1040-3590.12.1.19" target="_blank" rel="noopener noreferrer">DOI</a>
+            </li>
+            <li id="ref-17">
+              <a href="#cite-17">↑</a> Howard, R. A. (1988). "Decision Analysis: Practice and Promise." <em>Management Science</em>, 34(6), 679-695.{' '}
+              <a href="https://doi.org/10.1287/mnsc.34.6.679" target="_blank" rel="noopener noreferrer">DOI</a>
+            </li>
+            <li id="ref-18">
+              <a href="#cite-18">↑</a> Wang, X., Wei, J., et al. (2023). "Self-Consistency Improves Chain of Thought Reasoning in Language Models." <em>ICLR 2023</em>.{' '}
+              <a href="https://arxiv.org/abs/2203.11171" target="_blank" rel="noopener noreferrer">arxiv.org/abs/2203.11171</a>
+            </li>
+            <li id="ref-19">
+              <a href="#cite-19">↑</a> Xiong, M., Hu, Z., Lu, X., et al. (2024). "Can LLMs Express Their Uncertainty? An Empirical Evaluation of Confidence Elicitation in LLMs." <em>ICLR 2024</em>.{' '}
+              <a href="https://arxiv.org/abs/2306.13063" target="_blank" rel="noopener noreferrer">arxiv.org/abs/2306.13063</a>
+            </li>
+            <li id="ref-20">
+              <a href="#cite-20">↑</a> Echterhoff, J. M., Liu, Y., Alessa, A., McAuley, J., & He, Z. (2024). "Cognitive Bias in Decision-Making with LLMs." <em>Findings of EMNLP 2024</em>.{' '}
+              <a href="https://arxiv.org/abs/2403.00811" target="_blank" rel="noopener noreferrer">arxiv.org/abs/2403.00811</a>
+            </li>
+            <li id="ref-21">
+              <a href="#cite-21">↑</a> Echterhoff, M., et al. (2025). "Anchoring Bias in Large Language Models: An Experimental Study." <em>Journal of Computational Social Science</em>.{' '}
+              <a href="https://doi.org/10.1007/s42001-025-00435-2" target="_blank" rel="noopener noreferrer">DOI</a>
+            </li>
+            <li id="ref-22">
+              <a href="#cite-22">↑</a> Christian, B., & Mazor, M. (2026). "Self-Blinding and Counterfactual Self-Simulation Mitigate Biases and Sycophancy in Large Language Models." <em>arXiv:2601.14553</em>.{' '}
+              <a href="https://arxiv.org/abs/2601.14553" target="_blank" rel="noopener noreferrer">arxiv.org/abs/2601.14553</a>
+            </li>
+            <li id="ref-23">
+              <a href="#cite-23">↑</a> Chiang, C.-W., Lu, Z., Li, Z., & Yin, M. (2024). "Enhancing AI-Assisted Group Decision Making through LLM-Powered Devil's Advocate." <em>Proceedings of IUI '24</em>, ACM.{' '}
+              <a href="https://doi.org/10.1145/3640543.3645199" target="_blank" rel="noopener noreferrer">DOI</a>
+            </li>
+            <li id="ref-24">
+              <a href="#cite-24">↑</a> Du, Y., Li, S., Torralba, A., Tenenbaum, J. B., & Mordatch, I. (2024). "Improving Factuality and Reasoning in Language Models through Multiagent Debate." <em>ICML 2024</em>.{' '}
+              <a href="https://arxiv.org/abs/2305.14325" target="_blank" rel="noopener noreferrer">arxiv.org/abs/2305.14325</a>
+            </li>
+            <li id="ref-25">
+              <a href="#cite-25">↑</a> Halawi, D., Zhang, F., Yueh-Han, C., & Steinhardt, J. (2024). "Approaching Human-Level Forecasting with Language Models." <em>NeurIPS 2024</em>.{' '}
+              <a href="https://arxiv.org/abs/2402.18563" target="_blank" rel="noopener noreferrer">arxiv.org/abs/2402.18563</a>
             </li>
           </ol>
         </section>

@@ -1,91 +1,4 @@
-/* ── Header ── */
-
-.header {
-  position: sticky;
-  top: 0;
-  z-index: 100;
-  width: 100%;
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
-  background: rgba(12, 14, 19, 0.8);
-  border-bottom: 1px solid var(--color-border);
-}
-
-.header-inner {
-  width: 100%;
-  max-width: var(--max-width-wide);
-  margin: 0 auto;
-  padding: 0.75rem var(--space-md);
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-}
-
-.logo {
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-  text-decoration: none;
-  font-family: var(--font-display);
-  font-size: 1.2rem;
-  font-weight: 500;
-  color: var(--color-text);
-}
-
-.logo:hover {
-  text-decoration: none;
-}
-
-.logo-mark {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  width: 1.75rem;
-  height: 1.75rem;
-  background: var(--color-accent);
-  color: #0c0e13;
-  font-family: var(--font-display);
-  font-weight: 600;
-  font-size: 1rem;
-  border-radius: 5px;
-}
-
-.logo-text {
-  letter-spacing: 0.02em;
-}
-
-.app-dark .nav {
-  display: flex;
-  gap: 1.75rem;
-  align-items: center;
-}
-
-.app-dark .nav-link {
-  font-family: var(--font-body);
-  font-size: 0.85rem;
-  font-weight: 400;
-  color: var(--color-text-muted);
-  text-decoration: none;
-  transition: color 0.2s;
-}
-
-.app-dark .nav-link:hover {
-  color: var(--color-text);
-  text-decoration: none;
-}
-
-.nav-link-gh {
-  padding: 0.3em 0.85em;
-  border: 1px solid var(--color-border-strong);
-  border-radius: 6px;
-  font-size: 0.82rem;
-  margin-left: 0.25rem;
-}
-
-.nav-link-gh:hover {
-  border-color: var(--color-accent);
-  color: var(--color-accent);
-}
+/* Header and nav styles are in index.css (shared across all pages) */
 
 /* ── Hero ── */
 
@@ -155,54 +68,7 @@
   animation: fadeUp 0.8s ease-out 0.24s both;
 }
 
-/* ── Buttons ── */
-
-.btn {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.5em;
-  padding: 0.7em 1.5em;
-  font-family: var(--font-body);
-  font-size: 0.9rem;
-  font-weight: 500;
-  text-decoration: none;
-  border-radius: 8px;
-  border: 1px solid transparent;
-  cursor: pointer;
-  transition: all 0.2s ease;
-}
-
-.btn:hover {
-  text-decoration: none;
-}
-
-.btn-accent {
-  background: var(--color-accent);
-  color: var(--color-bg);
-  border-color: var(--color-accent);
-}
-
-.btn-accent:hover {
-  background: #d99a1f;
-  border-color: #d99a1f;
-  box-shadow: 0 4px 20px var(--color-accent-glow);
-}
-
-.btn-ghost {
-  background: transparent;
-  color: var(--color-text-muted);
-  border-color: var(--color-border-strong);
-}
-
-.btn-ghost:hover {
-  border-color: var(--color-accent);
-  color: var(--color-accent);
-}
-
-.mono {
-  font-family: var(--font-mono);
-  font-size: 0.85em;
-}
+/* Button and utility styles are in index.css (shared across all pages) */
 
 /* ── Sections ── */
 
@@ -720,18 +586,7 @@
   text-decoration: underline;
 }
 
-/* ── Animations ── */
-
-@keyframes fadeUp {
-  from {
-    opacity: 0;
-    transform: translateY(16px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
+/* fadeUp animation is in index.css (shared) */
 
 /* ── Responsive ── */
 
@@ -757,13 +612,6 @@
     grid-template-columns: 1fr;
   }
 
-  .header-inner {
-    padding: var(--space-xs) var(--space-sm);
-  }
-
-  .nav {
-    gap: var(--space-sm);
-  }
 }
 
 @media (max-width: 480px) {

@@ -4,11 +4,19 @@ import './Thesis.css'
 function Header() {
   return (
     <header className="header">
-      <Link to="/" className="logo">Farness</Link>
-      <nav className="nav">
-        <Link to="/thesis" className="nav-link active">Thesis</Link>
-        <Link to="/paper" className="nav-link">Paper</Link>
-      </nav>
+      <div className="header-inner">
+        <Link to="/" className="logo">
+          <span className="logo-mark">F</span>
+          <span className="logo-text">arness</span>
+        </Link>
+        <nav className="nav">
+          <Link to="/thesis" className="nav-link active">Thesis</Link>
+          <Link to="/paper" className="nav-link">Paper</Link>
+          <a href="https://github.com/MaxGhenis/farness" className="nav-link nav-link-gh">
+            GitHub
+          </a>
+        </nav>
+      </div>
     </header>
   )
 }
@@ -52,6 +60,10 @@ function Thesis() {
             <p>
               This isn't just a problem with AI (though AI's tendency toward sycophancy makes
               it worse<Cite id="1">1</Cite>). It's a problem with how we structure decision-making conversations.
+              Annie Duke calls this "resulting"—judging decisions by outcomes rather than
+              process<Cite id="16">16</Cite>. When we ask for advice and get a good outcome, we
+              credit the advice. Bad outcome, we blame it. But a single outcome tells us almost
+              nothing about whether the decision was good.
             </p>
           </section>
 
@@ -99,20 +111,24 @@ function Thesis() {
             </ul>
             <p>
               Superforecasters don't have access to secret information. They're just more
-              disciplined about structuring their thinking. Farness applies this discipline
-              to personal and professional decisions.
+              disciplined about structuring their thinking. Across over 100 comparative studies,
+              Dawes, Faust, and Meehl found that structured "mechanical" prediction equaled
+              or outperformed unstructured expert judgment in every domain tested<Cite id="17">17</Cite>.
+              Farness applies this discipline to personal and professional decisions.
             </p>
           </section>
 
           <section>
             <h2>Why AI Makes This Better</h2>
             <p>
-              Large language models are surprisingly good at forecasting. Recent research shows
-              LLM ensembles can match human crowd accuracy on prediction tasks<Cite id="6">6</Cite>, and
-              AI forecasting systems like AIA Forecaster have achieved expert-level performance
-              on benchmarks<Cite id="7">7</Cite>. The Center for AI Safety's "FiveThirtyNine" bot
-              achieved 87.7% accuracy on resolved questions, slightly outperforming the Metaculus
-              crowd at 87.0%<Cite id="8">8</Cite>.
+              Large language models are surprisingly good at forecasting. LLM ensembles can
+              match human crowd accuracy on prediction tasks<Cite id="6">6</Cite>. Halawi et al.
+              built a retrieval-augmented system that approaches competitive forecaster
+              accuracy<Cite id="18">18</Cite>, and AI forecasting systems like AIA Forecaster
+              have achieved superforecaster-level performance through structured pipelines
+              of search, independent reasoning, and calibration<Cite id="7">7</Cite>. On
+              ForecastBench, LLMs now surpass the median public forecaster, with projected
+              LLM-superforecaster parity by late 2026<Cite id="8">8</Cite>.
             </p>
             <p>
               But LLMs are also prone to sycophancy: telling you what you want to hear rather
@@ -123,6 +139,9 @@ function Thesis() {
               The forecasting frame is a <em>harness</em> that constrains this tendency. When
               you ask an AI for a probability with a confidence interval, it's harder for it
               to simply validate your existing beliefs. Numbers create accountability.
+              Xiong et al. found that structured elicitation strategies—multi-step prompting,
+              top-k sampling—significantly reduce LLM overconfidence<Cite id="19">19</Cite>.
+              How you ask matters as much as what you ask.
             </p>
             <p>
               More importantly, the structure itself improves thinking. Research on LLM-augmented
@@ -152,10 +171,14 @@ function Thesis() {
             </p>
             <p>
               Research on expert prediction shows that without feedback, even domain experts
-              are poorly calibrated<Cite id="10">10</Cite>. But with structured feedback,
-              calibration improves significantly. The Good Judgment Project found that
-              providing forecasters with regular accuracy feedback was one of the key
-              interventions that improved performance<Cite id="3">3</Cite>.
+              are poorly calibrated<Cite id="10">10</Cite>. Lichtenstein, Fischhoff, and Phillips
+              found that when people said they were 98% confident, they were correct only 68%
+              of the time<Cite id="20">20</Cite>. But with structured feedback,
+              calibration improves dramatically. Weather forecasters and professional
+              oddsmakers—who receive regular, structured feedback on their probabilistic
+              predictions—exhibited little or no overconfidence. The Good Judgment Project confirmed
+              this: regular accuracy feedback was one of the key interventions that improved
+              performance<Cite id="3">3</Cite>.
             </p>
             <p>
               You learn that you're overconfident on career decisions. Or underconfident on
@@ -165,6 +188,64 @@ function Thesis() {
               This meta-knowledge is invaluable. It's not just about making better individual
               decisions—it's about understanding your own decision-making patterns and
               compensating for systematic biases.
+            </p>
+          </section>
+
+          <section>
+            <h2>The Decision Quality Chain</h2>
+            <p>
+              Ron Howard and the Strategic Decisions Group developed a framework for measuring
+              decision quality at the time of decision, independent of outcome<Cite id="21">21</Cite>.
+              A decision is only as good as its weakest link across six elements: appropriate
+              frame, creative alternatives, reliable information, clear values, sound reasoning,
+              and commitment to action<Cite id="22">22</Cite>.
+            </p>
+            <p>
+              Farness maps directly onto this chain. Defining KPIs addresses <em>frame</em> and <em>values</em>.
+              Option expansion addresses <em>creative alternatives</em>. Forecasting with base
+              rates addresses <em>reliable information</em> and <em>sound reasoning</em>. The
+              calibration loop addresses the feedback mechanism that strengthens every link over time.
+            </p>
+            <p>
+              The key insight from decision analysis is that you can assess decision quality
+              without waiting for outcomes. Howard's information value theory shows that when
+              decisions are framed as forecasts, you can calculate exactly how much to invest
+              in resolving each uncertainty<Cite id="23">23</Cite>. If the expected value of
+              learning your probability of success is only $50, don't spend $5,000 on a
+              feasibility study.
+            </p>
+            <p>
+              This connects to what Kahneman and Lovallo call the "inside view" versus "outside
+              view"<Cite id="24">24</Cite>. Decision makers naturally treat each problem as unique,
+              anchoring on plans and scenarios rather than base rates from comparable situations.
+              Reframing decisions as forecasts naturally invokes the outside view by forcing explicit
+              probability assessment against a reference class.
+            </p>
+          </section>
+
+          <section>
+            <h2>Boosting, Not Nudging</h2>
+            <p>
+              Hertwig and Grune-Yanoff distinguish "nudges" (environmental changes that steer
+              behavior) from "boosts" (interventions that build decision-making
+              competence)<Cite id="25">25</Cite>. A nudge might default your retirement
+              savings to 10%. A boost teaches you to think about compound interest so you
+              choose the right rate yourself.
+            </p>
+            <p>
+              Farness is a boost, not a nudge. It doesn't tell you what to decide. It teaches
+              a way of thinking—probabilistic, structured, accountable—that transfers across
+              domains. Julia Galef calls this the "scout mindset": treating beliefs as
+              provisional hypotheses to be stress-tested, not positions to
+              defend<Cite id="26">26</Cite>. The forecasting frame cultivates this mindset
+              by making accuracy the explicit goal.
+            </p>
+            <p>
+              And critically, Koriat, Lichtenstein, and Fischhoff showed that simply asking
+              people to generate reasons <em>against</em> their preferred option eliminates
+              overconfidence almost entirely<Cite id="27">27</Cite>. Structured consideration
+              of alternatives—a core forecasting discipline—is one of the most robust debiasing
+              techniques known.
             </p>
           </section>
 
@@ -303,6 +384,50 @@ function Thesis() {
             </li>
             <li id="ref-15">
               <a href="#cite-15">↑</a> Kunda, Z. (1990). "The Case for Motivated Reasoning." <em>Psychological Bulletin</em>, 108(3), 480-498.
+            </li>
+            <li id="ref-16">
+              <a href="#cite-16">↑</a> Duke, A. (2018). <em>Thinking in Bets: Making Smarter Decisions When You Don't Have All the Facts</em>. Portfolio/Penguin.
+            </li>
+            <li id="ref-17">
+              <a href="#cite-17">↑</a> Dawes, R. M., Faust, D., & Meehl, P. E. (1989). "Clinical Versus Actuarial Judgment." <em>Science</em>, 243(4899), 1668-1674.{' '}
+              <a href="https://doi.org/10.1126/science.2648573" target="_blank" rel="noopener noreferrer">DOI</a>
+            </li>
+            <li id="ref-18">
+              <a href="#cite-18">↑</a> Halawi, D., Zhang, F., Yueh-Han, C., & Steinhardt, J. (2024). "Approaching Human-Level Forecasting with Language Models." <em>NeurIPS 2024</em>.{' '}
+              <a href="https://arxiv.org/abs/2402.18563" target="_blank" rel="noopener noreferrer">arxiv.org/abs/2402.18563</a>
+            </li>
+            <li id="ref-19">
+              <a href="#cite-19">↑</a> Xiong, M., Hu, Z., Lu, X., et al. (2024). "Can LLMs Express Their Uncertainty? An Empirical Evaluation of Confidence Elicitation in LLMs." <em>ICLR 2024</em>.{' '}
+              <a href="https://arxiv.org/abs/2306.13063" target="_blank" rel="noopener noreferrer">arxiv.org/abs/2306.13063</a>
+            </li>
+            <li id="ref-20">
+              <a href="#cite-20">↑</a> Lichtenstein, S., Fischhoff, B., & Phillips, L. D. (1982). "Calibration of Probabilities: The State of the Art to 1980." In D. Kahneman, P. Slovic, & A. Tversky (Eds.), <em>Judgment under Uncertainty: Heuristics and Biases</em> (pp. 306-334). Cambridge University Press.
+            </li>
+            <li id="ref-21">
+              <a href="#cite-21">↑</a> Howard, R. A. (1988). "Decision Analysis: Practice and Promise." <em>Management Science</em>, 34(6), 679-695.{' '}
+              <a href="https://doi.org/10.1287/mnsc.34.6.679" target="_blank" rel="noopener noreferrer">DOI</a>
+            </li>
+            <li id="ref-22">
+              <a href="#cite-22">↑</a> Spetzler, C., Winter, H., & Meyer, J. (2016). <em>Decision Quality: Value Creation from Better Business Decisions</em>. Wiley.
+            </li>
+            <li id="ref-23">
+              <a href="#cite-23">↑</a> Howard, R. A. (1966). "Information Value Theory." <em>IEEE Transactions on Systems Science and Cybernetics</em>, 2(1), 22-26.{' '}
+              <a href="https://doi.org/10.1109/TSSC.1966.300074" target="_blank" rel="noopener noreferrer">DOI</a>
+            </li>
+            <li id="ref-24">
+              <a href="#cite-24">↑</a> Kahneman, D., & Lovallo, D. (1993). "Timid Choices and Bold Forecasts: A Cognitive Perspective on Risk Taking." <em>Management Science</em>, 39(1), 17-31.{' '}
+              <a href="https://doi.org/10.1287/mnsc.39.1.17" target="_blank" rel="noopener noreferrer">DOI</a>
+            </li>
+            <li id="ref-25">
+              <a href="#cite-25">↑</a> Hertwig, R., & Grune-Yanoff, T. (2017). "Nudging and Boosting: Steering or Empowering Good Decisions." <em>Perspectives on Psychological Science</em>, 12(6), 973-986.{' '}
+              <a href="https://doi.org/10.1177/1745691617702496" target="_blank" rel="noopener noreferrer">DOI</a>
+            </li>
+            <li id="ref-26">
+              <a href="#cite-26">↑</a> Galef, J. (2021). <em>The Scout Mindset: Why Some People See Things Clearly and Others Don't</em>. Portfolio/Penguin.
+            </li>
+            <li id="ref-27">
+              <a href="#cite-27">↑</a> Koriat, A., Lichtenstein, S., & Fischhoff, B. (1980). "Reasons for Confidence." <em>Journal of Experimental Psychology: Human Learning and Memory</em>, 6(2), 107-118.{' '}
+              <a href="https://doi.org/10.1037/0278-7393.6.2.107" target="_blank" rel="noopener noreferrer">DOI</a>
             </li>
           </ol>
         </section>
