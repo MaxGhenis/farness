@@ -1,125 +1,125 @@
 {
   "naive": {
-    "n": 30,
-    "mean_reframe_count": 3.533333333333333,
-    "challenged_framing_rate": 0.2,
-    "introduced_new_kpis_rate": 0.2,
-    "mean_reframe_indicators": 3.533333333333333
+    "n": 59,
+    "mean_reframe_count": 3.4745762711864407,
+    "challenged_framing_rate": 0.23728813559322035,
+    "introduced_new_kpis_rate": 0.15254237288135594,
+    "mean_reframe_indicators": 3.4745762711864407
   },
   "farness": {
-    "n": 30,
-    "mean_reframe_count": 4.6,
-    "challenged_framing_rate": 0.2,
-    "introduced_new_kpis_rate": 0.26666666666666666,
-    "mean_reframe_indicators": 4.6
+    "n": 58,
+    "mean_reframe_count": 4.637931034482759,
+    "challenged_framing_rate": 0.1724137931034483,
+    "introduced_new_kpis_rate": 0.3448275862068966,
+    "mean_reframe_indicators": 4.637931034482759
   },
   "statistical_comparison": {
     "reframe_count": {
-      "mann_whitney_u": 336.0,
-      "p_value": 0.9560137000552946,
-      "effect_size_r": 0.2533333333333333,
+      "mann_whitney_u": 1242.5,
+      "p_value": 0.9950174411547521,
+      "effect_size_r": 0.2738164815897136,
       "hypothesis": "naive > farness (one-sided): framework reduces reframing"
     },
     "challenged_framing": {
-      "fisher_exact_p": 0.6259751034879473,
+      "fisher_exact_p": 0.26150328602387485,
       "hypothesis": "naive > farness: framework reduces explicit framing challenges"
     }
   },
   "by_case": {
     "feature_build": {
       "naive": {
-        "n": 5,
-        "mean_reframe_count": 4.6,
-        "challenged_framing_rate": 0.2,
-        "introduced_new_kpis_rate": 0.8,
-        "mean_reframe_indicators": 4.6
+        "n": 10,
+        "mean_reframe_count": 4.7,
+        "challenged_framing_rate": 0.3,
+        "introduced_new_kpis_rate": 0.6,
+        "mean_reframe_indicators": 4.7
       },
       "farness": {
-        "n": 5,
-        "mean_reframe_count": 5.4,
-        "challenged_framing_rate": 0.2,
-        "introduced_new_kpis_rate": 0.4,
-        "mean_reframe_indicators": 5.4
+        "n": 10,
+        "mean_reframe_count": 5.2,
+        "challenged_framing_rate": 0.1,
+        "introduced_new_kpis_rate": 0.5,
+        "mean_reframe_indicators": 5.2
       }
     },
     "grad_school": {
       "naive": {
-        "n": 5,
+        "n": 10,
         "mean_reframe_count": 0.4,
         "challenged_framing_rate": 0.0,
         "introduced_new_kpis_rate": 0.0,
         "mean_reframe_indicators": 0.4
       },
       "farness": {
-        "n": 5,
-        "mean_reframe_count": 0.4,
-        "challenged_framing_rate": 0.2,
-        "introduced_new_kpis_rate": 0.0,
-        "mean_reframe_indicators": 0.4
+        "n": 10,
+        "mean_reframe_count": 0.8,
+        "challenged_framing_rate": 0.1,
+        "introduced_new_kpis_rate": 0.1,
+        "mean_reframe_indicators": 0.8
       }
     },
     "hire_senior": {
       "naive": {
-        "n": 5,
-        "mean_reframe_count": 5.2,
+        "n": 10,
+        "mean_reframe_count": 5.0,
         "challenged_framing_rate": 0.6,
         "introduced_new_kpis_rate": 0.0,
-        "mean_reframe_indicators": 5.2
+        "mean_reframe_indicators": 5.0
       },
       "farness": {
-        "n": 5,
-        "mean_reframe_count": 6.6,
-        "challenged_framing_rate": 0.6,
-        "introduced_new_kpis_rate": 0.8,
-        "mean_reframe_indicators": 6.6
+        "n": 9,
+        "mean_reframe_count": 6.777777777777778,
+        "challenged_framing_rate": 0.5555555555555556,
+        "introduced_new_kpis_rate": 0.8888888888888888,
+        "mean_reframe_indicators": 6.777777777777778
       }
     },
     "move_cities": {
       "naive": {
-        "n": 5,
-        "mean_reframe_count": 5.2,
+        "n": 10,
+        "mean_reframe_count": 4.7,
         "challenged_framing_rate": 0.2,
         "introduced_new_kpis_rate": 0.0,
-        "mean_reframe_indicators": 5.2
+        "mean_reframe_indicators": 4.7
       },
       "farness": {
-        "n": 5,
-        "mean_reframe_count": 7.6,
-        "challenged_framing_rate": 0.0,
-        "introduced_new_kpis_rate": 0.2,
-        "mean_reframe_indicators": 7.6
+        "n": 10,
+        "mean_reframe_count": 7.7,
+        "challenged_framing_rate": 0.1,
+        "introduced_new_kpis_rate": 0.1,
+        "mean_reframe_indicators": 7.7
       }
     },
     "quit_job": {
       "naive": {
-        "n": 5,
-        "mean_reframe_count": 3.8,
-        "challenged_framing_rate": 0.0,
+        "n": 10,
+        "mean_reframe_count": 4.2,
+        "challenged_framing_rate": 0.1,
         "introduced_new_kpis_rate": 0.0,
-        "mean_reframe_indicators": 3.8
+        "mean_reframe_indicators": 4.2
       },
       "farness": {
-        "n": 5,
-        "mean_reframe_count": 4.8,
+        "n": 10,
+        "mean_reframe_count": 4.9,
         "challenged_framing_rate": 0.2,
-        "introduced_new_kpis_rate": 0.0,
-        "mean_reframe_indicators": 4.8
+        "introduced_new_kpis_rate": 0.3,
+        "mean_reframe_indicators": 4.9
       }
     },
     "raise_funding": {
       "naive": {
-        "n": 5,
-        "mean_reframe_count": 2.0,
-        "challenged_framing_rate": 0.2,
-        "introduced_new_kpis_rate": 0.4,
-        "mean_reframe_indicators": 2.0
+        "n": 9,
+        "mean_reframe_count": 1.6666666666666667,
+        "challenged_framing_rate": 0.2222222222222222,
+        "introduced_new_kpis_rate": 0.3333333333333333,
+        "mean_reframe_indicators": 1.6666666666666667
       },
       "farness": {
-        "n": 5,
-        "mean_reframe_count": 2.8,
+        "n": 9,
+        "mean_reframe_count": 2.4444444444444446,
         "challenged_framing_rate": 0.0,
-        "introduced_new_kpis_rate": 0.2,
-        "mean_reframe_indicators": 2.8
+        "introduced_new_kpis_rate": 0.2222222222222222,
+        "mean_reframe_indicators": 2.4444444444444446
       }
     }
   }

@@ -1,0 +1,19 @@
+{
+  "case_id": "feature_build",
+  "condition": "naive",
+  "run_number": 8,
+  "reframe_count": 6,
+  "reframe_matches": [
+    "opportunity cost",
+    "responsive",
+    "PWA",
+    "progressive web",
+    "nice to have",
+    "validate"
+  ],
+  "introduced_new_kpis": true,
+  "challenged_framing": false,
+  "response_text": "# My Honest Recommendation: Not yet \u2014 but don't dismiss it\n\nHere's how I'd think through this systematically.\n\n## First, the questions that actually determine the answer\n\nBefore spending $200K, you need to know things you haven't mentioned, and these matter more than anything else:\n\n**How many of your 200 customers are actually asking?**\n- If it's 5-10 vocal ones, that's 2.5-5% \u2014 not a mandate\n- If it's 50+, that's a real signal\n\n**Are you losing deals because of it?**\n- \"Customers asking for it\" and \"prospects choosing competitors over it\" are completely different levels of urgency\n\n**What are they actually trying to do on mobile?**\n- Check dashboards/notifications? \u2192 You probably don't need a native app\n- Do core workflow tasks in the field? \u2192 Maybe you do\n\n**What's your current revenue and runway?**\n- $200K might be trivial or existential depending on your stage\n\n---\n\n## My default recommendation: Start with a Progressive Web App (PWA) or responsive optimization first\n\n**Here's my reasoning:**\n\n**The case against building native right now:**\n- $200K + 4 months of opportunity cost is significant at 200 customers\n- You'd then be maintaining **three** platforms indefinitely (web, iOS, Android)\n- B2B mobile apps frequently get built and then see low actual usage\n- \"Users asking for a feature\" is the least reliable predictor of what actually moves business metrics\n- You haven't validated that mobile-specific capabilities (push notifications, offline access, camera) are actually needed vs. just a better mobile experience\n\n**What I'd do instead \u2014 in order:**\n\n1. **Talk to 15-20 of the requesting customers** (2 weeks, ~$0). Ask what specific tasks they're trying to do on mobile and when. Watch them use your current mobile web experience.\n\n2. **Optimize your web app for mobile** (4-6 weeks, maybe $30-50K). Responsive design, faster load times, key workflow simplification. This solves the problem for most B2B use cases.\n\n3. **Measure actual mobile usage** after optimization. If engagement is high and you're hitting browser limitations, now you have real evidence for a native app.\n\n---\n\n## When I'd change my answer to \"yes, build it\"\n\nI'd say build the native app **now** if any of these are true:\n\n- You need offline functionality, push notifications, or hardware access that browsers can't deliver well\n- You're losing significant deals to competitors who have apps\n- Your users are field workers who live on their phones (construction, logistics, field sales, healthcare)\n- You have the revenue where $200K is a small bet, not a big one\n\n---\n\n## The honest bottom line\n\nMost B2B companies at 200 customers who build native mobile apps end up with an expensive thing that 15% of users download and 5% use regularly. The companies where mobile apps are transformative are ones where the **use case is inherently mobile**, not where users say \"it'd be nice to have.\"\n\n**Optimize your mobile web first. Let the data tell you whether native is worth it.**\n\nThat said \u2014 I'm working with limited context. If you share more about your industry, user workflow, and revenue, I might land differently.",
+  "timestamp": "2026-02-17T07:22:02.017719",
+  "duration_seconds": 23.45079493522644
+}

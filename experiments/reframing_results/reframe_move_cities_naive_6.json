@@ -1,0 +1,14 @@
+{
+  "case_id": "move_cities",
+  "condition": "naive",
+  "run_number": 6,
+  "reframe_count": 1,
+  "reframe_matches": [
+    "beyond salary"
+  ],
+  "introduced_new_kpis": false,
+  "challenged_framing": false,
+  "response_text": "There isn't really enough information here. I'd love to help but I'd need to know more, like:\n\n- What's your current compensation?\n- What are your financial obligations?\n- Where are these roles located?\n- What's the role at each company?\n- What matters to you beyond salary?\n\nThe $250K number means very different things in San Francisco vs. Austin vs. Omaha.\n\n**General framework for thinking about it:**\n\n- Compare **total compensation** (base, bonus, equity, benefits), not just salary\n- Factor in **cost of living** differences honestly\n- Consider career growth potential at each option\n- Think about what you'd regret more: taking the risk or not taking it\n\nIf you share more details, I can give you a more useful perspective.",
+  "timestamp": "2026-02-17T07:27:25.225436",
+  "duration_seconds": 6.153723239898682
+}

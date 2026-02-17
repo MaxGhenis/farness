@@ -103,6 +103,34 @@ def main():
         action="store_true",
         help="List available stability cases",
     )
+    stability_parser.add_argument(
+        "--seed",
+        type=int,
+        help="Random seed for reproducibility",
+    )
+    stability_parser.add_argument(
+        "--start-run",
+        type=int,
+        default=1,
+        help="Starting run number (for appending to existing results)",
+    )
+
+    # Reanalyze from saved files
+    reanalyze_parser = subparsers.add_parser(
+        "reanalyze", help="Reanalyze results from saved JSON files"
+    )
+    reanalyze_parser.add_argument(
+        "--stability-dir",
+        type=Path,
+        default=Path("experiments/stability_results"),
+        help="Stability results directory",
+    )
+    reanalyze_parser.add_argument(
+        "--reframing-dir",
+        type=Path,
+        default=Path("experiments/reframing_results"),
+        help="Reframing results directory",
+    )
 
     args = parser.parse_args()
 
@@ -185,17 +213,90 @@ def main():
         else:
             cases = get_all_stability_cases()
 
-        print(f"Running stability experiment: {len(cases)} cases, {args.runs} runs/condition")
+        print(f"Running stability experiment: {len(cases)} cases, {args.runs} runs/condition (starting at run {args.start_run})")
 
         experiment = run_stability_experiment(
             cases=cases,
             runs_per_condition=args.runs,
             output_dir=args.output_dir,
             verbose=True,
+            random_seed=args.seed,
+            start_run=args.start_run,
         )
 
         print_experiment_summary(experiment)
         print(f"\nResults saved to {args.output_dir}")
+
+    elif args.command == "reanalyze":
+        from farness.experiments.stability import StabilityResult, StabilityExperiment
+        from farness.experiments.reframing import ReframingResult, analyze_reframing, summary_table
+
+        # Load stability results
+        stability_dir = Path(args.stability_dir)
+        if stability_dir.exists():
+            stability_results = []
+            for f in sorted(stability_dir.glob("*_run*.json")):
+                if f.name in ("summary.json", "experiment_metadata.json"):
+                    continue
+                with open(f) as fh:
+                    data = json.load(fh)
+                stability_results.append(StabilityResult(
+                    case_id=data["case_id"],
+                    condition=data["condition"],
+                    initial_estimate=data["initial_estimate"],
+                    initial_ci_low=data.get("initial_ci", [None, None])[0],
+                    initial_ci_high=data.get("initial_ci", [None, None])[1],
+                    final_estimate=data["final_estimate"],
+                    final_ci_low=data.get("final_ci", [None, None])[0],
+                    final_ci_high=data.get("final_ci", [None, None])[1],
+                ))
+
+            experiment = StabilityExperiment(
+                cases=get_all_stability_cases(),
+                results=stability_results,
+            )
+            print(f"Loaded {len(stability_results)} stability results")
+            print_experiment_summary(experiment)
+
+            # Save updated summary
+            analysis = experiment.analyze()
+            with open(stability_dir / "summary.json", "w") as fh:
+                json.dump(analysis, fh, indent=2)
+            with open(stability_dir / "results_table.md", "w") as fh:
+                fh.write("# Stability experiment results\n\n")
+                fh.write(f"**Total results**: {len(stability_results)}\n\n")
+                fh.write(experiment.summary_table())
+            print(f"Saved updated summary to {stability_dir}/summary.json")
+
+        # Load reframing results
+        reframing_dir = Path(args.reframing_dir)
+        if reframing_dir.exists():
+            reframing_results = []
+            for f in sorted(reframing_dir.glob("reframe_*.json")):
+                if f.name in ("summary.json", "scores.json"):
+                    continue
+                with open(f) as fh:
+                    data = json.load(fh)
+                reframing_results.append(ReframingResult(
+                    case_id=data["case_id"],
+                    condition=data["condition"],
+                    run_number=data["run_number"],
+                    response_text=data.get("response_text", ""),
+                    timestamp=data.get("timestamp", ""),
+                    duration_seconds=data.get("duration_seconds", 0),
+                    reframe_count=data.get("reframe_count", 0),
+                    reframe_matches=data.get("reframe_matches", []),
+                    introduced_new_kpis=data.get("introduced_new_kpis", False),
+                    challenged_framing=data.get("challenged_framing", False),
+                ))
+
+            print(f"\nLoaded {len(reframing_results)} reframing results")
+            analysis = analyze_reframing(reframing_results)
+            print(summary_table(reframing_results))
+
+            with open(reframing_dir / "summary.json", "w") as fh:
+                json.dump(analysis, fh, indent=2)
+            print(f"Saved updated summary to {reframing_dir}/summary.json")
 
     else:
         parser.print_help()

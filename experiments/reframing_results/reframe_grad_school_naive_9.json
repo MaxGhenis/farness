@@ -1,0 +1,14 @@
+{
+  "case_id": "grad_school",
+  "condition": "naive",
+  "run_number": 9,
+  "reframe_count": 1,
+  "reframe_matches": [
+    "why do you want"
+  ],
+  "introduced_new_kpis": false,
+  "challenged_framing": false,
+  "response_text": "# MBA Decision Analysis\n\nThis is a significant decision, so let me walk through it honestly rather than just cheerleading.\n\n## The Real Cost\n\nLet's be clear-eyed about the total investment:\n\n- **Tuition:** ~$160K\n- **Lost wages:** ~$260K (2 years of salary)\n- **Lost career momentum:** 2 years of engineering experience and compounding raises\n- **Total real cost: ~$420K+**\n\nThat's the number you need to justify.\n\n## The Honest Questions to Ask Yourself\n\n**Why do you want the MBA?** This is the most important question.\n\n- **\"I want to move into product management, strategy, or leadership at a tech company\"** \u2192 An MBA can help, but many engineers make this transition without one\n- **\"I want to pivot into finance, consulting, or a completely different industry\"** \u2192 Stronger case for the MBA\n- **\"I feel stuck or bored\"** \u2192 An MBA is an extremely expensive solution to a problem that might have cheaper fixes\n- **\"Prestige / I got in so I should go\"** \u2192 Not a good enough reason for $420K\n\n## When the MBA Makes Sense\n- You want a career path that genuinely requires it (some C-suite tracks, consulting, finance)\n- The network and brand of *this specific program* opens doors you can't open otherwise\n- You're at a ceiling that skills alone won't break through\n\n## When It Doesn't\n- You want to stay in engineering (the MBA won't increase your engineering salary enough to justify the cost)\n- You're at $130K with 3 years in \u2014 your engineering salary trajectory likely gets you to $180-250K+ in the next few years anyway, especially at larger companies\n- The program isn't top ~15 (the ROI drops dramatically outside elite programs)\n\n## My Honest Take\n\n**The math is hard to make work if you're staying technical.** Software engineering compensation grows aggressively with experience. In the 2 years you'd spend in school, you could potentially reach $180K+ and be on track for senior roles paying $250K+.\n\n**The MBA makes sense only if:**\n1. It's a top-tier program (think top 10-15)\n2. You have a **specific** post-MBA career goal that you can't reach from where you are now\n3. You've genuinely tried to make internal transitions first\n\n**If you can't clearly articulate what the MBA unlocks that you can't get otherwise, don't go.**\n\n---\n\nWhat's driving your interest? I can give you sharper advice if I know what you're hoping the MBA leads to.",
+  "timestamp": "2026-02-17T07:16:20.656609",
+  "duration_seconds": 18.421847105026245
+}

@@ -1,0 +1,18 @@
+{
+  "case_id": "deadline_estimate",
+  "condition": "farness",
+  "initial_estimate": 65.0,
+  "initial_ci": [
+    45.0,
+    82.0
+  ],
+  "final_estimate": 22.0,
+  "final_ci": [
+    10.0,
+    38.0
+  ],
+  "update_magnitude": 43.0,
+  "update_direction": "down",
+  "relative_update": 0.6615384615384615,
+  "had_initial_ci": true
+}

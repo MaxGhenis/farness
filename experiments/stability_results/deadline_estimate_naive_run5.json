@@ -1,0 +1,18 @@
+{
+  "case_id": "deadline_estimate",
+  "condition": "naive",
+  "initial_estimate": 78.0,
+  "initial_ci": [
+    62.0,
+    90.0
+  ],
+  "final_estimate": 22.0,
+  "final_ci": [
+    10.0,
+    38.0
+  ],
+  "update_magnitude": 56.0,
+  "update_direction": "down",
+  "relative_update": 0.717948717948718,
+  "had_initial_ci": true
+}

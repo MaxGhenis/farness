@@ -1,0 +1,18 @@
+{
+  "case_id": "hiring_success",
+  "condition": "naive",
+  "initial_estimate": 30.0,
+  "initial_ci": [
+    15.0,
+    50.0
+  ],
+  "final_estimate": 15.0,
+  "final_ci": [
+    8.0,
+    25.0
+  ],
+  "update_magnitude": 15.0,
+  "update_direction": "down",
+  "relative_update": 0.5,
+  "had_initial_ci": true
+}

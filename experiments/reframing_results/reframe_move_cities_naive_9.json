@@ -1,0 +1,20 @@
+{
+  "case_id": "move_cities",
+  "condition": "naive",
+  "run_number": 9,
+  "reframe_count": 7,
+  "reframe_matches": [
+    "partner",
+    "lifestyle",
+    "remote",
+    "negotiate",
+    "hybrid",
+    "social",
+    "network"
+  ],
+  "introduced_new_kpis": false,
+  "challenged_framing": false,
+  "response_text": "# Thinking Through Your SF Offer\n\nThis is a significant decision, so let me help you break it down honestly rather than just give you a quick answer.\n\n## The Money (it's more nuanced than it looks)\n\nThe $250K vs $180K looks like a 39% raise, but let's be real:\n\n- **Housing in SF is roughly 2-2.5x Austin.** If you're paying $2,500/mo in Austin, expect $4,500-6,000+ in SF for comparable space.\n- **State income tax:** Texas has none. California will take ~9-13% of your income.\n- **After adjusting for housing and taxes alone**, your $70K raise could shrink to roughly break-even or a modest gain of maybe $10-20K in actual purchasing power.\n\nSo **this probably isn't a financial slam dunk.** It might even be a slight downgrade in day-to-day lifestyle spending.\n\n## What actually matters more than the salary number\n\n**Reasons this could still be worth it:**\n- Career trajectory \u2014 does SF put you closer to companies/roles that could pay $350-400K+ next?\n- Network effects \u2014 being in SF's tech ecosystem has compounding value\n- The specific role \u2014 is the work meaningfully better?\n- Total comp \u2014 is that $250K base, or does it include equity? RSUs at a growing company change the math significantly\n\n**Reasons to be cautious:**\n- You and your partner may genuinely enjoy Austin more (space, lifestyle, culture fit)\n- Remote/hybrid senior roles paying $220-250K from Austin are increasingly common \u2014 have you explored that?\n- Uprooting has real costs: social ties, stress, adjustment period\n- If your partner's remote income stays fixed, your household purchasing power could actually drop\n\n## The question I'd push back on\n\n**Are you actually choosing between these two options, or are you using this offer as leverage?**\n\nA $250K SF offer likely means you're worth more than $180K in Austin. You could:\n- Negotiate your current salary up\n- Use the offer to land a **remote** role at SF-level pay\n- Counter the SF company for more comp given the COL difference\n\n## My honest take\n\nDon't take the offer *purely for the money* \u2014 the math doesn't support it strongly enough. **Take it if the role, company, or career positioning is genuinely better and SF is somewhere you want to live.** If you're mainly motivated by the salary jump, you likely have better moves available that don't require relocating to one of the most expensive cities in the country.\n\nWhat's actually drawing you to this offer \u2014 is it the money, the role, or something else?",
+  "timestamp": "2026-02-17T07:28:12.969400",
+  "duration_seconds": 22.74177598953247
+}

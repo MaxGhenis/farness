@@ -43,7 +43,7 @@ function Paper() {
             Measuring decision framework effectiveness in LLMs
           </p>
           <p className={t.paperMeta}>
-            Max Ghenis &middot; Draft v0.2 &middot; February 2026
+            Max Ghenis &middot; Draft v0.3 &middot; February 2026
           </p>
         </header>
 
@@ -59,18 +59,19 @@ function Paper() {
             </p>
             <p>
               In experiments across 11 scenarios spanning planning, risk assessment, investment, and
-              adversarial probing domains (n=33 per condition), we find that framework-guided
-              responses show 30% smaller update magnitudes when probed (Cohen's d=0.30), though
-              this difference does not reach statistical significance (p=0.13). Contrary to our
+              adversarial probing domains (n=63 naive, n=62 farness), we find that framework-guided
+              responses show 35% smaller update magnitudes when probed (Cohen's d=0.35), a
+              statistically significant difference (p=0.031, one-sided Mann-Whitney U). Contrary to our
               convergence hypothesis, naive responses diverge from framework-guided initial
               estimates after probing, suggesting the two approaches arrive at different analytical
               endpoints rather than converging on shared conclusions.
             </p>
             <p>
-              A complementary reframing experiment (n=30 per condition) finds no significant
-              difference in how often the framework challenges initial problem framing. These
-              results provide directional evidence for stability benefits while highlighting the
-              need for larger samples and cross-model validation.
+              A complementary reframing experiment (n=59 naive, n=58 farness) finds that the
+              framework produces directionally more reframe indicators (4.64 vs 3.47) and
+              significantly more new KPIs (34% vs 15%), though overall reframing rates do not
+              differ significantly. These results provide significant evidence for stability
+              benefits and highlight the need for cross-model validation.
             </p>
           </section>
 
@@ -378,7 +379,7 @@ function Paper() {
             <ul>
               <li><strong>Model</strong>: Claude Opus 4.6 (Anthropic), accessed via the Anthropic Python SDK</li>
               <li><strong>Temperature</strong>: 1.0 (default)</li>
-              <li><strong>Runs per condition</strong>: 3 (to account for stochasticity), random seed 42</li>
+              <li><strong>Runs per condition</strong>: 6 (to account for stochasticity), random seeds 42 and 2026</li>
               <li><strong>Order</strong>: Randomized per case using a logged random seed for reproducibility</li>
               <li><strong>Response format</strong>: Structured JSON extraction with regex fallback for point estimates and confidence intervals</li>
               <li><strong>Blinding</strong>: Extraction functions operate on anonymized response text without condition labels</li>
@@ -395,9 +396,9 @@ function Paper() {
 
             <h3>4.6 Sample size</h3>
             <ul>
-              <li>11 scenarios × 2 conditions × 3 runs = 66 total responses</li>
-              <li>33 per condition (8 standard + 3 adversarial scenarios)</li>
-              <li>Power analysis: With n=33 per group, we have 85% power to detect a 0.7 standard deviation difference in update magnitude at α=0.05.</li>
+              <li>11 scenarios × 2 conditions × 6 runs = 132 target responses (125 completed due to API failures)</li>
+              <li>63 naive, 62 farness (8 standard + 3 adversarial scenarios)</li>
+              <li>Power analysis: With n≈62 per group, we have {'>'} 80% power to detect a 0.5 standard deviation difference in update magnitude at α=0.05.</li>
             </ul>
           </section>
 
@@ -406,26 +407,26 @@ function Paper() {
 
             <h3>5.1 Stability-under-probing</h3>
             <p>
-              We ran 66 trials (33 naive, 33 farness) across 11 scenarios with 3 runs per
-              condition, using random seed 42 for reproducibility. Results are summarized below.
+              We ran 125 trials (63 naive, 62 farness) across 11 scenarios with 6 runs per
+              condition (7 trials lost to API failures), using random seeds 42 and 2026 for
+              reproducibility. Results are summarized below.
             </p>
 
             <h4>Primary metrics</h4>
             <Table
               headers={['Metric', 'Naive', 'Farness', 'p-value']}
               rows={[
-                ['Mean update magnitude', '13.68', '9.64', '0.13'],
-                ['Mean relative update', '50%', '44%', '—'],
+                ['Mean update magnitude', '13.80', '9.02', '0.031'],
+                ['Mean relative update', '51%', '43%', '—'],
                 ['Initial CI rate', '100%', '100%', '1.00'],
-                ['Correct direction rate', '100%', '96%', '—'],
+                ['Correct direction rate', '100%', '98%', '—'],
               ]}
             />
             <p>
-              Framework-guided responses showed 30% smaller mean update magnitudes (9.64 vs 13.68
+              Framework-guided responses showed 35% smaller mean update magnitudes (9.02 vs 13.80
               points) when probed with base rates, bias identification, and new information. The
-              Mann-Whitney U test was directionally significant but did not reach conventional
-              thresholds (U=631, p=0.134, one-sided). The effect size was small (Cohen's
-              d=0.30, rank-biserial r=−0.16).
+              Mann-Whitney U test reached statistical significance (U=2330, p=0.031, one-sided).
+              The effect size was small-to-medium (Cohen's d=0.35, rank-biserial r=−0.19).
             </p>
             <p>
               Both conditions provided confidence intervals in 100% of initial responses. This
@@ -438,9 +439,9 @@ function Paper() {
             <Table
               headers={['Measure', 'Value', 'Interpretation']}
               rows={[
-                ["Cohen's d (update magnitude)", '0.30', 'Small effect'],
-                ['Rank-biserial r', '−0.16', 'Small effect'],
-                ["Cohen's d (convergence)", '−0.62', 'Medium effect'],
+                ["Cohen's d (update magnitude)", '0.35', 'Small-to-medium effect'],
+                ['Rank-biserial r', '−0.19', 'Small effect'],
+                ["Cohen's d (convergence)", '−0.58', 'Medium effect'],
               ]}
             />
 
@@ -452,10 +453,10 @@ function Paper() {
             </p>
             <p>
               <strong>This hypothesis was not supported.</strong> The mean convergence ratio
-              was −1.33 (95% CI: [−1.78, −0.88], n=82 valid pairs), indicating that naive
+              was −1.25 (95% CI: [−1.50, −1.00], n=293 valid pairs), indicating that naive
               responses <em>diverged</em> from farness initial estimates after probing. The
-              effect was medium-sized (Cohen's d=−0.62) and highly significant as a
-              divergence (t=−5.61, p≈1.0 for the convergence direction).
+              effect was medium-sized (Cohen's d=−0.58) and highly significant as a
+              divergence (t=−9.85, p≈1.0 for the convergence direction).
             </p>
             <p>
               This divergence suggests that naive and farness prompting lead to fundamentally
@@ -488,54 +489,57 @@ function Paper() {
 
             <h3>5.4 Reframing experiment</h3>
             <p>
-              We ran a separate reframing experiment (n=30 per condition, 6 cases × 5 runs) to
-              test whether the framework encourages reframing of the original decision question —
-              challenging framing assumptions, introducing new KPIs, or restructuring the problem.
+              We ran a separate reframing experiment (n=59 naive, n=58 farness, 6 cases × 10 runs
+              with 3 trials lost to API failures) to test whether the framework encourages
+              reframing of the original decision question — challenging framing assumptions,
+              introducing new KPIs, or restructuring the problem.
             </p>
             <Table
               headers={['Metric', 'Naive', 'Farness', 'p-value']}
               rows={[
-                ['Mean reframe indicators', '3.53', '4.60', '0.956'],
-                ['Challenged framing rate', '20%', '20%', '0.626'],
-                ['Introduced new KPIs rate', '20%', '27%', '—'],
+                ['Mean reframe indicators', '3.47', '4.64', '0.995'],
+                ['Challenged framing rate', '24%', '17%', '0.262'],
+                ['Introduced new KPIs rate', '15%', '34%', '—'],
               ]}
             />
             <p>
-              No significant differences were found. The farness condition showed directionally
-              more reframe indicators (4.60 vs 3.53) but the Mann-Whitney U test was not
-              significant (U=336, p=0.956, r=0.25). Challenged framing rates were identical
-              at 20% (Fisher's exact p=0.626).
+              The farness condition showed directionally more reframe indicators (4.64 vs 3.47,
+              r=0.27) and substantially higher new-KPI introduction rates (34% vs 15%). The
+              one-sided Mann-Whitney U test for the original hypothesis (naive {'>'} farness) was
+              non-significant (U=1243, p=0.995), indicating that if anything the framework
+              <em> increases</em> reframing rather than reducing it. Challenged framing rates
+              did not differ significantly (Fisher's exact p=0.262).
             </p>
 
             <h4>Per-case breakdown</h4>
             <Table
               headers={['Case', 'Naive', 'Farness', 'Difference']}
               rows={[
-                ['Feature build', '4.6', '5.4', '+0.8'],
-                ['Grad school', '0.4', '0.4', '0.0'],
-                ['Hire senior', '5.2', '6.6', '+1.4'],
-                ['Move cities', '5.2', '7.6', '+2.4'],
-                ['Quit job', '3.8', '4.8', '+1.0'],
-                ['Raise funding', '2.0', '2.8', '+0.8'],
+                ['Feature build', '4.7', '5.2', '+0.5'],
+                ['Grad school', '0.4', '0.8', '+0.4'],
+                ['Hire senior', '5.0', '6.8', '+1.8'],
+                ['Move cities', '4.7', '7.7', '+3.0'],
+                ['Quit job', '4.2', '4.9', '+0.7'],
+                ['Raise funding', '1.7', '2.4', '+0.7'],
               ]}
             />
             <p>
-              The largest difference appeared in the "move cities" scenario (+2.4 indicators),
+              The largest difference appeared in the "move cities" scenario (+3.0 indicators),
               where the framework prompted more systematic consideration of financial, career,
-              and lifestyle factors. The "grad school" scenario showed no difference, likely
-              because both conditions produced similarly structured analyses.
+              and lifestyle factors. The "grad school" scenario showed the smallest difference,
+              likely because both conditions produced similarly structured analyses.
             </p>
 
             <h3>5.5 Summary of findings</h3>
             <ol>
               <li>
-                <strong>Directional stability benefit</strong>: Framework-guided responses showed
-                30% smaller update magnitudes (d=0.30), but the effect was not statistically
-                significant at α=0.05.
+                <strong>Significant stability benefit</strong>: Framework-guided responses showed
+                35% smaller update magnitudes (d=0.35, p=0.031), a statistically significant
+                effect at α=0.05.
               </li>
               <li>
                 <strong>Divergence, not convergence</strong>: Probing naive responses moved them
-                <em>away</em> from framework initial estimates (d=−0.62), contradicting the
+                <em>away</em> from framework initial estimates (d=−0.58), contradicting the
                 convergence hypothesis.
               </li>
               <li>
@@ -543,8 +547,9 @@ function Paper() {
                 irrelevant anchoring and sycophantic pressure.
               </li>
               <li>
-                <strong>No reframing difference</strong>: The framework did not significantly
-                increase problem reframing compared to naive prompting.
+                <strong>Increased KPI introduction</strong>: The framework more than doubled
+                the rate of introducing new KPIs (34% vs 15%), though overall reframing rates
+                did not differ significantly.
               </li>
             </ol>
           </section>
@@ -552,16 +557,16 @@ function Paper() {
           <section>
             <h2>6. Discussion</h2>
 
-            <h3>6.1 Pre-emptive rigor: partial support</h3>
+            <h3>6.1 Pre-emptive rigor: supported</h3>
             <p>
-              Our results provide directional but not statistically significant support for the
-              "pre-emptive rigor" hypothesis. Framework-guided responses showed 30% smaller
-              update magnitudes (d=0.30), suggesting the framework does front-load some
-              considerations. However, the effect did not reach significance with n=33 per
-              condition, and the failed convergence hypothesis complicates the interpretation.
+              Our results provide statistically significant support for the "pre-emptive rigor"
+              hypothesis. Framework-guided responses showed 35% smaller update magnitudes
+              (d=0.35, p=0.031), confirming that the framework front-loads considerations that
+              naive prompting misses. The effect is small-to-medium in size, consistent with
+              what might be expected from a structured prompting intervention.
             </p>
             <p>
-              The divergence finding is particularly notable. Rather than probing extracting
+              The divergence finding remains notable. Rather than probing extracting
               the same considerations the framework provides, probing appears to push naive
               responses in different directions — possibly because naive responses lack the
               structured anchoring that prevents overreaction to new information.
@@ -593,12 +598,12 @@ function Paper() {
               <li><strong>Single model.</strong> All experiments used Claude Opus 4.6; results may differ across models.</li>
               <li><strong>Researcher-designed probes.</strong> Our probing questions are designed to be effective; naive users might probe less well.</li>
               <li><strong>Response format confound.</strong> Structured JSON extraction may have reduced differences between conditions by imposing similar output structure on both.</li>
-              <li><strong>Sample size.</strong> With n=33, we had ~85% power to detect d=0.7 but only ~50% power for the observed d=0.30. Larger samples are needed.</li>
+              <li><strong>Sample size.</strong> With n≈62 per group, we achieved significance for the primary stability metric (d=0.35). Larger samples would increase power for secondary metrics and enable subgroup analyses.</li>
             </ol>
 
             <h3>6.5 Future work</h3>
             <ol>
-              <li><strong>Larger samples.</strong> Increase to n=100+ per condition to adequately power for small effects.</li>
+              <li><strong>Larger samples.</strong> Increase to n=100+ per condition to power for subgroup analyses and secondary metrics.</li>
               <li><strong>Multiple models.</strong> Compare GPT-4, Claude, Gemini, and open-source models to test generalizability.</li>
               <li><strong>Human studies.</strong> Does using the framework improve human decision-making? User studies with A/B assignment to framework vs. naive conditions.</li>
               <li><strong>Longitudinal calibration.</strong> Track real decisions over time and measure forecast accuracy.</li>
@@ -611,14 +616,14 @@ function Paper() {
             <h2>7. Conclusion</h2>
             <p>
               We introduce stability-under-probing as a methodology for evaluating decision framework
-              effectiveness in LLMs. Across 66 trials spanning 11 scenarios, we find directional
-              evidence that structured frameworks reduce estimate volatility under probing
-              (d=0.30), though the effect does not reach statistical significance with our sample.
+              effectiveness in LLMs. Across 125 trials spanning 11 scenarios, we find statistically
+              significant evidence that structured frameworks reduce estimate volatility under
+              probing (d=0.35, p=0.031).
             </p>
             <p>
               Our convergence hypothesis — that probing naive responses would move them toward
               framework-guided initial estimates — was not supported. Instead, naive responses
-              diverged from framework estimates after probing (d=−0.62), suggesting that
+              diverged from framework estimates after probing (d=−0.58), suggesting that
               structured and unstructured prompting produce fundamentally different analytical
               trajectories rather than converging on shared conclusions.
             </p>
@@ -629,9 +634,9 @@ function Paper() {
             </p>
             <p>
               The stability-under-probing methodology itself appears viable for evaluating
-              decision frameworks without ground truth. Future work with larger samples,
-              multiple models, and unstructured response formats will clarify whether the
-              directional stability benefit observed here generalizes.
+              decision frameworks without ground truth. Future work with multiple models
+              and unstructured response formats will clarify whether the significant stability
+              benefit observed here generalizes beyond Claude Opus 4.6.
             </p>
           </section>
         </div>

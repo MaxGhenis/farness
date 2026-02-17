@@ -1,0 +1,12 @@
+{
+  "case_id": "raise_funding",
+  "condition": "farness",
+  "run_number": 8,
+  "reframe_count": 0,
+  "reframe_matches": [],
+  "introduced_new_kpis": false,
+  "challenged_framing": false,
+  "response_text": "ERROR: Error code: 529 - {'type': 'error', 'error': {'type': 'overloaded_error', 'message': 'Overloaded'}, 'request_id': 'req_011CYDuFVGBtDeu1KaGgAuNW'}",
+  "timestamp": "2026-02-17T07:46:10.049640",
+  "duration_seconds": 30.12629199028015
+}

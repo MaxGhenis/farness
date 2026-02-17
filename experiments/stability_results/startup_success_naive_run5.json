@@ -1,0 +1,18 @@
+{
+  "case_id": "startup_success",
+  "condition": "naive",
+  "initial_estimate": 6.0,
+  "initial_ci": [
+    2.0,
+    15.0
+  ],
+  "final_estimate": 2.2,
+  "final_ci": [
+    0.5,
+    5.5
+  ],
+  "update_magnitude": 3.8,
+  "update_direction": "down",
+  "relative_update": 0.6333333333333333,
+  "had_initial_ci": true
+}

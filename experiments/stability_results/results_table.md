@@ -1,31 +1,30 @@
-# Stability Experiment Results
+# Stability experiment results
 
-**Random seed**: 42
-**Runs per condition**: 3
+**Total results**: 125
 
 ## Stability-Under-Probing Results
 
-**Sample sizes**: n_naive = 33, n_farness = 33
+**Sample sizes**: n_naive = 63, n_farness = 62
 
 ### Primary Metrics
 
 | Metric | Naive | Farness | p-value |
 |--------|-------|---------|---------|
-| Mean update magnitude | 13.68 | 9.64 | 0.13 |
-| Mean relative update | 50% | 44% | — |
+| Mean update magnitude | 13.80 | 9.02 | 0.03 |
+| Mean relative update | 51% | 43% | — |
 | Initial CI rate | 1.00 | 1.00 | 1.00 |
-| Correct direction rate | 1.00 | 96% | — |
+| Correct direction rate | 1.00 | 98% | — |
 
 ### Effect Sizes
 
-- Cohen's d (update magnitude): 0.30 (small)
-- Rank-biserial r: -0.16
+- Cohen's d (update magnitude): 0.35 (small)
+- Rank-biserial r: -0.19
 
 ### Convergence Analysis
 
-- **Convergence ratio**: -1.33 (95% CI: [-1.78, -0.88])
+- **Convergence ratio**: -1.25 (95% CI: [-1.53, -1.00])
 - **p-value** (H0: ratio = 0): 1.00
-- **Cohen's d**: -0.62
-- **n valid pairs**: 82
+- **Cohen's d**: -0.58
+- **n valid pairs**: 293
 
 *Significant divergence: naive responses moved away from farness initial estimates*

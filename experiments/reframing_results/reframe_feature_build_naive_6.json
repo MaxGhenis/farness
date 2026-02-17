@@ -1,0 +1,19 @@
+{
+  "case_id": "feature_build",
+  "condition": "naive",
+  "run_number": 6,
+  "reframe_count": 6,
+  "reframe_matches": [
+    "responsive",
+    "PWA",
+    "progressive web",
+    "must have",
+    "real problem",
+    "validate"
+  ],
+  "introduced_new_kpis": true,
+  "challenged_framing": true,
+  "response_text": "# My Honest Recommendation: Not yet \u2014 but don't ignore the signal.\n\nHere's my thinking, broken down into the questions I'd want answered before committing $200K and 4 months.\n\n## First, interrogate the demand\n\n\"Users have been asking\" is dangerously vague. I'd want to know:\n\n- **How many** of your 200 customers have asked? (5 loud ones \u2260 real demand)\n- **What specifically** do they want to do on mobile? (Everything, or 2-3 key workflows?)\n- **Has anyone churned** or declined to buy because of this gap?\n- **Would they pay more** for mobile access?\n\nIf you can't answer these clearly, **start there before spending anything.**\n\n## Why I'd lean against a native app right now\n\n- **$200K is significant** for a company with 200 customers \u2014 that's $1,000/customer for a feature many may never use\n- **4 months is optimistic** \u2014 native apps typically run over timeline, plus you're now maintaining two platforms permanently\n- **You haven't validated the core need** \u2014 you only know people said \"mobile app\" which is often shorthand for \"your site is annoying on my phone\"\n\n## What I'd actually do instead\n\n**Phase 1 (2-4 weeks, ~$15-30K): Make the mobile web experience good.**\nA responsive redesign of your top 5 workflows covers the majority of what people are actually complaining about. This might fully solve the problem.\n\n**Phase 2: Measure and learn.**\nTrack mobile usage after the improvements. If engagement is strong and growing, you have real data. If not, you just saved $170K.\n\n**Phase 3 (if validated): Consider a Progressive Web App (PWA).**\nGives you home-screen presence, offline capability, and push notifications at a fraction of native app cost. For most B2B use cases, this is enough.\n\n**Phase 4: Go native only if** you have clear evidence that native-specific capabilities (hardware integration, performance requirements, app store presence for buyer credibility) are actually needed.\n\n## The deeper concern\n\nBuilding a native app is easy to decide. **Maintaining it forever is the real cost.** Every feature you build from now on ships twice. Every bug exists in three places. Your team's velocity on your core product drops. For a 200-customer company, that ongoing tax is the part that actually hurts.\n\n## My bottom line\n\n**The users asking for a \"mobile app\" have a real problem. But \"build a native app\" is your most expensive possible interpretation of that problem.** Start by making mobile web great, see if the requests stop, and let data \u2014 not requests \u2014 drive the $200K decision.\n\nThe exception: if a handful of large enterprise deals are literally blocked by \"must have native app\" in their procurement checklist. That's a different calculus \u2014 then it's a sales tool, not a product decision, and you should evaluate it against those specific deal sizes.",
+  "timestamp": "2026-02-17T07:21:14.118523",
+  "duration_seconds": 23.239317893981934
+}

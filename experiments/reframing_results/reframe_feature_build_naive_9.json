@@ -1,0 +1,17 @@
+{
+  "case_id": "feature_build",
+  "condition": "naive",
+  "run_number": 9,
+  "reframe_count": 4,
+  "reframe_matches": [
+    "responsive",
+    "PWA",
+    "progressive web",
+    "validate"
+  ],
+  "introduced_new_kpis": false,
+  "challenged_framing": true,
+  "response_text": "# My Honest Recommendation: **Not yet \u2014 but don't ignore the signal.**\n\nHere's my reasoning, broken down into what I'd actually want to know before committing $200K and 4 months.\n\n---\n\n## First, the questions that actually determine the answer\n\n**You need to answer these before deciding, and I suspect you don't have firm answers yet:**\n\n- How many of the 200 customers are asking? If it's 8 loud ones, that's very different from 80.\n- Are you **losing deals** because you don't have an app, or are existing customers just expressing a preference?\n- What specifically do they want to do on mobile? Everything? Or 2-3 key workflows?\n- What's your ARR? Because $200K means very different things at $500K ARR vs $5M ARR.\n\n---\n\n## Why I'd lean against a full native app right now\n\n**The math is tough at 200 customers.** $200K is $1,000 per current customer. You need to be confident it drives retention, expansion, or new wins to justify that.\n\n**4 months is optimistic.** In my experience, native app estimates tend to be 1.5-2x reality once you add app store review, push notification infrastructure, offline handling, and the ongoing maintenance burden you're signing up for permanently.\n\n**You're now running two platforms forever.** Every future feature ships slower because you're building it twice. QA doubles. Bug surface area doubles. This is the cost people consistently underestimate.\n\n---\n\n## What I'd actually do instead\n\n### Phase 1: Validate (2-4 weeks, minimal cost)\n- Interview the requesting customers. Map exactly which workflows they need on mobile.\n- Check your analytics \u2014 how much mobile traffic do you already get? What do those sessions look like?\n\n### Phase 2: Progressive Web App or responsive optimization (4-6 weeks, ~$30-50K)\n- Optimize your top 3-5 mobile workflows\n- Add PWA capabilities (home screen install, push notifications, offline basics)\n- **This gets you 70-80% of the value at 20% of the cost**\n\n### Phase 3: Reassess with real data\n- If mobile engagement surges and customers are still asking for native, now you have a strong business case\n- If PWA satisfies the need, you just saved $150K+ and permanent maintenance overhead\n\n---\n\n## The exception \u2014 when I'd say build it now\n\nIf any of these are true, move faster:\n\n- **You're losing competitive deals** specifically because competitors have an app\n- **Your use case is inherently mobile** (field workers, on-site visits, time-sensitive alerts)\n- **You have strong evidence** this unlocks a new market segment\n- **You're well-funded** and $200K is a small bet relative to your resources\n\n---\n\n## Bottom line\n\n\"Our users are asking for a mobile app\" is a **starting point for investigation, not a specification**. What they're really telling you is \"I need to do [specific things] when I'm not at my desk.\" Solve *that* problem in the cheapest way first, then invest heavily once you've validated the demand is real and broad.\n\n**The riskiest thing isn't building it or not building it \u2014 it's spending $200K answering the wrong question.**",
+  "timestamp": "2026-02-17T07:22:25.500412",
+  "duration_seconds": 23.726603984832764
+}

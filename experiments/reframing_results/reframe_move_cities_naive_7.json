@@ -1,0 +1,16 @@
+{
+  "case_id": "move_cities",
+  "condition": "naive",
+  "run_number": 7,
+  "reframe_count": 3,
+  "reframe_matches": [
+    "partner",
+    "negotiate",
+    "network"
+  ],
+  "introduced_new_kpis": false,
+  "challenged_framing": true,
+  "response_text": "# Thinking Through Your SF Offer\n\nThis is a significant decision, so let me walk through it honestly rather than just give you a simple answer.\n\n## The Financial Reality Check\n\nThe raw numbers are misleading. Let me be direct about that.\n\n**$250K in SF vs $180K in Austin** sounds like a $70K raise, but:\n- Housing in SF is roughly 2-2.5x Austin prices\n- California state income tax is ~9-13% vs Texas has **0%**\n- After adjusting for taxes and cost of living, you may be roughly **flat or even slightly behind** in day-to-day purchasing power\n\nSo if this is purely a financial move, **the math probably doesn't work in your favor.**\n\n## What Could Make It Worth It Anyway\n\n- **Career trajectory** - Is this company/role a significant step up in scope, brand, or growth? A senior role at a top SF company can change your long-term earning power far more than $70K\n- **Network density** - SF still concentrates tech leadership in a way Austin doesn't yet match\n- **Equity/RSUs** - Is there upside you haven't mentioned? Stock compensation can change the entire calculation\n- **What you actually want** - Do you and your partner *want* to live in SF?\n\n## What Would Make Me Say No\n\n- If the role is a lateral move at a comparable company\n- If you own a home in Austin (you'd be trading equity for rent in most cases)\n- If you don't have a strong pull toward SF beyond the number\n- If you're optimizing for savings rate or early financial independence\n\n## My Honest Recommendation\n\n**Don't take it based on what you've told me so far.** The salary bump alone doesn't justify the move.\n\n**BUT** - negotiate before you decide. You have real leverage:\n- Counter at **$290-310K** (or push hard on equity)\n- At that range, you'd start to come out genuinely ahead\n- The fact that they offered $250K means there's likely room\n\nThe real question to sit with: **\"Would I take this role at the same effective compensation I have now?\"** If the answer is yes because of the opportunity itself, that tells you something important. If the answer is no, the current offer doesn't change that.\n\nWhat's the company/role situation? That context would sharpen the advice considerably.",
+  "timestamp": "2026-02-17T07:27:31.402635",
+  "duration_seconds": 17.38419461250305
+}

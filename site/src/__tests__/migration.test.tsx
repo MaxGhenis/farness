@@ -104,7 +104,7 @@ describe('vanilla-extract migration', () => {
 
     it('renders author metadata', () => {
       renderWithRouter(<Paper />)
-      expect(screen.getByText(/Draft v0.2/)).toBeInTheDocument()
+      expect(screen.getByText(/Draft v0.3/)).toBeInTheDocument()
     })
 
     it('renders all major sections', () => {

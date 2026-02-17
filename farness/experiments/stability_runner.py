@@ -136,6 +136,7 @@ def run_stability_experiment(
     verbose: bool = True,
     random_seed: Optional[int] = None,
     randomize_order: bool = True,
+    start_run: int = 1,
 ) -> StabilityExperiment:
     """Run the full stability experiment with randomization.
 
@@ -184,20 +185,21 @@ def run_stability_experiment(
             print(f"Case: {case.name}")
             print(f"{'='*60}")
 
-        for run in range(runs_per_condition):
+        for run_offset in range(runs_per_condition):
+            run_num = start_run + run_offset
             # Randomize condition order per case/run
             conditions = ["naive", "farness"]
             if randomize_order:
                 random.shuffle(conditions)
 
             # Log the order used
-            run_key = f"{case.id}_run{run+1}"
+            run_key = f"{case.id}_run{run_num}"
             metadata["condition_orders"][run_key] = conditions.copy()
 
             for condition in conditions:
                 test_num += 1
                 if verbose:
-                    print(f"\n[{test_num}/{total_tests}] {case.id} - {condition} - run {run+1}")
+                    print(f"\n[{test_num}/{total_tests}] {case.id} - {condition} - run {run_num}")
 
                 try:
                     result = run_single_stability_test(case, condition, verbose)
@@ -205,7 +207,7 @@ def run_stability_experiment(
 
                     # Save incrementally
                     if output_dir:
-                        result_file = output_dir / f"{case.id}_{condition}_run{run+1}.json"
+                        result_file = output_dir / f"{case.id}_{condition}_run{run_num}.json"
                         with open(result_file, "w") as f:
                             json.dump(result.to_dict(), f, indent=2)
 
@@ -338,6 +340,12 @@ if __name__ == "__main__":
         action="store_true",
         help="Don't randomize condition order",
     )
+    parser.add_argument(
+        "--start-run",
+        type=int,
+        default=1,
+        help="Starting run number (for appending to existing results)",
+    )
 
     args = parser.parse_args()
 
@@ -371,6 +379,7 @@ if __name__ == "__main__":
         verbose=True,
         random_seed=args.seed,
         randomize_order=not args.no_randomize,
+        start_run=args.start_run,
     )
 
     print_experiment_summary(experiment)

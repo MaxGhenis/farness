@@ -1,0 +1,18 @@
+{
+  "case_id": "quit_job",
+  "condition": "naive",
+  "run_number": 6,
+  "reframe_count": 5,
+  "reframe_matches": [
+    "spouse",
+    "family",
+    "partner",
+    "risk tolerance",
+    "worst case"
+  ],
+  "introduced_new_kpis": false,
+  "challenged_framing": false,
+  "response_text": "# Thinking Through Your Startup Decision\n\nThis is a genuinely hard decision, and I want to be honest with you rather than just cheerleading or just being cautious.\n\n## What I'd actually recommend\n\n**Don't quit yet. But set a concrete 3-6 month runway to validate this seriously before you decide.**\n\nHere's my reasoning:\n\n## The real math\n\n- $350K/year is roughly $20-25K/month after tax\n- $200K in savings sounds like a lot, but with a family in a GOOG-cost-of-living area, that's maybe **8-12 months of burn** with zero revenue\n- Your spouse's income helps, but you'd be putting real pressure on your family's financial stability with a toddler\n\nThat's not a comfortable runway. It's a stressed, clock-ticking runway that can lead to bad decisions.\n\n## What concerns me about quitting now\n\n- **You said \"idea\" and \"passionate\"** \u2014 you didn't mention customers, waitlists, design partners, or revenue. That matters a lot.\n- Developer tools is a real market but **notoriously hard to monetize**. Many beloved dev tools companies struggled to build businesses.\n- Passion is necessary but not sufficient. The graveyard of startups is full of passionate founders.\n- A 2-year-old means your risk tolerance should honestly be lower than a 25-year-old with no dependents, even if that's uncomfortable to hear.\n\n## What would change my answer to \"yes, quit\"\n\n- You have **3-5 paying design partners or LOIs** from real companies\n- You have a **co-founder** (especially technical, if you're the PM)\n- You've raised a **seed round or have strong investor interest**\n- You've validated that this requires full-time to progress \u2014 and you've exhausted what nights/weekends can do\n\n## What I'd actually do in your position\n\n1. **Spend the next 3 months doing real validation** \u2014 nights, weekends, PTO days. Talk to 30-50 potential users. Build a prototype or landing page. Get people to pay or commit.\n2. **Set a clear decision gate.** \"If by [date] I have [specific evidence], I quit. If not, I either pivot the idea or stay.\"\n3. **Save aggressively** during this period. Push that $200K toward $280K+.\n4. **Talk to your spouse honestly** about what the worst case looks like \u2014 18 months of reduced income, burning savings, and then potentially job-hunting at a worse market moment.\n5. **Explore whether Google has a leave of absence policy.** Some big tech companies do. This would be the dream scenario.\n\n## The honest bottom line\n\nThe fact that you're asking suggests you're not yet at the conviction level where the decision makes itself. The founders I've seen succeed usually reach a point where they **can't not do it** \u2014 and they've usually validated enough that the leap feels scary but not reckless.\n\nRight now, this sounds more like a leap of faith than a calculated bet. Your job is to **turn it into a calculated bet** over the next few months.\n\nIf you validate and it's real \u2014 quit without hesitation. $350K jobs will exist when you come back if it doesn't work out. But don't burn your family's safety net on an unvalidated idea, no matter how exciting it feels.\n\n**The best founders aren't the most reckless ones. They're the ones who de-risk intelligently and then go all-in at the right moment.**",
+  "timestamp": "2026-02-17T07:48:48.914541",
+  "duration_seconds": 30.215478897094727
+}

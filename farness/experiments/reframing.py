@@ -313,6 +313,7 @@ def run_reframing_experiment(
     runs_per_condition: int = 3,
     output_dir: Path | None = None,
     verbose: bool = True,
+    start_run: int = 1,
 ) -> list[ReframingResult]:
     """Run the full reframing experiment."""
     if cases is None:
@@ -328,7 +329,7 @@ def run_reframing_experiment(
 
     for case in cases:
         for condition in ["naive", "farness"]:
-            for run_num in range(1, runs_per_condition + 1):
+            for run_num in range(start_run, start_run + runs_per_condition):
                 i += 1
                 if verbose:
                     print(f"[{i}/{total}] {case.id} - {condition} - run {run_num}")

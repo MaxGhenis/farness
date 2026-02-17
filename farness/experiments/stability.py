@@ -236,16 +236,16 @@ class StabilityResult:
     condition: str  # "naive" or "farness"
 
     # Initial response
-    initial_estimate: float
-    initial_ci_low: Optional[float]
-    initial_ci_high: Optional[float]
-    initial_response_text: str
+    initial_estimate: float = 0.0
+    initial_ci_low: Optional[float] = None
+    initial_ci_high: Optional[float] = None
+    initial_response_text: str = ""
 
     # After probing
-    final_estimate: float
-    final_ci_low: Optional[float]
-    final_ci_high: Optional[float]
-    final_response_text: str
+    final_estimate: float = 0.0
+    final_ci_low: Optional[float] = None
+    final_ci_high: Optional[float] = None
+    final_response_text: str = ""
 
     # Computed metrics
     @property

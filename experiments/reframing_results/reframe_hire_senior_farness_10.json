@@ -1,0 +1,12 @@
+{
+  "case_id": "hire_senior",
+  "condition": "farness",
+  "run_number": 10,
+  "reframe_count": 0,
+  "reframe_matches": [],
+  "introduced_new_kpis": false,
+  "challenged_framing": false,
+  "response_text": "ERROR: Error code: 529 - {'type': 'error', 'error': {'type': 'overloaded_error', 'message': 'Overloaded'}, 'request_id': 'req_011CYDtoMn1UZozuCrbPMHsd'}",
+  "timestamp": "2026-02-17T07:40:12.049777",
+  "duration_seconds": 35.39942502975464
+}

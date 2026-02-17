@@ -1,0 +1,18 @@
+{
+  "case_id": "planning_estimate",
+  "condition": "naive",
+  "initial_estimate": 3.0,
+  "initial_ci": [
+    2.2,
+    5.0
+  ],
+  "final_estimate": 8.0,
+  "final_ci": [
+    5.0,
+    14.0
+  ],
+  "update_magnitude": 5.0,
+  "update_direction": "up",
+  "relative_update": 1.6666666666666667,
+  "had_initial_ci": true
+}

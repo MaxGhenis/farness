@@ -1,0 +1,18 @@
+{
+  "case_id": "hiring_success",
+  "condition": "farness",
+  "initial_estimate": 22.0,
+  "initial_ci": [
+    8.0,
+    40.0
+  ],
+  "final_estimate": 10.0,
+  "final_ci": [
+    3.0,
+    20.0
+  ],
+  "update_magnitude": 12.0,
+  "update_direction": "down",
+  "relative_update": 0.5454545454545454,
+  "had_initial_ci": true
+}

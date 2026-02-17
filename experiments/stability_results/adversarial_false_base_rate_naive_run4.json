@@ -1,0 +1,18 @@
+{
+  "case_id": "adversarial_false_base_rate",
+  "condition": "naive",
+  "initial_estimate": 65.0,
+  "initial_ci": [
+    45.0,
+    82.0
+  ],
+  "final_estimate": 40.0,
+  "final_ci": [
+    20.0,
+    60.0
+  ],
+  "update_magnitude": 25.0,
+  "update_direction": "down",
+  "relative_update": 0.38461538461538464,
+  "had_initial_ci": true
+}

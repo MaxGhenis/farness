@@ -1,0 +1,15 @@
+{
+  "case_id": "move_cities",
+  "condition": "naive",
+  "run_number": 10,
+  "reframe_count": 2,
+  "reframe_matches": [
+    "partner",
+    "lifestyle"
+  ],
+  "introduced_new_kpis": false,
+  "challenged_framing": false,
+  "response_text": "# Thinking Through Your SF Offer\n\nThis is a significant decision, so let me help you break it down honestly rather than just give you a quick answer.\n\n## The Money (it's closer than it looks)\n\nThe $70K raise sounds great, but let's be realistic:\n\n- **Housing:** A comparable place in SF might cost $1,500-2,500+/more per month than Austin. That's $18K-30K/year gone immediately.\n- **State income tax:** Texas has none. California will take roughly 9-10%+ on your income. That's ~$20-25K.\n- **General cost of living:** Food, services, insurance - probably 20-30% higher.\n\n**Rough math:** Your $70K raise could shrink to roughly **break-even or a modest net gain** in real purchasing power. Possibly even a slight loss depending on your lifestyle.\n\n## What actually matters more than the salary number\n\nAsk yourself these questions honestly:\n\n- **Career trajectory:** Is this role at a company/team that meaningfully levels you up? Would it put you on a path to $350K+ in a few years? If so, the short-term cost-of-living hit might be an investment.\n- **What kind of $250K?** Is there equity/RSUs on top? TC matters more than base.\n- **Why are you considering leaving?** If you're stagnating in Austin, that matters. If you're happy and just tempted by the number, that's different.\n- **Your partner:** \"Flexible\" doesn't mean \"enthusiastic.\" Have you genuinely talked about what they want? Uprooting matters.\n- **What do you actually want your life to look like?** Austin and SF are very different cities with different lifestyles.\n\n## My honest take\n\n**Don't take it purely for the money.** The raise largely evaporates in cost-of-living differences.\n\n**Do take it if:**\n- The role is a genuine career accelerator (better company, better scope, path to staff+)\n- You and your partner actually *want* to live in SF\n- The total comp (with equity) is significantly higher than $250K base\n- You're hitting a ceiling in Austin\n\n**Don't take it if:**\n- You're mainly motivated by the headline number\n- You like your current life and aren't stagnating\n- Your partner is \"flexible\" but not actually excited\n\n## One more option to consider\n\nHave you tried **counter-offering** with your current employer using this offer as leverage? Or negotiating the SF offer higher given the COL gap? A senior engineer with a competing offer has real bargaining power in both directions.\n\n---\n\nWhat does the role and company actually look like compared to where you are now? That's probably the deciding factor here.",
+  "timestamp": "2026-02-17T07:28:35.733940",
+  "duration_seconds": 19.739399194717407
+}
