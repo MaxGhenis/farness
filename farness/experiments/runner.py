@@ -4,13 +4,13 @@ from __future__ import annotations
 
 import json
 import random
-import subprocess
 from dataclasses import dataclass
 from datetime import datetime
 from pathlib import Path
 from typing import Optional
 
 from farness.experiments.cases import TestCase, get_all_cases
+from farness.experiments.llm import call_llm
 from farness.experiments.scorer import ResponseScore, ResponseScorer
 
 
@@ -73,24 +73,7 @@ def run_single(
     prompt = generate_prompt(case, condition)
     timestamp = datetime.now().isoformat()
 
-    start = datetime.now()
-    try:
-        # Run claude CLI with the prompt
-        result = subprocess.run(
-            ["claude", "-p", prompt, "--no-input"],
-            capture_output=True,
-            text=True,
-            timeout=timeout,
-        )
-        response = result.stdout.strip()
-        if result.returncode != 0 and not response:
-            response = f"ERROR: {result.stderr}"
-    except subprocess.TimeoutExpired:
-        response = "ERROR: Timeout"
-    except FileNotFoundError:
-        response = "ERROR: claude CLI not found"
-
-    duration = (datetime.now() - start).total_seconds()
+    response, duration = call_llm(prompt, timeout=float(timeout))
 
     return ExperimentRun(
         case_id=case.id,

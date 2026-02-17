@@ -10,12 +10,12 @@ from __future__ import annotations
 
 import json
 import random
-import subprocess
 from dataclasses import dataclass
 from datetime import datetime
 from pathlib import Path
 from typing import Optional
 
+from farness.experiments.llm import call_llm
 from farness.experiments.stability import (
     QuantitativeCase,
     StabilityResult,
@@ -31,22 +31,9 @@ from farness.experiments.stability import (
 
 
 def run_prompt(prompt: str, timeout: int = 180) -> str:
-    """Run a prompt through Claude CLI."""
-    try:
-        result = subprocess.run(
-            ["claude", "-p", prompt, "--no-input"],
-            capture_output=True,
-            text=True,
-            timeout=timeout,
-        )
-        response = result.stdout.strip()
-        if result.returncode != 0 and not response:
-            return f"ERROR: {result.stderr}"
-        return response
-    except subprocess.TimeoutExpired:
-        return "ERROR: Timeout"
-    except FileNotFoundError:
-        return "ERROR: claude CLI not found"
+    """Run a prompt through the Anthropic API."""
+    response, _ = call_llm(prompt, timeout=float(timeout))
+    return response
 
 
 def run_single_stability_test(
