@@ -1,0 +1,18 @@
+{
+  "case_id": "investment_return",
+  "condition": "farness",
+  "initial_estimate": 15.0,
+  "initial_ci": [
+    5.0,
+    30.0
+  ],
+  "final_estimate": 4.0,
+  "final_ci": [
+    1.5,
+    10.0
+  ],
+  "update_magnitude": 11.0,
+  "update_direction": "down",
+  "relative_update": 0.7333333333333333,
+  "had_initial_ci": true
+}

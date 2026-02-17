@@ -1,0 +1,17 @@
+{
+  "case_id": "raise_funding",
+  "condition": "naive",
+  "run_number": 2,
+  "reframe_count": 4,
+  "reframe_matches": [
+    "profitable",
+    "sustainable",
+    "burn rate",
+    "optionality"
+  ],
+  "introduced_new_kpis": false,
+  "challenged_framing": false,
+  "response_text": "# My Honest Recommendation: Raise Now, But Thoughtfully\n\n## The Short Answer\n\n**Raise now.** But not for the reason you might think \u2014 and not necessarily the full $20M.\n\n---\n\n## The Core Reasoning\n\n### The math on waiting looks tempting but is misleading\n\nAt 15% MoM growth, in 6 months you'd be at ~$1.15M MRR. In theory, that commands a higher valuation. Founders often think:\n\n*\"If I wait 6 months, I'll raise at $400M+ instead of $200M \u2014 less dilution!\"*\n\nBut this reasoning has serious problems:\n\n### What could go wrong waiting\n\n- **15% MoM growth is exceptional. It almost certainly won't hold.** Growth rates compress. If it dips to 8-10%, your narrative weakens and VCs recalibrate.\n- **12 months of runway sounds comfortable. It isn't.** You need to start raising at 6-8 months of runway to close by month 9-10. That means your *real decision window is the next 2-3 months.*\n- **Market windows close.** VC appetite shifts with macro conditions, sometimes in weeks. The interest you have now is real. Future interest is hypothetical.\n- **You're not choosing between raising now vs. raising later. You're choosing between raising from strength vs. potentially raising from need.**\n\n### What $200M at $500K MRR actually means\n\nThat's a ~33x ARR multiple. That's a **strong** valuation. This is not a lowball \u2014 this is VCs pricing in your growth rate. Treat it as a fair deal, not a compromise.\n\n---\n\n## What I'd Actually Do\n\n**1. Raise now, but be disciplined about terms**\n- Take $15-20M\n- Focus on investor quality, board structure, and protective provisions \u2014 not just valuation\n- A good board member at $200M is worth more than a passive check at $300M\n\n**2. Don't optimize for valuation \u2014 optimize for the next 24 months of execution**\n- The raise gives you ~3 years of runway at current burn\n- That's the breathing room to find out if 15% MoM is sustainable or if growth matures into something different\n- You make your best decisions when you're not worried about cash\n\n**3. Pressure-test one thing first**\n- Talk to 2-3 VCs and gauge *actual* term sheet likelihood vs. casual interest\n- \"VCs are interested\" and \"VCs are ready to wire money\" are very different\n\n---\n\n## The Uncomfortable Truth\n\nThe founders who regret waiting almost never talk about it publicly. The founders who regret raising \"too early\" at a \"low\" valuation almost always ended up fine \u2014 because they had cash when others didn't.\n\n**Dilution pain is real but survivable. Running out of runway is not.**\n\n---\n\n## The One Exception\n\nIf you're **already profitable or nearly profitable** and the $500K MRR covers your burn, then you have genuine optionality and waiting is defensible. But if you're burning $400K+/month, you don't have the luxury of optimizing for valuation.\n\n**What's your current burn rate?** That's the single number that changes this analysis most.",
+  "timestamp": "2026-02-16T16:58:34.686303",
+  "duration_seconds": 22.45521593093872
+}

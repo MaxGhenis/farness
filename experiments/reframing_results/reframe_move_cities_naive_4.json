@@ -1,0 +1,19 @@
+{
+  "case_id": "move_cities",
+  "condition": "naive",
+  "run_number": 4,
+  "reframe_count": 6,
+  "reframe_matches": [
+    "partner",
+    "lifestyle",
+    "remote",
+    "negotiate",
+    "quality of life",
+    "network"
+  ],
+  "introduced_new_kpis": false,
+  "challenged_framing": false,
+  "response_text": "# Thinking Through Your SF Offer\n\nThis is a significant decision, so let me help you break it down honestly rather than just give you a quick answer.\n\n## The Money (it's not as simple as it looks)\n\nThe $70K raise sounds great, but let's be realistic:\n\n- **Housing in SF** will likely eat $2,000-3,000+/mo more than Austin, so roughly $24K-36K/year gone immediately\n- **State income tax**: Texas has none. California will take roughly ~$15-20K+ at that income\n- **General cost of living** (food, gas, insurance): probably another $5-10K/year\n\n**Net financial gain: roughly $5K-25K/year**, depending on lifestyle. Possibly a wash. Possibly even a slight loss.\n\n## What the numbers DON'T capture\n\nThese are the questions that actually matter:\n\n- **Career trajectory**: Is this company/role a genuine step up, or just a lateral move with a bigger number? Would it open doors your current role won't?\n- **What's your current job like?** If you're stagnating at $180K in Austin, that's different from being happy and growing.\n- **Quality of life**: Do you and your partner actually *want* to live in SF? Austin lifestyle vs. SF lifestyle is a real tradeoff, not just a financial one.\n- **Equity/RSUs?** You only mentioned base. If the SF offer includes significant equity at a strong company, that could change the math entirely.\n- **Network effects**: SF still has a denser senior engineering network. That compounds over a career.\n\n## What I'd push back on\n\nBefore deciding, I'd want you to answer honestly:\n\n1. **Have you negotiated?** A senior engineer getting $250K base in SF in 2024 is... not exceptional. You may have room to push to $275-300K+ total comp.\n2. **Have you explored a counteroffer in Austin?** $180K for a senior engineer in Austin is below market for many companies. You might close the gap without moving.\n3. **Is remote an option for the SF company?** Even 2-3 days/week remote from a lower-cost area could change everything.\n\n## My honest take\n\n**Don't take the offer purely for the money** \u2014 the real purchasing power gain is modest at best. \n\n**Do take it if**: the role is meaningfully better for your career, you're excited about the company, and you and your partner are genuinely interested in living in SF.\n\n**Don't take it if**: you're happy in Austin and this is mainly about the salary number. In that case, use the offer as leverage to negotiate where you are, or keep looking for a better opportunity.\n\nThe biggest risk isn't making the wrong choice \u2014 it's making this decision based on the headline number ($70K raise!) rather than the actual factors that will determine whether you're happier in 2 years.\n\nWhat does the role itself look like compared to what you're doing now?",
+  "timestamp": "2026-02-16T16:41:49.304886",
+  "duration_seconds": 20.494334936141968
+}

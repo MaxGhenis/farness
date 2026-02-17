@@ -1,0 +1,17 @@
+{
+  "case_id": "move_cities",
+  "condition": "naive",
+  "run_number": 2,
+  "reframe_count": 4,
+  "reframe_matches": [
+    "partner",
+    "remote",
+    "social",
+    "network"
+  ],
+  "introduced_new_kpis": false,
+  "challenged_framing": false,
+  "response_text": "# Thinking Through Your SF Offer\n\nThis is a significant decision, so let me help you break it down honestly rather than just give you a quick answer.\n\n## The Money (It's Trickier Than It Looks)\n\nThe $70K raise sounds great, but let's be realistic:\n\n- **Housing in SF** will likely eat most of that difference. A comparable place in SF could cost $1,500-3,000+/month more than Austin.\n- **State income tax**: Texas has none. California will take roughly 9-13% of your income. That alone could be ~$20-25K/year.\n- **After adjusting for housing + taxes**, you might break even or come out slightly behind in day-to-day purchasing power.\n\n**So this likely isn't really a financial upgrade.** Be honest with yourself about that.\n\n## What Actually Matters More\n\nHere's where I'd push you to think harder:\n\n**Reasons this could be worth it:**\n- Career trajectory - is this company/role a genuine step up, or just a lateral move with a bigger number?\n- Network effects - SF still has density of tech talent and opportunities that Austin doesn't fully match\n- What comes *after* this role? Does it position you for a $350K+ next move?\n- Do you and your partner actually *want* to live in SF?\n\n**Reasons to be cautious:**\n- Austin's tech scene is growing fast - are there $220K+ opportunities there you haven't explored yet?\n- You'd be giving up a lower-stress cost structure\n- If your partner works remotely, you're trading their social roots for... your commute\n- Senior engineers in SF are common. In Austin, your $180K might reflect more relative leverage than you think.\n\n## The Question I'd Actually Ask Yourself\n\n**\"If both jobs paid exactly the same, which life would I want?\"**\n\nIf the answer is SF, take it. The money works out roughly even anyway, and you want to be there.\n\nIf the answer is Austin, then you're being lured by a number that mostly disappears after cost adjustment. That's a bad reason to uproot your life.\n\n## My Honest Take\n\n**Don't take it purely for the money** - the real raise is probably close to zero. **Do take it if the role itself is meaningfully better for your career and you'd genuinely enjoy living in SF.** If you're on the fence, I'd counter-offer at your current company or shop for Austin-based roles in the $210-230K range, which would be an unambiguous financial win.\n\nWhat's drawing you to this specific role beyond the compensation?",
+  "timestamp": "2026-02-16T16:41:11.587194",
+  "duration_seconds": 18.27834701538086
+}

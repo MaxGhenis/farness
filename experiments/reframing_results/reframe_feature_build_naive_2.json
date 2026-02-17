@@ -1,0 +1,17 @@
+{
+  "case_id": "feature_build",
+  "condition": "naive",
+  "run_number": 2,
+  "reframe_count": 4,
+  "reframe_matches": [
+    "responsive",
+    "PWA",
+    "progressive web",
+    "prioriti"
+  ],
+  "introduced_new_kpis": true,
+  "challenged_framing": false,
+  "response_text": "# My Honest Recommendation: **Not yet. Do something smaller first.**\n\nHere's my reasoning, and where I'd push back on the framing of this decision.\n\n## The core problem with \"users are asking for it\"\n\n\"Users have been asking\" is one of the most dangerous inputs for prioritization. You need to pressure-test this:\n\n- **How many** of your 200 customers have asked? If it's 8, that's 4%. If it's 80, that's a different conversation.\n- **What specifically** do they want to do on mobile? Check dashboards? Get notifications? Do actual work?\n- **Have you lost any deals** because of this? Or are existing customers just mentioning it as a nice-to-have?\n- **Is this a top-3 reason** for churn, lost deals, or failed expansion?\n\nIf you can't answer these precisely, **stop here and go find out first.**\n\n## Why I'd push back on the $200K native app\n\n**The math is hard to justify right now.** $200K across 200 customers is $1,000/customer in development cost. For a B2B SaaS company at this stage, that's significant. You'd need to be confident this drives retention, expansion, or new revenue.\n\n**4 months is an eternity.** That's 4 months your team isn't building features that might matter more. What are you saying *no* to in order to say yes to this?\n\n**You're probably wrong about what the app should be.** The first version of any native app built on assumptions will need major rework once it hits real users.\n\n## What I'd actually recommend instead\n\n### Phase 1: This month \u2014 make the mobile web experience good (2-4 weeks, ~$20-40K)\n- Responsive redesign of the 2-3 workflows users actually need on mobile\n- Progressive Web App (PWA) with push notifications and home screen install\n- This gets you 60-70% of the value at 15% of the cost\n\n### Phase 2: Measure and learn (1-2 months)\n- Track mobile usage patterns obsessively\n- Now you *actually know* what people do on phones\n- Interview the heaviest mobile users\n\n### Phase 3: Decide on native with real data\n- If mobile usage is high and hitting PWA limitations \u2192 build native, and you'll build the *right* native app\n- If mobile usage is modest \u2192 you just saved $200K and 4 months\n\n## The one exception\n\nIf you're hearing this in **sales calls** \u2014 as in \"we won't sign without a mobile app\" \u2014 and it's costing you meaningful revenue, the calculus changes. But even then, I'd start with the PWA and a roadmap commitment rather than delaying revenue for 4 months waiting on a native build.\n\n## Bottom line\n\n**Don't spend $200K to learn what your users actually need on mobile.** Spend $30K to find out, then make the big bet with conviction. The companies that build the right thing slightly later almost always beat the ones that build the wrong thing quickly.\n\nWhat does your data actually say about the demand? I can help you think through the next step once we sharpen that.",
+  "timestamp": "2026-02-16T16:35:16.829347",
+  "duration_seconds": 22.182048082351685
+}

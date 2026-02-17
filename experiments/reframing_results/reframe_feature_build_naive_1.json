@@ -1,0 +1,20 @@
+{
+  "case_id": "feature_build",
+  "condition": "naive",
+  "run_number": 1,
+  "reframe_count": 7,
+  "reframe_matches": [
+    "opportunity cost",
+    "responsive",
+    "PWA",
+    "progressive web",
+    "nice to have",
+    "must have",
+    "validate"
+  ],
+  "introduced_new_kpis": false,
+  "challenged_framing": false,
+  "response_text": "# My Honest Recommendation: Not yet. Do smaller steps first.\n\nHere's my reasoning, and I want to be upfront about what we don't know.\n\n## The core question you actually need to answer first\n\n**\"Our users have been asking for a mobile app\"** \u2014 this needs unpacking before you spend $200K.\n\n- How many users? If it's 8 out of 200 customers, that's different than 80.\n- What are they actually trying to do on mobile? Check dashboards? Get notifications? Do full workflows?\n- Are you losing deals because of this, or are existing customers just expressing a preference?\n- When they say \"mobile app,\" do they mean they want a native app or that **the mobile experience is frustrating**?\n\nMost of the time, \"we need a mobile app\" actually means \"your product doesn't work well on my phone.\"\n\n## Why I'd push back on the native app right now\n\n**$200K and 4 months is significant for a company with 200 customers.** That's likely a meaningful chunk of your engineering budget, and it comes with hidden ongoing costs:\n\n- Maintaining two platforms indefinitely\n- App store review cycles slowing releases\n- Platform-specific bugs doubling QA surface\n- Keeping feature parity (you will fall behind)\n\nThe real cost is probably **$200K to build + $80-120K/year to maintain**, plus the opportunity cost of what your team *won't* build during those 4 months.\n\n## What I'd actually recommend\n\n**Step 1 (2-4 weeks, low cost):** Make your web app responsive. A well-optimized mobile web experience solves 70-80% of what people are asking for. This is where the biggest bang-for-buck lives.\n\n**Step 2 (parallel):** Talk to 15-20 of the customers asking for this. Understand the specific use cases. You're looking for patterns like \"I need to approve things quickly from my phone\" vs. \"I want push notifications when X happens.\"\n\n**Step 3 (if needed):** Consider a Progressive Web App (PWA). You get home screen icons, push notifications, and offline capability without a native app. This covers most B2B mobile needs.\n\n**Step 4 (only if the data demands it):** Build native, but only if you've found that specific native capabilities (camera, deep OS integration, etc.) are genuinely required and you've validated that mobile usage is tied to retention or revenue.\n\n## The uncomfortable honest part\n\nBuilding a native app *feels* like progress and it's easy to justify because customers asked for it. But at 200 customers, **$200K should probably go toward things that get you to 400 customers.** Unless mobile access is directly blocking expansion revenue or causing churn, this is likely a \"nice to have\" being treated as a \"must have.\"\n\nIf you go straight to native and it doesn't move retention or revenue, you've lost $200K and 4 months, and you still have to maintain it forever.\n\n---\n\n**My bottom line:** Invest 10-15% of that budget to optimize your mobile web experience and do the customer research. You'll either discover that solves the problem, or you'll have much sharper requirements that make the native app cheaper and more likely to succeed.\n\nWhat does the customer research look like so far? That would change my recommendation significantly.",
+  "timestamp": "2026-02-16T16:34:54.164923",
+  "duration_seconds": 22.63652515411377
+}

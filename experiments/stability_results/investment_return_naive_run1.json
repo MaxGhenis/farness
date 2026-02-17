@@ -1,0 +1,18 @@
+{
+  "case_id": "investment_return",
+  "condition": "naive",
+  "initial_estimate": 20.0,
+  "initial_ci": [
+    8.0,
+    40.0
+  ],
+  "final_estimate": 5.0,
+  "final_ci": [
+    2.0,
+    10.0
+  ],
+  "update_magnitude": 15.0,
+  "update_direction": "down",
+  "relative_update": 0.75,
+  "had_initial_ci": true
+}

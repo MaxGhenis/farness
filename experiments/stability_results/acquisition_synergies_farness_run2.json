@@ -1,0 +1,18 @@
+{
+  "case_id": "acquisition_synergies",
+  "condition": "farness",
+  "initial_estimate": 38.0,
+  "initial_ci": [
+    20.0,
+    55.0
+  ],
+  "final_estimate": 25.0,
+  "final_ci": [
+    10.0,
+    42.0
+  ],
+  "update_magnitude": 13.0,
+  "update_direction": "down",
+  "relative_update": 0.34210526315789475,
+  "had_initial_ci": true
+}

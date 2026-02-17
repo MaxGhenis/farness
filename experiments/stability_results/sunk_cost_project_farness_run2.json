@@ -1,0 +1,18 @@
+{
+  "case_id": "sunk_cost_project",
+  "condition": "farness",
+  "initial_estimate": 7.0,
+  "initial_ci": [
+    2.0,
+    18.0
+  ],
+  "final_estimate": 2.0,
+  "final_ci": [
+    0.5,
+    6.0
+  ],
+  "update_magnitude": 5.0,
+  "update_direction": "down",
+  "relative_update": 0.7142857142857143,
+  "had_initial_ci": true
+}

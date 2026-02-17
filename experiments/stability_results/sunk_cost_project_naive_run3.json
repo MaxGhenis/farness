@@ -1,0 +1,18 @@
+{
+  "case_id": "sunk_cost_project",
+  "condition": "naive",
+  "initial_estimate": 12.0,
+  "initial_ci": [
+    5.0,
+    25.0
+  ],
+  "final_estimate": 3.5,
+  "final_ci": [
+    1.0,
+    10.0
+  ],
+  "update_magnitude": 8.5,
+  "update_direction": "down",
+  "relative_update": 0.7083333333333334,
+  "had_initial_ci": true
+}

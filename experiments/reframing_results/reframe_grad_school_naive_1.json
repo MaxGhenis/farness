@@ -1,0 +1,14 @@
+{
+  "case_id": "grad_school",
+  "condition": "naive",
+  "run_number": 1,
+  "reframe_count": 1,
+  "reframe_matches": [
+    "actually want"
+  ],
+  "introduced_new_kpis": false,
+  "challenged_framing": false,
+  "response_text": "# MBA Decision Framework\n\nThis is a significant decision, so let me help you think through it rigorously rather than just give a snap answer.\n\n## The Financial Math (Simplified)\n\n**Total cost isn't just tuition:**\n- Tuition: ~$160K\n- Lost wages: ~$260K (2 years of salary)\n- **True cost: ~$420K+**\n\nTo justify that purely financially, you'd need to increase your lifetime earnings by well over $500K (accounting for time value of money).\n\n## Questions That Actually Determine the Answer\n\n**These matter more than the generic \"is an MBA worth it\":**\n\n1. **What do you want to do after?** This is the single biggest factor.\n   - Pivot to management consulting, PE/VC, or corporate strategy \u2192 MBA has clear ROI\n   - Stay in software engineering \u2192 MBA is likely a poor financial decision\n   - Move into product management \u2192 possible without an MBA\n   - Start a company \u2192 debatable, but the network matters\n\n2. **Which program?** You said \"good\" - but there's a massive difference:\n   - Top 10 (M7 + a few others) \u2192 strong salary uplift, powerful network\n   - Top 11-25 \u2192 decent but diminishing returns\n   - Below that \u2192 very hard to justify financially\n\n3. **What's your current trajectory?** At $130K with 3 years in, you could realistically be at $200-300K+ in senior/staff engineering roles within a few years - **without spending $420K**.\n\n4. **Are there non-financial reasons?** Intellectual growth, career pivot you *can't* make otherwise, network, personal fulfillment - these are legitimate but be honest about whether you're romanticizing them.\n\n## My Honest Take\n\n**I'd lean toward \"don't go\" UNLESS:**\n- It's a top ~10 program, AND\n- You want to leave engineering for a career path where an MBA is genuinely a gatekeeper (finance, consulting, GM/C-suite track), AND\n- You've hit a ceiling or genuinely dislike your current trajectory\n\n**The uncomfortable truth:** A lot of people pursue MBAs because they're vaguely dissatisfied and an MBA feels like a prestigious \"reset button.\" That's a $420K way to avoid figuring out what you actually want.\n\n## What I'd Do Before Deciding\n\n- Talk to 5-10 alumni from *that specific program* who had similar backgrounds\n- Model out your engineering salary trajectory honestly (it's probably higher than you think)\n- Articulate in one sentence what the MBA gets you that you *cannot* get otherwise\n- If you can't complete that sentence convincingly, you have your answer\n\nWhat's the program, and what are you hoping to do afterward? That would let me give you a much sharper recommendation.",
+  "timestamp": "2026-02-16T16:29:21.534960",
+  "duration_seconds": 19.10504698753357
+}

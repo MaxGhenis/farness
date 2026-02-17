@@ -1,0 +1,18 @@
+{
+  "case_id": "move_cities",
+  "condition": "naive",
+  "run_number": 3,
+  "reframe_count": 5,
+  "reframe_matches": [
+    "partner",
+    "community",
+    "remote",
+    "negotiate",
+    "stage of life"
+  ],
+  "introduced_new_kpis": false,
+  "challenged_framing": true,
+  "response_text": "# Thinking Through Your SF Offer\n\nThis is a significant decision, so let me help you work through it honestly rather than just give you a simple yes/no.\n\n## The Financial Reality Check\n\nThe $70K raise sounds great, but let's be direct about SF costs:\n\n- **Housing** will likely eat most or all of that difference. A comparable place in SF might cost $1,500-3,000+/month more than Austin.\n- **State income tax**: Texas has none. California will take roughly 9-13% of your income, which on $250K is significant \u2014 potentially **$20-25K/year** gone immediately.\n- **After adjusting for taxes + housing alone**, you may roughly break even or come out only modestly ahead.\n\nSo **don't take this for the money.** The raise alone probably isn't a real raise.\n\n## The Real Questions to Ask Yourself\n\nThese matter more than the salary math:\n\n- **Career trajectory** \u2014 Is this company/role a meaningful step up? Better brand, scope, leadership opportunity? This is the strongest reason to move.\n- **What's pulling you vs. what you're running from** \u2014 Are you excited about SF, or just restless in your current role? If it's the latter, there may be cheaper solutions.\n- **Your partner's honest feelings** \u2014 \"Flexible\" doesn't mean \"enthusiastic.\" This affects both of you. Have they actually said they want this?\n- **Your Austin situation** \u2014 Do you own a home there? Have community? At $180K in Austin with no state tax, you may be building wealth faster than you realize.\n- **Stage of life** \u2014 Are you optimizing for peak career investment, or for stability and savings?\n\n## What I'd Push Back On\n\nA few things people often overlook:\n\n- **You didn't mention the role, only the comp.** That tells me the money might be driving this more than you realize.\n- **$250K for a senior engineer in SF is not top of market.** If a company is offering that, you might have leverage to negotiate higher, or it may signal something about the company's compensation philosophy.\n- **Have you tried negotiating where you are?** Or getting a competing remote offer at SF-level pay without the SF costs?\n\n## My Honest Take\n\n**Don't take it purely for the money \u2014 the math doesn't justify the disruption.**\n\n**Do take it if:** the role is genuinely a career accelerant, you're excited about SF specifically, and your partner is genuinely on board.\n\n**Best alternative to explore first:** Use this offer as leverage. Can you get a remote role at $220-240K and stay in Austin? That would be the clear financial win.\n\n---\n\nWhat's the role itself, and what's drawing you to it beyond the comp? That would help me give you a sharper recommendation.",
+  "timestamp": "2026-02-16T16:41:29.891312",
+  "duration_seconds": 19.392431020736694
+}

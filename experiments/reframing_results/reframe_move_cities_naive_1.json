@@ -1,0 +1,20 @@
+{
+  "case_id": "move_cities",
+  "condition": "naive",
+  "run_number": 1,
+  "reframe_count": 7,
+  "reframe_matches": [
+    "partner",
+    "lifestyle",
+    "remote",
+    "negotiate",
+    "hybrid",
+    "quality of life",
+    "network"
+  ],
+  "introduced_new_kpis": false,
+  "challenged_framing": false,
+  "response_text": "# Thinking Through Your SF Offer\n\nThis is a significant decision, so let me help you break it down honestly rather than just give you a quick answer.\n\n## The Money (It's Tighter Than It Looks)\n\nThe $70K raise sounds great, but let's be realistic:\n\n- **Housing:** A comparable place in SF likely costs $1,500-2,500+/month more than Austin\n- **State income tax:** California takes ~9-13% vs Texas's 0%. On $250K, that's roughly **$20-25K/year gone immediately**\n- **General COL:** Food, services, insurance - generally 20-40% higher\n\n**Rough math:** After tax differences and housing, you might be roughly **break-even or modestly ahead** - not $70K ahead. You could run your specific numbers through a cost-of-living calculator to pressure-test this.\n\n## What Actually Matters Beyond the Salary Number\n\n**Reasons this could be worth it:**\n- Career trajectory - SF network effects are real for senior+ engineers\n- The specific company/team/product (you didn't mention this, and **it matters more than the city**)\n- You and your partner want the SF lifestyle, climate, access to nature\n- Future comp growth - SF senior roles often have stronger equity upside\n\n**Reasons to be cautious:**\n- If you're happy in your current role and growing, you're giving up a strong financial position in a no-income-tax state\n- Remote work has weakened SF's monopoly on tech careers\n- Quality of life factors in SF (homelessness, cost stress, smaller living space) are real\n- Moving is disruptive - don't underestimate that cost\n\n## The Questions I'd Push You On\n\nThese are the ones that actually determine the answer:\n\n1. **Why are you considering leaving?** If your current job is stale, that changes everything.\n2. **What's the company/role?** A $250K offer at a high-growth company with strong equity is very different from $250K at a stagnant one.\n3. **Have you negotiated?** Senior engineers in SF often command more. And have you asked your current employer to counter?\n4. **Could you negotiate remote/hybrid for the SF role?** Live in Austin, earn closer to SF pay - even partial adjustment would be a clear win.\n5. **What does your partner actually want?** \"Flexible\" doesn't mean \"enthusiastic.\"\n\n## My Honest Take\n\n**Don't take it purely for the money** - the real purchasing power gain is modest at best. **Do take it if the role itself is a clear career upgrade** and you're genuinely excited about it, or if you're stagnating where you are.\n\nThe strongest move might actually be to **use this offer as leverage** - either negotiate the SF offer higher, negotiate remote work on it, or get a raise/promotion at your current company.\n\nWhat's driving you to consider the move in the first place? That's probably where the real answer lives.",
+  "timestamp": "2026-02-16T16:40:50.708773",
+  "duration_seconds": 20.85719919204712
+}

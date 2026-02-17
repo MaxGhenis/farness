@@ -1,0 +1,18 @@
+{
+  "case_id": "product_launch",
+  "condition": "farness",
+  "initial_estimate": 25.0,
+  "initial_ci": [
+    10.0,
+    45.0
+  ],
+  "final_estimate": 16.0,
+  "final_ci": [
+    6.0,
+    30.0
+  ],
+  "update_magnitude": 9.0,
+  "update_direction": "down",
+  "relative_update": 0.36,
+  "had_initial_ci": true
+}

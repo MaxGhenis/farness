@@ -1,0 +1,18 @@
+{
+  "case_id": "planning_estimate",
+  "condition": "farness",
+  "initial_estimate": 3.5,
+  "initial_ci": [
+    2.5,
+    6.0
+  ],
+  "final_estimate": 6.0,
+  "final_ci": [
+    4.0,
+    12.0
+  ],
+  "update_magnitude": 2.5,
+  "update_direction": "up",
+  "relative_update": 0.7142857142857143,
+  "had_initial_ci": true
+}
