@@ -65,20 +65,20 @@ describe('vanilla-extract migration', () => {
 
     it('renders thesis title', () => {
       renderWithRouter(<Thesis />)
-      expect(screen.getByText('Forecasting as a Harness')).toBeInTheDocument()
+      expect(screen.getByText('Forecasting as a harness')).toBeInTheDocument()
     })
 
     it('renders all 10 section headings', () => {
       renderWithRouter(<Thesis />)
-      expect(screen.getByText('The Problem with Advice')).toBeInTheDocument()
-      expect(screen.getByText('The Reframe')).toBeInTheDocument()
-      expect(screen.getByText('The Superforecasting Connection')).toBeInTheDocument()
-      expect(screen.getByText('Why AI Makes This Better')).toBeInTheDocument()
-      expect(screen.getByText('The Calibration Loop')).toBeInTheDocument()
-      expect(screen.getByText('The Decision Quality Chain')).toBeInTheDocument()
-      expect(screen.getByText('The Framework')).toBeInTheDocument()
-      expect(screen.getByText('When to Use It')).toBeInTheDocument()
-      expect(screen.getByText('The Vision')).toBeInTheDocument()
+      expect(screen.getByText('The problem with advice')).toBeInTheDocument()
+      expect(screen.getByText('The reframe')).toBeInTheDocument()
+      expect(screen.getByText('The superforecasting connection')).toBeInTheDocument()
+      expect(screen.getByText('Why AI makes this better')).toBeInTheDocument()
+      expect(screen.getByText('The calibration loop')).toBeInTheDocument()
+      expect(screen.getByText('The decision quality chain')).toBeInTheDocument()
+      expect(screen.getByText('The framework')).toBeInTheDocument()
+      expect(screen.getByText('When to use it')).toBeInTheDocument()
+      expect(screen.getByText('The vision')).toBeInTheDocument()
     })
 
     it('renders references section', () => {
@@ -94,7 +94,7 @@ describe('vanilla-extract migration', () => {
 
     it('renders paper title', () => {
       renderWithRouter(<Paper />)
-      expect(screen.getByText('Pre-emptive Rigor')).toBeInTheDocument()
+      expect(screen.getByText('Pre-emptive rigor')).toBeInTheDocument()
     })
 
     it('renders abstract', () => {
@@ -110,9 +110,9 @@ describe('vanilla-extract migration', () => {
     it('renders all major sections', () => {
       renderWithRouter(<Paper />)
       expect(screen.getByText('1. Introduction')).toBeInTheDocument()
-      expect(screen.getByText('2. Related Work')).toBeInTheDocument()
-      expect(screen.getByText('3. Methodology: Stability-Under-Probing')).toBeInTheDocument()
-      expect(screen.getByText('4. Experimental Design')).toBeInTheDocument()
+      expect(screen.getByText('2. Related work')).toBeInTheDocument()
+      expect(screen.getByText('3. Methodology: stability-under-probing')).toBeInTheDocument()
+      expect(screen.getByText('4. Experimental design')).toBeInTheDocument()
       expect(screen.getByText('5. Results')).toBeInTheDocument()
       expect(screen.getByText('6. Discussion')).toBeInTheDocument()
       expect(screen.getByText('7. Conclusion')).toBeInTheDocument()
@@ -126,7 +126,7 @@ describe('vanilla-extract migration', () => {
 
     it('renders code availability section', () => {
       renderWithRouter(<Paper />)
-      expect(screen.getByText('Code Availability')).toBeInTheDocument()
+      expect(screen.getByText('Code availability')).toBeInTheDocument()
     })
   })
 

@@ -37,10 +37,10 @@ function Paper() {
       <Header activePage="paper" />
       <article className={t.thesis}>
         <header className={t.thesisHeader}>
-          <p className={t.thesisLabel}>Research Paper</p>
-          <h1>Pre-emptive Rigor</h1>
+          <p className={t.thesisLabel}>Research paper</p>
+          <h1>Pre-emptive rigor</h1>
           <p className={t.thesisSubtitle}>
-            Measuring Decision Framework Effectiveness in LLMs
+            Measuring decision framework effectiveness in LLMs
           </p>
           <p className={t.paperMeta}>
             Max Ghenis &middot; Draft v0.2 &middot; February 2026
@@ -106,7 +106,7 @@ function Paper() {
               suggests the framework provides genuine value, not just cosmetic structure.
             </p>
 
-            <h3>1.1 The Farness Framework</h3>
+            <h3>1.1 The Farness framework</h3>
             <p>
               We evaluate a specific framework called "farness" (Forecasting as a Harness for
               Decision-Making) that requires (<Link to="/thesis">see full thesis</Link>):
@@ -126,9 +126,9 @@ function Paper() {
           </section>
 
           <section>
-            <h2>2. Related Work</h2>
+            <h2>2. Related work</h2>
 
-            <h3>2.1 Decision Hygiene and Structured Judgment</h3>
+            <h3>2.1 Decision hygiene and structured judgment</h3>
             <p>
               Kahneman, Sibony, and Sunstein (2021) introduce "decision hygiene" — procedures that
               reduce noise in human judgment<Cite id="3">3</Cite>. Key techniques include:
@@ -155,7 +155,7 @@ function Paper() {
               independent of outcomes<Cite id="17">17</Cite>.
             </p>
 
-            <h3>2.2 Superforecasting and Calibration</h3>
+            <h3>2.2 Superforecasting and calibration</h3>
             <p>
               Tetlock's Good Judgment Project demonstrated that structured training improves
               forecasting accuracy by ~10%, and that calibration can be learned through practice
@@ -163,7 +163,7 @@ function Paper() {
               decomposition, and explicit uncertainty quantification.
             </p>
 
-            <h3>2.3 LLM Prompting and Reasoning</h3>
+            <h3>2.3 LLM prompting and reasoning</h3>
             <p>
               Chain-of-thought prompting<Cite id="1">1</Cite> improves LLM performance on reasoning
               tasks by encouraging step-by-step thinking. Decomposition prompting<Cite id="7">7</Cite>
@@ -173,7 +173,7 @@ function Paper() {
               providing the theoretical basis for structured ensemble approaches.
             </p>
 
-            <h3>2.4 LLM Calibration</h3>
+            <h3>2.4 LLM calibration</h3>
             <p>
               Recent work has examined whether LLMs produce well-calibrated probability estimates.
               Kadavath et al. (2022) found that larger models show improved calibration on question-answering
@@ -191,7 +191,7 @@ function Paper() {
               truth exists.
             </p>
 
-            <h3>2.5 Sycophancy and Cognitive Bias in LLMs</h3>
+            <h3>2.5 Sycophancy and cognitive bias in LLMs</h3>
             <p>
               LLMs exhibit sycophancy — the tendency to agree with users even when they shouldn't.
               Perez et al. (2023) documented that models shift answers when users express opinions,
@@ -214,7 +214,7 @@ function Paper() {
               update inappropriately when probed, and does structured framing reduce such updates?
             </p>
 
-            <h3>2.6 Process Evaluation in Decision-Making</h3>
+            <h3>2.6 Process evaluation in decision-making</h3>
             <p>
               Evaluating decision <em>process</em> rather than outcomes has precedent in behavioral
               economics. Kahneman and Klein (2009) argue for "pre-mortem" analysis as a process
@@ -224,7 +224,7 @@ function Paper() {
               deliberation quality.
             </p>
 
-            <h3>2.7 LLM-Assisted Structured Decision-Making</h3>
+            <h3>2.7 LLM-assisted structured decision-making</h3>
             <p>
               Chiang et al. (2024) showed that LLM-powered "devil's advocates" — agents that argue
               against AI recommendations — promote appropriate reliance on AI in group decisions by
@@ -234,7 +234,7 @@ function Paper() {
               to Analysis of Competing Hypotheses<Cite id="24">24</Cite>.
             </p>
 
-            <h3>2.8 LLM Forecasting Benchmarks</h3>
+            <h3>2.8 LLM forecasting benchmarks</h3>
             <p>
               ForecastBench<Cite id="8">8</Cite> provides a dynamic benchmark for LLM forecasting
               accuracy, comparing models to human forecasters including superforecasters. Halawi et al.
@@ -245,7 +245,7 @@ function Paper() {
               parity by late 2026.
             </p>
 
-            <h3>2.9 Gap in the Literature</h3>
+            <h3>2.9 Gap in the literature</h3>
             <p>Existing work measures either:</p>
             <ul>
               <li><strong>Forecasting accuracy</strong> (ForecastBench) — but this requires resolvable questions and doesn't capture decision <em>process</em></li>
@@ -258,7 +258,7 @@ function Paper() {
           </section>
 
           <section>
-            <h2>3. Methodology: Stability-Under-Probing</h2>
+            <h2>3. Methodology: stability-under-probing</h2>
 
             <h3>3.1 Intuition</h3>
             <p>
@@ -329,9 +329,9 @@ function Paper() {
           </section>
 
           <section>
-            <h2>4. Experimental Design</h2>
+            <h2>4. Experimental design</h2>
 
-            <h3>4.1 Decision Scenarios</h3>
+            <h3>4.1 Decision scenarios</h3>
             <p>We design quantitative decision scenarios across multiple domains:</p>
             <Table
               headers={['Domain', 'Scenario', 'Estimate Type']}
@@ -357,7 +357,7 @@ function Paper() {
               <li>Expected direction of update (for validation)</li>
             </ul>
 
-            <h3>4.2 Probing Questions</h3>
+            <h3>4.2 Probing questions</h3>
             <p>Probes are designed to surface considerations that good decision-making should address:</p>
             <ol>
               <li><strong>Base rate probes</strong>: "Research shows X% of similar situations result in Y..."</li>
@@ -365,7 +365,7 @@ function Paper() {
               <li><strong>New information probes</strong>: "I just learned that [relevant new fact]..."</li>
             </ol>
 
-            <h3>4.3 Adversarial Probing Conditions</h3>
+            <h3>4.3 Adversarial probing conditions</h3>
             <p>To establish discriminant validity, we include adversarial probing scenarios where estimates <em>should not</em> change:</p>
             <ol>
               <li><strong>Irrelevant anchoring</strong>: Probes include unrelated numbers (e.g., "My phone number ends in 97. Does this change your estimate?")</li>
@@ -374,7 +374,7 @@ function Paper() {
             </ol>
             <p>A robust framework should resist these adversarial probes while appropriately updating to legitimate new information.</p>
 
-            <h3>4.4 Model and Procedure</h3>
+            <h3>4.4 Model and procedure</h3>
             <ul>
               <li><strong>Model</strong>: Claude Opus 4.6 (Anthropic), accessed via the Anthropic Python SDK</li>
               <li><strong>Temperature</strong>: 1.0 (default)</li>
@@ -384,7 +384,7 @@ function Paper() {
               <li><strong>Blinding</strong>: Extraction functions operate on anonymized response text without condition labels</li>
             </ul>
 
-            <h3>4.5 Statistical Analysis</h3>
+            <h3>4.5 Statistical analysis</h3>
             <p>We use non-parametric tests given expected small sample sizes:</p>
             <ul>
               <li><strong>Mann-Whitney U test</strong>: Compares update magnitudes between conditions (one-sided, H₁: naive {'>'} farness)</li>
@@ -393,7 +393,7 @@ function Paper() {
               <li><strong>Effect sizes</strong>: Rank-biserial correlation for update magnitude, Cohen's d for convergence</li>
             </ul>
 
-            <h3>4.6 Sample Size</h3>
+            <h3>4.6 Sample size</h3>
             <ul>
               <li>11 scenarios × 2 conditions × 3 runs = 66 total responses</li>
               <li>33 per condition (8 standard + 3 adversarial scenarios)</li>
@@ -729,7 +729,7 @@ function Paper() {
         </section>
 
         <section className={t.codeAvailability}>
-          <h2>Code Availability</h2>
+          <h2>Code availability</h2>
           <p>
             Code for running stability-under-probing experiments is available at:{' '}
             <a href="https://github.com/MaxGhenis/farness" target="_blank" rel="noopener noreferrer">

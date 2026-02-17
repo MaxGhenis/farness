@@ -62,9 +62,9 @@ const SCENARIOS: DemoScenario[] = [
   {
     question: 'Which job should I take?',
     kpis: [
-      { name: 'Total Comp (Year 1)', unit: '$k' },
-      { name: 'Learning & Growth', unit: '/10' },
-      { name: 'Work-Life Balance', unit: '/10' },
+      { name: 'Total comp (year 1)', unit: '$k' },
+      { name: 'Learning & growth', unit: '/10' },
+      { name: 'Work-life balance', unit: '/10' },
     ],
     options: [
       {
@@ -76,7 +76,7 @@ const SCENARIOS: DemoScenario[] = [
         ],
       },
       {
-        name: 'Big Co',
+        name: 'Big co',
         forecasts: [
           { value: 250, ci: [230, 270] },
           { value: 5, ci: [4, 6] },
@@ -88,13 +88,13 @@ const SCENARIOS: DemoScenario[] = [
   {
     question: 'Should we launch this feature?',
     kpis: [
-      { name: 'User Retention', unit: '%' },
-      { name: 'Revenue Impact', unit: '$k/mo' },
-      { name: 'Eng Effort', unit: 'weeks' },
+      { name: 'User retention', unit: '%' },
+      { name: 'Revenue impact', unit: '$k/mo' },
+      { name: 'Eng effort', unit: 'weeks' },
     ],
     options: [
       {
-        name: 'Launch Now',
+        name: 'Launch now',
         forecasts: [
           { value: 72, ci: [65, 80] },
           { value: 45, ci: [20, 80] },
@@ -102,7 +102,7 @@ const SCENARIOS: DemoScenario[] = [
         ],
       },
       {
-        name: 'Wait & Polish',
+        name: 'Wait & polish',
         forecasts: [
           { value: 78, ci: [72, 85] },
           { value: 60, ci: [35, 90] },
@@ -114,9 +114,9 @@ const SCENARIOS: DemoScenario[] = [
   {
     question: 'Continue or kill this project?',
     kpis: [
-      { name: 'Months to Ship', unit: 'mo' },
-      { name: 'Added Burn', unit: '$k' },
-      { name: 'Strategic Value', unit: '/10' },
+      { name: 'Months to ship', unit: 'mo' },
+      { name: 'Added burn', unit: '$k' },
+      { name: 'Strategic value', unit: '/10' },
     ],
     options: [
       {
@@ -128,7 +128,7 @@ const SCENARIOS: DemoScenario[] = [
         ],
       },
       {
-        name: 'Kill It',
+        name: 'Kill it',
         forecasts: [
           { value: 0, ci: [0, 0] },
           { value: 0, ci: [0, 0] },

@@ -18,8 +18,8 @@ function Thesis() {
       <Header activePage="thesis" />
       <article className={t.thesis}>
         <header className={t.thesisHeader}>
-          <p className={t.thesisLabel}>The Farness Thesis</p>
-          <h1>Forecasting as a Harness</h1>
+          <p className={t.thesisLabel}>The Farness thesis</p>
+          <h1>Forecasting as a harness</h1>
           <p className={t.thesisSubtitle}>
             Why reframing decisions as predictions leads to better outcomes—and how to do it.
           </p>
@@ -27,7 +27,7 @@ function Thesis() {
 
         <div className={t.thesisContent}>
           <section>
-            <h2>The Problem with Advice</h2>
+            <h2>The problem with advice</h2>
             <p>
               When we ask someone—a friend, a mentor, an AI—"Should I do X?", we're asking the
               wrong question. The answer we get depends entirely on unstated assumptions: What
@@ -50,7 +50,7 @@ function Thesis() {
           </section>
 
           <section>
-            <h2>The Reframe</h2>
+            <h2>The reframe</h2>
             <p>
               Instead of asking for advice, ask for <em>forecasts conditional on actions</em>.
             </p>
@@ -75,7 +75,7 @@ function Thesis() {
           </section>
 
           <section>
-            <h2>The Superforecasting Connection</h2>
+            <h2>The superforecasting connection</h2>
             <p>
               This isn't a new idea. Philip Tetlock's research on superforecasting<Cite id="2">2</Cite> identified a
               set of techniques that reliably improve predictive accuracy. In the Good Judgment Project,
@@ -101,7 +101,7 @@ function Thesis() {
           </section>
 
           <section>
-            <h2>Why AI Makes This Better</h2>
+            <h2>Why AI makes this better</h2>
             <p>
               Large language models are surprisingly good at forecasting. LLM ensembles can
               match human crowd accuracy on prediction tasks<Cite id="6">6</Cite>. Halawi et al.
@@ -146,7 +146,7 @@ function Thesis() {
           </section>
 
           <section>
-            <h2>The Calibration Loop</h2>
+            <h2>The calibration loop</h2>
             <p>
               The most powerful part of this approach is what happens over time. By logging
               your forecasts and scoring them against reality, you build a calibration curve.
@@ -174,7 +174,7 @@ function Thesis() {
           </section>
 
           <section>
-            <h2>The Decision Quality Chain</h2>
+            <h2>The decision quality chain</h2>
             <p>
               Ron Howard and the Strategic Decisions Group developed a framework for measuring
               decision quality at the time of decision, independent of outcome<Cite id="21">21</Cite>.
@@ -206,7 +206,7 @@ function Thesis() {
           </section>
 
           <section>
-            <h2>Boosting, Not Nudging</h2>
+            <h2>Boosting, not nudging</h2>
             <p>
               Hertwig and Grune-Yanoff distinguish "nudges" (environmental changes that steer
               behavior) from "boosts" (interventions that build decision-making
@@ -232,7 +232,7 @@ function Thesis() {
           </section>
 
           <section>
-            <h2>The Framework</h2>
+            <h2>The framework</h2>
             <p>
               Farness implements a five-step process, drawing on structured analytic techniques
               from intelligence analysis<Cite id="11">11</Cite> and the superforecasting literature:
@@ -268,7 +268,7 @@ function Thesis() {
           </section>
 
           <section>
-            <h2>When to Use It</h2>
+            <h2>When to use it</h2>
             <p>
               Farness is valuable across a range of decisions:
             </p>
@@ -282,7 +282,7 @@ function Thesis() {
           </section>
 
           <section>
-            <h2>The Vision</h2>
+            <h2>The vision</h2>
             <p>
               Imagine a world where every significant decision comes with:
             </p>
@@ -304,7 +304,7 @@ function Thesis() {
               Get better over time.
             </p>
             <p className={t.thesisCta}>
-              <Link to="/" className={`${s.btn} ${t.thesisCtaBtn}`}>Get Started →</Link>
+              <Link to="/" className={`${s.btn} ${t.thesisCtaBtn}`}>Get started →</Link>
             </p>
           </section>
         </div>
