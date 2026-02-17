@@ -114,7 +114,7 @@ const SCENARIOS: DemoScenario[] = [
   {
     question: 'Continue or kill this project?',
     kpis: [
-      { name: 'P(Ship on Time)', unit: '%' },
+      { name: 'Months to Ship', unit: 'mo' },
       { name: 'Added Burn', unit: '$k' },
       { name: 'Strategic Value', unit: '/10' },
     ],
@@ -122,7 +122,7 @@ const SCENARIOS: DemoScenario[] = [
       {
         name: 'Continue',
         forecasts: [
-          { value: 25, ci: [10, 45] },
+          { value: 8, ci: [5, 14] },
           { value: 500, ci: [300, 900] },
           { value: 7, ci: [5, 9] },
         ],
@@ -130,7 +130,7 @@ const SCENARIOS: DemoScenario[] = [
       {
         name: 'Kill It',
         forecasts: [
-          { value: 100, ci: [100, 100] },
+          { value: 0, ci: [0, 0] },
           { value: 0, ci: [0, 0] },
           { value: 2, ci: [1, 3] },
         ],
