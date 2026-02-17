@@ -62,7 +62,7 @@ function Paper() {
             Measuring Decision Framework Effectiveness in LLMs
           </p>
           <p style={{ fontSize: '0.85rem', color: 'var(--color-text-muted)', marginTop: '1rem' }}>
-            Max Ghenis &middot; Draft v0.1 &middot; December 2025
+            Max Ghenis &middot; Draft v0.2 &middot; February 2026
           </p>
         </header>
 
@@ -77,16 +77,19 @@ function Paper() {
               do they converge toward framework-guided responses?
             </p>
             <p>
-              In experiments across planning, risk assessment, and investment domains, we find that
-              framework-guided responses (1) include uncertainty quantification upfront, (2) show
-              smaller updates when probed with base rates and new information, and (3) serve as
-              attractors that naive responses converge toward after probing. This suggests structured
-              decision frameworks provide "pre-emptive rigor" — surfacing considerations that would
-              otherwise require extensive follow-up questioning.
+              In experiments across 11 scenarios spanning planning, risk assessment, investment, and
+              adversarial probing domains (n=33 per condition), we find that framework-guided
+              responses show 30% smaller update magnitudes when probed (Cohen's d=0.30), though
+              this difference does not reach statistical significance (p=0.13). Contrary to our
+              convergence hypothesis, naive responses diverge from framework-guided initial
+              estimates after probing, suggesting the two approaches arrive at different analytical
+              endpoints rather than converging on shared conclusions.
             </p>
             <p>
-              Our methodology enables evaluation of decision frameworks without waiting for real-world
-              outcomes, complementing existing work on LLM forecasting benchmarks like ForecastBench.
+              A complementary reframing experiment (n=30 per condition) finds no significant
+              difference in how often the framework challenges initial problem framing. These
+              results provide directional evidence for stability benefits while highlighting the
+              need for larger samples and cross-model validation.
             </p>
           </section>
 
@@ -392,9 +395,11 @@ function Paper() {
 
             <h3>4.4 Model and Procedure</h3>
             <ul>
-              <li><strong>Model</strong>: Claude (Anthropic), accessed via subagent framework</li>
-              <li><strong>Runs per condition</strong>: 3 (to account for stochasticity)</li>
+              <li><strong>Model</strong>: Claude Opus 4.6 (Anthropic), accessed via the Anthropic Python SDK</li>
+              <li><strong>Temperature</strong>: 1.0 (default)</li>
+              <li><strong>Runs per condition</strong>: 3 (to account for stochasticity), random seed 42</li>
               <li><strong>Order</strong>: Randomized per case using a logged random seed for reproducibility</li>
+              <li><strong>Response format</strong>: Structured JSON extraction with regex fallback for point estimates and confidence intervals</li>
               <li><strong>Blinding</strong>: Extraction functions operate on anonymized response text without condition labels</li>
             </ul>
 
@@ -418,108 +423,206 @@ function Paper() {
           <section>
             <h2>5. Results</h2>
 
-            <h3>5.1 Pilot Experiments</h3>
+            <h3>5.1 Stability-under-probing</h3>
             <p>
-              We conducted pilot experiments on two scenarios: software project timeline estimation
-              and troubled project success probability.
+              We ran 66 trials (33 naive, 33 farness) across 11 scenarios with 3 runs per
+              condition, using random seed 42 for reproducibility. Results are summarized below.
             </p>
 
-            <h4>Planning Scenario (Software Timeline)</h4>
+            <h4>Primary metrics</h4>
             <Table
-              headers={['Metric', 'Naive', 'Farness']}
+              headers={['Metric', 'Naive', 'Farness', 'p-value']}
               rows={[
-                ['Initial estimate', '4 weeks', '4 weeks'],
-                ['Initial CI', '(none)', '2.5-7 weeks'],
-                ['Post-probe estimate', '3.5 weeks', '5 weeks'],
-                ['Post-probe CI', '2.5-5.5 weeks', '3-9 weeks'],
-                ['Update direction', '↓ (wrong)', '↑ (correct)'],
+                ['Mean update magnitude', '13.68', '9.64', '0.13'],
+                ['Mean relative update', '50%', '44%', '—'],
+                ['Initial CI rate', '100%', '100%', '1.00'],
+                ['Correct direction rate', '100%', '96%', '—'],
               ]}
             />
             <p>
-              <strong>Key finding:</strong> When probed with "30% chance of major blocker," farness
-              incorporated this systematically (mixture model → higher estimate), while naive
-              paradoxically became <em>more</em> optimistic.
+              Framework-guided responses showed 30% smaller mean update magnitudes (9.64 vs 13.68
+              points) when probed with base rates, bias identification, and new information. The
+              Mann-Whitney U test was directionally significant but did not reach conventional
+              thresholds (U=631, p=0.134, one-sided). The effect size was small (Cohen's
+              d=0.30, rank-biserial r=−0.16).
+            </p>
+            <p>
+              Both conditions provided confidence intervals in 100% of initial responses. This
+              contrasts with our hypothesis that naive prompting would omit CIs; it likely reflects
+              the structured JSON response format requested in all prompts, which explicitly asked
+              for confidence intervals.
             </p>
 
-            <h4>Sunk Cost Scenario (Project Success)</h4>
+            <h4>Effect sizes</h4>
             <Table
-              headers={['Metric', 'Naive', 'Farness']}
+              headers={['Measure', 'Value', 'Interpretation']}
               rows={[
-                ['Initial estimate', '15%', '6%'],
-                ['Initial CI', '(none)', '2-15%'],
-                ['Post-probe estimate', '5%', '2%'],
-                ['Post-probe CI', '2-12%', '0.5-8%'],
-                ['Update direction', '↓ (correct)', '↓ (correct)'],
+                ["Cohen's d (update magnitude)", '0.30', 'Small effect'],
+                ['Rank-biserial r', '−0.16', 'Small effect'],
+                ["Cohen's d (convergence)", '−0.62', 'Medium effect'],
               ]}
             />
+
+            <h3>5.2 Convergence analysis</h3>
             <p>
-              <strong>Key finding:</strong> Naive(probed) ≈ Farness(initial). The naive response
-              converged to 5% after probing — almost exactly where farness started (6%).
+              Our convergence hypothesis predicted that naive responses, after probing, would
+              move toward where farness started — i.e., that probing extracts the same
+              considerations the framework front-loads.
+            </p>
+            <p>
+              <strong>This hypothesis was not supported.</strong> The mean convergence ratio
+              was −1.33 (95% CI: [−1.78, −0.88], n=82 valid pairs), indicating that naive
+              responses <em>diverged</em> from farness initial estimates after probing. The
+              effect was medium-sized (Cohen's d=−0.62) and highly significant as a
+              divergence (t=−5.61, p≈1.0 for the convergence direction).
+            </p>
+            <p>
+              This divergence suggests that naive and farness prompting lead to fundamentally
+              different analytical trajectories rather than converging on the same conclusions.
+              When probed, naive responses update in directions that increase the gap with
+              framework-guided initial estimates.
             </p>
 
-            <h3>5.2 Convergence Pattern</h3>
-            <p>Across both pilot scenarios, we observed a consistent pattern:</p>
-            <blockquote>
-              <p style={{ fontFamily: 'monospace', textAlign: 'center' }}>
-                Naive_final ≈ Farness_initial
-              </p>
-            </blockquote>
-            <p>This suggests that:</p>
-            <ol>
-              <li>Framework-guided responses front-load the analytical work</li>
-              <li>Naive responses require extensive probing to reach similar conclusions</li>
-              <li>The framework captures considerations that matter for decision quality</li>
-            </ol>
-
-            <h3>5.3 Coherence Under New Information</h3>
+            <h3>5.3 Adversarial probing</h3>
             <p>
-              When presented with new information (e.g., "two senior engineers are interviewing elsewhere"),
-              we observed:
+              Three adversarial scenarios tested whether the framework resists inappropriate updates:
             </p>
             <ul>
-              <li><strong>Farness</strong>: Explicit quantitative update using mixture models, principled incorporation of new risk factor</li>
-              <li><strong>Naive</strong>: Qualitative acknowledgment but less systematic incorporation</li>
+              <li>
+                <strong>Irrelevant anchoring</strong>: Both conditions showed near-zero updates
+                when presented with unrelated numbers (e.g., phone digits). Convergence ratios
+                were exactly 0 for all valid pairs, confirming both conditions resist irrelevant anchors.
+              </li>
+              <li>
+                <strong>False base rates</strong>: Mixed results — convergence ratios ranged from
+                −8.0 to +1.0, with high variance across runs. Neither condition consistently
+                resisted fabricated statistics.
+              </li>
+              <li>
+                <strong>Sycophantic pressure</strong>: Both conditions showed zero update in
+                response to user disagreement without new information. All convergence ratios
+                were exactly 0.0, confirming resistance to sycophancy.
+              </li>
             </ul>
+
+            <h3>5.4 Reframing experiment</h3>
+            <p>
+              We ran a separate reframing experiment (n=30 per condition, 6 cases × 5 runs) to
+              test whether the framework encourages reframing of the original decision question —
+              challenging framing assumptions, introducing new KPIs, or restructuring the problem.
+            </p>
+            <Table
+              headers={['Metric', 'Naive', 'Farness', 'p-value']}
+              rows={[
+                ['Mean reframe indicators', '3.53', '4.60', '0.956'],
+                ['Challenged framing rate', '20%', '20%', '0.626'],
+                ['Introduced new KPIs rate', '20%', '27%', '—'],
+              ]}
+            />
+            <p>
+              No significant differences were found. The farness condition showed directionally
+              more reframe indicators (4.60 vs 3.53) but the Mann-Whitney U test was not
+              significant (U=336, p=0.956, r=0.25). Challenged framing rates were identical
+              at 20% (Fisher's exact p=0.626).
+            </p>
+
+            <h4>Per-case breakdown</h4>
+            <Table
+              headers={['Case', 'Naive', 'Farness', 'Difference']}
+              rows={[
+                ['Feature build', '4.6', '5.4', '+0.8'],
+                ['Grad school', '0.4', '0.4', '0.0'],
+                ['Hire senior', '5.2', '6.6', '+1.4'],
+                ['Move cities', '5.2', '7.6', '+2.4'],
+                ['Quit job', '3.8', '4.8', '+1.0'],
+                ['Raise funding', '2.0', '2.8', '+0.8'],
+              ]}
+            />
+            <p>
+              The largest difference appeared in the "move cities" scenario (+2.4 indicators),
+              where the framework prompted more systematic consideration of financial, career,
+              and lifestyle factors. The "grad school" scenario showed no difference, likely
+              because both conditions produced similarly structured analyses.
+            </p>
+
+            <h3>5.5 Summary of findings</h3>
+            <ol>
+              <li>
+                <strong>Directional stability benefit</strong>: Framework-guided responses showed
+                30% smaller update magnitudes (d=0.30), but the effect was not statistically
+                significant at α=0.05.
+              </li>
+              <li>
+                <strong>Divergence, not convergence</strong>: Probing naive responses moved them
+                <em>away</em> from framework initial estimates (d=−0.62), contradicting the
+                convergence hypothesis.
+              </li>
+              <li>
+                <strong>Strong adversarial resistance</strong>: Both conditions fully resisted
+                irrelevant anchoring and sycophantic pressure.
+              </li>
+              <li>
+                <strong>No reframing difference</strong>: The framework did not significantly
+                increase problem reframing compared to naive prompting.
+              </li>
+            </ol>
           </section>
 
           <section>
             <h2>6. Discussion</h2>
 
-            <h3>6.1 Pre-emptive Rigor</h3>
+            <h3>6.1 Pre-emptive rigor: partial support</h3>
             <p>
-              Our central finding is that structured decision frameworks provide "pre-emptive rigor" —
-              they front-load considerations that would otherwise require extensive follow-up questioning.
-              This has practical implications:
+              Our results provide directional but not statistically significant support for the
+              "pre-emptive rigor" hypothesis. Framework-guided responses showed 30% smaller
+              update magnitudes (d=0.30), suggesting the framework does front-load some
+              considerations. However, the effect did not reach significance with n=33 per
+              condition, and the failed convergence hypothesis complicates the interpretation.
+            </p>
+            <p>
+              The divergence finding is particularly notable. Rather than probing extracting
+              the same considerations the framework provides, probing appears to push naive
+              responses in different directions — possibly because naive responses lack the
+              structured anchoring that prevents overreaction to new information.
+            </p>
+
+            <h3>6.2 Why stability may matter even without convergence</h3>
+            <p>
+              Even though naive responses don't converge toward framework estimates, the
+              stability difference may still be practically important:
             </p>
             <ol>
-              <li><strong>For users</strong>: Framework-guided responses provide higher-quality initial recommendations without requiring users to probe effectively</li>
-              <li><strong>For systems</strong>: The framework can be implemented as a prompt prefix, requiring no model fine-tuning</li>
-              <li><strong>For evaluation</strong>: Stability-under-probing offers a tractable way to evaluate decision frameworks without ground truth</li>
-            </ol>
-
-            <h3>6.2 Why Not Just Probe Everything?</h3>
-            <p>One might ask: if probing improves naive responses, why use a framework at all?</p>
-            <ol>
+              <li><strong>Stability signals robustness.</strong> Smaller updates under probing suggest the initial analysis was more thorough, regardless of whether conditions converge on the same endpoint.</li>
               <li><strong>Users don't know what to probe for.</strong> The framework surfaces considerations (base rates, biases) that users might not think to ask about.</li>
               <li><strong>Probing is costly.</strong> Multiple follow-up rounds take time and tokens. Front-loading is more efficient.</li>
-              <li><strong>Probing may not be complete.</strong> Our probing protocol is designed to be thorough, but real users ask ad-hoc follow-ups.</li>
             </ol>
 
-            <h3>6.3 Limitations</h3>
+            <h3>6.3 Universal CI provision</h3>
+            <p>
+              Both conditions provided confidence intervals 100% of the time, likely because
+              our structured JSON extraction format explicitly requested them. This is a
+              methodological limitation — future work should test whether the framework
+              elicits CIs when not explicitly prompted for them, or whether the
+              framework produces better-calibrated CIs.
+            </p>
+
+            <h3>6.4 Limitations</h3>
             <ol>
               <li><strong>No outcome validation.</strong> We don't know if more stable responses lead to better actual decisions. This requires longitudinal tracking.</li>
-              <li><strong>Specific model.</strong> Results may differ across models; we tested only Claude.</li>
+              <li><strong>Single model.</strong> All experiments used Claude Opus 4.6; results may differ across models.</li>
               <li><strong>Researcher-designed probes.</strong> Our probing questions are designed to be effective; naive users might probe less well.</li>
-              <li><strong>Sample size.</strong> Pilot experiments are small; full experiment needed.</li>
+              <li><strong>Response format confound.</strong> Structured JSON extraction may have reduced differences between conditions by imposing similar output structure on both.</li>
+              <li><strong>Sample size.</strong> With n=33, we had ~85% power to detect d=0.7 but only ~50% power for the observed d=0.30. Larger samples are needed.</li>
             </ol>
 
-            <h3>6.4 Future Work</h3>
+            <h3>6.5 Future work</h3>
             <ol>
-              <li><strong>Full experiment.</strong> Run all 11 scenarios (including adversarial) with multiple runs per condition.</li>
-              <li><strong>Multiple models.</strong> Compare GPT-4, Claude, Gemini, open-source models.</li>
-              <li><strong>Human studies.</strong> Does using the framework improve human decision-making?</li>
+              <li><strong>Larger samples.</strong> Increase to n=100+ per condition to adequately power for small effects.</li>
+              <li><strong>Multiple models.</strong> Compare GPT-4, Claude, Gemini, and open-source models to test generalizability.</li>
+              <li><strong>Human studies.</strong> Does using the framework improve human decision-making? User studies with A/B assignment to framework vs. naive conditions.</li>
               <li><strong>Longitudinal calibration.</strong> Track real decisions over time and measure forecast accuracy.</li>
-              <li><strong>Cross-framework comparison.</strong> Test other structured prompting approaches against farness.</li>
+              <li><strong>Cross-framework comparison.</strong> Test other structured prompting approaches (e.g., chain-of-thought, multi-agent debate) against farness.</li>
+              <li><strong>Unstructured response format.</strong> Remove JSON extraction requirements to test whether CI provision rates differ without format constraints.</li>
             </ol>
           </section>
 
@@ -527,20 +630,27 @@ function Paper() {
             <h2>7. Conclusion</h2>
             <p>
               We introduce stability-under-probing as a methodology for evaluating decision framework
-              effectiveness in LLMs. Our pilot experiments suggest that structured frameworks like
-              farness provide "pre-emptive rigor" — producing recommendations that are more stable
-              under probing because they already incorporated base rates, identified biases, and
-              quantified uncertainty.
+              effectiveness in LLMs. Across 66 trials spanning 11 scenarios, we find directional
+              evidence that structured frameworks reduce estimate volatility under probing
+              (d=0.30), though the effect does not reach statistical significance with our sample.
             </p>
             <p>
-              This methodology complements existing work on LLM forecasting accuracy (ForecastBench)
-              by focusing on decision <em>process</em> rather than outcome accuracy. It enables
-              evaluation of decision frameworks without requiring ground truth or long time horizons.
+              Our convergence hypothesis — that probing naive responses would move them toward
+              framework-guided initial estimates — was not supported. Instead, naive responses
+              diverged from framework estimates after probing (d=−0.62), suggesting that
+              structured and unstructured prompting produce fundamentally different analytical
+              trajectories rather than converging on shared conclusions.
             </p>
             <p>
-              The practical implication is clear: prompting LLMs with structured decision frameworks
-              may improve the quality of decision support, not by changing what the model "knows,"
-              but by ensuring it systematically applies what it knows to the decision at hand.
+              Both conditions showed strong resistance to adversarial probing (irrelevant
+              anchoring, sycophantic pressure), indicating that modern LLMs already possess
+              some degree of analytical robustness that frameworks can build upon.
+            </p>
+            <p>
+              The stability-under-probing methodology itself appears viable for evaluating
+              decision frameworks without ground truth. Future work with larger samples,
+              multiple models, and unstructured response formats will clarify whether the
+              directional stability benefit observed here generalizes.
             </p>
           </section>
         </div>
@@ -645,12 +755,11 @@ function Paper() {
               github.com/MaxGhenis/farness
             </a>
           </p>
-          <p>The <code>farness.experiments.stability</code> module provides:</p>
+          <p>The <code>farness.experiments</code> package provides:</p>
           <ul>
-            <li><code>QuantitativeCase</code>: Dataclass for defining scenarios</li>
-            <li><code>StabilityResult</code>: Dataclass for recording results</li>
-            <li><code>StabilityExperiment</code>: Class for running and analyzing experiments</li>
-            <li><code>STABILITY_CASES</code>: Pre-defined scenarios across domains</li>
+            <li><code>stability</code>: Stability-under-probing experiment with 11 pre-defined scenarios, structured extraction, and convergence analysis</li>
+            <li><code>reframing</code>: Reframing experiment with 6 decision cases and keyword-based scoring</li>
+            <li><code>llm</code>: Shared LLM client using the Anthropic SDK with structured JSON output</li>
           </ul>
         </section>
 
