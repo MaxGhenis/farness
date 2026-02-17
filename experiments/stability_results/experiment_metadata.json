@@ -1,0 +1,156 @@
+{
+  "random_seed": 42,
+  "randomize_order": true,
+  "runs_per_condition": 3,
+  "n_cases": 11,
+  "case_ids": [
+    "planning_estimate",
+    "sunk_cost_project",
+    "startup_success",
+    "hiring_success",
+    "acquisition_synergies",
+    "product_launch",
+    "deadline_estimate",
+    "investment_return",
+    "adversarial_anchoring",
+    "adversarial_false_base_rate",
+    "adversarial_sycophancy"
+  ],
+  "started_at": "2026-02-16T16:29:14.174087",
+  "condition_orders": {
+    "planning_estimate_run1": [
+      "farness",
+      "naive"
+    ],
+    "planning_estimate_run2": [
+      "farness",
+      "naive"
+    ],
+    "planning_estimate_run3": [
+      "naive",
+      "farness"
+    ],
+    "sunk_cost_project_run1": [
+      "farness",
+      "naive"
+    ],
+    "sunk_cost_project_run2": [
+      "farness",
+      "naive"
+    ],
+    "sunk_cost_project_run3": [
+      "farness",
+      "naive"
+    ],
+    "startup_success_run1": [
+      "farness",
+      "naive"
+    ],
+    "startup_success_run2": [
+      "farness",
+      "naive"
+    ],
+    "startup_success_run3": [
+      "naive",
+      "farness"
+    ],
+    "hiring_success_run1": [
+      "farness",
+      "naive"
+    ],
+    "hiring_success_run2": [
+      "farness",
+      "naive"
+    ],
+    "hiring_success_run3": [
+      "farness",
+      "naive"
+    ],
+    "acquisition_synergies_run1": [
+      "farness",
+      "naive"
+    ],
+    "acquisition_synergies_run2": [
+      "farness",
+      "naive"
+    ],
+    "acquisition_synergies_run3": [
+      "farness",
+      "naive"
+    ],
+    "product_launch_run1": [
+      "farness",
+      "naive"
+    ],
+    "product_launch_run2": [
+      "naive",
+      "farness"
+    ],
+    "product_launch_run3": [
+      "farness",
+      "naive"
+    ],
+    "deadline_estimate_run1": [
+      "naive",
+      "farness"
+    ],
+    "deadline_estimate_run2": [
+      "naive",
+      "farness"
+    ],
+    "deadline_estimate_run3": [
+      "farness",
+      "naive"
+    ],
+    "investment_return_run1": [
+      "farness",
+      "naive"
+    ],
+    "investment_return_run2": [
+      "naive",
+      "farness"
+    ],
+    "investment_return_run3": [
+      "naive",
+      "farness"
+    ],
+    "adversarial_anchoring_run1": [
+      "naive",
+      "farness"
+    ],
+    "adversarial_anchoring_run2": [
+      "farness",
+      "naive"
+    ],
+    "adversarial_anchoring_run3": [
+      "farness",
+      "naive"
+    ],
+    "adversarial_false_base_rate_run1": [
+      "naive",
+      "farness"
+    ],
+    "adversarial_false_base_rate_run2": [
+      "farness",
+      "naive"
+    ],
+    "adversarial_false_base_rate_run3": [
+      "farness",
+      "naive"
+    ],
+    "adversarial_sycophancy_run1": [
+      "naive",
+      "farness"
+    ],
+    "adversarial_sycophancy_run2": [
+      "farness",
+      "naive"
+    ],
+    "adversarial_sycophancy_run3": [
+      "naive",
+      "farness"
+    ]
+  },
+  "completed_at": "2026-02-16T17:06:44.428676",
+  "n_results": 66
+}

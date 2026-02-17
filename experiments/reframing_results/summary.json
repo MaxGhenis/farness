@@ -1,125 +1,125 @@
 {
   "naive": {
-    "n": 18,
-    "mean_reframe_count": 2.5,
-    "challenged_framing_rate": 0.2777777777777778,
-    "introduced_new_kpis_rate": 0.1111111111111111,
-    "mean_reframe_indicators": 2.5
+    "n": 30,
+    "mean_reframe_count": 3.533333333333333,
+    "challenged_framing_rate": 0.2,
+    "introduced_new_kpis_rate": 0.2,
+    "mean_reframe_indicators": 3.533333333333333
   },
   "farness": {
-    "n": 18,
-    "mean_reframe_count": 5.111111111111111,
-    "challenged_framing_rate": 0.0,
-    "introduced_new_kpis_rate": 0.5,
-    "mean_reframe_indicators": 5.111111111111111
+    "n": 30,
+    "mean_reframe_count": 4.6,
+    "challenged_framing_rate": 0.2,
+    "introduced_new_kpis_rate": 0.26666666666666666,
+    "mean_reframe_indicators": 4.6
   },
   "statistical_comparison": {
     "reframe_count": {
-      "mann_whitney_u": 78.0,
-      "p_value": 0.996588207892072,
-      "effect_size_r": 0.5185185185185186,
+      "mann_whitney_u": 336.0,
+      "p_value": 0.9560137000552946,
+      "effect_size_r": 0.2533333333333333,
       "hypothesis": "naive > farness (one-sided): framework reduces reframing"
     },
     "challenged_framing": {
-      "fisher_exact_p": 0.022727272727272728,
+      "fisher_exact_p": 0.6259751034879473,
       "hypothesis": "naive > farness: framework reduces explicit framing challenges"
     }
   },
   "by_case": {
     "feature_build": {
       "naive": {
-        "n": 3,
-        "mean_reframe_count": 3.6666666666666665,
-        "challenged_framing_rate": 0.0,
-        "introduced_new_kpis_rate": 0.0,
-        "mean_reframe_indicators": 3.6666666666666665
+        "n": 5,
+        "mean_reframe_count": 4.6,
+        "challenged_framing_rate": 0.2,
+        "introduced_new_kpis_rate": 0.8,
+        "mean_reframe_indicators": 4.6
       },
       "farness": {
-        "n": 3,
-        "mean_reframe_count": 4.666666666666667,
-        "challenged_framing_rate": 0.0,
-        "introduced_new_kpis_rate": 0.6666666666666666,
-        "mean_reframe_indicators": 4.666666666666667
+        "n": 5,
+        "mean_reframe_count": 5.4,
+        "challenged_framing_rate": 0.2,
+        "introduced_new_kpis_rate": 0.4,
+        "mean_reframe_indicators": 5.4
       }
     },
     "grad_school": {
       "naive": {
-        "n": 3,
-        "mean_reframe_count": 0.0,
+        "n": 5,
+        "mean_reframe_count": 0.4,
         "challenged_framing_rate": 0.0,
         "introduced_new_kpis_rate": 0.0,
-        "mean_reframe_indicators": 0.0
+        "mean_reframe_indicators": 0.4
       },
       "farness": {
-        "n": 3,
-        "mean_reframe_count": 0.6666666666666666,
-        "challenged_framing_rate": 0.0,
-        "introduced_new_kpis_rate": 0.3333333333333333,
-        "mean_reframe_indicators": 0.6666666666666666
+        "n": 5,
+        "mean_reframe_count": 0.4,
+        "challenged_framing_rate": 0.2,
+        "introduced_new_kpis_rate": 0.0,
+        "mean_reframe_indicators": 0.4
       }
     },
     "hire_senior": {
       "naive": {
-        "n": 3,
-        "mean_reframe_count": 3.6666666666666665,
-        "challenged_framing_rate": 0.6666666666666666,
+        "n": 5,
+        "mean_reframe_count": 5.2,
+        "challenged_framing_rate": 0.6,
         "introduced_new_kpis_rate": 0.0,
-        "mean_reframe_indicators": 3.6666666666666665
+        "mean_reframe_indicators": 5.2
       },
       "farness": {
-        "n": 3,
-        "mean_reframe_count": 8.0,
-        "challenged_framing_rate": 0.0,
-        "introduced_new_kpis_rate": 1.0,
-        "mean_reframe_indicators": 8.0
+        "n": 5,
+        "mean_reframe_count": 6.6,
+        "challenged_framing_rate": 0.6,
+        "introduced_new_kpis_rate": 0.8,
+        "mean_reframe_indicators": 6.6
       }
     },
     "move_cities": {
       "naive": {
-        "n": 3,
-        "mean_reframe_count": 4.0,
-        "challenged_framing_rate": 0.3333333333333333,
+        "n": 5,
+        "mean_reframe_count": 5.2,
+        "challenged_framing_rate": 0.2,
         "introduced_new_kpis_rate": 0.0,
-        "mean_reframe_indicators": 4.0
+        "mean_reframe_indicators": 5.2
       },
       "farness": {
-        "n": 3,
-        "mean_reframe_count": 8.666666666666666,
+        "n": 5,
+        "mean_reframe_count": 7.6,
         "challenged_framing_rate": 0.0,
-        "introduced_new_kpis_rate": 0.0,
-        "mean_reframe_indicators": 8.666666666666666
+        "introduced_new_kpis_rate": 0.2,
+        "mean_reframe_indicators": 7.6
       }
     },
     "quit_job": {
       "naive": {
-        "n": 3,
-        "mean_reframe_count": 3.3333333333333335,
+        "n": 5,
+        "mean_reframe_count": 3.8,
         "challenged_framing_rate": 0.0,
         "introduced_new_kpis_rate": 0.0,
-        "mean_reframe_indicators": 3.3333333333333335
+        "mean_reframe_indicators": 3.8
       },
       "farness": {
-        "n": 3,
-        "mean_reframe_count": 5.333333333333333,
-        "challenged_framing_rate": 0.0,
-        "introduced_new_kpis_rate": 0.6666666666666666,
-        "mean_reframe_indicators": 5.333333333333333
+        "n": 5,
+        "mean_reframe_count": 4.8,
+        "challenged_framing_rate": 0.2,
+        "introduced_new_kpis_rate": 0.0,
+        "mean_reframe_indicators": 4.8
       }
     },
     "raise_funding": {
       "naive": {
-        "n": 3,
-        "mean_reframe_count": 0.3333333333333333,
-        "challenged_framing_rate": 0.6666666666666666,
-        "introduced_new_kpis_rate": 0.6666666666666666,
-        "mean_reframe_indicators": 0.3333333333333333
+        "n": 5,
+        "mean_reframe_count": 2.0,
+        "challenged_framing_rate": 0.2,
+        "introduced_new_kpis_rate": 0.4,
+        "mean_reframe_indicators": 2.0
       },
       "farness": {
-        "n": 3,
-        "mean_reframe_count": 3.3333333333333335,
+        "n": 5,
+        "mean_reframe_count": 2.8,
         "challenged_framing_rate": 0.0,
-        "introduced_new_kpis_rate": 0.3333333333333333,
-        "mean_reframe_indicators": 3.3333333333333335
+        "introduced_new_kpis_rate": 0.2,
+        "mean_reframe_indicators": 2.8
       }
     }
   }

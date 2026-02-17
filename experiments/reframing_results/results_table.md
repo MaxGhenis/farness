@@ -2,26 +2,26 @@
 
 ## Reframing experiment results
 
-**Sample sizes**: n_naive = 18, n_farness = 18
+**Sample sizes**: n_naive = 30, n_farness = 30
 
 ### Reframing metrics
 
 | Metric | Naive | Farness | Direction |
 |--------|-------|---------|-----------|
-| Mean reframe indicators | 2.50 | 5.11 | farness >= naive |
-| Challenged framing rate | 28% | 0% | naive > farness |
-| Introduced new KPIs rate | 11% | 50% | farness >= naive |
+| Mean reframe indicators | 3.53 | 4.60 | farness >= naive |
+| Challenged framing rate | 20% | 20% | farness >= naive |
+| Introduced new KPIs rate | 20% | 27% | farness >= naive |
 
 ### Statistical tests
 
-- Reframe count: U = 78.0, p = 0.997, r = 0.52
-- Challenged framing: Fisher's exact p = 0.023
+- Reframe count: U = 336.0, p = 0.956, r = 0.25
+- Challenged framing: Fisher's exact p = 0.626
 
 ### Per-case breakdown
 
-- **feature_build**: naive=3.7 vs farness=4.7 reframe indicators
-- **grad_school**: naive=0.0 vs farness=0.7 reframe indicators
-- **hire_senior**: naive=3.7 vs farness=8.0 reframe indicators
-- **move_cities**: naive=4.0 vs farness=8.7 reframe indicators
-- **quit_job**: naive=3.3 vs farness=5.3 reframe indicators
-- **raise_funding**: naive=0.3 vs farness=3.3 reframe indicators
+- **feature_build**: naive=4.6 vs farness=5.4 reframe indicators
+- **grad_school**: naive=0.4 vs farness=0.4 reframe indicators
+- **hire_senior**: naive=5.2 vs farness=6.6 reframe indicators
+- **move_cities**: naive=5.2 vs farness=7.6 reframe indicators
+- **quit_job**: naive=3.8 vs farness=4.8 reframe indicators
+- **raise_funding**: naive=2.0 vs farness=2.8 reframe indicators
