@@ -1,39 +1,20 @@
 import { Link } from 'react-router-dom'
-import './Thesis.css'
+import { lightTheme } from './styles/theme.css'
+import { Header } from './components/Header'
+import * as t from './Thesis.css'
+import { mono } from './styles/shared.css'
 
-function Header() {
-  return (
-    <header className="header">
-      <div className="header-inner">
-        <Link to="/" className="logo">
-          <span className="logo-mark">F</span>
-          <span className="logo-text">arness</span>
-        </Link>
-        <nav className="nav">
-          <Link to="/thesis" className="nav-link">Thesis</Link>
-          <Link to="/paper" className="nav-link active">Paper</Link>
-          <a href="https://github.com/MaxGhenis/farness" className="nav-link nav-link-gh">
-            GitHub
-          </a>
-        </nav>
-      </div>
-    </header>
-  )
-}
-
-// Citation component
 function Cite({ id, children }: { id: string; children: React.ReactNode }) {
   return (
-    <sup className="citation">
+    <sup className={t.citation}>
       <a href={`#ref-${id}`} id={`cite-${id}`}>[{children}]</a>
     </sup>
   )
 }
 
-// Table component for metrics
 function Table({ headers, rows }: { headers: string[]; rows: string[][] }) {
   return (
-    <table className="paper-table">
+    <table className={t.paperTable}>
       <thead>
         <tr>
           {headers.map((h, i) => <th key={i}>{h}</th>)}
@@ -52,22 +33,22 @@ function Table({ headers, rows }: { headers: string[]; rows: string[][] }) {
 
 function Paper() {
   return (
-    <>
-      <Header />
-      <article className="thesis">
-        <header className="thesis-header">
-          <p className="thesis-label">Research Paper</p>
+    <div className={lightTheme}>
+      <Header activePage="paper" />
+      <article className={t.thesis}>
+        <header className={t.thesisHeader}>
+          <p className={t.thesisLabel}>Research Paper</p>
           <h1>Pre-emptive Rigor</h1>
-          <p className="thesis-subtitle">
+          <p className={t.thesisSubtitle}>
             Measuring Decision Framework Effectiveness in LLMs
           </p>
-          <p style={{ fontSize: '0.85rem', color: 'var(--color-text-muted)', marginTop: '1rem' }}>
+          <p className={t.paperMeta}>
             Max Ghenis &middot; Draft v0.2 &middot; February 2026
           </p>
         </header>
 
-        <div className="thesis-content">
-          <section className="abstract">
+        <div className={t.thesisContent}>
+          <section className={t.abstract}>
             <h2>Abstract</h2>
             <p>
               We introduce a methodology for evaluating whether structured decision frameworks
@@ -326,7 +307,7 @@ function Paper() {
             <p><strong>Convergence metric:</strong></p>
             <p>We measure whether naive(probed) converges toward framework(initial):</p>
             <blockquote>
-              <p style={{ fontFamily: 'monospace', fontSize: '0.9rem' }}>
+              <p className={mono}>
                 Convergence ratio = 1 - |naive_final - framework_initial| / |naive_initial - framework_initial|
               </p>
             </blockquote>
@@ -655,9 +636,9 @@ function Paper() {
           </section>
         </div>
 
-        <section className="references">
+        <section className={t.references}>
           <h2>References</h2>
-          <ol className="reference-list">
+          <ol className={t.referenceList}>
             <li id="ref-1">
               <a href="#cite-1">↑</a> Wei, J., et al. (2022). "Chain-of-Thought Prompting Elicits Reasoning in Large Language Models." <em>NeurIPS 2022</em>.
             </li>
@@ -747,7 +728,7 @@ function Paper() {
           </ol>
         </section>
 
-        <section style={{ marginTop: 'var(--space-xl)', paddingTop: 'var(--space-lg)', borderTop: '1px solid var(--color-border)' }}>
+        <section className={t.codeAvailability}>
           <h2>Code Availability</h2>
           <p>
             Code for running stability-under-probing experiments is available at:{' '}
@@ -763,14 +744,14 @@ function Paper() {
           </ul>
         </section>
 
-        <footer className="thesis-footer">
+        <footer className={t.thesisFooter}>
           <p>
             Written by <a href="https://github.com/MaxGhenis">Max Ghenis</a>.
             Farness is <a href="https://github.com/MaxGhenis/farness">open source</a>.
           </p>
         </footer>
       </article>
-    </>
+    </div>
   )
 }
 

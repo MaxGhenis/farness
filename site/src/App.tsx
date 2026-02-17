@@ -1,46 +1,29 @@
 import { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
-import './App.css'
-
-function Header() {
-  return (
-    <header className="header">
-      <div className="header-inner">
-        <Link to="/" className="logo">
-          <span className="logo-mark">F</span>
-          <span className="logo-text">arness</span>
-        </Link>
-        <nav className="nav">
-          <Link to="/thesis" className="nav-link">Thesis</Link>
-          <Link to="/paper" className="nav-link">Paper</Link>
-          <a href="https://github.com/MaxGhenis/farness" className="nav-link nav-link-gh">
-            GitHub
-          </a>
-        </nav>
-      </div>
-    </header>
-  )
-}
+import { darkTheme } from './styles/theme.css'
+import { Header } from './components/Header'
+import * as s from './styles/shared.css'
+import * as a from './App.css'
 
 function Hero() {
   return (
-    <div className="hero">
-      <div className="hero-grid" />
-      <div className="hero-content">
-        <p className="hero-label">Decision framework</p>
+    <div className={a.hero}>
+      <div className={a.heroGrid} />
+      <div className={a.heroContent}>
+        <p className={a.heroLabel}>Decision framework</p>
         <h1>
           Stop asking <em>"Is this good?"</em>
           <br />
           Start asking <em>"What will happen?"</em>
         </h1>
-        <p className="subtitle">
+        <p className={a.subtitle}>
           Farness reframes decisions as forecasting problems—with explicit KPIs,
           confidence intervals, and calibration tracking.
         </p>
-        <div className="hero-actions">
-          <a href="#demo" className="btn btn-accent">See it work</a>
-          <a href="https://pypi.org/project/farness/" className="btn btn-ghost">
-            <span className="mono">pip install farness</span>
+        <div className={a.heroActions}>
+          <a href="#demo" className={`${s.btn} ${s.btnAccent}`}>See it work</a>
+          <a href="https://pypi.org/project/farness/" className={`${s.btn} ${s.btnGhost}`}>
+            <span className={s.mono}>pip install farness</span>
           </a>
         </div>
       </div>
@@ -52,12 +35,12 @@ function Section({ id, label, title, children }: {
   id: string; label: string; title: string; children: React.ReactNode
 }) {
   return (
-    <section id={id} className="section">
-      <div className="section-head">
-        <span className="section-label">{label}</span>
+    <section id={id} className={a.section}>
+      <div className={a.sectionHead}>
+        <span className={a.sectionLabel}>{label}</span>
         <h2>{title}</h2>
       </div>
-      <div className="section-body">
+      <div className={a.sectionBody}>
         {children}
       </div>
     </section>
@@ -162,10 +145,9 @@ function ConfidenceBar({ value, ci, max, color, animate }: {
   const pct = (v: number) => `${(v / max) * 100}%`
 
   return (
-    <div className="ci-bar-container">
-      {/* CI range */}
+    <div className={a.ciBarContainer}>
       <div
-        className={`ci-range ${animate ? 'animate' : ''}`}
+        className={`${a.ciRange} ${animate ? a.ciRangeAnimate : ''}`}
         style={{
           left: pct(ci[0]),
           width: `${((ci[1] - ci[0]) / max) * 100}%`,
@@ -174,9 +156,8 @@ function ConfidenceBar({ value, ci, max, color, animate }: {
           borderRight: `1px solid ${color}40`,
         }}
       />
-      {/* Point estimate */}
       <div
-        className={`ci-point ${animate ? 'animate' : ''}`}
+        className={`${a.ciPoint} ${animate ? a.ciPointAnimate : ''}`}
         style={{
           left: pct(value),
           background: color,
@@ -201,24 +182,24 @@ function InteractiveDemo() {
   const colors = ['#e8a825', '#5b9bd5']
 
   return (
-    <div className="demo" id="demo">
-      <div className="demo-header">
-        <span className="demo-label">Interactive demo</span>
-        <h3 className="demo-question">{scenario.question}</h3>
-        <div className="demo-tabs">
-          {SCENARIOS.map((s, i) => (
+    <div className={a.demo} id="demo">
+      <div className={a.demoHeader}>
+        <span className={a.demoLabel}>Interactive demo</span>
+        <h3 className={a.demoQuestion}>{scenario.question}</h3>
+        <div className={a.demoTabs}>
+          {SCENARIOS.map((sc, i) => (
             <button
               key={i}
-              className={`demo-tab ${i === activeScenario ? 'active' : ''}`}
+              className={`${a.demoTab} ${i === activeScenario ? a.demoTabActive : ''}`}
               onClick={() => setActiveScenario(i)}
             >
-              {s.question.length > 25 ? s.question.slice(0, 25) + '...' : s.question}
+              {sc.question.length > 25 ? sc.question.slice(0, 25) + '...' : sc.question}
             </button>
           ))}
         </div>
       </div>
 
-      <div className="demo-grid">
+      <div className={a.demoGrid}>
         {scenario.kpis.map((kpi, ki) => {
           const allVals = scenario.options.flatMap(o => [
             o.forecasts[ki].ci[0], o.forecasts[ki].ci[1]
@@ -226,18 +207,18 @@ function InteractiveDemo() {
           const max = Math.max(...allVals) * 1.15
 
           return (
-            <div key={kpi.name} className="demo-kpi">
-              <div className="demo-kpi-header">
-                <span className="demo-kpi-name">{kpi.name}</span>
-                <span className="demo-kpi-unit">{kpi.unit}</span>
+            <div key={kpi.name} className={a.demoKpi}>
+              <div className={a.demoKpiHeader}>
+                <span className={a.demoKpiName}>{kpi.name}</span>
+                <span className={a.demoKpiUnit}>{kpi.unit}</span>
               </div>
-              <div className="demo-kpi-bars">
+              <div className={a.demoKpiBars}>
                 {scenario.options.map((opt, oi) => (
-                  <div key={opt.name} className="demo-option-row">
-                    <span className="demo-option-label" style={{ color: colors[oi] }}>
+                  <div key={opt.name} className={a.demoOptionRow}>
+                    <span className={a.demoOptionLabel} style={{ color: colors[oi] }}>
                       {opt.name}
                     </span>
-                    <div className="demo-bar-wrap">
+                    <div className={a.demoBarWrap}>
                       <ConfidenceBar
                         value={opt.forecasts[ki].value}
                         ci={opt.forecasts[ki].ci}
@@ -246,27 +227,26 @@ function InteractiveDemo() {
                         animate={animate}
                       />
                     </div>
-                    <span className="demo-value mono">
+                    <span className={`${a.demoValue} ${s.mono}`}>
                       {opt.forecasts[ki].value}
                     </span>
                   </div>
                 ))}
               </div>
-              {/* Scale ticks */}
-              <div className="demo-scale">
-                <span className="mono">0</span>
-                <span className="mono">{Math.round(max / 2)}</span>
-                <span className="mono">{Math.round(max)}</span>
+              <div className={a.demoScale}>
+                <span className={s.mono}>0</span>
+                <span className={s.mono}>{Math.round(max / 2)}</span>
+                <span className={s.mono}>{Math.round(max)}</span>
               </div>
             </div>
           )
         })}
       </div>
 
-      <div className="demo-footer">
-        <span className="demo-legend">
-          <span className="demo-legend-dot" /> Point estimate
-          <span className="demo-legend-bar" /> 80% confidence interval
+      <div className={a.demoFooter}>
+        <span className={a.demoLegend}>
+          <span className={a.demoLegendDot} /> Point estimate
+          <span className={a.demoLegendBar} /> 80% confidence interval
         </span>
       </div>
     </div>
@@ -301,27 +281,27 @@ function ReframeDemo() {
   }, [])
 
   return (
-    <div className="reframe">
-      <div className="reframe-pair">
-        <div className="reframe-box reframe-before">
-          <span className="reframe-tag">vague</span>
+    <div className={a.reframe}>
+      <div className={a.reframePair}>
+        <div className={`${a.reframeBox} ${a.reframeBefore}`}>
+          <span className={`${a.reframeTag} ${a.reframeTagBefore}`}>vague</span>
           <p>{examples[current].before}</p>
         </div>
-        <div className="reframe-arrow">
+        <div className={a.reframeArrow}>
           <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
             <path d="M5 12h14m-7-7 7 7-7 7"/>
           </svg>
         </div>
-        <div className="reframe-box reframe-after">
-          <span className="reframe-tag">precise</span>
+        <div className={`${a.reframeBox} ${a.reframeAfter}`}>
+          <span className={`${a.reframeTag} ${a.reframeTagAfter}`}>precise</span>
           <p>{examples[current].after}</p>
         </div>
       </div>
-      <div className="reframe-dots">
+      <div className={a.reframeDots}>
         {examples.map((_, i) => (
           <button
             key={i}
-            className={`reframe-dot ${i === current ? 'active' : ''}`}
+            className={`${a.reframeDot} ${i === current ? a.reframeDotActive : ''}`}
             onClick={() => setCurrent(i)}
           />
         ))}
@@ -392,12 +372,12 @@ function FrameworkSteps() {
   ]
 
   return (
-    <div className="steps-grid">
+    <div className={a.stepsGrid}>
       {steps.map(step => (
-        <div key={step.num} className="step-card">
-          <div className="step-header">
-            <span className="step-icon">{StepIcons[step.num]}</span>
-            <span className="step-num mono">{step.num}</span>
+        <div key={step.num} className={a.stepCard}>
+          <div className={a.stepHeader}>
+            <span className={a.stepIcon}>{StepIcons[step.num]}</span>
+            <span className={`${a.stepNum} ${s.mono}`}>{step.num}</span>
           </div>
           <h3>{step.title}</h3>
           <p>{step.text}</p>
@@ -419,9 +399,9 @@ function WhyItWorks() {
   ]
 
   return (
-    <div className="reasons-grid">
+    <div className={a.reasonsGrid}>
       {reasons.map((r, i) => (
-        <div key={i} className="reason-card">
+        <div key={i} className={a.reasonCard}>
           <h3>{r.title}</h3>
           <p>{r.text}</p>
         </div>
@@ -434,23 +414,23 @@ function WhyItWorks() {
 
 function CTA() {
   return (
-    <div className="cta">
-      <div className="cta-inner">
+    <div className={a.cta}>
+      <div className={a.ctaInner}>
         <h2>Start making better decisions</h2>
         <p>Farness is open source. Use it as a Python library, CLI tool, or Claude Code plugin.</p>
-        <div className="cta-buttons">
-          <a href="https://github.com/MaxGhenis/farness" className="btn btn-accent">
+        <div className={a.ctaButtons}>
+          <a href="https://github.com/MaxGhenis/farness" className={`${s.btn} ${s.btnAccent}`}>
             <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
               <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/>
             </svg>
             View on GitHub
           </a>
-          <a href="https://pypi.org/project/farness/" className="btn btn-ghost">
-            <span className="mono">pip install farness</span>
+          <a href="https://pypi.org/project/farness/" className={`${s.btn} ${s.btnGhost}`}>
+            <span className={s.mono}>pip install farness</span>
           </a>
         </div>
-        <div className="cta-cli">
-          <code className="mono">
+        <div className={a.ctaCli}>
+          <code className={s.mono}>
             $ farness new "Should I take this job?"<br/>
             Created decision [a3f8b2c1]: Should I take this job?
           </code>
@@ -462,7 +442,7 @@ function CTA() {
 
 function Footer() {
   return (
-    <footer className="footer">
+    <footer className={a.footer}>
       <p>
         Built by <a href="https://github.com/MaxGhenis">Max Ghenis</a>.
         Inspired by superforecasting, Fermi estimation, and the desire for better decisions.
@@ -473,10 +453,10 @@ function Footer() {
 
 function App() {
   return (
-    <div className="app-dark">
+    <div className={`${darkTheme} ${a.appDark}`}>
       <Header />
       <Hero />
-      <main>
+      <main className={a.appMain}>
         <Section id="problem" label="01" title="The problem">
           <p>
             When we ask AI (or advisors, or ourselves) <strong>"Should I do X?"</strong>,
@@ -523,7 +503,7 @@ function App() {
             that probing would surface. Naive responses converge toward where the framework started.
           </p>
           <p>
-            <Link to="/paper" className="inline-link">Read the full paper →</Link>
+            <Link to="/paper" className={a.inlineLink}>Read the full paper →</Link>
           </p>
         </Section>
       </main>
