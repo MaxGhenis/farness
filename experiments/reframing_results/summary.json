@@ -23,6 +23,12 @@
     "challenged_framing": {
       "fisher_exact_p": 0.26150328602387485,
       "hypothesis": "naive > farness: framework reduces explicit framing challenges"
+    },
+    "introduced_new_kpis": {
+      "fisher_exact_p": 0.013637145900008897,
+      "naive_count": 9,
+      "farness_count": 20,
+      "hypothesis": "farness > naive: framework introduces more new KPIs"
     }
   },
   "by_case": {

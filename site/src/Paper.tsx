@@ -499,16 +499,17 @@ function Paper() {
               rows={[
                 ['Mean reframe indicators', '3.47', '4.64', '0.995'],
                 ['Challenged framing rate', '24%', '17%', '0.262'],
-                ['Introduced new KPIs rate', '15%', '34%', '—'],
+                ['Introduced new KPIs rate', '15%', '34%', '0.014'],
               ]}
             />
             <p>
               The farness condition showed directionally more reframe indicators (4.64 vs 3.47,
-              r=0.27) and substantially higher new-KPI introduction rates (34% vs 15%). The
-              one-sided Mann-Whitney U test for the original hypothesis (naive {'>'} farness) was
-              non-significant (U=1243, p=0.995), indicating that if anything the framework
-              <em> increases</em> reframing rather than reducing it. Challenged framing rates
-              did not differ significantly (Fisher's exact p=0.262).
+              r=0.27) and significantly higher new-KPI introduction rates (34% vs 15%,
+              Fisher's exact p=0.014). The one-sided Mann-Whitney U test for the original
+              hypothesis (naive {'>'} farness) was non-significant (U=1243, p=0.995), indicating
+              that if anything the framework <em>increases</em> reframing rather than reducing
+              it. Challenged framing rates did not differ significantly (Fisher's exact
+              p=0.262).
             </p>
 
             <h4>Per-case breakdown</h4>

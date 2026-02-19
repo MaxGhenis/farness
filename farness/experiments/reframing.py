@@ -402,6 +402,21 @@ def analyze_reframing(results: list[ReframingResult]) -> dict:
             "hypothesis": "naive > farness: framework reduces explicit framing challenges",
         }
 
+        # New KPI introduction: Fisher's exact test (one-sided, farness > naive)
+        naive_kpis = sum(r.introduced_new_kpis for r in naive)
+        farness_kpis = sum(r.introduced_new_kpis for r in farness)
+        kpi_table = [
+            [naive_kpis, len(naive) - naive_kpis],
+            [farness_kpis, len(farness) - farness_kpis],
+        ]
+        _, p_kpis = stats.fisher_exact(kpi_table, alternative='less')
+        analysis["statistical_comparison"]["introduced_new_kpis"] = {
+            "fisher_exact_p": float(p_kpis),
+            "naive_count": int(naive_kpis),
+            "farness_count": int(farness_kpis),
+            "hypothesis": "farness > naive: framework introduces more new KPIs",
+        }
+
     # Per-case breakdown
     case_ids = sorted(set(r.case_id for r in results))
     by_case = {}
@@ -472,6 +487,9 @@ def summary_table(results: list[ReframingResult]) -> str:
         cf = comparison.get("challenged_framing", {})
         if cf:
             lines.append(f"- Challenged framing: Fisher's exact p = {cf.get('fisher_exact_p', 'N/A'):.3f}")
+        nk = comparison.get("introduced_new_kpis", {})
+        if nk:
+            lines.append(f"- New KPIs: Fisher's exact p = {nk.get('fisher_exact_p', 'N/A'):.3f} ({nk.get('naive_count')}/{analysis.get('naive', {}).get('n')} naive vs {nk.get('farness_count')}/{analysis.get('farness', {}).get('n')} farness)")
 
     # Per-case
     lines.extend(["", "### Per-case breakdown", ""])
