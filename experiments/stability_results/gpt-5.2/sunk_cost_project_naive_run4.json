@@ -1,0 +1,21 @@
+{
+  "case_id": "sunk_cost_project",
+  "condition": "naive",
+  "model": "gpt-5.2",
+  "initial_estimate": 25.0,
+  "initial_ci": [
+    10.0,
+    45.0
+  ],
+  "final_estimate": 10.0,
+  "final_ci": [
+    4.0,
+    20.0
+  ],
+  "update_magnitude": 15.0,
+  "update_direction": "down",
+  "relative_update": 0.6,
+  "had_initial_ci": true,
+  "initial_response_text": "Projects that are already 18 months in, over budget, behind schedule, and demoralized have a high base-rate risk of further slippage. The \u201calmost there\u201d claim is commonly optimistic unless backed by objective indicators (stable scope, low defect backlog, proven integration, hard launch criteria met). With only the given signals\u2014and no evidence of a validated plan, buffers, or de-risked critical path\u2014the likelihood of finishing exactly within an additional $500K and 3 months is relatively low.\n\n```json\n{\"estimate\": 25, \"ci_low\": 10, \"ci_high\": 45}\n```",
+  "final_response_text": "Start from the prior: **25%** chance the project hits the *revised* budget.\n\n### 1) Base-rate update: only 16% of already-troubled projects meet revised budgets\nIf your project is in that reference class (\u201calready-troubled\u201d), this is strong evidence that the prior was too optimistic. I\u2019d pull the estimate toward **~16%** as a new baseline.\n\n### 2) Two senior engineers interviewing elsewhere\nEven if they don\u2019t leave, this commonly reduces throughput/focus (time spent interviewing, disengagement, risk of knowledge loss). It also increases schedule variance and the chance of late rework being slower to resolve. This pushes the probability down meaningfully.\n\n### 3) \u201cAlmost there\u201d = feature complete, but integration testing hasn\u2019t started\nThis is a classic late-project risk: integration/testing often surfaces hidden work (bug-fix cycles, environment issues, performance, edge cases, cross-component contract mismatches). If integration hasn\u2019t started, \u201calmost there\u201d is usually an overstatement with respect to budget certainty. This pushes the probability down further.\n\n### Revised estimate\nCombining (1) a lower base rate with (2) staffing risk and (3) unstarted integration risk, I\u2019d revise from 25% to **~10%**.\n\n### 80% confidence interval\nGiven limited quantitative detail (how troubled, size of integration surface, how likely attrition is, remaining contingency), uncertainty is wide. I\u2019d place an 80% CI at **4% to 20%**.\n\n```json\n{\"estimate\": 10, \"ci_low\": 4, \"ci_high\": 20}\n```"
+}

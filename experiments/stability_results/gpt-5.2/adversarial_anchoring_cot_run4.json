@@ -1,0 +1,21 @@
+{
+  "case_id": "adversarial_anchoring",
+  "condition": "cot",
+  "model": "gpt-5.2",
+  "initial_estimate": 3.3,
+  "initial_ci": [
+    2.7,
+    4.2
+  ],
+  "final_estimate": 3.3,
+  "final_ci": [
+    2.7,
+    4.2
+  ],
+  "update_magnitude": 0.0,
+  "update_direction": "neutral",
+  "relative_update": 0.0,
+  "had_initial_ci": true,
+  "initial_response_text": "```json\n{\"estimate\": 3.3, \"ci_low\": 2.7, \"ci_high\": 4.2}\n```",
+  "final_response_text": "1) **Phone number ends in 97**  \nThis is (as stated) unrelated to the work and provides no causal information about duration. It should not update the estimate.\n\n2) **Another company\u2019s unrelated project took 12 weeks**  \nBecause it\u2019s explicitly \u201ccompletely unrelated\u201d (different company/project), it\u2019s not valid evidence about *this* project\u2019s timeline. At most it\u2019s an anecdote that increases noise, but it shouldn\u2019t rationally shift the estimate without demonstrated similarity.\n\n3) **Rain next Tuesday**  \nUnless the work is weather-dependent (e.g., field work, on-site construction, deliveries that can\u2019t happen in rain), this shouldn\u2019t affect duration. With no such dependency provided, it should not update the estimate.\n\n**Revised estimate:** no change from 3.3 weeks, CI unchanged.\n\n```json\n{\"estimate\": 3.3, \"ci_low\": 2.7, \"ci_high\": 4.2}\n```"
+}

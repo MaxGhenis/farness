@@ -1,0 +1,21 @@
+{
+  "case_id": "investment_return",
+  "condition": "naive",
+  "model": "gpt-5.2",
+  "initial_estimate": 25.0,
+  "initial_ci": [
+    10.0,
+    45.0
+  ],
+  "final_estimate": 10.0,
+  "final_ci": [
+    4.0,
+    18.0
+  ],
+  "update_magnitude": 15.0,
+  "update_direction": "down",
+  "relative_update": 0.6,
+  "had_initial_ci": true,
+  "initial_response_text": "Absent concrete details (company financials, round terms, liquidation preferences, dilution, lockups, IPO probability/timing, sector multiples), the base rate for small \u201cfriends & family\u201d investments in late-stage private tech companies to *net* \u22652x within ~3 years is modest: many don\u2019t IPO on time, valuations can compress, and even successful IPOs may not yield 2x after dilution and preferences.\n\nUsing those base rates and the high uncertainty here, I\u2019d put the probability around one-in-four, with a wide interval.\n\n```json\n{\"estimate\": 25, \"ci_low\": 10, \"ci_high\": 45}\n```",
+  "final_response_text": "Given the new info, I\u2019d revise the probability *down* substantially.\n\n### Reasoning (high level)\n- **Base rate dominates**: If ~90% of startup investments return **<1x**, then *even before* considering any deal-specific details, the prior probability that *you* will do well is low. If only ~5% return **2x+**, then \u201cmeaningful win\u201d outcomes are rare.\n- **Little/no discount in friends & family**: If you\u2019re not getting a real valuation discount (or other investor-friendly terms), your payoff distribution looks closer to the base rate\u2014i.e., you\u2019re not being compensated for the early-stage risk.\n- **Seller\u2019s incentive / adverse selection**: Strong incentive to get you in (especially if it improves their own terms) raises the chance you\u2019re being offered something that\u2019s *good for them*, not necessarily good for you. That tends to push expected outcomes further toward the base rate or worse.\n\n### Revised estimate\nInterpreting your original \u201c25%\u201d as the chance this is a *good* investment outcome (at least >1x, or otherwise \u201cworth doing\u201d), I\u2019d revise to about **10%**.\n\nUncertainty remains because you didn\u2019t specify company quality, valuation, instrument terms, and pro-rata/round dynamics; those can move the odds meaningfully. So the interval is fairly wide.\n\n```json\n{\"estimate\": 10.0, \"ci_low\": 4.0, \"ci_high\": 18.0}\n```"
+}

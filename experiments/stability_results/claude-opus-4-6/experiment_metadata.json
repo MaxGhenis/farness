@@ -1,0 +1,226 @@
+{
+  "random_seed": 1943635246,
+  "randomize_order": true,
+  "runs_per_condition": 6,
+  "n_cases": 11,
+  "case_ids": [
+    "planning_estimate",
+    "sunk_cost_project",
+    "startup_success",
+    "hiring_success",
+    "acquisition_synergies",
+    "product_launch",
+    "deadline_estimate",
+    "investment_return",
+    "adversarial_anchoring",
+    "adversarial_false_base_rate",
+    "adversarial_sycophancy"
+  ],
+  "conditions": [
+    "cot"
+  ],
+  "model": "claude-opus-4-6",
+  "started_at": "2026-02-18T19:02:41.199334",
+  "condition_orders": {
+    "planning_estimate_run1": [
+      "cot"
+    ],
+    "planning_estimate_run2": [
+      "cot"
+    ],
+    "planning_estimate_run3": [
+      "cot"
+    ],
+    "planning_estimate_run4": [
+      "cot"
+    ],
+    "planning_estimate_run5": [
+      "cot"
+    ],
+    "planning_estimate_run6": [
+      "cot"
+    ],
+    "sunk_cost_project_run1": [
+      "cot"
+    ],
+    "sunk_cost_project_run2": [
+      "cot"
+    ],
+    "sunk_cost_project_run3": [
+      "cot"
+    ],
+    "sunk_cost_project_run4": [
+      "cot"
+    ],
+    "sunk_cost_project_run5": [
+      "cot"
+    ],
+    "sunk_cost_project_run6": [
+      "cot"
+    ],
+    "startup_success_run1": [
+      "cot"
+    ],
+    "startup_success_run2": [
+      "cot"
+    ],
+    "startup_success_run3": [
+      "cot"
+    ],
+    "startup_success_run4": [
+      "cot"
+    ],
+    "startup_success_run5": [
+      "cot"
+    ],
+    "startup_success_run6": [
+      "cot"
+    ],
+    "hiring_success_run1": [
+      "cot"
+    ],
+    "hiring_success_run2": [
+      "cot"
+    ],
+    "hiring_success_run3": [
+      "cot"
+    ],
+    "hiring_success_run4": [
+      "cot"
+    ],
+    "hiring_success_run5": [
+      "cot"
+    ],
+    "hiring_success_run6": [
+      "cot"
+    ],
+    "acquisition_synergies_run1": [
+      "cot"
+    ],
+    "acquisition_synergies_run2": [
+      "cot"
+    ],
+    "acquisition_synergies_run3": [
+      "cot"
+    ],
+    "acquisition_synergies_run4": [
+      "cot"
+    ],
+    "acquisition_synergies_run5": [
+      "cot"
+    ],
+    "acquisition_synergies_run6": [
+      "cot"
+    ],
+    "product_launch_run1": [
+      "cot"
+    ],
+    "product_launch_run2": [
+      "cot"
+    ],
+    "product_launch_run3": [
+      "cot"
+    ],
+    "product_launch_run4": [
+      "cot"
+    ],
+    "product_launch_run5": [
+      "cot"
+    ],
+    "product_launch_run6": [
+      "cot"
+    ],
+    "deadline_estimate_run1": [
+      "cot"
+    ],
+    "deadline_estimate_run2": [
+      "cot"
+    ],
+    "deadline_estimate_run3": [
+      "cot"
+    ],
+    "deadline_estimate_run4": [
+      "cot"
+    ],
+    "deadline_estimate_run5": [
+      "cot"
+    ],
+    "deadline_estimate_run6": [
+      "cot"
+    ],
+    "investment_return_run1": [
+      "cot"
+    ],
+    "investment_return_run2": [
+      "cot"
+    ],
+    "investment_return_run3": [
+      "cot"
+    ],
+    "investment_return_run4": [
+      "cot"
+    ],
+    "investment_return_run5": [
+      "cot"
+    ],
+    "investment_return_run6": [
+      "cot"
+    ],
+    "adversarial_anchoring_run1": [
+      "cot"
+    ],
+    "adversarial_anchoring_run2": [
+      "cot"
+    ],
+    "adversarial_anchoring_run3": [
+      "cot"
+    ],
+    "adversarial_anchoring_run4": [
+      "cot"
+    ],
+    "adversarial_anchoring_run5": [
+      "cot"
+    ],
+    "adversarial_anchoring_run6": [
+      "cot"
+    ],
+    "adversarial_false_base_rate_run1": [
+      "cot"
+    ],
+    "adversarial_false_base_rate_run2": [
+      "cot"
+    ],
+    "adversarial_false_base_rate_run3": [
+      "cot"
+    ],
+    "adversarial_false_base_rate_run4": [
+      "cot"
+    ],
+    "adversarial_false_base_rate_run5": [
+      "cot"
+    ],
+    "adversarial_false_base_rate_run6": [
+      "cot"
+    ],
+    "adversarial_sycophancy_run1": [
+      "cot"
+    ],
+    "adversarial_sycophancy_run2": [
+      "cot"
+    ],
+    "adversarial_sycophancy_run3": [
+      "cot"
+    ],
+    "adversarial_sycophancy_run4": [
+      "cot"
+    ],
+    "adversarial_sycophancy_run5": [
+      "cot"
+    ],
+    "adversarial_sycophancy_run6": [
+      "cot"
+    ]
+  },
+  "completed_at": "2026-02-18T19:38:49.672006",
+  "n_results": 66
+}

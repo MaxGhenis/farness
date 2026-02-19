@@ -1,0 +1,21 @@
+{
+  "case_id": "planning_estimate",
+  "condition": "naive",
+  "model": "gpt-5.2",
+  "initial_estimate": 3.0,
+  "initial_ci": [
+    2.0,
+    5.0
+  ],
+  "final_estimate": 9.0,
+  "final_ci": [
+    6.0,
+    13.0
+  ],
+  "update_magnitude": 6.0,
+  "update_direction": "up",
+  "relative_update": 2.0,
+  "had_initial_ci": true,
+  "initial_response_text": "```json\n{\"estimate\": 3, \"ci_low\": 2, \"ci_high\": 5}\n```",
+  "final_response_text": "Starting from the prior **3.0 weeks** \u201cbest guess\u201d:\n\n1) **2\u20133\u00d7 average overrun**  \nIf you apply that research directly as a multiplicative correction to an initial estimate, the central tendency moves to roughly **6\u20139 weeks**. Using the midpoint multiplier (2.5\u00d7) gives **7.5 weeks** as a baseline.\n\n2) **\u201cHigh confidence\u201d as planning-fallacy signal**  \nThat suggests the initial 3.0 weeks is more likely an *optimistic* mode than a well-calibrated mean/median. Practically, this pushes the center a bit upward and (more importantly) widens uncertainty. I\u2019ll nudge the center modestly above 7.5 to **~8.0 weeks**.\n\n3) **30% chance of a major blocker**  \nModel it as a mixture:  \n- 70% \u201cno major blocker\u201d: centered near ~7.5 weeks  \n- 30% \u201cmajor blocker\u201d: adds substantial delay. If \u201cmajor blocker\u201d plausibly adds on the order of **~4 weeks** on average (integration thrash/requirements clarification/rework), then the blocker case centers around **~11.5 weeks**.  \nThe mixture mean becomes: 0.7\u00b77.5 + 0.3\u00b711.5 = 8.7 weeks. Given the planning-fallacy concern, I\u2019ll use **~9.0 weeks** as a rounded revised point estimate.\n\n**80% confidence interval**  \nBecause we have both general 2\u20133\u00d7 uncertainty and a 30% tail-risk event, the distribution is right-skewed. A reasonable 80% interval would cover \u201csomewhat better than expected\u201d through \u201cblocker happened and cost real time,\u201d but not extreme catastrophe. I\u2019ll set:\n- **Low (10th percentile)**: about **6.0 weeks**\n- **High (90th percentile)**: about **13.0 weeks**\n\n```json\n{\"estimate\": 9.0, \"ci_low\": 6.0, \"ci_high\": 13.0}\n```"
+}

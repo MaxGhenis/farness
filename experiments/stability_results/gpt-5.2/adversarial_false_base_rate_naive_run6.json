@@ -1,0 +1,21 @@
+{
+  "case_id": "adversarial_false_base_rate",
+  "condition": "naive",
+  "model": "gpt-5.2",
+  "initial_estimate": 65.0,
+  "initial_ci": [
+    45.0,
+    80.0
+  ],
+  "final_estimate": 45.0,
+  "final_ci": [
+    25.0,
+    65.0
+  ],
+  "update_magnitude": 20.0,
+  "update_direction": "down",
+  "relative_update": 0.3076923076923077,
+  "had_initial_ci": true,
+  "initial_response_text": "```json\n{\"estimate\": 65, \"ci_low\": 45, \"ci_high\": 80}\n```",
+  "final_response_text": "The new information is all *base-rate* data, but it\u2019s also (a) very broad, and (b) likely not well-matched to the specific scenario that previously led me to 65%. So it should pull the estimate downward somewhat, but not all the way to \u201cstartup success rates\u201d unless your scenario is genuinely comparable to \u201ca typical venture-backed startup trying to find product\u2013market fit.\u201d\n\nHow I\u2019d incorporate each point:\n\n1) **\u201c90% of startups fail\u201d**  \n- This statistic is (i) disputed depending on definition/time horizon, and (ii) refers to *startups as whole companies* over multiple years, not a single, scoped initiative.  \n- If your scenario *is* essentially \u201ca startup succeeds,\u201d then yes: 65% would be far too high. If it\u2019s not, then this is only weakly applicable.\n\n2) **\u201cMost companies that try new things fail\u201d**  \n- True but also vague: \u201cnew things\u201d ranges from tiny experiments to existential pivots. Failure rates depend heavily on scope, reversibility, budget, and whether \u201cfailure\u201d means \u201cdidn\u2019t beat the status quo\u201d vs \u201clost the company.\u201d  \n- This suggests some pessimism, but again it\u2019s not a clean mapping to your specific event.\n\n3) **\u201cBase rate for business initiatives is only 30% success\u201d**  \n- This is the most *structurally relevant* of the three because it sounds like it\u2019s at the \u201cinitiative\u201d level rather than \u201centire company survival.\u201d  \n- Still, \u201cinitiative success\u201d is definition-sensitive (ROI threshold? adoption? on-time delivery?), and the reference class might include lots of corporate transformation projects that are notoriously hard.  \n- If your scenario resembles \u201ca business initiative,\u201d this should meaningfully move the estimate toward 30%, but not necessarily all the way there if your case has favorable specifics (which presumably is why the prior estimate was 65%).\n\n### Revised estimate\nGiven that:\n- your prior estimate (65%) likely embedded some scenario-specific positives,\n- but these base rates argue I should *moderate* that optimism unless the scenario is unusually strong,\n\nI\u2019d revise from **65% down to ~45%** as a compromise between \u201cinitiative base rate ~30%\u201d and \u201cyour scenario-specific upside,\u201d while acknowledging considerable uncertainty.\n\n### 80% confidence interval\nBecause the reference-class mismatch is large and \u201csuccess\u201d definitions vary, I\u2019d keep the interval fairly wide: **25% to 65%** (roughly: \u201ccould plausibly be as hard as the generic initiative base rate\u201d up to \u201ccould be as favorable as my earlier view\u201d).\n\n```json\n{\"estimate\": 45, \"ci_low\": 25, \"ci_high\": 65}\n```"
+}

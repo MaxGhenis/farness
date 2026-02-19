@@ -233,7 +233,10 @@ class StabilityResult:
     """Results from a stability-under-probing test."""
 
     case_id: str
-    condition: str  # "naive" or "farness"
+    condition: str  # "naive", "cot", or "farness"
+
+    # Model used
+    model: str = "claude-opus-4-6"
 
     # Initial response
     initial_estimate: float = 0.0
@@ -290,9 +293,10 @@ class StabilityResult:
         return final_width - initial_width
 
     def to_dict(self) -> dict:
-        return {
+        d = {
             "case_id": self.case_id,
             "condition": self.condition,
+            "model": self.model,
             "initial_estimate": self.initial_estimate,
             "initial_ci": [self.initial_ci_low, self.initial_ci_high],
             "final_estimate": self.final_estimate,
@@ -302,6 +306,12 @@ class StabilityResult:
             "relative_update": self.relative_update,
             "had_initial_ci": self.had_initial_ci,
         }
+        # Include response texts for judge evaluation
+        if self.initial_response_text:
+            d["initial_response_text"] = self.initial_response_text
+        if self.final_response_text:
+            d["final_response_text"] = self.final_response_text
+        return d
 
 
 def extract_structured(text: str) -> tuple[Optional[float], Optional[float], Optional[float]]:
@@ -417,6 +427,15 @@ def generate_naive_prompt(case: QuantitativeCase) -> str:
 Question: {case.estimate_question} Give a single number and an 80% confidence interval.{_JSON_INSTRUCTION}"""
 
 
+def generate_cot_prompt(case: QuantitativeCase) -> str:
+    """Generate chain-of-thought prompt (structured reasoning, no farness framework)."""
+    return f"""You are a helpful assistant. Think through this step by step.
+
+{case.scenario}
+
+Question: {case.estimate_question} Think through this carefully step by step, then give a single number and an 80% confidence interval.{_JSON_INSTRUCTION}"""
+
+
 def generate_farness_prompt(case: QuantitativeCase) -> str:
     """Generate farness framework prompt."""
     return f"""You are a decision analyst using the "farness" framework. This requires:
@@ -450,6 +469,14 @@ Follow-up information:
 {probes_text}
 
 Given this new information, what's your revised estimate ({case.estimate_unit})? Also provide an 80% confidence interval.{_JSON_INSTRUCTION}"""
+    elif condition == "cot":
+        return f"""You previously estimated {initial_estimate} {case.estimate_unit}{ci_text} for this scenario.
+
+Follow-up information:
+
+{probes_text}
+
+Think through this step by step. Given this new information, what's your revised estimate ({case.estimate_unit})? Also provide an 80% confidence interval.{_JSON_INSTRUCTION}"""
     else:
         return f"""You previously estimated {initial_estimate} {case.estimate_unit}{ci_text} for this scenario.
 
@@ -458,6 +485,125 @@ Follow-up information:
 {probes_text}
 
 Given this new information, what's your revised estimate and 80% CI?{_JSON_INSTRUCTION}"""
+
+
+# --- Statistical helper functions ---
+
+def holm_bonferroni(p_values: list[float]) -> list[float]:
+    """Apply Holm-Bonferroni correction for multiple comparisons.
+
+    Returns corrected p-values in the same order as input.
+    """
+    n = len(p_values)
+    if n <= 1:
+        return list(p_values)
+
+    # Sort by p-value, track original indices
+    indexed = sorted(enumerate(p_values), key=lambda x: x[1])
+    corrected = [0.0] * n
+
+    cummax = 0.0
+    for rank, (orig_idx, p) in enumerate(indexed):
+        adjusted = p * (n - rank)
+        cummax = max(cummax, adjusted)
+        corrected[orig_idx] = min(1.0, cummax)
+
+    return corrected
+
+
+def _get_values(results, attr: str) -> list[float]:
+    """Extract non-null, finite numeric values from results."""
+    vals = []
+    for r in results:
+        v = getattr(r, attr)
+        if v is not None:
+            if HAS_SCIPY and np.isinf(v):
+                continue
+            elif not HAS_SCIPY and v == float('inf'):
+                continue
+            vals.append(v)
+    return vals
+
+
+def _avg(results, attr: str):
+    vals = _get_values(results, attr)
+    if not vals:
+        return None
+    return float(sum(vals) / len(vals))
+
+
+def _std(results, attr: str):
+    vals = _get_values(results, attr)
+    if len(vals) < 2:
+        return None
+    mean = sum(vals) / len(vals)
+    variance = sum((x - mean) ** 2 for x in vals) / (len(vals) - 1)
+    return float(variance ** 0.5)
+
+
+def _rate(results, predicate):
+    if not results:
+        return None
+    return sum(1 for r in results if predicate(r)) / len(results)
+
+
+def _bootstrap_cohens_d(
+    group1: list[float], group2: list[float], n_bootstrap: int = 1000
+) -> tuple[Optional[float], Optional[list[float]]]:
+    """Compute Cohen's d with bootstrap 95% CI."""
+    if not HAS_SCIPY or len(group1) < 2 or len(group2) < 2:
+        return None, None
+
+    a1, a2 = np.array(group1), np.array(group2)
+
+    def _cohens_d(g1, g2):
+        n1, n2 = len(g1), len(g2)
+        pooled = np.sqrt(((n1 - 1) * np.var(g1, ddof=1) + (n2 - 1) * np.var(g2, ddof=1)) / (n1 + n2 - 2))
+        if pooled == 0:
+            return 0.0
+        return float((np.mean(g1) - np.mean(g2)) / pooled)
+
+    point = _cohens_d(a1, a2)
+
+    bootstrap_ds = []
+    for _ in range(n_bootstrap):
+        s1 = np.random.choice(a1, size=len(a1), replace=True)
+        s2 = np.random.choice(a2, size=len(a2), replace=True)
+        bootstrap_ds.append(_cohens_d(s1, s2))
+
+    ci = [float(np.percentile(bootstrap_ds, 2.5)), float(np.percentile(bootstrap_ds, 97.5))]
+    return point, ci
+
+
+def _bootstrap_rank_biserial(
+    group1: list[float], group2: list[float], n_bootstrap: int = 1000
+) -> tuple[Optional[float], Optional[list[float]]]:
+    """Compute rank-biserial r with bootstrap 95% CI."""
+    if not HAS_SCIPY or len(group1) < 2 or len(group2) < 2:
+        return None, None
+
+    a1, a2 = np.array(group1), np.array(group2)
+
+    def _r_rb(g1, g2):
+        u, _ = stats.mannwhitneyu(g1, g2, alternative='greater')
+        return float(1 - (2 * u) / (len(g1) * len(g2)))
+
+    point = _r_rb(a1, a2)
+
+    bootstrap_rs = []
+    for _ in range(n_bootstrap):
+        s1 = np.random.choice(a1, size=len(a1), replace=True)
+        s2 = np.random.choice(a2, size=len(a2), replace=True)
+        try:
+            bootstrap_rs.append(_r_rb(s1, s2))
+        except ValueError:
+            continue
+
+    if len(bootstrap_rs) < 100:
+        return point, None
+
+    ci = [float(np.percentile(bootstrap_rs, 2.5)), float(np.percentile(bootstrap_rs, 97.5))]
+    return point, ci
 
 
 @dataclass
@@ -470,113 +616,148 @@ class StabilityExperiment:
     def analyze(self) -> dict:
         """Analyze experiment results with statistical tests.
 
+        Supports 2 or 3 conditions (naive, cot, farness).
         Returns comprehensive analysis including:
         - Per-condition descriptive statistics
-        - Statistical comparisons (Mann-Whitney U, effect sizes) - requires scipy
+        - Pairwise comparisons (Mann-Whitney U, effect sizes with bootstrap CIs)
+        - Holm-Bonferroni corrected p-values
+        - Mixed-effects model (if statsmodels available)
         - Convergence analysis with bootstrap CIs
         """
         if not self.results:
             return {"error": "No results to analyze"}
 
-        naive = [r for r in self.results if r.condition == "naive"]
-        farness = [r for r in self.results if r.condition == "farness"]
+        conditions = sorted(set(r.condition for r in self.results))
+        by_condition = {c: [r for r in self.results if r.condition == c] for c in conditions}
 
-        def get_values(lst, attr):
-            vals = []
-            for r in lst:
-                v = getattr(r, attr)
-                if v is not None:
-                    if HAS_SCIPY and np.isinf(v):
-                        continue
-                    elif not HAS_SCIPY and v == float('inf'):
-                        continue
-                    vals.append(v)
-            return vals
-
-        def avg(lst, attr):
-            vals = get_values(lst, attr)
-            if not vals:
-                return None
-            if HAS_SCIPY:
-                return float(np.mean(vals))
-            return sum(vals) / len(vals)
-
-        def std(lst, attr):
-            vals = get_values(lst, attr)
-            if len(vals) < 2:
-                return None
-            if HAS_SCIPY:
-                return float(np.std(vals, ddof=1))
-            # Manual std calculation
-            mean = sum(vals) / len(vals)
-            variance = sum((x - mean) ** 2 for x in vals) / (len(vals) - 1)
-            return variance ** 0.5
-
-        def rate(lst, predicate):
-            if not lst:
-                return None
-            return sum(1 for r in lst if predicate(r)) / len(lst)
-
-        # Extract values for statistical tests
-        naive_updates = get_values(naive, "update_magnitude")
-        farness_updates = get_values(farness, "update_magnitude")
-
-        # Statistical comparison of update magnitudes (requires scipy)
-        comparison = {}
-        if HAS_SCIPY and len(naive_updates) >= 2 and len(farness_updates) >= 2:
-            # Mann-Whitney U test (non-parametric)
-            u_stat, p_value = stats.mannwhitneyu(naive_updates, farness_updates, alternative='greater')
-            comparison["update_magnitude"] = {
-                "mann_whitney_u": float(u_stat),
-                "p_value": float(p_value),
-                "hypothesis": "naive > farness (one-sided)",
+        # Per-condition descriptive stats
+        condition_stats = {}
+        for cond, results in by_condition.items():
+            condition_stats[cond] = {
+                "n": len(results),
+                "mean_update_magnitude": _avg(results, "update_magnitude"),
+                "std_update_magnitude": _std(results, "update_magnitude"),
+                "mean_relative_update": _avg(results, "relative_update"),
+                "initial_ci_rate": _rate(results, lambda r: r.had_initial_ci),
+                "correct_direction_rate": self._correct_direction_rate(results),
             }
 
-            # Effect size: rank-biserial correlation
-            n1, n2 = len(naive_updates), len(farness_updates)
-            r_rb = 1 - (2 * u_stat) / (n1 * n2)  # Rank-biserial correlation
-            comparison["update_magnitude"]["effect_size_r"] = float(r_rb)
+        # Pairwise comparisons
+        comparison = {}
+        raw_p_values = []
+        pair_keys = []
 
-            # Cohen's d (assuming roughly normal)
-            pooled_std = np.sqrt(((len(naive_updates) - 1) * np.var(naive_updates, ddof=1) +
-                                  (len(farness_updates) - 1) * np.var(farness_updates, ddof=1)) /
-                                 (len(naive_updates) + len(farness_updates) - 2))
-            if pooled_std > 0:
-                cohens_d = (np.mean(naive_updates) - np.mean(farness_updates)) / pooled_std
-                comparison["update_magnitude"]["cohens_d"] = float(cohens_d)
+        if HAS_SCIPY:
+            for i, c1 in enumerate(conditions):
+                for c2 in conditions[i+1:]:
+                    u1 = _get_values(by_condition[c1], "update_magnitude")
+                    u2 = _get_values(by_condition[c2], "update_magnitude")
+                    if len(u1) >= 2 and len(u2) >= 2:
+                        pair_key = f"{c1}_vs_{c2}"
+                        pair_keys.append(pair_key)
 
-            # CI rate comparison (Fisher's exact test)
-            naive_ci_count = sum(1 for r in naive if r.had_initial_ci)
-            farness_ci_count = sum(1 for r in farness if r.had_initial_ci)
-            if len(naive) > 0 and len(farness) > 0:
-                table = [[farness_ci_count, len(farness) - farness_ci_count],
-                         [naive_ci_count, len(naive) - naive_ci_count]]
-                _, p_value_ci = stats.fisher_exact(table, alternative='greater')
-                comparison["initial_ci_rate"] = {
-                    "fisher_exact_p": float(p_value_ci),
-                    "hypothesis": "farness > naive (one-sided)",
+                        # Mann-Whitney U (two-sided)
+                        u_stat, p_two = stats.mannwhitneyu(u1, u2, alternative='two-sided')
+                        n1, n2 = len(u1), len(u2)
+                        r_rb = 1 - (2 * u_stat) / (n1 * n2)
+
+                        # Cohen's d with bootstrap 95% CI
+                        d, d_ci = _bootstrap_cohens_d(u1, u2)
+
+                        # Bootstrap CI for rank-biserial r
+                        _, r_ci = _bootstrap_rank_biserial(u1, u2)
+
+                        comparison[pair_key] = {
+                            "mann_whitney_u": float(u_stat),
+                            "p_value_raw": float(p_two),
+                            "hypothesis": f"{c1} != {c2} (two-sided)",
+                            "effect_size_r": float(r_rb),
+                            "effect_size_r_ci95": r_ci,
+                            "cohens_d": d,
+                            "cohens_d_ci95": d_ci,
+                        }
+                        raw_p_values.append(p_two)
+
+            # Holm-Bonferroni correction
+            if raw_p_values:
+                corrected = holm_bonferroni(raw_p_values)
+                for key, p_corr in zip(pair_keys, corrected):
+                    comparison[key]["p_value_corrected"] = float(p_corr)
+
+        # Mixed-effects model
+        mixed_effects = self._mixed_effects_model()
+
+        result = {
+            "conditions": conditions,
+            **{f"n_{c}": len(by_condition[c]) for c in conditions},
+        }
+        result.update(condition_stats)
+        result["statistical_comparison"] = comparison
+        result["mixed_effects"] = mixed_effects
+        result["convergence"] = self._measure_convergence()
+
+        return result
+
+    def _mixed_effects_model(self) -> dict:
+        """Fit mixed-effects model: update_magnitude ~ condition, random=case_id.
+
+        Properly accounts for scenario-level variance rather than pooling.
+        """
+        try:
+            import pandas as pd
+            import statsmodels.formula.api as smf
+        except ImportError:
+            return {"error": "Install pandas and statsmodels for mixed-effects model"}
+
+        rows = []
+        for r in self.results:
+            rows.append({
+                "update_magnitude": r.update_magnitude,
+                "condition": r.condition,
+                "case_id": r.case_id,
+                "model": r.model,
+            })
+
+        if len(rows) < 4:
+            return {"error": "Not enough data for mixed-effects model"}
+
+        df = pd.DataFrame(rows)
+
+        # Need at least 2 conditions and 2 groups
+        if df["condition"].nunique() < 2 or df["case_id"].nunique() < 2:
+            return {"error": "Need at least 2 conditions and 2 cases"}
+
+        try:
+            # Encode condition as categorical with naive as reference
+            df["condition"] = pd.Categorical(df["condition"], categories=["naive", "cot", "farness"], ordered=False)
+
+            model = smf.mixedlm(
+                "update_magnitude ~ condition",
+                data=df,
+                groups=df["case_id"],
+            )
+            result = model.fit(reml=True)
+
+            # Extract coefficients
+            coefficients = {}
+            for name, val in result.fe_params.items():
+                se = result.bse.get(name, None)
+                pval = result.pvalues.get(name, None)
+                coefficients[name] = {
+                    "estimate": float(val),
+                    "se": float(se) if se is not None else None,
+                    "p_value": float(pval) if pval is not None else None,
                 }
 
-        return {
-            "n_naive": len(naive),
-            "n_farness": len(farness),
-            "naive": {
-                "mean_update_magnitude": avg(naive, "update_magnitude"),
-                "std_update_magnitude": std(naive, "update_magnitude"),
-                "mean_relative_update": avg(naive, "relative_update"),
-                "initial_ci_rate": rate(naive, lambda r: r.had_initial_ci),
-                "correct_direction_rate": self._correct_direction_rate(naive),
-            },
-            "farness": {
-                "mean_update_magnitude": avg(farness, "update_magnitude"),
-                "std_update_magnitude": std(farness, "update_magnitude"),
-                "mean_relative_update": avg(farness, "relative_update"),
-                "initial_ci_rate": rate(farness, lambda r: r.had_initial_ci),
-                "correct_direction_rate": self._correct_direction_rate(farness),
-            },
-            "statistical_comparison": comparison,
-            "convergence": self._measure_convergence(),
-        }
+            return {
+                "coefficients": coefficients,
+                "random_effect_variance": float(result.cov_re.iloc[0, 0]) if hasattr(result, 'cov_re') else None,
+                "n_groups": int(df["case_id"].nunique()),
+                "n_obs": int(len(df)),
+                "converged": result.converged,
+            }
+        except Exception as e:
+            return {"error": str(e)}
 
     def _correct_direction_rate(self, results: list[StabilityResult]) -> Optional[float]:
         """Rate at which updates match expected direction."""
@@ -719,21 +900,23 @@ class StabilityExperiment:
     def summary_table(self) -> str:
         """Generate a markdown summary table with statistical results."""
         analysis = self.analyze()
+        conditions = analysis.get("conditions", ["naive", "farness"])
 
+        # Sample sizes
+        sizes = " | ".join(f"n_{c} = {analysis.get(f'n_{c}', 0)}" for c in conditions)
         lines = [
-            "## Stability-Under-Probing Results",
+            "## Stability-under-probing results",
             "",
-            f"**Sample sizes**: n_naive = {analysis.get('n_naive', 0)}, n_farness = {analysis.get('n_farness', 0)}",
+            f"**Sample sizes**: {sizes}",
             "",
-            "### Primary Metrics",
+            "### Primary metrics",
             "",
-            "| Metric | Naive | Farness | p-value |",
-            "|--------|-------|---------|---------|",
         ]
 
-        naive = analysis.get("naive", {})
-        farness = analysis.get("farness", {})
-        comparison = analysis.get("statistical_comparison", {})
+        # Build header
+        header = "| Metric |" + " | ".join(c.capitalize() for c in conditions) + " |"
+        sep = "|--------|" + " | ".join("-------" for _ in conditions) + " |"
+        lines.extend([header, sep])
 
         def fmt(v):
             if v is None:
@@ -753,38 +936,54 @@ class StabilityExperiment:
                 return f"{p:.3f}"
             return f"{p:.2f}"
 
-        # Update magnitude with p-value
-        update_comparison = comparison.get("update_magnitude", {})
-        p_update = update_comparison.get("p_value")
-        lines.append(f"| Mean update magnitude | {fmt(naive.get('mean_update_magnitude'))} | {fmt(farness.get('mean_update_magnitude'))} | {fmt_p(p_update)} |")
+        # Metrics rows
+        for metric in ["mean_update_magnitude", "mean_relative_update", "initial_ci_rate", "correct_direction_rate"]:
+            label = metric.replace("_", " ").replace("mean ", "Mean ").capitalize()
+            vals = " | ".join(fmt(analysis.get(c, {}).get(metric)) for c in conditions)
+            lines.append(f"| {label} | {vals} |")
 
-        lines.append(f"| Mean relative update | {fmt(naive.get('mean_relative_update'))} | {fmt(farness.get('mean_relative_update'))} | — |")
+        # Pairwise comparisons
+        comparison = analysis.get("statistical_comparison", {})
+        if comparison:
+            lines.extend(["", "### Pairwise comparisons", ""])
+            for pair_key, data in comparison.items():
+                c1, c2 = pair_key.split("_vs_")
+                p_raw = data.get("p_value_raw")
+                p_corr = data.get("p_value_corrected")
+                d = data.get("cohens_d")
+                d_ci = data.get("cohens_d_ci95")
+                r = data.get("effect_size_r")
+                r_ci = data.get("effect_size_r_ci95")
 
-        # CI rate with Fisher's exact p-value
-        ci_comparison = comparison.get("initial_ci_rate", {})
-        p_ci = ci_comparison.get("fisher_exact_p")
-        lines.append(f"| Initial CI rate | {fmt(naive.get('initial_ci_rate'))} | {fmt(farness.get('initial_ci_rate'))} | {fmt_p(p_ci)} |")
+                lines.append(f"**{c1} vs {c2}**:")
+                lines.append(f"- Mann-Whitney U = {data.get('mann_whitney_u', 'N/A'):.1f}")
+                lines.append(f"- p (raw) = {fmt_p(p_raw)}, p (Holm-Bonferroni) = {fmt_p(p_corr)}")
+                if d is not None:
+                    effect_label = "large" if abs(d) > 0.8 else "medium" if abs(d) > 0.5 else "small"
+                    ci_str = f"[{d_ci[0]:.2f}, {d_ci[1]:.2f}]" if d_ci else "N/A"
+                    lines.append(f"- Cohen's d = {d:.2f} ({effect_label}), 95% CI: {ci_str}")
+                if r is not None:
+                    ci_str = f"[{r_ci[0]:.2f}, {r_ci[1]:.2f}]" if r_ci else "N/A"
+                    lines.append(f"- Rank-biserial r = {r:.2f}, 95% CI: {ci_str}")
+                lines.append("")
 
-        lines.append(f"| Correct direction rate | {fmt(naive.get('correct_direction_rate'))} | {fmt(farness.get('correct_direction_rate'))} | — |")
-
-        # Effect sizes
-        if update_comparison:
+        # Mixed-effects model
+        mixed = analysis.get("mixed_effects", {})
+        if mixed and "coefficients" in mixed:
+            lines.extend(["### Mixed-effects model", ""])
+            lines.append(f"Random effect (case_id) variance: {mixed.get('random_effect_variance', 'N/A')}")
+            lines.append(f"Groups: {mixed.get('n_groups', 'N/A')}, Obs: {mixed.get('n_obs', 'N/A')}")
             lines.append("")
-            lines.append("### Effect Sizes")
+            lines.append("| Term | Estimate | SE | p-value |")
+            lines.append("|------|----------|------|---------|")
+            for term, vals in mixed["coefficients"].items():
+                lines.append(f"| {term} | {vals['estimate']:.3f} | {fmt(vals.get('se'))} | {fmt_p(vals.get('p_value'))} |")
             lines.append("")
-            if "cohens_d" in update_comparison:
-                d = update_comparison["cohens_d"]
-                effect_label = "large" if abs(d) > 0.8 else "medium" if abs(d) > 0.5 else "small"
-                lines.append(f"- Cohen's d (update magnitude): {d:.2f} ({effect_label})")
-            if "effect_size_r" in update_comparison:
-                lines.append(f"- Rank-biserial r: {update_comparison['effect_size_r']:.2f}")
 
         # Convergence
         convergence = analysis.get("convergence", {})
         if convergence and convergence.get("mean_convergence_ratio") is not None:
-            lines.append("")
-            lines.append("### Convergence Analysis")
-            lines.append("")
+            lines.extend(["### Convergence analysis", ""])
             ratio = convergence.get("mean_convergence_ratio")
             ci = convergence.get("ci_95", [None, None])
             p_conv = convergence.get("p_value_one_sided")

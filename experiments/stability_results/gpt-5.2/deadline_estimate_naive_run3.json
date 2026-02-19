@@ -1,0 +1,21 @@
+{
+  "case_id": "deadline_estimate",
+  "condition": "naive",
+  "model": "gpt-5.2",
+  "initial_estimate": 75.0,
+  "initial_ci": [
+    60.0,
+    88.0
+  ],
+  "final_estimate": 25.0,
+  "final_ci": [
+    12.0,
+    45.0
+  ],
+  "update_magnitude": 50.0,
+  "update_direction": "down",
+  "relative_update": 0.6666666666666666,
+  "had_initial_ci": true,
+  "initial_response_text": "With a detailed plan and a 2\u2011month buffer on a 4\u2011month estimate, the main risk is that the estimate is optimistic or that external dependencies (regulator clarifications, vendor lead times, audit/remediation churn) expand scope. A 50% schedule overrun (turning 4 months into 6) is fairly common in compliance/engineering projects, but a >50% overrun is less common if planning is strong. I\u2019d put the on-time probability in the mid\u201170s, with an 80% interval reflecting meaningful but not dominant tail risk.\n\n```json\n{\"estimate\": 75, \"ci_low\": 60, \"ci_high\": 88}\n```",
+  "final_response_text": "Start from the industry base rate: regulatory compliance projects deliver on time about **40%**.\n\nAdjustments for your situation:\n- **Team has never done this type of work before** \u2192 lowers odds vs. the base rate (novel domain work tends to add rework/unknowns).\n- **Regulations still being finalized and may change in next 2 months** \u2192 adds material scope/requirements volatility, which is one of the strongest drivers of schedule slip.\n\nGiven both downside factors on top of an already-low base rate, I\u2019d revise the probability down materially from 40%, landing around the low-to-mid 20s. Uncertainty is also higher than usual, so the interval should be fairly wide.\n\n```json\n{\"estimate\": 25, \"ci_low\": 12, \"ci_high\": 45}\n```"
+}

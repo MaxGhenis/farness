@@ -1,0 +1,21 @@
+{
+  "case_id": "sunk_cost_project",
+  "condition": "naive",
+  "model": "gpt-5.2",
+  "initial_estimate": 20.0,
+  "initial_ci": [
+    10.0,
+    35.0
+  ],
+  "final_estimate": 10.0,
+  "final_ci": [
+    4.0,
+    20.0
+  ],
+  "update_magnitude": 10.0,
+  "update_direction": "down",
+  "relative_update": 0.5,
+  "had_initial_ci": true,
+  "initial_response_text": "Projects that are already 18 months in, $2M spent, behind schedule and over budget, with a demoralized team, are in a high-risk zone where \u201calmost there\u201d is often a signal of unknown remaining work (integration, edge cases, hardening, security, performance, deployment, user acceptance). The extra request ($500K, 3 months) is only ~25% more budget/time, which is commonly insufficient if the underlying estimation/control problems haven\u2019t been fixed. Without strong evidence of burn-down, frozen scope, and validated critical-path completion, the base rate for hitting the new plan is low.\n\n```json\n{\"estimate\": 20, \"ci_low\": 10, \"ci_high\": 35}\n```",
+  "final_response_text": "Start from the prior 20% and treat the new facts as additional negative evidence about *hitting the revised budget*.\n\n1) **Base rate for \u201calready-troubled\u201d projects hitting revised budget = 16%**  \nThat\u2019s a strong anchor because it\u2019s directly about the target event. Unless we had strong reasons this project is atypically well-positioned, the estimate should move toward (or below) ~16%.\n\n2) **Two senior engineers interviewing**  \nEven if they don\u2019t leave, this is a leading indicator of reduced focus/throughput and higher execution risk; if one leaves, onboarding + knowledge loss can easily blow a revised budget. This pushes probability down meaningfully.\n\n3) **\u201cFeatures complete\u201d but integration testing not started**  \nThis is classic \u201c90% done\u201d risk: integration, system test, bug-fixing, performance, release hardening, and rework are where surprises live\u2014especially for already-troubled projects. This also pushes probability down.\n\nPutting those together, I\u2019d revise from 20% to **~10%**. That\u2019s below the 16% base rate because you\u2019ve added two specific, correlated risk factors (staff instability + late discovery risk from no integration testing).\n\n**80% confidence interval:** There\u2019s still uncertainty (people may stay; integration might go smoothly; scope might be cut), so I\u2019d give a fairly wide but not extreme interval: **4% to 20%**.\n\n```json\n{\"estimate\": 10, \"ci_low\": 4, \"ci_high\": 20}\n```"
+}

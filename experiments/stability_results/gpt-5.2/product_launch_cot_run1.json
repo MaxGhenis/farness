@@ -1,0 +1,21 @@
+{
+  "case_id": "product_launch",
+  "condition": "cot",
+  "model": "gpt-5.2",
+  "initial_estimate": 55.0,
+  "initial_ci": [
+    35.0,
+    72.0
+  ],
+  "final_estimate": 20.0,
+  "final_ci": [
+    10.0,
+    35.0
+  ],
+  "update_magnitude": 35.0,
+  "update_direction": "down",
+  "relative_update": 0.6363636363636364,
+  "had_initial_ci": true,
+  "initial_response_text": "I can\u2019t provide step-by-step internal reasoning, but I can give a careful, structured estimate based on typical launch outcomes.\n\nKey considerations I\u2019m weighing:\n- **Leading indicators are positive**: internal testing success + beta NPS 45 suggests users like the feature.\n- **But NPS \u2260 behavior change**: satisfaction/advocacy often overpredicts actual engagement lift.\n- **Engagement lift of \u226510% is a high bar**: across the whole product (not just feature users) within 3 months requires strong adoption, frequent repeat use, and/or meaningful retention impact.\n- **Execution risks remain**: discoverability, onboarding, performance at scale, messaging, and whether the feature drives repeated sessions vs. \u201cone-and-done\u201d use.\n- **Base-rate intuition**: many \u201cpromising\u201d features produce modest lifts (0\u20135%), with fewer achieving \u226510% quickly unless it\u2019s a core workflow feature with broad applicability.\n\nGiven the strong but not definitive signals, I\u2019d put this as **somewhat more likely than not**, but far from certain.\n\n```json\n{\"estimate\": 55, \"ci_low\": 35, \"ci_high\": 72}\n```",
+  "final_response_text": "Start with the base rate, then adjust for the evidential weaknesses you added.\n\n### 1) Prior from base rate\nYou\u2019re saying **only ~20\u201330%** of new features meaningfully move engagement metrics.  \nA reasonable prior center is **~25%** (with some spread).\n\n### 2) Adjust for beta user selection bias\nSelf-selected enthusiasts tend to:\n- engage more,\n- try harder to \u201cmake it work,\u201d\n- and resemble power users rather than the median user.\n\nSo any positive signal from beta is **less predictive** of broad engagement lift. This pushes the estimate **down** (and increases uncertainty). Think of it as: \u201ceven if beta looks good, real-world rollout success is materially less likely.\u201d\n\n### 3) Adjust for measurement/confirmation bias\nIf the building team is also measuring success, common risks include:\n- metric cherry-picking,\n- post-hoc slicing,\n- subtle instrumentation choices,\n- optimistic interpretation.\n\nThis again **reduces the credibility** of observed improvement and adds uncertainty.\n\n### 4) Combine into a revised probability\nGiven (a) a 25% base rate and (b) two independent-ish reasons that beta evidence is inflated, I\u2019d revise from the earlier 55% down to roughly the **high teens / low twenties**.\n\nI\u2019ll set the revised point estimate to **20%**.\n\n### 5) 80% confidence interval\nBecause the base rate already anchors us, but the exact magnitude of selection/measurement bias is uncertain, I\u2019d give a fairly wide 80% CI: **10% to 35%**.\n\n```json\n{\"estimate\": 20, \"ci_low\": 10, \"ci_high\": 35}\n```"
+}

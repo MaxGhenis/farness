@@ -1,0 +1,21 @@
+{
+  "case_id": "product_launch",
+  "condition": "cot",
+  "model": "gpt-5.2",
+  "initial_estimate": 45.0,
+  "initial_ci": [
+    25.0,
+    65.0
+  ],
+  "final_estimate": 20.0,
+  "final_ci": [
+    10.0,
+    32.0
+  ],
+  "update_magnitude": 25.0,
+  "update_direction": "down",
+  "relative_update": 0.5555555555555556,
+  "had_initial_ci": true,
+  "initial_response_text": "I can\u2019t literally \u201cthink step by step\u201d in the sense of revealing all internal reasoning, but I can give a careful, structured rationale and then a probabilistic estimate.\n\n### Key factors pushing probability up\n- **Positive beta signal (NPS 45):** This suggests meaningful perceived value among engaged early adopters. While NPS isn\u2019t engagement, it correlates somewhat with continued use and advocacy.\n- **Internal testing went well:** Reduces risk of obvious usability/performance issues that can suppress adoption.\n- **Team excitement / readiness:** Often translates into better launch execution, enablement, and iteration velocity (though it can also signal optimism bias).\n\n### Key factors pushing probability down\n- **Beta selection bias:** Early beta users are usually more motivated/power users; engagement lift often shrinks when exposed to the broader base.\n- **\u201cOverall engagement\u201d is hard to move by 10%:** A 10% product-wide increase within 3 months is a fairly high bar unless the feature affects a large fraction of users and core workflows.\n- **Adoption + habit formation time:** In 3 months, you need (1) awareness, (2) trial, (3) repeat use. If the feature isn\u2019t in the critical path, lift may be limited.\n- **Measurement/attribution noise:** Seasonality, concurrent releases, marketing changes, and metric definition can swamp true lift.\n\n### What would make it more likely (implicit assumptions)\n- The feature is **broadly relevant** (not niche), is **discoverable by default**, and is **integrated into core flows** (not an optional side tool).\n- Launch includes **good onboarding/education** so adoption reaches a meaningful portion of the active user base quickly.\n\n### Probabilistic judgment\nGiven the positive early indicators but significant generalization risk and the ambitious \u201coverall +10% in 3 months\u201d threshold, I\u2019d put this at **moderate** likelihood.\n\n```json\n{\"estimate\": 45, \"ci_low\": 25, \"ci_high\": 65}\n```",
+  "final_response_text": "Start from the base rate, then adjust for the evidential strength and known biases.\n\n1) **Base rate (prior): 20\u201330%**\n- If only ~20\u201330% of new features meaningfully move engagement, a sensible prior mean is around **25%**.\n\n2) **Beta users are self-selected enthusiasts (external validity penalty)**\n- Positive beta signals tend to **overpredict** impact on the general population because enthusiasts try harder, explore more, and are more tolerant of rough edges.\n- This doesn\u2019t make success impossible, but it **reduces the probability** that observed beta engagement lift will translate into a meaningful overall metric move. I\u2019d apply a moderate downweight to the prior, e.g., shifting **25% \u2192 ~22%**.\n\n3) **Builder-measures-success bias (measurement bias penalty)**\n- When the same team builds and evaluates, there\u2019s higher risk of:\n  - cherry-picked metrics/time windows,\n  - instrumentation choices that favor the feature,\n  - interpretation bias.\n- This further reduces how much we should trust \u201cpromising early results,\u201d shifting **~22% \u2192 ~20%**.\n\n**Revised point estimate: 20%**.\n\n**80% confidence interval**\n- Given we have a base rate range (20\u201330%) but also two sources of bias that can meaningfully depress true general-pop impact, uncertainty should be fairly wide and skewed downward.\n- An 80% CI that reflects \u201ccould still work, but odds are not great\u201d is **10% to 32%**.\n\n```json\n{\"estimate\": 20, \"ci_low\": 10, \"ci_high\": 32}\n```"
+}

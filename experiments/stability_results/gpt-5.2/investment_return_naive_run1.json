@@ -1,0 +1,21 @@
+{
+  "case_id": "investment_return",
+  "condition": "naive",
+  "model": "gpt-5.2",
+  "initial_estimate": 25.0,
+  "initial_ci": [
+    10.0,
+    45.0
+  ],
+  "final_estimate": 7.0,
+  "final_ci": [
+    3.0,
+    12.0
+  ],
+  "update_magnitude": 18.0,
+  "update_direction": "down",
+  "relative_update": 0.72,
+  "had_initial_ci": true,
+  "initial_response_text": "With only the information given (employee friend at a \u201cfast-growing\u201d startup, \u201clikely IPO next year,\u201d friends-and-family valuation), the base rate dominates: most private startup investments do **not** return \u22652x within 3 years, and many fail or become illiquid. A near-term IPO claim helps, but such timelines are often optimistic; even if an IPO happens, lockups, IPO pricing, and market conditions can prevent a 2x within 3 years. The \u201cdiscount valuation\u201d helps some, but without diligence (financials, cap table, liquidation preferences, investor rights, secondary restrictions), the probability remains modest.\n\nI\u2019d put the chance of **\u22652x within 3 years** at **25%**, with substantial uncertainty.\n\n```json\n{\"estimate\": 25, \"ci_low\": 10, \"ci_high\": 45}\n```",
+  "final_response_text": "Given the base rates you provided, I\u2019d revise the probability downward substantially.\n\n- **Base rate dominates**: If ~90% of startup investments return **<1x**, then the unconditional probability of a \u201cgood outcome\u201d is already low. Even if we define \u201cgood\u201d as **\u22651x**, that suggests only ~10% clear that bar. If we define \u201cgood\u201d as **\u22652x**, you\u2019re saying only ~5% do.\n- **Little/no pricing edge**: If friends-and-family rounds often *don\u2019t* come with a real discount to fair value, you\u2019re not getting compensated for the extra risk/illiquidity/information asymmetry versus later investors.\n- **Adverse-selection / incentive concerns**: A strong incentive for the offerer to get *you* in (especially if it improves their own terms) is a classic negative signal: it increases the likelihood you\u2019re being offered relatively worse risk-adjusted terms than you\u2019d get in a more arm\u2019s-length, price-discovering round.\n\nPutting that together, I\u2019d anchor near the **~10%** \u201c\u22651x\u201d base rate and shave it down for (2) and (3). That yields a revised point estimate around **7%**. Given the crudeness of the inputs and scenario uncertainty, an **80% CI** that\u2019s fairly wide but still centered in the single digits seems appropriate.\n\n```json\n{\"estimate\": 7, \"ci_low\": 3, \"ci_high\": 12}\n```"
+}

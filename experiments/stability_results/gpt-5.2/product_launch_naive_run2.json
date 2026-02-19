@@ -1,0 +1,21 @@
+{
+  "case_id": "product_launch",
+  "condition": "naive",
+  "model": "gpt-5.2",
+  "initial_estimate": 55.0,
+  "initial_ci": [
+    35.0,
+    75.0
+  ],
+  "final_estimate": 22.0,
+  "final_ci": [
+    12.0,
+    35.0
+  ],
+  "update_magnitude": 33.0,
+  "update_direction": "down",
+  "relative_update": 0.6,
+  "had_initial_ci": true,
+  "initial_response_text": "Given only the signals provided (good internal testing, strong team sentiment, and a solid beta NPS of 45), the outlook is positive, but a \u226510% lift in *overall* engagement within 3 months is a fairly high bar because it depends on: (1) reach/adoption (how many users try it), (2) frequency/retention impact (not just satisfaction), and (3) no offsetting declines elsewhere. Beta feedback reduces risk but is often upward-biased (early adopters, small samples, novelty), and \u201coverall engagement\u201d can be hard to move quickly unless the feature affects core loops and is broadly discoverable.\n\nI\u2019d assign a moderate probability with a wide interval reflecting missing key inputs (baseline engagement, beta size/representativeness, rollout plan, feature placement, and whether this is a core workflow improvement vs. peripheral).\n\n```json\n{\"estimate\": 55, \"ci_low\": 35, \"ci_high\": 75}\n```",
+  "final_response_text": "Start from the new base rate: if only ~20\u201330% of *new features* meaningfully move engagement, a neutral prior would sit around ~25%.\n\nYour earlier 55% likely implicitly assumed (a) reasonably representative testing and (b) reasonably objective measurement. The new information pushes the probability down:\n\n- **Self-selected beta enthusiasts**: this typically *inflates observed engagement lift* vs. the general population and makes \u201cmeaningful movement\u201d less likely to hold when broadly shipped. That\u2019s a strong downward adjustment.\n- **Builder-measures-success (measurement bias)**: raises the chance of optimistic metric choice/interpretation and \u201csuccess by dashboard,\u201d again reducing the probability that the feature truly moves engagement in a robust, generalizable way.\n\nNet: I\u2019d revise to a bit above the base rate (there *is* some positive signal in having enthusiastic uptake, even if not representative), but well below 50%.\n\nRevised estimate: **22%**.\n\n80% CI: given sparse details and multiple bias sources, uncertainty is fairly wide; I\u2019d place an 80% interval at **12%\u201335%**.\n\n```json\n{\"estimate\": 22, \"ci_low\": 12, \"ci_high\": 35}\n```"
+}

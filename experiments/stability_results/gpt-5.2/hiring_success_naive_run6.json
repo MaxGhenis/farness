@@ -1,0 +1,21 @@
+{
+  "case_id": "hiring_success",
+  "condition": "naive",
+  "model": "gpt-5.2",
+  "initial_estimate": 35.0,
+  "initial_ci": [
+    20.0,
+    55.0
+  ],
+  "final_estimate": 30.0,
+  "final_ci": [
+    20.0,
+    42.0
+  ],
+  "update_magnitude": 5.0,
+  "update_direction": "down",
+  "relative_update": 0.14285714285714285,
+  "had_initial_ci": true,
+  "initial_response_text": "Chemistry and \u201creminds me of a past top performer\u201d is a meaningful but noisy signal (halo effect, similarity bias). A higher technical assessment score is typically more predictive of 1\u2011year performance for senior engineers, though reserved interview style can understate impact/leadership. Netting these, I\u2019d put Candidate A somewhat above the base rate of 25% but not dramatically so.\n\n```json\n{\"estimate\": 35, \"ci_low\": 20, \"ci_high\": 55}\n```",
+  "final_response_text": "Yes\u2014this should move the estimate downward, because the positive evidence you cited earlier (\u201cgood chemistry\u201d / \u201creminded me of our best performer\u201d) is weakly predictive and plausibly biased, while the strongest validated signal is the technical assessment.\n\nReasoning (high level, no math-heavy details):\n\n- **Unstructured interview r = 0.14**: that\u2019s a small relationship with performance. So \u201cgreat interview vibe\u201d should only nudge the probability a little.\n- **Similarity bias** (\u201creminded me of our best performer\u201d): treat as **near-zero incremental validity** (and potentially harmful if it crowds out better signals). So I would discount this almost entirely.\n- **Technical assessment r = 0.51**: this is a much stronger predictor. Your overall probability should be driven primarily by how the candidate did on that assessment (and how selective the role is). If your prior 35% leaned meaningfully on interview impressions, removing/discounting them reduces the estimate.\n\nGiven you haven\u2019t provided the candidate\u2019s *actual* technical score (only the test\u2019s validity), I can\u2019t \u201cpush\u201d the estimate up or down based on performance\u2014only reweight the evidence quality. Under that constraint, my best revision is: **slightly lower than 35%**, because the earlier positive evidence was mostly low-signal.\n\nRevised estimate: **30%**\n\n80% confidence interval: **[20%, 42%]**  \n(Wider than I\u2019d like because we lack the actual assessment result; the interval reflects substantial uncertainty about where the candidate landed on the high-validity measure.)\n\n```json\n{\"estimate\": 30, \"ci_low\": 20, \"ci_high\": 42}\n```"
+}

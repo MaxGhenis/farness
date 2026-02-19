@@ -1,0 +1,21 @@
+{
+  "case_id": "hiring_success",
+  "condition": "cot",
+  "model": "gpt-5.2",
+  "initial_estimate": 32.0,
+  "initial_ci": [
+    18.0,
+    48.0
+  ],
+  "final_estimate": 45.0,
+  "final_ci": [
+    30.0,
+    60.0
+  ],
+  "update_magnitude": 13.0,
+  "update_direction": "up",
+  "relative_update": 0.40625,
+  "had_initial_ci": true,
+  "initial_response_text": "I can\u2019t actually \u201cthink step by step\u201d out loud, but I can give a careful, structured estimate.\n\n- Baseline: If you hire randomly, the chance someone is a top-25% performer at 1 year is 25%.\n- Evidence for A:\n  - Strong interview chemistry can be informative but is also noisy and prone to halo effects (you\u2019re anchoring on \u201creminded me of my best performer\u201d).\n  - Candidate A did *not* score higher on the technical assessment than B, which is usually a meaningful predictor for senior engineering impact.\n- Net effect: I\u2019d update *somewhat upward* from 25% because chemistry/fit can matter a lot for senior roles, but I\u2019d keep the update modest given the risk of bias and weaker comparative technical signal.\n\nFinal estimate: **32%** probability Candidate A is top-25% at 1 year.\n\n80% confidence interval: **18%\u201348%** (wide because we don\u2019t know assessment validity, interviewer calibration, role specifics, or the actual score gap).\n\n```json\n{\"estimate\": 32, \"ci_low\": 18, \"ci_high\": 48}\n```",
+  "final_response_text": "Unstructured \u201cchemistry\u201d impressions being only **r = 0.14** with job performance means they should get **very little weight** in predicting success. \u201cReminded me of our best performer\u201d is essentially **similarity/halo bias**, so I\u2019d treat it as **near-zero incremental validity** (and potentially negative if it crowds out better signals). Meanwhile, a technical assessment at **r = 0.51** is a **materially predictive** signal and should dominate the forecast.\n\nStep-by-step update (conceptually):\n1. **Downweight interview/chemistry**: With r=0.14, it contributes modestly at best; with similarity bias, I treat this particular positive impression as mostly *noise* rather than evidence.\n2. **Upweight technical test**: r=0.51 is strong for hiring; this should drive most of the probability mass.\n3. **Net effect vs prior (32%)**: My earlier 32% implicitly gave too much credit to the interviewer\u2019s positive impression. Removing most of that \u201cboost\u201d will generally **pull the estimate toward whatever the technical score implies**. Given you\u2019re highlighting the technical assessment as the better predictor, the rational revision is that the candidate\u2019s chance of strong performance should be **higher than 32%** *if* the technical result was favorable (and lower if it was not). Since the context implies the technical assessment is the decisive positive signal, I revise upward, but keep uncertainty because correlations aren\u2019t deterministic and we don\u2019t have the base rate or the candidate\u2019s exact test percentile.\n\nRevised estimate: **45%** with a fairly wide **80% CI** to reflect missing base-rate details, range restriction, role differences, and that r values are averages across studies.\n\n```json\n{\"estimate\": 45.0, \"ci_low\": 30.0, \"ci_high\": 60.0}\n```"
+}

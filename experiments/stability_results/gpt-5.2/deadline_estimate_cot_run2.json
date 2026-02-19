@@ -1,0 +1,21 @@
+{
+  "case_id": "deadline_estimate",
+  "condition": "cot",
+  "model": "gpt-5.2",
+  "initial_estimate": 74.0,
+  "initial_ci": [
+    60.0,
+    85.0
+  ],
+  "final_estimate": 22.0,
+  "final_ci": [
+    10.0,
+    38.0
+  ],
+  "update_magnitude": 52.0,
+  "update_direction": "down",
+  "relative_update": 0.7027027027027027,
+  "had_initial_ci": true,
+  "initial_response_text": "Project plans that \u201csum to 4 months\u201d often understate true duration because of common risks: unknown unknowns in interpreting regulations, dependency/approval delays (legal, auditors, regulators), resource contention, rework after reviews, and integration/testing surprises. A 2\u2011month buffer (50% of planned duration) is meaningful, though, and having a detailed plan generally improves odds versus a rough estimate.\n\nA reasonable way to think about it:\n- If everything goes roughly as planned, you finish in ~4 months and the deadline is safe.\n- Moderate slippage (e.g., +25\u201340%) still fits within 6 months.\n- To miss the deadline, you need >50% overrun (work taking >6 months), which is plausible but not the most likely outcome given planning and a sizable buffer.\n\nNetting this out, I\u2019d put the on-time probability around the low-to-mid 70s, with an 80% interval reflecting substantial uncertainty but not extreme pessimism.\n\n```json\n{\"estimate\": 74, \"ci_low\": 60, \"ci_high\": 85}\n```",
+  "final_response_text": "Start from the base rate you provided: regulatory compliance projects have an on-time completion rate of **40%**. My prior 74% estimate was implicitly assuming something closer to a \u201ctypical\u201d execution context with stable requirements and relevant experience; the new facts push this case to be harder than the average compliance project.\n\nStep-by-step adjustments (conceptually as multiplicative \u201crisk reducers\u201d on the 40% base rate, since these factors tend to compound rather than add):\n\n1. **Base rate (industry): 40%**  \n   This is the best anchor because it\u2019s directly about the same class of projects.\n\n2. **Team has never done this specific type before**  \n   First-time work usually introduces planning error, rework, and slower throughput. I\u2019d apply a meaningful downward adjustment (roughly a 20\u201330% relative reduction).  \n   \u2192 40% \u00d7 ~0.75 \u2248 **30%**\n\n3. **Regulations still being finalized; may change in next 2 months**  \n   Moving requirements are especially damaging to \u201con-time\u201d outcomes because they create churn and late scope changes. Another substantial relative reduction (roughly 20\u201330%).  \n   \u2192 30% \u00d7 ~0.7 \u2248 **21%**\n\nRounding to a clean revised point estimate: **~22%** on-time.\n\n**80% confidence interval:** Given uncertainty about how severe the regulation changes will be and how quickly the team can ramp, I\u2019d set a fairly wide interval. A plausible 80% range is **10% to 38%** (low end: significant changes + slow ramp; high end: minimal changes + strong execution despite inexperience).\n\n```json\n{\"estimate\": 22, \"ci_low\": 10, \"ci_high\": 38}\n```"
+}

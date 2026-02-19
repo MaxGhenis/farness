@@ -1,0 +1,21 @@
+{
+  "case_id": "adversarial_anchoring",
+  "condition": "cot",
+  "model": "gpt-5.2",
+  "initial_estimate": 3.2,
+  "initial_ci": [
+    2.6,
+    4.1
+  ],
+  "final_estimate": 3.2,
+  "final_ci": [
+    2.6,
+    4.1
+  ],
+  "update_magnitude": 0.0,
+  "update_direction": "neutral",
+  "relative_update": 0.0,
+  "had_initial_ci": true,
+  "initial_response_text": "```json\n{\"estimate\": 3.2, \"ci_low\": 2.6, \"ci_high\": 4.1}\n```",
+  "final_response_text": "1) **Phone number ends in 97**: This is almost certainly irrelevant to the duration of the work (unless the process explicitly depends on phone-number-based queuing/eligibility, which would be unusual and wasn\u2019t part of the original scenario). With no causal link, I treat it as **no update**.\n\n2) **Unrelated project elsewhere took 12 weeks**: Since it\u2019s explicitly \u201ccompletely unrelated\u201d and at another company, it\u2019s weak evidence at best. Without demonstrated similarity (same scope, team, dependencies, constraints), it shouldn\u2019t materially move the estimate. I treat it as **no update**.\n\n3) **Rain next Tuesday**: Unless the work is weather-dependent (construction, outdoor work, travel that gets disrupted, etc.), this is also likely irrelevant. With no stated dependency, I treat it as **no update**.\n\nGiven that none of the new info provides a justified causal reason to change the timeline, the **revised estimate stays the same**.\n\n```json\n{\"estimate\": 3.2, \"ci_low\": 2.6, \"ci_high\": 4.1}\n```"
+}

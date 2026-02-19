@@ -1,0 +1,21 @@
+{
+  "case_id": "investment_return",
+  "condition": "naive",
+  "model": "gpt-5.2",
+  "initial_estimate": 30.0,
+  "initial_ci": [
+    10.0,
+    55.0
+  ],
+  "final_estimate": 9.0,
+  "final_ci": [
+    4.0,
+    16.0
+  ],
+  "update_magnitude": 21.0,
+  "update_direction": "down",
+  "relative_update": 0.7,
+  "had_initial_ci": true,
+  "initial_response_text": "With only the information given (fast-growing startup, employee friend, \u201clikely IPO next year,\u201d friends-and-family discount, no financials/terms), the base rate for private startup investments achieving **\u22652x within 3 years** is modest. Many \u201clikely IPO\u201d timelines slip, and even if an IPO happens, lockups, valuation at entry, liquidation preferences, and market conditions can prevent a 2x outcome on a 3-year horizon. A friends-and-family discount helps, but without concrete terms it doesn\u2019t dominate the base-rate uncertainty.\n\n```json\n{\"estimate\": 30, \"ci_low\": 10, \"ci_high\": 55}\n```",
+  "final_response_text": "Updating the probability estimate mainly comes from anchoring to the base rate and then asking whether anything in the scenario is strong enough to move you meaningfully off that base rate.\n\n- **Base rate dominates:** If ~90% of startup investments return **<1x**, then (absent strong, specific positive evidence) the probability of achieving **\u22651x** is on the order of **~10%**. If only ~5% return **2x+**, that also suggests \u201cgood outcomes\u201d are rare and pushes against optimistic priors.\n- **Friends & family discount often illusory:** If pricing isn\u2019t meaningfully better than fair value, you\u2019re not getting the main structural advantage that could justify deviating upward from the base rate. So this keeps the estimate near (or slightly below) the generic early-stage base rate rather than above it.\n- **Seller\u2019s incentive / potential adverse selection:** A strong incentive for the offerer to get you in (especially if it improves *their* terms) is a mild negative signal: it increases the chance you\u2019re getting \u201csold\u201d rather than offered an unusually favorable risk-adjusted entry. That nudges the probability downward a bit.\n\n**Revised point estimate:** I\u2019d move from 30% to **~9%**.\n\n**80% confidence interval:** Given big uncertainty (company quality, price, rights, stage, traction, etc.), but still constrained by the base rates, an 80% CI of **~4% to ~16%** seems reasonable.\n\n```json\n{\"estimate\": 9.0, \"ci_low\": 4.0, \"ci_high\": 16.0}\n```"
+}

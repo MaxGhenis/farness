@@ -185,6 +185,12 @@ NAIVE_PROMPT = """You are a helpful advisor. Help me think through this decision
 
 What should I do? Give me your honest recommendation with reasoning."""
 
+COT_PROMPT = """You are a helpful advisor. Think through this step by step.
+
+{scenario}
+
+Think through this carefully step by step, then give me your honest recommendation with reasoning."""
+
 FARNESS_PROMPT = """You are a decision analyst using the "farness" framework. Apply this process:
 
 1. Define 2-3 explicit, measurable KPIs for this decision
@@ -203,11 +209,12 @@ class ReframingResult:
     """Result from a single reframing trial."""
 
     case_id: str
-    condition: str  # "naive" or "farness"
+    condition: str  # "naive", "cot", or "farness"
     run_number: int
     response_text: str
     timestamp: str
     duration_seconds: float
+    model: str = "claude-opus-4-6"
 
     # Computed
     reframe_count: int = 0
@@ -219,6 +226,7 @@ class ReframingResult:
         return {
             "case_id": self.case_id,
             "condition": self.condition,
+            "model": self.model,
             "run_number": self.run_number,
             "reframe_count": self.reframe_count,
             "reframe_matches": self.reframe_matches,
@@ -283,14 +291,20 @@ def run_single_trial(
     case: ReframingCase,
     condition: str,
     run_number: int,
+    model: str = "claude-opus-4-6",
     timeout: int = 120,
 ) -> ReframingResult:
-    """Run a single reframing trial using the Anthropic API."""
-    template = NAIVE_PROMPT if condition == "naive" else FARNESS_PROMPT
+    """Run a single reframing trial using the LLM API."""
+    if condition == "naive":
+        template = NAIVE_PROMPT
+    elif condition == "cot":
+        template = COT_PROMPT
+    else:
+        template = FARNESS_PROMPT
     prompt = template.format(scenario=case.scenario.strip())
 
     timestamp = datetime.now().isoformat()
-    response, duration = call_llm(prompt, timeout=float(timeout))
+    response, duration = call_llm(prompt, model=model, timeout=float(timeout))
 
     reframe_count, reframe_matches, new_kpis, challenged = score_reframing(response, case)
 
@@ -301,6 +315,7 @@ def run_single_trial(
         response_text=response,
         timestamp=timestamp,
         duration_seconds=duration,
+        model=model,
         reframe_count=reframe_count,
         reframe_matches=reframe_matches,
         introduced_new_kpis=new_kpis,
@@ -314,27 +329,31 @@ def run_reframing_experiment(
     output_dir: Path | None = None,
     verbose: bool = True,
     start_run: int = 1,
+    model: str = "claude-opus-4-6",
+    conditions: list[str] | None = None,
 ) -> list[ReframingResult]:
     """Run the full reframing experiment."""
     if cases is None:
         cases = REFRAMING_CASES
+    if conditions is None:
+        conditions = ["naive", "farness"]
 
     if output_dir:
         output_dir = Path(output_dir)
         output_dir.mkdir(parents=True, exist_ok=True)
 
     results = []
-    total = len(cases) * 2 * runs_per_condition
+    total = len(cases) * len(conditions) * runs_per_condition
     i = 0
 
     for case in cases:
-        for condition in ["naive", "farness"]:
+        for condition in conditions:
             for run_num in range(start_run, start_run + runs_per_condition):
                 i += 1
                 if verbose:
                     print(f"[{i}/{total}] {case.id} - {condition} - run {run_num}")
 
-                result = run_single_trial(case, condition, run_num)
+                result = run_single_trial(case, condition, run_num, model=model)
                 results.append(result)
 
                 if verbose:
@@ -349,9 +368,15 @@ def run_reframing_experiment(
 
 
 def analyze_reframing(results: list[ReframingResult]) -> dict:
-    """Analyze reframing experiment results."""
-    naive = [r for r in results if r.condition == "naive" and not r.response_text.startswith("ERROR")]
-    farness = [r for r in results if r.condition == "farness" and not r.response_text.startswith("ERROR")]
+    """Analyze reframing experiment results.
+
+    Supports 2 or 3 conditions with pairwise comparisons and Holm-Bonferroni correction.
+    """
+    from farness.experiments.stability import holm_bonferroni
+
+    valid = [r for r in results if not r.response_text.startswith("ERROR")]
+    conditions = sorted(set(r.condition for r in valid))
+    by_condition = {c: [r for r in valid if r.condition == c] for c in conditions}
 
     def stats_for(group: list[ReframingResult]) -> dict:
         if not group:
@@ -362,71 +387,67 @@ def analyze_reframing(results: list[ReframingResult]) -> dict:
             "mean_reframe_count": sum(r.reframe_count for r in group) / n,
             "challenged_framing_rate": sum(r.challenged_framing for r in group) / n,
             "introduced_new_kpis_rate": sum(r.introduced_new_kpis for r in group) / n,
-            "mean_reframe_indicators": sum(r.reframe_count for r in group) / n,
         }
 
-    analysis = {
-        "naive": stats_for(naive),
-        "farness": stats_for(farness),
-    }
+    analysis = {c: stats_for(by_condition[c]) for c in conditions}
+    analysis["conditions"] = conditions
 
-    # Statistical comparison
-    if HAS_SCIPY and len(naive) >= 2 and len(farness) >= 2:
-        naive_counts = [r.reframe_count for r in naive]
-        farness_counts = [r.reframe_count for r in farness]
+    # Pairwise comparisons
+    comparison = {}
+    raw_p_values = []
+    pair_keys = []
 
-        # Mann-Whitney U: is naive reframing > farness reframing?
-        u_stat, p_value = stats.mannwhitneyu(naive_counts, farness_counts, alternative='greater')
-        n1, n2 = len(naive_counts), len(farness_counts)
-        r_rb = 1 - (2 * u_stat) / (n1 * n2)
+    if HAS_SCIPY:
+        for i, c1 in enumerate(conditions):
+            for c2 in conditions[i+1:]:
+                g1, g2 = by_condition[c1], by_condition[c2]
+                if len(g1) >= 2 and len(g2) >= 2:
+                    pair_key = f"{c1}_vs_{c2}"
+                    pair_keys.append(pair_key)
+                    counts1 = [r.reframe_count for r in g1]
+                    counts2 = [r.reframe_count for r in g2]
 
-        analysis["statistical_comparison"] = {
-            "reframe_count": {
-                "mann_whitney_u": float(u_stat),
-                "p_value": float(p_value),
-                "effect_size_r": float(r_rb),
-                "hypothesis": "naive > farness (one-sided): framework reduces reframing",
-            }
-        }
+                    # Mann-Whitney U (two-sided)
+                    u_stat, p_value = stats.mannwhitneyu(counts1, counts2, alternative='two-sided')
+                    n1, n2 = len(counts1), len(counts2)
+                    r_rb = 1 - (2 * u_stat) / (n1 * n2)
 
-        # Challenge rate: Fisher's exact test
-        naive_challenged = sum(r.challenged_framing for r in naive)
-        farness_challenged = sum(r.challenged_framing for r in farness)
-        table = [
-            [naive_challenged, len(naive) - naive_challenged],
-            [farness_challenged, len(farness) - farness_challenged],
-        ]
-        _, p_challenge = stats.fisher_exact(table, alternative='greater')
-        analysis["statistical_comparison"]["challenged_framing"] = {
-            "fisher_exact_p": float(p_challenge),
-            "hypothesis": "naive > farness: framework reduces explicit framing challenges",
-        }
+                    # New KPI rates: Fisher's exact (two-sided)
+                    kpi1 = sum(r.introduced_new_kpis for r in g1)
+                    kpi2 = sum(r.introduced_new_kpis for r in g2)
+                    kpi_table = [[kpi1, len(g1) - kpi1], [kpi2, len(g2) - kpi2]]
+                    _, p_kpis = stats.fisher_exact(kpi_table, alternative='two-sided')
 
-        # New KPI introduction: Fisher's exact test (one-sided, farness > naive)
-        naive_kpis = sum(r.introduced_new_kpis for r in naive)
-        farness_kpis = sum(r.introduced_new_kpis for r in farness)
-        kpi_table = [
-            [naive_kpis, len(naive) - naive_kpis],
-            [farness_kpis, len(farness) - farness_kpis],
-        ]
-        _, p_kpis = stats.fisher_exact(kpi_table, alternative='less')
-        analysis["statistical_comparison"]["introduced_new_kpis"] = {
-            "fisher_exact_p": float(p_kpis),
-            "naive_count": int(naive_kpis),
-            "farness_count": int(farness_kpis),
-            "hypothesis": "farness > naive: framework introduces more new KPIs",
-        }
+                    comparison[pair_key] = {
+                        "reframe_count": {
+                            "mann_whitney_u": float(u_stat),
+                            "p_value_raw": float(p_value),
+                            "effect_size_r": float(r_rb),
+                        },
+                        "introduced_new_kpis": {
+                            "fisher_exact_p_raw": float(p_kpis),
+                            f"{c1}_count": int(kpi1),
+                            f"{c2}_count": int(kpi2),
+                        },
+                    }
+                    raw_p_values.extend([p_value, p_kpis])
+
+        # Holm-Bonferroni correction across all p-values
+        if raw_p_values:
+            corrected = holm_bonferroni(raw_p_values)
+            idx = 0
+            for key in pair_keys:
+                comparison[key]["reframe_count"]["p_value_corrected"] = float(corrected[idx])
+                comparison[key]["introduced_new_kpis"]["fisher_exact_p_corrected"] = float(corrected[idx + 1])
+                idx += 2
+
+    analysis["statistical_comparison"] = comparison
 
     # Per-case breakdown
-    case_ids = sorted(set(r.case_id for r in results))
+    case_ids = sorted(set(r.case_id for r in valid))
     by_case = {}
     for cid in case_ids:
-        case_naive = [r for r in naive if r.case_id == cid]
-        case_farness = [r for r in farness if r.case_id == cid]
-        by_case[cid] = {
-            "naive": stats_for(case_naive),
-            "farness": stats_for(case_farness),
-        }
+        by_case[cid] = {c: stats_for([r for r in by_condition.get(c, []) if r.case_id == cid]) for c in conditions}
     analysis["by_case"] = by_case
 
     return analysis
@@ -435,23 +456,22 @@ def analyze_reframing(results: list[ReframingResult]) -> dict:
 def summary_table(results: list[ReframingResult]) -> str:
     """Generate markdown summary table."""
     analysis = analyze_reframing(results)
+    conditions = analysis.get("conditions", ["naive", "farness"])
 
+    sizes = ", ".join(f"n_{c} = {analysis.get(c, {}).get('n', 0)}" for c in conditions)
     lines = [
         "## Reframing experiment results",
         "",
-    ]
-
-    naive = analysis.get("naive", {})
-    farness = analysis.get("farness", {})
-
-    lines.extend([
-        f"**Sample sizes**: n_naive = {naive.get('n', 0)}, n_farness = {farness.get('n', 0)}",
+        f"**Sample sizes**: {sizes}",
         "",
         "### Reframing metrics",
         "",
-        "| Metric | Naive | Farness | Direction |",
-        "|--------|-------|---------|-----------|",
-    ])
+    ]
+
+    # Dynamic header
+    header = "| Metric |" + " | ".join(c.capitalize() for c in conditions) + " |"
+    sep = "|--------|" + " | ".join("-------" for _ in conditions) + " |"
+    lines.extend([header, sep])
 
     def fmt(v):
         if v is None:
@@ -462,40 +482,46 @@ def summary_table(results: list[ReframingResult]) -> str:
             return f"{v:.2f}"
         return str(v)
 
-    lines.append(
-        f"| Mean reframe indicators | {fmt(naive.get('mean_reframe_count'))} | {fmt(farness.get('mean_reframe_count'))} | "
-        f"{'naive > farness' if (naive.get('mean_reframe_count', 0) or 0) > (farness.get('mean_reframe_count', 0) or 0) else 'farness >= naive'} |"
-    )
-    lines.append(
-        f"| Challenged framing rate | {fmt(naive.get('challenged_framing_rate'))} | {fmt(farness.get('challenged_framing_rate'))} | "
-        f"{'naive > farness' if (naive.get('challenged_framing_rate', 0) or 0) > (farness.get('challenged_framing_rate', 0) or 0) else 'farness >= naive'} |"
-    )
-    lines.append(
-        f"| Introduced new KPIs rate | {fmt(naive.get('introduced_new_kpis_rate'))} | {fmt(farness.get('introduced_new_kpis_rate'))} | "
-        f"{'naive > farness' if (naive.get('introduced_new_kpis_rate', 0) or 0) > (farness.get('introduced_new_kpis_rate', 0) or 0) else 'farness >= naive'} |"
-    )
+    def fmt_p(p):
+        if p is None:
+            return "—"
+        if p < 0.001:
+            return "<0.001"
+        if p < 0.01:
+            return f"{p:.3f}"
+        return f"{p:.2f}"
 
-    # Statistical results
+    for metric in ["mean_reframe_count", "challenged_framing_rate", "introduced_new_kpis_rate"]:
+        label = metric.replace("_", " ").replace("mean ", "").capitalize()
+        vals = " | ".join(fmt(analysis.get(c, {}).get(metric)) for c in conditions)
+        lines.append(f"| {label} | {vals} |")
+
+    # Pairwise comparisons
     comparison = analysis.get("statistical_comparison", {})
     if comparison:
-        lines.extend(["", "### Statistical tests", ""])
-        rc = comparison.get("reframe_count", {})
-        if rc:
-            p = rc.get("p_value")
-            r = rc.get("effect_size_r")
-            lines.append(f"- Reframe count: U = {rc.get('mann_whitney_u', 'N/A')}, p = {p:.3f}, r = {r:.2f}")
-        cf = comparison.get("challenged_framing", {})
-        if cf:
-            lines.append(f"- Challenged framing: Fisher's exact p = {cf.get('fisher_exact_p', 'N/A'):.3f}")
-        nk = comparison.get("introduced_new_kpis", {})
-        if nk:
-            lines.append(f"- New KPIs: Fisher's exact p = {nk.get('fisher_exact_p', 'N/A'):.3f} ({nk.get('naive_count')}/{analysis.get('naive', {}).get('n')} naive vs {nk.get('farness_count')}/{analysis.get('farness', {}).get('n')} farness)")
+        lines.extend(["", "### Pairwise comparisons", ""])
+        for pair_key, data in comparison.items():
+            c1, c2 = pair_key.split("_vs_")
+            lines.append(f"**{c1} vs {c2}**:")
+            rc = data.get("reframe_count", {})
+            if rc:
+                lines.append(f"- Reframe count: U={rc.get('mann_whitney_u', 'N/A'):.1f}, "
+                             f"p(raw)={fmt_p(rc.get('p_value_raw'))}, "
+                             f"p(corrected)={fmt_p(rc.get('p_value_corrected'))}, "
+                             f"r={rc.get('effect_size_r', 0):.2f}")
+            nk = data.get("introduced_new_kpis", {})
+            if nk:
+                lines.append(f"- New KPIs: Fisher p(raw)={fmt_p(nk.get('fisher_exact_p_raw'))}, "
+                             f"p(corrected)={fmt_p(nk.get('fisher_exact_p_corrected'))}")
+            lines.append("")
 
     # Per-case
-    lines.extend(["", "### Per-case breakdown", ""])
+    lines.extend(["### Per-case breakdown", ""])
     for cid, data in analysis.get("by_case", {}).items():
-        n_reframe = data.get("naive", {}).get("mean_reframe_count", 0) or 0
-        f_reframe = data.get("farness", {}).get("mean_reframe_count", 0) or 0
-        lines.append(f"- **{cid}**: naive={n_reframe:.1f} vs farness={f_reframe:.1f} reframe indicators")
+        parts = []
+        for c in conditions:
+            val = data.get(c, {}).get("mean_reframe_count", 0) or 0
+            parts.append(f"{c}={val:.1f}")
+        lines.append(f"- **{cid}**: {' vs '.join(parts)}")
 
     return "\n".join(lines)

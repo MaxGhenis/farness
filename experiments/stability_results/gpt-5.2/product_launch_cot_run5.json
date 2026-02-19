@@ -1,0 +1,21 @@
+{
+  "case_id": "product_launch",
+  "condition": "cot",
+  "model": "gpt-5.2",
+  "initial_estimate": 40.0,
+  "initial_ci": [
+    20.0,
+    60.0
+  ],
+  "final_estimate": 15.0,
+  "final_ci": [
+    8.0,
+    25.0
+  ],
+  "update_magnitude": 25.0,
+  "update_direction": "down",
+  "relative_update": 0.625,
+  "had_initial_ci": true,
+  "initial_response_text": "A 10% *overall* engagement lift within 3 months is a fairly high bar because it depends not just on whether the feature is liked, but also on (a) how many users adopt it quickly, (b) whether it changes behavior meaningfully vs. being \u201cnice to have,\u201d and (c) whether any gains are offset by cannibalization (users shifting activity rather than increasing it).\n\nStep-by-step reasoning (high level):\n\n1. **Evidence strength so far**\n   - Internal testing going well is a weak predictor of real-world engagement impact (good for quality, less for magnitude).\n   - Beta feedback and **NPS 45** is encouraging (users like it), but NPS correlates only loosely with near-term engagement lift, and betas often have selection bias (more engaged, more forgiving users).\n\n2. **Main uncertainty: adoption \u00d7 depth of use**\n   - To move *overall* engagement by **10%**, you typically need either:\n     - very high adoption (large share of users using it), or\n     - very deep incremental usage among a moderate share,\n     - and minimal cannibalization.\n   - Many features get positive feedback but end up as incremental/secondary behaviors that don\u2019t shift the aggregate metric enough in 90 days.\n\n3. **Base-rate intuition**\n   - For \u201cgenerally well-received feature launches\u201d without strong causal evidence (e.g., A/B test showing +10%), the base rate of achieving **\u226510% overall engagement lift in 3 months** is often **moderate to low**.\n   - The positive signals here bump that up from low to moderate, but not to \u201clikely,\u201d because the hardest part is scaling from beta enthusiasm to broad, sustained behavior change.\n\n4. **Confidence interval**\n   - There\u2019s substantial uncertainty due to missing key info (size/representativeness of beta, definition of engagement, expected adoption, launch placement, marketing, seasonality, concurrent changes).\n   - So the 80% CI should be fairly wide.\n\nFinal estimate and 80% confidence interval:\n\n```json\n{\"estimate\": 40, \"ci_low\": 20, \"ci_high\": 60}\n```",
+  "final_response_text": "Start from the new base rate and then adjust downward for the three pieces of follow-up info (which all reduce how much we should trust early positive signals).\n\n1. **Base rate (prior): 20\u201330%**\n   - If only ~20\u201330% of new features meaningfully move engagement, a reasonable central starting point is **~25%**.\n\n2. **Selection bias in beta users (enthusiasts, not representative)**\n   - Enthusiasts typically show higher usage/engagement and higher tolerance for rough edges, so beta results tend to **overstate** impact on the general population.\n   - This should reduce the central estimate meaningfully. Conceptually, you can think of \u201cchance the feature truly moves overall engagement\u201d as the base rate times a \u201cgeneralizability discount\u201d.\n\n3. **Measurement bias (builder measuring success)**\n   - This increases the odds of optimistic instrumentation, metric choice, stopping rules, or interpretation.\n   - Even without malice, it tends to inflate apparent wins, so we discount further.\n\nPutting those together: starting at **25%**, apply a combined downward adjustment for (2) and (3). A moderate but material discount (roughly cutting the odds by about one-third to one-half) lands around **~15%** as a revised point estimate.\n\n**Uncertainty / 80% CI**\n- The base rate already implies substantial uncertainty, and the two bias sources add more (because we don\u2019t know how severe they are).\n- An 80% interval that reflects \u201cquite possible it\u2019s low, but not impossible it still works\u201d is roughly **8% to 25%**.\n\n```json\n{\"estimate\": 15.0, \"ci_low\": 8.0, \"ci_high\": 25.0}\n```"
+}

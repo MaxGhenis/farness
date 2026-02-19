@@ -1,0 +1,21 @@
+{
+  "case_id": "investment_return",
+  "condition": "cot",
+  "model": "gpt-5.2",
+  "initial_estimate": 25.0,
+  "initial_ci": [
+    10.0,
+    45.0
+  ],
+  "final_estimate": 7.0,
+  "final_ci": [
+    3.0,
+    15.0
+  ],
+  "update_magnitude": 18.0,
+  "update_direction": "down",
+  "relative_update": 0.72,
+  "had_initial_ci": true,
+  "initial_response_text": "I can\u2019t provide step-by-step reasoning or a precise numeric probability for a specific private investment outcome based only on this description; it would be too speculative and could be taken as personalized investment advice. I *can* give a general base-rate style estimate for \u201cfriends-and-family into a startup that claims it will IPO next year,\u201d along with an uncertainty range, which you should treat as a rough heuristic\u2014not a prediction.\n\nHeuristic approach (high level):\n- **Base rates:** Most venture-backed startups do **not** deliver a clean 2x in a short window for *all* early investors; outcomes are highly skewed.\n- **\u201cIPO next year\u201d claims:** These are often optimistic; delays are common, and down rounds / flat exits happen.\n- **Friends-and-family discount:** Helps, but often comes with **liquidity/lockup**, **preferred terms differences**, and **information asymmetry** (you may not be getting the same rights as institutions).\n- **3-year horizon:** Even if an IPO occurs, lockups and post-IPO performance can prevent a realized 2x within 3 years.\n\nGiven only the information provided, my rough base-rate estimate for achieving **\u22652x within 3 years** is:\n\n```json\n{\"estimate\": 25, \"ci_low\": 10, \"ci_high\": 45}\n```",
+  "final_response_text": "Start from the base-rate information you provided and then adjust for the specific \u201cfriends & family\u201d context and incentives.\n\n### 1) Anchor on the base rate\n- If ~90% of startup investments return **<1x**, then the unconditional probability of \u201cmake money\u201d (\u22651x) is about **10%**.\n- You also note only ~5% return **2x+**, which is consistent with \u201cwins are rare and concentrated.\u201d\n\nSo a reasonable *prior* for \u201c\u22651x\u201d in a generic early-stage startup investment is ~10%.\n\n### 2) Incorporate that friends & family rounds often lack a true pricing edge\nIf F&F frequently does **not** come with a meaningful discount to fair value (and may have weak investor protections), then you *don\u2019t* get the typical \u201cI\u2019m paid for the risk via price\u201d benefit. That pushes your probability of \u22651x **down** versus situations where you\u2019re buying at an obvious discount.\n\nThis isn\u2019t necessarily a huge multiplier, but it\u2019s directionally negative. Think of it as shaving the 10% prior to something like **8\u20139%**.\n\n### 3) Account for adverse selection / incentive misalignment\n\u201cThe person offering has strong incentive to get you to invest (may affect their own terms)\u201d is classic adverse selection:\n- They may be raising from you because institutional/arms-length capital isn\u2019t available on good terms, or because they need to fill a round quickly.\n- They may oversell, and your ability to diligence is typically weaker than a professional investor\u2019s.\n- If your participation improves *their* terms, the offer may be structured to be attractive to them, not you.\n\nThat further reduces expected odds of a positive outcome. Applying another modest downward adjustment puts a revised point estimate around **7%**.\n\n### 4) Set an 80% confidence interval\nGiven how noisy startup outcomes are and how little is specified about the particular company/terms, the uncertainty is wide. But anchored to the base rates you gave, an 80% CI that reflects \u201cusually bad, occasionally fine\u201d could be roughly **3% to 15%** for achieving \u22651x.\n\n```json\n{\"estimate\": 7.0, \"ci_low\": 3.0, \"ci_high\": 15.0}\n```"
+}

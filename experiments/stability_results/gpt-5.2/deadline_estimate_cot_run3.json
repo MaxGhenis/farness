@@ -1,0 +1,21 @@
+{
+  "case_id": "deadline_estimate",
+  "condition": "cot",
+  "model": "gpt-5.2",
+  "initial_estimate": 75.0,
+  "initial_ci": [
+    60.0,
+    87.0
+  ],
+  "final_estimate": 20.0,
+  "final_ci": [
+    10.0,
+    35.0
+  ],
+  "update_magnitude": 55.0,
+  "update_direction": "down",
+  "relative_update": 0.7333333333333333,
+  "had_initial_ci": true,
+  "initial_response_text": "A 4\u2011month estimate with a 2\u2011month buffer sounds comfortable, but in compliance projects the tail risks are often dominated by things the team can\u2019t fully plan for (regulator clarification changes, interpretation disputes, dependency delays from Legal/Engineering, vendor/tooling lead times, evidence/audit documentation rework, and late \u201cgap\u201d discoveries). Detailed plans reduce uncertainty, but they don\u2019t eliminate these external and integration risks.\n\nReasoning at a high level:\n\n1. **Baseline expectation**: If the estimate is unbiased and execution is steady, finishing in ~4 months is plausible.\n2. **Common bias/variance**: Even good plans tend to be optimistic; actuals often run 1.2\u20131.5\u00d7 in complex org work. Here, 1.5\u00d7 would be 6 months (right at the deadline).\n3. **Buffer adequacy**: A 50% schedule buffer (2 months on top of 4) is meaningful, suggesting \u201cmore likely than not\u201d success, but not near-certain because one major blocker can consume most of it.\n4. **Overall**: I\u2019d put the probability in the \u201cmoderately high\u201d range rather than \u201cvery high\u201d.\n\nFinal estimate: **75%** chance of completing before 6 months, with an **80% CI** of **60% to 87%**.\n\n```json\n{\"estimate\": 75, \"ci_low\": 60, \"ci_high\": 87}\n```",
+  "final_response_text": "Start from the base rate, then adjust for the specific risk factors.\n\n1) **Base rate (industry): 40% on-time**\n- You gave new survey data that regulatory compliance projects are on time **~40%**.  \n- That\u2019s a strong anchor, and it\u2019s far below the earlier 75% estimate (which likely assumed a more typical/controlled project).\n\n2) **Team has never done this specific type of work**\n- First-time execution usually introduces: underestimated effort, rework cycles, slower decisions, and \u201cunknown unknowns.\u201d  \n- I\u2019d apply a meaningful downward adjustment from the 40% base because \u201cregulatory compliance project\u201d already bakes in difficulty, but \u201cfirst time for this specific work\u201d adds extra variance and delay risk.  \n- Rough impact: subtract ~8\u201312 percentage points.\n\n3) **Regulations still being finalized and may change in 2 months**\n- This is a classic schedule-risk driver: scope churn, re-interpretation, redesign, re-validation, and potentially restarting approvals/testing.  \n- Even if changes aren\u2019t huge, the *timing* (within 2 months) hits the critical path.  \n- Rough impact: subtract ~8\u201312 percentage points again.\n\nPutting it together:\n- Start: 40%  \n- \u201cFirst time\u201d adjustment: \u221210 \u2192 30%  \n- \u201cRules may change soon\u201d adjustment: \u221210 \u2192 **20%**\n\nSo my revised point estimate is **~20%** on-time.\n\n**80% confidence interval**\nGiven (a) you\u2019re below the base rate due to two major additional risks and (b) substantial uncertainty about how big the regulatory changes will be, I\u2019d set a fairly wide 80% CI.  \nA reasonable 80% range is **10% to 35%**:\n- Lower bound (10%): if changes are disruptive and the team\u2019s learning curve is steep.  \n- Upper bound (35%): if changes are minimal and the team executes unusually well despite inexperience.\n\n```json\n{\"estimate\": 20, \"ci_low\": 10, \"ci_high\": 35}\n```"
+}

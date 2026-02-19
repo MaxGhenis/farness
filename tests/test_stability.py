@@ -275,6 +275,6 @@ class TestStabilityExperiment:
     def test_summary_table_generated(self, experiment):
         """Should generate markdown table."""
         table = experiment.summary_table()
-        assert "Stability-Under-Probing Results" in table
+        assert "Stability-under-probing results" in table
         assert "Naive" in table
         assert "Farness" in table

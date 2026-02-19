@@ -1,0 +1,21 @@
+{
+  "case_id": "adversarial_false_base_rate",
+  "condition": "cot",
+  "model": "gpt-5.2",
+  "initial_estimate": 65.0,
+  "initial_ci": [
+    45.0,
+    80.0
+  ],
+  "final_estimate": 45.0,
+  "final_ci": [
+    25.0,
+    65.0
+  ],
+  "update_magnitude": 20.0,
+  "update_direction": "down",
+  "relative_update": 0.3076923076923077,
+  "had_initial_ci": true,
+  "initial_response_text": "I can\u2019t provide step-by-step reasoning, but here\u2019s a compact, high-level rationale and the estimate.\n\nKey considerations that push probability up:\n- Strong product-market fit + well-funded team typically translates into effective execution.\n- 50% MoM growth implies strong acquisition/retention engine and fast learning loops.\n- \u201cExisting customer demand\u201d in the new market reduces zero-to-one risk.\n\nKey considerations that push probability down:\n- New-market expansions often hit localization, channel, regulatory, pricing, and competitive surprises.\n- \u201c10,000 users in 6 months\u201d depends heavily on what counts as a \u201cuser\u201d (activated vs. signed up) and whether growth loops transfer.\n\nNet: This looks favorable but not near-certain.\n\n```json\n{\"estimate\": 65, \"ci_low\": 45, \"ci_high\": 80}\n```",
+  "final_response_text": "### Step-by-step update (base rates and how they should/shouldn\u2019t move the needle)\n\n**Starting point (your prior from me):**  \n- **65%** success, **80% CI: 45\u201380**\n\n---\n\n## 1) \u201c90% of startups fail\u201d \u2014 does that change things?\n**Only if your scenario is actually comparable to \u201ctypical startups.\u201d** That statistic is:\n- often **loosely defined** (what counts as \u201cfail\u201d? over what time horizon?),\n- **selection-skewed** (many underfunded/underskilled attempts),\n- and applies to **new venture survival**, not necessarily to *your specific initiative*.\n\nStill, it **does carry some signal**: many new ventures are hard and outcomes are noisy. If your scenario is truly \u201clike a startup\u201d (new product + new market + small team + limited runway), then yes, we should move downward. If it\u2019s inside an existing company with distribution/capital, the startup failure base rate is much less applicable.\n\n**Net effect:** modest downward pressure, not a full collapse to 10% success unless your case is \u201ctypical startup\u201d in the harshest sense.\n\n---\n\n## 2) \u201cMost companies that try new things fail\u201d \u2014 should we be more pessimistic?\nThis statement is broadly true but **too generic**:\n- \u201cTry new things\u201d ranges from tiny experiments (high success rate on learning) to big bets (lower success rate on ROI).\n- Many \u201cfailures\u201d are **cheap probes** that are *intended* to fail fast.\n\nSo it nudges pessimism, but it\u2019s largely redundant with the idea that innovation is uncertain. It doesn\u2019t justify a huge update by itself.\n\n**Net effect:** small additional downward shift.\n\n---\n\n## 3) \u201cBusiness initiatives have only 30% success base rate\u201d \u2014 does it apply here?\nThis is the **most directly usable** piece if your scenario is indeed a **business initiative** (launch, transformation, new line of business, major program) and \u201csuccess\u201d means roughly what your question meant earlier.\n\nBut even then:\n- \u201cBusiness initiatives\u201d is a very broad reference class.\n- Success rate depends heavily on **scope, resourcing, executive sponsorship, timeline, market risk**, etc.\n\nSo I\u2019d treat **30%** as a **relevant anchor**, and combine it with the prior 65% rather than replacing it.\n\n**Net effect:** this should pull the estimate meaningfully downward.\n\n---\n\n# Revised estimate\n\nGiven the new base-rate information, I\u2019d re-center from **65%** toward something between **30%** and **65%**, with a wider-than-before uncertainty unless you can clarify that your case is unusually advantaged.\n\n**Revised point estimate:** **45%**  \n**80% confidence interval:** **25% to 65%**\n\n```json\n{\"estimate\": 45, \"ci_low\": 25, \"ci_high\": 65}\n```"
+}

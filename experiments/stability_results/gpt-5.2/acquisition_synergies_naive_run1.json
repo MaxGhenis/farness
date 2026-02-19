@@ -1,0 +1,21 @@
+{
+  "case_id": "acquisition_synergies",
+  "condition": "naive",
+  "model": "gpt-5.2",
+  "initial_estimate": 65.0,
+  "initial_ci": [
+    45.0,
+    80.0
+  ],
+  "final_estimate": 30.0,
+  "final_ci": [
+    15.0,
+    45.0
+  ],
+  "update_magnitude": 35.0,
+  "update_direction": "down",
+  "relative_update": 0.5384615384615384,
+  "had_initial_ci": true,
+  "initial_response_text": "For typical competitor acquisitions, synergy forecasts are often optimistic. Cost synergies are more reliable than revenue synergies, but integration friction, one-time dis-synergies, employee/customer churn, and execution capacity commonly delay or reduce capture\u2014especially within a 2-year window. Hitting **at least half** of a combined cost+revenue synergy target is plausible but far from assured.\n\n```json\n{\"estimate\": 65, \"ci_low\": 45, \"ci_high\": 80}\n```",
+  "final_response_text": "Start from the prior 65% and treat the new facts as evidence about (a) *base rates* for M&A success and (b) *execution risk* (synergy realization), plus (c) a *governance/behavioral risk* (CEO championing).\n\n- **Base rate (deal creates value):** If **60\u201380% fail**, then **20\u201340% succeed**. A reasonable midpoint base rate is ~30% success. That alone would pull the estimate well below 65% unless the original scenario had unusually strong edge.\n- **Synergy realization:** If acquirers realize **~50% of projected synergies on average with high variance**, then scenarios that depended on \u201cfull\u201d synergy capture should be discounted materially. This doesn\u2019t necessarily halve the probability of success, but it increases the chance the deal under-delivers versus the investment case.\n- **CEO excitement / championing:** This is correlated with **overconfidence, weaker challenge processes, and winner\u2019s curse** risk. Not always bad (could indicate strategic clarity), but empirically it\u2019s more often a negative prior for disciplined pricing and unbiased diligence.\n\nPutting those together, I\u2019d revise the probability of a \u201csuccessful outcome\u201d (in the same sense as before) toward the **high-20s to low-30s**, with wide uncertainty because \u201cfail to create value\u201d and \u201csynergy realization\u201d vary a lot by deal type and price paid.\n\n**Revised point estimate: 30%**\n\n**80% confidence interval:** roughly **15% to 45%** (captures the base-rate range plus variance from synergy capture and behavioral risk).\n\n```json\n{\"estimate\": 30, \"ci_low\": 15, \"ci_high\": 45}\n```"
+}

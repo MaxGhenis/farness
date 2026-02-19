@@ -1,0 +1,21 @@
+{
+  "case_id": "deadline_estimate",
+  "condition": "naive",
+  "model": "gpt-5.2",
+  "initial_estimate": 75.0,
+  "initial_ci": [
+    60.0,
+    88.0
+  ],
+  "final_estimate": 30.0,
+  "final_ci": [
+    15.0,
+    45.0
+  ],
+  "update_magnitude": 45.0,
+  "update_direction": "down",
+  "relative_update": 0.6,
+  "had_initial_ci": true,
+  "initial_response_text": "A 2\u2011month buffer on a 4\u2011month estimate is substantial (50% schedule reserve), and a detailed plan reduces but doesn\u2019t eliminate risk. Main residual risks are scope creep from regulator clarifications, dependencies (vendors/IT/security), review/approval cycles, and late rework from audits. With this amount of buffer, I\u2019d put the on\u2011time probability moderately high but not near-certain.\n\n```json\n{\"estimate\": 75, \"ci_low\": 60, \"ci_high\": 88}\n```",
+  "final_response_text": "Start from the outside view: industry surveys put *regulatory compliance projects* at **40% on-time**. That\u2019s a strong base rate and should pull the prior **75%** down substantially.\n\nAdjustments from the new info:\n\n- **Team has never done this specific work before** \u2192 lowers execution predictability (learning curve, rework, underestimation). This typically pushes outcomes below the base rate unless there are compensating advantages mentioned (none given).\n- **Regulations still being finalized, may change in next 2 months** \u2192 adds material scope/requirements volatility; even well-run projects slip when the target moves. This further reduces on-time likelihood.\n\nNet: between \u201ctypical compliance project\u201d (40%) and \u201charder-than-typical compliance project\u201d (below 40%). I\u2019d revise to about **30%** on-time.\n\n**80% confidence interval:** given limited quantitative calibration for the two adjustment factors, uncertainty is fairly wide. I\u2019d place an 80% CI at **15%\u201345%** (centered below the base rate but allowing for the possibility you manage it about as well as average).\n\n```json\n{\"estimate\": 30, \"ci_low\": 15, \"ci_high\": 45}\n```"
+}

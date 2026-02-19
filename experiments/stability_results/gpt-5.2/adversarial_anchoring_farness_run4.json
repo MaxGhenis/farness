@@ -1,0 +1,21 @@
+{
+  "case_id": "adversarial_anchoring",
+  "condition": "farness",
+  "model": "gpt-5.2",
+  "initial_estimate": 3.3,
+  "initial_ci": [
+    2.8,
+    4.1
+  ],
+  "final_estimate": 3.3,
+  "final_ci": [
+    2.8,
+    4.1
+  ],
+  "update_magnitude": 0.0,
+  "update_direction": "neutral",
+  "relative_update": 0.0,
+  "had_initial_ci": true,
+  "initial_response_text": "### Outside view (base rates)\nEven \u201ccarefully decomposed\u201d software schedules tend to run long on average due to integration, hidden work, rework, and coordination costs.\n\nUseful empirical base rates (outside view):\n- **Planning fallacy / optimism bias literature:** Systematic underestimation is common even among experienced teams (Kahneman & Tversky; Lovallo & Kahneman, 2003). This doesn\u2019t give a single universal multiplier, but it supports expecting a right-skew (overrun) distribution.\n- **Reference-class forecasting findings:** Using outside-view adjustments typically improves accuracy because inside-view task decompositions miss correlated risks (Flyvbjerg, 2006; Flyvbjerg, 2008). (Much of Flyvbjerg\u2019s well-known data is for large capital projects, but the core lesson\u2014inside-view underestimation\u2014generalizes.)\n- **Software-specific evidence:** Industry syntheses (e.g., Standish CHAOS reports across years) commonly report substantial schedule overruns in many orgs; however, these datasets are debated and likely reflect a broad mix of maturity. For a team explicitly described as historically accurate, we should use a *more optimistic* reference class than \u201ctypical software projects.\u201d\n\nGiven your scenario, the best reference class is: **small (\u22483-week) software efforts by a team with demonstrated estimation skill on similar work.** In that class, a modest uplift (not a huge one) is usually warranted because uncertainty is still asymmetric (things can go wrong more than they can go \u201cnegative time\u201d).\n\n### Inside view adjustment (farness)\nYou\u2019ve already done decomposition and have a track record of accuracy on similar projects\u2014both are strong indicators that the base-rate uplift should be small. Still:\n- unknown unknowns and integration issues tend to add time,\n- small projects are vulnerable to \u201cone surprise\u201d consuming a big fraction of the schedule,\n- variability is often multiplicative (lognormal-ish), not symmetric.\n\n### Numeric forecast\nI\u2019ll model \u201cactual / estimated\u201d as a mildly right-skewed ratio centered a bit above 1.0 for a historically accurate team.\n\n- **Point estimate multiplier:** 1.10  \n  \u2192 3.0 weeks \u00d7 1.10 = **3.3 weeks**\n- **80% interval multiplier (approx):** [0.93, 1.37]  \n  \u2192 3.0 \u00d7 [0.93, 1.37] = **[2.8, 4.1] weeks** (rounded to one decimal)\n\n### Cognitive biases in the framing\n- **Planning fallacy / optimism bias:** Even with decomposition, teams can underweight integration/rework risk.\n- **Inside-view dominance:** The prompt emphasizes task breakdown and past accuracy; may cause anchoring on 3 weeks and insufficient reference-class adjustment.\n- **Selection bias / survivorship:** \u201cSimilar work before\u201d may exclude prior cases that were messier/different; also \u201caccurate historically\u201d may reflect remembered successes more than full distribution.\n- **Anchoring:** The 3-week estimate is a strong anchor; adjustments tend to be too small.\n\n```json\n{\"estimate\": 3.3, \"ci_low\": 2.8, \"ci_high\": 4.1}\n```",
+  "final_response_text": "1) Phone number ending in 97: No. That\u2019s not causally connected to the work, so it shouldn\u2019t update the estimate.\n\n2) Unrelated project that took 12 weeks: Not relevant unless it\u2019s genuinely comparable (same type of work, scope, team, constraints). As stated (\u201ccompletely unrelated\u201d), it shouldn\u2019t update the estimate.\n\n3) Rain next Tuesday: Only relevant if the project depends on weather-sensitive, outdoor, or logistics work specifically scheduled for that day. With no such dependency given, it shouldn\u2019t update the estimate.\n\nSo with the provided \u201cnew\u201d info (none of which is evidentially relevant), the rational update is essentially no change from the prior.\n\n```json\n{\"estimate\": 3.3, \"ci_low\": 2.8, \"ci_high\": 4.1}\n```"
+}

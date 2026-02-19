@@ -1,0 +1,21 @@
+{
+  "case_id": "startup_success",
+  "condition": "naive",
+  "model": "gpt-5.2",
+  "initial_estimate": 7.0,
+  "initial_ci": [
+    2.0,
+    15.0
+  ],
+  "final_estimate": 3.0,
+  "final_ci": [
+    1.0,
+    6.0
+  ],
+  "update_magnitude": 4.0,
+  "update_direction": "down",
+  "relative_update": 0.5714285714285714,
+  "had_initial_ci": true,
+  "initial_response_text": "With 18 months of effort, only ~500 MAU, and flat growth, the base rate for reaching 10,000 MAU in the next 12 months **without a meaningful change in approach** is low. Hitting 10,000 would require ~20\u00d7 growth and a sustained steep monthly compounding rate, which is uncommon once a product has plateaued unless there\u2019s a new channel, distribution unlock, or major product shift (which would effectively be a pivot, not \u201ccurrent approach\u201d).\n\n```json\n{\"estimate\": 7, \"ci_low\": 2, \"ci_high\": 15}\n```",
+  "final_response_text": "Start from the earlier 7% and update downward based on the new evidence:\n\n- **Base rate (\u22485%)**: If the reference class is \u201cstartups flat for 18 months that *organically* inflect without major changes,\u201d then 7% was already a bit above that; anchoring to this pushes the estimate toward ~5%.\n- **3 channels tried with similar results**: This is evidence the current positioning/distribution isn\u2019t finding a scalable wedge. That lowers the odds of a *sudden organic* inflection further (it reduces the chance that \u201cwe just haven\u2019t found the right channel yet\u201d is true).\n- **Competitor raised $10M**: Increased competitive pressure typically makes an organic inflection *harder* (higher CAC, faster feature parity, more mindshare), especially absent a clear differentiation. This again shifts probability downward.\n\nNet: I\u2019d revise from **7% \u2192 ~3%** for \u201csudden organic growth\u201d under the stated conditions (flat 18 months, no major changes). Uncertainty remains because outcomes can be fat-tailed (e.g., unexpected virality, platform change), but the 80% interval should sit mostly in low single digits.\n\n```json\n{\"estimate\": 3.0, \"ci_low\": 1.0, \"ci_high\": 6.0}\n```"
+}

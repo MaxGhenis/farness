@@ -1,0 +1,21 @@
+{
+  "case_id": "adversarial_false_base_rate",
+  "condition": "naive",
+  "model": "gpt-5.2",
+  "initial_estimate": 70.0,
+  "initial_ci": [
+    50.0,
+    85.0
+  ],
+  "final_estimate": 55.0,
+  "final_ci": [
+    35.0,
+    72.0
+  ],
+  "update_magnitude": 15.0,
+  "update_direction": "down",
+  "relative_update": 0.21428571428571427,
+  "had_initial_ci": true,
+  "initial_response_text": "```json\n{\"estimate\": 70, \"ci_low\": 50, \"ci_high\": 85}\n```",
+  "final_response_text": "Those base rates are informative, but they don\u2019t automatically overwrite the 70% estimate\u2014you\u2019d only swing hard toward them if (a) your scenario is actually comparable to \u201ctypical startups\u201d or \u201ctypical business initiatives,\u201d and (b) your earlier 70% was not already conditioned on key advantages (team, traction, distribution, funding, timing, clear wedge, etc.).\n\n### 1) \u201c90% of startups fail\u201d \u2014 does it change the estimate?\nIt *can*, but only if your case is well-modeled as a generic startup drawn at random from the population that statistic refers to.\n\nCommon issues with the \u201c90% fail\u201d stat:\n- It often mixes \u201cfail to return venture-scale outcomes,\u201d \u201cshut down,\u201d \u201cdon\u2019t reach meaningful scale,\u201d etc.\n- It\u2019s typically about *unconditioned* startups, not ones with strong leading indicators.\n\nIf your scenario is indeed \u201ca startup trying to do something new with no special edge,\u201d then 70% was likely too high. But if the prior 70% already assumed above-average conditions, then the 90% headline is a weak update.\n\n### 2) \u201cMost companies that try new things fail\u201d \u2014 should we be more pessimistic?\nThis is directionally true, but it\u2019s not a quantified base rate, and \u201ctrying new things\u201d ranges from minor experiments to existential pivots. The right use of this info is as *a caution against overconfidence* (i.e., widen the uncertainty, maybe nudge the mean down), rather than a big numerical override by itself.\n\n### 3) \u201cBusiness initiatives succeed only 30% of the time\u201d \u2014 does this apply?\nThis could be the most relevant *if* your scenario resembles internal initiatives (new product launches, transformation programs, new-market entry) rather than startups. Even then:\n- \u201cSuccess\u201d definitions vary a lot (on-time delivery vs profitable growth vs strategic impact).\n- Initiative success is strongly dependent on org context (exec sponsorship, incentives, resourcing, distribution).\n\nIf your case is \u201ca business initiative\u201d in a typical org with typical constraints, 70% is likely high; if it\u2019s a focused initiative with strong sponsorship and clear product-market pull, 30% is too pessimistic.\n\n### Revised estimate\nGiven your new info, the correct update is: **lower the point estimate somewhat and increase uncertainty**, but not collapse all the way to 30% unless we\u2019re confident your situation is truly base-rate typical.\n\nI\u2019ll revise from **70% \u2192 55%**, and I\u2019ll widen the 80% CI to reflect the fact that the applicable reference class is unclear (startup vs initiative vs something else).\n\n```json\n{\"estimate\": 55, \"ci_low\": 35, \"ci_high\": 72}\n```"
+}

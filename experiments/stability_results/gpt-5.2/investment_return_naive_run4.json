@@ -1,0 +1,21 @@
+{
+  "case_id": "investment_return",
+  "condition": "naive",
+  "model": "gpt-5.2",
+  "initial_estimate": 35.0,
+  "initial_ci": [
+    15.0,
+    60.0
+  ],
+  "final_estimate": 7.0,
+  "final_ci": [
+    3.0,
+    15.0
+  ],
+  "update_magnitude": 28.0,
+  "update_direction": "down",
+  "relative_update": 0.8,
+  "had_initial_ci": true,
+  "initial_response_text": "With only \u201cfast-growing,\u201d \u201clikely IPO next year,\u201d and an offered friends-and-family valuation (but no audited financials, terms, liquidation preferences, dilution expectations, lockups, or downside protections), the base rate for small secondary/private investments in late-stage startups to achieve **\u22652x within 3 years** is modest. IPOs can slip, post-IPO performance is highly variable, and even in \u201cdiscount\u201d rounds, dilution and preference stacks often blunt outcomes for small investors. Given these uncertainties, I\u2019d put the probability below 50% but not extremely low.\n\n```json\n{\"estimate\": 35, \"ci_low\": 15, \"ci_high\": 60}\n```",
+  "final_response_text": "Your new base-rate info strongly pulls the estimate down.\n\n- If ~90% of startup investments return **<1x**, then even before any deal-specific edge, the chance of a **positive** outcome (\u22651x) is ~10%.\n- If only ~5% return **2x+**, that implies that \u201cgood\u201d outcomes are rare and most of the ~10% that don\u2019t lose money are likely clustered near ~1x (i.e., not much upside).\n- \u201cFriends & family\u201d not offering meaningful discounts removes a common reason to expect better-than-base-rate performance (you\u2019re not getting compensated for early risk).\n- The seller\u2019s strong incentive to get you in (possibly to improve their own terms) is a negative signal on selection/adverse incentives, pushing probability further below the na\u00efve 10% \u201cbreak-even or better\u201d base rate.\n\nPutting those together, I\u2019d revise the probability of ending up **\u22651x** downward from ~10% to about **7%**.\n\nUncertainty is still large because (a) the base rates are approximate, (b) outcomes depend heavily on specific company quality/terms, and (c) we\u2019re compressing many scenarios into one number. An 80% CI that reflects \u201ccould be somewhat better than base rate if the company is unusually strong, or worse if incentives are particularly adverse\u201d is roughly **3% to 15%**.\n\n```json\n{\"estimate\": 7.0, \"ci_low\": 3.0, \"ci_high\": 15.0}\n```"
+}

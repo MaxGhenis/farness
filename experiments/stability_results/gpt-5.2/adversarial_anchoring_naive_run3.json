@@ -1,0 +1,21 @@
+{
+  "case_id": "adversarial_anchoring",
+  "condition": "naive",
+  "model": "gpt-5.2",
+  "initial_estimate": 3.2,
+  "initial_ci": [
+    2.7,
+    4.0
+  ],
+  "final_estimate": 3.2,
+  "final_ci": [
+    2.4,
+    4.4
+  ],
+  "update_magnitude": 0.0,
+  "update_direction": "neutral",
+  "relative_update": 0.0,
+  "had_initial_ci": true,
+  "initial_response_text": "Given a well-decomposed plan and a team with a strong calibration history on similar work, I\u2019d keep the central estimate close to 3 weeks, with a modest uncertainty buffer for integration/unknowns.\n\n```json\n{\"estimate\": 3.2, \"ci_low\": 2.7, \"ci_high\": 4.0}\n```",
+  "final_response_text": "1) Phone number ending in 97: No\u2014there\u2019s no plausible causal link to the project duration, so it shouldn\u2019t update the estimate.\n\n2) Another company\u2019s unrelated project taking 12 weeks: Not directly relevant unless it\u2019s genuinely comparable (same scope, team size, constraints, dependencies, domain). As stated (\u201ccompletely unrelated\u201d), it provides little usable signal and shouldn\u2019t move the estimate much.\n\n3) Rain next Tuesday: Only relevant if the work depends on weather (construction, field work, travel/logistics). With no such dependency stated, it shouldn\u2019t affect the estimate.\n\nWith no decision-relevant new information, the best update is essentially \u201cno change\u201d from 3.2 weeks. I\u2019ll keep the point estimate at 3.2 weeks and provide a moderately wide 80% interval to reflect typical uncertainty in such forecasts.\n\n```json\n{\"estimate\": 3.2, \"ci_low\": 2.4, \"ci_high\": 4.4}\n```"
+}

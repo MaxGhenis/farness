@@ -1,0 +1,21 @@
+{
+  "case_id": "hiring_success",
+  "condition": "naive",
+  "model": "gpt-5.2",
+  "initial_estimate": 35.0,
+  "initial_ci": [
+    20.0,
+    55.0
+  ],
+  "final_estimate": 24.0,
+  "final_ci": [
+    14.0,
+    36.0
+  ],
+  "update_magnitude": 11.0,
+  "update_direction": "down",
+  "relative_update": 0.3142857142857143,
+  "had_initial_ci": true,
+  "initial_response_text": "Chemistry/\u201creminds me of a top performer\u201d is a meaningful but noisy signal (high variance, risk of halo/similarity bias). A higher technical assessment score is usually a stronger, more directly job-related predictor of 1-year performance for senior engineers. So I\u2019d put Candidate A somewhat above the base rate (25%) but not close to \u201clikely.\u201d\n\n```json\n{\"estimate\": 35, \"ci_low\": 20, \"ci_high\": 55}\n```",
+  "final_response_text": "The new evidence should push the estimate downward because it says the key *positive* signal you were implicitly using before (\u201cgreat interview chemistry\u201d / \u201creminds me of our best performer\u201d) has weak predictive validity, while the more valid signal is the technical assessment.\n\n- **Unstructured interview r = 0.14**: That\u2019s a small relationship with performance. It doesn\u2019t mean \u201cuseless,\u201d but it means interview impressions should move your probability only a little versus base rate.\n- **Similarity bias** (\u201creminded me of our best performer\u201d): This is more like *noise* than signal. I\u2019d treat it as near-zero incremental validity, and possibly negative if it crowds out better evidence.\n- **Technical assessment r = 0.51**: This is a meaningfully strong predictor in hiring terms. If the technical assessment result was not strongly positive, it should dominate the forecast and reduce the chance of strong performance.\n\nGiven you previously landed at **35%** (apparently influenced by interview impressions), discounting the interview signal and re-weighting toward the technical assessment suggests a **material drop**. Without knowing whether the technical score was weak vs merely average, I\u2019ll assume it was *not a clear \u201chire\u201d signal* (otherwise you likely wouldn\u2019t have anchored on chemistry in the first place). Under that assumption, a reasonable revision is to the **low-to-mid 20s**.\n\nFor the **80% CI**, the main uncertainty is missing specifics: the actual technical score distribution, role base rates, and whether interview impressions add any incremental validity beyond the test. I\u2019ll give a moderately wide interval.\n\n```json\n{\"estimate\": 24, \"ci_low\": 14, \"ci_high\": 36}\n```"
+}

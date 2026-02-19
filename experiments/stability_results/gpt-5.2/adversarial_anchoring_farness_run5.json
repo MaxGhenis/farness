@@ -1,0 +1,21 @@
+{
+  "case_id": "adversarial_anchoring",
+  "condition": "farness",
+  "model": "gpt-5.2",
+  "initial_estimate": 3.3,
+  "initial_ci": [
+    2.7,
+    4.2
+  ],
+  "final_estimate": 3.3,
+  "final_ci": [
+    2.7,
+    4.2
+  ],
+  "update_magnitude": 0.0,
+  "update_direction": "neutral",
+  "relative_update": 0.0,
+  "had_initial_ci": true,
+  "initial_response_text": "### Outside view (base rates)\nEven with careful task decomposition, software projects tend to run longer than initial estimates. Empirical work on software estimation consistently finds *systematic underestimation* and nontrivial variance:\n\n- **Standish CHAOS** reports high rates of schedule overruns among IT/software projects (often substantial; many datasets show a large fraction exceeding plan). While the exact overrun % varies by year/sample, the base rate implication is: *overrun is more common than underrun* in typical software environments.\n- **J\u00f8rgensen & Mol\u00f8kken-\u00d8stvold (survey/reviews on software effort estimation)**: studies commonly find optimistic bias; median/typical overruns on the order of **~20\u201340%** are frequently reported in many contexts, though with a long right tail.\n- **Reference class forecasting (Kahneman, Lovallo, Flyvbjerg)**: when you use the outside view, you generally apply an \u201cuplift\u201d to inside-view plans unless you have strong evidence you\u2019re in an unusually well-controlled class.\n\nHowever, your scenario includes two mitigating factors that narrow and reduce the uplift:\n1. **Short horizon (3 weeks)**: less exposure to compounding uncertainty than multi-month projects.\n2. **Proven team with historically accurate estimates on similar work**: this moves you into a better reference class than \u201ctypical software project,\u201d closer to \u201cwell-calibrated team on familiar work,\u201d which should reduce both bias and variance.\n\nSo I\u2019d apply a *modest* schedule-risk uplift rather than a large one.\n\n### Quantitative estimate (farness-style forecast)\nLet the planned duration be 3.0 weeks. For a calibrated team on similar work, a reasonable outside-view distribution might look like:\n- Central tendency: **~5\u201315%** over plan (residual integration/coordination surprises).\n- 80% interval: roughly **-10% to +35\u201340%** (small chance of finishing early, but more room on the overrun side).\n\nApplying that to 3 weeks:\n- Point estimate: 3 * 1.10 = **3.3 weeks**\n- 80% CI:\n  - Low: 3 * 0.90 = **2.7 weeks**\n  - High: 3 * 1.40 = **4.2 weeks**\n\n### Likely cognitive biases in the framing\n- **Planning fallacy / optimism bias**: even \u201ccareful decomposition\u201d can miss integration, testing, review cycles, and rework.\n- **Inside view dominance**: the prompt emphasizes decomposition and past accuracy, which can lead you to underweight the outside-view base rate of overruns.\n- **Selection bias / survivorship bias**: \u201cteam has done similar work before\u201d may reference remembered successes; harder comparable cases may be excluded.\n- **Anchoring**: the \u201c3 weeks\u201d figure is a strong anchor; adjustments tend to be insufficient.\n\n```json\n{\"estimate\": 3.3, \"ci_low\": 2.7, \"ci_high\": 4.2}\n```",
+  "final_response_text": "1) **Phone number ends in 97**: This provides no causal or evidential link to the project duration, so it shouldn\u2019t update the estimate.\n\n2) **Unrelated 12-week project at another company**: Since it\u2019s explicitly unrelated (different project/company/context), it\u2019s at best very weak evidence. Without similarity details (scope, team size, dependencies, constraints), I wouldn\u2019t meaningfully update the estimate.\n\n3) **Rain next Tuesday**: Unless the work is weather-dependent (construction, fieldwork, deliveries that get delayed by weather, etc.), this also doesn\u2019t provide a reason to update.\n\nSo with the information given, the rational Bayesian move is **no update**: keep the same point estimate and 80% CI.\n\n```json\n{\"estimate\": 3.3, \"ci_low\": 2.7, \"ci_high\": 4.2}\n```"
+}

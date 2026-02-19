@@ -1,0 +1,21 @@
+{
+  "case_id": "hiring_success",
+  "condition": "cot",
+  "model": "gpt-5.2",
+  "initial_estimate": 33.0,
+  "initial_ci": [
+    20.0,
+    48.0
+  ],
+  "final_estimate": 27.0,
+  "final_ci": [
+    18.0,
+    38.0
+  ],
+  "update_magnitude": 6.0,
+  "update_direction": "down",
+  "relative_update": 0.18181818181818182,
+  "had_initial_ci": true,
+  "initial_response_text": "I can\u2019t provide step-by-step reasoning, but here\u2019s a careful, structured estimate.\n\n- Baseline: with no signal, any candidate has a 25% chance of being in the top 25% at 1 year.\n- Signals:\n  - \u201cGreat chemistry / reminded you of your best performer\u201d is a meaningful but noisy indicator (halo/affinity bias risk; interview performance only partially predicts job performance).\n  - \u201cScored higher on the technical assessment\u201d suggests Candidate B may have higher expected performance, which slightly *reduces* the relative likelihood that Candidate A ends up top-25% compared to a world where A also had the strongest objective signal.\n- Net: Candidate A gets uplift from strong interview/chemistry above the 25% base rate, but not so much that it dominates the stronger technical signal for B.\n\nFinal estimate and 80% CI (reflecting high uncertainty and imperfect predictive validity of interviews/assessments):\n\n```json\n{\"estimate\": 33, \"ci_low\": 20, \"ci_high\": 48}\n```",
+  "final_response_text": "### Step-by-step update\n\n**1) What changes with r = 0.14 for unstructured interviews?**  \nAn unstructured interview correlation of **r = 0.14** implies the interview explains only **r\u00b2 \u2248 0.02 (2%)** of the variance in job performance. That\u2019s a weak signal. So the earlier boost you were implicitly getting from \u201cgood chemistry / great impression\u201d should be sharply discounted\u2014much of it is noise.\n\n**2) \u201cReminded me of our best performer\u201d**  \nAs you note, that\u2019s classic **similarity/representativeness bias** and not a validated predictor. In Bayesian terms, it should contribute little to no likelihood update beyond what is already captured by structured, job-relevant measures. So I\u2019d treat it as **near-zero incremental evidence** (and possibly slightly negative if it indicates biased judgment).\n\n**3) Technical assessment r = 0.51 dominates**  \nWith **r = 0.51**, the technical assessment explains **r\u00b2 \u2248 0.26 (26%)** of performance variance\u2014an order-of-magnitude more informative than the unstructured interview. Therefore, the posterior should be driven mostly by the technical score and only minimally by interview impressions.\n\n### Revised estimate logic (in plain terms)\n\n- Previously: **33% (20\u201348)** reflected substantial weight on the positive interview vibe / similarity cue.  \n- Now: that cue is shown to be weak (r=0.14) and biased (\u201creminded me\u2026\u201d), so the earlier optimism should **move downward**, unless the technical assessment was strongly positive enough to carry the prediction.  \n- Given your framing (\u201ctechnical assessment 4x better than interview chemistry\u201d), the rational move is to **re-weight** toward the technical assessment and **away** from interview impressions. Net effect: **lower mean estimate** and **tighter interval** (because we\u2019re using a better predictor and discarding noisy/biasy evidence).\n\n### Revised estimate\nI\u2019d revise the probability of success/hire-being-a-good-performer to:\n\n```json\n{\"estimate\": 27.0, \"ci_low\": 18.0, \"ci_high\": 38.0}\n```"
+}

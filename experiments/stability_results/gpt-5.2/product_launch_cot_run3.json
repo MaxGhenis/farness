@@ -1,0 +1,21 @@
+{
+  "case_id": "product_launch",
+  "condition": "cot",
+  "model": "gpt-5.2",
+  "initial_estimate": 40.0,
+  "initial_ci": [
+    25.0,
+    55.0
+  ],
+  "final_estimate": 16.0,
+  "final_ci": [
+    10.0,
+    25.0
+  ],
+  "update_magnitude": 24.0,
+  "update_direction": "down",
+  "relative_update": 0.6,
+  "had_initial_ci": true,
+  "initial_response_text": "Increased engagement \u226510% within 3 months depends on (a) how many users adopt the feature, (b) whether it changes behavior enough to move the aggregate metric, and (c) whether effects persist past initial novelty.\n\nStep by step:\n\n1. **Base rate / prior**  \n   For a \u201cnew feature\u201d launch, getting a *measurable* lift is common, but a *\u226510% overall engagement* lift (product-wide) in 3 months is a fairly high bar unless the feature is broadly relevant or changes a core workflow. As a rough prior, I\u2019d put this kind of outcome in the \u201cpossible but not the default\u201d range.\n\n2. **Signals pushing probability up**\n   - **Internal testing went well**: reduces risk of obvious usability/perf issues that can suppress adoption.  \n   - **Beta feedback + NPS 45**: good satisfaction signal; suggests users who tried it liked it. This raises odds of retention/continued use.\n   - **Team excitement**: mild positive, but also sometimes correlated with optimism bias.\n\n3. **Factors that limit probability**\n   - **Selection effects**: beta users are often power users or early adopters; their NPS can overpredict broad-market adoption and impact.\n   - **Translation from \u201cliked\u201d to \u201cmoves engagement\u201d**: NPS doesn\u2019t guarantee higher usage frequency/time; it can reflect perceived value without changing behavior much.\n   - **Denominator problem**: \u201coverall product engagement\u201d includes many users who may never touch the feature. To get +10% overall, you typically need either very high adoption or a big per-user lift among a meaningful segment.\n   - **Time window**: 3 months is enough to see effect, but also short enough that onboarding, discoverability, and rollout details matter a lot.\n\n4. **Synthesis**\n   Netting these: I\u2019d put the probability somewhat below 50%, but not low, because you have a strong early satisfaction signal and no red flags. Still, the \u226510% overall threshold is ambitious.\n\nFinal estimate and 80% CI reflect moderate uncertainty about adoption and magnitude.\n\n```json\n{\"estimate\": 40, \"ci_low\": 25, \"ci_high\": 55}\n```",
+  "final_response_text": "Start from the new base rate: **20\u201330%** of new features meaningfully move engagement. A reasonable midpoint prior is **~25%**.\n\nNow adjust for the new factors:\n\n1) **Beta users are self-selected enthusiasts (non-representative)**\n- This typically **inflates observed engagement** during beta because enthusiasts try harder, tolerate friction, and explore more.\n- So the probability that \u201cbeta looks good\u201d translates into \u201cgeneral population moves\u201d should be **discounted**.\n- I\u2019d apply a moderate downward adjustment (not catastrophic, but meaningful): think **~0.75\u00d7** on the prior.\n\n2) **Builders measuring their own success (measurement/confirmation bias)**\n- This increases the chance of optimistic metric choices, analysis flexibility, and selective interpretation.\n- That doesn\u2019t mean the feature can\u2019t work, but it raises the odds that the apparent lift won\u2019t hold up under independent, pre-registered, or stricter measurement.\n- Apply an additional discount, say **~0.85\u00d7**.\n\nPutting it together (roughly multiplicative):\n- Prior midpoint 25% \u00d7 0.75 \u00d7 0.85 \u2248 **16%**.\n\nGiven the uncertainty in how strong each bias is, widen the interval. An 80% CI that reflects \u201ccould still work, but odds are below base rate\u201d might be roughly **10% to 25%**.\n\n```json\n{\"estimate\": 16, \"ci_low\": 10, \"ci_high\": 25}\n```"
+}

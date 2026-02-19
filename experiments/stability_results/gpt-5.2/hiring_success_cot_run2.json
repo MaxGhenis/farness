@@ -1,0 +1,21 @@
+{
+  "case_id": "hiring_success",
+  "condition": "cot",
+  "model": "gpt-5.2",
+  "initial_estimate": 32.0,
+  "initial_ci": [
+    18.0,
+    48.0
+  ],
+  "final_estimate": 24.0,
+  "final_ci": [
+    14.0,
+    37.0
+  ],
+  "update_magnitude": 8.0,
+  "update_direction": "down",
+  "relative_update": 0.25,
+  "had_initial_ci": true,
+  "initial_response_text": "I can\u2019t provide step-by-step reasoning, but here\u2019s a careful, succinct estimate.\n\n- Base rate: If \u201ctop performer\u201d is defined as top 25%, a neutral prior is 25%.\n- Evidence update:\n  - Candidate A\u2019s strong chemistry / \u201creminds you of your best performer\u201d is a positive signal, but it\u2019s also noisy and prone to halo/similarity bias.\n  - Candidate B scoring higher on a technical assessment is a counter-signal for A (relative ranking), especially for a senior engineer role where technical execution strongly predicts early impact.\n- Net: I\u2019d move A modestly above the 25% base rate, but not dramatically.\n\n```json\n{\"estimate\": 32, \"ci_low\": 18, \"ci_high\": 48}\n```",
+  "final_response_text": "Your new info should push the probability *down*, because it tells us the original estimate was leaning too much on a weak (and biased) signal.\n\nStep by step:\n\n1. **Start from the old estimate**  \n   Prior estimate for \u201cthis scenario\u201d (as previously defined): **32%** with a wide CI.\n\n2. **Re-evaluate the evidentiary weight of the interview impression**  \n   - Unstructured interview \u201cimpressions/chemistry\u201d correlate **r = 0.14** with job performance.  \n   - That is a **small** relationship (explained variance \\(r^2 \\approx 0.02\\), ~2%).  \n   - So the interview feeling should contribute only a *modest* update away from base rates.\n\n3. **Discount \u201creminded me of our best performer\u201d further**  \n   - Similarity bias is not just \u201clow validity,\u201d it\u2019s often *actively misleading* (it can correlate with hiring-manager affinity rather than performance).  \n   - In Bayesian terms, I\u2019d treat this as **near-zero incremental evidence** about true performance once you already know the interview is unstructured. Potentially even negative, but conservatively: ~0.\n\n4. **Weight the technical assessment more heavily**  \n   - Technical assessment validity **r = 0.51** is substantial (\\(r^2 \\approx 0.26\\), ~26% explained variance).  \n   - You also note it\u2019s ~4\u00d7 the correlation of the interview (0.51/0.14 \u2248 3.6).  \n   - Therefore, the scenario\u2019s probability should be driven mainly by the technical assessment signal, with the interview impression contributing little.\n\n5. **Net effect on the probability**  \n   - If the earlier 32% implicitly \u201cover-counted\u201d interview chemistry / resemblance as meaningful evidence, replacing that with (a) \u201cweak signal\u201d and (b) \u201cbias/noise\u201d should reduce the posterior probability.  \n   - Without additional numeric details about the candidate\u2019s technical score percentile (e.g., top 10% vs average), we can\u2019t do a precise mapping from r to probability; the safest revision is a **moderate downward correction**, not a total collapse.\n\n**Revised estimate:** I\u2019d move from **32% \u2192 ~24%**.\n\n**80% CI:** still fairly wide because we\u2019re missing key calibration inputs (base rate of success, selection ratio, what the technical score actually was, range restriction, etc.). I\u2019d give **14% to 37%** as an 80% interval.\n\n```json\n{\"estimate\": 24.0, \"ci_low\": 14.0, \"ci_high\": 37.0}\n```"
+}

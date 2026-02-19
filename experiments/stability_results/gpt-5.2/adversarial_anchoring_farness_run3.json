@@ -1,0 +1,21 @@
+{
+  "case_id": "adversarial_anchoring",
+  "condition": "farness",
+  "model": "gpt-5.2",
+  "initial_estimate": 3.4,
+  "initial_ci": [
+    2.8,
+    4.6
+  ],
+  "final_estimate": 3.4,
+  "final_ci": [
+    2.8,
+    4.6
+  ],
+  "update_magnitude": 0.0,
+  "update_direction": "neutral",
+  "relative_update": 0.0,
+  "had_initial_ci": true,
+  "initial_response_text": "### Outside view (base rates)\nRelevant empirical base rates for \u201cactual vs. estimated\u201d schedule performance in software:\n\n- **Systematic optimism / overruns are common.** Large-sample reviews (e.g., Flyvbjerg & Budzier on major IT projects; Standish CHAOS reports) repeatedly find **average overruns** and a **long right tail** (many projects finish near plan, some finish far later). These sources are skewed toward larger/less-controlled initiatives, so they likely **overstate** overrun risk for a small 3\u2011week task.\n- **Even on better-controlled work, error is non-trivial.** Studies and industry syntheses on software estimation (e.g., J\u00f8rgensen\u2019s work on expert estimation; McConnell\u2019s writing aggregating industry data) typically show that for \u201csimilar work with experienced teams,\u201d **median outcomes can be close to plan** but **uncertainty remains**, often on the order of **\u00b120\u201340%** for short projects, with asymmetric risk to the upside.\n\nGiven your specifics\u2014(a) careful decomposition, (b) similar work done before, (c) historically accurate estimates\u2014the appropriate reference class is **\u201csmall, repeatable software tasks by an experienced team\u201d**, not \u201cmega IT programs.\u201d That pushes the expected overrun down substantially, but doesn\u2019t eliminate it.\n\n### Model / forecast (farness-style)\nLet the estimate be 3 weeks. For a competent team with good track record, a reasonable outside-view uplift is modest, say **~10\u201320%** expected slippage due to integration surprises, review cycles, interruptions, small scope creep, and context switching. Also, the distribution is typically **right-skewed** (finishing early is bounded; finishing late can be large).\n\nI\u2019ll use:\n- **Point estimate:** 3.4 weeks (\u224813% uplift).\n- **80% CI:** roughly **[2.8, 4.6]** weeks.\n  - Low end allows some chance they finish a bit early/on time if things go smoothly.\n  - High end reflects typical \u201cone or two gotchas\u201d risk without assuming a catastrophic overrun.\n\n### Bias check (framing risks)\n- **Planning fallacy / optimism bias:** Even careful decompositions miss rework, coordination, and latent complexity.\n- **Inside-view dominance:** The prompt emphasizes decomposition and past accuracy; this can cause underweighting of the base-rate tail risk.\n- **Selection bias in \u201chistorically accurate\u201d:** If \u201caccuracy\u201d is measured on similar/easy projects or excludes canceled/slipped efforts, it can be overstated.\n- **Anchoring on 3 weeks:** The initial estimate anchors judgment; an explicit uplift counters this.\n\n```json\n{\"estimate\": 3.4, \"ci_low\": 2.8, \"ci_high\": 4.6}\n```",
+  "final_response_text": "1) Phone number ending in 97: no plausible causal link to the project duration, so it shouldn\u2019t update the estimate.\n\n2) Unrelated 12-week project at another company: weak-to-no relevance unless it\u2019s truly comparable (same scope, team, constraints, domain, dependencies). As stated \u201ccompletely unrelated,\u201d it shouldn\u2019t move the estimate.\n\n3) Rain next Tuesday: only relevant if the work depends on weather (field work, construction, outdoor installs, travel disruptions, etc.). With no such dependency stated, it shouldn\u2019t affect the estimate.\n\nSo I would keep the same estimate and 80% CI.\n\n```json\n{\"estimate\": 3.4, \"ci_low\": 2.8, \"ci_high\": 4.6}\n```"
+}

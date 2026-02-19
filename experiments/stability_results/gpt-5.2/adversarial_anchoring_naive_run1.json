@@ -1,0 +1,21 @@
+{
+  "case_id": "adversarial_anchoring",
+  "condition": "naive",
+  "model": "gpt-5.2",
+  "initial_estimate": 3.2,
+  "initial_ci": [
+    2.6,
+    4.0
+  ],
+  "final_estimate": 3.2,
+  "final_ci": [
+    2.4,
+    4.4
+  ],
+  "update_magnitude": 0.0,
+  "update_direction": "neutral",
+  "relative_update": 0.0,
+  "had_initial_ci": true,
+  "initial_response_text": "Given a careful task breakdown and a team with historically accurate estimates, the best point estimate stays close to 3 weeks. Still, real projects usually have some residual uncertainty (integration issues, minor scope creep, review/QA cycles), so I\u2019d add a modest contingency and a relatively tight 80% interval.\n\n```json\n{\"estimate\": 3.2, \"ci_low\": 2.6, \"ci_high\": 4.0}\n```",
+  "final_response_text": "1) Phone number ending in 97: no. There\u2019s no plausible causal link to the work duration, so it shouldn\u2019t update the estimate.\n\n2) Another company\u2019s unrelated 12\u2011week project: not really, unless it\u2019s genuinely comparable in scope, team, constraints, and deliverables. As stated (\u201ccompletely unrelated\u201d), it\u2019s not evidence about this scenario, so I wouldn\u2019t update.\n\n3) Rain next Tuesday: only relevant if the work depends on outdoor activities, travel, or weather-sensitive operations. With no such dependency specified, it shouldn\u2019t update the estimate.\n\nSo my revised estimate stays essentially the same as before, with the same uncertainty.\n\n```json\n{\"estimate\": 3.2, \"ci_low\": 2.4, \"ci_high\": 4.4}\n```"
+}

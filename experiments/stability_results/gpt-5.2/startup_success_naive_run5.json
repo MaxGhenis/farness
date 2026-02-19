@@ -1,0 +1,21 @@
+{
+  "case_id": "startup_success",
+  "condition": "naive",
+  "model": "gpt-5.2",
+  "initial_estimate": 8.0,
+  "initial_ci": [
+    2.0,
+    20.0
+  ],
+  "final_estimate": 2.5,
+  "final_ci": [
+    1.0,
+    6.0
+  ],
+  "update_magnitude": 5.5,
+  "update_direction": "down",
+  "relative_update": 0.6875,
+  "had_initial_ci": true,
+  "initial_response_text": "With 500 MAU after 18 months and flat growth, the current approach is not showing product-market fit or a scalable acquisition loop. To reach 10,000 MAU in 12 months from 500 requires ~20\u00d7 growth\u2014about **28% compound monthly growth**. Teams that can sustain that kind of growth usually already show clear upward momentum; flat traction this late makes that outcome unlikely without a meaningful change (which would effectively be a pivot, not \u201ccurrent approach\u201d).\n\nI\u2019d assign a low-but-not-zero chance (since execution/marketing improvements can sometimes unlock a channel without changing the product).\n\n```json\n{\"estimate\": 8, \"ci_low\": 2, \"ci_high\": 20}\n```",
+  "final_response_text": "Start from the new base rate you provided: **~5%** of startups with 18 months of flat growth see a sudden *organic* inflection without major changes.\n\nUpdate with the additional evidence:\n\n- **3 marketing channels tried with similar results**: this is strong evidence that \u201cwe just haven\u2019t found the right channel yet\u201d is less likely. It pushes the probability **down** relative to the 5% base (it suggests the constraint is product/market fit, positioning, pricing, or market structure rather than channel selection).\n- **Competitor raised $10M targeting same market**: this typically reduces the odds of an *organic* inflection for the slower-growing player (they may bid up channels, capture mindshare, and accelerate sales cycles against you). There are exceptions (market validation), but given you specified \u201corganic growth\u201d and \u201csame market,\u201d net effect is **down** again.\n\nPutting that together, I\u2019d revise the estimate to the low single digits.\n\n- **Revised point estimate:** **2.5%**\n- **80% confidence interval:** **1.0% to 6.0%** (wide because outcomes vary a lot depending on whether \u201cmajor changes\u201d happen, whether the competitor expands the category vs. dominates it, and whether the flat growth hides a latent retention/activation improvement opportunity)\n\n```json\n{\"estimate\": 2.5, \"ci_low\": 1.0, \"ci_high\": 6.0}\n```"
+}

@@ -1,0 +1,21 @@
+{
+  "case_id": "startup_success",
+  "condition": "cot",
+  "model": "gpt-5.2",
+  "initial_estimate": 10.0,
+  "initial_ci": [
+    3.0,
+    22.0
+  ],
+  "final_estimate": 3.0,
+  "final_ci": [
+    1.0,
+    7.0
+  ],
+  "update_magnitude": 7.0,
+  "update_direction": "down",
+  "relative_update": 0.7,
+  "had_initial_ci": true,
+  "initial_response_text": "Base rate first: a startup with **500 MAU after 18 months and flat growth** is usually in (a) weak product-market fit, (b) poor distribution, or (c) a niche with limited pull. Without a meaningful change, large step-function growth within a year is uncommon.\n\nWhat \u201c10,000 MAU in 12 months\u201d implies:\n- Need to go from 500 \u2192 10,000 = **20\u00d7**.\n- That\u2019s roughly **~28% compounded monthly growth** for 12 months (since \\(500 \\cdot 1.28^{12} \\approx 10,000\\)).\n- \u201cPersist with current approach\u201d suggests **no major pivot**, so we\u2019re largely betting on execution improvements, iteration, and maybe a couple experiments\u2014not a fundamentally new channel or market.\n\nKey considerations pushing probability down:\n- **18 months with flat growth** is strong evidence the current loop isn\u2019t self-sustaining.\n- To hit 10k MAU, they\u2019d need either a **new scalable acquisition channel** or a **product change that creates strong referral/retention loops**\u2014both are effectively \u201cchanging the approach,\u201d even if not called a pivot.\n- Even if they find one promising channel, sustaining ~28% MoM for a full year is hard.\n\nConsiderations pushing probability up (but still limited):\n- If 500 MAU are highly retained and the issue is mainly distribution, a single channel breakthrough could accelerate.\n- Small absolute scale means **some growth can look fast** if they unlock one loop.\n- \u201cTeam believes and has ideas\u201d adds a bit, but belief isn\u2019t strong evidence.\n\nPutting this together, I\u2019d treat this as a **low-probability** event under \u201cpersist,\u201d not impossible but meaningfully unlikely. I\u2019d center around a high-single-digit to low-teens percent.\n\n```json\n{\"estimate\": 10, \"ci_low\": 3, \"ci_high\": 22}\n```",
+  "final_response_text": "Start from the prior you referenced: **10%** (CI 3\u201322) for \u201cthis scenario.\u201d\n\n### Step-by-step update with the new information\n\n1. **Base rate update (flat for 18 months):**\n   You\u2019re giving a direct reference class: only ~**5%** of startups with 18 months of flat growth see a sudden *organic* inflection without major changes.\n   - That suggests the prior 10% was optimistic *unless* the scenario already assumed meaningful changes.\n   - If we\u2019re specifically talking about \u201csudden organic growth\u201d absent major changes, a reasonable anchor becomes **~5%**.\n\n2. **Three marketing channels tried with similar results:**\n   This is evidence against \u201cwe just haven\u2019t found the right channel yet.\u201d It reduces the chance that growth is being held back by a simple, discoverable go-to-market lever.\n   - Not a death sentence (there are more channels and message/segment iterations), but it meaningfully lowers odds of a near-term inflection without a more fundamental shift (product, positioning, distribution).\n   - Apply a downward adjustment from 5% to roughly **~4%**.\n\n3. **Competitor raised $10M targeting same market:**\n   This increases competitive pressure on paid acquisition, sales hiring, mindshare, and partner access\u2014making an organic inflection *harder* and reducing the probability your startup captures the growth inflection first.\n   - Not always fatal (it can validate the market), but given your current flat trajectory, the more likely effect is negative.\n   - Apply another downward adjustment to about **~3%**.\n\n### Revised estimate and 80% CI\nGiven these updates, I\u2019d revise the probability to **3%**, with an **80% confidence interval of 1% to 7%** (wide because outcomes hinge on unobserved factors like product differentiation, retention, distribution advantages, and whether \u201cmajor changes\u201d are imminent).\n\n```json\n{\"estimate\": 3.0, \"ci_low\": 1.0, \"ci_high\": 7.0}\n```"
+}

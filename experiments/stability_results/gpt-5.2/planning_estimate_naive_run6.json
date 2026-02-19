@@ -1,0 +1,21 @@
+{
+  "case_id": "planning_estimate",
+  "condition": "naive",
+  "model": "gpt-5.2",
+  "initial_estimate": 3.0,
+  "initial_ci": [
+    2.0,
+    4.0
+  ],
+  "final_estimate": 4.2,
+  "final_ci": [
+    3.0,
+    6.5
+  ],
+  "update_magnitude": 1.2000000000000002,
+  "update_direction": "up",
+  "relative_update": 0.4000000000000001,
+  "had_initial_ci": true,
+  "initial_response_text": "Software work commonly runs over initial estimates due to integration issues, reviews, testing, and unexpected dependencies\u2014even with good breakdowns. A reasonable adjustment is ~1.5\u00d7 the estimate, with an 80% interval spanning from \u201con time\u201d to \u201cabout 2\u00d7\u201d.\n\n```json\n{\"estimate\": 3.0, \"ci_low\": 2.0, \"ci_high\": 4.0}\n```",
+  "final_response_text": "Start from the prior point estimate: **3.0 weeks** (implicitly assuming \u201ceverything goes reasonably well\u201d).\n\n### 1) \u201cProjects average 2\u20133\u00d7 initial estimates\u201d\nThat statistic is usually about *early/optimistic* estimates across many teams and contexts. It\u2019s a strong prior that the distribution is right\u2011skewed and that the *mean* overrun can be large, but it doesn\u2019t necessarily mean *this* specific estimate should be multiplied by 2\u20133 automatically\u2014especially if the original 3.0 weeks was already a \u201crealistic\u201d (not best\u2011case) estimate.\n\nStill, it should push the estimate upward and widen uncertainty.\n\n### 2) \u201cConfidence\u201d as a planning\u2011fallacy warning sign\nAgreed: high stated confidence without evidence (historical throughput, reference class, decomposition, integration test plan, etc.) is a risk factor. This again argues for an upward adjustment and a wider interval.\n\n### 3) 30% chance of a major blocker\nModel this as a mixture:\n- **No major blocker (70%)**: work lands around a \u201cnormal\u201d outcome somewhat above 3 weeks due to general underestimation.\n- **Major blocker (30%)**: adds substantial delay (integration/requirements). For a 3\u2011week effort, a \u201cmajor blocker\u201d commonly adds on the order of **1\u20133+ weeks** depending on severity.\n\nA simple, defensible adjustment is:\n- Baseline (no blocker) central tendency: **~3.6 weeks** (20% uplift for general optimism/planning fallacy without going full 2\u20133\u00d7).\n- Blocker adds expected delay: **~2.0 weeks** (covers diagnose/fix/rework/coordination).\n- Expected value: \\( 3.6 + 0.3 \\times 2.0 = 4.2 \\) weeks.\n\n### 80% confidence interval\nBecause the risk is lumpy (blocker vs no blocker) and project durations are right\u2011skewed, the 80% interval should be asymmetric and fairly wide. A reasonable 80% range here:\n- **Low (10th percentile)**: outcome where things go smoothly: **~3.0 weeks**\n- **High (90th percentile)**: includes blocker scenarios and some overrun tail: **~6.5 weeks**\n\n```json\n{\"estimate\": 4.2, \"ci_low\": 3.0, \"ci_high\": 6.5}\n```"
+}

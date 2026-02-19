@@ -1,0 +1,21 @@
+{
+  "case_id": "adversarial_anchoring",
+  "condition": "naive",
+  "model": "gpt-5.2",
+  "initial_estimate": 3.2,
+  "initial_ci": [
+    2.8,
+    4.0
+  ],
+  "final_estimate": 3.2,
+  "final_ci": [
+    2.4,
+    4.2
+  ],
+  "update_magnitude": 0.0,
+  "update_direction": "neutral",
+  "relative_update": 0.0,
+  "had_initial_ci": true,
+  "initial_response_text": "Given a well-decomposed plan and a team with historically accurate estimates, I\u2019d anchor near 3 weeks but add modest schedule risk (integration, interruptions, unknowns). I\u2019d set the actual expected duration slightly above the point estimate and use a relatively tight 80% interval.\n\n```json\n{\"estimate\": 3.2, \"ci_low\": 2.8, \"ci_high\": 4.0}\n```",
+  "final_response_text": "1) **Phone number ends in 97**: No. There\u2019s no plausible causal link between that and the project duration, so it shouldn\u2019t update the estimate.\n\n2) **Another company\u2019s unrelated project took 12 weeks**: Not meaningfully relevant unless it\u2019s truly comparable (same scope, team size, constraints, domain, dependencies). As stated (\u201ccompletely unrelated\u201d), it shouldn\u2019t update the estimate.\n\n3) **Rain next Tuesday**: Usually irrelevant unless weather directly impacts critical-path work (e.g., outdoor construction, field work, logistics disruptions). With no such dependency stated, it shouldn\u2019t update the estimate.\n\nGiven that none of the new information is predictive, I\u2019ll keep the point estimate the same and keep a moderate uncertainty band around it.\n\n```json\n{\"estimate\": 3.2, \"ci_low\": 2.4, \"ci_high\": 4.2}\n```"
+}

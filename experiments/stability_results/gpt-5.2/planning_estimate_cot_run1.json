@@ -1,0 +1,21 @@
+{
+  "case_id": "planning_estimate",
+  "condition": "cot",
+  "model": "gpt-5.2",
+  "initial_estimate": 3.0,
+  "initial_ci": [
+    2.0,
+    5.0
+  ],
+  "final_estimate": 9.8,
+  "final_ci": [
+    5.8,
+    18.4
+  ],
+  "update_magnitude": 6.800000000000001,
+  "update_direction": "up",
+  "relative_update": 2.266666666666667,
+  "had_initial_ci": true,
+  "initial_response_text": "```json\n{\"estimate\": 3.0, \"ci_low\": 2.0, \"ci_high\": 5.0}\n```",
+  "final_response_text": "Start from the earlier estimate: **3.0 weeks**, 80% CI **[2.0, 5.0]**.\n\n## 1) \u201cProjects average 2\u20133\u00d7 initial estimates\u201d\nThat statistic is typically about *initial/planned* estimates being optimistic. If our 3.0-week number was effectively an \u201cinside view\u201d estimate, this is evidence we should inflate it. A simple way is to apply a multiplicative uplift.\n\n- Use a midpoint uplift of **2.5\u00d7** (between 2 and 3) as a central adjustment.\n- This would move the point estimate to **3.0 \u00d7 2.5 = 7.5 weeks**.\n- Apply similarly to the CI: **[2.0, 5.0] \u00d7 2.5 \u2192 [5.0, 12.5]**.\n\nSo after (1): estimate \u2248 **7.5 weeks**, CI \u2248 **[5.0, 12.5]**.\n\n## 2) \u201cTeam confidence is a planning-fallacy warning\u201d\nThis is additional evidence that the earlier estimate is on the optimistic side even *relative to* typical uplifts. Rather than re-multiplying by another huge factor, I\u2019d model it as a modest additional uplift.\n\n- Apply an additional **~15%** uplift to center and bounds.\n\nAfter (2):\n- Point: **7.5 \u00d7 1.15 = 8.625 \u2192 8.6 weeks**\n- CI: **[5.0, 12.5] \u00d7 1.15 = [5.75, 14.375] \u2192 [5.8, 14.4]**\n\n## 3) 30% chance of a major blocker\nModel as a mixture:\n- With **70%** probability: duration ~ baseline from (2).\n- With **30%** probability: add \u201cmajor blocker\u201d delay.\n\nWe need an assumption for blocker impact. \u201cMajor blocker (integration issue, unclear requirements)\u201d commonly adds on the order of a couple weeks to a month. I\u2019ll use:\n- **Blocker adds ~4 weeks** (as a reasonable central impact).\n\n### Revised point estimate (expected value style)\n- New estimate \u2248 **8.625 + 0.30 \u00d7 4 = 8.625 + 1.2 = 9.825 \u2192 9.8 weeks**\n\n### Revised 80% interval\nWe want an interval that captures much of the baseline uncertainty *and* includes blocker risk in the upper tail. A simple approximation:\n- Lower bound: baseline lower (**~5.75 weeks**) (blockers don\u2019t usually make things faster).\n- Upper bound: near the baseline upper (**~14.38**) plus blocker impact (**+4**) to reflect that a substantial portion (30%) lands in the \u201cshifted right\u201d mode \u2192 **~18.38 weeks**.\n\nSo 80% CI \u2248 **[5.8, 18.4]**.\n\n```json\n{\"estimate\": 9.8, \"ci_low\": 5.8, \"ci_high\": 18.4}\n```"
+}

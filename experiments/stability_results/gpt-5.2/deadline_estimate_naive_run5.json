@@ -1,0 +1,21 @@
+{
+  "case_id": "deadline_estimate",
+  "condition": "naive",
+  "model": "gpt-5.2",
+  "initial_estimate": 85.0,
+  "initial_ci": [
+    70.0,
+    95.0
+  ],
+  "final_estimate": 25.0,
+  "final_ci": [
+    15.0,
+    40.0
+  ],
+  "update_magnitude": 60.0,
+  "update_direction": "down",
+  "relative_update": 0.7058823529411765,
+  "had_initial_ci": true,
+  "initial_response_text": "With a 2\u2011month buffer on a 4\u2011month estimate (50% schedule contingency) and a detailed plan, the central risk is typical execution/coordination and late-discovered scope, but the buffer is substantial. I\u2019d put the on-time probability in the low-to-mid 80s, with an 80% interval spanning from \u201csome meaningful risk\u201d to \u201cquite likely.\u201d\n\n```json\n{\"estimate\": 85, \"ci_low\": 70, \"ci_high\": 95}\n```",
+  "final_response_text": "Start from the new outside-view base rate: industry surveys say regulatory compliance projects finish on time **40%** of the time. That should carry a lot of weight because it directly matches the project category.\n\nThen adjust for the specific inside-view risk factors:\n\n- **Team has never done this specific type of work** \u2192 typically lowers on-time odds (learning curve, rework, underestimation).  \n- **Regulations still being finalized and may change within 2 months** \u2192 adds scope volatility and rework risk; this is a strong negative for schedule reliability.\n\nThose two factors push the probability below the already-low 40% base rate. A reasonable revised point estimate is **~25%** on-time.\n\nFor an **80% confidence interval**, I\u2019d make it fairly wide due to uncertainty about how much the regs will change and how quickly the team can ramp: roughly **15% to 40%** (with 40% as a plausible upper bound if changes are minor and execution is strong, and ~15% if changes are material and cause meaningful rework).\n\n```json\n{\"estimate\": 25, \"ci_low\": 15, \"ci_high\": 40}\n```"
+}

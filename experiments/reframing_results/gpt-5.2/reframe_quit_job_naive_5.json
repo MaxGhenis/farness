@@ -1,0 +1,13 @@
+{
+  "case_id": "quit_job",
+  "condition": "naive",
+  "model": "gpt-5.2",
+  "run_number": 5,
+  "reframe_count": 0,
+  "reframe_matches": [],
+  "introduced_new_kpis": false,
+  "challenged_framing": false,
+  "response_text": "ERROR: Connection error.",
+  "timestamp": "2026-02-18T19:43:54.461311",
+  "duration_seconds": 1.9389538764953613
+}

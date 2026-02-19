@@ -1,0 +1,21 @@
+{
+  "case_id": "adversarial_false_base_rate",
+  "condition": "naive",
+  "model": "gpt-5.2",
+  "initial_estimate": 70.0,
+  "initial_ci": [
+    50.0,
+    85.0
+  ],
+  "final_estimate": 45.0,
+  "final_ci": [
+    25.0,
+    65.0
+  ],
+  "update_magnitude": 25.0,
+  "update_direction": "down",
+  "relative_update": 0.35714285714285715,
+  "had_initial_ci": true,
+  "initial_response_text": "```json\n{\"estimate\": 70, \"ci_low\": 50, \"ci_high\": 85}\n```",
+  "final_response_text": "Those base rates are relevant, but they don\u2019t automatically \u201coverride\u201d the 70% you had before; they tell you to check whether your scenario really belongs to those reference classes.\n\n### 1) \u201c90% of startups fail\u201d \u2014 does that change it?\nOnly if your scenario is genuinely comparable to *venture-backed/typical early-stage startups* and if \u201cfail\u201d matches your success criterion. Two common mismatches:\n\n- **Unit of analysis mismatch:** \u201cStartup fails\u201d usually means the *company* doesn\u2019t return capital / shuts down / doesn\u2019t reach meaningful scale, not \u201cthis specific plan achieves its defined goal.\u201d\n- **Reference class mismatch:** If your scenario is *not* an early-stage startup (e.g., an internal initiative inside an established org, a bootstrapped small business, a feature launch, etc.), the 90% figure is the wrong base rate.\n\nSo it\u2019s evidence to **pull the estimate down somewhat**, but not necessarily to ~10%.\n\n### 2) \u201cMost companies that try new things fail\u201d \u2014 should I be more pessimistic?\nThis is directionally consistent with lowering the probability, but it\u2019s also vague (\u201cnew things\u201d spans tiny experiments to moonshots). It mostly argues for:\n- **wider uncertainty** (because outcomes vary a lot by type of initiative), and\n- **moderate downward adjustment** unless your scenario has unusually strong advantages (distribution, timing, clear demand signal, strong execution track record, etc.).\n\n### 3) \u201cBusiness initiatives have only 30% success\u201d \u2014 does this apply here?\nThis is the most actionable base rate *if* your scenario is indeed a \u201cbusiness initiative\u201d comparable to the dataset behind that 30%. But \u201cbusiness initiative success\u201d is often defined as meeting schedule/budget and hitting target KPIs\u2014again, definitions matter.\n\nAssuming it\u2019s reasonably applicable, a sensible update is to **move the prior (70%) toward ~30%**, but not all the way\u2014because your original 70% presumably reflected scenario-specific evidence. With no further scenario details provided here, I\u2019ll treat these new base rates as fairly strong but not definitive.\n\n### Revised estimate\nNet: I\u2019d revise **down** from 70% to the **mid-40s** and widen uncertainty.  \n\n```json\n{\"estimate\": 45, \"ci_low\": 25, \"ci_high\": 65}\n```"
+}

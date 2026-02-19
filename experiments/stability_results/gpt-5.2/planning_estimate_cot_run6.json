@@ -1,0 +1,21 @@
+{
+  "case_id": "planning_estimate",
+  "condition": "cot",
+  "model": "gpt-5.2",
+  "initial_estimate": 3.0,
+  "initial_ci": [
+    2.2,
+    4.2
+  ],
+  "final_estimate": 4.8,
+  "final_ci": [
+    2.8,
+    8.5
+  ],
+  "update_magnitude": 1.7999999999999998,
+  "update_direction": "up",
+  "relative_update": 0.6,
+  "had_initial_ci": true,
+  "initial_response_text": "Teams that estimate \u201c2 weeks\u201d with detailed breakdowns still tend to face hidden work: integration issues, reviews/QA, unexpected edge cases, coordination overhead, and small scope creep. A common planning-fallacy adjustment is roughly 1.3\u20131.8\u00d7 the original estimate for \u201cactual elapsed time,\u201d especially when the estimate already feels confident. I\u2019ll center near ~1.5\u00d7 with a moderately wide 80% interval.\n\n```json\n{\"estimate\": 3.0, \"ci_low\": 2.2, \"ci_high\": 4.2}\n```",
+  "final_response_text": "Start from the prior estimate:\n\n- Baseline: **3.0 weeks**, 80% CI **[2.2, 4.2]**\n\n### 1) \u201cProjects average 2\u20133\u00d7 initial estimates\u201d\nThat statistic is usually about *naive* initial estimates vs actuals; my earlier 3.0 weeks was already a probabilistic estimate with an explicit CI, so applying a full 2\u20133\u00d7 multiplier would likely double-count pessimism. Still, it suggests my baseline could be biased low. I\u2019ll apply a **moderate uplift**, not 2\u20133\u00d7.\n\nAssume ~**1.25\u00d7** central uplift for base-case work:\n- New base central \u2248 3.0 \u00d7 1.25 = **3.75 weeks**\n- Scale CI similarly: [2.2, 4.2] \u00d7 1.25 \u2192 **[2.75, 5.25]**\n\n### 2) \u201cConfidence is a planning-fallacy warning sign\u201d\nThis pushes the same direction: increase both expected duration and uncertainty. I\u2019ll widen slightly:\n\n- Base central: **3.75 \u2192 3.9 weeks**\n- Base 80% CI: **[2.75, 5.25] \u2192 [2.7, 5.6]** (a bit wider on the high end)\n\nSo *without* the major-blocker risk, I\u2019d use:\n- **Base (no-major-blocker): 3.9 weeks**, 80% CI **[2.7, 5.6]**\n\n### 3) 30% chance of a major blocker\nModel as a mixture:\n- With probability **70%**: base outcome above.\n- With probability **30%**: \u201cmajor blocker\u201d adds extra time.\n\nWe need an assumption for blocker impact. \u201cMajor integration issue / unclear requirements\u201d often adds on the order of **~2\u20134 weeks** (can be more, but \u201cmajor\u201d here implies noticeable schedule impact). Use a simple additive impact:\n- Blocker add-on (typical): **+3.0 weeks**\n- Blocker add-on 80% range: roughly **[+1.5, +6.0]** (uncertainty is big)\n\nCentral estimate (expected value approximation):\n- E[T] \u2248 0.7*(3.9) + 0.3*(3.9 + 3.0)  \n  = 3.9 + 0.3*3.0  \n  = **4.8 weeks**\n\n80% interval for the mixture (approximate):\n- Lower bound: dominated by the no-blocker case lower tail \u2192 about **~2.8 weeks**\n- Upper bound: needs to cover a good chunk of the blocker tail. A practical approximation is \u201cbase high + typical blocker add-on high-ish\u201d, but weighted by 30% probability, so not the extreme worst case. I\u2019ll set an 80% high around **~8.5 weeks**.\n\n**Revised estimate: 4.8 weeks, 80% CI [2.8, 8.5].**\n\n```json\n{\"estimate\": 4.8, \"ci_low\": 2.8, \"ci_high\": 8.5}\n```"
+}

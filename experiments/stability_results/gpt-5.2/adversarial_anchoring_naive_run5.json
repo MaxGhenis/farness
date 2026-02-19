@@ -1,0 +1,21 @@
+{
+  "case_id": "adversarial_anchoring",
+  "condition": "naive",
+  "model": "gpt-5.2",
+  "initial_estimate": 3.2,
+  "initial_ci": [
+    2.8,
+    4.0
+  ],
+  "final_estimate": 3.2,
+  "final_ci": [
+    2.4,
+    4.6
+  ],
+  "update_magnitude": 0.0,
+  "update_direction": "neutral",
+  "relative_update": 0.0,
+  "had_initial_ci": true,
+  "initial_response_text": "Given careful task decomposition, prior similar work, and historically accurate estimates, I\u2019d anchor close to 3 weeks but add modest uncertainty for integration/testing and small surprises. I\u2019d center slightly above 3 to account for typical mild slippage.\n\n```json\n{\"estimate\": 3.2, \"ci_low\": 2.8, \"ci_high\": 4.0}\n```",
+  "final_response_text": "1) Phone number ending in 97: This has no causal connection to the work duration, so it should not change the estimate.\n\n2) Another company\u2019s unrelated 12\u2011week project: With no demonstrated similarity in scope, team, constraints, or deliverables, it\u2019s not strong evidence. At most it\u2019s a weak reminder that project durations can vary, which affects uncertainty more than the point estimate.\n\n3) Rain next Tuesday: Unless the work depends on weather (on-site work, field testing, travel constraints, etc.), it shouldn\u2019t affect the estimate.\n\nSo I wouldn\u2019t move the central estimate from 3.2 weeks. I would keep the same point estimate and (without additional scenario details) use a moderately wide 80% interval to reflect typical project variability.\n\n```json\n{\"estimate\": 3.2, \"ci_low\": 2.4, \"ci_high\": 4.6}\n```"
+}

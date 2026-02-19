@@ -1,0 +1,21 @@
+{
+  "case_id": "startup_success",
+  "condition": "cot",
+  "model": "gpt-5.2",
+  "initial_estimate": 6.0,
+  "initial_ci": [
+    2.0,
+    15.0
+  ],
+  "final_estimate": 3.0,
+  "final_ci": [
+    1.0,
+    7.0
+  ],
+  "update_magnitude": 3.0,
+  "update_direction": "down",
+  "relative_update": 0.5,
+  "had_initial_ci": true,
+  "initial_response_text": "Base rate first: after 18 months a product sitting around ~500 MAU with flat growth is usually not showing strong product\u2011market fit. Getting to 10,000 MAU in the next 12 months requires a 20\u00d7 increase, i.e., roughly ~28% compound monthly growth (because \\(500 \\times 1.28^{12} \\approx 10{,}000\\)). \u201cFlat\u201d implies they are currently far below that.\n\nIf they *persist with the current approach* (same target user, positioning, distribution channels, and core product direction), the most likely outcomes are: modest improvements (maybe 1.2\u20133\u00d7) or continued flatness/decline. Reaching 20\u00d7 typically requires a step-change in either distribution (new channel that works) or retention/virality (clear PMF), which is less likely without a meaningful pivot.\n\nThat said, it\u2019s not impossible: sometimes a product looks flat until one channel clicks, pricing changes unlock sharing, or an integration/SEO strategy suddenly compounds. But those are relatively rare given the time already spent and the constraint of \u201ccurrent approach.\u201d\n\nSo I\u2019d put the probability in the single digits, with a wide uncertainty band to reflect missing details (category, retention, paid acquisition economics, etc.).\n\n```json\n{\"estimate\": 6, \"ci_low\": 2, \"ci_high\": 15}\n```",
+  "final_response_text": "Start from your prior estimate: **6%** (with wide uncertainty).\n\n### Step 1 \u2014 Update from base rate (18 months flat)\nYou\u2019re giving a strong reference class: **~5%** of startups that have been flat for 18 months later see *sudden organic growth* without major changes.  \nThat suggests my prior **6%** was a bit high if we\u2019re talking about \u201cinflecting\u201d in a similar \u201cno-major-change\u201d regime, so I\u2019d pull the center **toward ~5%**.\n\n### Step 2 \u2014 Tried 3 marketing channels with similar results\nThis is evidence the problem isn\u2019t a single-channel mismatch and reduces the chance that there\u2019s an \u201ceasy\u201d go-to-market unlock remaining. That should push the probability **down further** from the 5% base rate\u2014because the 5% includes cases where founders haven\u2019t exhausted obvious levers yet.\n\n### Step 3 \u2014 Competitor raised $10M targeting same market\nA well-funded competitor increases execution pressure (higher CAC, faster feature race, mindshare), which generally **reduces** the odds of an organic inflection for the smaller/flat-growth startup *unless* the smaller startup has strong differentiation or a niche wedge (not provided). So this also pushes probability **down**.\n\n### Revised estimate\nNet: move from 6% \u2192 around base rate (5%) \u2192 discount for exhausted channels + new competitive pressure.\n\nI land at **~3%** as a revised point estimate.\n\n### 80% confidence interval\nGiven we still have limited detail (product quality, retention, unit economics, differentiation), uncertainty remains meaningful, but the new info narrows the upside. I\u2019d set an 80% CI of roughly **1% to 7%**.\n\n```json\n{\"estimate\": 3.0, \"ci_low\": 1.0, \"ci_high\": 7.0}\n```"
+}

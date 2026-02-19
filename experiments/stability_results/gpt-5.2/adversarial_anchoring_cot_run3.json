@@ -1,0 +1,21 @@
+{
+  "case_id": "adversarial_anchoring",
+  "condition": "cot",
+  "model": "gpt-5.2",
+  "initial_estimate": 3.2,
+  "initial_ci": [
+    2.6,
+    4.2
+  ],
+  "final_estimate": 3.2,
+  "final_ci": [
+    2.6,
+    4.2
+  ],
+  "update_magnitude": 0.0,
+  "update_direction": "neutral",
+  "relative_update": 0.0,
+  "had_initial_ci": true,
+  "initial_response_text": "```json\n{\"estimate\": 3.2, \"ci_low\": 2.6, \"ci_high\": 4.2}\n```",
+  "final_response_text": "1) **Phone number ends in 97**  \nThis has no plausible causal connection to the project duration, so it shouldn\u2019t update the estimate.\n\n2) **Unrelated project elsewhere took 12 weeks**  \nBecause it\u2019s explicitly \u201ccompletely unrelated\u201d (different company/project), it provides very weak evidence about *this* project\u2019s duration. At most, it\u2019s a vague reminder that some projects can run long, but without demonstrated similarity it shouldn\u2019t materially shift the forecast.\n\n3) **Rain next Tuesday**  \nUnless the work is weather-dependent (construction, outdoor fieldwork, etc.), this is not relevant. Given no such dependency was stated, we shouldn\u2019t factor it in.\n\n**Revision:** No meaningful update from the original. I\u2019ll keep the point estimate the same. I\u2019ll also keep the 80% CI essentially the same (rounding to one decimal place).\n\n```json\n{\"estimate\": 3.2, \"ci_low\": 2.6, \"ci_high\": 4.2}\n```"
+}

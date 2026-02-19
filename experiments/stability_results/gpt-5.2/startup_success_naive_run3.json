@@ -1,0 +1,21 @@
+{
+  "case_id": "startup_success",
+  "condition": "naive",
+  "model": "gpt-5.2",
+  "initial_estimate": 6.0,
+  "initial_ci": [
+    2.0,
+    15.0
+  ],
+  "final_estimate": 3.0,
+  "final_ci": [
+    1.0,
+    6.0
+  ],
+  "update_magnitude": 3.0,
+  "update_direction": "down",
+  "relative_update": 0.5,
+  "had_initial_ci": true,
+  "initial_response_text": "With 500 MAU after 18 months and flat growth, the base rate for reaching 10,000 MAU (a 20\u00d7 increase) in the next 12 months *without* a meaningful change in approach is low. That outcome typically requires either a clear distribution breakthrough, strong product-led virality/retention, or a step-change in acquisition channels\u2014none of which is implied by \u201cpersist with current approach.\u201d Some chance remains due to execution improvements and latent product-market fit, but flat growth this late is a strong negative signal.\n\n```json\n{\"estimate\": 6, \"ci_low\": 2, \"ci_high\": 15}\n```",
+  "final_response_text": "Starting from the prior 6% estimate, the new facts mostly push probability downward:\n\n- **Base rate (\u22485%)**: If the relevant reference class is \u201cflat for 18 months, then sudden *organic* inflection without major changes,\u201d that\u2019s already below 6% and should pull the estimate toward ~5% (or lower if your scenario requires a meaningful inflection, not just a mild uptick).\n- **3 channels tried with similar results**: This is evidence against \u201ceasy-to-find distribution unlocks.\u201d It doesn\u2019t make growth impossible, but it reduces the likelihood that there\u2019s a near-term organic channel breakthrough.\n- **Competitor raised $10M targeting same market**: Typically negative for a flat-growth startup\u2019s chance of an organic inflection (attention, CAC, and hiring competition), unless the market is so underpenetrated that it lifts category awareness. With the info given, I\u2019d treat it as net negative.\n\nNetting those together, I\u2019d revise the probability to **~3%**.\n\nFor an **80% confidence interval**, given the uncertainty about (a) what \u201cinflect\u201d means quantitatively and (b) whether \u201cmajor changes\u201d are allowed in the scenario, I\u2019d use a moderately wide interval: **~1% to 6%**.\n\n```json\n{\"estimate\": 3.0, \"ci_low\": 1.0, \"ci_high\": 6.0}\n```"
+}

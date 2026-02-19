@@ -1,0 +1,21 @@
+{
+  "case_id": "product_launch",
+  "condition": "naive",
+  "model": "gpt-5.2",
+  "initial_estimate": 45.0,
+  "initial_ci": [
+    25.0,
+    65.0
+  ],
+  "final_estimate": 17.0,
+  "final_ci": [
+    10.0,
+    26.0
+  ],
+  "update_magnitude": 28.0,
+  "update_direction": "down",
+  "relative_update": 0.6222222222222222,
+  "had_initial_ci": true,
+  "initial_response_text": "Positive internal testing and a beta NPS of 45 suggest users like the feature, but liking doesn\u2019t reliably translate into a \u226510% *overall* engagement lift\u2014especially within 3 months\u2014because adoption, discoverability, habit formation, and cannibalization/substitution effects often blunt net gains. A 10% overall lift is a meaningful step-change; many \u201csuccessful\u201d features produce smaller global movement unless they affect a core loop and reach high penetration quickly. Given the signals, I\u2019d put the probability modestly above base rates for feature launches, but far from certain.\n\n```json\n{\"estimate\": 45, \"ci_low\": 25, \"ci_high\": 65}\n```",
+  "final_response_text": "Start from the new base rate rather than the prior 45%. If only **20\u201330%** of new features meaningfully move engagement, a neutral prior center is ~**25%**.\n\nNow adjust for the three updates:\n\n1) **Base rate (20\u201330%)**  \nThis alone pulls the estimate down from 45% to ~25%.\n\n2) **Beta users are enthusiasts (selection bias)**  \nPositive results in beta are less likely to generalize; conditional on \u201clooks good in beta,\u201d the real-world probability of meaningfully moving metrics is typically lower. I\u2019d apply a material downward adjustment (on the order of ~20\u201330% relative), taking ~25% \u2192 ~18\u201320%.\n\n3) **Builder-measures-success (measurement bias / p-hacking risk)**  \nThis further reduces the chance that an apparent lift reflects a true, durable effect. Another modest downward adjustment (say ~10\u201315% relative) puts us around **~16\u201318%**.\n\nPutting it together, my revised point estimate is **17%**.\n\n**80% confidence interval:** uncertainty is fairly wide because the main risks (generalization + measurement bias) are hard to quantify precisely. I\u2019d place the 80% CI at **10% to 26%** (still anchored to the 20\u201330% base rate but allowing meaningful downside and some upside if the feature is genuinely strong).\n\n```json\n{\"estimate\": 17, \"ci_low\": 10, \"ci_high\": 26}\n```"
+}

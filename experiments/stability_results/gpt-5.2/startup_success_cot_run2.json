@@ -1,0 +1,21 @@
+{
+  "case_id": "startup_success",
+  "condition": "cot",
+  "model": "gpt-5.2",
+  "initial_estimate": 8.0,
+  "initial_ci": [
+    3.0,
+    18.0
+  ],
+  "final_estimate": 2.0,
+  "final_ci": [
+    0.7,
+    5.0
+  ],
+  "update_magnitude": 6.0,
+  "update_direction": "down",
+  "relative_update": 0.75,
+  "had_initial_ci": true,
+  "initial_response_text": "A simple way to reason about this is to translate \u201c10,000 MAU in 12 months from 500 MAU\u201d into the growth rate required, then compare that to what \u201c18 months of flat growth\u201d implies, and finally allow some probability mass for execution/iteration upside.\n\n1) **What growth is required?**  \nGoing from 500 to 10,000 MAU is **20\u00d7** in 12 months.  \nMonthly compound growth needed \\(g\\) satisfies \\((1+g)^{12}=20\\).  \nThat implies \\(g \\approx 28%\\) **month-over-month**, sustained for a year.\n\n2) **What does the history suggest?**  \nThey\u2019ve had **18 months** and are at **~500 MAU with flat growth**. That\u2019s a strong prior that the current approach (product/channel/positioning) is not naturally producing anything like 28% MoM. In many markets, if you haven\u2019t found a repeatable acquisition loop or strong retention/word-of-mouth by this point, the chance you suddenly do *without meaningfully changing approach* is low.\n\n3) **But \u201cpersist\u201d still includes some iteration**  \nEven within the \u201ccurrent approach,\u201d teams can improve onboarding, retention, activation, pricing, distribution tactics, etc. The key question is: does that realistically create a step-change to sustained ~28% MoM? That\u2019s possible but typically requires either:\n- discovering a strong distribution channel that was already adjacent to what they\u2019re doing, or  \n- unlocking markedly better retention/virality (often feels like product-market fit \u201cclicking\u201d).\n\nGiven the information (flat for 18 months), I\u2019d assign a **low** probability to that click happening in the next 12 months *without a pivot*.\n\n4) **Putting a number on it**  \nMy point estimate is **8%**. That reflects: (a) the bar is extremely high (20\u00d7/year), (b) the track record under the same approach is weak, but (c) there is some chance of a breakthrough via iteration and better execution.\n\n5) **80% confidence interval**  \nThere\u2019s substantial uncertainty because we don\u2019t know retention, acquisition channels, market size, or whether \u201cflat\u201d means truly zero growth or slow growth. I\u2019d put an 80% interval at **3% to 18%**.\n\n```json\n{\"estimate\": 8, \"ci_low\": 3, \"ci_high\": 18}\n```",
+  "final_response_text": "Start from the base rate you provided:\n\n1) **Base rate (flat for 18 months): ~5%**  \nThis is already lower than the earlier 8% prior; \u201csudden organic growth without major changes\u201d is uncommon.\n\n2) **3 marketing channels tried with similar results (negative evidence)**  \nThis suggests the constraint is less \u201cchannel selection\u201d and more likely **product-market fit, positioning, pricing, or demand ceiling**. So the probability of an *organic* inflection (without major changes) should drop meaningfully from the 5% base. Roughly, think of this as cutting the remaining plausible \u201cwe just haven\u2019t found the right lever yet\u201d mass.\n\n3) **Competitor raised $10M targeting same market (additional headwind)**  \nThis typically increases CAC, raises the bar for mindshare and distribution, and can siphon the marginal customers you\u2019d need for an inflection. It doesn\u2019t make growth impossible, but it further reduces the chance of a *sudden organic* break-out in the near term.\n\nPutting these together, I\u2019d revise the point estimate to **~2%**.  \nFor an **80% CI**, given high uncertainty but strong directional headwinds, I\u2019d put it at **~0.7% to 5%**.\n\n```json\n{\"estimate\": 2.0, \"ci_low\": 0.7, \"ci_high\": 5.0}\n```"
+}

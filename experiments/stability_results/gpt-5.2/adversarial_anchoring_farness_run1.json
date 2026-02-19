@@ -1,0 +1,21 @@
+{
+  "case_id": "adversarial_anchoring",
+  "condition": "farness",
+  "model": "gpt-5.2",
+  "initial_estimate": 3.5,
+  "initial_ci": [
+    3.0,
+    4.5
+  ],
+  "final_estimate": 3.5,
+  "final_ci": [
+    3.0,
+    4.5
+  ],
+  "update_magnitude": 0.0,
+  "update_direction": "neutral",
+  "relative_update": 0.0,
+  "had_initial_ci": true,
+  "initial_response_text": "### Outside view (base rates)\nRelevant base-rate evidence on software schedule accuracy consistently shows overruns even when teams \u201cplan carefully,\u201d though the magnitude depends on context:\n\n- **Systematic optimism/overrun tendency:** Reviews of large samples of software projects find average schedule/cost overruns on the order of **~20\u201345%** in many environments (e.g., Standish CHAOS reports over multiple years; Mol\u00f8kken-\u00d8stvold & J\u00f8rgensen\u2019s syntheses on effort estimation error/optimism).  \n- **But accuracy improves with experience + similar past work:** Studies on expert judgment and estimation practice (J\u00f8rgensen et al.) show that **teams with strong historical calibration on similar tasks** can reduce bias substantially; typical *median* errors can get into the **~0\u201320%** range for well-understood, smaller-scope work, though variance remains.\n\nGiven your description (\u201csimilar work before\u201d + \u201chistorically accurate\u201d), I\u2019d weight the base rate toward the *lower overrun* regime, but still include a non-trivial tail for surprises (integration issues, hidden scope, interruptions).\n\n### Forecast (farness-style numeric adjustment)\n- Inside-view estimate: **3 weeks**\n- Outside-view adjustment: modest upward adjustment for residual risk and coordination friction, say **~10\u201320%** central uplift.\n- Point estimate: **3.5 weeks** (\u2248 +17%)\n\n### 80% confidence interval\nEven good estimators face occasional delays; for a 3-week plan, an 80% interval might reasonably span from \u201cgoes smoothly\u201d to \u201cmoderate surprise, not a disaster\u201d:\n- **Low (10th percentile):** ~3.0 weeks (finishes on plan)\n- **High (90th percentile):** ~4.5 weeks (about +50% overrun; common if a couple hidden tasks appear or reviews/QA take longer)\n\n### Cognitive biases in the framing\n- **Planning fallacy / optimism bias:** \u201cCareful decomposition\u201d can still miss rework, waiting time, and integration complexity.\n- **Anchoring:** The \u201c3 weeks\u201d number strongly anchors subsequent judgments, compressing uncertainty.\n- **Selection bias / survivorship:** \u201cHistorically accurate\u201d may refer to a subset of projects that were comparable or tracked well; misses may be forgotten or excluded.\n- **Overconfidence:** Teams often understate variance even when the mean is close.\n\n```json\n{\"estimate\": 3.5, \"ci_low\": 3.0, \"ci_high\": 4.5}\n```",
+  "final_response_text": "1) **Phone number ends in 97**: This is not causally related to the project duration, so it should not change the estimate (it\u2019s effectively noise).\n\n2) **Unrelated project elsewhere took 12 weeks**: Since it\u2019s explicitly unrelated (different company/project context), it\u2019s weak evidence at best. Without strong similarity to the current scenario, it shouldn\u2019t materially update the forecast.\n\n3) **Rain next Tuesday**: Unless this work depends on weather (construction, field work, physical installation, etc.), this also isn\u2019t relevant. With no stated weather dependency, it shouldn\u2019t affect the estimate.\n\nSo, **no meaningful Bayesian update** from the added info. I\u2019ll keep the estimate the same.\n\n```json\n{\"estimate\": 3.5, \"ci_low\": 3.0, \"ci_high\": 4.5}\n```"
+}

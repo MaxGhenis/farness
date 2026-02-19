@@ -16,6 +16,27 @@ from farness.experiments.stability_runner import (
     run_stability_experiment,
     print_experiment_summary,
 )
+from farness.experiments.llm import model_short_name
+
+ALL_CONDITIONS = ["naive", "cot", "farness"]
+
+
+def _add_model_args(parser: argparse.ArgumentParser) -> None:
+    """Add --model and --conditions args to a subparser."""
+    parser.add_argument(
+        "--model",
+        type=str,
+        default="claude-opus-4-6",
+        help="LLM model ID (e.g. claude-opus-4-6, gpt-5.2)",
+    )
+    parser.add_argument(
+        "--conditions",
+        type=str,
+        nargs="+",
+        choices=ALL_CONDITIONS,
+        default=None,
+        help="Conditions to run (default: naive farness)",
+    )
 
 
 def main():
@@ -73,9 +94,7 @@ def main():
     )
 
     # List cases
-    list_parser = subparsers.add_parser(
-        "cases", help="List available test cases"
-    )
+    subparsers.add_parser("cases", help="List available test cases")
 
     # Stability experiment
     stability_parser = subparsers.add_parser(
@@ -84,8 +103,8 @@ def main():
     stability_parser.add_argument(
         "--output-dir",
         type=Path,
-        default=Path("experiments/stability_results"),
-        help="Output directory",
+        default=None,
+        help="Output directory (default: experiments/stability_results/{model})",
     )
     stability_parser.add_argument(
         "--runs",
@@ -114,6 +133,31 @@ def main():
         default=1,
         help="Starting run number (for appending to existing results)",
     )
+    _add_model_args(stability_parser)
+
+    # Reframing experiment
+    reframing_parser = subparsers.add_parser(
+        "reframing", help="Run reframing experiment"
+    )
+    reframing_parser.add_argument(
+        "--output-dir",
+        type=Path,
+        default=None,
+        help="Output directory (default: experiments/reframing_results/{model})",
+    )
+    reframing_parser.add_argument(
+        "--runs",
+        type=int,
+        default=5,
+        help="Runs per condition",
+    )
+    reframing_parser.add_argument(
+        "--start-run",
+        type=int,
+        default=1,
+        help="Starting run number",
+    )
+    _add_model_args(reframing_parser)
 
     # Reanalyze from saved files
     reanalyze_parser = subparsers.add_parser(
@@ -123,13 +167,36 @@ def main():
         "--stability-dir",
         type=Path,
         default=Path("experiments/stability_results"),
-        help="Stability results directory",
+        help="Stability results directory (searches subdirs for model-specific results)",
     )
     reanalyze_parser.add_argument(
         "--reframing-dir",
         type=Path,
         default=Path("experiments/reframing_results"),
+        help="Reframing results directory (searches subdirs for model-specific results)",
+    )
+
+    # Judge experiment
+    judge_parser = subparsers.add_parser(
+        "judge", help="Run LLM-as-judge evaluation"
+    )
+    judge_parser.add_argument(
+        "--reframing-dir",
+        type=Path,
+        default=Path("experiments/reframing_results"),
         help="Reframing results directory",
+    )
+    judge_parser.add_argument(
+        "--stability-dir",
+        type=Path,
+        default=Path("experiments/stability_results"),
+        help="Stability results directory",
+    )
+    judge_parser.add_argument(
+        "--judge-model",
+        type=str,
+        default=None,
+        help="Model to use as judge (default: cross-model judging)",
     )
 
     args = parser.parse_args()
@@ -213,95 +280,246 @@ def main():
         else:
             cases = get_all_stability_cases()
 
-        print(f"Running stability experiment: {len(cases)} cases, {args.runs} runs/condition (starting at run {args.start_run})")
+        model = args.model
+        conditions = args.conditions
+        output_dir = args.output_dir or Path(f"experiments/stability_results/{model_short_name(model)}")
+
+        print(f"Running stability experiment: {len(cases)} cases, {args.runs} runs/condition")
+        print(f"  Model: {model}")
+        print(f"  Conditions: {conditions or ['naive', 'farness']}")
+        print(f"  Output: {output_dir}")
+        print(f"  Starting at run {args.start_run}")
 
         experiment = run_stability_experiment(
             cases=cases,
             runs_per_condition=args.runs,
-            output_dir=args.output_dir,
+            output_dir=output_dir,
             verbose=True,
             random_seed=args.seed,
             start_run=args.start_run,
+            model=model,
+            conditions=conditions,
         )
 
         print_experiment_summary(experiment)
-        print(f"\nResults saved to {args.output_dir}")
+        print(f"\nResults saved to {output_dir}")
+
+    elif args.command == "reframing":
+        from farness.experiments.reframing import (
+            REFRAMING_CASES,
+            run_reframing_experiment,
+            analyze_reframing,
+            summary_table,
+        )
+
+        model = args.model
+        conditions = args.conditions
+        output_dir = args.output_dir or Path(f"experiments/reframing_results/{model_short_name(model)}")
+
+        print(f"Running reframing experiment: {len(REFRAMING_CASES)} cases, {args.runs} runs/condition")
+        print(f"  Model: {model}")
+        print(f"  Conditions: {conditions or ['naive', 'farness']}")
+        print(f"  Output: {output_dir}")
+
+        results = run_reframing_experiment(
+            runs_per_condition=args.runs,
+            output_dir=output_dir,
+            verbose=True,
+            start_run=args.start_run,
+            model=model,
+            conditions=conditions,
+        )
+
+        analysis = analyze_reframing(results)
+        print(summary_table(results))
+
+        with open(output_dir / "summary.json", "w") as fh:
+            json.dump(analysis, fh, indent=2)
+        print(f"\nResults saved to {output_dir}")
 
     elif args.command == "reanalyze":
-        from farness.experiments.stability import StabilityResult, StabilityExperiment
-        from farness.experiments.reframing import ReframingResult, analyze_reframing, summary_table
+        _reanalyze(args)
 
-        # Load stability results
-        stability_dir = Path(args.stability_dir)
-        if stability_dir.exists():
-            stability_results = []
-            for f in sorted(stability_dir.glob("*_run*.json")):
-                if f.name in ("summary.json", "experiment_metadata.json"):
-                    continue
-                with open(f) as fh:
-                    data = json.load(fh)
-                stability_results.append(StabilityResult(
-                    case_id=data["case_id"],
-                    condition=data["condition"],
-                    initial_estimate=data["initial_estimate"],
-                    initial_ci_low=data.get("initial_ci", [None, None])[0],
-                    initial_ci_high=data.get("initial_ci", [None, None])[1],
-                    final_estimate=data["final_estimate"],
-                    final_ci_low=data.get("final_ci", [None, None])[0],
-                    final_ci_high=data.get("final_ci", [None, None])[1],
-                ))
-
-            experiment = StabilityExperiment(
-                cases=get_all_stability_cases(),
-                results=stability_results,
-            )
-            print(f"Loaded {len(stability_results)} stability results")
-            print_experiment_summary(experiment)
-
-            # Save updated summary
-            analysis = experiment.analyze()
-            with open(stability_dir / "summary.json", "w") as fh:
-                json.dump(analysis, fh, indent=2)
-            with open(stability_dir / "results_table.md", "w") as fh:
-                fh.write("# Stability experiment results\n\n")
-                fh.write(f"**Total results**: {len(stability_results)}\n\n")
-                fh.write(experiment.summary_table())
-            print(f"Saved updated summary to {stability_dir}/summary.json")
-
-        # Load reframing results
-        reframing_dir = Path(args.reframing_dir)
-        if reframing_dir.exists():
-            reframing_results = []
-            for f in sorted(reframing_dir.glob("reframe_*.json")):
-                if f.name in ("summary.json", "scores.json"):
-                    continue
-                with open(f) as fh:
-                    data = json.load(fh)
-                reframing_results.append(ReframingResult(
-                    case_id=data["case_id"],
-                    condition=data["condition"],
-                    run_number=data["run_number"],
-                    response_text=data.get("response_text", ""),
-                    timestamp=data.get("timestamp", ""),
-                    duration_seconds=data.get("duration_seconds", 0),
-                    reframe_count=data.get("reframe_count", 0),
-                    reframe_matches=data.get("reframe_matches", []),
-                    introduced_new_kpis=data.get("introduced_new_kpis", False),
-                    challenged_framing=data.get("challenged_framing", False),
-                ))
-
-            print(f"\nLoaded {len(reframing_results)} reframing results")
-            analysis = analyze_reframing(reframing_results)
-            print(summary_table(reframing_results))
-
-            with open(reframing_dir / "summary.json", "w") as fh:
-                json.dump(analysis, fh, indent=2)
-            print(f"Saved updated summary to {reframing_dir}/summary.json")
+    elif args.command == "judge":
+        from farness.experiments.judge import run_judge_evaluation
+        run_judge_evaluation(
+            reframing_dir=args.reframing_dir,
+            stability_dir=args.stability_dir,
+            judge_model=args.judge_model,
+        )
 
     else:
         parser.print_help()
 
     return 0
+
+
+def _reanalyze(args):
+    """Reanalyze results from saved JSON files, discovering model subdirectories."""
+    from farness.experiments.stability import StabilityResult, StabilityExperiment
+    from farness.experiments.reframing import ReframingResult, analyze_reframing, summary_table
+
+    stability_base = Path(args.stability_dir)
+    reframing_base = Path(args.reframing_dir)
+
+    # Discover model subdirectories (or use flat dir for backward compat)
+    def _find_result_dirs(base: Path) -> list[tuple[str, Path]]:
+        """Return list of (model_name, dir_path) for result directories."""
+        if not base.exists():
+            return []
+        # Check for model subdirectories
+        subdirs = [d for d in base.iterdir() if d.is_dir() and not d.name.startswith(".")]
+        if subdirs:
+            return [(d.name, d) for d in sorted(subdirs)]
+        # Flat directory (legacy) — treat as unknown model
+        return [("claude-opus-4-6", base)]
+
+    # Stability
+    all_stability_results = []
+    for model_name, sdir in _find_result_dirs(stability_base):
+        results = []
+        for f in sorted(sdir.glob("*_run*.json")):
+            if f.name in ("summary.json", "experiment_metadata.json"):
+                continue
+            with open(f) as fh:
+                data = json.load(fh)
+            results.append(StabilityResult(
+                case_id=data["case_id"],
+                condition=data["condition"],
+                model=data.get("model", model_name),
+                initial_estimate=data["initial_estimate"],
+                initial_ci_low=data.get("initial_ci", [None, None])[0],
+                initial_ci_high=data.get("initial_ci", [None, None])[1],
+                final_estimate=data["final_estimate"],
+                final_ci_low=data.get("final_ci", [None, None])[0],
+                final_ci_high=data.get("final_ci", [None, None])[1],
+            ))
+
+        if results:
+            print(f"\n{'='*60}")
+            print(f"Stability results: {model_name} ({len(results)} results)")
+            print(f"{'='*60}")
+            experiment = StabilityExperiment(
+                cases=get_all_stability_cases(),
+                results=results,
+            )
+            print_experiment_summary(experiment)
+
+            # Save updated summary
+            analysis = experiment.analyze()
+            analysis["model"] = model_name
+            with open(sdir / "summary.json", "w") as fh:
+                json.dump(analysis, fh, indent=2)
+            with open(sdir / "results_table.md", "w") as fh:
+                fh.write(f"# Stability experiment results ({model_name})\n\n")
+                fh.write(f"**Total results**: {len(results)}\n\n")
+                fh.write(experiment.summary_table())
+
+            all_stability_results.extend(results)
+
+    # Cross-model stability comparison
+    if all_stability_results:
+        models = sorted(set(r.model for r in all_stability_results))
+        if len(models) > 1:
+            print(f"\n{'='*60}")
+            print(f"Cross-model stability comparison ({', '.join(models)})")
+            print(f"{'='*60}")
+            _cross_model_stability(all_stability_results, models, stability_base)
+
+    # Reframing
+    all_reframing_results = []
+    for model_name, rdir in _find_result_dirs(reframing_base):
+        results = []
+        for f in sorted(rdir.glob("reframe_*.json")):
+            if f.name in ("summary.json", "scores.json"):
+                continue
+            with open(f) as fh:
+                data = json.load(fh)
+            results.append(ReframingResult(
+                case_id=data["case_id"],
+                condition=data["condition"],
+                run_number=data["run_number"],
+                response_text=data.get("response_text", ""),
+                timestamp=data.get("timestamp", ""),
+                duration_seconds=data.get("duration_seconds", 0),
+                model=data.get("model", model_name),
+                reframe_count=data.get("reframe_count", 0),
+                reframe_matches=data.get("reframe_matches", []),
+                introduced_new_kpis=data.get("introduced_new_kpis", False),
+                challenged_framing=data.get("challenged_framing", False),
+            ))
+
+        if results:
+            print(f"\n{'='*60}")
+            print(f"Reframing results: {model_name} ({len(results)} results)")
+            print(f"{'='*60}")
+            analysis = analyze_reframing(results)
+            print(summary_table(results))
+
+            analysis["model"] = model_name
+            with open(rdir / "summary.json", "w") as fh:
+                json.dump(analysis, fh, indent=2)
+
+            all_reframing_results.extend(results)
+
+    # Cross-model reframing comparison
+    if all_reframing_results:
+        models = sorted(set(r.model for r in all_reframing_results))
+        if len(models) > 1:
+            print(f"\n{'='*60}")
+            print(f"Cross-model reframing comparison ({', '.join(models)})")
+            print(f"{'='*60}")
+            _cross_model_reframing(all_reframing_results, models)
+
+
+def _cross_model_stability(results, models, base_dir):
+    """Print cross-model comparison for stability results."""
+    try:
+        import numpy as np
+        from scipy import stats as sp_stats
+    except ImportError:
+        print("Install scipy for cross-model comparison statistics")
+        return
+
+    for model in models:
+        model_results = [r for r in results if r.model == model]
+        conditions = sorted(set(r.condition for r in model_results))
+        for cond in conditions:
+            cond_results = [r for r in model_results if r.condition == cond]
+            updates = [r.update_magnitude for r in cond_results]
+            if updates:
+                print(f"  {model}/{cond}: mean_update={np.mean(updates):.2f} (n={len(updates)})")
+
+    # Pairwise model comparison for each condition
+    conditions = sorted(set(r.condition for r in results))
+    for cond in conditions:
+        print(f"\n  Condition: {cond}")
+        for i, m1 in enumerate(models):
+            for m2 in models[i+1:]:
+                u1 = [r.update_magnitude for r in results if r.model == m1 and r.condition == cond]
+                u2 = [r.update_magnitude for r in results if r.model == m2 and r.condition == cond]
+                if len(u1) >= 2 and len(u2) >= 2:
+                    stat, p = sp_stats.mannwhitneyu(u1, u2, alternative='two-sided')
+                    print(f"    {m1} vs {m2}: U={stat:.1f}, p={p:.3f}")
+
+
+def _cross_model_reframing(results, models):
+    """Print cross-model comparison for reframing results."""
+    try:
+        import numpy as np
+        from scipy import stats as sp_stats
+    except ImportError:
+        print("Install scipy for cross-model comparison statistics")
+        return
+
+    for model in models:
+        model_results = [r for r in results if r.model == model]
+        conditions = sorted(set(r.condition for r in model_results))
+        for cond in conditions:
+            cond_results = [r for r in model_results if r.condition == cond]
+            counts = [r.reframe_count for r in cond_results]
+            if counts:
+                print(f"  {model}/{cond}: mean_reframe={np.mean(counts):.2f} (n={len(counts)})")
 
 
 if __name__ == "__main__":

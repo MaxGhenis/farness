@@ -1,0 +1,21 @@
+{
+  "case_id": "hiring_success",
+  "condition": "cot",
+  "model": "gpt-5.2",
+  "initial_estimate": 35.0,
+  "initial_ci": [
+    20.0,
+    55.0
+  ],
+  "final_estimate": 40.0,
+  "final_ci": [
+    28.0,
+    54.0
+  ],
+  "update_magnitude": 5.0,
+  "update_direction": "up",
+  "relative_update": 0.14285714285714285,
+  "had_initial_ci": true,
+  "initial_response_text": "I can\u2019t provide step-by-step reasoning, but I can give a careful, high-level estimate.\n\n- Base rate: If you hire at random from a pool, the chance someone is \u201ctop 25%\u201d at 1 year is 25%.\n- Evidence update:\n  - Strong interview chemistry *can* correlate with performance (communication, leadership, collaboration), but it\u2019s also prone to halo effect and \u201csimilar-to-me\u201d bias\u2014especially when they remind you of a past top performer.\n  - Candidate B scoring higher on a technical assessment is a meaningful signal that *Candidate A* may be relatively weaker on the most directly job-relevant dimension (depending on role), which should temper how much we bump A above base rate.\n- Net: I\u2019d move Candidate A modestly above base rate, but not dramatically.\n\n```json\n{\"estimate\": 35, \"ci_low\": 20, \"ci_high\": 55}\n```",
+  "final_response_text": "Start from the earlier 35% estimate: that implicitly treated the interviewer\u2019s \u201cstrong positive vibe / reminded me of our best performer\u201d as meaningful evidence.\n\n### Step 1 \u2014 Revalue the interview signal (r = 0.14)\nAn unstructured interview correlation of **r = 0.14** implies **very low predictive validity** (shared variance \\(r^2 \\approx 0.02\\), ~2%). So the interview \u201cchemistry\u201d should move the probability only a little away from the base rate, not a lot.\n\n### Step 2 \u2014 Similarity bias further weakens (or nulls) that evidence\n\u201cReminded me of our best performer\u201d is not an additional independent predictor; it\u2019s likely **contaminated** (similar-to-me / halo / representativeness). In Bayesian terms: much of what we treated as \u201csignal\u201d is actually **noise** or even **systematic bias**, so we should discount it heavily\u2014close to zero incremental weight.\n\n### Step 3 \u2014 Let the technical assessment dominate (r = 0.51)\nA technical assessment with **r = 0.51** has strong predictive validity (\\(r^2 \\approx 0.26\\), ~26% variance explained), and is **~3.6\u00d7** the correlation and **~13\u00d7** the explained variance of the unstructured interview.\n\nSo the revised estimate should be driven primarily by the technical result, with only a small adjustment (if any) from the interview.\n\n### What this does to the probability\n- The prior 35% was meaningfully boosted by interview impressions.\n- With the interview now heavily discounted, the posterior should **move toward whatever the technical assessment alone would imply**.\n- Given the technical assessment is \u201c4\u00d7 better than interview chemistry\u201d and is the only strong predictor here, a reasonable revision is **a modest increase** over 35% *if* the technical result was positive, but not a huge jump (because even r=0.51 is far from determinative and hiring outcomes are noisy).\n\n**Revised point estimate: 40%**\n\n### 80% confidence interval\nBecause we\u2019re leaning on one strong predictor but still facing substantial uncertainty (performance is multi-determined; selection context; range restriction; criterion noise), the interval should remain fairly wide but narrower than the original 20\u201355 if we trust the assessment.\n\n**80% CI: 28% to 54%**\n\n```json\n{\"estimate\": 40.0, \"ci_low\": 28.0, \"ci_high\": 54.0}\n```"
+}

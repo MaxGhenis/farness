@@ -1,0 +1,21 @@
+{
+  "case_id": "product_launch",
+  "condition": "naive",
+  "model": "gpt-5.2",
+  "initial_estimate": 45.0,
+  "initial_ci": [
+    25.0,
+    65.0
+  ],
+  "final_estimate": 18.0,
+  "final_ci": [
+    10.0,
+    28.0
+  ],
+  "update_magnitude": 27.0,
+  "update_direction": "down",
+  "relative_update": 0.6,
+  "had_initial_ci": true,
+  "initial_response_text": "A 10% lift in *overall* engagement within 3 months is a fairly high bar: it requires broad adoption, clear behavior change, and minimal cannibalization of existing engagement. The signals you have (smooth internal testing, strong team conviction, and beta NPS 45) are encouraging but are imperfect predictors of a population-wide engagement lift\u2014betas often over-represent power users, and NPS reflects sentiment more than sustained behavior. Given typical feature-launch outcomes, I\u2019d put this as moderately likely but far from assured.\n\n```json\n{\"estimate\": 45, \"ci_low\": 25, \"ci_high\": 65}\n```",
+  "final_response_text": "Start from the new base rate (20\u201330% of new features meaningfully move engagement). That already pulls the prior 45% down toward ~25%.\n\nThen adjust for the specifics:\n\n- **Self-selected beta enthusiasts**: this tends to **inflate apparent engagement lift** in beta relative to the general population. If your \u201cscenario\u201d was implicitly \u201cthis feature will move engagement for the broader user base,\u201d enthusiastic beta signals are less predictive \u2192 **lower probability** than the base-rate-informed prior would otherwise suggest.\n- **Same team measuring success (measurement bias risk)**: increases the chance of optimistic metric choices, p-hacking, selective reporting, etc. That again makes observed/expected \u201cwins\u201d less likely to replicate \u2192 **further downward adjustment**.\n\nNet: from ~25% baseline, these two factors push the probability into the high teens/low 20s. I\u2019ll set the point estimate at **18%**.\n\nFor an **80% confidence interval**, given we\u2019re combining a coarse base rate with two qualitative debiasing adjustments (high uncertainty), I\u2019d use a fairly wide interval: **10% to 28%**.\n\n```json\n{\"estimate\": 18, \"ci_low\": 10, \"ci_high\": 28}\n```"
+}

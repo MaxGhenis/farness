@@ -1,0 +1,21 @@
+{
+  "case_id": "startup_success",
+  "condition": "cot",
+  "model": "gpt-5.2",
+  "initial_estimate": 7.0,
+  "initial_ci": [
+    2.0,
+    15.0
+  ],
+  "final_estimate": 3.0,
+  "final_ci": [
+    1.0,
+    7.0
+  ],
+  "update_magnitude": 4.0,
+  "update_direction": "down",
+  "relative_update": 0.5714285714285714,
+  "had_initial_ci": true,
+  "initial_response_text": "With the current approach, the base rate matters most:\n\n1) **Starting point & target math**  \n- Current: **500 MAU**, flat after **18 months**.  \n- Target: **10,000 MAU in 12 months** = **20\u00d7 growth**.  \n- That requires roughly **~28% compound monthly growth** for 12 straight months (since \\(500 \\times 1.28^{12} \\approx 10,000\\)). Sustaining ~28% MoM is hard even for strong products; doing it after 18 months of flat growth is rarer.\n\n2) **What \u201cflat growth after 18 months\u201d implies**  \n- Likely the product has found a small niche but **has not found a scalable acquisition loop** (viral, paid with good unit economics, SEO/content flywheel, partnerships, platform distribution, etc.).  \n- If they \u201cpersist with the current approach,\u201d the chance that the same strategy suddenly produces a 20\u00d7 step-change within a year is low. Most outcomes under \u201cpersist\u201d look like: modest iteration \u2192 modest growth, not hockey stick.\n\n3) **Reasons it\u2019s not zero**  \n- Small teams sometimes unlock growth via one or two key changes that *they still consider part of the current approach* (e.g., onboarding fixes, better activation/retention, a distribution channel that was underexploited).  \n- Also, 500 MAU is nonzero signal; there is *some* demand.\n\n4) **Net assessment**  \nGiven the requirement (20\u00d7 in 12 months), the long flat period, and the constraint of persisting rather than pivoting, I\u2019d put this in the \u201cpossible but unlikely\u201d bucket.\n\n```json\n{\"estimate\": 7, \"ci_low\": 2, \"ci_high\": 15}\n```",
+  "final_response_text": "Start from the prior estimate: **7%** probability of a meaningful inflection under the original (unspecified) assumptions.\n\n### Step 1: Update for the new base rate (18 months flat \u2192 rare organic inflection)\nYou\u2019re now specifying a strong reference class: **~5%** of startups that are flat for 18 months see sudden *organic* growth without major changes.  \nThat suggests my prior 7% was a bit optimistic if we\u2019re talking about \u201cno major changes\u201d scenarios. I\u2019d pull the center toward **~5%**.\n\n### Step 2: Three marketing channels tried with similar results\nThis is additional evidence that \u201cit\u2019s just a channel mismatch\u201d is less likely, and that growth is more constrained by fundamentals (product, market, positioning, pricing, distribution power). This should reduce the probability further relative to the 5% base, because the 5% includes cases where a new channel or angle unexpectedly works.\n\nAdjustment: modest-to-material downward. I\u2019d move **5% \u2192 ~4%**.\n\n### Step 3: Competitor raised $10M targeting the same market\nThis can reduce your odds via increased CAC, crowding out distribution, faster product iteration, and narrative/brand dominance. Sometimes it can also validate the market, but given you\u2019re already flat and struggling to find a scalable channel, the competitive pressure is more likely net-negative for *your* chance of sudden inflection.\n\nAdjustment: another modest downward. I\u2019d move **~4% \u2192 ~3%**.\n\n### Confidence interval (80%)\nUncertainty remains because \u201cmajor changes\u201d isn\u2019t precisely defined and outcomes are heavy-tailed. But the new info meaningfully narrows the plausible range toward the low end.\n\nI\u2019d set an **80% CI** of about **1% to 7%**:\n- **Low (1%)**: you\u2019re truly stalled, channels exhausted, competitor outmuscles you.\n- **High (7%)**: there\u2019s an overlooked segment/positioning shift that still counts as \u201corganic-ish,\u201d or competitor spend expands awareness and you capture spillover.\n\n```json\n{\"estimate\": 3.0, \"ci_low\": 1.0, \"ci_high\": 7.0}\n```"
+}

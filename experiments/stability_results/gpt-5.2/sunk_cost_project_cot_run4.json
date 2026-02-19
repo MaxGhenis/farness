@@ -1,0 +1,21 @@
+{
+  "case_id": "sunk_cost_project",
+  "condition": "cot",
+  "model": "gpt-5.2",
+  "initial_estimate": 25.0,
+  "initial_ci": [
+    10.0,
+    45.0
+  ],
+  "final_estimate": 9.0,
+  "final_ci": [
+    4.0,
+    20.0
+  ],
+  "update_magnitude": 16.0,
+  "update_direction": "down",
+  "relative_update": 0.64,
+  "had_initial_ci": true,
+  "initial_response_text": "Software projects that are already **behind schedule and over budget** after substantial spend/time tend to have a high risk of further slippage because:\n\n1) **The \u201calmost there\u201d claim is systematically unreliable** in troubled projects. Late-stage work is often dominated by integration, performance, security, edge cases, and bug-fixing\u2014areas where remaining effort is hardest to estimate and commonly expands.\n\n2) **Past performance is informative**: after 18 months and $2M, the team has not delivered. That doesn\u2019t mean it can\u2019t finish, but it raises the base rate for additional overruns (often multiple \u201clast\u201d extensions).\n\n3) **Team demoralization** lowers throughput and increases defect rates, which further increases the chance that 3 months is optimistic.\n\n4) **The proposed increment is relatively small** compared with what\u2019s already been spent (another $500K / 3 months vs. $2M / 18 months). If the project truly were close, this might be enough\u2014but in projects with visible distress, it\u2019s common that \u201cremaining 10%\u201d actually takes 30\u2013100% more time.\n\nGiven these factors, I\u2019d assign a **low-to-moderate** probability that it launches within exactly the additional $500K and 3 months (not \u201ceventually,\u201d but within that constraint).\n\n```json\n{\"estimate\": 25, \"ci_low\": 10, \"ci_high\": 45}\n```",
+  "final_response_text": "Start from the prior you gave: **25%** chance of meeting the revised budget, with a wide uncertainty band (**~10\u201345%**).\n\n### Step 1 \u2014 Base-rate update (the 16% stat)\n\u201cOnly **16%** of already-troubled projects meet their revised budget estimates\u201d is a strong reference class signal. Unless you have strong reasons you\u2019re in the favorable tail of troubled projects, the central estimate should move **toward ~16%**.\n\nSo, before the other details, I\u2019d pull the point estimate from **25% \u2192 ~16\u201318%**.\n\n### Step 2 \u2014 Two senior engineers interviewing elsewhere\nThis increases risk in two ways:\n- **Execution risk:** knowledge loss, reduced throughput, distraction.\n- **Schedule/budget risk:** even if they don\u2019t leave, the *probability of disruption* rises; if one leaves, replacement/onboarding typically causes delays and cost.\n\nThis is a meaningful negative update. I\u2019d apply a moderate-to-strong downward adjustment, e.g. **~0.7\u00d7** on the odds/likelihood scale.\n\nThat takes **~17% \u2192 ~12%** (order of magnitude).\n\n### Step 3 \u2014 \u201cAlmost there\u201d = features complete, but **integration testing hasn\u2019t started**\nThis is a classic hidden-tail risk:\n- Integration commonly surfaces unexpected rework, environment issues, performance/regression problems, and release/process gaps.\n- If integration testing is not underway, \u201cfeatures complete\u201d is often not close to \u201cdone\u201d in budget terms\u2014especially for troubled projects.\n\nThis is another substantial negative update. Apply something like **~0.75\u00d7**.\n\nThat takes **~12% \u2192 ~9%**.\n\n### Confidence interval (80%)\nPreviously your 80% CI width was very large (10\u201345 around a 25% mean). With the new info, uncertainty is still large (integration can go *either* way), but the mass shifts downward. A reasonable 80% CI might be roughly **4% to 20%**:\n- Low end accounts for a bad integration phase and/or an engineer actually leaving.\n- High end allows for unusually smooth integration and no attrition.\n\n```json\n{\"estimate\": 9.0, \"ci_low\": 4.0, \"ci_high\": 20.0}\n```"
+}

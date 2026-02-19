@@ -1,0 +1,21 @@
+{
+  "case_id": "product_launch",
+  "condition": "naive",
+  "model": "gpt-5.2",
+  "initial_estimate": 60.0,
+  "initial_ci": [
+    40.0,
+    78.0
+  ],
+  "final_estimate": 22.0,
+  "final_ci": [
+    10.0,
+    35.0
+  ],
+  "update_magnitude": 38.0,
+  "update_direction": "down",
+  "relative_update": 0.6333333333333333,
+  "had_initial_ci": true,
+  "initial_response_text": "Positive internal tests and an NPS of 45 from early beta users are strong leading indicators that the feature delivers real user value, which often correlates with increased adoption and engagement. However, translating beta enthusiasm into a **10%+ lift in overall product engagement** within 3 months is a relatively high bar and is sensitive to launch execution, discoverability, which segments adopt, and whether the feature primarily deepens engagement for existing power users vs. broadening usage across the base. Given typical variance in post-launch outcomes, I\u2019d put this as somewhat more likely than not, but with meaningful uncertainty.\n\n```json\n{\"estimate\": 60, \"ci_low\": 40, \"ci_high\": 78}\n```",
+  "final_response_text": "Start from the base rate: if only **20\u201330%** of new features meaningfully move engagement, that should be the anchor unless you have strong contrary evidence. Your prior 60% implicitly assumed unusually strong signal from the beta.\n\nAdjustments from the follow-up:\n\n- **Self-selected beta enthusiasts**: this typically **inflates apparent engagement lift** vs the general population, so the probability of \u201cmeaningful move\u201d in a broad rollout should come **down** (often substantially).\n- **Builder-measures-success bias**: increases risk of optimistic instrumentation/analysis choices (metric selection, stopping rules, segmentation), again pushing the real-world probability **down**.\n\nNet: absent additional high-quality evidence (e.g., pre-registered metrics, independent analysis, representative sampling, randomized holdout), the rational move is to revert close to base rate and discount further for the two bias sources. That puts the estimate slightly below the midpoint of 20\u201330%.\n\n```json\n{\"estimate\": 22, \"ci_low\": 10, \"ci_high\": 35}\n```"
+}

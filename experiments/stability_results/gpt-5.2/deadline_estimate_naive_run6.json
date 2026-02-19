@@ -1,0 +1,21 @@
+{
+  "case_id": "deadline_estimate",
+  "condition": "naive",
+  "model": "gpt-5.2",
+  "initial_estimate": 75.0,
+  "initial_ci": [
+    60.0,
+    88.0
+  ],
+  "final_estimate": 24.0,
+  "final_ci": [
+    15.0,
+    35.0
+  ],
+  "update_magnitude": 51.0,
+  "update_direction": "down",
+  "relative_update": 0.68,
+  "had_initial_ci": true,
+  "initial_response_text": "A detailed plan and a nominal 2\u2011month buffer (50% of the estimated 4 months) suggests good odds, but regulatory/compliance work often has fat\u2011tail risks: interpretation changes, stakeholder delays, vendor dependencies, audit findings, or rework. With a solid plan and buffer, I\u2019d still discount for these uncertainties.\n\n```json\n{\"estimate\": 75, \"ci_low\": 60, \"ci_high\": 88}\n```",
+  "final_response_text": "Start from the relevant base rate and then adjust for your specific risk factors.\n\n### 1) Base rate update (anchor)\nYou provided an industry survey base rate: **40% on-time completion** for regulatory compliance projects.  \nThat\u2019s a much stronger anchor than my prior (75%), so I start at **40%**.\n\n### 2) Adjustments for new risk factors\nEach added factor plausibly pushes the probability down from the base rate:\n\n- **Team has never done this specific type of work before**: first-time work typically has more rework, slower discovery, and estimation error. I\u2019d apply a meaningful downward adjustment (on the order of ~20\u201330% relative reduction).  \n- **Regulations still being finalized and may change in next 2 months**: this increases scope volatility and late-breaking changes\u2014often a major driver of schedule slips in compliance. Another sizable downward adjustment.\n\nRather than subtracting fixed percentage points (which can behave oddly near 0/100), think in relative terms: starting at 40%, \u201cfirst-time\u201d and \u201crequirements volatility\u201d together often cut the odds by roughly ~40\u201350% relative. That puts the point estimate around:\n\n- 40% \u00d7 ~0.6 \u2248 **24%**\n\n### 3) 80% confidence interval\nUncertainty is higher than usual because requirements may change and the team is inexperienced. So I\u2019d use a fairly wide interval. A reasonable 80% CI might span roughly **15% to 35%**: wide enough to reflect volatility, but still centered around the ~mid-20s.\n\n```json\n{\"estimate\": 24, \"ci_low\": 15, \"ci_high\": 35}\n```"
+}
