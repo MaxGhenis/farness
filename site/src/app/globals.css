@@ -1,0 +1,123 @@
+@import "tailwindcss";
+
+/* ── Design tokens ── */
+
+@theme {
+  /* Accent colors */
+  --color-accent: #e8a825;
+  --color-accent-hover: #d99a1f;
+  --color-accent-glow: rgba(232, 168, 37, 0.15);
+  --color-accent-subtle: rgba(232, 168, 37, 0.08);
+
+  /* Light theme */
+  --color-light-bg: #faf8f5;
+  --color-light-bg-elevated: #fff;
+  --color-light-bg-surface: #f0ede8;
+  --color-light-text: #1a1a18;
+  --color-light-text-muted: #5c5c58;
+  --color-light-text-dim: #8a8880;
+  --color-light-border: #e8e4df;
+  --color-light-border-strong: #d0ccc5;
+  --color-light-header-bg: rgba(250, 248, 245, 0.85);
+
+  /* Dark theme */
+  --color-dark-bg: #0c0e13;
+  --color-dark-bg-elevated: #141720;
+  --color-dark-bg-surface: #1a1e2a;
+  --color-dark-text: #e8e6e1;
+  --color-dark-text-muted: #8a8880;
+  --color-dark-text-dim: #5a5850;
+  --color-dark-border: rgba(255, 255, 255, 0.08);
+  --color-dark-border-strong: rgba(255, 255, 255, 0.15);
+  --color-dark-header-bg: rgba(12, 14, 19, 0.8);
+
+  /* Fonts */
+  --font-display: "Newsreader", Georgia, serif;
+  --font-body: "Outfit", -apple-system, sans-serif;
+  --font-mono: "JetBrains Mono", "SF Mono", monospace;
+
+  /* Easing */
+  --ease-default: 0.2s ease;
+  --ease-spring: 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+
+  /* Animation */
+  --animate-fade-up: fade-up 0.8s ease-out;
+  --animate-fade-up-delay-1: fade-up 0.8s ease-out 0.12s both;
+  --animate-fade-up-delay-2: fade-up 0.8s ease-out 0.24s both;
+  --animate-fade-up-short: fade-up 0.6s ease-out;
+}
+
+@keyframes fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ── CSS custom properties for theme switching ── */
+
+:root {
+  --theme-bg: var(--color-light-bg);
+  --theme-bg-elevated: var(--color-light-bg-elevated);
+  --theme-bg-surface: var(--color-light-bg-surface);
+  --theme-text: var(--color-light-text);
+  --theme-text-muted: var(--color-light-text-muted);
+  --theme-text-dim: var(--color-light-text-dim);
+  --theme-border: var(--color-light-border);
+  --theme-border-strong: var(--color-light-border-strong);
+  --theme-header-bg: var(--color-light-header-bg);
+}
+
+.theme-dark {
+  --theme-bg: var(--color-dark-bg);
+  --theme-bg-elevated: var(--color-dark-bg-elevated);
+  --theme-bg-surface: var(--color-dark-bg-surface);
+  --theme-text: var(--color-dark-text);
+  --theme-text-muted: var(--color-dark-text-muted);
+  --theme-text-dim: var(--color-dark-text-dim);
+  --theme-border: var(--color-dark-border);
+  --theme-border-strong: var(--color-dark-border-strong);
+  --theme-header-bg: var(--color-dark-header-bg);
+}
+
+/* ── Global reset and base styles ── */
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 17px;
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: var(--font-body);
+  background: var(--theme-bg);
+  color: var(--theme-text);
+  line-height: 1.7;
+  min-height: 100vh;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+a {
+  color: var(--color-accent);
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+@media (max-width: 600px) {
+  html {
+    font-size: 15px;
+  }
+}
