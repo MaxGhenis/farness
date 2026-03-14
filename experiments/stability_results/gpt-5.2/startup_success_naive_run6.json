@@ -1,0 +1,21 @@
+{
+  "case_id": "startup_success",
+  "condition": "naive",
+  "model": "gpt-5.2",
+  "initial_estimate": 8.0,
+  "initial_ci": [
+    2.0,
+    18.0
+  ],
+  "final_estimate": 4.0,
+  "final_ci": [
+    1.5,
+    8.0
+  ],
+  "update_magnitude": 4.0,
+  "update_direction": "down",
+  "relative_update": 0.5,
+  "had_initial_ci": true,
+  "initial_response_text": "Given 18 months of effort with only ~500 MAU and flat growth, the base rate for reaching 10,000 MAU in the next 12 months *without a meaningful change in approach* is low. Hitting 10,000 would require ~20\u00d7 growth and a sustained, steep acquisition curve; past stagnation is strong negative evidence unless there\u2019s a clear, already-validated growth lever.\n\n```json\n{\"estimate\": 8, \"ci_low\": 2, \"ci_high\": 18}\n```",
+  "final_response_text": "Start from the prior 8% estimate and update downward given the new evidence:\n\n- **Base rate (5% inflect organically after 18 months flat):** This strongly anchors the probability below 8%, unless we have strong positive differentiators. We don\u2019t; this is a negative prior update.\n- **3 marketing channels tried with similar results:** This suggests it\u2019s not just a channel-selection issue; it increases the likelihood of product/market fit or positioning constraints. Another downward update.\n- **Competitor raised $10M targeting same market:** Raises competitive pressure and likely CAC, and reduces the chance that *organic* growth suddenly appears without major changes. Downward update again.\n\nNet: revised estimate close to (and a bit below) the **5% base rate**, because the added facts are all adverse and provide no offsetting upside signals.\n\n```json\n{\"estimate\": 4.0, \"ci_low\": 1.5, \"ci_high\": 8.0}\n```"
+}

@@ -1,0 +1,21 @@
+{
+  "case_id": "hiring_success",
+  "condition": "naive",
+  "model": "gpt-5.2",
+  "initial_estimate": 35.0,
+  "initial_ci": [
+    20.0,
+    55.0
+  ],
+  "final_estimate": 56.0,
+  "final_ci": [
+    42.0,
+    69.0
+  ],
+  "update_magnitude": 21.0,
+  "update_direction": "up",
+  "relative_update": 0.6,
+  "had_initial_ci": true,
+  "initial_response_text": "Chemistry/\u201creminds me of a best performer\u201d is a moderately predictive but noisy signal (high variance, risk of similarity bias). A higher technical assessment is typically more predictive of 1\u2011year top performance for senior engineers, so Candidate A\u2019s chance of landing in the top quartile is only somewhat above the base rate (25%).\n\n```json\n{\"estimate\": 35, \"ci_low\": 20, \"ci_high\": 55}\n```",
+  "final_response_text": "Updating from 35%: yes, this should move the estimate substantially toward \u201cmore likely than not,\u201d because the strongest signal you\u2019ve provided is the technical assessment (r = 0.51), while the interview \u201cchemistry\u201d (r = 0.14) and \u201creminded me of our best performer\u201d similarity bias should be heavily down-weighted (the latter close to zero incremental predictive value, and potentially harmful if it drives error).\n\nA rough way to combine this qualitatively (without pretending we can compute an exact posterior from correlations alone) is:\n- Treat the technical assessment as the primary driver (moderately strong predictor).\n- Treat unstructured interview impressions as weak, only slightly informative.\n- Treat similarity-bias-based impressions as non-evidence (or at best noise).\n\nGiven that, I\u2019d revise the probability upward from 35% to around the mid-50s. Uncertainty remains high because we don\u2019t know base rates, selection ratio, how the assessment score compared to the candidate pool, range restriction, or whether the assessment is well-calibrated for this specific role/team.\n\n```json\n{\"estimate\": 56, \"ci_low\": 42, \"ci_high\": 69}\n```"
+}

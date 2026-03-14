@@ -1,7 +1,7 @@
 """Shared LLM client for experiments.
 
-Uses the Anthropic Python SDK directly instead of shelling out to `claude -p`,
-which fails inside Claude Code sessions.
+Supports both Anthropic (Claude) and OpenAI (GPT) models.
+Provider is auto-detected from the model name.
 """
 
 from __future__ import annotations
@@ -9,20 +9,24 @@ from __future__ import annotations
 import os
 import subprocess
 import time
+from typing import Optional
 
-import anthropic
+# Lazy imports — populated on first use
+_anthropic_client: Optional[object] = None
+_openai_client: Optional[object] = None
 
 
-def _load_api_key() -> str:
-    """Load Anthropic API key from env or macOS keychain."""
-    key = os.environ.get("ANTHROPIC_API_KEY")
-    if key:
-        return key
+def _is_openai_model(model: str) -> bool:
+    """Detect whether a model ID is OpenAI vs Anthropic."""
+    prefixes = ("gpt-", "o1", "o3", "o4")
+    return any(model.startswith(p) for p in prefixes)
 
-    # Try macOS keychain
+
+def _load_key_from_keychain(account: str) -> Optional[str]:
+    """Load a secret from macOS keychain (service 'claude-env')."""
     try:
         result = subprocess.run(
-            ["security", "find-generic-password", "-s", "claude-env", "-a", "ANTHROPIC_API_KEY", "-w"],
+            ["security", "find-generic-password", "-s", "claude-env", "-a", account, "-w"],
             capture_output=True,
             text=True,
             timeout=5,
@@ -31,11 +35,53 @@ def _load_api_key() -> str:
             return result.stdout.strip()
     except (subprocess.TimeoutExpired, FileNotFoundError):
         pass
+    return None
 
+
+def _load_anthropic_key() -> str:
+    """Load Anthropic API key from env or macOS keychain."""
+    key = os.environ.get("ANTHROPIC_API_KEY")
+    if key:
+        return key
+    key = _load_key_from_keychain("ANTHROPIC_API_KEY")
+    if key:
+        return key
     raise RuntimeError(
         "ANTHROPIC_API_KEY not found. Set it as an environment variable "
         "or store it in the macOS keychain with service 'claude-env'."
     )
+
+
+def _load_openai_key() -> str:
+    """Load OpenAI API key from env or macOS keychain."""
+    key = os.environ.get("OPENAI_API_KEY")
+    if key:
+        return key
+    key = _load_key_from_keychain("OPENAI_API_KEY")
+    if key:
+        return key
+    raise RuntimeError(
+        "OPENAI_API_KEY not found. Set it as an environment variable "
+        "or store it in the macOS keychain with service 'claude-env'."
+    )
+
+
+def _get_anthropic_client():
+    """Get or create cached Anthropic client."""
+    global _anthropic_client
+    if _anthropic_client is None:
+        import anthropic
+        _anthropic_client = anthropic.Anthropic(api_key=_load_anthropic_key())
+    return _anthropic_client
+
+
+def _get_openai_client():
+    """Get or create cached OpenAI client."""
+    global _openai_client
+    if _openai_client is None:
+        import openai
+        _openai_client = openai.OpenAI(api_key=_load_openai_key())
+    return _openai_client
 
 
 def call_llm(
@@ -45,11 +91,15 @@ def call_llm(
     temperature: float = 1.0,
     timeout: float = 180.0,
 ) -> tuple[str, float]:
-    """Call the Anthropic API and return (response_text, duration_seconds).
+    """Call an LLM and return (response_text, duration_seconds).
+
+    Provider is auto-detected from the model name:
+    - gpt-*, o1*, o3*, o4* -> OpenAI
+    - everything else -> Anthropic
 
     Args:
         prompt: The user message to send
-        model: Model ID
+        model: Model ID (e.g. "claude-opus-4-6", "gpt-5.2")
         max_tokens: Max response tokens
         temperature: Sampling temperature (1.0 = default, good for experiment variance)
         timeout: Request timeout in seconds
@@ -57,21 +107,67 @@ def call_llm(
     Returns:
         Tuple of (response_text, duration_seconds)
     """
-    client = anthropic.Anthropic(api_key=_load_api_key())
-
     start = time.time()
+
+    if _is_openai_model(model):
+        response = _call_openai(prompt, model, max_tokens, temperature, timeout)
+    else:
+        response = _call_anthropic(prompt, model, max_tokens, temperature, timeout)
+
+    duration = time.time() - start
+    return response, duration
+
+
+def _call_anthropic(
+    prompt: str, model: str, max_tokens: int, temperature: float, timeout: float
+) -> str:
+    """Call the Anthropic API."""
+    import anthropic
+
+    client = _get_anthropic_client()
     try:
         message = client.messages.create(
             model=model,
             max_tokens=max_tokens,
             messages=[{"role": "user", "content": prompt}],
+            temperature=temperature,
             timeout=timeout,
         )
-        response = message.content[0].text
+        return message.content[0].text
     except anthropic.APITimeoutError:
-        response = "ERROR: Timeout"
+        return "ERROR: Timeout"
     except anthropic.APIError as e:
-        response = f"ERROR: {e}"
+        return f"ERROR: {e}"
 
-    duration = time.time() - start
-    return response, duration
+
+def _call_openai(
+    prompt: str, model: str, max_tokens: int, temperature: float, timeout: float
+) -> str:
+    """Call the OpenAI API."""
+    import openai
+
+    client = _get_openai_client()
+    try:
+        response = client.chat.completions.create(
+            model=model,
+            max_completion_tokens=max_tokens,
+            messages=[{"role": "user", "content": prompt}],
+            temperature=temperature,
+            timeout=timeout,
+        )
+        return response.choices[0].message.content
+    except openai.APITimeoutError:
+        return "ERROR: Timeout"
+    except openai.APIError as e:
+        return f"ERROR: {e}"
+
+
+def model_short_name(model: str) -> str:
+    """Convert a model ID to a filesystem-safe short name.
+
+    Examples:
+        "claude-opus-4-6" -> "claude-opus-4-6"
+        "gpt-5.2" -> "gpt-5.2"
+    """
+    # Already filesystem-safe for our purposes
+    return model

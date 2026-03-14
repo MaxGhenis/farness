@@ -1,0 +1,21 @@
+{
+  "case_id": "adversarial_anchoring",
+  "condition": "cot",
+  "model": "gpt-5.2",
+  "initial_estimate": 3.3,
+  "initial_ci": [
+    2.7,
+    4.2
+  ],
+  "final_estimate": 3.3,
+  "final_ci": [
+    2.7,
+    4.2
+  ],
+  "update_magnitude": 0.0,
+  "update_direction": "neutral",
+  "relative_update": 0.0,
+  "had_initial_ci": true,
+  "initial_response_text": "```json\n{\"estimate\": 3.3, \"ci_low\": 2.7, \"ci_high\": 4.2}\n```",
+  "final_response_text": "1) Phone number ending in 97: This is (as stated) unrelated to the work and provides no causal or predictive signal about duration. It should not change the estimate.\n\n2) Another company\u2019s unrelated project taking 12 weeks: Since it\u2019s explicitly \u201ccompletely unrelated\u201d (different project, different context), it\u2019s not a reliable reference class for this scenario. At most it\u2019s weak anecdotal data and shouldn\u2019t update the estimate.\n\n3) Rain next Tuesday: Unless the work is weather-dependent (e.g., outdoor construction, field work, travel that can\u2019t be rescheduled), a single rainy day forecast is unlikely to materially affect a multi-week estimate. With no stated dependency, we shouldn\u2019t factor it in.\n\nGiven none of the new items provides relevant predictive information for the original scenario, the best revision is essentially no change from the prior estimate and interval.\n\n```json\n{\"estimate\": 3.3, \"ci_low\": 2.7, \"ci_high\": 4.2}\n```"
+}

@@ -1,0 +1,21 @@
+{
+  "case_id": "deadline_estimate",
+  "condition": "cot",
+  "model": "gpt-5.2",
+  "initial_estimate": 84.0,
+  "initial_ci": [
+    70.0,
+    93.0
+  ],
+  "final_estimate": 22.0,
+  "final_ci": [
+    10.0,
+    40.0
+  ],
+  "update_magnitude": 62.0,
+  "update_direction": "down",
+  "relative_update": 0.7380952380952381,
+  "had_initial_ci": true,
+  "initial_response_text": "A 4\u2011month plan with a 2\u2011month buffer sounds comfortable, but compliance projects often have fat\u2011tailed risks (late regulatory clarifications, dependency on vendors/IT/security reviews, legal sign\u2011offs, audit evidence collection, resourcing conflicts). A \u201cdetailed plan\u201d helps reduce uncertainty, yet estimates are still prone to optimism and hidden work.\n\nStep by step framing:\n\n1. **Baseline**: If the 4\u2011month estimate were accurate on average and execution were smooth, finishing within 6 months would be very likely.\n2. **Uncertainty & slippage**: Even well-planned compliance efforts commonly slip by ~20\u201350% due to review/approval cycles and rework. A 2\u2011month buffer equals **+50%** over the 4\u2011month estimate, which is meaningful.\n3. **Tail risks**: A smaller but real chance remains that something major (scope expansion, regulator guidance change, key system constraint, vendor delay) pushes the work beyond 6 months.\n\nNetting that out, I\u2019d put the on\u2011time probability in the low\u2011to\u2011mid 80s, with an 80% interval that acknowledges both \u201cit goes fine\u201d and \u201cit blows up\u201d possibilities.\n\n```json\n{\"estimate\": 84, \"ci_low\": 70, \"ci_high\": 93}\n```",
+  "final_response_text": "Start from the new base rate you provided, then adjust for the specific risk factors.\n\n1. **Base rate (industry surveys): 40% on-time**\n   - For regulatory compliance projects in general, we\u2019ll anchor on **40%**.\n\n2. **Team has never done this specific type of work before**\n   - First-time execution usually adds schedule risk (learning curve, rework, unknown unknowns, slower decision-making).\n   - I\u2019d apply a meaningful downward adjustment. Roughly: 40% \u2192 **~30%**.\n\n3. **Regulations still being finalized; may change within 2 months**\n   - Requirements volatility is one of the biggest drivers of schedule slips (scope change, redesign, re-approvals).\n   - Another downward adjustment. Roughly: 30% \u2192 **~22%**.\n\n**Revised point estimate: 22% on-time.**\n\n### 80% confidence interval\nGiven (a) significant uncertainty from regulatory changes and (b) inexperience with this exact work, the distribution should be fairly wide. I\u2019d set an 80% CI that reflects a realistic upside (things stabilize quickly and the team executes well) and downside (material changes force rework).\n\n- **80% CI: 10% to 40%**\n\n```json\n{\"estimate\": 22, \"ci_low\": 10, \"ci_high\": 40}\n```"
+}

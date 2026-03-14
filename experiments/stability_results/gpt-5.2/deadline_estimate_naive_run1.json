@@ -1,0 +1,21 @@
+{
+  "case_id": "deadline_estimate",
+  "condition": "naive",
+  "model": "gpt-5.2",
+  "initial_estimate": 75.0,
+  "initial_ci": [
+    60.0,
+    88.0
+  ],
+  "final_estimate": 25.0,
+  "final_ci": [
+    15.0,
+    40.0
+  ],
+  "update_magnitude": 50.0,
+  "update_direction": "down",
+  "relative_update": 0.6666666666666666,
+  "had_initial_ci": true,
+  "initial_response_text": "With a detailed plan and a 2\u2011month buffer on a 4\u2011month estimate, the central risk is typical schedule slippage (integration issues, clarifications from regulators, internal review cycles). A 50% buffer is meaningful, so I\u2019d put the on-time probability moderately high but not near-certain.\n\n```json\n{\"estimate\": 75, \"ci_low\": 60, \"ci_high\": 88}\n```",
+  "final_response_text": "Start from the industry base rate for *regulatory compliance projects finishing on time*: **40%**.\n\nAdjustments from the new facts:\n\n- **Team has never done this specific type of work before** \u2192 lowers odds vs. the base rate (less domain-specific experience, more rework/unknowns). I\u2019d apply a meaningful downward adjustment (on the order of ~20\u201330% relative), taking 40% to roughly **30\u201332%**.\n- **Regulations still being finalized and may change in the next 2 months** \u2192 adds scope volatility and likely rework; this is a strong on-time risk factor. Another sizable downward adjustment (again ~20\u201330% relative), taking ~31% to roughly **22\u201326%**.\n\nRevised point estimate: **25%**.\n\n80% confidence interval: because outcomes vary widely by organization resourcing, project size, and how big the regulatory changes end up being, uncertainty is high. I\u2019d place an 80% CI of **15% to 40%** (centered near 25%, with a long upper tail if changes are minor and execution is strong, but substantial downside if changes are material).\n\n```json\n{\"estimate\": 25, \"ci_low\": 15, \"ci_high\": 40}\n```"
+}

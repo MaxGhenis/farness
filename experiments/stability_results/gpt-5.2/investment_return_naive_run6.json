@@ -1,0 +1,21 @@
+{
+  "case_id": "investment_return",
+  "condition": "naive",
+  "model": "gpt-5.2",
+  "initial_estimate": 28.0,
+  "initial_ci": [
+    10.0,
+    55.0
+  ],
+  "final_estimate": 4.0,
+  "final_ci": [
+    2.0,
+    8.0
+  ],
+  "update_magnitude": 24.0,
+  "update_direction": "down",
+  "relative_update": 0.8571428571428571,
+  "had_initial_ci": true,
+  "initial_response_text": "With only the information given (no financials, terms, valuation, investor protections, dilution expectations, or verified IPO readiness), I\u2019d treat this as a typical late-stage private \u201cfriends & family\u201d secondary/SAFE-style bet with substantial downside risk and a meaningful chance the IPO slips or the post-IPO price/terms don\u2019t deliver a 2x within 3 years. Across such deals, a 2x in 3 years happens, but it\u2019s not the base case.\n\n```json\n{\"estimate\": 28, \"ci_low\": 10, \"ci_high\": 55}\n```",
+  "final_response_text": "Given the base rate you provided, my earlier 28% implicitly assumed this opportunity was materially better than an average startup investment (or had unusually favorable terms). The new information pushes hard in the opposite direction:\n\n- **Base rate dominates**: If ~90% return <1x and only ~5% return 2x+, then \u201c\u22652x\u201d is rare in the reference class. Unless we have strong evidence this deal is in the top tail, the prior should be near **~5%**.\n- **FF rounds not meaningfully discounted**: This removes a common reason small investors can outperform the base rate (getting in at an attractive price). So expected odds of \u22652x should move **down**, not up.\n- **Strong incentive / adverse selection risk**: When the issuer is motivated to bring you in for reasons tied to their own terms, that\u2019s a classic setup for worse-than-average outcomes for the marginal investor, nudging the probability down further.\n\nPutting that together, I\u2019d revise from 28% to **~4%** as a central estimate for \u201cthis investment returns \u22652x,\u201d absent additional, concrete edge information (traction, unusually low valuation, clear path to liquidity, etc.).  \n\n**80% confidence interval:** wide, because your base rates are coarse and we\u2019re mapping \u201cthis specific deal\u201d to a broad reference class with limited specifics. I\u2019d place it at **~2% to ~8%**.\n\n```json\n{\"estimate\": 4.0, \"ci_low\": 2.0, \"ci_high\": 8.0}\n```"
+}

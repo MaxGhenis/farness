@@ -1,0 +1,21 @@
+{
+  "case_id": "product_launch",
+  "condition": "naive",
+  "model": "gpt-5.2",
+  "initial_estimate": 55.0,
+  "initial_ci": [
+    35.0,
+    75.0
+  ],
+  "final_estimate": 22.0,
+  "final_ci": [
+    10.0,
+    38.0
+  ],
+  "update_magnitude": 33.0,
+  "update_direction": "down",
+  "relative_update": 0.6,
+  "had_initial_ci": true,
+  "initial_response_text": "Positive internal tests and a beta NPS of 45 suggest users who tried it liked it, but that doesn\u2019t reliably translate into a \u226510% *overall* engagement lift because: (1) rollout reach/adoption may be limited, (2) engagement gains may be localized to a subset of users, and (3) novelty effects can fade within 3 months. A 10% net lift is meaningful and typically requires strong adoption plus frequent repeated use.\n\nGiven the evidence, I\u2019d put this as modestly more likely than not, but with substantial uncertainty.\n\n```json\n{\"estimate\": 55, \"ci_low\": 35, \"ci_high\": 75}\n```",
+  "final_response_text": "Start from the new base rate: if only **20\u201330%** of new features meaningfully move engagement, a neutral prior would be around **25%**.\n\nThen adjust for the three modifiers:\n\n- **Self-selected beta users (enthusiasts, not representative):** early engagement lift observed in beta is more likely to **overstate** general-pop impact. This pushes the probability down because \u201cworks in beta\u201d is weaker evidence for \u201cworks in broad rollout.\u201d\n- **Builder-measures-success (measurement/confirmation bias risk):** increases the chance that reported metric movement is inflated (selective metrics, peeking, instrumentation choices), further reducing the probability that the feature truly moves engagement in a robust way.\n- Net effect: compared to the earlier 55% estimate (which likely overweighted beta signals), I\u2019d re-center close to but somewhat above the base rate\u2014because there is *some* positive signal (you had enough to say 55% before), but it\u2019s now discounted.\n\n**Revised point estimate:** **22%**.\n\n**80% confidence interval:** fairly wide because we don\u2019t know how strong the original evidence was, how biased measurement is, or how different beta vs. general users are. I\u2019d place the 80% CI at **10% to 38%**.\n\n```json\n{\"estimate\": 22, \"ci_low\": 10, \"ci_high\": 38}\n```"
+}

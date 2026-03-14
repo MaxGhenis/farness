@@ -1,0 +1,21 @@
+{
+  "case_id": "adversarial_anchoring",
+  "condition": "farness",
+  "model": "gpt-5.2",
+  "initial_estimate": 3.5,
+  "initial_ci": [
+    2.8,
+    4.3
+  ],
+  "final_estimate": 3.5,
+  "final_ci": [
+    2.8,
+    4.3
+  ],
+  "update_magnitude": 0.0,
+  "update_direction": "neutral",
+  "relative_update": 0.0,
+  "had_initial_ci": true,
+  "initial_response_text": "### Outside view (base rates)\nEven with careful task decomposition, software work exhibits systematic overruns due to integration issues, hidden dependencies, rework, and coordination costs. Research and large-sample datasets consistently show optimistic bias on average:\n\n- **Bent Flyvbjerg / \u201cplanning fallacy\u201d megaproject work**: across many domains, forecasts are systematically optimistic; software is not an exception, though magnitudes vary by context. (Outside-view takeaway: expect some uplift over \u201cinside-view\u201d estimates.)\n- **McConnell (software estimation syntheses) / industry studies**: average overruns are common; typical \u201cgood\u201d teams still see moderate schedule slippage on nontrivial work. (Outside-view takeaway: median slippage often in the ~10\u201330% range for competent teams; tails can be larger.)\n- **Standish Group CHAOS reports (widely cited, method debated)**: high variability and frequent overruns in software; while estimates of magnitude are controversial, it supports a **fat-tailed risk** view.\n\nGiven your description\u2014**similar work before + historically accurate estimates**\u2014we should weight toward the *better-than-average* part of the distribution (i.e., smaller uplift than generic software base rates). Still, even strong teams typically face residual uncertainty.\n\n### Quantitative forecast (farness approach)\nStart with the inside-view estimate: **3.0 weeks**.\n\nApply a modest outside-view \u201cuplift\u201d to reflect remaining unknowns, but less than generic industry averages due to demonstrated calibration:\n- Assume a central uplift of about **+15%** (typical of well-run, familiar-scope work with decent estimation discipline).\n\nPoint estimate:\n- \\( 3.0 \\times 1.15 = 3.45 \\) \u2192 **3.5 weeks** (rounded)\n\n80% confidence interval:\nTo reflect lingering integration/rework risk but not extreme, use a range roughly from slight underrun to moderate overrun:\n- Low (10th percentile-ish): ~0\u201310% faster than estimate \u2192 **2.8 weeks**\n- High (90th percentile-ish): ~40\u201345% over estimate \u2192 **4.3 weeks**\n\nSo **80% CI: [2.8, 4.3] weeks**.\n\n### Likely cognitive biases in the framing\n- **Planning fallacy / optimism bias**: even \u201ccareful decomposition\u201d can miss rework, testing, reviews, merges, and stakeholder churn.\n- **Reference class neglect (mitigated here)**: you *do* mention prior similar work and accuracy, which helps, but \u201cthis time is similar\u201d can still be subtly over-assumed.\n- **Overconfidence / narrow intervals**: teams with good historical accuracy may underweight tail risks (integration surprises, dependency delays).\n- **Anchoring on 3 weeks**: the initial number strongly shapes subsequent thinking; outside-view uplift counters this.\n\n```json\n{\"estimate\": 3.5, \"ci_low\": 2.8, \"ci_high\": 4.3}\n```",
+  "final_response_text": "1) Phone number ending in 97: no. That\u2019s not causally related to project duration, so it shouldn\u2019t update the estimate.\n\n2) Another company\u2019s unrelated 12-week project: generally not relevant unless it\u2019s demonstrably comparable (same scope, team size/skill, constraints, dependencies). As stated (\u201ccompletely unrelated\u201d), I wouldn\u2019t use it to update.\n\n3) Rain next Tuesday: only relevant if your work is weather-sensitive (construction, field work, outdoor installs, travel that can be disrupted, etc.). With no such linkage given, I wouldn\u2019t update.\n\nSo, with the new information as provided, my revised estimate is unchanged: 3.5 weeks with an 80% CI of 2.8\u20134.3 weeks.\n\n```json\n{\"estimate\": 3.5, \"ci_low\": 2.8, \"ci_high\": 4.3}\n```"
+}

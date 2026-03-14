@@ -1,0 +1,21 @@
+{
+  "case_id": "hiring_success",
+  "condition": "cot",
+  "model": "gpt-5.2",
+  "initial_estimate": 35.0,
+  "initial_ci": [
+    20.0,
+    55.0
+  ],
+  "final_estimate": 30.0,
+  "final_ci": [
+    18.0,
+    45.0
+  ],
+  "update_magnitude": 5.0,
+  "update_direction": "down",
+  "relative_update": 0.14285714285714285,
+  "had_initial_ci": true,
+  "initial_response_text": "I can\u2019t provide step-by-step reasoning, but here\u2019s a careful, high-level way to think about it and the resulting estimate.\n\n- Baseline: if \u201ctop performer\u201d means top 25% among comparable hires, a neutral prior is 25%.\n- Evidence for A: strong interview chemistry and resemblance to your best performer is a positive signal, but it\u2019s also noisy (halo effect / similarity bias risk).\n- Evidence against A (relative): B scoring higher technically suggests A may be weaker on a dimension that often predicts early impact for senior engineers. That doesn\u2019t negate A, but it tempers how far above 25% you should move.\n\nNet: I\u2019d update modestly upward from 25%, but not dramatically.\n\n```json\n{\"estimate\": 35, \"ci_low\": 20, \"ci_high\": 55}\n```",
+  "final_response_text": "Start from what actually predicts performance.\n\n### 1) Re-weight the evidence by predictive validity\nPreviously, the 35% estimate implicitly gave a lot of weight to the interviewer\u2019s positive impression (\u201cchemistry\u201d, \u201creminded me of our best performer\u201d). Your new points imply that weight should drop sharply:\n\n- **Unstructured interview impression**: \\( r = 0.14 \\) with job performance \u2192 **very weak** signal.  \n  In variance terms, \\( r^2 \\approx 0.02 \\), so ~2% of performance variance explained.\n- **Similarity bias (\u201creminded me of our best performer\u201d)**: treat as **near-zero incremental validity** (and potentially misleading).\n- **Technical assessment**: \\( r = 0.51 \\) \u2192 **strong** signal.  \n  \\( r^2 \\approx 0.26 \\), ~26% variance explained.\n\nSo compared to the technical test, the unstructured interview is ~**(0.14/0.51 \u2248 0.27)** as strong on correlation, or ~**(0.02/0.26 \u2248 0.08)** as strong on variance explained. Either way, the \u201cchemistry\u201d evidence should contribute only a small adjustment.\n\n### 2) What direction does this push the probability?\nIf the prior 35% was boosted meaningfully by \u201cthey felt like a top performer\u201d, removing/discounting that boost should **pull the estimate back toward whatever the technical assessment implies on its own**.\n\nGiven you\u2019re emphasizing the technical assessment as the far better predictor, the revised probability should be **closer to a neutral-to-moderately-positive base rate**, unless the technical score was clearly strong. With only the information provided here (validities, and that \u201cchemistry\u201d shouldn\u2019t count), the safest revision is: **reduce the estimate modestly-to-materially from 35%**, because the earlier number overcounted weak/biased evidence.\n\n### 3) Revised point estimate and uncertainty\nBecause we\u2019re explicitly de-emphasizing low-validity and biased cues, the posterior should be less optimistic and also a bit tighter around \u201cmostly driven by the test.\u201d I\u2019ll revise from **35% \u2192 30%**.\n\nFor the **80% CI**, I\u2019ll narrow somewhat from the earlier very wide 20\u201355 range, but still keep it broad because we don\u2019t know:\n- the candidate\u2019s actual technical score (only the test\u2019s validity),\n- the role\u2019s base rate of \u201csuccess,\u201d\n- selection context and calibration.\n\nA reasonable 80% CI: **18%\u201345%**.\n\n```json\n{\"estimate\": 30.0, \"ci_low\": 18.0, \"ci_high\": 45.0}\n```"
+}

@@ -1,0 +1,21 @@
+{
+  "case_id": "deadline_estimate",
+  "condition": "cot",
+  "model": "gpt-5.2",
+  "initial_estimate": 72.0,
+  "initial_ci": [
+    55.0,
+    85.0
+  ],
+  "final_estimate": 25.0,
+  "final_ci": [
+    12.0,
+    40.0
+  ],
+  "update_magnitude": 47.0,
+  "update_direction": "down",
+  "relative_update": 0.6527777777777778,
+  "had_initial_ci": true,
+  "initial_response_text": "Base rates for regulatory/compliance projects with a \u201c4 months of work + 2 months buffer\u201d plan tend to be meaningfully less than \u201calmost sure,\u201d because (a) estimates are often optimistic, (b) late-discovered scope/interpretation changes are common, and (c) external dependencies (legal review, auditors/regulators, vendor tooling) can add non-linear delays. A detailed plan increases the odds versus a rough estimate, but it doesn\u2019t eliminate tail risks.\n\nA simple way to reason is: you succeed if actual duration \u2264 6 months. With a 2\u2011month buffer, you can tolerate up to a 50% overrun (from 4 \u2192 6). Many well-planned projects still overrun by >50% some non-trivial fraction of the time; on the other hand, compliance work is often more predictable than greenfield product builds. Balancing those, I\u2019d put the success probability in the \u201clikely but not assured\u201d range.\n\n```json\n{\"estimate\": 72, \"ci_low\": 55, \"ci_high\": 85}\n```",
+  "final_response_text": "Start from the new base rate, then adjust for the scenario-specific risk factors.\n\n1. **Base rate (industry surveys): 40% on-time**\n   - This is much more diagnostic than the earlier generic estimate, so it should strongly anchor the revision.\n\n2. **No prior experience with this specific type of compliance work**\n   - First-time execution typically adds planning/coordination errors and rework. I\u2019d apply a meaningful downward adjustment (on the order of ~20\u201330% relative reduction from the base rate), because \u201cnew-to-this\u201d is a common failure mode in regulatory projects.\n\n3. **Regulations still being finalized; may change in next 2 months**\n   - This creates **scope volatility**, which is one of the strongest predictors of schedule slips. Even if the team executes well, late-breaking changes can force redesign/re-approval. I\u2019d apply another substantial downward adjustment.\n\nPutting these together, it\u2019s hard to justify staying near 40%. A reasonable revised point estimate is in the **mid-20s**.\n\nFor an **80% CI**, uncertainty is elevated because:\n- the \u201c40%\u201d survey number may not perfectly match your project,\n- the magnitude of \u201cfirst-time\u201d and \u201creg changes\u201d effects varies widely,\n- you might get lucky (few changes) or unlucky (major rewrite).\n\nSo I\u2019d set a fairly wide 80% interval, roughly from **low-teens to around 40%**.\n\n```json\n{\"estimate\": 25, \"ci_low\": 12, \"ci_high\": 40}\n```"
+}

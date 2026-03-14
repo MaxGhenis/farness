@@ -1,0 +1,21 @@
+{
+  "case_id": "planning_estimate",
+  "condition": "cot",
+  "model": "gpt-5.2",
+  "initial_estimate": 3.0,
+  "initial_ci": [
+    2.0,
+    5.0
+  ],
+  "final_estimate": 5.0,
+  "final_ci": [
+    3.0,
+    9.0
+  ],
+  "update_magnitude": 2.0,
+  "update_direction": "up",
+  "relative_update": 0.6666666666666666,
+  "had_initial_ci": true,
+  "initial_response_text": "```json\n{\"estimate\": 3.0, \"ci_low\": 2.0, \"ci_high\": 5.0}\n```",
+  "final_response_text": "Start from the prior estimate: **3.0 weeks**, with an **80% CI of 2.0\u20135.0**.\n\n## 1) \u201cProjects average 2\u20133\u00d7 initial estimates\u201d\nThis statistic is usually about *initial/planned* estimates vs *actuals* across many contexts. It\u2019s informative as an outside-view correction, but applying a full 2\u20133\u00d7 multiplier mechanically would likely **double-count** risk if our original 2\u20135 week interval already had some uncertainty baked in.\n\nA reasonable way to use this is as a **calibration nudge upward** (i.e., assume our prior was still somewhat optimistic). I\u2019ll treat it as a moderate uplift rather than a full 2\u20133\u00d7.\n\n## 2) Team \u201cconfidence\u201d as a planning fallacy signal\nIf confidence is actually a red flag, that suggests the *inside view* is likely underestimating unknowns. This also supports shifting the estimate upward and widening the tail a bit (more weight on longer outcomes).\n\n## 3) 30% chance of a major blocker\nModel this as a mixture:\n- **70%**: \u201cnormal\u201d outcome around the revised baseline\n- **30%**: \u201cblocker\u201d outcome that adds substantial delay\n\nAssume a major blocker adds roughly **+2 to +4 weeks** (integration + requirements churn). That\u2019s enough to move the upper tail meaningfully without assuming catastrophe.\n\n## Revised distribution (approx.)\nAfter applying (1) and (2), I\u2019ll move the central estimate from **3.0 \u2192 ~4.0 weeks**.\n\nThen incorporate (3) by adding a 30% branch that shifts outcomes later by a few weeks, which pushes the **mean/typical** outcome up further and expands the upper bound of the 80% interval.\n\nA reasonable combined result:\n- Point estimate (expected/typical): **~5.0 weeks**\n- 80% CI: **~3.0 to ~9.0 weeks**\n  - Lower bound rises because even \u201cnormal\u201d work is likely not as fast as originally thought.\n  - Upper bound expands due to the 30% blocker risk.\n\n```json\n{\"estimate\": 5.0, \"ci_low\": 3.0, \"ci_high\": 9.0}\n```"
+}

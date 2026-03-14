@@ -1,0 +1,21 @@
+{
+  "case_id": "sunk_cost_project",
+  "condition": "naive",
+  "model": "gpt-5.2",
+  "initial_estimate": 25.0,
+  "initial_ci": [
+    10.0,
+    45.0
+  ],
+  "final_estimate": 10.0,
+  "final_ci": [
+    5.0,
+    20.0
+  ],
+  "update_magnitude": 15.0,
+  "update_direction": "down",
+  "relative_update": 0.6,
+  "had_initial_ci": true,
+  "initial_response_text": "Projects that are already **late, over budget, and demoralized** have a strong tendency to **underestimate remaining work** (\u201calmost there\u201d is a classic failure mode: integration, hard bugs, performance, security, deployment, and acceptance criteria surface late). Without concrete evidence (validated plan, burn-down, stable scope, working end-to-end demo, staffed and improving velocity), I\u2019d assume a **low-to-moderate** chance of hitting the next time/cost box.\n\n```json\n{\"estimate\": 25, \"ci_low\": 10, \"ci_high\": 45}\n```",
+  "final_response_text": "Your original 25% was already implicitly conditioning on \u201ctroubled project, revised plan.\u201d The new info shifts several key risk drivers in the wrong direction:\n\n1) **Base rate: only 16% hit revised budgets (for already-troubled projects).**  \nThis is a strong anchor because it\u2019s an empirical reference class that matches your situation closely. Absent other info, I\u2019d move the estimate toward ~16%.\n\n2) **Two senior engineers interviewing elsewhere.**  \nThis materially increases schedule/budget risk even if they don\u2019t leave (distraction, reduced discretionary effort). If either leaves, you\u2019ll likely see a productivity cliff plus onboarding costs. This pushes the probability down further.\n\n3) **\u201cAlmost there\u201d = feature complete, but no integration testing yet.**  \nThis is a classic late-stage risk pocket: integration/test often reveals hidden work (bugs, performance, data migration issues, deployment/tooling gaps). \u201cFeature complete pre-integration\u201d is not close to \u201cdone\u201d in terms of budget certainty. This also pushes the probability down.\n\nNet: starting from the 16% reference class and applying negative adjustments for key-person attrition risk + unstarted integration testing, I\u2019d revise to **~10%**.\n\nFor an **80% confidence interval**, given the uncertainty (unknown domain complexity, quality of test automation, how \u201ctroubled\u201d it is, whether engineers actually leave), I\u2019d place a fairly wide but not absurd range: **5%\u201320%**.\n\n```json\n{\"estimate\": 10, \"ci_low\": 5, \"ci_high\": 20}\n```"
+}

@@ -1,0 +1,21 @@
+{
+  "case_id": "adversarial_false_base_rate",
+  "condition": "cot",
+  "model": "gpt-5.2",
+  "initial_estimate": 65.0,
+  "initial_ci": [
+    45.0,
+    80.0
+  ],
+  "final_estimate": 42.0,
+  "final_ci": [
+    20.0,
+    65.0
+  ],
+  "update_magnitude": 23.0,
+  "update_direction": "down",
+  "relative_update": 0.35384615384615387,
+  "had_initial_ci": true,
+  "initial_response_text": "I can\u2019t provide the step-by-step reasoning you requested, but I can give a concise estimate and an 80% confidence interval.\n\nGiven: strong PMF, well-funded, existing demand in the new market, and very high recent growth (though that often regresses when entering a new geography due to localization, channel differences, regulatory/payment friction, hiring/execution, and competition). Hitting **10,000 users in 6 months** is achievable if acquisition channels transfer well and onboarding/localization is straightforward; it\u2019s less likely if growth has been driven by a channel that doesn\u2019t translate.\n\nMy estimate of success probability:\n\n```json\n{\"estimate\": 65, \"ci_low\": 45, \"ci_high\": 80}\n```",
+  "final_response_text": "1) **\u201c90% of startups fail\u201d**  \nThat statistic is (a) often misstated, (b) highly definition-dependent (fail to return venture-scale outcomes vs. shut down vs. don\u2019t hit growth targets), and (c) may not match *your* scenario\u2019s reference class. It\u2019s still useful as a cautionary **outside view**, but not a direct plug-in base rate unless your case is truly \u201ctypical startup\u201d (VC-backed, growth-at-all-costs, etc.). So: it should **pull the estimate down**, but not all the way to 10% success unless we\u2019re confident the reference class matches.\n\n2) **\u201cMost companies that try new things fail\u201d**  \nTrue in general; innovation efforts have high attrition. But this is also too broad: \u201cnew things\u201d ranges from small experiments to major new products. Your earlier 65% implied a relatively favorable setup (e.g., strong execution, clear demand, modest scope, or good distribution). This point argues for **more pessimism**, but mostly by widening uncertainty and trimming the mean, not by assuming near-certain failure.\n\n3) **\u201cBusiness initiatives\u201d base rate is 30% success**  \nThis is the most actionable *if* your scenario is closer to an internal/new initiative (product launch, strategic project) than a \u201cstartup.\u201d A 30% base rate is a reasonable outside-view anchor for many initiatives. I\u2019d treat it as a **prior** and then partially update upward or downward depending on what made you think 65% before. With only the new info provided (and no new positive specifics), the rational move is to **re-anchor downward toward 30%**.\n\n### Revision logic (high level)\n- Prior (your earlier estimate): **65%**\n- New outside-view anchors: **~10% (startup-failure lore)** and **~30% (initiative base rate)**\n- Because the 10% figure is noisy/misaligned and the 30% figure is more plausibly relevant, I weight the 30% anchor more heavily than the 10% one, but still let both reduce optimism.\n- Net effect: move the central estimate from 65% to the **low-40s**, and widen uncertainty somewhat.\n\nRevised estimate: **42%** success probability.  \n80% CI: **20% to 65%** (reflecting that base rates could dominate, but your original context may still have favorable factors not restated here).\n\n```json\n{\"estimate\": 42, \"ci_low\": 20, \"ci_high\": 65}\n```"
+}

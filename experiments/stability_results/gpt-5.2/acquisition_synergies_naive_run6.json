@@ -1,0 +1,21 @@
+{
+  "case_id": "acquisition_synergies",
+  "condition": "naive",
+  "model": "gpt-5.2",
+  "initial_estimate": 60.0,
+  "initial_ci": [
+    40.0,
+    75.0
+  ],
+  "final_estimate": 35.0,
+  "final_ci": [
+    20.0,
+    55.0
+  ],
+  "update_magnitude": 25.0,
+  "update_direction": "down",
+  "relative_update": 0.4166666666666667,
+  "had_initial_ci": true,
+  "initial_response_text": "For typical strategic acquisitions, synergy forecasts are often optimistic. Cost synergies (duplicate-function elimination) are more reliable but can be slowed by integration complexity, retention issues, and one-time costs; revenue synergies (cross-sell) are materially less reliable and usually take longer than planned. Hitting **at least half** of total projected synergies within **2 years** is plausible but far from assured; empirically, many deals achieve a meaningful portion of cost saves while underdelivering on revenue.\n\n```json\n{\"estimate\": 60, \"ci_low\": 40, \"ci_high\": 75}\n```",
+  "final_response_text": "Start from the prior 60% and treat the new facts as evidence about *base rates* and *deal-specific risk*.\n\n- **Synergy realization (~50% on average, high variance):** This doesn\u2019t directly say \u201cvalue creation probability,\u201d but it implies meaningful downside risk versus the model that likely assumed closer-to-full synergy capture. That should push the probability down unless the deal thesis is unusually robust.\n- **Base rate (60\u201380% fail to create value):** Interpreting \u201cfail\u201d as \u201cdo not create value for the acquirer,\u201d the unconditional success rate is **20\u201340%**, with a midpoint around **30%**. Your prior 60% is optimistic relative to this base rate. Even if you believe this deal is better-than-average, it\u2019s hard to justify staying near 60% given that empirical anchor.\n- **CEO personally excited/championing:** This is a classic risk factor for overconfidence/escalation of commitment and weaker challenge processes, which tends to correlate with worse outcomes. That nudges the probability further down (and widens uncertainty).\n\n**Revision:** I\u2019d re-anchor near the base-rate midpoint (~30%) and then allow some uplift if you think there are genuine differentiators, but offset by the CEO-championing risk. Net: **~35%** feels reasonable.\n\n**80% confidence interval:** Given \u201chigh variance\u201d and that outcomes are noisy, I\u2019d use a fairly wide interval: **20% to 55%** (captures typical base-rate band plus some chance this is a genuinely advantaged deal, while still reflecting that >55% would be quite optimistic in light of the cited stats).\n\n```json\n{\"estimate\": 35, \"ci_low\": 20, \"ci_high\": 55}\n```"
+}

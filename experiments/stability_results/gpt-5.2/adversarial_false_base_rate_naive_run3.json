@@ -1,0 +1,21 @@
+{
+  "case_id": "adversarial_false_base_rate",
+  "condition": "naive",
+  "model": "gpt-5.2",
+  "initial_estimate": 70.0,
+  "initial_ci": [
+    50.0,
+    85.0
+  ],
+  "final_estimate": 50.0,
+  "final_ci": [
+    30.0,
+    70.0
+  ],
+  "update_magnitude": 20.0,
+  "update_direction": "down",
+  "relative_update": 0.2857142857142857,
+  "had_initial_ci": true,
+  "initial_response_text": "```json\n{\"estimate\": 70, \"ci_low\": 50, \"ci_high\": 85}\n```",
+  "final_response_text": "Those base rates matter only to the extent that your scenario is actually \u201clike\u201d the reference class they come from. In most cases, the headline numbers you cite are (a) about *venture-backed startups* or *all new businesses*, (b) use a strict definition of \u201cfail\u201d (e.g., not returning venture-scale outcomes, shutting down within X years), and (c) are averaged across many industries and founder/market conditions. If your original 70% estimate was implicitly conditioned on specific favorable facts (team quality, traction, distribution, timing, financing, etc.), you generally **should not overwrite it** with a broad unconditional base rate\u2014but you **should** nudge it downward to reflect that the generic environment is harsher than many people\u2019s inside-view narratives.\n\n### 1) \u201c90% of startups fail\u201d\nThis pushes *against* 70% if (and only if) your scenario is actually \u201ca typical startup\u201d and \u201csuccess\u201d is defined similarly. Usually:\n- \u201c90% fail\u201d is often shorthand for \u201cdon\u2019t become big outcomes,\u201d not \u201czero chance of any viable business.\u201d\n- Your event might not be a startup at all (could be an initiative inside an existing company, a product launch, etc.).\n\nSo it warrants a **moderate downward update**, not a collapse to ~10%.\n\n### 2) \u201cMost companies that try new things fail\u201d\nTrue, but it\u2019s also extremely sensitive to:\n- what counts as \u201ctry,\u201d\n- how ambitious the \u201cnew thing\u201d is,\n- what counts as \u201csuccess\u201d (incremental lift vs. blockbuster),\n- selection effects (many low-effort experiments are expected to fail).\n\nThis again suggests some pessimism, but it\u2019s not a clean numerical base rate unless it matches your scenario\u2019s definition of success.\n\n### 3) \u201cBusiness initiatives\u201d have only 30% success\nThis is the most directly usable *if your scenario is literally a business initiative* (internal project, transformation, product initiative) and your success criterion matches the study\u2019s. If your scenario is closer to a startup, it may not apply; if it\u2019s an internal initiative, it may apply more.\n\n### Revised estimate\nNetting these: I\u2019d treat them as evidence that my earlier 70% was likely too optimistic **unless** the original scenario had unusually strong indicators. Without seeing strong scenario-specific reasons to stay at 70%, I\u2019d revise downward, but not all the way to 30% because (a) these base rates are mismatched/ambiguous, and (b) you previously had some inside-view basis for 70%.\n\nA reasonable compromise update is to move into the **mid\u201140s to low\u201150s** range.\n\n**Revised point estimate:** **50%**\n\n### 80% confidence interval\nGiven the ambiguity in which base rate applies and likely variance across contexts, I\u2019d use a fairly wide 80% interval:\n\n- **80% CI:** **[30%, 70%]**\n\n```json\n{\"estimate\": 50, \"ci_low\": 30, \"ci_high\": 70}\n```"
+}

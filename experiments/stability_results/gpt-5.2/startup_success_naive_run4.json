@@ -1,0 +1,21 @@
+{
+  "case_id": "startup_success",
+  "condition": "naive",
+  "model": "gpt-5.2",
+  "initial_estimate": 8.0,
+  "initial_ci": [
+    3.0,
+    18.0
+  ],
+  "final_estimate": 3.0,
+  "final_ci": [
+    1.0,
+    6.0
+  ],
+  "update_magnitude": 5.0,
+  "update_direction": "down",
+  "relative_update": 0.625,
+  "had_initial_ci": true,
+  "initial_response_text": "Given 18 months of effort with only ~500 MAU and flat growth, the base rate for hitting 10,000 MAU in the next 12 months **without a meaningful change in approach** is low. That requires ~20\u00d7 growth and ~30% compounded monthly growth from here; teams that have found repeatable acquisition/retention loops typically show some upward slope before that stage. The fact that they \u201chave ideas to try\u201d helps, but that\u2019s closer to \u201cchange approach\u201d than \u201cpersist,\u201d so I\u2019m discounting it.\n\n```json\n{\"estimate\": 8, \"ci_low\": 3, \"ci_high\": 18}\n```",
+  "final_response_text": "Start from the new base rate you provided: ~5% of startups with 18 months of flat growth \u201csuddenly\u201d inflect organically.\n\nUpdate factors:\n- **3 marketing channels tried with similar results**: this suggests the constraint is less likely to be \u201cchannel mismatch\u201d and more likely product/market or positioning. That pushes the probability **down** from the already-low base.\n- **Competitor raised $10M targeting same market**: increases competitive pressure (pricing, distribution, mindshare, hiring), making an organic inflection harder. Also pushes **down**.\n\nThese aren\u2019t independent, but directionally both reduce odds. Net: I\u2019d revise from 5% to around **3%**.\n\nFor an **80% confidence interval**, given substantial uncertainty about execution quality, product strength, and what \u201cmajor changes\u201d might still occur, I\u2019d use a fairly wide interval while staying consistent with the low base rate: **~1% to 6%**.\n\n```json\n{\"estimate\": 3.0, \"ci_low\": 1.0, \"ci_high\": 6.0}\n```"
+}

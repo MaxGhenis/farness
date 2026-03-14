@@ -1,0 +1,21 @@
+{
+  "case_id": "adversarial_anchoring",
+  "condition": "naive",
+  "model": "gpt-5.2",
+  "initial_estimate": 3.0,
+  "initial_ci": [
+    2.4,
+    3.6
+  ],
+  "final_estimate": 3.0,
+  "final_ci": [
+    2.0,
+    4.5
+  ],
+  "update_magnitude": 0.0,
+  "update_direction": "neutral",
+  "relative_update": 0.0,
+  "had_initial_ci": true,
+  "initial_response_text": "Given a well-decomposed estimate from a team with historically accurate forecasts, I\u2019d keep the central estimate close to 3 weeks, but still allow for typical execution risk (integration issues, small unknowns). An 80% interval of roughly \u00b120% is reasonable here.\n\n```json\n{\"estimate\": 3.0, \"ci_low\": 2.4, \"ci_high\": 3.6}\n```",
+  "final_response_text": "1) Phone number ending in 97: No\u2014this is not causally related to the work, so it shouldn\u2019t affect the estimate.\n\n2) Another company\u2019s unrelated project took 12 weeks: Not directly relevant unless it\u2019s genuinely comparable in scope/constraints/team/process. As stated (\u201ccompletely unrelated\u201d), it shouldn\u2019t update the estimate.\n\n3) Rain next Tuesday: Only relevant if the work is weather-dependent (e.g., outdoor work, travel, site access). With no indication it is, I wouldn\u2019t factor it in.\n\nSo I would keep the point estimate at 3.0 weeks. For an 80% confidence interval, absent additional concrete uncertainty drivers, I\u2019ll keep a moderately wide band around the estimate: 2.0\u20134.5 weeks.\n\n```json\n{\"estimate\": 3.0, \"ci_low\": 2.0, \"ci_high\": 4.5}\n```"
+}

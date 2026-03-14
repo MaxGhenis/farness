@@ -1,0 +1,192 @@
+{
+  "cot": {
+    "n": 30,
+    "mean_reframe_count": 4.433333333333334,
+    "challenged_framing_rate": 0.36666666666666664,
+    "introduced_new_kpis_rate": 0.26666666666666666
+  },
+  "farness": {
+    "n": 58,
+    "mean_reframe_count": 4.637931034482759,
+    "challenged_framing_rate": 0.1724137931034483,
+    "introduced_new_kpis_rate": 0.3448275862068966
+  },
+  "naive": {
+    "n": 59,
+    "mean_reframe_count": 3.4745762711864407,
+    "challenged_framing_rate": 0.23728813559322035,
+    "introduced_new_kpis_rate": 0.15254237288135594
+  },
+  "conditions": [
+    "cot",
+    "farness",
+    "naive"
+  ],
+  "statistical_comparison": {
+    "cot_vs_farness": {
+      "reframe_count": {
+        "mann_whitney_u": 835.5,
+        "p_value_raw": 0.7632432889823786,
+        "effect_size_r": 0.03965517241379313,
+        "p_value_corrected": 1.0
+      },
+      "introduced_new_kpis": {
+        "fisher_exact_p_raw": 0.6297081056302867,
+        "cot_count": 8,
+        "farness_count": 20,
+        "fisher_exact_p_corrected": 1.0
+      }
+    },
+    "cot_vs_naive": {
+      "reframe_count": {
+        "mann_whitney_u": 1060.5,
+        "p_value_raw": 0.12511960754622614,
+        "effect_size_r": -0.1983050847457628,
+        "p_value_corrected": 0.5004784301849046
+      },
+      "introduced_new_kpis": {
+        "fisher_exact_p_raw": 0.25515670544154967,
+        "cot_count": 8,
+        "naive_count": 9,
+        "fisher_exact_p_corrected": 0.765470116324649
+      }
+    },
+    "farness_vs_naive": {
+      "reframe_count": {
+        "mann_whitney_u": 2179.5,
+        "p_value_raw": 0.0101246552634359,
+        "effect_size_r": -0.2738164815897137,
+        "p_value_corrected": 0.060747931580615394
+      },
+      "introduced_new_kpis": {
+        "fisher_exact_p_raw": 0.019148070434958808,
+        "farness_count": 20,
+        "naive_count": 9,
+        "fisher_exact_p_corrected": 0.09574035217479404
+      }
+    }
+  },
+  "by_case": {
+    "feature_build": {
+      "cot": {
+        "n": 5,
+        "mean_reframe_count": 5.0,
+        "challenged_framing_rate": 0.6,
+        "introduced_new_kpis_rate": 0.4
+      },
+      "farness": {
+        "n": 10,
+        "mean_reframe_count": 5.2,
+        "challenged_framing_rate": 0.1,
+        "introduced_new_kpis_rate": 0.5
+      },
+      "naive": {
+        "n": 10,
+        "mean_reframe_count": 4.7,
+        "challenged_framing_rate": 0.3,
+        "introduced_new_kpis_rate": 0.6
+      }
+    },
+    "grad_school": {
+      "cot": {
+        "n": 5,
+        "mean_reframe_count": 0.2,
+        "challenged_framing_rate": 0.2,
+        "introduced_new_kpis_rate": 0.0
+      },
+      "farness": {
+        "n": 10,
+        "mean_reframe_count": 0.8,
+        "challenged_framing_rate": 0.1,
+        "introduced_new_kpis_rate": 0.1
+      },
+      "naive": {
+        "n": 10,
+        "mean_reframe_count": 0.4,
+        "challenged_framing_rate": 0.0,
+        "introduced_new_kpis_rate": 0.0
+      }
+    },
+    "hire_senior": {
+      "cot": {
+        "n": 5,
+        "mean_reframe_count": 7.4,
+        "challenged_framing_rate": 0.8,
+        "introduced_new_kpis_rate": 0.0
+      },
+      "farness": {
+        "n": 9,
+        "mean_reframe_count": 6.777777777777778,
+        "challenged_framing_rate": 0.5555555555555556,
+        "introduced_new_kpis_rate": 0.8888888888888888
+      },
+      "naive": {
+        "n": 10,
+        "mean_reframe_count": 5.0,
+        "challenged_framing_rate": 0.6,
+        "introduced_new_kpis_rate": 0.0
+      }
+    },
+    "move_cities": {
+      "cot": {
+        "n": 5,
+        "mean_reframe_count": 6.6,
+        "challenged_framing_rate": 0.0,
+        "introduced_new_kpis_rate": 0.0
+      },
+      "farness": {
+        "n": 10,
+        "mean_reframe_count": 7.7,
+        "challenged_framing_rate": 0.1,
+        "introduced_new_kpis_rate": 0.1
+      },
+      "naive": {
+        "n": 10,
+        "mean_reframe_count": 4.7,
+        "challenged_framing_rate": 0.2,
+        "introduced_new_kpis_rate": 0.0
+      }
+    },
+    "quit_job": {
+      "cot": {
+        "n": 5,
+        "mean_reframe_count": 6.2,
+        "challenged_framing_rate": 0.4,
+        "introduced_new_kpis_rate": 0.4
+      },
+      "farness": {
+        "n": 10,
+        "mean_reframe_count": 4.9,
+        "challenged_framing_rate": 0.2,
+        "introduced_new_kpis_rate": 0.3
+      },
+      "naive": {
+        "n": 10,
+        "mean_reframe_count": 4.2,
+        "challenged_framing_rate": 0.1,
+        "introduced_new_kpis_rate": 0.0
+      }
+    },
+    "raise_funding": {
+      "cot": {
+        "n": 5,
+        "mean_reframe_count": 1.2,
+        "challenged_framing_rate": 0.2,
+        "introduced_new_kpis_rate": 0.8
+      },
+      "farness": {
+        "n": 9,
+        "mean_reframe_count": 2.4444444444444446,
+        "challenged_framing_rate": 0.0,
+        "introduced_new_kpis_rate": 0.2222222222222222
+      },
+      "naive": {
+        "n": 9,
+        "mean_reframe_count": 1.6666666666666667,
+        "challenged_framing_rate": 0.2222222222222222,
+        "introduced_new_kpis_rate": 0.3333333333333333
+      }
+    }
+  },
+  "model": "claude-opus-4-6"
+}

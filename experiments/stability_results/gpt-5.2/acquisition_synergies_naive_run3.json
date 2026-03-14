@@ -1,0 +1,21 @@
+{
+  "case_id": "acquisition_synergies",
+  "condition": "naive",
+  "model": "gpt-5.2",
+  "initial_estimate": 60.0,
+  "initial_ci": [
+    40.0,
+    78.0
+  ],
+  "final_estimate": 32.0,
+  "final_ci": [
+    18.0,
+    48.0
+  ],
+  "update_magnitude": 28.0,
+  "update_direction": "down",
+  "relative_update": 0.4666666666666667,
+  "had_initial_ci": true,
+  "initial_response_text": "A typical M&A synergy plan mixes (1) cost takeout, which is more controllable but still slowed by integration complexity and one-time costs, and (2) revenue synergies, which are less reliable and usually take longer to materialize. Hitting **at least half** of a headline synergy number within **2 years** is achievable but far from assured: integration execution risk, retention/customer disruption, systems/process harmonization, and optimistic deal-modeling all commonly reduce realized synergies versus plan. Given that the threshold is only 50% (not 100%) and the horizon is 2 years (moderate), I\u2019d put this in the \u201csomewhat more likely than not\u201d range.\n\n```json\n{\"estimate\": 60, \"ci_low\": 40, \"ci_high\": 78}\n```",
+  "final_response_text": "Starting from the prior 60% (implicitly \u201cdeal creates value / achieves intended outcomes\u201d as we were using before), the new facts push the probability down:\n\n- **Synergy realization ~50% on average, high variance**: if the thesis relies meaningfully on synergies, the expected outcome mass shifts lower and the dispersion widens. This alone would pull a 60% \u201csuccess\u201d view toward something closer to a coin flip.\n- **60\u201380% of deals fail to create value for the acquirer**: this is strong base-rate evidence. Interpreting that literally implies only **20\u201340%** succeed on average. Unless we have strong deal-specific edge (not provided), we should regress toward this base rate rather than stay at 60%.\n- **CEO personally excited / championing**: this is a governance/process risk signal (overconfidence, confirmation bias, weak challenge function). Empirically it tends to correlate with overpaying and diluted discipline, so it nudges the probability down further.\n\nCombining these, I\u2019d revise the point estimate to the **low-30s**. The \u201chigh variance\u201d note also argues for a **wider** interval than I\u2019d otherwise give.\n\n```json\n{\"estimate\": 32, \"ci_low\": 18, \"ci_high\": 48}\n```"
+}

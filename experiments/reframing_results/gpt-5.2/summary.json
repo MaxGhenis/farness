@@ -1,0 +1,152 @@
+{
+  "cot": {
+    "n": 20,
+    "mean_reframe_count": 4.6,
+    "challenged_framing_rate": 0.3,
+    "introduced_new_kpis_rate": 0.3
+  },
+  "farness": {
+    "n": 18,
+    "mean_reframe_count": 4.777777777777778,
+    "challenged_framing_rate": 0.0,
+    "introduced_new_kpis_rate": 0.7222222222222222
+  },
+  "naive": {
+    "n": 20,
+    "mean_reframe_count": 4.0,
+    "challenged_framing_rate": 0.1,
+    "introduced_new_kpis_rate": 0.5
+  },
+  "conditions": [
+    "cot",
+    "farness",
+    "naive"
+  ],
+  "statistical_comparison": {
+    "cot_vs_farness": {
+      "reframe_count": {
+        "mann_whitney_u": 172.0,
+        "p_value_raw": 0.8248429656310388,
+        "effect_size_r": 0.0444444444444444,
+        "p_value_corrected": 1.0
+      },
+      "introduced_new_kpis": {
+        "fisher_exact_p_raw": 0.021709799772381386,
+        "cot_count": 6,
+        "farness_count": 13,
+        "fisher_exact_p_corrected": 0.13025879863428833
+      }
+    },
+    "cot_vs_naive": {
+      "reframe_count": {
+        "mann_whitney_u": 227.0,
+        "p_value_raw": 0.4686648248849281,
+        "effect_size_r": -0.135,
+        "p_value_corrected": 1.0
+      },
+      "introduced_new_kpis": {
+        "fisher_exact_p_raw": 0.3332130795979517,
+        "cot_count": 6,
+        "naive_count": 10,
+        "fisher_exact_p_corrected": 1.0
+      }
+    },
+    "farness_vs_naive": {
+      "reframe_count": {
+        "mann_whitney_u": 209.0,
+        "p_value_raw": 0.40039063383516116,
+        "effect_size_r": -0.1611111111111112,
+        "p_value_corrected": 1.0
+      },
+      "introduced_new_kpis": {
+        "fisher_exact_p_raw": 0.19828838849973446,
+        "farness_count": 13,
+        "naive_count": 10,
+        "fisher_exact_p_corrected": 0.9914419424986722
+      }
+    }
+  },
+  "by_case": {
+    "feature_build": {
+      "cot": {
+        "n": 5,
+        "mean_reframe_count": 4.8,
+        "challenged_framing_rate": 0.4,
+        "introduced_new_kpis_rate": 0.6
+      },
+      "farness": {
+        "n": 5,
+        "mean_reframe_count": 5.2,
+        "challenged_framing_rate": 0.0,
+        "introduced_new_kpis_rate": 0.8
+      },
+      "naive": {
+        "n": 5,
+        "mean_reframe_count": 4.2,
+        "challenged_framing_rate": 0.0,
+        "introduced_new_kpis_rate": 0.8
+      }
+    },
+    "grad_school": {
+      "cot": {
+        "n": 5,
+        "mean_reframe_count": 0.2,
+        "challenged_framing_rate": 0.2,
+        "introduced_new_kpis_rate": 0.0
+      },
+      "farness": {
+        "n": 5,
+        "mean_reframe_count": 0.2,
+        "challenged_framing_rate": 0.0,
+        "introduced_new_kpis_rate": 0.2
+      },
+      "naive": {
+        "n": 5,
+        "mean_reframe_count": 0.2,
+        "challenged_framing_rate": 0.2,
+        "introduced_new_kpis_rate": 0.2
+      }
+    },
+    "hire_senior": {
+      "cot": {
+        "n": 5,
+        "mean_reframe_count": 5.4,
+        "challenged_framing_rate": 0.6,
+        "introduced_new_kpis_rate": 0.6
+      },
+      "farness": {
+        "n": 3,
+        "mean_reframe_count": 5.333333333333333,
+        "challenged_framing_rate": 0.0,
+        "introduced_new_kpis_rate": 1.0
+      },
+      "naive": {
+        "n": 5,
+        "mean_reframe_count": 4.2,
+        "challenged_framing_rate": 0.2,
+        "introduced_new_kpis_rate": 0.6
+      }
+    },
+    "move_cities": {
+      "cot": {
+        "n": 5,
+        "mean_reframe_count": 8.0,
+        "challenged_framing_rate": 0.0,
+        "introduced_new_kpis_rate": 0.0
+      },
+      "farness": {
+        "n": 5,
+        "mean_reframe_count": 8.6,
+        "challenged_framing_rate": 0.0,
+        "introduced_new_kpis_rate": 1.0
+      },
+      "naive": {
+        "n": 5,
+        "mean_reframe_count": 7.4,
+        "challenged_framing_rate": 0.0,
+        "introduced_new_kpis_rate": 0.4
+      }
+    }
+  },
+  "model": "gpt-5.2"
+}

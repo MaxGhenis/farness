@@ -1,0 +1,21 @@
+{
+  "case_id": "planning_estimate",
+  "condition": "cot",
+  "model": "gpt-5.2",
+  "initial_estimate": 3.0,
+  "initial_ci": [
+    2.0,
+    4.0
+  ],
+  "final_estimate": 9.2,
+  "final_ci": [
+    6.0,
+    15.0
+  ],
+  "update_magnitude": 6.199999999999999,
+  "update_direction": "up",
+  "relative_update": 2.0666666666666664,
+  "had_initial_ci": true,
+  "initial_response_text": "In practice, even \u201cconfident\u201d 2\u2011week estimates tend to omit or underestimate a few common sources of schedule expansion:\n\n1. **Hidden work / overlooked tasks**: small integration details, edge cases, minor scope clarifications.  \n2. **QA + bug fixing**: testing effort often arrives late and clusters.  \n3. **Review/iteration cycles**: code review, rework, product feedback.  \n4. **Dependencies and coordination**: waiting on other systems/people, environment issues.  \n5. **Interruptions/overhead**: meetings, support, context switching (unless the 2 weeks already explicitly means \u201ccalendar time with overhead included\u201d).\n\nA reasonable rule-of-thumb for \u201c2 weeks estimated with breakdowns\u201d is a **~1.5\u00d7** multiplier for actual calendar time in many teams/projects, with substantial variance.\n\nSo I\u2019d estimate **~3 weeks** actual duration. For an 80% confidence interval, I\u2019d allow for cases where it goes fairly smoothly (close to 2 weeks) up to cases with moderate complications (around 4 weeks), without covering extreme blowups.\n\n```json\n{\"estimate\": 3.0, \"ci_low\": 2.0, \"ci_high\": 4.0}\n```",
+  "final_response_text": "Start from the prior estimate: **3.0 weeks**, 80% CI **[2.0, 4.0]**.\n\n### 1) \u201cProjects average 2\u20133\u00d7 their initial estimates\u201d\nThat statistic is usually about *initial estimates being systematically low* (optimism bias), especially early in a project. If we treat our prior as an \u201cinitial estimate\u201d and apply a calibration multiplier, a reasonable single-point adjustment is the midpoint **2.5\u00d7**.\n\n- Mean estimate: \\(3.0 \\times 2.5 = 7.5\\) weeks  \n- CI: \\([2.0, 4.0] \\times 2.5 = [5.0, 10.0]\\) weeks\n\n### 2) Team \u201cconfidence\u201d as planning-fallacy warning\nIf confidence is a *negative* signal (they\u2019re underweighting risks/unknowns), we should widen slightly and nudge upward. I\u2019ll apply a modest uplift (not another full 2\u20133\u00d7, since that would double-count the same phenomenon). Use **~10%**.\n\n- Mean: \\(7.5 \\times 1.1 = 8.25\\) weeks  \n- CI: \\([5.0, 10.0] \\times 1.1 = [5.5, 11.0]\\) weeks\n\n### 3) 30% chance of a major blocker\nModel as a mixture:\n- With probability 70%: \u201cnormal\u201d duration \\(D\\) ~ centered at 8.25 weeks.\n- With probability 30%: add a blocker delay \\(B\\).\n\nWe need a blocker delay assumption. \u201cMajor blocker (integration issue/unclear requirements)\u201d commonly costs on the order of **~2\u20134 weeks**. Use expected blocker delay **3 weeks** (with variability). For the point estimate, use the expectation:\n\n\\[\nE[T] = E[D] + 0.3 \\times E[B] = 8.25 + 0.3 \\times 3 = 9.15 \\text{ weeks}\n\\]\n\nFor an **80% CI**, the blocker creates a heavier right tail. A practical approximation:\n- Lower bound: close to the \u201cnormal\u201d lower tail (blocker unlikely to reduce time). Keep near **~5.5\u20136.0**; choose **6.0**.\n- Upper bound: should cover scenarios where (a) you\u2019re already in the high end of \u201cnormal\u201d and (b) a blocker hits. Approximate as \\( \\text{normal high} + \\text{blocker high}\\). Take normal high ~11.0 and blocker high ~4.0 \u21d2 **15.0**.\n\nSo revised estimate \u2248 **9.2 weeks**, 80% CI **[6.0, 15.0]**.\n\n```json\n{\"estimate\": 9.2, \"ci_low\": 6.0, \"ci_high\": 15.0}\n```"
+}

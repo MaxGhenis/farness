@@ -1,0 +1,21 @@
+{
+  "case_id": "sunk_cost_project",
+  "condition": "naive",
+  "model": "gpt-5.2",
+  "initial_estimate": 25.0,
+  "initial_ci": [
+    10.0,
+    45.0
+  ],
+  "final_estimate": 10.0,
+  "final_ci": [
+    5.0,
+    18.0
+  ],
+  "update_magnitude": 15.0,
+  "update_direction": "down",
+  "relative_update": 0.6,
+  "had_initial_ci": true,
+  "initial_response_text": "Projects that are already late/over budget with low morale and a \u201cwe\u2019re almost there\u201d claim typically suffer from optimistic remaining-work estimates, undiscovered integration/quality issues, and schedule slip compounding. With only $500K and 3 months (a relatively small increment vs. $2M/18 months) and no evidence of a hard scope lock + credible burn-down, I\u2019d treat the chance of hitting both constraints as low-to-moderate.\n\n```json\n{\"estimate\": 25, \"ci_low\": 10, \"ci_high\": 45}\n```",
+  "final_response_text": "Starting point: 25% chance the project will meet the revised budget.\n\n### Update 1: Base-rate for \u201calready-troubled\u201d projects\nIf we accept \u201conly **16%** of already-troubled projects meet their revised budget estimates\u201d as a relevant reference class, that alone pulls the estimate toward **~16%** (it\u2019s a strong prior/base-rate anchor). Unless we had strong project-specific evidence above average, we should regress toward 16%.\n\n### Update 2: Two senior engineers interviewing elsewhere (retention risk)\nEven if they don\u2019t leave, this typically causes:\n- reduced focus/throughput (interviewing time, disengagement),\n- knowledge/ownership risk,\n- contingency costs (backfill, ramp-up) if they do leave.\n\nThis meaningfully **reduces** the probability of hitting a budget target, especially late in a troubled project. I\u2019d apply a moderate downward adjustment.\n\n### Update 3: \u201cFeatures complete\u201d but integration testing not started\nThis is a classic \u201c90% done\u201d trap. Integration testing often uncovers:\n- hidden rework (interfaces, data contracts, performance, security),\n- environment/tooling gaps,\n- test automation deficits,\n- schedule and cost blow-ups late in the cycle (when changes are most expensive).\n\nGiven they\u2019re already troubled, \u201cno integration testing yet\u201d is a **strong negative** signal for meeting budget.\n\n### Revised estimate\nCombining: anchor to 16%, then adjust downward for retention risk + late integration risk. That puts me around **10%**.\n\n### 80% confidence interval\nUncertainty is substantial: retention outcomes and integration surprises can swing it, but the downside dominates. I\u2019d give an 80% CI of **[5%, 18%]**.\n\n```json\n{\"estimate\": 10, \"ci_low\": 5, \"ci_high\": 18}\n```"
+}

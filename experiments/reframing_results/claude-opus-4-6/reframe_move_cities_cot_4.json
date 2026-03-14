@@ -1,0 +1,22 @@
+{
+  "case_id": "move_cities",
+  "condition": "cot",
+  "model": "claude-opus-4-6",
+  "run_number": 4,
+  "reframe_count": 8,
+  "reframe_matches": [
+    "partner",
+    "relationship",
+    "lifestyle",
+    "remote",
+    "negotiate",
+    "hybrid",
+    "quality of life",
+    "network"
+  ],
+  "introduced_new_kpis": false,
+  "challenged_framing": false,
+  "response_text": "# Thinking Through Your SF Offer\n\nThis is a big decision, so let me work through it systematically.\n\n---\n\n## Step 1: The Actual Financial Math\n\n**The $70K raise sounds great, but let's pressure-test it.**\n\nCost of living in SF vs. Austin is roughly **40-60% higher** depending on lifestyle, driven overwhelmingly by housing.\n\n| Category | Austin (now) | SF (estimate) |\n|---|---|---|\n| Housing (rent/mortgage) | ~$2,000-2,500/mo | ~$3,800-5,500/mo |\n| State income tax | 0% (Texas) | ~9-10%+ (CA) |\n| General expenses | Baseline | ~20-30% more |\n\n**Rough math:**\n- $250K in SF \u2192 CA state tax alone eats ~$15-25K more than TX\n- Housing delta: likely $20-30K+/year more\n- Other cost increases: ~$5-10K/year\n\n**Net purchasing power after adjustments: roughly comparable to your $180K in Austin, possibly slightly worse.** The \"raise\" largely evaporates.\n\n---\n\n## Step 2: What the Numbers Don't Capture\n\n**Arguments FOR taking it:**\n\n- **Career trajectory** \u2014 SF still has the densest network for senior+ engineering roles. Your *next* job from SF likely pays $300-350K+. This is the strongest argument.\n- **Total comp matters** \u2014 Is that $250K all base, or does it include RSUs/equity? SF offers often have significant equity upside that Austin roles don't.\n- **Professional network** \u2014 Proximity to decision-makers, VCs, and top-tier engineers compounds over time.\n- **Partner flexibility** \u2014 This is a genuine advantage. Many people can't do this; you can.\n\n**Arguments AGAINST:**\n\n- **Net-zero raise for major life disruption** \u2014 You're uprooting your life for roughly the same spending power.\n- **Quality of life** \u2014 Austin generally offers more space, easier logistics, and arguably better day-to-day livability for the money.\n- **SF's challenges are real** \u2014 Housing quality per dollar, commute stress, and urban issues are not just headlines.\n- **Remote/hybrid trend** \u2014 Senior engineers increasingly command strong comp without being in SF. You might be able to get $220-240K in Austin within a year or two.\n- **If you own property in Austin** \u2014 You'd be giving up a strong position in a favorable market.\n\n---\n\n## Step 3: The Questions That Actually Decide This\n\nThese matter more than the spreadsheet:\n\n1. **Is the SF role a meaningfully better *career* move?** (Better company, better title, harder problems, stronger brand?) If yes, that changes everything.\n2. **What's the equity component?** If it's a high-growth startup or strong public company RSUs, the real comp could be $350K+.\n3. **Could you negotiate remote/hybrid and stay in Austin?** Many companies will flex for senior engineers. Have you asked?\n4. **What does your partner actually want?** \"Flexible\" doesn't mean \"indifferent.\" This affects a relationship.\n5. **Where do you want to be in 5 years?** If you want to break into staff/principal level at a top company, SF accelerates that. If you want financial independence and lifestyle, Austin wins.\n\n---\n\n## My Honest Recommendation\n\n**Don't take it purely for the money \u2014 because there isn't really more money.**\n\n**DO take it if:**\n- The role itself is a clear career upgrade (company brand, scope, or trajectory)\n- There's meaningful equity upside beyond $250K\n- You're actively trying to level up into staff+ or leadership roles\n- You and your partner are genuinely excited about the move\n\n**DON'T take it if:**\n- It's a lateral role at a comparable company and the main appeal is the number\n- You're happy with your trajectory in Austin\n- You haven't first tried to negotiate your current comp or find a better Austin/remote offer\n\n**The sharpest move might be:** Use this offer as leverage. Either negotiate remote work with the SF company at or near $250K while staying in Austin, or bring the offer to your current employer. A $200-220K counter in Austin would be unambiguously better than $250K in SF.\n\n---\n\nWhat does the actual role look like compared to your current one? That's where the real answer lives.",
+  "timestamp": "2026-02-18T19:09:05.669858",
+  "duration_seconds": 29.429432153701782
+}

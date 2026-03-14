@@ -1,0 +1,13 @@
+{
+  "case_id": "raise_funding",
+  "condition": "naive",
+  "model": "gpt-5.2",
+  "run_number": 1,
+  "reframe_count": 0,
+  "reframe_matches": [],
+  "introduced_new_kpis": false,
+  "challenged_framing": false,
+  "response_text": "ERROR: Connection error.",
+  "timestamp": "2026-02-18T19:43:26.263798",
+  "duration_seconds": 1.4375202655792236
+}

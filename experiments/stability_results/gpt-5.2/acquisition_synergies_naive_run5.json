@@ -1,0 +1,21 @@
+{
+  "case_id": "acquisition_synergies",
+  "condition": "naive",
+  "model": "gpt-5.2",
+  "initial_estimate": 60.0,
+  "initial_ci": [
+    40.0,
+    78.0
+  ],
+  "final_estimate": 40.0,
+  "final_ci": [
+    25.0,
+    55.0
+  ],
+  "update_magnitude": 20.0,
+  "update_direction": "down",
+  "relative_update": 0.3333333333333333,
+  "had_initial_ci": true,
+  "initial_response_text": "A common pattern in M&A is that *cost* synergies are more achievable than *revenue* synergies, but the combined target here (\u2265$25M of $50M within 2 years) is only \u201chalf,\u201d which is often attainable if integration is competently executed. Against that, synergy forecasts are frequently optimistic, integration timelines slip, and revenue synergies in particular tend to materialize later than planned. Balancing these, I\u2019d put the odds modestly above 50%, with wide uncertainty depending on integration complexity and how much of the $50M is cost vs. revenue.\n\n```json\n{\"estimate\": 60, \"ci_low\": 40, \"ci_high\": 78}\n```",
+  "final_response_text": "Starting point: 60% (your prior).\n\n### Update from the new information\n\n1) **Synergy realization averages ~50% with high variance**  \nIf the original 60% implicitly assumed something closer to \u201cmost\u201d projected synergies are realized (or at least a decent chance of doing so), learning that the *base rate* is ~50% (and noisy) should pull the success probability downward. This doesn\u2019t automatically cut the probability in half (because \u201csuccess\u201d isn\u2019t identical to \u201c100% synergy capture\u201d), but it\u2019s a meaningful negative base-rate update.\n\n2) **60\u201380% of deals fail to create value for the acquirer**  \nThat implies a base rate of value creation of only **20\u201340%**, with a midpoint around **30%**. Unless we have strong deal-specific evidence that this deal is materially above-average, the rational move is to anchor closer to that base rate than to 60%. This is the biggest downward pull.\n\n3) **CEO personally excited / championing**  \nThis is a classic risk factor for overconfidence, reduced diligence, and escalation of commitment (particularly if the CEO is publicly committed to the board). It doesn\u2019t guarantee failure, but it *does* modestly increase the likelihood the deal is pursued on optimistic assumptions and that risks are underweighted. Another downward adjustment.\n\n### Revised estimate\nBalancing:\n- Strong base-rate signal suggests ~30% success,\n- But you previously had reasons to be at 60% (implying some favorable specifics not repeated here),\n- I\u2019ll compromise toward the base rate while still allowing some deal-specific upside.\n\n**Revised estimate: 40%**\n\n### 80% confidence interval\nGiven \u201chigh variance\u201d and the broad 20\u201340% base-rate band (plus unknown deal specifics), uncertainty is wide. I\u2019ll set an 80% CI that reflects: plausible downside near typical outcomes and upside if this deal is genuinely better-than-average.\n\n**80% CI: 25% to 55%**\n\n```json\n{\"estimate\": 40, \"ci_low\": 25, \"ci_high\": 55}\n```"
+}

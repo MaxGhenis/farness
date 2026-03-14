@@ -1,0 +1,21 @@
+{
+  "case_id": "move_cities",
+  "condition": "cot",
+  "model": "claude-opus-4-6",
+  "run_number": 3,
+  "reframe_count": 7,
+  "reframe_matches": [
+    "partner",
+    "lifestyle",
+    "remote",
+    "negotiate",
+    "hybrid",
+    "quality of life",
+    "network"
+  ],
+  "introduced_new_kpis": false,
+  "challenged_framing": false,
+  "response_text": "# Thinking Through Your SF Offer\n\nThis is a big decision, so let me work through it systematically.\n\n---\n\n## Step 1: The Actual Money\n\n**Nominal raise:** $70K (39% increase)\n\n**But let's adjust for cost of living.** SF is roughly 40-60% more expensive than Austin, driven *overwhelmingly* by housing. Let's use a moderate estimate of ~45%.\n\n- $250K in SF \u2248 $170-175K in Austin purchasing power\n- **You'd likely be taking a slight effective pay cut**\n\nThis is the number most people don't want to hear.\n\n## Step 2: Where the Math Gets Nuanced\n\nThe flat COL comparison isn't the full picture though:\n\n- **Savings rate matters more than spending rate.** If you spend $100K and save the rest, you're saving $150K vs $80K. That's huge. The COL multiplier doesn't apply to the money you *don't spend* in SF.\n- **If your partner keeps their income**, your household absorbs the COL hit across two incomes but only one relocates in cost terms.\n- **Tax hit:** California state income tax (~9-12% at your bracket) vs. Texas (0%). This alone is **~$22-25K/year.** This is real money people often overlook.\n\n**Realistic net advantage after taxes and COL:** Probably modest \u2014 maybe $10-20K/year better *if* you're disciplined, possibly worse if lifestyle creep kicks in.\n\n## Step 3: Beyond the Money\n\n**Reasons this could be worth it:**\n- Career trajectory \u2014 SF network effects for senior+ engineers are real\n- If the *company* is stronger (brand, equity upside, growth)\n- You want the SF experience while you can\n- The role itself is a meaningful step up in scope\n\n**Reasons to be cautious:**\n- You already have a good income in a low-cost, no-income-tax state\n- Austin's tech scene is strong and growing\n- The \"prestige\" gap between SF and Austin has narrowed significantly\n- Quality of life factors (housing size, commute, lifestyle)\n- Moving stress and uprooting your life for a financially marginal gain\n\n## Step 4: The Questions That Actually Decide This\n\n1. **Is there equity/RSU upside** that makes the total comp picture much bigger than $250K?\n2. **Is this a career-defining role** (better title, better company, better scope)?\n3. **Could you negotiate Austin-level remote** or hybrid and capture some of both?\n4. **Could you counter your current employer** with this offer?\n\n---\n\n## My Honest Recommendation\n\n**If the offer is just $250K cash/base with no meaningful equity upside or career leap \u2014 I'd lean toward declining or negotiating.**\n\nThe financial case is surprisingly weak once you account for California taxes and housing. You'd be working harder to stay roughly even.\n\n**However, if this comes with significant equity, a top-tier company name, or a clear path to Staff/Principal** \u2014 that changes everything. The long-term earnings trajectory from an SF career move can dwarf the short-term COL math.\n\n**My actual advice:** Counter-offer. Ask for $280-300K, or ask if the role can be done remotely from Austin. You have leverage \u2014 you're employed, senior, and they want you. Use it.",
+  "timestamp": "2026-02-18T19:08:40.104696",
+  "duration_seconds": 25.564581871032715
+}

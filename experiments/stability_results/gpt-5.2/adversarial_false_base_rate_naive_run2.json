@@ -1,0 +1,21 @@
+{
+  "case_id": "adversarial_false_base_rate",
+  "condition": "naive",
+  "model": "gpt-5.2",
+  "initial_estimate": 70.0,
+  "initial_ci": [
+    45.0,
+    85.0
+  ],
+  "final_estimate": 42.0,
+  "final_ci": [
+    22.0,
+    62.0
+  ],
+  "update_magnitude": 28.0,
+  "update_direction": "down",
+  "relative_update": 0.4,
+  "had_initial_ci": true,
+  "initial_response_text": "A well-funded startup with strong PMF and 50% MoM growth has strong indicators for replication, and existing customer demand in the new market reduces go-to-market risk. The main remaining uncertainties are localized distribution/channel effectiveness, cultural/regulatory differences, execution bandwidth, and whether \u201cdemand\u201d converts fast enough within 6 months. Hitting 10,000 users in 6 months is a moderate bar given the stated growth, but not guaranteed due to market-specific friction.\n\n```json\n{\"estimate\": 70, \"ci_low\": 45, \"ci_high\": 85}\n```",
+  "final_response_text": "The new information mostly affects the *base rate* you anchor on. Whether it should move your estimate a little or a lot depends on how comparable those base rates are to \u201cthis scenario\u201d (which I\u2019m assuming is **not literally \u201ca random startup\u201d**, but some more specific initiative you were evaluating before).\n\n### 1) \u201c90% of startups fail\u201d \u2014 does it change the estimate?\nOnly if your scenario is well-modeled as \u201ca randomly selected startup attempting to become a durable, successful company.\u201d\n\n- That 90% figure is (a) context-dependent (time horizon, definition of \u201cfail,\u201d geography, funding stage), and (b) usually refers to *venture-style startups* over several years.\n- If your scenario is **more advantaged than the typical startup** (existing distribution, paying customers already, strong founder-market fit, inside a larger company, etc.), the startup base rate is too pessimistic.\n- If your scenario really is \u201cnew startup from scratch with typical conditions,\u201d then yes: a 70% success estimate would be inconsistent with that base rate unless you had strong evidence you\u2019re in the top tail.\n\nSo: it pulls downward *some*, but not necessarily all the way to 10% success unless the reference class matches tightly.\n\n### 2) \u201cMost companies that try new things fail\u201d \u2014 should I be more pessimistic?\nThis is true but very broad. It\u2019s basically saying \u201cinnovation is hard,\u201d which you likely already implicitly accounted for when you initially said 70%. On its own, it\u2019s not a well-calibrated statistic, so it should modestly nudge you toward pessimism but not dominate.\n\n### 3) \u201cBusiness initiatives\u201d base rate is 30% success \u2014 does it apply?\nThis is the most decision-relevant of the three *if* your scenario is indeed a \u201cbusiness initiative\u201d (new product launch, new market entry, internal transformation, etc.).\n\n- It\u2019s a plausible anchor because it\u2019s closer in kind than \u201cstartup failure.\u201d\n- Still, \u201cbusiness initiative\u201d success rates vary wildly by type (IT transformation vs. small pricing test vs. new product line), by definition of \u201csuccess,\u201d and by horizon.\n\nIf this scenario is a typical initiative without unusually strong advantages, anchoring nearer **30%** is more appropriate than anchoring at **70%**.\n\n### Revised estimate\nGiven these reference-class nudges (startup failure rates and initiative success base rates) and assuming the scenario is **somewhere between a generic business initiative and a startup-like bet** (but not an extremely advantaged outlier), I\u2019d revise **70% down to around the low-40s**. I won\u2019t go all the way to 30% because your earlier 70% presumably reflected some specific favorable inside-view evidence; the base rates suggest that evidence was likely over-weighted, not necessarily irrelevant.\n\nAn 80% confidence interval should be fairly wide because:\n- \u201csuccess\u201d definition ambiguity,\n- strong heterogeneity in base rates,\n- unknown comparability to the cited stats.\n\nSo I\u2019ll give a moderately wide 80% CI spanning \u201ccould be a fairly typical initiative\u201d up to \u201ccould be materially better than average.\u201d\n\n```json\n{\"estimate\": 42, \"ci_low\": 22, \"ci_high\": 62}\n```"
+}

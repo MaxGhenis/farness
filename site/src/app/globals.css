@@ -1,0 +1,212 @@
+@import "tailwindcss";
+
+/* ── Design tokens ── */
+
+@theme {
+  /* Accent colors */
+  --color-accent: #e8a825;
+  --color-accent-hover: #d99a1f;
+  --color-accent-glow: rgba(232, 168, 37, 0.15);
+  --color-accent-subtle: rgba(232, 168, 37, 0.08);
+
+  /* Light theme */
+  --color-light-bg: #faf8f5;
+  --color-light-bg-elevated: #fff;
+  --color-light-bg-surface: #f0ede8;
+  --color-light-text: #1a1a18;
+  --color-light-text-muted: #5c5c58;
+  --color-light-text-dim: #8a8880;
+  --color-light-border: #e8e4df;
+  --color-light-border-strong: #d0ccc5;
+  --color-light-header-bg: rgba(250, 248, 245, 0.85);
+
+  /* Dark theme */
+  --color-dark-bg: #0c0e13;
+  --color-dark-bg-elevated: #141720;
+  --color-dark-bg-surface: #1a1e2a;
+  --color-dark-text: #e8e6e1;
+  --color-dark-text-muted: #8a8880;
+  --color-dark-text-dim: #5a5850;
+  --color-dark-border: rgba(255, 255, 255, 0.08);
+  --color-dark-border-strong: rgba(255, 255, 255, 0.15);
+  --color-dark-header-bg: rgba(12, 14, 19, 0.8);
+
+  /* Fonts */
+  --font-display: "Newsreader", Georgia, serif;
+  --font-body: "Outfit", -apple-system, sans-serif;
+  --font-mono: "JetBrains Mono", "SF Mono", monospace;
+
+}
+
+@keyframes fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ── CSS custom properties for theme switching ── */
+
+:root {
+  --theme-bg: var(--color-light-bg);
+  --theme-bg-elevated: var(--color-light-bg-elevated);
+  --theme-bg-surface: var(--color-light-bg-surface);
+  --theme-text: var(--color-light-text);
+  --theme-text-muted: var(--color-light-text-muted);
+  --theme-text-dim: var(--color-light-text-dim);
+  --theme-border: var(--color-light-border);
+  --theme-border-strong: var(--color-light-border-strong);
+  --theme-header-bg: var(--color-light-header-bg);
+}
+
+.theme-dark {
+  --theme-bg: var(--color-dark-bg);
+  --theme-bg-elevated: var(--color-dark-bg-elevated);
+  --theme-bg-surface: var(--color-dark-bg-surface);
+  --theme-text: var(--color-dark-text);
+  --theme-text-muted: var(--color-dark-text-muted);
+  --theme-text-dim: var(--color-dark-text-dim);
+  --theme-border: var(--color-dark-border);
+  --theme-border-strong: var(--color-dark-border-strong);
+  --theme-header-bg: var(--color-dark-header-bg);
+}
+
+/* ── Global reset and base styles ── */
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 17px;
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: var(--font-body);
+  background: var(--theme-bg);
+  color: var(--theme-text);
+  line-height: 1.7;
+  min-height: 100vh;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+a {
+  color: var(--color-accent);
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+@media (max-width: 600px) {
+  html {
+    font-size: 15px;
+  }
+}
+
+/* ── Shared prose styles for thesis and paper pages ── */
+
+.prose-content section {
+  margin-bottom: 6rem;
+}
+
+.prose-content h2 {
+  font-family: var(--font-display);
+  font-size: 1.5rem;
+  font-weight: 400;
+  margin-bottom: 2rem;
+  color: var(--theme-text);
+  position: relative;
+  padding-left: 1.5rem;
+}
+
+.prose-content h2::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0.5em;
+  width: 0.5rem;
+  height: 0.125rem;
+  background: var(--color-accent);
+}
+
+.prose-content h3 {
+  font-family: var(--font-display);
+  font-size: 1.15rem;
+  font-weight: 500;
+  margin-top: 4rem;
+  margin-bottom: 1rem;
+  color: var(--theme-text);
+}
+
+.prose-content h4 {
+  font-family: var(--font-display);
+  font-size: 1rem;
+  font-weight: 500;
+  margin-top: 2rem;
+  margin-bottom: 1rem;
+  color: var(--theme-text-muted);
+}
+
+.prose-content p {
+  margin-bottom: 1rem;
+}
+
+.prose-content ul,
+.prose-content ol {
+  margin-top: 2rem;
+  margin-bottom: 2rem;
+  padding-left: 1.5rem;
+}
+
+.prose-content li {
+  margin-bottom: 0.5rem;
+  padding-left: 0.5rem;
+}
+
+.prose-content li strong {
+  color: var(--theme-text);
+}
+
+.prose-content blockquote {
+  border-left: 3px solid var(--color-accent);
+  padding: 2rem 4rem;
+  margin: 4rem 0;
+  background: linear-gradient(
+    135deg,
+    var(--color-accent-subtle) 0%,
+    transparent 100%
+  );
+  border-radius: 0 0.25rem 0.25rem 0;
+}
+
+.prose-content blockquote p {
+  margin-bottom: 0.5rem;
+}
+
+.prose-content blockquote p:last-child {
+  margin-bottom: 0;
+}
+
+.prose-content code {
+  font-family: var(--font-mono);
+  font-size: 0.85em;
+  background: var(--theme-bg-surface);
+  padding: 0.15em 0.4em;
+  border-radius: 0.25rem;
+}
+
+@media (max-width: 600px) {
+  .prose-content blockquote {
+    padding: 1rem 2rem;
+  }
+}

@@ -1,0 +1,21 @@
+{
+  "case_id": "deadline_estimate",
+  "condition": "naive",
+  "model": "gpt-5.2",
+  "initial_estimate": 75.0,
+  "initial_ci": [
+    60.0,
+    88.0
+  ],
+  "final_estimate": 22.0,
+  "final_ci": [
+    12.0,
+    35.0
+  ],
+  "update_magnitude": 53.0,
+  "update_direction": "down",
+  "relative_update": 0.7066666666666667,
+  "had_initial_ci": true,
+  "initial_response_text": "A 2-month buffer on a 4-month estimate is substantial (50% schedule contingency), and the existence of a detailed plan reduces some execution risk. However, compliance work often has tail risks (regulator interpretation changes, hidden dependencies, vendor/legal review delays, audit findings causing rework). With only the given information, I\u2019d put the on-time probability moderately high but not near-certain.\n\n```json\n{\"estimate\": 75, \"ci_low\": 60, \"ci_high\": 88}\n```",
+  "final_response_text": "Start from the industry base rate you provided: **40%** on-time for regulatory compliance projects.\n\nThen adjust for the two major risk factors:\n\n- **Team has never done this specific type of work before** \u2192 typically lowers delivery reliability meaningfully vs. the base rate (learning curve, rework, mis-scoping). I\u2019d haircut the odds by ~25\u201335% relative.  \n- **Regulations still being finalized and may change in the next 2 months** \u2192 scope volatility is one of the strongest predictors of schedule slip. I\u2019d haircut another ~25\u201340% relative, depending on how material the likely changes are.\n\nApplying conservative (not worst-case) relative reductions sequentially to the 40% base rate yields something in the low-to-mid 20s. That also aligns with the intuition that you\u2019ve moved from \u201ctypical compliance project\u201d into \u201cfirst-time + shifting requirements,\u201d which is a common pattern for substantial delays.\n\n**Revised point estimate: 22%** chance of on-time completion.\n\nFor an **80% confidence interval**, I\u2019ll reflect substantial uncertainty (because we don\u2019t know timeline length, buffer, team size, degree of change, dependencies). A reasonable 80% interval is **12% to 35%**.\n\n```json\n{\"estimate\": 22, \"ci_low\": 12, \"ci_high\": 35}\n```"
+}

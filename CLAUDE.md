@@ -41,13 +41,14 @@ farness calibration       # Show calibration statistics
 farness pending           # Alias for list --pending
 ```
 
-### Site (React/Vite)
+### Site (Next.js)
 
 ```bash
 cd site
-npm install
-npm run dev      # Development server
-npm run build    # Build for production
+bun install
+bun run dev      # Development server
+bun run build    # Build for production (static export)
+bun run test     # Run vitest tests
 ```
 
 ## Architecture
@@ -67,7 +68,7 @@ npm run build    # Build for production
 
 ### Site (`site/`)
 
-React/TypeScript site built with Vite, deployed via GitHub Pages.
+Next.js App Router site with Tailwind CSS v4, statically exported for deployment.
 
 ## Key Design Decisions
 

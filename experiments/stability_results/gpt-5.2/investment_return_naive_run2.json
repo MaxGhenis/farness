@@ -1,0 +1,21 @@
+{
+  "case_id": "investment_return",
+  "condition": "naive",
+  "model": "gpt-5.2",
+  "initial_estimate": 30.0,
+  "initial_ci": [
+    10.0,
+    55.0
+  ],
+  "final_estimate": 14.0,
+  "final_ci": [
+    6.0,
+    26.0
+  ],
+  "update_magnitude": 16.0,
+  "update_direction": "down",
+  "relative_update": 0.5333333333333333,
+  "had_initial_ci": true,
+  "initial_response_text": "With only the info given (a friend\u2019s claim of a likely IPO next year + \u201cfriends and family\u201d discount, but no financials, term sheet, investor rights, liquidity constraints, or verification), the base rate for single-company private startup investments achieving **\u22652x** within **3 years** is not that high. Many such deals either don\u2019t IPO on the stated timeline, face down-rounds, or remain illiquid past 3 years even if the company is doing fine. A discount valuation helps, but doesn\u2019t overcome the dominant risks (timing/liquidity, valuation, and company-specific execution).\n\n**Estimate (probability of \u22652x within 3 years): 30%**  \n**80% confidence interval: 10% to 55%**\n\n```json\n{\"estimate\": 30, \"ci_low\": 10, \"ci_high\": 55}\n```",
+  "final_response_text": "The new base-rate info is a strong downward prior for *any* single startup investment returning \u22651x, and especially \u22652x:\n\n- If ~90% return <1x, then **P(\u22651x) \u2248 10%** as a starting point.  \n- If only ~5% return \u22652x, then **P(\u22652x) \u2248 5%**.\n\nMy earlier 30% implicitly assumed you had some meaningful edge (valuation discount, unusually strong company/terms, or special access). Your added points (2) and (3) specifically *remove* two common reasons friends-and-family might outperform the base rate:\n- If there\u2019s **no real discount to fair value**, then you\u2019re not getting compensated for the high failure rate.\n- If the offeror has a **strong incentive to pull you in**, that\u2019s weak negative evidence about deal quality/terms (not proof of bad faith, but it reduces confidence that you\u2019re seeing an unusually good opportunity).\n\nSo I\u2019d revise toward the base rate, but not all the way to 10% if we assume there\u2019s still some chance you have mild informational/selection advantage by being close to the founders. Net: I\u2019d move from 30% down to the **low-to-mid teens**.\n\nFor uncertainty: across individual startups and term structures, the true probability can vary a lot; an 80% interval should be fairly wide but not absurdly so. I\u2019ll put an 80% CI that spans \u201csome modest edge\u201d up to \u201cworse-than-average deal.\u201d\n\n```json\n{\"estimate\": 14, \"ci_low\": 6, \"ci_high\": 26}\n```"
+}

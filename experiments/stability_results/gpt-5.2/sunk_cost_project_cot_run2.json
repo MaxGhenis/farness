@@ -1,0 +1,21 @@
+{
+  "case_id": "sunk_cost_project",
+  "condition": "cot",
+  "model": "gpt-5.2",
+  "initial_estimate": 25.0,
+  "initial_ci": [
+    10.0,
+    45.0
+  ],
+  "final_estimate": 10.0,
+  "final_ci": [
+    4.0,
+    20.0
+  ],
+  "update_magnitude": 15.0,
+  "update_direction": "down",
+  "relative_update": 0.6,
+  "had_initial_ci": true,
+  "initial_response_text": "Base rate: software projects that are already **behind schedule and over budget** after a long burn (18 months) have a high conditional risk of further slippage. \u201cAlmost there\u201d is a common (and systematically biased) status claim in troubled projects, often reflecting optimism bias and unknown remaining integration/testing work.\n\nKey conditional factors pushing probability down:\n1. **Past performance as evidence**: 18 months and $2M spent without launch is strong evidence the team\u2019s estimation and execution have been unreliable; that tends to persist.\n2. **\u201cFinish\u201d work is tail-heavy**: the last 10\u201320% (stabilization, integration, security, compliance, performance, data migration, release readiness) frequently takes longer than expected, especially if earlier phases ran long.\n3. **Demoralization** reduces throughput and increases defects/rework, making schedule recovery harder.\n4. **Budget/time constraint is tight**: an extra 3 months on top of 18 months is only a ~17% schedule extension; many failing projects require larger resets (scope cuts, re-architecture, or team changes) rather than a small extension.\n5. **Unknown unknowns**: the fact it\u2019s late already increases the likelihood that remaining work includes hidden blockers.\n\nFactors that could raise probability somewhat:\n- If scope is already frozen, requirements are stable, and the remaining work is mainly bug-fixing with solid automated tests and a proven deployment pipeline.\n- If \u201claunch\u201d is defined as a limited pilot/soft launch rather than full GA.\n\nBalancing these, I\u2019d put the chance of truly launching **within** the proposed $500K and 3 months in the low-to-moderate range, with wide uncertainty.\n\n```json\n{\"estimate\": 25, \"ci_low\": 10, \"ci_high\": 45}\n```",
+  "final_response_text": "Start from the prior you referenced: **25%** chance the project meets the revised budget (80% CI **10\u201345%**).\n\n### 1) Base-rate update: \u201cOnly 16% of already-troubled projects meet revised budgets\u201d\nThis is strong anchor evidence because it\u2019s directly about the target class (\u201calready-troubled\u201d + \u201crevised budget\u201d). Absent other info, it would pull the estimate toward **~16%** from **25%**.\n\nHowever, we *also* have project-specific negatives (below), so we should treat 16% as more like an upper-mid baseline than a reassuring floor.\n\n### 2) Two senior engineers interviewing elsewhere (key-person risk)\nEven if they don\u2019t leave, interviewing implies distraction and elevated attrition risk. If one leaves, onboarding/knowledge-transfer and execution risk spikes, especially late in a project. This meaningfully reduces the chance of landing on a tight revised budget.\n\nNet effect: push probability down several points.\n\n### 3) \u201cAlmost there\u201d = features complete, but integration testing hasn\u2019t started\nThis is typically where \u201cunknown unknowns\u201d surface: integration defects, performance issues, environment/config mismatches, missed requirements, and rework. If integration testing hasn\u2019t started, \u201calmost there\u201d is usually an overstatement in schedule/budget terms. For meeting a *budget* estimate, late integration risk is especially punitive because fixes arrive when changes are expensive.\n\nNet effect: another substantial downward adjustment, and it widens uncertainty (tail risk).\n\n### Synthesis\n- Base rate: ~16%\n- Add two strong negative, late-stage risk factors (attrition risk + no integration yet) \u2192 move below 16%.\n- Because these factors can either not materialize (engineers stay; integration goes smoothly) or blow up badly, the distribution is skewed with a fat downside tail; so the CI should still be fairly wide, but shifted downward.\n\n**Revised point estimate:** **10%**  \n**80% CI:** **4\u201320%**\n\n```json\n{\"estimate\": 10, \"ci_low\": 4, \"ci_high\": 20}\n```"
+}

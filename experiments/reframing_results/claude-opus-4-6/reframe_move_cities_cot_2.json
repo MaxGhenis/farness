@@ -1,0 +1,19 @@
+{
+  "case_id": "move_cities",
+  "condition": "cot",
+  "model": "claude-opus-4-6",
+  "run_number": 2,
+  "reframe_count": 5,
+  "reframe_matches": [
+    "partner",
+    "lifestyle",
+    "negotiate",
+    "quality of life",
+    "network"
+  ],
+  "introduced_new_kpis": false,
+  "challenged_framing": false,
+  "response_text": "# Thinking Through Your SF Offer\n\nThis is a big decision, so let me break it down systematically.\n\n## The Money (Let's Be Honest About It)\n\n**Nominal raise:** $70K (39% increase) \u2014 looks great on paper.\n\n**But let's adjust for cost of living:**\n- SF cost of living is roughly 40-60% higher than Austin, depending on lifestyle\n- Housing is the biggest driver: a comparable apartment/home in SF can easily cost $2,000-3,500+/month more\n- Your $250K in SF likely has roughly the **same or slightly less** purchasing power as your $180K in Austin\n- Texas has no state income tax; California's will take roughly ~9-10% of your income (~$22-25K)\n\n**After tax + COL adjustment, you may actually be slightly worse off day-to-day.**\n\n## What Could Make It Worth It Anyway\n\n- **Career trajectory:** SF still has the densest network for senior+ engineering roles. If this gets you closer to Staff/Principal or into a top-tier company, the *next* job could pay $350-400K+\n- **Equity/TC:** Is that $250K base only? If total comp includes RSUs/equity, the real number could change everything. *Clarify this if you haven't*\n- **Network effects:** Being in SF physically puts you in rooms that matter for career compounding\n- **Company quality:** A brand-name SF company on your resume has real market value\n\n## What Should Give You Pause\n\n- **You're already at $180K in Austin** \u2014 that's a genuinely comfortable life with real savings potential\n- **Quality of life trade-offs:** Smaller space, harder commute, grittier urban environment, higher baseline stress\n- **Partner impact:** They're flexible on location, but would they actually *want* to live in SF? This matters more than people admit\n- **Austin is a growing tech hub** \u2014 you may be able to get $200-220K+ without moving\n\n## The Questions I'd Want Answered Before Deciding\n\n1. **What's the TOTAL comp?** (Base + equity + bonus). If TC is $350K+, this changes the math significantly.\n2. **Is this a career-level-up move** (better title, better company, bigger scope) or a lateral move with more pay?\n3. **How do you and your partner actually feel about SF as a place to live?**\n4. **Could you negotiate your current role up**, or get a competing Austin offer, using this as leverage?\n5. **What's your 3-5 year plan?** Building wealth? Starting a company? Reaching Staff+?\n\n---\n\n## My Honest Recommendation\n\n**Don't take it purely for the money \u2014 the raise is largely a mirage after COL and taxes.**\n\n**DO take it if:**\n- Total comp is significantly higher than $250K\n- It's a meaningful career upgrade (better company, bigger scope, clearer path to Staff+)\n- You and your partner are genuinely excited about living in SF\n\n**Consider counter-offering or leveraging instead if:**\n- It's mainly a pay bump at a comparable or lesser company\n- You're happy in Austin and this is just \"more money\"\n\nThe smartest move might actually be: **use the SF offer to negotiate a raise to $210-220K in Austin** (or at a new Austin role), and keep your cost-of-living advantage.\n\nWhat does the total comp picture actually look like, and what's the company?",
+  "timestamp": "2026-02-18T19:08:14.893123",
+  "duration_seconds": 25.210689783096313
+}

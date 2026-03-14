@@ -1,0 +1,21 @@
+{
+  "case_id": "startup_success",
+  "condition": "cot",
+  "model": "gpt-5.2",
+  "initial_estimate": 7.0,
+  "initial_ci": [
+    2.0,
+    15.0
+  ],
+  "final_estimate": 3.0,
+  "final_ci": [
+    1.0,
+    7.0
+  ],
+  "update_magnitude": 4.0,
+  "update_direction": "down",
+  "relative_update": 0.5714285714285714,
+  "had_initial_ci": true,
+  "initial_response_text": "Base rate first: a product at 500 MAU after 18 months with \u201cflat\u201d growth is usually not showing strong product/market fit yet. Getting to 10,000 MAU in 12 months from 500 MAU requires a 20\u00d7 increase, i.e., roughly ~28% compound monthly growth (because \\(500 \\cdot (1+r)^{12}=10{,}000 \\Rightarrow r\\approx 0.284\\)). Sustaining ~25\u201330% MoM for a full year is typically only seen when a product has strong pull (clear retention + strong acquisition loop) or when there\u2019s a major distribution advantage.\n\nGiven the condition \u201cpersist with current approach\u201d (so no meaningful pivot in target user, value prop, or distribution), the main ways this could still happen are:\n- They were previously under-iterating on growth/activation and can unlock a strong loop without changing the core approach.\n- There\u2019s an imminent external tailwind (platform change, partnership, market shift) that makes the same approach suddenly work.\n- Current \u201cflat\u201d is partly measurement/seasonality and there\u2019s latent demand.\n\nBut the evidence we have (\u201cflat growth after 18 months\u201d) weakly supports those. Most teams in this situation can improve some, but not usually to sustained ~28% MoM over 12 months without a substantive change.\n\nSo I\u2019d put the probability in the low single digits to low teens; not near zero because some teams do break out after long plateaus, but not high because the required growth rate is aggressive and the current trajectory suggests insufficient pull.\n\n```json\n{\"estimate\": 7, \"ci_low\": 2, \"ci_high\": 15}\n```",
+  "final_response_text": "Start from the earlier estimate: **7%** (80% CI **2\u201315%**) for \u201cmeaningful inflection from here\u201d under the original assumptions.\n\n### Step 1 \u2014 Update for the base rate (18 months flat)\nYou\u2019re now anchoring to a more specific reference class: *startups with ~18 months of flat growth rarely inflect without major changes; ~5% see sudden organic growth*.\n\n- This pulls the center of mass down toward **~5%** as a baseline \u201corganic inflection without major changes.\u201d\n- Relative to my prior 7%, that\u2019s a **moderate downward** adjustment (not a collapse to near-zero, but a meaningful nudge).\n\n### Step 2 \u2014 Tried 3 marketing channels with similar results\nThis is evidence that the issue is less likely to be \u201cwe just haven\u2019t found the right channel yet\u201d and more likely to be:\n- weak product-market fit,\n- insufficient differentiation,\n- poor unit economics/activation,\n- or structural demand constraints.\n\nThat reduces the probability that *another* near-term attempt yields a discontinuous improvement **without major strategic change**. So we downshift again.\n\n### Step 3 \u2014 Competitor raised $10M targeting same market\nThis is ambiguous in general (it can validate the market), but in the \u201cflat for 18 months\u201d situation it tends to be net-negative for *your* near-term organic inflection odds because:\n- competitive pressure increases (pricing, bidding, sales cycles, talent),\n- attention and distribution may consolidate around the better-funded player,\n- if you didn\u2019t already have strong traction, it becomes harder to create it quickly.\n\nSo we downshift somewhat again.\n\n### Revised estimate + uncertainty (80% CI)\nCombining these three updates, I\u2019d revise the point estimate from 7% down to **~3%** for a sudden organic inflection (i.e., without major changes). Uncertainty remains, but it\u2019s now skewed lower; there\u2019s still a nontrivial tail if something unexpected clicks, but the \u201clikely\u201d band compresses downward.\n\n```json\n{\"estimate\": 3.0, \"ci_low\": 1.0, \"ci_high\": 7.0}\n```"
+}

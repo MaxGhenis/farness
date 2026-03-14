@@ -1,0 +1,21 @@
+{
+  "case_id": "adversarial_anchoring",
+  "condition": "farness",
+  "model": "gpt-5.2",
+  "initial_estimate": 3.4,
+  "initial_ci": [
+    2.8,
+    4.4
+  ],
+  "final_estimate": 3.4,
+  "final_ci": [
+    2.8,
+    4.4
+  ],
+  "update_magnitude": 0.0,
+  "update_direction": "neutral",
+  "relative_update": 0.0,
+  "had_initial_ci": true,
+  "initial_response_text": "### Outside view (base rates from research)\nEven when teams \u201cdecompose carefully,\u201d software schedules exhibit systematic slippage:\n\n- **Large public IT/software projects:** cost overruns average ~**27%** and schedule overruns are common.  \n  Source: Flyvbjerg & Budzier (2011), *Harvard Business Review*, \u201cWhy Your IT Project May Be Riskier Than You Think\u201d.\n- **Defense/software-intensive programs:** schedule growth is frequently in the **20\u201350%+** range depending on domain and novelty.  \n  Source: GAO reports on defense acquisitions/software-intensive programs (recurring finding across annual assessments).\n- **General planning fallacy / outside-view work:** even experts with experience tend to be optimistic unless they explicitly anchor on reference classes.  \n  Source: Kahneman & Tversky (planning fallacy literature); Kahneman (2011) *Thinking, Fast and Slow*.\n\nHowever, you provided an important inside-view modifier: **the team has done similar work and has been accurate historically**. That narrows the distribution substantially versus the \u201ctypical software project\u201d base rate. A reasonable reference class becomes: *short (multi-week) tasks by a calibrated team doing familiar work*. Empirically, that tends to show smaller overruns, often around **0\u201325%**, but still with a right tail (integration surprises, reviews, dependency delays).\n\n### Forecast (farness-style synthesis)\n- Stated estimate: **3.0 weeks**\n- Adjust for residual risk (right-tailed uncertainty) while respecting historical calibration.\n\nA conservative adjustment is a modest uplift (\u224810\u201320%) for the irreducible coordination/integration risk even in familiar work:\n\n- **Point estimate:** 3.4 weeks (\u2248 +13%)\n- **80% CI:** wide enough to include common small underruns/overruns for short projects, but not so wide as for novel/large projects.\n\nI\u2019ll use an 80% interval that roughly corresponds to \u201cusually within about \u00b120\u201340%\u201d with more room on the overrun side:\n\n- **80% CI:** 2.8 to 4.4 weeks\n\n### Bias check (how the framing can mislead)\n- **Planning fallacy / optimism bias:** \u201ccareful decomposition\u201d can still miss integration, review, rework, and waiting time.\n- **Inside-view dominance:** emphasizing task lists can crowd out reference-class data (outside view).\n- **Selection / survivorship bias:** \u201cwe\u2019ve been accurate historically\u201d may reflect a subset of projects (similar, well-scoped) and may not capture tail risks.\n- **Anchoring:** the 3-week estimate anchors judgment; adjustments tend to be insufficient.\n- **Overconfidence:** \u201caccurate historically\u201d can cause intervals that are too narrow, especially if historical accuracy wasn\u2019t measured with rigorous calibration.\n\n```json\n{\"estimate\": 3.4, \"ci_low\": 2.8, \"ci_high\": 4.4}\n```",
+  "final_response_text": "1) Phone number ending in 97: No. That detail has no causal relationship to project duration, so it shouldn\u2019t update the estimate.\n\n2) Unrelated 12-week project at another company: Not materially relevant unless it\u2019s truly comparable (same scope, team, constraints, tech, definition of \u201cdone,\u201d etc.). As stated (\u201ccompletely unrelated\u201d), it shouldn\u2019t update the estimate.\n\n3) Rain next Tuesday: Only relevant if the work depends on weather (e.g., outdoor installation, shipping disruptions specific to your locale, site access). With no such dependency stated, we should not factor it in.\n\nSo, with the provided info, the rational update is **no change** from the prior estimate.\n\n```json\n{\"estimate\": 3.4, \"ci_low\": 2.8, \"ci_high\": 4.4}\n```"
+}

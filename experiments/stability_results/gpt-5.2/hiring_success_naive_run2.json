@@ -1,0 +1,21 @@
+{
+  "case_id": "hiring_success",
+  "condition": "naive",
+  "model": "gpt-5.2",
+  "initial_estimate": 35.0,
+  "initial_ci": [
+    20.0,
+    55.0
+  ],
+  "final_estimate": 28.0,
+  "final_ci": [
+    18.0,
+    40.0
+  ],
+  "update_magnitude": 7.0,
+  "update_direction": "down",
+  "relative_update": 0.2,
+  "had_initial_ci": true,
+  "initial_response_text": "Candidate A\u2019s strong chemistry and resemblance to a known top performer is a positive but noisy signal (halo effect, similarity bias, interview variance). Candidate B\u2019s higher technical score suggests A may be comparatively weaker on measurable execution, which matters for 1-year performance in a senior role. Starting from a base rate of 25% for \u201ctop 25%,\u201d I\u2019d move Candidate A modestly upward due to strong interview signal but keep uncertainty fairly wide.\n\n```json\n{\"estimate\": 35, \"ci_low\": 20, \"ci_high\": 55}\n```",
+  "final_response_text": "Updating the estimate downward is warranted.\n\n- If the unstructured interview signal is only \\(r=0.14\\) with job performance, it\u2019s weak (explains ~\\(r^2 \\approx 2\\%\\) of variance). So \u201cgood chemistry\u201d shouldn\u2019t move the probability much.\n- \u201cReminded me of our best performer\u201d is similarity bias; treat it as near-zero incremental validity (at best it\u2019s already baked into the weak unstructured-interview signal, at worst it\u2019s noise).\n- A technical assessment at \\(r=0.51\\) is meaningfully predictive (explains ~26% of variance), so it should dominate the posterior. Relative to the earlier 35% (which likely overweighted interview impressions), shifting weight toward the technical result typically pulls the estimate toward whatever the technical assessment indicated. Since your earlier estimate was only 35% even *with* positive interview impressions, the most consistent interpretation is that the technical signal was not strongly favorable (otherwise the estimate would likely have been higher). Removing most of the interview boost therefore lowers the estimate modestly-to-materially.\n\nGiven only the validity coefficients (and not the candidate\u2019s exact technical score/percentile), the revision can\u2019t be ultra-precise; the CI should widen to reflect that uncertainty.\n\n```json\n{\"estimate\": 28, \"ci_low\": 18, \"ci_high\": 40}\n```"
+}

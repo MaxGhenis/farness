@@ -1,0 +1,21 @@
+{
+  "case_id": "product_launch",
+  "condition": "cot",
+  "model": "gpt-5.2",
+  "initial_estimate": 40.0,
+  "initial_ci": [
+    25.0,
+    60.0
+  ],
+  "final_estimate": 18.0,
+  "final_ci": [
+    10.0,
+    30.0
+  ],
+  "update_magnitude": 22.0,
+  "update_direction": "down",
+  "relative_update": 0.55,
+  "had_initial_ci": true,
+  "initial_response_text": "I can\u2019t provide step-by-step reasoning, but here\u2019s a careful, high-level calibration of the probability.\n\nKey considerations I\u2019m implicitly weighing:\n- **Base rate**: Many \u201cpromising\u201d features don\u2019t yield a sustained **+10% overall engagement** lift product-wide within 3 months; that\u2019s a fairly high bar.\n- **Signal strength**: Strong internal testing and **beta NPS=45** are positive indicators, but NPS doesn\u2019t reliably translate into broad behavioral lift (especially at the aggregate \u201coverall engagement\u201d level).\n- **Rollout realities**: Post-launch discoverability, targeting, onboarding, performance/reliability at scale, and whether the feature affects a large enough share of users all strongly influence engagement impact.\n- **Time horizon**: 3 months is enough to see impact, but also enough time for novelty effects to fade; netting +10% overall is still challenging.\n\nNet: I\u2019d put this in the \u201cplausible but not more likely than not\u201d range.\n\n```json\n{\"estimate\": 40, \"ci_low\": 25, \"ci_high\": 60}\n```",
+  "final_response_text": "Start from the new base rate, then adjust for the evidential strength/weakness of what you observed.\n\n### 1) Prior from base rate\nYou say **only ~20\u201330%** of new features meaningfully move engagement metrics.  \nA reasonable midpoint prior is **~25%** (with uncertainty roughly spanning 20\u201330% before seeing any additional evidence).\n\n### 2) Beta users are self-selected enthusiasts (external validity penalty)\nPositive signals from an enthusiast beta cohort tend to **overpredict** impact on the general population. Even if the feature genuinely helps, the *probability it \u201cmeaningfully moves metrics\u201d in the full launch* drops because:\n- enthusiasts are more forgiving, more motivated, and more likely to explore\n- usage intensity differs from average users\n\nThis pushes the probability down materially. (Think of it as reducing how much we should \u201cupdate upward\u201d from any promising beta readout.)\n\n### 3) Builder-measures-success bias (measurement/confirmation bias)\nWhen the same team builds and evaluates, there\u2019s higher risk of:\n- picking favorable metrics/windows/segments\n- instrumentation choices that flatter the feature\n- selective reporting\n\nThis further **discounts** the apparent evidence of success, again reducing the posterior.\n\n### 4) Putting it together (revised posterior)\nGiven (a) a 20\u201330% base rate and (b) two compounding reasons that beta results are likely optimistic/noisy, I\u2019d revise the probability **below the 25% midpoint**, but not collapse it to near-zero (features still do sometimes generalize and move metrics).\n\nA reasonable revised point estimate: **~18%**.\n\n### 5) 80% confidence interval\nUncertainty is fairly wide because these are qualitative discounts and we don\u2019t have hard effect sizes or audit-quality measurement. I\u2019d put an **80% CI** around **10% to 30%**:\n- low end reflects \u201cbeta signal mostly doesn\u2019t generalize + measurement bias\u201d\n- high end reflects \u201cdespite biases, the feature is one of the winners consistent with base rate upper range\u201d\n\n```json\n{\"estimate\": 18, \"ci_low\": 10, \"ci_high\": 30}\n```"
+}

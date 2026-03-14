@@ -1,0 +1,21 @@
+{
+  "case_id": "sunk_cost_project",
+  "condition": "cot",
+  "model": "gpt-5.2",
+  "initial_estimate": 25.0,
+  "initial_ci": [
+    10.0,
+    45.0
+  ],
+  "final_estimate": 10.0,
+  "final_ci": [
+    3.0,
+    20.0
+  ],
+  "update_magnitude": 15.0,
+  "update_direction": "down",
+  "relative_update": 0.6,
+  "had_initial_ci": true,
+  "initial_response_text": "Software projects that are already **behind schedule and over budget** after a long burn (18 months, $2M) have a strong base-rate tendency to **continue slipping**. The statement \u201calmost there\u201d is common in troubled projects because remaining work is often the most integration-heavy, defect-prone, and uncertainty-rich (testing, performance, security, deployment, migration, edge cases). The additional negatives here are (a) **demoralized team** (productivity/quality drops, attrition risk), and (b) **fixed, short \u201clast mile\u201d window** (3 months) where any surprise can blow the plan.\n\nOn the other hand, it\u2019s not impossible: if scope is truly frozen, architecture is stable, critical-path items are known, and \u201claunch\u201d means a limited initial release (not full feature completion), then a 3\u2011month push can work. But without evidence of those conditions, I\u2019d lean heavily toward \u201cplan is optimistic.\u201d\n\nBalancing base rates for late-stage software overruns with the possibility that they really are near integration/finish, I\u2019d assign a **low-to-moderate** chance of hitting both constraints (time *and* additional budget).\n\n```json\n{\"estimate\": 25, \"ci_low\": 10, \"ci_high\": 45}\n```",
+  "final_response_text": "Start from the prior: **25%** chance of meeting the revised budget (80% CI **10\u201345**).\n\n### 1) Base-rate update: \u201cOnly 16% of already-troubled projects meet revised estimates\u201d\nThis is strong reference-class data that directly targets the question. It should pull the point estimate toward **~16%** unless we have credible reasons this specific project is meaningfully better than the typical \u201calready-troubled\u201d project.\n\nSo, absent other info, I\u2019d move **25% \u2192 ~16\u201318%**.\n\n### 2) Two senior engineers interviewing elsewhere\nThis increases risk in two ways:\n- **Attrition risk** (they may leave) which can cause immediate schedule/budget disruption.\n- **Focus risk** (even if they stay, interviewing often reduces availability/attention).\nSince they\u2019re *senior*, the project\u2019s dependency on them is usually high, especially late in a project where integration/debugging requires deep system context.\n\nThis pushes probability down further (and increases downside tail risk). Roughly, I\u2019d haircut the updated ~17% by a meaningful fraction.\n\n### 3) \u201cAlmost there\u201d is based on feature complete, but integration testing hasn\u2019t started\n\u201cFeature complete\u201d before integration is a classic planning failure mode: a lot of the cost/risk is discovered during integration and system testing (unexpected interactions, performance, flaky behavior, missing requirements, environment issues, and bug-fix cascades). If integration testing truly hasn\u2019t started, \u201calmost there\u201d is likely overconfident, especially for a project already labeled \u201ctroubled.\u201d\n\nThis is another substantial negative update, because it directly undermines the primary optimistic signal.\n\n### Putting it together\n- Base rate suggests **~16%**.\n- Senior engineer interviewing risk + pre-integration \u201calmost there\u201d typically indicates a materially *worse-than-average* troubled project in terms of meeting a revised budget.\n\nA reasonable revised point estimate is **~10%**.\n\nFor an **80% CI**, I\u2019d set:\n- **Low end**: scenarios where one/both seniors leave and integration reveals major rework \u2192 very low but not zero (**~3%**).\n- **High end**: seniors stay, integration is unusually smooth, and revised budget had lots of buffer \u2192 still constrained by base rates but possible (**~20%**).\n\n```json\n{\"estimate\": 10.0, \"ci_low\": 3.0, \"ci_high\": 20.0}\n```"
+}

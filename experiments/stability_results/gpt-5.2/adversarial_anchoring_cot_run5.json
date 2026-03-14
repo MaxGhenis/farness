@@ -1,0 +1,21 @@
+{
+  "case_id": "adversarial_anchoring",
+  "condition": "cot",
+  "model": "gpt-5.2",
+  "initial_estimate": 3.2,
+  "initial_ci": [
+    2.7,
+    4.1
+  ],
+  "final_estimate": 3.2,
+  "final_ci": [
+    2.7,
+    4.1
+  ],
+  "update_magnitude": 0.0,
+  "update_direction": "neutral",
+  "relative_update": 0.0,
+  "had_initial_ci": true,
+  "initial_response_text": "```json\n{\"estimate\": 3.2, \"ci_low\": 2.7, \"ci_high\": 4.1}\n```",
+  "final_response_text": "1) Phone number ending in 97  \nThis is not causally related to how long the scenario takes, so it shouldn\u2019t update the estimate. Treat as irrelevant noise.\n\n2) Unrelated project at another company took 12 weeks  \nBecause it\u2019s explicitly \u201ccompletely unrelated\u201d and only a single data point, it\u2019s weak evidence at best. Without knowing comparability (scope, team, constraints), it shouldn\u2019t meaningfully move the estimate. At most, it could slightly increase uncertainty, but even that\u2019s speculative.\n\n3) Rain next Tuesday  \nUnless the work is weather-dependent (construction, outdoor fieldwork, shipping delays that depend on local weather, etc.), this also shouldn\u2019t update the estimate. With no stated linkage, treat as irrelevant.\n\nRevised estimate: no material update from the prior. I\u2019ll keep the point estimate and 80% CI unchanged.\n\n```json\n{\"estimate\": 3.2, \"ci_low\": 2.7, \"ci_high\": 4.1}\n```"
+}

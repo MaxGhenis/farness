@@ -1,0 +1,21 @@
+{
+  "case_id": "sunk_cost_project",
+  "condition": "naive",
+  "model": "gpt-5.2",
+  "initial_estimate": 25.0,
+  "initial_ci": [
+    10.0,
+    45.0
+  ],
+  "final_estimate": 12.0,
+  "final_ci": [
+    5.0,
+    22.0
+  ],
+  "update_magnitude": 13.0,
+  "update_direction": "down",
+  "relative_update": 0.52,
+  "had_initial_ci": true,
+  "initial_response_text": "Projects in this state (\u201calmost there\u201d after large overruns, demoralized team, still behind) are prone to the **90% done / last 10% takes 90%** effect: integration, QA, performance, security, deployment, data migration, and stakeholder sign-off commonly surface late and blow up short schedules. Without strong objective evidence (burn-down to zero, stable scope, passing end-to-end tests, release readiness criteria met), leadership\u2019s \u201cjust 3 more months\u201d is often optimism bias rather than a reliable forecast.\n\nGiven only the provided signals (significant overrun, behind schedule, demoralization, and a relatively small incremental budget/time request), I\u2019d assign a **low-to-moderate** chance of hitting *both* the additional **$500K** and **3 months** constraints.\n\n```json\n{\"estimate\": 25, \"ci_low\": 10, \"ci_high\": 45}\n```",
+  "final_response_text": "Starting point: **25%** (your earlier scenario).\n\n### Update from new information\n\n1) **Base rate: 16% of already-troubled projects hit the revised budget**\n- This is strong anchoring evidence that the true probability is likely **below 25%** if your project is in that \u201calready-troubled\u201d reference class.\n- I\u2019d pull the estimate meaningfully downward toward (and somewhat below) 16%, because your additional items (2) and (3) are further negative signals.\n\n2) **Two senior engineers interviewing**\n- This increases risk in two ways: (a) probability of losing key people during the most schedule-sensitive phase, and (b) indicates morale/credibility issues (often correlated with further slippage).\n- Even if they don\u2019t leave, interview time and distraction can reduce throughput.\n- Net: **moderate negative** adjustment.\n\n3) **\u201cAlmost there\u201d = features complete, but integration testing not started**\n- If integration testing hasn\u2019t begun, a large portion of risk remains unresolved (integration defects, performance issues, deployment, data migration, edge cases, etc.).\n- \u201cFeature complete\u201d commonly triggers optimism bias; many projects discover substantial rework during integration.\n- Net: **large negative** adjustment.\n\n### Revised estimate\nPutting these together, I\u2019d revise to **~12%** chance of meeting the revised budget. That\u2019s below the 16% base rate because (2) and especially (3) add extra downside relative to the typical \u201calready-troubled\u201d project.\n\n### 80% confidence interval\nGiven limited quantitative detail, uncertainty is still wide. An 80% CI that reflects plausible variation (from \u201cthey stay + integration goes smoothly\u201d to \u201cattrition + major integration rework\u201d) would be:\n\n- **Low:** ~5%\n- **High:** ~22%\n\n```json\n{\"estimate\": 12, \"ci_low\": 5, \"ci_high\": 22}\n```"
+}

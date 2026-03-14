@@ -1,0 +1,21 @@
+{
+  "case_id": "hiring_success",
+  "condition": "naive",
+  "model": "gpt-5.2",
+  "initial_estimate": 35.0,
+  "initial_ci": [
+    20.0,
+    55.0
+  ],
+  "final_estimate": 25.0,
+  "final_ci": [
+    15.0,
+    40.0
+  ],
+  "update_magnitude": 10.0,
+  "update_direction": "down",
+  "relative_update": 0.2857142857142857,
+  "had_initial_ci": true,
+  "initial_response_text": "Chemistry/\u201creminds me of a top performer\u201d is a moderately predictive but noise-prone signal (halo effect, similarity bias). A higher technical assessment score is usually a stronger predictor of 1-year performance for senior engineers. So I\u2019d put Candidate A somewhat above the 25% base rate, but not dramatically.\n\n```json\n{\"estimate\": 35, \"ci_low\": 20, \"ci_high\": 55}\n```",
+  "final_response_text": "The new information should move the estimate downward, because it downgrades (a) the evidentiary weight of unstructured \u201cgood chemistry\u201d interview impressions and (b) explicitly labels the \u201creminded me of our best performer\u201d signal as similarity bias rather than a predictive cue. Meanwhile it upgrades the technical assessment as the main valid signal.\n\nA simple way to reflect this is to re-weight the evidence by relative predictive validity:\n\n- Unstructured interview: \\(r=0.14\\) \u21d2 weak signal; explains ~\\(r^2 \\approx 2\\%\\) of variance in performance.\n- Technical assessment: \\(r=0.51\\) \u21d2 strong signal; explains ~\\(r^2 \\approx 26\\%\\) of variance.\n- \u201cReminded me of our best performer\u201d: treat as ~0 incremental validity (or potentially negative due to bias), so it shouldn\u2019t raise the probability.\n\nGiven you previously had 35% with (implicitly) too much weight on interview impressions/chemistry, and now most of that weight should be removed, I\u2019d revise the probability downward to reflect that the remaining decision should largely be driven by the technical assessment. Without knowing whether the candidate\u2019s technical score was strong or weak, the best update is mainly: \u201cdon\u2019t overcount interview vibes.\u201d That typically shrinks the estimate toward the base rate of success for hires in similar roles, but since we don\u2019t have that base rate either, the interval should widen.\n\n**Revised point estimate:** 25%\n\n**80% confidence interval:** 15% to 40% (wide, because we\u2019re missing the candidate\u2019s actual technical assessment result and the relevant base rate; we mainly know which signals are valid/invalid, not their realized values in this case).\n\n```json\n{\"estimate\": 25, \"ci_low\": 15, \"ci_high\": 40}\n```"
+}

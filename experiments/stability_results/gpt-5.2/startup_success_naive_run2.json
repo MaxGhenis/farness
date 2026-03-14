@@ -1,0 +1,21 @@
+{
+  "case_id": "startup_success",
+  "condition": "naive",
+  "model": "gpt-5.2",
+  "initial_estimate": 7.0,
+  "initial_ci": [
+    2.0,
+    15.0
+  ],
+  "final_estimate": 3.0,
+  "final_ci": [
+    1.0,
+    6.0
+  ],
+  "update_magnitude": 4.0,
+  "update_direction": "down",
+  "relative_update": 0.5714285714285714,
+  "had_initial_ci": true,
+  "initial_response_text": "From 500 MAU to 10,000 MAU in 12 months requires ~20\u00d7 growth, which is roughly ~28% compound monthly growth sustained for a year. After 18 months of effort with flat growth, the base rate for suddenly achieving sustained ~28% MoM growth without a major change (i.e., \u201cpersist with current approach\u201d) is low. Some upside exists if distribution finally clicks or a few experiments unlock a channel, but \u201ccurrent approach\u201d implies no meaningful strategic shift, so the probability remains modest.\n\n```json\n{\"estimate\": 7, \"ci_low\": 2, \"ci_high\": 15}\n```",
+  "final_response_text": "Start from the new base rate you provided: **~5%** of startups with 18 months of flat growth see *sudden organic growth* without major changes.\n\nNow adjust for the new evidence:\n\n- **3 marketing channels already tried with similar results**: this is evidence against \u201cwe just haven\u2019t found the right channel yet,\u201d so it pushes probability **down** versus the 5% base. (Not to near-zero, because there can still be channel execution issues, messaging/positioning shifts, partnerships, or product-led dynamics that aren\u2019t strictly \u201cmajor changes,\u201d but it is meaningfully negative.)\n- **Competitor raised $10M targeting the same market**: typically reduces the odds of *your* sudden organic inflection via (a) increased noise/CAC, (b) mindshare capture, (c) faster product iteration, and (d) talent/partner pull. Occasionally it can expand the category and help everyone, but in most markets with flat growth already, the net effect is **negative** on your chance of a sudden organic breakout.\n\nCombining these, I\u2019d revise the probability to **below the 5% base rate**, landing around **3%**.\n\nFor an **80% confidence interval**, I\u2019d reflect substantial uncertainty (execution variance, niche positioning, market dynamics), but still keep it low given the structural headwinds: **~1% to ~6%**.\n\n```json\n{\"estimate\": 3.0, \"ci_low\": 1.0, \"ci_high\": 6.0}\n```"
+}

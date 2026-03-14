@@ -87,8 +87,7 @@ class TestAnalyzeReframing:
 
     def test_empty_results(self):
         analysis = analyze_reframing([])
-        assert analysis["naive"] == {}
-        assert analysis["farness"] == {}
+        assert analysis["conditions"] == []
 
     def test_naive_more_reframing(self):
         results = [

@@ -1,0 +1,21 @@
+{
+  "case_id": "sunk_cost_project",
+  "condition": "naive",
+  "model": "gpt-5.2",
+  "initial_estimate": 25.0,
+  "initial_ci": [
+    10.0,
+    45.0
+  ],
+  "final_estimate": 12.0,
+  "final_ci": [
+    5.0,
+    22.0
+  ],
+  "update_magnitude": 13.0,
+  "update_direction": "down",
+  "relative_update": 0.52,
+  "had_initial_ci": true,
+  "initial_response_text": "Projects that are already materially late/over budget with a demoralized team and leadership claiming they\u2019re \u201calmost there\u201d tend to be in a high-risk \u201c90% done = 90% left\u201d zone. With only the given facts (no evidence of scope cuts, burn-down data, defect backlog, or independent verification), I\u2019d assign a low-to-moderate chance they hit *both* the additional budget and the 3\u2011month schedule.\n\n```json\n{\"estimate\": 25, \"ci_low\": 10, \"ci_high\": 45}\n```",
+  "final_response_text": "Start from the previous 25% as a baseline \u201cchance of meeting the revised budget/schedule\u201d (I\u2019ll treat it as meeting the revised budget, since that\u2019s what your new base-rate datum targets).\n\n### 1) Base rate: only 16% of already-troubled projects meet revised budget\nThat\u2019s strong outside-view evidence that the typical outcome is failure to hit the revised number. If I were *only* updating on this, I\u2019d pull the estimate down toward ~16%. Since your original 25% likely already assumed \u201ctroubled,\u201d I won\u2019t snap all the way to 16%, but it should move meaningfully downward.\n\n### 2) Two senior engineers interviewing elsewhere\nThis increases risk in two ways: (a) non-trivial probability of attrition during the critical finishing/integration period, and (b) even if they don\u2019t leave, focus/availability often drops. Either tends to blow budgets late because remaining work is disproportionately integration/bug-fix/coordination-heavy.\n\n### 3) \u201cAlmost there\u201d based on feature complete, but integration testing hasn\u2019t started\nThis is a classic late-stage risk signal: feature completion is not a reliable proxy for done-ness. Integration testing frequently surfaces rework, environment issues, performance/regression problems, and cross-component defects that can create large, unpredictable tail risk. This alone is a substantial downward update.\n\n### Revised estimate\nCombining: the 16% base rate pulls you down from 25%, and (2) + (3) add additional negative evidence relative to the typical \u201ctroubled project\u201d case. Net: I\u2019d revise to **~12%**.\n\n### 80% confidence interval\nGiven the uncertainty (unknown project size, remaining calendar, contractual constraints, ability to add resources, etc.) I\u2019d give a fairly wide 80% interval: **5%\u201322%**. The lower bound reflects the very real chance integration reveals major rework and/or attrition hits; the upper bound reflects scenarios where integration is smoother than expected and the interviewing doesn\u2019t translate into departures.\n\n```json\n{\"estimate\": 12, \"ci_low\": 5, \"ci_high\": 22}\n```"
+}

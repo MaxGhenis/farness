@@ -1,0 +1,21 @@
+{
+  "case_id": "move_cities",
+  "condition": "cot",
+  "model": "claude-opus-4-6",
+  "run_number": 5,
+  "reframe_count": 7,
+  "reframe_matches": [
+    "partner",
+    "lifestyle",
+    "remote",
+    "negotiate",
+    "hybrid",
+    "quality of life",
+    "network"
+  ],
+  "introduced_new_kpis": false,
+  "challenged_framing": false,
+  "response_text": "# Thinking Through Your SF Offer\n\nThis is a big decision, so let me break it down systematically.\n\n## Step 1: The Money (Adjusted for Reality)\n\n**Nominal raise:** $70K (39% increase) \u2014 looks great on paper.\n\n**But let's reality-check with cost of living:**\n- SF cost of living is roughly 40-60% higher than Austin, depending on lifestyle\n- Housing is the biggest driver: a comparable place in SF might cost $3,000-4,500+/mo vs $1,800-2,500 in Austin\n- Using a conservative 1.45x multiplier, your $250K in SF has the purchasing power of roughly **$172K in Austin terms**\n\n**So you might actually be taking a small effective pay cut.** At best, it's roughly a wash.\n\n**Key question:** Is the $250K base, or total comp? If there's significant equity/RSUs on top, the math could shift meaningfully.\n\n## Step 2: What the Money Doesn't Capture\n\n**Potential upsides of SF:**\n- Career network density \u2014 being in the room matters for senior+ roles\n- Path to Staff/Principal roles or future opportunities often runs through SF hubs\n- If you're in AI/ML, crypto, or certain niches, the ecosystem is unmatched\n- Future offers calibrate off your current comp \u2014 $250K becomes your new floor\n- No state income tax... wait, **California has ~13.3% top marginal state tax vs Texas at 0%.** This is huge.\n\n**Let me recalculate with taxes:**\n- Texas take-home on $180K: ~$133K\n- California take-home on $250K: ~$166K\n- Difference: ~$33K more take-home... but much higher expenses eat that fast\n\n## Step 3: The Tax Problem Is Bigger Than It Looks\n\nThat California income tax alone costs you roughly **$20-25K/year** that you'd keep in Texas. This makes the effective gap even tighter.\n\n## Step 4: Lifestyle & Partner Factors\n\n- Your partner's remote flexibility is a genuine asset \u2014 no dual-job-search risk\n- But: smaller living space, higher stress, different culture\n- Austin's quality of life for the money is hard to beat honestly\n\n## Step 5: The Questions I'd Push Back On\n\nBefore deciding, I'd want to know:\n\n1. **Can you negotiate the SF offer higher?** At senior level, $250K base in SF is honestly not aggressive. $280-300K+ with equity might be realistic.\n2. **Would they allow hybrid/remote from Austin?** Even a few days/month in-office changes everything.\n3. **What's the equity/bonus/total comp picture?** If total comp is $350K+, the math shifts.\n4. **Why do you want to leave?** If you're happy in Austin and it's purely financial, the numbers don't justify it. If you're stagnating, that changes things.\n5. **What's your 3-5 year plan?** If this is a stepping stone to a $400K+ role, the short-term hit may be worth it.\n\n---\n\n## My Honest Recommendation\n\n**Don't take it as-is.**\n\nAt $250K base with no other context, you're likely moving laterally or slightly backward financially while taking on higher cost, higher tax, and lifestyle disruption.\n\n**But don't walk away either.** Instead:\n\n1. **Counter at $280-300K+** and push hard on equity. You have leverage \u2014 you're employed and comfortable.\n2. **Ask about remote/hybrid flexibility.** SF comp from Austin would be a life-changing arbitrage.\n3. **If they won't budge**, it's probably not worth uprooting unless the role itself is a career-defining opportunity that you can't get in Austin.\n\nThe one exception: **if this company/role gives you a credible path to Staff+ level, or it's a rocketship startup with real equity upside**, then the short-term financial hit could be a smart investment in your trajectory. Career capital sometimes matters more than immediate dollars.\n\nWhat does the rest of the comp package look like? That might change my answer.",
+  "timestamp": "2026-02-18T19:09:35.099881",
+  "duration_seconds": 29.586400985717773
+}

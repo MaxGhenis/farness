@@ -1,0 +1,21 @@
+{
+  "case_id": "product_launch",
+  "condition": "cot",
+  "model": "gpt-5.2",
+  "initial_estimate": 45.0,
+  "initial_ci": [
+    25.0,
+    65.0
+  ],
+  "final_estimate": 22.0,
+  "final_ci": [
+    10.0,
+    40.0
+  ],
+  "update_magnitude": 23.0,
+  "update_direction": "down",
+  "relative_update": 0.5111111111111111,
+  "had_initial_ci": true,
+  "initial_response_text": "I can\u2019t provide a literal step-by-step chain-of-thought, but I can summarize the key considerations I\u2019m using and then give an estimate and an 80% confidence interval.\n\n**Key factors I\u2019m weighing (high level):**\n- **Base rate for \u201cbig\u201d engagement lifts:** A sustained **\u226510% overall engagement** lift within **3 months** is meaningful; many well-received features produce smaller net lifts once novelty wears off and the effect averages across all users.\n- **Signal strength from beta:** **NPS 45** is a strong satisfaction/advocacy signal, but it doesn\u2019t always translate to broad engagement uplift\u2014especially if beta users are more motivated/power users than the general population.\n- **Rollout reality:** Post-launch outcomes depend heavily on **distribution (who sees it), activation/onboarding, default settings, and surface area in the core workflow**. Good internal testing reduces risk of obvious defects but doesn\u2019t guarantee behavior change at scale.\n- **Time horizon:** 3 months is enough to see impact, but also enough for initial spike to regress if the feature isn\u2019t sticky.\n- **Definition risk:** \u201cOverall product engagement\u201d can be measured many ways (DAU, sessions/user, time spent, key actions). Hitting \u226510% on the chosen metric is easier for some definitions than others.\n\n**My probabilistic judgment:** given strong early sentiment but meaningful translation risk from beta to full population and the size of the target lift, I\u2019d put this as **moderately likely but far from assured**.\n\n```json\n{\"estimate\": 45, \"ci_low\": 25, \"ci_high\": 65}\n```",
+  "final_response_text": "Start from the new base rate, then adjust for how much this particular evidence should move us away from it.\n\n### 1) Prior from base rate\nYou say only **20\u201330%** of new features meaningfully move engagement.  \nA reasonable starting point is the midpoint: **25%**.\n\n### 2) Effect of self-selected beta users (enthusiast bias)\nIf the observed promise of the feature came primarily from beta users, that signal is typically **optimistically biased** relative to the general population (higher tolerance for friction, higher intrinsic motivation, more novelty-seeking).  \nSo the earlier (more optimistic) estimate should be pulled **down toward (or even below) the base rate**, because the evidence is less generalizable.\n\n### 3) Measurement bias (builder-measures-success)\nWhen the same team builds and evaluates, common failure modes include:\n- choosing favorable metrics / windows,\n- selective reporting,\n- subtle p-hacking / iteration until it \u201clooks good,\u201d\n- instrumentation choices that unintentionally favor the feature.\n\nThis further reduces how much we should trust any positive readouts so far, again pulling the estimate down and widening uncertainty.\n\n### 4) Revised point estimate\nGiven (a) a 25% base rate and (b) two independent reasons the evidence is inflated/unreliable, I\u2019d revise **somewhat below the base rate**, not massively (since base rate already reflects \u201ctypical\u201d product work, and these biases are common but not always fatal).\n\n**Revised estimate: 22%**\n\n### 5) 80% confidence interval\nBecause the evidence quality is weaker (non-representative sample + evaluator bias), uncertainty should be fairly wide. But the base rate still anchors us from going too extreme.\n\n**80% CI: 10% to 40%**\n\n```json\n{\"estimate\": 22, \"ci_low\": 10, \"ci_high\": 40}\n```"
+}

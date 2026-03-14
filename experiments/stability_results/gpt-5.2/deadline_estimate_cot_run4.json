@@ -1,0 +1,21 @@
+{
+  "case_id": "deadline_estimate",
+  "condition": "cot",
+  "model": "gpt-5.2",
+  "initial_estimate": 82.0,
+  "initial_ci": [
+    65.0,
+    92.0
+  ],
+  "final_estimate": 24.0,
+  "final_ci": [
+    10.0,
+    38.0
+  ],
+  "update_magnitude": 58.0,
+  "update_direction": "down",
+  "relative_update": 0.7073170731707317,
+  "had_initial_ci": true,
+  "initial_response_text": "A 4\u2011month estimate with a 2\u2011month buffer sounds comfortable, but compliance projects often have \u201cfat\u2011tail\u201d risks: late regulatory clarifications, interpretation changes, security/legal review cycles, dependencies on vendors/engineering, and audit/remediation findings that only surface near the end. A detailed plan improves odds, yet estimates are still typically optimistic unless they explicitly incorporate uncertainty and known risks.\n\nA simple way to think about it: you succeed if actual duration \u2264 6 months. With a 4\u2011month planned duration, you have 2 months of schedule contingency (50% of planned time). That\u2019s a decent buffer, so the probability should be >50% and plausibly in the 70\u201390% range. Accounting for common overrun patterns in compliance work (where moderate overruns are common, large overruns happen sometimes), I\u2019d put the central estimate around the low\u201180s, with an 80% interval spanning from \u201csome important risks materialize\u201d to \u201cthings go mostly as planned.\u201d\n\n```json\n{\"estimate\": 82, \"ci_low\": 65, \"ci_high\": 92}\n```",
+  "final_response_text": "Start from the new base rate you provided and then adjust for the scenario-specific risk factors.\n\n1) **Base rate (industry): 40% on-time**\n- For regulatory compliance projects in general, surveys suggest **P(on-time) \u2248 0.40**. This should heavily anchor the estimate, and it\u2019s far below the prior 82% you mentioned.\n\n2) **Team has never done this specific type of work**\n- First-time work typically adds schedule risk (learning curve, unknown unknowns, rework).\n- I\u2019d apply a meaningful downward adjustment. Roughly: **0.40 \u2192 0.32** (about a 20% relative reduction).\n\n3) **Regulations still being finalized and may change in next 2 months**\n- This increases the chance of rework and late-breaking requirements, especially damaging to schedules.\n- Apply another downward adjustment. Roughly: **0.32 \u2192 0.24** (about a 25% relative reduction).\n\nSo a reasonable revised point estimate is **~24%** on-time.\n\n### 80% confidence interval\nGiven:\n- survey base rates can be noisy / non-identical to your exact situation,\n- \u201cfirst time\u201d and \u201cregulatory changes\u201d add substantial variance,\n\nI\u2019d use a fairly wide 80% CI, roughly **\u00b114 percentage points** around the estimate, truncated to valid probabilities:\n\n- **CI (80%) \u2248 10% to 38%**\n\n```json\n{\"estimate\": 24.0, \"ci_low\": 10.0, \"ci_high\": 38.0}\n```"
+}

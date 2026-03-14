@@ -1,0 +1,21 @@
+{
+  "case_id": "planning_estimate",
+  "condition": "naive",
+  "model": "gpt-5.2",
+  "initial_estimate": 3.0,
+  "initial_ci": [
+    2.2,
+    4.5
+  ],
+  "final_estimate": 9.0,
+  "final_ci": [
+    7.0,
+    13.0
+  ],
+  "update_magnitude": 6.0,
+  "update_direction": "up",
+  "relative_update": 2.0,
+  "had_initial_ci": true,
+  "initial_response_text": "Software estimates tend to be optimistic even with good breakdowns due to integration, testing, reviews, interruptions, and unforeseen edge cases. For a 2\u2011week \u201cconfident\u201d estimate, a common real-world outcome is ~1.5\u00d7 the planned duration, with a moderate spread.\n\n```json\n{\"estimate\": 3.0, \"ci_low\": 2.2, \"ci_high\": 4.5}\n```",
+  "final_response_text": "Starting point: **3.0 weeks** was essentially a *best\u2011case / \u201cinside view\u201d* estimate.\n\n### 1) \u201cProjects average 2\u20133\u00d7 initial estimates\u201d\nIf we treat that research as an outside\u2011view uplift factor, the central tendency moves to:\n- 3.0 \u00d7 (2 to 3) \u21d2 **6.0 to 9.0 weeks**\nA reasonable midpoint of that range is **~7.5 weeks**.\n\n### 2) High team confidence as a planning-fallacy warning\nIf confidence is *anti\u2011evidence* (i.e., indicates underestimation risk), that pushes us toward the upper part of the 2\u20133\u00d7 band rather than the middle. So instead of ~7.5, I\u2019d nudge the central estimate upward (not all the way to 9, but closer), say **~8 weeks**.\n\n### 3) 30% chance of a major blocker\nModel it simply as a mixture:\n- With **70%** probability: \u201cnormal\u201d outcome around **8 weeks**\n- With **30%** probability: \u201cblocker\u201d outcome adds a substantial delay.\n\nA \u201cmajor blocker\u201d often costs on the order of **+2 to +6 weeks** depending on severity and discovery timing. Use a midpoint **+4 weeks** as a rough expected-impact assumption.\n\nExpected value:\n- 0.7 \u00d7 8 + 0.3 \u00d7 (8 + 4) = 8 + 0.3\u00d74 = **9.2 weeks**\n\nRound to a planning-friendly figure: **~9 weeks**.\n\n### 80% confidence interval\nWe want the central 80% of outcomes acknowledging:\n- Typical variance even without blockers\n- A heavy right tail due to the 30% blocker risk\n\nA practical interval consistent with the above mixture is:\n- **Low (10th percentile-ish): ~7 weeks** (things go relatively smoothly and \u201c2\u00d7\u201d reality dominates)\n- **High (90th percentile-ish): ~13 weeks** (blocker happens and is on the worse side, plus normal variability)\n\nSo: **Estimate = 9.0 weeks**, **80% CI = [7.0, 13.0] weeks**.\n\n```json\n{\"estimate\": 9.0, \"ci_low\": 7.0, \"ci_high\": 13.0}\n```"
+}

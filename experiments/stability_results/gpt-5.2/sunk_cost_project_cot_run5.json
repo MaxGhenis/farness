@@ -1,0 +1,21 @@
+{
+  "case_id": "sunk_cost_project",
+  "condition": "cot",
+  "model": "gpt-5.2",
+  "initial_estimate": 25.0,
+  "initial_ci": [
+    10.0,
+    45.0
+  ],
+  "final_estimate": 11.0,
+  "final_ci": [
+    4.0,
+    22.0
+  ],
+  "update_magnitude": 14.0,
+  "update_direction": "down",
+  "relative_update": 0.56,
+  "had_initial_ci": true,
+  "initial_response_text": "Base rates first: software projects that are already **behind schedule and over budget** have a low \u201con-time/on-budget from here\u201d success rate, because the remaining work is typically **underestimated** (unknown unknowns, integration, testing, stabilization, launch readiness).\n\nKey evidence from the prompt:\n1. **18 months and $2M spent** and still not launched \u21d2 initial plan/estimation/control has been weak, or scope/requirements have been unstable.\n2. Team is **demoralized** \u21d2 productivity and quality typically drop; more defects and rework near the end.\n3. Leadership says \u201c**almost there**\u201d \u21d2 common pattern: optimism bias; \u201c90% done\u201d can last a long time, especially if the hard parts are the last 10% (hardening, performance, security, deployment, data migration, compliance, edge cases).\n4. The request is **+$500K and +3 months** (a relatively small increment vs. already spent) \u21d2 suggests they believe only a small amount remains; but given history, the probability that this increment is sufficient is meaningfully below 50%.\n\nOffsets (factors that could increase odds) aren\u2019t specified (e.g., clear remaining scope, strong delivery lead, working software in production-like env, proven release process). With no such positives, I weight toward a low-to-moderate chance.\n\nSo I\u2019d put the probability of successfully launching **within** the proposed additional budget and time at roughly **one in four**. For an 80% confidence interval, I\u2019ll allow for uncertainty: it could be as low as ~10% if they\u2019re deep in \u201clast 10%\u201d trap, or as high as ~45% if it truly is near-ready and the earlier delay was due to now-resolved issues.\n\n```json\n{\"estimate\": 25, \"ci_low\": 10, \"ci_high\": 45}\n```",
+  "final_response_text": "Start from the prior: **25%** chance of meeting the revised budget (80% CI **10\u201345**).\n\n### 1) Base-rate update: only 16% of already-troubled projects hit revised budgets\nThis is strong anchoring evidence about the reference class you\u2019re in. If your earlier 25% was partly optimistic relative to the base rate, I\u2019d pull the center **down toward 16%**.\n\n**Update:** 25% \u2192 ~**18%** (CI shifts down somewhat, e.g., ~8\u201335).\n\n### 2) Two senior engineers interviewing elsewhere\nThis increases risk in two ways: (a) potential attrition / knowledge loss, (b) distraction + morale issues even if they don\u2019t leave. Both disproportionately affect late-stage integration and bug-fixing (high-leverage phases).\n\n**Update:** ~18% \u2192 ~**14%** (CI widens a bit because outcomes become more bimodal: \u201cthey stay and it\u2019s OK\u201d vs \u201csomeone leaves and you slip hard\u201d).\n\n### 3) \u201cAlmost there\u201d = features complete, but integration testing not started\nThis is a classic schedule-risk pattern: the remaining work is not linear. Integration testing often reveals hidden work (defects, interface mismatches, performance issues, environment gaps). So \u201cfeature complete\u201d without integration started is materially less predictive of \u201cdone\u201d than people think.\n\n**Update:** ~14% \u2192 ~**11%**.\n\n### Revised estimate + 80% CI\nGiven the combined effect (base-rate drag + staffing instability + integration risk), I\u2019d put the probability of meeting the revised budget at **~11%**. For an 80% interval, I\u2019d choose a range that reflects meaningful upside if integration is unusually smooth and nobody leaves, but a long downside tail if integration blows up or attrition happens.\n\n```json\n{\"estimate\": 11.0, \"ci_low\": 4.0, \"ci_high\": 22.0}\n```"
+}

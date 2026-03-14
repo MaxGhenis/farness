@@ -1,0 +1,21 @@
+{
+  "case_id": "deadline_estimate",
+  "condition": "cot",
+  "model": "gpt-5.2",
+  "initial_estimate": 82.0,
+  "initial_ci": [
+    65.0,
+    92.0
+  ],
+  "final_estimate": 23.0,
+  "final_ci": [
+    10.0,
+    40.0
+  ],
+  "update_magnitude": 59.0,
+  "update_direction": "down",
+  "relative_update": 0.7195121951219512,
+  "had_initial_ci": true,
+  "initial_response_text": "A careful way to think about this is to start from the plan and then apply common sources of schedule risk.\n\n1) **Baseline from the plan**\n- Estimated duration: **4 months** of work.\n- Time available: **6 months**.\n- Buffer: **2 months**, i.e., **50% schedule contingency** (2 months on top of 4).\n\n2) **How informative is a \u201cdetailed project plan\u201d?**\n- It meaningfully reduces uncertainty versus a rough guess, but plans still often miss:\n  - Regulatory interpretation changes / clarifications\n  - Hidden dependencies (vendor, legal, security reviews)\n  - Unplanned remediation work found during implementation/testing\n  - Approval and audit/documentation cycles that \u201cexpand to fill time\u201d\n\n3) **Translate to a rough probability**\n- To miss the deadline, the project has to **overrun by >2 months**, i.e., take **more than 6 months**, which is **>50% longer** than the estimate.\n- For many compliance/engineering projects with a real plan and a hard deadline, a >50% overrun is **possible but not the dominant outcome**. It tends to happen when there is a major surprise (scope increase, key dependency delay, or rework).\n- So the probability of finishing by 6 months is plausibly **in the 70\u201390% range**, not near-certain but better than a coin flip.\n\n4) **Choose an estimate and an 80% interval**\n- Point estimate: **~82%** likelihood of finishing within 6 months.\n- 80% CI: I\u2019ll place a fairly wide central interval to reflect meaningful uncertainty even with a plan: **65% to 92%**.\n\n```json\n{\"estimate\": 82, \"ci_low\": 65, \"ci_high\": 92}\n```",
+  "final_response_text": "Start from the new base rate:\n\n1. **Industry base rate for regulatory compliance projects (on-time): 40%**  \n   This is a strong anchor because it\u2019s directly about the same broad class of projects.\n\n2. **Team has never done this specific type of work before \u2192 adjust downward**  \n   First-time work typically brings unknowns (requirements interpretation, tooling/process gaps, rework). I\u2019d apply a meaningful penalty (on the order of 20\u201330% relative reduction).  \n   - 40% \u00d7 0.75 \u2248 **30%**\n\n3. **Regulations still being finalized and may change within 2 months \u2192 adjust downward again**  \n   Late-breaking rule changes are a major driver of schedule slip (scope churn, re-approval cycles). Another sizeable penalty (say ~20\u201330% relative).  \n   - 30% \u00d7 0.75 \u2248 **22.5%**\n\nSo a reasonable revised point estimate is **~23%** chance of on-time completion.\n\n### 80% confidence interval\nUncertainty is high because (a) \u201c40%\u201d is an industry average with wide variance by org/project, and (b) pending regulatory changes introduce fat-tail delay risk. I\u2019d place an 80% CI that is wide but not absurdly so, roughly **10% to 40%**:\n- Low end (\u224810%): regulations change materially + first-time team friction.\n- High end (\u224840%): changes are minor and execution is unusually strong (roughly back up to base rate, but not above it given the risk factors).\n\n```json\n{\"estimate\": 23.0, \"ci_low\": 10.0, \"ci_high\": 40.0}\n```"
+}

@@ -15,7 +15,7 @@ from datetime import datetime
 from pathlib import Path
 from typing import Optional
 
-from farness.experiments.llm import call_llm
+from farness.experiments.llm import call_llm, model_short_name
 from farness.experiments.stability import (
     QuantitativeCase,
     StabilityResult,
@@ -23,6 +23,7 @@ from farness.experiments.stability import (
     extract_estimate,
     extract_ci,
     generate_naive_prompt,
+    generate_cot_prompt,
     generate_farness_prompt,
     generate_probe_prompt,
     get_all_stability_cases,
@@ -30,22 +31,24 @@ from farness.experiments.stability import (
 )
 
 
-def run_prompt(prompt: str, timeout: int = 180) -> str:
-    """Run a prompt through the Anthropic API."""
-    response, _ = call_llm(prompt, timeout=float(timeout))
+def run_prompt(prompt: str, model: str = "claude-opus-4-6", timeout: int = 180) -> str:
+    """Run a prompt through the LLM API."""
+    response, _ = call_llm(prompt, model=model, timeout=float(timeout))
     return response
 
 
 def run_single_stability_test(
     case: QuantitativeCase,
     condition: str,
+    model: str = "claude-opus-4-6",
     verbose: bool = True,
 ) -> StabilityResult:
     """Run a single stability test (initial + probing).
 
     Args:
         case: The quantitative case to test
-        condition: "naive" or "farness"
+        condition: "naive", "cot", or "farness"
+        model: LLM model ID
         verbose: Print progress
 
     Returns:
@@ -57,10 +60,12 @@ def run_single_stability_test(
     # Phase 1: Initial prompt
     if condition == "naive":
         initial_prompt = generate_naive_prompt(case)
+    elif condition == "cot":
+        initial_prompt = generate_cot_prompt(case)
     else:
         initial_prompt = generate_farness_prompt(case)
 
-    initial_response = run_prompt(initial_prompt)
+    initial_response = run_prompt(initial_prompt, model=model)
 
     if initial_response.startswith("ERROR:"):
         raise RuntimeError(f"Initial prompt failed: {initial_response}")
@@ -93,7 +98,7 @@ def run_single_stability_test(
         condition,
     )
 
-    final_response = run_prompt(probe_prompt)
+    final_response = run_prompt(probe_prompt, model=model)
 
     if final_response.startswith("ERROR:"):
         raise RuntimeError(f"Probe prompt failed: {final_response}")
@@ -118,6 +123,7 @@ def run_single_stability_test(
     return StabilityResult(
         case_id=case.id,
         condition=condition,
+        model=model,
         initial_estimate=initial_estimate,
         initial_ci_low=initial_ci_low,
         initial_ci_high=initial_ci_high,
@@ -137,6 +143,8 @@ def run_stability_experiment(
     random_seed: Optional[int] = None,
     randomize_order: bool = True,
     start_run: int = 1,
+    model: str = "claude-opus-4-6",
+    conditions: Optional[list[str]] = None,
 ) -> StabilityExperiment:
     """Run the full stability experiment with randomization.
 
@@ -163,6 +171,9 @@ def run_stability_experiment(
         output_dir = Path(output_dir)
         output_dir.mkdir(parents=True, exist_ok=True)
 
+    if conditions is None:
+        conditions = ["naive", "farness"]
+
     experiment = StabilityExperiment(cases=cases)
 
     # Metadata for reproducibility
@@ -172,11 +183,13 @@ def run_stability_experiment(
         "runs_per_condition": runs_per_condition,
         "n_cases": len(cases),
         "case_ids": [c.id for c in cases],
+        "conditions": conditions,
+        "model": model,
         "started_at": datetime.now().isoformat(),
         "condition_orders": {},  # Log which order was used per case
     }
 
-    total_tests = len(cases) * 2 * runs_per_condition  # 2 conditions
+    total_tests = len(cases) * len(conditions) * runs_per_condition
     test_num = 0
 
     for case in cases:
@@ -188,21 +201,21 @@ def run_stability_experiment(
         for run_offset in range(runs_per_condition):
             run_num = start_run + run_offset
             # Randomize condition order per case/run
-            conditions = ["naive", "farness"]
+            run_conditions = conditions.copy()
             if randomize_order:
-                random.shuffle(conditions)
+                random.shuffle(run_conditions)
 
             # Log the order used
             run_key = f"{case.id}_run{run_num}"
-            metadata["condition_orders"][run_key] = conditions.copy()
+            metadata["condition_orders"][run_key] = run_conditions.copy()
 
-            for condition in conditions:
+            for condition in run_conditions:
                 test_num += 1
                 if verbose:
                     print(f"\n[{test_num}/{total_tests}] {case.id} - {condition} - run {run_num}")
 
                 try:
-                    result = run_single_stability_test(case, condition, verbose)
+                    result = run_single_stability_test(case, condition, model=model, verbose=verbose)
                     experiment.results.append(result)
 
                     # Save incrementally

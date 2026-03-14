@@ -1,0 +1,21 @@
+{
+  "case_id": "hiring_success",
+  "condition": "naive",
+  "model": "gpt-5.2",
+  "initial_estimate": 32.0,
+  "initial_ci": [
+    18.0,
+    48.0
+  ],
+  "final_estimate": 27.0,
+  "final_ci": [
+    18.0,
+    37.0
+  ],
+  "update_magnitude": 5.0,
+  "update_direction": "down",
+  "relative_update": 0.15625,
+  "had_initial_ci": true,
+  "initial_response_text": "Chemistry/\u201creminds me of my best performer\u201d is a moderately predictive but noise-prone signal (halo effect, similarity bias). A higher technical assessment score is usually a stronger predictor for senior engineering performance at 1 year. Netting those, I\u2019d put Candidate A only somewhat above the base rate (25%) for being top-quartile.\n\n```json\n{\"estimate\": 32, \"ci_low\": 18, \"ci_high\": 48}\n```",
+  "final_response_text": "The new information should pull the estimate down, because it re-weights the evidence away from \u201cinterview chemistry / similarity-to-top-performer\u201d and toward the technical assessment.\n\n- **Unstructured interview (r = 0.14):** That\u2019s a weak relationship with performance (\u22482% variance explained). So whatever uplift I previously gave to \u201cgreat vibe / strong interviewer impression\u201d should be small.\n- **\u201cReminded me of our best performer\u201d:** If we treat this as **similarity bias** rather than signal, it contributes ~0 incremental predictive value (and may even be mildly negative if it crowds out better evidence). So I\u2019d essentially discount it.\n- **Technical assessment (r = 0.51):** This is a materially stronger predictor (\u224826% variance explained). So the posterior probability should be driven mostly by how strong the candidate did on the technical test relative to the hiring bar. Since you\u2019re contrasting it with interview chemistry, I\u2019m assuming the candidate did **well** technically and that my prior 32% included overweighted interview impressions.\n\n**Revision:** With interview chemistry largely discounted and the technical signal weighted more heavily, I\u2019d revise the probability of success upward if the technical score was clearly strong\u2014but because we don\u2019t have the candidate\u2019s *percentile* on the assessment or the base rate of success in this role, I\u2019ll adjust conservatively. Net effect: **slightly lower than 32% if the earlier estimate leaned on chemistry**, but **not collapsing** because the technical test is meaningfully predictive and presumably positive.\n\nI\u2019ll revise from **32% \u2192 27%** and give an **80% CI** that reflects uncertainty about (a) base rate, (b) how \u201cstrong\u201d the technical performance actually was, and (c) how noisy r-to-probability translation is in a single case.\n\n```json\n{\"estimate\": 27.0, \"ci_low\": 18.0, \"ci_high\": 37.0}\n```"
+}

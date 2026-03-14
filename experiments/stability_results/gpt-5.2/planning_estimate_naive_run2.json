@@ -1,0 +1,21 @@
+{
+  "case_id": "planning_estimate",
+  "condition": "naive",
+  "model": "gpt-5.2",
+  "initial_estimate": 3.0,
+  "initial_ci": [
+    2.5,
+    4.0
+  ],
+  "final_estimate": 9.2,
+  "final_ci": [
+    6.5,
+    13.5
+  ],
+  "update_magnitude": 6.199999999999999,
+  "update_direction": "up",
+  "relative_update": 2.0666666666666664,
+  "had_initial_ci": true,
+  "initial_response_text": "Teams with detailed breakdowns still tend to underestimate due to integration, reviews, testing, interruptions, and unexpected edge cases. A common planning-fallacy correction is ~1.5\u00d7 the stated estimate for \u201cactually done\u201d (including QA/stabilization). For an 80% interval, I\u2019d allow a moderate spread: roughly 1.25\u00d7 to 2\u00d7 of the original estimate.\n\n```json\n{\"estimate\": 3, \"ci_low\": 2.5, \"ci_high\": 4}\n```",
+  "final_response_text": "Starting point: the prior point estimate was **3.0 weeks**.\n\n### 1) \u201cProjects average 2\u20133\u00d7 initial estimates\u201d\nThat empirical base rate suggests the *expected* outcome is meaningfully higher than the naive estimate. If we apply a simple multiplicative adjustment using the midpoint (2.5\u00d7) as a base-rate correction:\n\n- 3.0 \u00d7 2.5 = **7.5 weeks**\n\n### 2) Team confidence as planning fallacy signal\nIf \u201chigh confidence\u201d is actually correlated with underestimation, that pushes the adjustment upward a bit more. I\u2019ll model that as a modest extra factor (not another full 2\u20133\u00d7, since the 2\u20133\u00d7 already partly reflects typical optimism), e.g. **+10\u201315%** on the base-rate-adjusted number:\n\n- 7.5 \u00d7 1.1 \u2248 **8.25 weeks** (rounding to 8.3)\n\n### 3) 30% chance of a major blocker\nModel as a mixture: 70% \u201cnormal\u201d outcome, 30% \u201cblocker\u201d outcome that adds additional time. Without specific blocker magnitude, a reasonable planning assumption is a major blocker costs on the order of **+2\u20134 weeks** (coordination, rework, waiting on other teams, clarification loops). Use +3 weeks as a central value:\n\n- Expected added time from blocker = 0.3 \u00d7 3 = **0.9 weeks**\n- Revised expected estimate = 8.25 + 0.9 = **9.15 weeks** \u2192 **9.2 weeks** (rounded)\n\n### 80% confidence interval\nGiven the heavy-tailed nature implied by \u201c2\u20133\u00d7\u201d and the explicit 30% blocker risk, the distribution is likely right-skewed. A practical 80% CI should:\n- Have a lower bound reflecting a relatively smooth execution but still not the naive 3 weeks.\n- Have an upper bound that includes a decent chunk of blocker scenarios and overruns.\n\nA reasonable 80% interval here is approximately **6.5 to 13.5 weeks**:\n- **~6.5 weeks**: things go relatively well, but still consistent with base-rate overrun vs. 3.0.\n- **~13.5 weeks**: incorporates meaningful chance of blocker + additional rework/coordination.\n\n```json\n{\"estimate\": 9.2, \"ci_low\": 6.5, \"ci_high\": 13.5}\n```"
+}

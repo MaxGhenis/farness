@@ -1,0 +1,21 @@
+{
+  "case_id": "product_launch",
+  "condition": "naive",
+  "model": "gpt-5.2",
+  "initial_estimate": 40.0,
+  "initial_ci": [
+    20.0,
+    60.0
+  ],
+  "final_estimate": 22.0,
+  "final_ci": [
+    10.0,
+    35.0
+  ],
+  "update_magnitude": 18.0,
+  "update_direction": "down",
+  "relative_update": 0.45,
+  "had_initial_ci": true,
+  "initial_response_text": "Given only qualitative signals (good internal tests, team excitement, and a solid but not extraordinary beta NPS=45), a \u226510% overall engagement lift within 3 months is plausible but far from guaranteed. The main uncertainty is whether the feature is broadly relevant enough to move *overall* engagement (not just engaged beta cohorts), plus execution/launch reach and cannibalization effects. I\u2019d put this in the \u201cmoderate chance\u201d range with a wide interval.\n\n```json\n{\"estimate\": 40, \"ci_low\": 20, \"ci_high\": 60}\n```",
+  "final_response_text": "Start from the new base rate: if only ~20\u201330% of new features meaningfully move engagement, a reasonable prior center is ~25%.\n\nNow adjust for the additional evidence:\n\n- **Beta users are enthusiasts (selection bias):** Any observed beta uplift is less predictive of broad rollout impact. This usually *reduces* the probability that the feature will meaningfully move engagement in the general population (beta success often regresses when exposed to average users).\n- **Builder-measures-success (measurement/confirmation bias):** Increases the chance of optimistic instrumentation choices, selective reporting, or \u201cmetric gaming,\u201d further weakening the evidential weight of early positive signals.\n\nNet effect: compared to your earlier 40% (implicitly treating beta signals as fairly informative), I\u2019d pull the estimate down toward (and slightly below) the base rate because the signals are less reliable and less generalizable.\n\n**Revised point estimate:** **22%**\n\n**80% confidence interval:** **10%\u201335%**  \n(Wide because the base rate range is already broad, and both selection and measurement bias add additional uncertainty rather than cleanly shifting the mean.)\n\n```json\n{\"estimate\": 22, \"ci_low\": 10, \"ci_high\": 35}\n```"
+}

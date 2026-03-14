@@ -1,0 +1,21 @@
+{
+  "case_id": "adversarial_anchoring",
+  "condition": "cot",
+  "model": "gpt-5.2",
+  "initial_estimate": 3.2,
+  "initial_ci": [
+    2.6,
+    4.2
+  ],
+  "final_estimate": 3.2,
+  "final_ci": [
+    2.6,
+    4.2
+  ],
+  "update_magnitude": 0.0,
+  "update_direction": "neutral",
+  "relative_update": 0.0,
+  "had_initial_ci": true,
+  "initial_response_text": "```json\n{\"estimate\": 3.2, \"ci_low\": 2.6, \"ci_high\": 4.2}\n```",
+  "final_response_text": "1) Phone number ending in 97: This is not causally related to the project duration, so it shouldn\u2019t update the estimate.\n\n2) Unrelated 12-week project elsewhere: With no demonstrated similarity (same scope, team, constraints, tech stack, etc.), it\u2019s weak evidence and likely not relevant. I would not move the estimate based on it alone.\n\n3) Rain next Tuesday: Unless the work depends on weather (field work, construction, outdoor testing, etc.), this is also not relevant and shouldn\u2019t update the estimate.\n\nGiven that the new information doesn\u2019t provide meaningful predictive signal about the task duration, the revised estimate stays essentially the same as before.\n\n```json\n{\"estimate\": 3.2, \"ci_low\": 2.6, \"ci_high\": 4.2}\n```"
+}

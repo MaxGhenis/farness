@@ -1,0 +1,21 @@
+{
+  "case_id": "sunk_cost_project",
+  "condition": "cot",
+  "model": "gpt-5.2",
+  "initial_estimate": 25.0,
+  "initial_ci": [
+    10.0,
+    45.0
+  ],
+  "final_estimate": 10.0,
+  "final_ci": [
+    4.0,
+    20.0
+  ],
+  "update_magnitude": 15.0,
+  "update_direction": "down",
+  "relative_update": 0.6,
+  "had_initial_ci": true,
+  "initial_response_text": "Software projects in this state tend to have *optimism-biased* remaining estimates, and the specific signals here are all negative predictors of \u201con-time/on-budget from here\u201d:\n\n1. **Base rate**: A project that is already **18 months in, $2M spent, behind schedule and over budget** is in a high-risk regime. In many orgs, a large fraction of such projects either slip again, ship significantly reduced scope, or get quietly re-scoped/restarted. Even when they do \u201claunch,\u201d it often takes longer than the last promised window.\n\n2. **\u201cAlmost there\u201d pattern**: Repeated \u201cwe\u2019re 3 months from done\u201d is a classic failure mode. If the team were truly near completion, you\u2019d expect stronger evidence: stable requirements, declining bug curve, frozen scope, and an integrated system. You didn\u2019t mention any of that\u2014only leadership\u2019s claim.\n\n3. **Remaining work is the hard part**: Late-stage integration, performance, security, compliance, deployment, and stabilization frequently reveal unknowns. The last 10\u201320% can take 50%+ of the time, especially if the project has been troubled.\n\n4. **Team demoralization**: Demoralization reduces productivity and increases defects and attrition risk\u2014both strong drivers of schedule slip.\n\n5. **Budget/time ask is modest relative to burn so far**: $500K and 3 months after $2M/18 months implies a belief that the remaining work is ~25% of cost and ~17% of time. For a project already slipping, that\u2019s more likely an underestimate than an overestimate.\n\nPutting those together, I\u2019d assign a **low-to-moderate** chance that it *successfully launches* (i.e., real launch, not a token release) **within** the proposed **additional** $500K and **3 months**, with substantial uncertainty.\n\n```json\n{\"estimate\": 25, \"ci_low\": 10, \"ci_high\": 45}\n```",
+  "final_response_text": "Start from the prior you quoted: **25%** chance (80% CI **10\u201345%**) that the project will meet the revised budget.\n\n### Step 1 \u2014 Base rate update (already-troubled projects: 16% hit revised budget)\nThis is strong \u201coutside view\u201d evidence and should pull the estimate toward **16%**. Since your earlier 25% likely reflected some (implicit) optimism or project-specific positives, I\u2019d partially (not fully) revert toward the base rate.\n\n- **Update:** 25% \u2192 ~**18%**\n\n### Step 2 \u2014 Two senior engineers interviewing elsewhere\nThis increases risk in two ways: (a) potential attrition/knowledge loss, (b) distraction / reduced throughput even if they don\u2019t leave. On a troubled project, this tends to meaningfully reduce the odds of staying within budget.\n\n- **Update:** 18% \u2192 ~**14%**\n\n### Step 3 \u2014 \u201cAlmost there\u201d = feature complete, but integration testing not started\nThis is a classic late-stage risk spike. Integration is where hidden work appears (interfaces, environments, performance, flaky tests, deployment, regressions). If integration hasn\u2019t started, \u201cfeature complete\u201d is not close to \u201cdone,\u201d and schedule/budget overrun odds rise materially.\n\n- **Update:** 14% \u2192 ~**10%**\n\n### Confidence interval (80%)\nGiven the mix of strong base-rate evidence (16%) and strong project-specific downside signals (attrition risk + integration not started), the distribution is skewed low but still with uncertainty (e.g., if integration is unusually smooth and no one leaves, they could still make it).\n\nA reasonable 80% CI: **4%\u201320%**.\n\n```json\n{\"estimate\": 10, \"ci_low\": 4, \"ci_high\": 20}\n```"
+}

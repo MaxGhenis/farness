@@ -1,0 +1,21 @@
+{
+  "case_id": "startup_success",
+  "condition": "cot",
+  "model": "gpt-5.2",
+  "initial_estimate": 6.0,
+  "initial_ci": [
+    2.0,
+    15.0
+  ],
+  "final_estimate": 2.5,
+  "final_ci": [
+    1.0,
+    6.0
+  ],
+  "update_magnitude": 3.5,
+  "update_direction": "down",
+  "relative_update": 0.5833333333333334,
+  "had_initial_ci": true,
+  "initial_response_text": "Reaching 10,000 MAU from 500 MAU in 12 months requires a 20\u00d7 increase. That corresponds to roughly **~28% compound monthly growth** (because \\(500 \\times 1.283^{12} \\approx 10{,}000\\)).\n\nStep-by-step reasoning:\n\n1. **Base rate from the current trajectory**\n   - They\u2019ve had **18 months** and are at **500 MAU with flat growth**. \u201cFlat\u201d suggests the current approach is not producing sustained compounding growth, and likely indicates weak product/market fit, ineffective acquisition loops, or retention issues.\n   - Startups that are truly on a path to 20\u00d7 in a year usually show meaningful acceleration *before* 18 months, not flatlining.\n\n2. **What \u201cpersist with current approach\u201d implies**\n   - If \u201ccurrent approach\u201d means same core product, positioning, and GTM motion (even with incremental experiments), the probability of suddenly finding a consistent ~28% MoM growth regime is low.\n   - Teams often overestimate the impact of \u201ca few ideas to try\u201d when the system-level issue is PMF or distribution.\n\n3. **Tailwind possibility / upside**\n   - It\u2019s not impossible: sometimes one distribution channel clicks, a viral loop improves, pricing/packaging unlocks adoption, or a niche focus increases retention and referrals.\n   - But given 18 months of limited traction, this is more \u201clong-shot breakthrough\u201d than \u201clikely outcome.\u201d\n\n4. **Overall probability**\n   - Most plausible outcomes are: modest growth, stagnation, or slow improvement\u2014not 20\u00d7 in a year.\n   - I\u2019d put the chance in the **single digits**, with uncertainty depending on market, retention, and the nature of the \u201cideas to try\u201d (unknown here).\n\nFinal estimate and 80% confidence interval:\n\n```json\n{\"estimate\": 6, \"ci_low\": 2, \"ci_high\": 15}\n```",
+  "final_response_text": "Start from the prior: **6%** chance of a meaningful inflection under the original assumptions (CI 2\u201315).\n\n### Step-by-step update with the new information\n\n1. **Base rate for \u201cflat for 18 months\u201d**\n   - You\u2019re saying: only ~**5%** of startups in this state see **sudden organic** growth **without major changes**.\n   - This suggests the prior 6% was slightly optimistic if we\u2019re still talking about \u201cinflecting without a big strategic change.\u201d So I\u2019d pull the center down toward ~5%.\n   - **Update:** 6% \u2192 **~5%**\n\n2. **Already tried 3 marketing channels with similar results**\n   - This is evidence that \u201cit\u2019s just a channel issue\u201d is less likely, and that demand/positioning/product pull may be the limiting factor.\n   - It doesn\u2019t make success impossible, but it reduces the probability that a near-term inflection happens organically.\n   - **Update:** 5% \u00d7 ~0.7 \u2192 **~3.5%**\n\n3. **Competitor raised $10M targeting the same market**\n   - Typically increases CAC, raises buyer expectations, and can crowd out attention\u2014especially painful for a flat-growth startup without strong pull.\n   - There are edge cases where it validates the market and expands awareness, but net effect in most cases is negative for *this* company\u2019s odds of sudden organic inflection.\n   - **Update:** 3.5% \u00d7 ~0.75 \u2192 **~2.6%**\n\n### Revised point estimate and 80% CI\nGiven the above, I\u2019d revise to **~2.5%**. Uncertainty is still substantial, but the new info tightens the plausible range downward. An **80% CI** that reflects \u201cunlikely but not impossible\u201d:\n\n- **80% CI:** **1.0% to 6.0%**\n\n```json\n{\"estimate\": 2.5, \"ci_low\": 1.0, \"ci_high\": 6.0}\n```"
+}

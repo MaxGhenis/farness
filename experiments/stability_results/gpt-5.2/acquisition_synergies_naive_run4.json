@@ -1,0 +1,21 @@
+{
+  "case_id": "acquisition_synergies",
+  "condition": "naive",
+  "model": "gpt-5.2",
+  "initial_estimate": 60.0,
+  "initial_ci": [
+    40.0,
+    75.0
+  ],
+  "final_estimate": 35.0,
+  "final_ci": [
+    20.0,
+    55.0
+  ],
+  "update_magnitude": 25.0,
+  "update_direction": "down",
+  "relative_update": 0.4166666666666667,
+  "had_initial_ci": true,
+  "initial_response_text": "Synergy forecasts in M&A are often optimistic. Cost synergies (duplicate-function elimination) are usually more reliable than revenue synergies (cross-sell), but both are constrained by integration execution risk, employee/customer churn, systems/process integration, and timing slippage. Hitting *at least half* of a combined cost+revenue synergy target within 24 months is achievable in many deals, but far from assured\u2014especially if a meaningful share is revenue synergies.\n\n```json\n{\"estimate\": 60, \"ci_low\": 40, \"ci_high\": 75}\n```",
+  "final_response_text": "Starting point: **60%** (your prior estimate).\n\n### How the new information shifts the probability\n1. **Synergy realization averages ~50% with high variance**  \n   If the original 60% implicitly assumed \u201cmost\u201d of the modeled synergies would be captured, this pushes the probability **down** because the deal now has a materially higher chance of under-delivering on its core economic rationale. The \u201chigh variance\u201d also **widens uncertainty**.\n\n2. **60\u201380% of deals fail to create value for the acquirer**  \n   This is strong base-rate evidence. Interpreting it as \u201cprobability of success\u201d is roughly **20\u201340%**, with a midpoint around **30%**. Unless we have compelling deal-specific edge, the estimate should move **meaningfully toward ~30%** from 60%.\n\n3. **CEO personally excited/championing to the board**  \n   This often correlates with **overconfidence / escalation of commitment** and can weaken governance/discipline (e.g., overpaying, confirmation bias), which tends to **reduce expected success probability**. It also increases tail risk, again **widening uncertainty**.\n\n### Revised estimate\nBalancing: a strong negative base rate (pulling toward ~30%), plus additional negative governance signal (CEO championing), I\u2019d revise to **~35%** rather than all the way to 30% (leaving some room for deal-specific strengths that may have motivated the earlier 60%, but acknowledging we haven\u2019t been given those strengths explicitly).\n\n### 80% confidence interval\nGiven \u201chigh variance\u201d outcomes in M&A and limited specifics, the interval should be fairly wide. I\u2019ll set an 80% CI of **20% to 55%**: low end consistent with the failure base rate and potential overpayment; high end allowing for scenarios where integration goes well and the deal is among the minority of value-creating transactions.\n\n```json\n{\"estimate\": 35, \"ci_low\": 20, \"ci_high\": 55}\n```"
+}
