@@ -1,19 +1,6 @@
 import Link from "next/link";
+import { Cite } from "@/components/Cite";
 import { Header } from "@/components/Header";
-
-function Cite({ id, children }: { id: string; children: React.ReactNode }) {
-  return (
-    <sup className="text-[0.75em] align-super leading-none">
-      <a
-        href={`#ref-${id}`}
-        id={`cite-${id}`}
-        className="text-accent no-underline px-[0.1em] hover:underline"
-      >
-        [{children}]
-      </a>
-    </sup>
-  );
-}
 
 export default function ThesisPage() {
   return (
@@ -33,7 +20,7 @@ export default function ThesisPage() {
           </p>
         </header>
 
-        <div className="thesis-content [&_section]:mb-24 [&_h2]:font-[var(--font-display)] [&_h2]:text-[1.5rem] [&_h2]:font-normal [&_h2]:mb-8 [&_h2]:text-[var(--theme-text)] [&_h2]:relative [&_h2]:pl-6 [&_h2]:before:content-[''] [&_h2]:before:absolute [&_h2]:before:left-0 [&_h2]:before:top-[0.5em] [&_h2]:before:w-2 [&_h2]:before:h-0.5 [&_h2]:before:bg-accent [&_p]:mb-4 [&_ul]:my-8 [&_ul]:pl-6 [&_ol]:my-8 [&_ol]:pl-6 [&_li]:mb-2 [&_li]:pl-2 [&_li_strong]:text-[var(--theme-text)] [&_blockquote]:border-l-[3px] [&_blockquote]:border-l-accent [&_blockquote]:py-8 [&_blockquote]:px-16 [&_blockquote]:my-16 [&_blockquote]:bg-[linear-gradient(135deg,var(--color-accent-subtle)_0%,transparent_100%)] [&_blockquote]:rounded-r [&_blockquote_p]:mb-2 [&_blockquote_p:last-child]:mb-0 max-[600px]:[&_blockquote]:py-4 max-[600px]:[&_blockquote]:px-8">
+        <div className="prose-content">
           <section>
             <h2>The problem with advice</h2>
             <p>

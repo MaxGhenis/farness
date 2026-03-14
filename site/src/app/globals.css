@@ -36,15 +36,6 @@
   --font-body: "Outfit", -apple-system, sans-serif;
   --font-mono: "JetBrains Mono", "SF Mono", monospace;
 
-  /* Easing */
-  --ease-default: 0.2s ease;
-  --ease-spring: 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
-
-  /* Animation */
-  --animate-fade-up: fade-up 0.8s ease-out;
-  --animate-fade-up-delay-1: fade-up 0.8s ease-out 0.12s both;
-  --animate-fade-up-delay-2: fade-up 0.8s ease-out 0.24s both;
-  --animate-fade-up-short: fade-up 0.6s ease-out;
 }
 
 @keyframes fade-up {
@@ -119,5 +110,103 @@ a:hover {
 @media (max-width: 600px) {
   html {
     font-size: 15px;
+  }
+}
+
+/* ── Shared prose styles for thesis and paper pages ── */
+
+.prose-content section {
+  margin-bottom: 6rem;
+}
+
+.prose-content h2 {
+  font-family: var(--font-display);
+  font-size: 1.5rem;
+  font-weight: 400;
+  margin-bottom: 2rem;
+  color: var(--theme-text);
+  position: relative;
+  padding-left: 1.5rem;
+}
+
+.prose-content h2::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0.5em;
+  width: 0.5rem;
+  height: 0.125rem;
+  background: var(--color-accent);
+}
+
+.prose-content h3 {
+  font-family: var(--font-display);
+  font-size: 1.15rem;
+  font-weight: 500;
+  margin-top: 4rem;
+  margin-bottom: 1rem;
+  color: var(--theme-text);
+}
+
+.prose-content h4 {
+  font-family: var(--font-display);
+  font-size: 1rem;
+  font-weight: 500;
+  margin-top: 2rem;
+  margin-bottom: 1rem;
+  color: var(--theme-text-muted);
+}
+
+.prose-content p {
+  margin-bottom: 1rem;
+}
+
+.prose-content ul,
+.prose-content ol {
+  margin-top: 2rem;
+  margin-bottom: 2rem;
+  padding-left: 1.5rem;
+}
+
+.prose-content li {
+  margin-bottom: 0.5rem;
+  padding-left: 0.5rem;
+}
+
+.prose-content li strong {
+  color: var(--theme-text);
+}
+
+.prose-content blockquote {
+  border-left: 3px solid var(--color-accent);
+  padding: 2rem 4rem;
+  margin: 4rem 0;
+  background: linear-gradient(
+    135deg,
+    var(--color-accent-subtle) 0%,
+    transparent 100%
+  );
+  border-radius: 0 0.25rem 0.25rem 0;
+}
+
+.prose-content blockquote p {
+  margin-bottom: 0.5rem;
+}
+
+.prose-content blockquote p:last-child {
+  margin-bottom: 0;
+}
+
+.prose-content code {
+  font-family: var(--font-mono);
+  font-size: 0.85em;
+  background: var(--theme-bg-surface);
+  padding: 0.15em 0.4em;
+  border-radius: 0.25rem;
+}
+
+@media (max-width: 600px) {
+  .prose-content blockquote {
+    padding: 1rem 2rem;
   }
 }

@@ -1,19 +1,6 @@
 import Link from "next/link";
+import { Cite } from "@/components/Cite";
 import { Header } from "@/components/Header";
-
-function Cite({ id, children }: { id: string; children: React.ReactNode }) {
-  return (
-    <sup className="text-[0.75em] align-super leading-none">
-      <a
-        href={`#ref-${id}`}
-        id={`cite-${id}`}
-        className="text-accent no-underline px-[0.1em] hover:underline"
-      >
-        [{children}]
-      </a>
-    </sup>
-  );
-}
 
 function Table({ headers, rows }: { headers: string[]; rows: string[][] }) {
   return (
@@ -72,7 +59,7 @@ export default function PaperPage() {
           </p>
         </header>
 
-        <div className="thesis-content [&_section]:mb-24 [&_h2]:font-[var(--font-display)] [&_h2]:text-[1.5rem] [&_h2]:font-normal [&_h2]:mb-8 [&_h2]:text-[var(--theme-text)] [&_h2]:relative [&_h2]:pl-6 [&_h2]:before:content-[''] [&_h2]:before:absolute [&_h2]:before:left-0 [&_h2]:before:top-[0.5em] [&_h2]:before:w-2 [&_h2]:before:h-0.5 [&_h2]:before:bg-accent [&_h3]:font-[var(--font-display)] [&_h3]:text-[1.15rem] [&_h3]:font-medium [&_h3]:mt-16 [&_h3]:mb-4 [&_h3]:text-[var(--theme-text)] [&_h4]:font-[var(--font-display)] [&_h4]:text-base [&_h4]:font-medium [&_h4]:mt-8 [&_h4]:mb-4 [&_h4]:text-[var(--theme-text-muted)] [&_p]:mb-4 [&_ul]:my-8 [&_ul]:pl-6 [&_ol]:my-8 [&_ol]:pl-6 [&_li]:mb-2 [&_li]:pl-2 [&_li_strong]:text-[var(--theme-text)] [&_blockquote]:border-l-[3px] [&_blockquote]:border-l-accent [&_blockquote]:py-8 [&_blockquote]:px-16 [&_blockquote]:my-16 [&_blockquote]:bg-[linear-gradient(135deg,var(--color-accent-subtle)_0%,transparent_100%)] [&_blockquote]:rounded-r [&_blockquote_p]:mb-2 [&_blockquote_p:last-child]:mb-0 [&_code]:font-[var(--font-mono)] [&_code]:text-[0.85em] [&_code]:bg-[var(--theme-bg-surface)] [&_code]:py-[0.15em] [&_code]:px-[0.4em] [&_code]:rounded max-[600px]:[&_blockquote]:py-4 max-[600px]:[&_blockquote]:px-8">
+        <div className="prose-content">
           <section className="bg-[linear-gradient(135deg,var(--color-accent-subtle)_0%,transparent_100%)] p-16 border-l-[3px] border-l-accent mb-24 rounded-r [&_p]:text-[0.95rem]">
             <h2>Abstract</h2>
             <p>

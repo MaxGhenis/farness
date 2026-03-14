@@ -18,18 +18,6 @@ vi.mock("next/link", () => ({
   ),
 }));
 
-// Mock next/navigation
-vi.mock("next/navigation", () => ({
-  useRouter: () => ({
-    push: vi.fn(),
-    replace: vi.fn(),
-    prefetch: vi.fn(),
-    back: vi.fn(),
-  }),
-  usePathname: () => "/",
-  useSearchParams: () => new URLSearchParams(),
-}));
-
 // Import components after mocks are set up
 import HomePage from "../app/page";
 import ThesisPage from "../app/thesis/page";
