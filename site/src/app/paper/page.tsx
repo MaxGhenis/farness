@@ -3,7 +3,7 @@ import fs from "fs";
 import path from "path";
 
 function getQuartoContent(): { mainHtml: string; styles: string } {
-  const htmlPath = path.join(process.cwd(), "public", "paper", "index.html");
+  const htmlPath = path.join(process.cwd(), "public", "paper-raw", "index.html");
 
   try {
     const html = fs.readFileSync(htmlPath, "utf8");
@@ -23,7 +23,7 @@ function getQuartoContent(): { mainHtml: string; styles: string } {
     const cssMatches =
       html.match(/<link href="[^"]*" rel="stylesheet"[^>]*>/g) || [];
     const cssLinks = cssMatches.map((link) =>
-      link.replace(/href="([^"]*)"/, 'href="/paper/$1"'),
+      link.replace(/href="([^"]*)"/, 'href="/paper-raw/$1"'),
     );
 
     const styles = [...cssLinks, ...styleBlocks].join("\n");

@@ -32,7 +32,7 @@ export function Header({ activePage }: { activePage?: "thesis" | "paper" }) {
             Thesis
           </Link>
           <a
-            href="/paper/"
+            href="/paper"
             className={`[font-family:var(--font-body)] text-[0.82rem] font-normal no-underline transition-colors duration-200 hover:no-underline ${
               activePage === "paper"
                 ? "text-[#A94E80]"

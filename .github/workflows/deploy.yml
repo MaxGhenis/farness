@@ -27,8 +27,8 @@ jobs:
 
       - name: Copy paper to site public dir
         run: |
-          mkdir -p site/public/paper
-          cp -r paper/_book/* site/public/paper/
+          mkdir -p site/public/paper-raw
+          cp -r paper/_book/* site/public/paper-raw/
 
       - uses: oven-sh/setup-bun@v2
 

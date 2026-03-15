@@ -42,7 +42,7 @@ function Hero() {
               Install the plugin
             </a>
             <Link
-              href="/paper/"
+              href="/paper"
               className="inline-flex items-center gap-2 py-[0.75em] px-2 [font-family:var(--font-body)] text-[0.88rem] font-medium no-underline cursor-pointer transition-all duration-200 text-[#415463] underline decoration-[#BED0DB] underline-offset-4 hover:text-[#14202B] hover:decoration-[#14202B]"
             >
               Read the paper
@@ -365,7 +365,7 @@ function ResearchProof() {
 
           <div className="relative text-center">
             <Link
-              href="/paper/"
+              href="/paper"
               className="inline-flex items-center gap-2 py-[0.7em] px-5 [font-family:var(--font-display)] text-[0.85rem] font-medium no-underline rounded-lg cursor-pointer transition-all duration-200 hover:no-underline bg-white text-[#415463] border border-[#BED0DB] hover:border-[#A94E80] hover:text-[#14202B]"
             >
               Read the full paper
@@ -559,7 +559,7 @@ function Footer() {
         <a href="https://github.com/MaxGhenis/farness" className="text-[#6B7C89] no-underline hover:text-[#14202B] transition-colors">
           GitHub
         </a>
-        <a href="/paper/" className="text-[#6B7C89] no-underline hover:text-[#14202B] transition-colors">
+        <a href="/paper" className="text-[#6B7C89] no-underline hover:text-[#14202B] transition-colors">
           Research
         </a>
         <a href="/thesis" className="text-[#6B7C89] no-underline hover:text-[#14202B] transition-colors">
