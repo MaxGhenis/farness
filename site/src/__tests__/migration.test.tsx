@@ -31,7 +31,7 @@ describe("Next.js migration", () => {
 
     it("renders header with logo", () => {
       render(<HomePage />);
-      expect(screen.getByText("arness")).toBeInTheDocument();
+      expect(screen.getByText("farness")).toBeInTheDocument();
     });
 
     it("renders hero content", () => {

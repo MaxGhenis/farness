@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { FarnessLogoMark } from "./FarnessLogo";
 
 export function Header({ activePage }: { activePage?: "thesis" | "paper" }) {
   return (
@@ -6,12 +7,10 @@ export function Header({ activePage }: { activePage?: "thesis" | "paper" }) {
       <div className="w-full max-w-[1080px] mx-auto px-8 py-3 flex items-center justify-between max-md:px-4 max-md:py-2">
         <Link
           href="/"
-          className="flex items-center gap-2 no-underline [font-family:var(--font-display)] text-[1.2rem] font-medium text-[var(--theme-text)] hover:no-underline"
+          className="flex items-center gap-[0.35em] no-underline [font-family:var(--font-display)] text-[1.2rem] font-medium text-[var(--theme-text)] hover:no-underline"
         >
-          <span className="inline-flex items-center justify-center w-7 h-7 bg-accent text-[#0c0e13] [font-family:var(--font-display)] font-semibold text-base rounded-[5px]">
-            F
-          </span>
-          <span className="tracking-[0.02em]">arness</span>
+          <FarnessLogoMark size={28} />
+          <span className="tracking-[0.02em]">farness</span>
         </Link>
         <nav className="flex gap-7 items-center max-md:gap-4">
           <Link
