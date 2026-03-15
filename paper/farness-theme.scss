@@ -1,0 +1,283 @@
+/*-- scss:defaults --*/
+
+// Google Fonts import
+@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@300;400;500;600&family=Instrument+Serif:ital@0;1&family=Newsreader:ital,opsz,wght@0,6..72,300..600;1,6..72,300..600&display=swap');
+
+// Fonts
+$font-family-sans-serif: "IBM Plex Sans", -apple-system, sans-serif;
+$font-family-monospace: "IBM Plex Mono", monospace;
+$headings-font-family: "Newsreader", Georgia, serif;
+
+// Colors — Clear Horizon palette
+$body-bg: #F7FAFC;
+$body-color: #14202B;
+$link-color: #356C99;
+$link-hover-color: #A94E80;
+
+$gray-100: #F7FAFC;
+$gray-200: #EEF4F8;
+$gray-300: #D9E4EC;
+$gray-400: #BED0DB;
+$gray-500: #94A3AF;
+$gray-600: #6B7C89;
+$gray-700: #415463;
+$gray-800: #14202B;
+
+$border-color: #D9E4EC;
+
+// Spacing / widths
+$max-width: 780px;
+
+// Typography
+$font-size-base: 1rem;
+$headings-font-weight: 600;
+$line-height-base: 1.7;
+
+// Code
+$code-color: #A94E80;
+$code-bg: #EEF4F8;
+
+/*-- scss:rules --*/
+
+// ── Page canvas ──
+
+body {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+// Hide Quarto's default navbar — we use a custom header
+.navbar {
+  display: none !important;
+}
+
+// Also hide the sidebar nav that book projects generate
+#quarto-sidebar {
+  display: none !important;
+}
+
+#quarto-content {
+  margin-left: 0 !important;
+}
+
+#quarto-margin-sidebar {
+  // Keep TOC on wide screens but style it
+  border-left: 1px solid #D9E4EC;
+}
+
+// ── Main content area ──
+
+.page-columns {
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+main.content, #quarto-document-content {
+  max-width: $max-width;
+}
+
+// ── Typography ──
+
+h1, .title {
+  font-family: "Newsreader", Georgia, serif;
+  font-weight: 600;
+  color: #14202B;
+  letter-spacing: -0.02em;
+  line-height: 1.25;
+}
+
+h1 {
+  font-size: 2rem;
+  margin-top: 2rem;
+  margin-bottom: 1rem;
+}
+
+h2 {
+  font-size: 1.5rem;
+  margin-top: 3rem;
+  margin-bottom: 1.25rem;
+  padding-left: 1.25rem;
+  position: relative;
+  letter-spacing: -0.02em;
+
+  &::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0.55em;
+    width: 0.5rem;
+    height: 0.125rem;
+    background: #A94E80;
+  }
+}
+
+h3 {
+  font-size: 1.15rem;
+  margin-top: 2.5rem;
+  margin-bottom: 1rem;
+}
+
+h4 {
+  font-size: 1rem;
+  margin-top: 2rem;
+  margin-bottom: 0.75rem;
+  color: #415463;
+}
+
+// ── Links ──
+
+a:hover {
+  color: #A94E80;
+}
+
+// ── Blockquotes ──
+
+blockquote {
+  border-left: 3px solid #A94E80 !important;
+  padding: 1.5rem 2.5rem !important;
+  margin: 2rem 0 !important;
+  background: linear-gradient(135deg, #F6E7F0 0%, transparent 100%) !important;
+  border-radius: 0 0.25rem 0.25rem 0 !important;
+  color: #14202B;
+}
+
+// ── Code blocks — dark instrument panel ──
+
+div.sourceCode, pre.sourceCode, pre:not([class]) {
+  background: linear-gradient(180deg, #172633 0%, #0F1A24 100%) !important;
+  color: #E8F0F5 !important;
+  border: 1px solid #2B3D4B !important;
+  border-radius: 0.5rem !important;
+  padding: 1.25rem 1.5rem !important;
+  font-size: 0.85rem;
+}
+
+pre > code {
+  background: transparent !important;
+  color: #E8F0F5 !important;
+  padding: 0 !important;
+}
+
+// Inline code
+p code, li code, td code {
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 0.85em;
+  background: #EEF4F8;
+  padding: 0.15em 0.4em;
+  border-radius: 0.25rem;
+  color: #A94E80;
+}
+
+// ── Tables ──
+
+.table, table {
+  border-color: #D9E4EC;
+
+  th {
+    background: #EEF4F8;
+    border-color: #D9E4EC;
+    font-weight: 600;
+    color: #14202B;
+    font-size: 0.9rem;
+  }
+
+  td {
+    border-color: #D9E4EC;
+    font-size: 0.9rem;
+  }
+
+  thead {
+    border-bottom: 2px solid #BED0DB;
+  }
+
+  tbody tr:hover {
+    background: #EEF4F8;
+  }
+}
+
+// ── Figures and captions ──
+
+figcaption, .figure-caption {
+  color: #6B7C89;
+  font-size: 0.85rem;
+  margin-top: 0.5rem;
+}
+
+// ── Footnotes and references ──
+
+.footnote-ref, .csl-entry {
+  font-size: 0.9rem;
+}
+
+#refs .csl-entry {
+  padding: 0.25rem 0;
+  color: #415463;
+}
+
+// ── TOC styling ──
+
+.sidebar nav[role="doc-toc"] {
+  a {
+    color: #6B7C89;
+    font-size: 0.82rem;
+    font-family: "IBM Plex Sans", sans-serif;
+
+    &:hover {
+      color: #A94E80;
+    }
+
+    &.active {
+      color: #A94E80;
+      font-weight: 600;
+    }
+  }
+}
+
+// ── Custom header spacing ──
+
+// Push content below the fixed header
+#farness-header + div,
+#farness-header ~ main,
+#farness-header ~ .page-columns {
+  padding-top: 0;
+}
+
+// ── Quarto book metadata ──
+
+.quarto-title-meta {
+  border-top: 1px solid #D9E4EC;
+  border-bottom: 1px solid #D9E4EC;
+  padding: 1rem 0;
+  margin: 1.5rem 0 2rem;
+  color: #415463;
+  font-size: 0.9rem;
+}
+
+// ── Page navigation ──
+
+.page-navigation {
+  border-top: 1px solid #D9E4EC;
+  padding-top: 1.5rem;
+
+  a {
+    color: #356C99;
+
+    &:hover {
+      color: #A94E80;
+    }
+  }
+}
+
+// ── Callout styling ──
+
+.callout {
+  border-radius: 0.5rem;
+  border-color: #D9E4EC;
+}
+
+// ── Math / equations ──
+
+.math.display {
+  overflow-x: auto;
+  padding: 1rem 0;
+}

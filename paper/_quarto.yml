@@ -7,11 +7,18 @@ book:
     email: max@maxghenis.com
   chapters:
   - index.qmd
+  navbar: false
+  sidebar: false
 bibliography:
 - references.bib
 format:
   html:
-    theme: cosmo
+    theme: [cosmo, farness-theme.scss]
+    include-before-body: _header.html
+    toc: true
+    toc-location: right
+    number-sections: false
+    favicon: /favicon.svg
 repo-url: https://github.com/MaxGhenis/farness
 license: MIT
 keywords:
