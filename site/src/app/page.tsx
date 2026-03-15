@@ -7,10 +7,10 @@ import { Header } from "@/components/Header";
 /* ── Shared style snippets ── */
 
 const btnBase =
-  "inline-flex items-center gap-2 py-[0.7em] px-6 font-[var(--font-body)] text-[0.9rem] font-medium no-underline rounded-lg border border-transparent cursor-pointer transition-all duration-200 hover:no-underline";
+  "inline-flex items-center gap-2 py-[0.7em] px-6 [font-family:var(--font-body)] text-[0.9rem] font-medium no-underline rounded-lg border border-transparent cursor-pointer transition-all duration-200 hover:no-underline";
 const btnAccent = `${btnBase} bg-accent text-[var(--theme-bg)] border-accent hover:bg-accent-hover hover:border-accent-hover hover:shadow-[0_4px_20px_var(--color-accent-glow)]`;
 const btnGhost = `${btnBase} bg-transparent text-[var(--theme-text-muted)] border-[var(--theme-border-strong)] hover:border-accent hover:text-accent`;
-const mono = "font-[var(--font-mono)] text-[0.85em]";
+const mono = "[font-family:var(--font-mono)] text-[0.85em]";
 
 /* ── Hero ── */
 
@@ -19,10 +19,10 @@ function Hero() {
     <div className="relative overflow-hidden flex justify-center px-8 pt-40 pb-24 max-md:px-4 max-md:pt-24 max-md:pb-16">
       <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.03)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.03)_1px,transparent_1px)] bg-[length:60px_60px] [mask-image:radial-gradient(ellipse_70%_60%_at_50%_40%,black,transparent)] [-webkit-mask-image:radial-gradient(ellipse_70%_60%_at_50%_40%,black,transparent)]" />
       <div className="relative text-center max-w-[780px] animate-[fade-up_0.8s_ease-out]">
-        <p className="font-[var(--font-mono)] text-[0.72rem] tracking-[0.08em] text-accent mb-4">
+        <p className="[font-family:var(--font-mono)] text-[0.72rem] tracking-[0.08em] text-accent mb-4">
           Decision framework
         </p>
-        <h1 className="font-[var(--font-display)] text-[clamp(2.4rem,5.5vw,3.8rem)] font-normal leading-[1.18] tracking-[-0.02em] mb-8">
+        <h1 className="[font-family:var(--font-display)] text-[clamp(2.4rem,5.5vw,3.8rem)] font-normal leading-[1.18] tracking-[-0.02em] mb-8">
           Stop asking{" "}
           <em className="italic text-accent">{'"Is this good?"'}</em>
           <br />
@@ -62,10 +62,10 @@ function Section({
   return (
     <section id={id} className="mb-24">
       <div className="mb-8">
-        <span className="font-[var(--font-mono)] text-[0.7rem] tracking-[0.06em] text-accent block mb-2">
+        <span className="[font-family:var(--font-mono)] text-[0.7rem] tracking-[0.06em] text-accent block mb-2">
           {label}
         </span>
-        <h2 className="font-[var(--font-display)] text-[1.8rem] font-normal leading-[1.25] tracking-[-0.01em]">
+        <h2 className="[font-family:var(--font-display)] text-[1.8rem] font-normal leading-[1.25] tracking-[-0.01em]">
           {title}
         </h2>
       </div>
@@ -230,17 +230,17 @@ function InteractiveDemo() {
   return (
     <div className="max-w-[1080px] mx-auto px-8 py-24" id="demo">
       <div className="text-center mb-16">
-        <span className="font-[var(--font-mono)] text-[0.7rem] tracking-[0.06em] text-accent block mb-2">
+        <span className="[font-family:var(--font-mono)] text-[0.7rem] tracking-[0.06em] text-accent block mb-2">
           Interactive demo
         </span>
-        <h3 className="font-[var(--font-display)] text-[1.6rem] font-normal italic mb-8">
+        <h3 className="[font-family:var(--font-display)] text-[1.6rem] font-normal italic mb-8">
           {scenario.question}
         </h3>
         <div className="flex gap-2 justify-center flex-wrap max-[480px]:flex-col max-[480px]:items-stretch">
           {SCENARIOS.map((sc, i) => (
             <button
               key={i}
-              className={`font-[var(--font-body)] text-[0.78rem] font-normal py-[0.4em] px-4 bg-transparent border rounded-[20px] cursor-pointer transition-all duration-200 ${
+              className={`[font-family:var(--font-body)] text-[0.78rem] font-normal py-[0.4em] px-4 bg-transparent border rounded-[20px] cursor-pointer transition-all duration-200 ${
                 i === activeScenario
                   ? "border-accent text-accent bg-accent-subtle"
                   : "border-[var(--theme-border)] text-[var(--theme-text-dim)] hover:border-[var(--theme-text-muted)] hover:text-[var(--theme-text-muted)]"
@@ -270,7 +270,7 @@ function InteractiveDemo() {
             >
               <div className="flex justify-between items-baseline mb-4">
                 <span className="font-medium text-[0.95rem]">{kpi.name}</span>
-                <span className="font-[var(--font-mono)] text-[0.75rem] text-[var(--theme-text-dim)]">
+                <span className="[font-family:var(--font-mono)] text-[0.75rem] text-[var(--theme-text-dim)]">
                   {kpi.unit}
                 </span>
               </div>
@@ -281,7 +281,7 @@ function InteractiveDemo() {
                     className="grid grid-cols-[80px_1fr_50px] items-center gap-4 max-md:grid-cols-[65px_1fr_40px] max-[480px]:grid-cols-[55px_1fr_35px] max-[480px]:gap-2"
                   >
                     <span
-                      className="font-[var(--font-body)] text-[0.82rem] font-medium text-right"
+                      className="[font-family:var(--font-body)] text-[0.82rem] font-medium text-right"
                       style={{ color: colors[oi] }}
                     >
                       {opt.name}
@@ -370,10 +370,10 @@ function ReframeDemo() {
     <div className="my-16">
       <div className="flex items-stretch gap-4 max-md:flex-col">
         <div className="flex-1 p-8 rounded-[10px] flex flex-col gap-2 bg-[var(--theme-bg-elevated)] border border-[var(--theme-border)]">
-          <span className="font-[var(--font-mono)] text-[0.65rem] tracking-[0.06em] text-[var(--theme-text-dim)]">
+          <span className="[font-family:var(--font-mono)] text-[0.65rem] tracking-[0.06em] text-[var(--theme-text-dim)]">
             vague
           </span>
-          <p className="font-[var(--font-display)] text-[1.05rem] italic leading-[1.5] text-[var(--theme-text-muted)] m-0">
+          <p className="[font-family:var(--font-display)] text-[1.05rem] italic leading-[1.5] text-[var(--theme-text-muted)] m-0">
             {examples[current].before}
           </p>
         </div>
@@ -390,10 +390,10 @@ function ReframeDemo() {
           </svg>
         </div>
         <div className="flex-1 p-8 rounded-[10px] flex flex-col gap-2 bg-[var(--theme-bg-surface)] border border-[rgba(232,168,37,0.3)]">
-          <span className="font-[var(--font-mono)] text-[0.65rem] tracking-[0.06em] text-accent">
+          <span className="[font-family:var(--font-mono)] text-[0.65rem] tracking-[0.06em] text-accent">
             precise
           </span>
-          <p className="font-[var(--font-display)] text-[1.05rem] italic leading-[1.5] text-[var(--theme-text)] m-0">
+          <p className="[font-family:var(--font-display)] text-[1.05rem] italic leading-[1.5] text-[var(--theme-text)] m-0">
             {examples[current].after}
           </p>
         </div>
@@ -541,7 +541,7 @@ function FrameworkSteps() {
               {step.num}
             </span>
           </div>
-          <h3 className="font-[var(--font-display)] text-[1.05rem] font-medium mb-2">
+          <h3 className="[font-family:var(--font-display)] text-[1.05rem] font-medium mb-2">
             {step.title}
           </h3>
           <p className="text-[0.88rem] text-[var(--theme-text-muted)] m-0 leading-[1.55]">
@@ -586,7 +586,7 @@ function WhyItWorks() {
           key={i}
           className="flex flex-col gap-[0.3rem] py-4 border-b border-[var(--theme-border)] last:border-b-0"
         >
-          <h3 className="font-[var(--font-display)] text-base font-medium text-[var(--theme-text)]">
+          <h3 className="[font-family:var(--font-display)] text-base font-medium text-[var(--theme-text)]">
             {r.title}
           </h3>
           <p className="text-[0.9rem] text-[var(--theme-text-muted)] m-0">
@@ -604,7 +604,7 @@ function CTA() {
   return (
     <div className="border-t border-[var(--theme-border)] px-8 py-24">
       <div className="max-w-[720px] mx-auto text-center">
-        <h2 className="font-[var(--font-display)] text-[1.8rem] font-normal mb-4">
+        <h2 className="[font-family:var(--font-display)] text-[1.8rem] font-normal mb-4">
           Start making better decisions
         </h2>
         <p className="text-[var(--theme-text-muted)] font-light max-w-[480px] mx-auto">

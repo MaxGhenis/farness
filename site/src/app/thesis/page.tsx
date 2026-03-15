@@ -8,10 +8,10 @@ export default function ThesisPage() {
       <Header activePage="thesis" />
       <article className="max-w-[680px] mx-auto px-8">
         <header className="text-center py-24 border-b border-[var(--theme-border)] mb-24 animate-[fade-up_0.6s_ease-out] max-[600px]:py-16">
-          <p className="font-[var(--font-mono)] text-[0.65rem] tracking-[0.15em] uppercase text-accent mb-4">
+          <p className="[font-family:var(--font-mono)] text-[0.65rem] tracking-[0.15em] uppercase text-accent mb-4">
             The Farness thesis
           </p>
-          <h1 className="font-[var(--font-display)] text-[clamp(2rem,5vw,3rem)] font-light leading-[1.2] mb-8 tracking-[-0.02em]">
+          <h1 className="[font-family:var(--font-display)] text-[clamp(2rem,5vw,3rem)] font-light leading-[1.2] mb-8 tracking-[-0.02em]">
             Forecasting as a harness
           </h1>
           <p className="text-[1.15rem] text-[var(--theme-text-muted)] max-w-[480px] mx-auto leading-[1.6]">
@@ -402,7 +402,7 @@ export default function ThesisPage() {
             <p className="text-center mt-16">
               <Link
                 href="/"
-                className="inline-flex items-center gap-2 py-4 px-8 font-[var(--font-display)] text-[0.9rem] no-underline bg-[var(--theme-text)] text-[var(--theme-bg)] border border-[var(--theme-text)] rounded-lg transition-all duration-200 hover:bg-accent hover:border-accent hover:no-underline"
+                className="inline-flex items-center gap-2 py-4 px-8 [font-family:var(--font-display)] text-[0.9rem] no-underline bg-[var(--theme-text)] text-[var(--theme-bg)] border border-[var(--theme-text)] rounded-lg transition-all duration-200 hover:bg-accent hover:border-accent hover:no-underline"
               >
                 Get started →
               </Link>
@@ -411,7 +411,7 @@ export default function ThesisPage() {
         </div>
 
         <section className="mt-24 pt-24 border-t border-[var(--theme-border)]">
-          <h2 className="font-[var(--font-display)] text-[1.25rem] font-normal mb-8 text-[var(--theme-text)]">
+          <h2 className="[font-family:var(--font-display)] text-[1.25rem] font-normal mb-8 text-[var(--theme-text)]">
             References
           </h2>
           <ol className="list-none p-0 m-0 text-[0.85rem] text-[var(--theme-text-muted)] leading-[1.6] [&_li]:mb-4 [&_li]:pl-8 [&_li]:relative [&_li>a:first-child]:absolute [&_li>a:first-child]:left-0 [&_li>a:first-child]:text-[var(--theme-text-muted)] [&_li>a:first-child]:no-underline [&_li>a:first-child]:text-[0.8em] [&_li>a:first-child:hover]:text-accent [&_em]:italic [&_a]:text-accent [&_a]:no-underline [&_a:hover]:underline">
