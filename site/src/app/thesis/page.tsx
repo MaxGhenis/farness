@@ -126,7 +126,7 @@ export default function ThesisPage() {
             <p>
               Superforecasters don&apos;t have access to secret information.
               They&apos;re just more disciplined about structuring their
-              thinking. Across over 100 comparative studies, Dawes, Faust, and
+              thinking. Across nearly 100 comparative studies, Dawes, Faust, and
               Meehl found that structured &quot;mechanical&quot; prediction
               equaled or outperformed unstructured expert judgment in every
               domain tested
@@ -146,10 +146,12 @@ export default function ThesisPage() {
               Forecaster have achieved superforecaster-level performance through
               structured pipelines of search, independent reasoning, and
               calibration
-              <Cite id="7">7</Cite>. On ForecastBench, LLMs now surpass the
+              <Cite id="7">7</Cite>. The CAIS forecasting bot has demonstrated
+              superhuman accuracy on competitive forecasting platforms
+              <Cite id="8">8</Cite>. On ForecastBench, LLMs now surpass the
               median public forecaster, with projected LLM-superforecaster
               parity by late 2026
-              <Cite id="8">8</Cite>.
+              <Cite id="28">28</Cite>.
             </p>
             <p>
               But LLMs are also prone to sycophancy: telling you what you want
@@ -163,7 +165,8 @@ export default function ThesisPage() {
               interval, it&apos;s harder for it to simply validate your existing
               beliefs. Numbers create accountability. Xiong et al. found that
               structured elicitation strategies—multi-step prompting, top-k
-              sampling—significantly reduce LLM overconfidence
+              sampling—can help mitigate LLM overconfidence, though no single
+              technique consistently outperforms others
               <Cite id="19">19</Cite>. How you ask matters as much as what you
               ask.
             </p>
@@ -194,7 +197,7 @@ export default function ThesisPage() {
             </ul>
             <p>The AI becomes a structured thinking partner, not an oracle.</p>
             <p className="bg-[var(--theme-bg-surface)] border-l-[3px] border-l-accent p-8 my-16 rounded-r [&_a]:text-accent [&_a]:no-underline [&_a:hover]:underline">
-              <strong>See our research:</strong> We&apos;ve developed a
+              <strong>See the research:</strong> I&apos;ve developed a
               methodology called &quot;stability-under-probing&quot; to
               empirically test whether frameworks reduce sycophancy.{" "}
               <Link href="/paper">Read the paper →</Link>
@@ -416,15 +419,15 @@ export default function ThesisPage() {
           </h2>
           <ol className="list-none p-0 m-0 text-[0.85rem] text-[var(--theme-text-muted)] leading-[1.6] [&_li]:mb-4 [&_li]:pl-8 [&_li]:relative [&_li>a:first-child]:absolute [&_li>a:first-child]:left-0 [&_li>a:first-child]:text-[var(--theme-text-muted)] [&_li>a:first-child]:no-underline [&_li>a:first-child]:text-[0.8em] [&_li>a:first-child:hover]:text-accent [&_em]:italic [&_a]:text-accent [&_a]:no-underline [&_a:hover]:underline">
             <li id="ref-1">
-              <a href="#cite-1">↑</a> Sharma, M., et al. (2023). &quot;Towards
+              <a href="#cite-1">↑</a> Sharma, M., et al. (2024). &quot;Towards
               Understanding Sycophancy in Language Models.&quot;{" "}
-              <em>arXiv:2310.13548</em>.{" "}
+              <em>ICLR 2024</em>.{" "}
               <a
-                href="https://arxiv.org/abs/2310.13548"
+                href="https://openreview.net/forum?id=tvhaxkMKAn"
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                arxiv.org/abs/2310.13548
+                openreview.net
               </a>
             </li>
             <li id="ref-2">
@@ -484,8 +487,8 @@ export default function ThesisPage() {
               </a>
             </li>
             <li id="ref-7">
-              <a href="#cite-7">↑</a> &quot;AIA Forecaster: Technical
-              Report.&quot; (2025). <em>arXiv:2511.07678</em>.{" "}
+              <a href="#cite-7">↑</a> Alur, R., et al. (2025). &quot;AIA
+              Forecaster: Technical Report.&quot; <em>arXiv:2511.07678</em>.{" "}
               <a
                 href="https://arxiv.org/abs/2511.07678"
                 target="_blank"
@@ -522,7 +525,14 @@ export default function ThesisPage() {
               <em>
                 Expert Political Judgment: How Good Is It? How Can We Know?
               </em>{" "}
-              Princeton University Press.
+              Princeton University Press.{" "}
+              <a
+                href="https://press.princeton.edu/books/paperback/9780691128719/expert-political-judgment"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                Princeton University Press
+              </a>
             </li>
             <li id="ref-11">
               <a href="#cite-11">↑</a> Heuer, R. J., & Pherson, R. H. (2015).{" "}
@@ -540,7 +550,14 @@ export default function ThesisPage() {
               <a href="#cite-12">↑</a> Kruglanski, A. W., & Webster, D. M.
               (1996). &quot;Motivated Closing of the Mind: &apos;Seizing&apos;
               and &apos;Freezing&apos;.&quot; <em>Psychological Review</em>,
-              103(2), 263-283.
+              103(2), 263-283.{" "}
+              <a
+                href="https://doi.org/10.1037/0033-295X.103.2.263"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                DOI
+              </a>
             </li>
             <li id="ref-13">
               <a href="#cite-13">↑</a> CIA. (2009). &quot;A Tradecraft Primer:
@@ -557,12 +574,26 @@ export default function ThesisPage() {
             <li id="ref-14">
               <a href="#cite-14">↑</a> Brier, G. W. (1950). &quot;Verification
               of Forecasts Expressed in Terms of Probability.&quot;{" "}
-              <em>Monthly Weather Review</em>, 78(1), 1-3.
+              <em>Monthly Weather Review</em>, 78(1), 1-3.{" "}
+              <a
+                href="https://doi.org/10.1175/1520-0493(1950)078<0001:VOFEIT>2.0.CO;2"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                DOI
+              </a>
             </li>
             <li id="ref-15">
               <a href="#cite-15">↑</a> Kunda, Z. (1990). &quot;The Case for
               Motivated Reasoning.&quot; <em>Psychological Bulletin</em>,
-              108(3), 480-498.
+              108(3), 480-498.{" "}
+              <a
+                href="https://doi.org/10.1037/0033-2909.108.3.480"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                DOI
+              </a>
             </li>
             <li id="ref-16">
               <a href="#cite-16">↑</a> Duke, A. (2018).{" "}
@@ -585,7 +616,7 @@ export default function ThesisPage() {
               </a>
             </li>
             <li id="ref-18">
-              <a href="#cite-18">↑</a> Halawi, D., Zhang, F., Yueh-Han, C., &
+              <a href="#cite-18">↑</a> Halawi, D., Zhang, F., Chen, Y.-H., &
               Steinhardt, J. (2024). &quot;Approaching Human-Level Forecasting
               with Language Models.&quot; <em>NeurIPS 2024</em>.{" "}
               <a
@@ -697,12 +728,24 @@ export default function ThesisPage() {
                 DOI
               </a>
             </li>
+            <li id="ref-28">
+              <a href="#cite-28">↑</a> Karger, E., et al. (2025).
+              &quot;ForecastBench: A Dynamic Benchmark of AI Forecasting
+              Capabilities.&quot; <em>ICLR 2025</em>.{" "}
+              <a
+                href="https://openreview.net/forum?id=lfPkGWXLLf"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                openreview.net
+              </a>
+            </li>
           </ol>
         </section>
 
         <footer className="text-center py-24 mt-16 border-t border-[var(--theme-border)] text-[var(--theme-text-muted)] text-[0.85rem]">
           <p>
-            Written by <a href="https://github.com/MaxGhenis">Max Ghenis</a>.
+            Written by <a href="https://maxghenis.com">Max Ghenis</a>.
             Farness is{" "}
             <a href="https://github.com/MaxGhenis/farness">open source</a>.
           </p>

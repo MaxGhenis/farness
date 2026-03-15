@@ -1,16 +1,10 @@
 /**
  * Farness logo mark — "The Vanishing Point"
  *
- * Two perspective lines converging toward (but not touching) a luminous
- * focal point, evoking seeing far, uncertainty narrowing to clarity,
- * and a confidence interval collapsing to a point estimate.
- *
- * Design principles:
- * - Lines terminate INTO the dot, never touching each other (avoids play-button)
- * - Subtle taper from left→right suggests spatial recession
- * - Top line slightly thinner than bottom for asymmetric depth
- * - Dot is structurally essential, not decorative — must survive at 16px
- * - Open form with generous negative space between rails
+ * Two perspective lines converging toward a luminous focal point.
+ * Updated for the "Clear Horizon" palette:
+ * - Lines use Mist-400 (#9FB6C6) — visible on light backgrounds
+ * - Dot uses Rose-600 (#A94E80) — brand accent
  */
 export function FarnessLogoMark({
   size = 28,
@@ -29,46 +23,45 @@ export function FarnessLogoMark({
       className={className}
       aria-label="Farness"
     >
-      {/* Glow halo — subtle depth cue */}
+      {/* Glow halo — rose at low opacity */}
       <circle
         cx="21.5"
         cy="14"
         r="5.5"
-        fill="var(--color-accent)"
-        opacity="0.1"
+        fill="#A94E80"
+        opacity="0.10"
       />
-      {/* Upper perspective rail — slightly thinner for asymmetric depth */}
+      {/* Upper perspective rail */}
       <line
         x1="2"
         y1="4.5"
         x2="17"
         y2="12"
-        stroke="currentColor"
+        stroke="#9FB6C6"
         strokeWidth="1.2"
         strokeLinecap="round"
-        opacity="0.45"
+        opacity="0.55"
       />
-      {/* Lower perspective rail — slightly bolder, grounding the mark */}
+      {/* Lower perspective rail */}
       <line
         x1="2"
         y1="23.5"
         x2="17"
         y2="16"
-        stroke="currentColor"
+        stroke="#9FB6C6"
         strokeWidth="1.5"
         strokeLinecap="round"
-        opacity="0.55"
+        opacity="0.65"
       />
-      {/* Focal point — the golden vanishing point where uncertainty resolves */}
-      <circle cx="21.5" cy="14" r="3.2" fill="var(--color-accent)" />
+      {/* Focal point — Rose-600 vanishing point */}
+      <circle cx="21.5" cy="14" r="3.2" fill="#A94E80" />
     </svg>
   );
 }
 
 /**
  * Full wordmark: logo mark + "farness" text.
- * Used in the header navigation. Lowercase for approachability
- * while the serif display font provides gravitas.
+ * Newsreader SemiBold, lowercase.
  */
 export function FarnessWordmark({ size = 28 }: { size?: number }) {
   return (

@@ -2,21 +2,21 @@ import type { Metadata } from "next";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "Farness — Forecasting as a Harness",
+  title: "Farness — Decision Optics for AI",
   description:
-    "Stop asking 'Is this good?' Start asking 'What will happen?' A framework for better decisions through explicit forecasting.",
+    "When AI asks 'Should I...?' farness turns it into a forecast. A Claude Code plugin for pre-emptive rigor.",
   openGraph: {
     type: "website",
-    title: "Farness — Forecasting as a Harness",
+    title: "Farness — Decision Optics for AI",
     description:
-      "A framework for better decisions through explicit forecasting. Includes research paper on stability-under-probing methodology.",
+      "A Claude Code plugin that intercepts ambiguous decision questions and reframes them with explicit KPIs, numeric forecasts, base rates, bias checks, and review dates.",
     url: "https://farness.ai",
   },
   twitter: {
     card: "summary",
-    title: "Farness — Forecasting as a Harness",
+    title: "Farness — Decision Optics for AI",
     description:
-      "A framework for better decisions through explicit forecasting and calibration.",
+      "When AI asks 'Should I...?' farness turns it into a forecast.",
   },
 };
 
@@ -36,7 +36,7 @@ export default function RootLayout({
           crossOrigin="anonymous"
         />
         <link
-          href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,300;0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,300;1,6..72,400&family=Outfit:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap"
+          href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@300;400;500;600&family=Instrument+Serif:ital@0;1&family=Newsreader:ital,opsz,wght@0,6..72,300..600;1,6..72,300..600&display=swap"
           rel="stylesheet"
         />
       </head>

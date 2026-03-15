@@ -31,41 +31,71 @@ describe("Next.js migration", () => {
 
     it("renders header with logo", () => {
       render(<HomePage />);
-      expect(screen.getByText("farness")).toBeInTheDocument();
+      const farnessElements = screen.getAllByText("farness");
+      expect(farnessElements.length).toBeGreaterThan(0);
     });
 
-    it("renders hero content", () => {
+    it("renders hero headline", () => {
       render(<HomePage />);
-      expect(screen.getByText("Decision framework")).toBeInTheDocument();
+      const matches = screen.getAllByText(/AI is often fluent about decisions/);
+      expect(matches.length).toBeGreaterThan(0);
     });
 
-    it("renders all section labels", () => {
-      render(<HomePage />);
-      expect(screen.getAllByText("01").length).toBeGreaterThan(0);
-      expect(screen.getAllByText("02").length).toBeGreaterThan(0);
-      expect(screen.getAllByText("03").length).toBeGreaterThan(0);
-      expect(screen.getAllByText("04").length).toBeGreaterThan(0);
-      expect(screen.getAllByText("05").length).toBeGreaterThan(0);
-    });
-
-    it("renders interactive demo", () => {
-      render(<HomePage />);
-      expect(screen.getAllByText("Interactive demo").length).toBeGreaterThan(0);
-      expect(
-        screen.getAllByText("Which job should I take?").length,
-      ).toBeGreaterThan(0);
-    });
-
-    it("renders CTA", () => {
+    it("renders hero subhead with farness mention", () => {
       render(<HomePage />);
       expect(
-        screen.getByText("Start making better decisions"),
+        screen.getByText(/turns ambiguous reasoning into structured forecasts/),
+      ).toBeInTheDocument();
+    });
+
+    it("renders how it works section", () => {
+      render(<HomePage />);
+      expect(screen.getByText("From intuition to instrument")).toBeInTheDocument();
+      expect(screen.getByText("Intercept")).toBeInTheDocument();
+      expect(screen.getByText("Reframe")).toBeInTheDocument();
+      expect(screen.getByText("Anchor")).toBeInTheDocument();
+    });
+
+    it("renders forecast artifact", () => {
+      render(<HomePage />);
+      expect(
+        screen.getByText("Should we rewrite the auth layer now?"),
+      ).toBeInTheDocument();
+    });
+
+    it("renders research proof section", () => {
+      render(<HomePage />);
+      expect(screen.getByText("Pre-emptive rigor")).toBeInTheDocument();
+      expect(screen.getByText("11")).toBeInTheDocument();
+      expect(screen.getByText("35-63%")).toBeInTheDocument();
+    });
+
+    it("renders instrument modules", () => {
+      render(<HomePage />);
+      expect(screen.getByText("What farness produces")).toBeInTheDocument();
+    });
+
+    it("renders editorial pull quote", () => {
+      render(<HomePage />);
+      const matches = screen.getAllByText(/AI is often fluent about decisions/);
+      expect(matches.length).toBeGreaterThanOrEqual(1);
+    });
+
+    it("renders installation section", () => {
+      render(<HomePage />);
+      expect(screen.getByText("Install in seconds")).toBeInTheDocument();
+    });
+
+    it("renders closing CTA", () => {
+      render(<HomePage />);
+      expect(
+        screen.getByText("See further before you decide."),
       ).toBeInTheDocument();
     });
 
     it("renders footer", () => {
       render(<HomePage />);
-      expect(screen.getByText(/Built by/)).toBeInTheDocument();
+      expect(screen.getByText("Clarity at distance.")).toBeInTheDocument();
     });
   });
 
@@ -113,7 +143,12 @@ describe("Next.js migration", () => {
   describe("shared Header component", () => {
     it("renders nav links on all pages", () => {
       render(<HomePage />);
-      expect(screen.getByText("GitHub")).toBeInTheDocument();
+      expect(screen.getAllByText("GitHub").length).toBeGreaterThan(0);
+    });
+
+    it("renders install button", () => {
+      render(<HomePage />);
+      expect(screen.getByText("Install")).toBeInTheDocument();
     });
 
     it("uses Tailwind classes (no old CSS module class names)", () => {
@@ -138,10 +173,10 @@ describe("Next.js migration", () => {
   });
 
   describe("theme classes", () => {
-    it("Homepage wrapper has dark theme class", () => {
+    it("Homepage wrapper does NOT have dark theme class (light by default)", () => {
       const { container } = render(<HomePage />);
       const wrapper = container.firstElementChild as HTMLElement;
-      expect(wrapper.className).toContain("theme-dark");
+      expect(wrapper.className).not.toContain("theme-dark");
     });
 
     it("Thesis page renders without dark theme", () => {

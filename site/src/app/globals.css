@@ -1,41 +1,57 @@
 @import "tailwindcss";
 
-/* ── Design tokens ── */
+/* ── Design tokens — "Clear Horizon" palette ── */
 
 @theme {
-  /* Accent colors */
-  --color-accent: #e8a825;
-  --color-accent-hover: #d99a1f;
-  --color-accent-glow: rgba(232, 168, 37, 0.15);
-  --color-accent-subtle: rgba(232, 168, 37, 0.08);
+  /* Core light palette */
+  --color-canvas: #F7FAFC;
+  --color-paper: #FCFDFE;
+  --color-section: #EEF4F8;
+  --color-card: #FFFFFF;
 
-  /* Light theme */
-  --color-light-bg: #faf8f5;
-  --color-light-bg-elevated: #fff;
-  --color-light-bg-surface: #f0ede8;
-  --color-light-text: #1a1a18;
-  --color-light-text-muted: #5c5c58;
-  --color-light-text-dim: #8a8880;
-  --color-light-border: #e8e4df;
-  --color-light-border-strong: #d0ccc5;
-  --color-light-header-bg: rgba(250, 248, 245, 0.85);
+  --color-border-soft: #D9E4EC;
+  --color-border-strong: #BED0DB;
 
-  /* Dark theme */
-  --color-dark-bg: #0c0e13;
-  --color-dark-bg-elevated: #141720;
-  --color-dark-bg-surface: #1a1e2a;
-  --color-dark-text: #e8e6e1;
-  --color-dark-text-muted: #8a8880;
-  --color-dark-text-dim: #5a5850;
-  --color-dark-border: rgba(255, 255, 255, 0.08);
-  --color-dark-border-strong: rgba(255, 255, 255, 0.15);
-  --color-dark-header-bg: rgba(12, 14, 19, 0.8);
+  --color-text-primary: #14202B;
+  --color-text-secondary: #415463;
+  --color-text-tertiary: #6B7C89;
+  --color-text-disabled: #94A3AF;
+
+  /* Atmospheric mist blues */
+  --color-mist-100: #E7EFF4;
+  --color-mist-200: #D6E3EB;
+  --color-mist-400: #9FB6C6;
+  --color-mist-600: #5E7A8D;
+
+  /* Horizon blues */
+  --color-horizon-300: #9FC4E6;
+  --color-horizon-500: #5E97C8;
+  --color-horizon-700: #356C99;
+
+  /* Rose accent system */
+  --color-rose-100: #F6E7F0;
+  --color-rose-300: #E7A6C8;
+  --color-rose-500: #C96B9C;
+  --color-rose-600: #A94E80;
+  --color-rose-700: #863A65;
+
+  /* Dark instrument panel colors */
+  --color-ink-dark: #0F1A24;
+  --color-slate-dark: #172633;
+  --color-ink-border: #2B3D4B;
+  --color-ink-text: #E8F0F5;
+  --color-ink-muted: #9DB1BF;
+
+  /* Semantic */
+  --color-accent: #A94E80;
+  --color-accent-hover: #8E456A;
+  --color-accent-subtle: #F6E7F0;
 
   /* Fonts */
   --font-display: "Newsreader", Georgia, serif;
-  --font-body: "Outfit", -apple-system, sans-serif;
-  --font-mono: "JetBrains Mono", "SF Mono", monospace;
-
+  --font-body: "IBM Plex Sans", -apple-system, sans-serif;
+  --font-editorial: "Instrument Serif", serif;
+  --font-mono: "IBM Plex Mono", monospace;
 }
 
 @keyframes fade-up {
@@ -52,27 +68,27 @@
 /* ── CSS custom properties for theme switching ── */
 
 :root {
-  --theme-bg: var(--color-light-bg);
-  --theme-bg-elevated: var(--color-light-bg-elevated);
-  --theme-bg-surface: var(--color-light-bg-surface);
-  --theme-text: var(--color-light-text);
-  --theme-text-muted: var(--color-light-text-muted);
-  --theme-text-dim: var(--color-light-text-dim);
-  --theme-border: var(--color-light-border);
-  --theme-border-strong: var(--color-light-border-strong);
-  --theme-header-bg: var(--color-light-header-bg);
+  --theme-bg: var(--color-canvas);
+  --theme-bg-elevated: var(--color-card);
+  --theme-bg-surface: var(--color-section);
+  --theme-text: var(--color-text-primary);
+  --theme-text-muted: var(--color-text-secondary);
+  --theme-text-dim: var(--color-text-tertiary);
+  --theme-border: var(--color-border-soft);
+  --theme-border-strong: var(--color-border-strong);
+  --theme-header-bg: rgba(252, 253, 254, 0.85);
 }
 
 .theme-dark {
-  --theme-bg: var(--color-dark-bg);
-  --theme-bg-elevated: var(--color-dark-bg-elevated);
-  --theme-bg-surface: var(--color-dark-bg-surface);
-  --theme-text: var(--color-dark-text);
-  --theme-text-muted: var(--color-dark-text-muted);
-  --theme-text-dim: var(--color-dark-text-dim);
-  --theme-border: var(--color-dark-border);
-  --theme-border-strong: var(--color-dark-border-strong);
-  --theme-header-bg: var(--color-dark-header-bg);
+  --theme-bg: var(--color-ink-dark);
+  --theme-bg-elevated: var(--color-slate-dark);
+  --theme-bg-surface: #1A2D3B;
+  --theme-text: var(--color-ink-text);
+  --theme-text-muted: var(--color-ink-muted);
+  --theme-text-dim: #6B8494;
+  --theme-border: var(--color-ink-border);
+  --theme-border-strong: #3A5060;
+  --theme-header-bg: rgba(15, 26, 36, 0.82);
 }
 
 /* ── Global reset and base styles ── */
@@ -85,22 +101,22 @@
   }
 
   html {
-    font-size: 17px;
+    font-size: 16px;
     scroll-behavior: smooth;
   }
 
   body {
     font-family: var(--font-body);
-    background: var(--theme-bg);
-    color: var(--theme-text);
-    line-height: 1.7;
+    background: var(--color-canvas);
+    color: var(--color-text-primary);
+    line-height: 1.6;
     min-height: 100vh;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
   }
 
   a {
-    color: var(--color-accent);
+    color: var(--color-horizon-700);
     text-decoration: none;
   }
 
@@ -124,11 +140,12 @@
 .prose-content h2 {
   font-family: var(--font-display);
   font-size: 1.5rem;
-  font-weight: 400;
+  font-weight: 600;
   margin-bottom: 2rem;
   color: var(--theme-text);
   position: relative;
   padding-left: 1.5rem;
+  letter-spacing: -0.02em;
 }
 
 .prose-content h2::before {
@@ -144,7 +161,7 @@
 .prose-content h3 {
   font-family: var(--font-display);
   font-size: 1.15rem;
-  font-weight: 500;
+  font-weight: 600;
   margin-top: 4rem;
   margin-bottom: 1rem;
   color: var(--theme-text);
@@ -153,7 +170,7 @@
 .prose-content h4 {
   font-family: var(--font-display);
   font-size: 1rem;
-  font-weight: 500;
+  font-weight: 600;
   margin-top: 2rem;
   margin-bottom: 1rem;
   color: var(--theme-text-muted);
@@ -211,4 +228,18 @@
   .prose-content blockquote {
     padding: 1rem 2rem;
   }
+}
+
+/* ── Atmospheric grain texture ── */
+
+.grain-overlay::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  pointer-events: none;
+  opacity: 0.025;
+  mix-blend-mode: multiply;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+  background-size: 256px 256px;
 }
