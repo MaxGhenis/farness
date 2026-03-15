@@ -24,8 +24,8 @@ export function Header({ activePage }: { activePage?: "thesis" | "paper" }) {
           >
             Thesis
           </Link>
-          <Link
-            href="/paper"
+          <a
+            href="/paper/"
             className={`font-[var(--font-body)] text-[0.82rem] font-normal no-underline transition-colors duration-200 hover:text-[var(--theme-text)] hover:no-underline ${
               activePage === "paper"
                 ? "text-accent"
@@ -33,7 +33,7 @@ export function Header({ activePage }: { activePage?: "thesis" | "paper" }) {
             }`}
           >
             Paper
-          </Link>
+          </a>
           <a
             href="https://github.com/MaxGhenis/farness"
             className="font-[var(--font-body)] text-[0.82rem] font-normal text-[var(--theme-text-muted)] no-underline transition-colors duration-200 hover:text-[var(--theme-text)] hover:no-underline py-[0.3em] px-[0.85em] border border-[var(--theme-border-strong)] rounded-lg ml-1 hover:border-accent hover:text-accent"

@@ -21,5 +21,9 @@ env/
 .coverage
 htmlcov/
 
+# Quarto build output
+paper/_book/
+site/public/paper/
+
 # OS
 .DS_Store

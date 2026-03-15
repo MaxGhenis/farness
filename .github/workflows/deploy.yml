@@ -20,6 +20,16 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
+      - uses: quarto-dev/quarto-actions/setup@v2
+
+      - name: Render paper
+        run: quarto render paper
+
+      - name: Copy paper to site public dir
+        run: |
+          mkdir -p site/public/paper
+          cp -r paper/_book/* site/public/paper/
+
       - uses: oven-sh/setup-bun@v2
 
       - name: Install dependencies
