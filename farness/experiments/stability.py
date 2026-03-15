@@ -548,12 +548,13 @@ def _rate(results, predicate):
 
 
 def _bootstrap_cohens_d(
-    group1: list[float], group2: list[float], n_bootstrap: int = 1000
+    group1: list[float], group2: list[float], n_bootstrap: int = 1000, seed: int = 42
 ) -> tuple[Optional[float], Optional[list[float]]]:
     """Compute Cohen's d with bootstrap 95% CI."""
     if not HAS_SCIPY or len(group1) < 2 or len(group2) < 2:
         return None, None
 
+    rng = np.random.default_rng(seed)
     a1, a2 = np.array(group1), np.array(group2)
 
     def _cohens_d(g1, g2):
@@ -567,8 +568,8 @@ def _bootstrap_cohens_d(
 
     bootstrap_ds = []
     for _ in range(n_bootstrap):
-        s1 = np.random.choice(a1, size=len(a1), replace=True)
-        s2 = np.random.choice(a2, size=len(a2), replace=True)
+        s1 = rng.choice(a1, size=len(a1), replace=True)
+        s2 = rng.choice(a2, size=len(a2), replace=True)
         bootstrap_ds.append(_cohens_d(s1, s2))
 
     ci = [float(np.percentile(bootstrap_ds, 2.5)), float(np.percentile(bootstrap_ds, 97.5))]
@@ -576,12 +577,13 @@ def _bootstrap_cohens_d(
 
 
 def _bootstrap_rank_biserial(
-    group1: list[float], group2: list[float], n_bootstrap: int = 1000
+    group1: list[float], group2: list[float], n_bootstrap: int = 1000, seed: int = 42
 ) -> tuple[Optional[float], Optional[list[float]]]:
     """Compute rank-biserial r with bootstrap 95% CI."""
     if not HAS_SCIPY or len(group1) < 2 or len(group2) < 2:
         return None, None
 
+    rng = np.random.default_rng(seed)
     a1, a2 = np.array(group1), np.array(group2)
 
     def _r_rb(g1, g2):
@@ -592,8 +594,8 @@ def _bootstrap_rank_biserial(
 
     bootstrap_rs = []
     for _ in range(n_bootstrap):
-        s1 = np.random.choice(a1, size=len(a1), replace=True)
-        s2 = np.random.choice(a2, size=len(a2), replace=True)
+        s1 = rng.choice(a1, size=len(a1), replace=True)
+        s2 = rng.choice(a2, size=len(a2), replace=True)
         try:
             bootstrap_rs.append(_r_rb(s1, s2))
         except ValueError:
@@ -797,33 +799,35 @@ class StabilityExperiment:
             if not naive_results or not farness_results:
                 continue
 
+            # Average farness initial estimates per scenario to avoid pseudo-replication
+            farness_initial_mean = sum(r.initial_estimate for r in farness_results) / len(farness_results)
+
             for naive_r in naive_results:
-                for farness_r in farness_results:
-                    # Distance from naive(initial) to farness(initial)
-                    initial_gap = abs(naive_r.initial_estimate - farness_r.initial_estimate)
-                    # Distance from naive(probed) to farness(initial)
-                    final_gap = abs(naive_r.final_estimate - farness_r.initial_estimate)
+                # Distance from naive(initial) to mean farness(initial)
+                initial_gap = abs(naive_r.initial_estimate - farness_initial_mean)
+                # Distance from naive(probed) to mean farness(initial)
+                final_gap = abs(naive_r.final_estimate - farness_initial_mean)
 
-                    # Skip if initial gap too small (estimates already similar)
-                    if initial_gap < MIN_GAP_THRESHOLD:
-                        convergence_data.append({
-                            "case_id": case.id,
-                            "initial_gap": initial_gap,
-                            "final_gap": final_gap,
-                            "convergence_ratio": None,  # Undefined when gap too small
-                            "skipped": True,
-                            "skip_reason": f"Initial gap {initial_gap:.2f} < threshold {MIN_GAP_THRESHOLD}",
-                        })
-                        continue
-
-                    convergence_ratio = 1 - (final_gap / initial_gap)
+                # Skip if initial gap too small (estimates already similar)
+                if initial_gap < MIN_GAP_THRESHOLD:
                     convergence_data.append({
                         "case_id": case.id,
                         "initial_gap": initial_gap,
                         "final_gap": final_gap,
-                        "convergence_ratio": convergence_ratio,
-                        "skipped": False,
+                        "convergence_ratio": None,  # Undefined when gap too small
+                        "skipped": True,
+                        "skip_reason": f"Initial gap {initial_gap:.2f} < threshold {MIN_GAP_THRESHOLD}",
                     })
+                    continue
+
+                convergence_ratio = 1 - (final_gap / initial_gap)
+                convergence_data.append({
+                    "case_id": case.id,
+                    "initial_gap": initial_gap,
+                    "final_gap": final_gap,
+                    "convergence_ratio": convergence_ratio,
+                    "skipped": False,
+                })
 
         if not convergence_data:
             return {}
@@ -848,10 +852,11 @@ class StabilityExperiment:
         # Bootstrap 95% CI for convergence ratio (requires scipy/numpy)
         ci_low, ci_high = None, None
         if HAS_SCIPY:
+            rng = np.random.default_rng(42)
             bootstrap_means = []
             n_bootstrap = 1000
             for _ in range(n_bootstrap):
-                sample = np.random.choice(valid_ratios, size=len(valid_ratios), replace=True)
+                sample = rng.choice(valid_ratios, size=len(valid_ratios), replace=True)
                 bootstrap_means.append(np.mean(sample))
 
             ci_low = float(np.percentile(bootstrap_means, 2.5))
