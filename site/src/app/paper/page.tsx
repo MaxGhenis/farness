@@ -1,0 +1,102 @@
+import { Header } from "@/components/Header";
+import fs from "fs";
+import path from "path";
+
+function getQuartoContent(): { mainHtml: string; styles: string } {
+  const htmlPath = path.join(process.cwd(), "public", "paper", "index.html");
+
+  try {
+    const html = fs.readFileSync(htmlPath, "utf8");
+
+    // Extract <main>...</main> content
+    const mainStart = html.indexOf('<main class="content"');
+    const mainEnd = html.indexOf("</main>") + "</main>".length;
+    const mainHtml =
+      mainStart >= 0 && mainEnd > mainStart
+        ? html.substring(mainStart, mainEnd)
+        : "<main><p>Paper content not found. Run quarto render first.</p></main>";
+
+    // Extract inline <style> blocks
+    const styleBlocks = html.match(/<style[^>]*>[\s\S]*?<\/style>/g) || [];
+
+    // Build CSS link tags prefixed with /paper/, wrapped to scope
+    const cssMatches =
+      html.match(/<link href="[^"]*" rel="stylesheet"[^>]*>/g) || [];
+    const cssLinks = cssMatches.map((link) =>
+      link.replace(/href="([^"]*)"/, 'href="/paper/$1"'),
+    );
+
+    const styles = [...cssLinks, ...styleBlocks].join("\n");
+
+    return { mainHtml, styles };
+  } catch {
+    return {
+      mainHtml:
+        "<main><p>Paper not yet rendered. Run: quarto render paper</p></main>",
+      styles: "",
+    };
+  }
+}
+
+export default function PaperPage() {
+  const { mainHtml, styles } = getQuartoContent();
+
+  // Wrap Quarto content in a container that isolates its CSS from the header
+  const scopedHtml = `
+    <div id="quarto-paper-scope">
+      <style>
+        /* Scope Quarto bootstrap to only affect paper content */
+        #quarto-paper-scope {
+          all: initial;
+          display: block;
+          font-family: "IBM Plex Sans", -apple-system, sans-serif;
+          color: #14202B;
+          line-height: 1.7;
+          max-width: 960px;
+          margin: 0 auto;
+          padding: 2rem;
+        }
+        #quarto-paper-scope * {
+          box-sizing: border-box;
+        }
+        /* Override Quarto's global resets within scope */
+        #quarto-paper-scope h1, #quarto-paper-scope h2, #quarto-paper-scope h3 {
+          font-family: "Newsreader", Georgia, serif;
+          color: #14202B;
+          margin-top: 2.5rem;
+          margin-bottom: 1rem;
+        }
+        #quarto-paper-scope h1 { font-size: 2rem; font-weight: 600; letter-spacing: -0.02em; line-height: 1.25; margin-top: 0; }
+        #quarto-paper-scope h2 { font-size: 1.4rem; font-weight: 500; }
+        #quarto-paper-scope h3 { font-size: 1.1rem; font-weight: 500; }
+        #quarto-paper-scope p { margin-bottom: 1rem; }
+        #quarto-paper-scope a { color: #356C99; text-decoration: none; }
+        #quarto-paper-scope a:hover { color: #A94E80; text-decoration: underline; }
+        #quarto-paper-scope em { font-style: italic; }
+        #quarto-paper-scope strong { font-weight: 600; }
+        #quarto-paper-scope table { width: 100%; border-collapse: collapse; margin: 1.5rem 0; font-size: 0.9rem; }
+        #quarto-paper-scope th { text-align: left; padding: 0.75rem; border-bottom: 2px solid #D9E4EC; font-weight: 600; }
+        #quarto-paper-scope td { padding: 0.75rem; border-bottom: 1px solid #D9E4EC; }
+        #quarto-paper-scope code { font-family: "IBM Plex Mono", monospace; background: #EEF4F8; padding: 0.15em 0.4em; border-radius: 3px; font-size: 0.88em; }
+        #quarto-paper-scope pre { background: linear-gradient(180deg, #172633, #0F1A24); color: #E8F0F5; padding: 1.5rem; border-radius: 12px; overflow-x: auto; margin: 1.5rem 0; border: 1px solid #2B3D4B; }
+        #quarto-paper-scope pre code { background: none; padding: 0; color: inherit; }
+        #quarto-paper-scope blockquote { border-left: 3px solid #A94E80; padding: 1rem 1.5rem; margin: 1.5rem 0; background: #F6E7F0; border-radius: 0 8px 8px 0; }
+        #quarto-paper-scope .quarto-appendix-contents { margin-top: 2rem; }
+        #quarto-paper-scope #refs { font-size: 0.88rem; line-height: 1.6; }
+        #quarto-paper-scope #refs p { margin-bottom: 0.5rem; }
+        #quarto-paper-scope .csl-entry { margin-bottom: 0.75rem; }
+        #quarto-paper-scope section { margin-bottom: 2rem; }
+        #quarto-paper-scope .math { font-style: normal; }
+        #quarto-paper-scope #quarto-appendix { border-top: 1px solid #D9E4EC; padding-top: 2rem; margin-top: 3rem; }
+      </style>
+      ${mainHtml}
+    </div>
+  `;
+
+  return (
+    <div className="bg-[#F7FAFC] text-[#14202B] min-h-screen">
+      <Header activePage="paper" />
+      <div dangerouslySetInnerHTML={{ __html: scopedHtml }} />
+    </div>
+  );
+}
