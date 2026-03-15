@@ -96,7 +96,7 @@ export default function PaperPage() {
   return (
     <div className="bg-[#F7FAFC] text-[#14202B] min-h-screen">
       <Header activePage="paper" />
-      <div dangerouslySetInnerHTML={{ __html: scopedHtml }} />
+      <div className="animate-[fade-up_0.6s_ease-out]" dangerouslySetInnerHTML={{ __html: scopedHtml }} />
     </div>
   );
 }
