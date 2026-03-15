@@ -51,6 +51,18 @@ body {
   display: none !important;
 }
 
+// Hide inline TOC (rendered at top of page) — the right-sidebar TOC handles navigation
+#TOC {
+  display: none !important;
+}
+
+// Also hide the duplicate title/author/keywords block Quarto generates
+.quarto-title-meta-heading,
+.quarto-title-meta-contents,
+header#title-block-header > .quarto-title > .quarto-categories {
+  // keep these visible but well-styled
+}
+
 // Also hide the sidebar nav that book projects generate
 #quarto-sidebar {
   display: none !important;
@@ -65,7 +77,20 @@ body {
   border-left: 1px solid #D9E4EC;
 }
 
+// ── Hide keywords metadata ──
+.quarto-title-meta,
+.keywords {
+  display: none !important;
+}
+
 // ── Main content area ──
+
+// Content constrained but header full-width
+main, #quarto-content {
+  max-width: $max-width;
+  margin: 0 auto;
+  padding: 0 2rem;
+}
 
 .page-columns {
   max-width: 1100px;

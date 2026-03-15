@@ -1,29 +1,20 @@
 project:
-  type: book
-book:
-  title: "Pre-emptive rigor: Measuring decision framework effectiveness in LLMs"
-  author:
-  - name: Max Ghenis
-    email: max@maxghenis.com
-  chapters:
-  - index.qmd
-  navbar: false
-  sidebar: false
+  type: default
+  output-dir: _book
+  render:
+    - index.qmd
+
+
 bibliography:
 - references.bib
+
 format:
   html:
     theme: [cosmo, farness-theme.scss]
     include-before-body: _header.html
-    toc: true
-    toc-location: right
+    toc: false
     number-sections: false
     favicon: /favicon.svg
+
 repo-url: https://github.com/MaxGhenis/farness
 license: MIT
-keywords:
-- decision frameworks
-- LLMs
-- stability-under-probing
-- chain-of-thought
-- calibration
