@@ -21,7 +21,7 @@ vi.mock("next/link", () => ({
 // Import components after mocks are set up
 import HomePage from "../app/page";
 import ThesisPage from "../app/thesis/page";
-import PaperPage from "../app/paper/page";
+
 
 describe("Next.js migration", () => {
   describe("Homepage", () => {
@@ -108,49 +108,7 @@ describe("Next.js migration", () => {
     });
   });
 
-  describe("Paper page", () => {
-    it("renders without crashing", () => {
-      render(<PaperPage />);
-    });
-
-    it("renders paper title", () => {
-      render(<PaperPage />);
-      expect(screen.getByText("Pre-emptive rigor")).toBeInTheDocument();
-    });
-
-    it("renders abstract", () => {
-      render(<PaperPage />);
-      expect(screen.getByText("Abstract")).toBeInTheDocument();
-    });
-
-    it("renders author metadata", () => {
-      render(<PaperPage />);
-      expect(screen.getByText(/Draft v0.4/)).toBeInTheDocument();
-    });
-
-    it("renders all major sections", () => {
-      render(<PaperPage />);
-      expect(screen.getByText("1. Introduction")).toBeInTheDocument();
-      expect(screen.getByText("2. Related work")).toBeInTheDocument();
-      expect(
-        screen.getByText("3. Methodology: stability-under-probing"),
-      ).toBeInTheDocument();
-      expect(screen.getByText("4. Experimental design")).toBeInTheDocument();
-      expect(screen.getByText("5. Results")).toBeInTheDocument();
-      expect(screen.getByText("6. Discussion")).toBeInTheDocument();
-      expect(screen.getByText("7. Conclusion")).toBeInTheDocument();
-    });
-
-    it("renders tables", () => {
-      render(<PaperPage />);
-      expect(screen.getByText("Update magnitude")).toBeInTheDocument();
-    });
-
-    it("renders code availability section", () => {
-      render(<PaperPage />);
-      expect(screen.getByText("Code availability")).toBeInTheDocument();
-    });
-  });
+  // Paper page is now rendered by Quarto (not a React component)
 
   describe("shared Header component", () => {
     it("renders nav links on all pages", () => {
@@ -192,10 +150,6 @@ describe("Next.js migration", () => {
       expect(wrapper.className).not.toContain("theme-dark");
     });
 
-    it("Paper page renders without dark theme", () => {
-      const { container } = render(<PaperPage />);
-      const wrapper = container.firstElementChild as HTMLElement;
-      expect(wrapper.className).not.toContain("theme-dark");
-    });
+    // Paper page is now Quarto-rendered, not a React component
   });
 });
