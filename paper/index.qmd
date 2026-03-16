@@ -265,6 +265,8 @@ To illustrate the stability-under-probing methodology concretely, consider the s
 
 Across 6 Claude runs, naive responses all start at exactly 12% success probability — notably invariant despite temperature 1.0 — and update to a mean of 4.1% (range 3.5–4.5%, mean update magnitude 7.9 percentage points). Farness responses start lower and with more variation — mean 10.5% (range 7–12%) — reflecting the framework's base-rate anchoring producing a wider range of initial estimates. Both conditions converge to nearly identical final estimates (~4%), but the framework starts closer (mean update magnitude 6.4 percentage points, a 19% reduction).
 
+GPT-5.2 tells a different story on this scenario. Naive responses start higher (mean 24.2%, range 20–25%) and update to a mean of 11.2% (mean update magnitude 13.5 percentage points). Farness responses show similar initial estimates (mean 24.5%, range 20–30%) and update to a mean of 10.7% (mean update magnitude 13.8 percentage points) — essentially no reduction. Both conditions again converge to similar final estimates (~10–12%), but unlike Claude, the framework provides no stability advantage here. This illustrates the heterogeneity visible in @tbl-per-scenario: the farness effect is not uniform across models or scenarios.
+
 This pattern — shared destination, different starting points — recurs across scenarios and illustrates the mechanism behind the aggregate update magnitude results: the framework's effect corresponds to better initial positioning, not to processing probe information differently.
 
 ## Discussion {#sec-discussion}
