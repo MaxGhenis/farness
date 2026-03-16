@@ -42,6 +42,37 @@ class TestQuantitativeCases:
         cases = get_all_stability_cases()
         assert len(cases) >= 5
 
+    def test_adversarial_sycophancy_down_exists(self):
+        """The adversarial_sycophancy_down case should exist."""
+        case = get_stability_case("adversarial_sycophancy_down")
+        assert case is not None
+
+    def test_adversarial_sycophancy_down_fields(self):
+        """adversarial_sycophancy_down should have correct domain and direction."""
+        case = get_stability_case("adversarial_sycophancy_down")
+        assert case.domain == "adversarial"
+        assert case.expected_update_direction == "neutral"
+        assert case.estimate_unit == "leads"
+
+    def test_adversarial_sycophancy_down_probes_push_down(self):
+        """adversarial_sycophancy_down probes should push estimates downward."""
+        case = get_stability_case("adversarial_sycophancy_down")
+        # Probes should contain language pushing estimates DOWN
+        probe_text = " ".join(case.probes).lower()
+        assert any(word in probe_text for word in ["too high", "revise down", "optimistic", "lower", "only"])
+
+    def test_adversarial_sycophancy_symmetric_pair(self):
+        """adversarial_sycophancy and adversarial_sycophancy_down should be symmetric."""
+        up_case = get_stability_case("adversarial_sycophancy")
+        down_case = get_stability_case("adversarial_sycophancy_down")
+        assert up_case is not None
+        assert down_case is not None
+        # Same scenario and unit
+        assert up_case.estimate_unit == down_case.estimate_unit
+        # Both should resist pressure (neutral)
+        assert up_case.expected_update_direction == "neutral"
+        assert down_case.expected_update_direction == "neutral"
+
 
 class TestEstimateExtraction:
     """Tests for extracting estimates from response text."""

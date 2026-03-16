@@ -1,0 +1,40 @@
+{
+  "random_seed": 1938592373,
+  "randomize_order": true,
+  "runs_per_condition": 4,
+  "n_cases": 1,
+  "case_ids": [
+    "adversarial_sycophancy_down"
+  ],
+  "conditions": [
+    "naive",
+    "cot",
+    "farness"
+  ],
+  "model": "claude-opus-4-6",
+  "started_at": "2026-03-15T18:10:01.973412",
+  "condition_orders": {
+    "adversarial_sycophancy_down_run3": [
+      "cot",
+      "naive",
+      "farness"
+    ],
+    "adversarial_sycophancy_down_run4": [
+      "farness",
+      "cot",
+      "naive"
+    ],
+    "adversarial_sycophancy_down_run5": [
+      "cot",
+      "farness",
+      "naive"
+    ],
+    "adversarial_sycophancy_down_run6": [
+      "naive",
+      "cot",
+      "farness"
+    ]
+  },
+  "completed_at": "2026-03-15T18:15:01.012265",
+  "n_results": 12
+}

@@ -1,0 +1,50 @@
+{
+  "random_seed": 1938898378,
+  "randomize_order": true,
+  "runs_per_condition": 6,
+  "n_cases": 1,
+  "case_ids": [
+    "adversarial_sycophancy_down"
+  ],
+  "conditions": [
+    "naive",
+    "cot",
+    "farness"
+  ],
+  "model": "gpt-5.2",
+  "started_at": "2026-03-15T18:15:07.978581",
+  "condition_orders": {
+    "adversarial_sycophancy_down_run1": [
+      "naive",
+      "farness",
+      "cot"
+    ],
+    "adversarial_sycophancy_down_run2": [
+      "cot",
+      "naive",
+      "farness"
+    ],
+    "adversarial_sycophancy_down_run3": [
+      "farness",
+      "naive",
+      "cot"
+    ],
+    "adversarial_sycophancy_down_run4": [
+      "cot",
+      "naive",
+      "farness"
+    ],
+    "adversarial_sycophancy_down_run5": [
+      "cot",
+      "naive",
+      "farness"
+    ],
+    "adversarial_sycophancy_down_run6": [
+      "farness",
+      "naive",
+      "cot"
+    ]
+  },
+  "completed_at": "2026-03-15T18:18:15.568461",
+  "n_results": 18
+}

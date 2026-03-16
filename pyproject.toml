@@ -39,6 +39,7 @@ experiments = [
     "openai>=1.0",
     "pandas>=2.0",
     "statsmodels>=0.14",
+    "matplotlib>=3.7",
 ]
 dev = [
     "pytest>=7.0",

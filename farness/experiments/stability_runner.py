@@ -10,7 +10,7 @@ from __future__ import annotations
 
 import json
 import random
-from dataclasses import dataclass
+import re
 from datetime import datetime
 from pathlib import Path
 from typing import Optional
@@ -35,6 +35,24 @@ def run_prompt(prompt: str, model: str = "claude-opus-4-6", timeout: int = 180) 
     """Run a prompt through the LLM API."""
     response, _ = call_llm(prompt, model=model, timeout=float(timeout))
     return response
+
+
+def _extract_estimate_or_raise(response: str, unit: str, phase: str) -> float:
+    """Extract estimate from response, falling back to first number found.
+
+    Raises ValueError if no number can be extracted.
+    """
+    estimate = extract_estimate(response, unit)
+    if estimate is not None:
+        return estimate
+
+    numbers = re.findall(r'\b(\d+\.?\d*)\b', response)
+    if numbers:
+        return float(numbers[0])
+
+    raise ValueError(
+        f"Could not extract {phase} estimate from response: {response[:200]}"
+    )
 
 
 def run_single_stability_test(
@@ -71,17 +89,8 @@ def run_single_stability_test(
         raise RuntimeError(f"Initial prompt failed: {initial_response}")
 
     # Extract initial estimate
-    initial_estimate = extract_estimate(initial_response, case.estimate_unit)
+    initial_estimate = _extract_estimate_or_raise(initial_response, case.estimate_unit, "initial")
     initial_ci_low, initial_ci_high = extract_ci(initial_response)
-
-    if initial_estimate is None:
-        # Try harder to find a number
-        import re
-        numbers = re.findall(r'\b(\d+\.?\d*)\b', initial_response)
-        if numbers:
-            initial_estimate = float(numbers[0])
-        else:
-            raise ValueError(f"Could not extract initial estimate from response: {initial_response[:200]}")
 
     if verbose:
         ci_str = f" (CI: {initial_ci_low}-{initial_ci_high})" if initial_ci_low else ""
@@ -104,16 +113,8 @@ def run_single_stability_test(
         raise RuntimeError(f"Probe prompt failed: {final_response}")
 
     # Extract final estimate
-    final_estimate = extract_estimate(final_response, case.estimate_unit)
+    final_estimate = _extract_estimate_or_raise(final_response, case.estimate_unit, "final")
     final_ci_low, final_ci_high = extract_ci(final_response)
-
-    if final_estimate is None:
-        import re
-        numbers = re.findall(r'\b(\d+\.?\d*)\b', final_response)
-        if numbers:
-            final_estimate = float(numbers[0])
-        else:
-            raise ValueError(f"Could not extract final estimate from response: {final_response[:200]}")
 
     if verbose:
         ci_str = f" (CI: {final_ci_low}-{final_ci_high})" if final_ci_low else ""
@@ -359,6 +360,19 @@ if __name__ == "__main__":
         default=1,
         help="Starting run number (for appending to existing results)",
     )
+    parser.add_argument(
+        "--model",
+        type=str,
+        default="claude-opus-4-6",
+        help="Model ID (e.g. claude-opus-4-6, gpt-5.2)",
+    )
+    parser.add_argument(
+        "--conditions",
+        type=str,
+        nargs="+",
+        default=None,
+        help="Conditions to test (default: naive farness)",
+    )
 
     args = parser.parse_args()
 
@@ -393,6 +407,8 @@ if __name__ == "__main__":
         random_seed=args.seed,
         randomize_order=not args.no_randomize,
         start_run=args.start_run,
+        model=args.model,
+        conditions=args.conditions,
     )
 
     print_experiment_summary(experiment)
