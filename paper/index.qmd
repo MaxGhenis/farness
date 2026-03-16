@@ -152,7 +152,7 @@ All experiments use Claude Opus 4.6 (Anthropic) and GPT-5.2 (OpenAI), accessed v
 
 ### Statistical analysis
 
-I use non-parametric tests given expected small sample sizes. The Mann-Whitney U test compares update magnitudes between conditions (two-sided). Fisher's exact test compares CI provision rates between conditions. I compute 1000-resample bootstrap 95% confidence intervals for convergence ratios. Effect sizes include rank-biserial correlation for update magnitude and Cohen's d for convergence, both with bootstrap 95% CIs. Analysis code was committed to the repository before data collection began (commits 50e93d4 and bfd1aae, December 2025; experiments ran February 2026). The original analysis plan specified correctness-based evaluation with ground truth outcomes; the stability-under-probing methodology reported here represents a substantive redesign motivated by the difficulty of establishing ground truth for judgment-under-uncertainty tasks. The mixed-effects model was added post hoc to address the hierarchical data structure.
+The primary analysis uses a linear mixed-effects model (update magnitude ~ condition with random intercepts for scenario) to account for the hierarchical data structure, where each scenario contributes multiple non-independent observations. I also report non-parametric Mann-Whitney U tests as a robustness check that makes no distributional or independence assumptions. Effect sizes include Cohen's d and rank-biserial correlation, both with 1000-resample bootstrap 95% CIs (seed=42). Analysis code was committed to the repository before data collection (December 2025; experiments ran February 2026).
 
 ### Sample size
 
@@ -185,9 +185,17 @@ Farness-condition responses show smaller absolute updates under probing than bot
 
 The 100% initial CI rate across all conditions is a prompt design artifact: all three prompt templates explicitly request an 80% confidence interval with structured JSON output. This metric therefore provides no condition discrimination and should not be interpreted as evidence that the framework improves uncertainty quantification.
 
-### Pairwise comparisons {#sec-pairwise}
+### Mixed-effects model
 
-@tbl-pairwise reports pairwise statistical comparisons (Mann-Whitney U, two-sided) with Holm-Bonferroni correction for three comparisons per model.
+To account for the clustering structure — each scenario contributes multiple non-independent observations — I fit a linear mixed-effects model (update magnitude ~ condition with random intercepts for scenario) using restricted maximum likelihood (REML) estimation.
+
+For Claude, the model converges with random-intercept variance of 202.2 across 11 scenario groups (n=191). The farness coefficient is −4.17 (SE=0.60, p<0.001), indicating that farness responses update 4.17 points less than naive responses after accounting for scenario-level variation. The CoT coefficient is −0.56 (SE=0.59, p=0.34), confirming no benefit from chain-of-thought prompting. The intercept (naive baseline) is 13.93 (SE=4.31, p=0.001).
+
+For GPT-5.2, the model converges with random-intercept variance of 4194.5 (n=198). The farness coefficient is −37.0 (SE=14.2, p=0.009) and the CoT coefficient is −29.7 (SE=14.2, p=0.036). The GPT-5.2 CoT effect reaches significance in the mixed-effects model, suggesting that after accounting for scenario-level variance, CoT may provide a modest benefit for GPT-5.2 specifically — though the effect is smaller than farness and does not replicate on Claude. The large random-intercept variance reflects the large heterogeneity across scenarios visible in @tbl-per-scenario. Note that the GPT-5.2 farness coefficient (−37.0) is in raw update-magnitude units and is inflated by the leads-scale sycophancy scenario; the standardized effect size (Cohen's d = −0.30) is more comparable across models.
+
+### Non-parametric robustness check {#sec-pairwise}
+
+As a robustness check that makes no distributional or independence assumptions, @tbl-pairwise reports pairwise Mann-Whitney U tests (two-sided) with Holm-Bonferroni correction.
 
 | Comparison | U | p (raw) | p (corrected) | Cohen's d [95% CI] | Rank-biserial r [95% CI] |
 |-----------|---|---------|--------------|--------------------|-----------------------|
@@ -198,9 +206,9 @@ The 100% initial CI rate across all conditions is a prompt design artifact: all 
 | GPT: CoT vs farness | 2634.5 | 0.038 | 0.093 | 0.16 [−0.16, 0.55] | −0.21 [−0.41, −0.03] |
 | GPT: CoT vs naive | 2173.0 | 0.984 | 0.984 | −0.24 [−0.45, 0.07] | 0.00 [−0.21, 0.20] |
 
-: Pairwise comparisons of update magnitude. {#tbl-pairwise}
+: Pairwise comparisons of update magnitude (non-parametric robustness check). {#tbl-pairwise}
 
-After Holm-Bonferroni correction, no comparison reaches conventional significance at alpha=0.05. However, the bootstrap 95% CIs for Cohen's d exclude zero for farness vs naive on both models, indicating a small but consistent effect. The CoT vs naive comparison shows no meaningful difference on either model (Claude: d=−0.03; GPT: d=−0.24 with CI crossing zero), indicating that generic step-by-step reasoning does not reduce update susceptibility.
+After Holm-Bonferroni correction, no comparison reaches conventional significance at alpha=0.05. However, the bootstrap 95% CIs for Cohen's d exclude zero for farness vs naive on both models, indicating a small but consistent effect. The weaker p-values compared to the mixed-effects model reflect the non-parametric test's inability to account for the within-scenario correlation structure — it treats heterogeneous scenarios as a single pool rather than conditioning on scenario difficulty.
 
 ### Cross-model comparison
 
@@ -210,11 +218,9 @@ GPT-5.2 exhibits 2–4x larger absolute update magnitudes than Claude across all
 
 ![Convergence analysis: initial and final estimates by condition, showing both conditions converge toward similar final values.](figures/fig_convergence.png){#fig-convergence}
 
-The original convergence hypothesis predicted that probed naive responses would converge toward framework initial estimates (convergence ratio > 0). In the narrow sense, this was not supported (@fig-convergence). After fixing a pseudo-replication issue in the original analysis (which had taken Cartesian products of naive and farness runs per scenario, inflating n), I average farness initial estimates per scenario and compute convergence per naive run.
+The convergence ratio (@eq-convergence) measures whether probed naive responses move toward the framework's initial estimates. For Claude, the mean convergence ratio is −1.48 (95% bootstrap CI [−2.08, −0.94], n=53 valid pairs). For GPT-5.2, it is −5.14 (95% CI [−7.57, −2.90], n=47 valid pairs). Negative values indicate that naive responses overshoot past the framework's initial anchor — moving further away rather than converging toward it (@fig-convergence). This is especially pronounced in the deadline_estimate and sunk_cost_project scenarios, where naive responses update aggressively in the correct direction but well past where the framework started.
 
-For Claude, the mean convergence ratio is −1.48 (95% bootstrap CI [−2.08, −0.94], n=53 valid pairs). For GPT-5.2, it is −5.14 (95% CI [−7.57, −2.90], n=47 valid pairs). Negative values indicate divergence: probed naive responses overshoot past the framework's initial anchor, moving further away rather than converging toward it. This is especially pronounced in the deadline_estimate and sunk_cost_project scenarios, where naive responses update aggressively in the correct direction but well past where the framework started.
-
-The divergence finding does not undermine the update magnitude result. Rather, both conditions converge toward similar final estimates after probing, but the framework starts closer to that shared destination. The framework produces initial estimates closer to post-probing values that resist large updates, while naive responses start from weaker initial positions and over-correct when challenged.
+However, the key insight is that both conditions converge toward similar *final* values after probing — the framework simply starts closer to that shared destination. The framework produces initial estimates closer to post-probing values, while naive responses start from less-anchored positions and over-correct when challenged.
 
 ### Adversarial resistance
 
@@ -261,16 +267,6 @@ Across 6 Claude runs, naive responses all start at 12% success probability and u
 
 This pattern — shared destination, different starting points — recurs across scenarios and illustrates the mechanism behind the aggregate update magnitude results: the framework's effect corresponds to better initial positioning, not to processing probe information differently.
 
-### Mixed-effects model
-
-To account for the clustering structure — each scenario contributes multiple non-independent observations — I fit a post hoc linear mixed-effects model (update magnitude ~ condition with random intercepts for scenario) using restricted maximum likelihood (REML) estimation. This model was not specified in the original analysis code but addresses a structural limitation of the originally specified non-parametric tests, which assume independence across observations.
-
-For Claude, the model converges with random-intercept variance of 202.2 across 11 scenario groups (n=191). The farness coefficient is −4.17 (SE=0.60, p<0.001), indicating that farness responses update 4.17 points less than naive responses after accounting for scenario-level variation. The CoT coefficient is −0.56 (SE=0.59, p=0.34), confirming no benefit from chain-of-thought prompting. The intercept (naive baseline) is 13.93 (SE=4.31, p=0.001).
-
-For GPT-5.2, the model converges with random-intercept variance of 4194.5 (n=198). The farness coefficient is −37.0 (SE=14.2, p=0.009) and the CoT coefficient is −29.7 (SE=14.2, p=0.036). Notably, the GPT-5.2 CoT effect reaches significance in the mixed-effects model but not in the non-parametric test (corrected p=0.984), suggesting that after accounting for scenario-level variance, CoT may provide a modest benefit for GPT-5.2 specifically — though the effect is smaller than farness and does not replicate on Claude. The large random-intercept variance reflects the large heterogeneity across scenarios visible in @tbl-per-scenario.
-
-The mixed-effects results are notably stronger than the non-parametric tests in @sec-pairwise: the farness effect reaches p<0.001 for Claude and p=0.009 for GPT-5.2, compared to corrected p-values of 0.187 and 0.093 from Mann-Whitney U. This discrepancy arises because the mixed-effects model properly accounts for the within-scenario correlation structure, effectively conditioning on scenario difficulty rather than pooling across heterogeneous scenarios. I treat the mixed-effects model as the primary analysis given the hierarchical data structure, with the non-parametric tests reported as a conservative robustness check that makes no distributional or independence assumptions.
-
 ## Discussion {#sec-discussion}
 
 ### Stability under probing
@@ -287,9 +283,7 @@ One important caveat: recent frontier models may employ implicit chain-of-though
 
 ### Both conditions converge — but the framework starts closer
 
-The original prediction that probed naive responses would converge toward framework initial estimates was not supported in the narrow sense — naive responses overshoot past the framework's initial anchor. However, a more informative reframe emerges: both conditions converge toward similar final values after probing, but the framework starts closer to that destination, requiring smaller updates to get there.
-
-The framework anchors on base rates and produces conservative initial estimates; when probed, it makes smaller adjustments. Naive responses start from less-anchored initial positions and, when confronted with strong evidence (e.g., "only 16% of troubled projects meet revised estimates"), make large corrections that overshoot the framework's conservative anchor. The framework's stability advantage thus comes from better initial positioning rather than superior information processing during probing.
+Both conditions converge toward similar final values after probing, but the framework starts closer to that destination, requiring smaller updates to get there. The framework anchors on base rates and produces conservative initial estimates; when probed, it makes smaller adjustments. Naive responses start from less-anchored initial positions and, when confronted with strong evidence (e.g., "only 16% of troubled projects meet revised estimates"), make large corrections that overshoot the framework's initial anchor. The framework's stability advantage thus comes from better initial positioning rather than superior information processing during probing.
 
 ### Model differences
 

@@ -28,7 +28,13 @@ function getQuartoContent(): { mainHtml: string; styles: string } {
 
     const styles = [...cssLinks, ...styleBlocks].join("\n");
 
-    return { mainHtml, styles };
+    // Rewrite image src paths: figures/... → /paper-raw/figures/...
+    const fixedMainHtml = mainHtml.replace(
+      /src="figures\//g,
+      'src="/paper-raw/figures/',
+    );
+
+    return { mainHtml: fixedMainHtml, styles };
   } catch {
     return {
       mainHtml:
@@ -86,6 +92,7 @@ export default function PaperPage() {
         #quarto-paper-scope #refs p { margin-bottom: 0.5rem; }
         #quarto-paper-scope .csl-entry { margin-bottom: 0.75rem; }
         #quarto-paper-scope section { margin-bottom: 2rem; }
+        #quarto-paper-scope img { max-width: 100%; height: auto; margin: 1rem 0; border-radius: 8px; }
         #quarto-paper-scope .math { font-style: normal; }
         #quarto-paper-scope #quarto-appendix { border-top: 1px solid #D9E4EC; padding-top: 2rem; margin-top: 3rem; }
       </style>

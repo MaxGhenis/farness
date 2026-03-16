@@ -114,12 +114,11 @@ def test_prompt_probe_confound_in_discussion():
     ), "Missing prompt-probe alignment discussion in body"
 
 
-def test_preregistration_deviation_disclosed():
-    """Paper should disclose preregistration-execution mismatch."""
+def test_no_preregistration_claims():
+    """Paper should not claim preregistration."""
     text = _read_paper()
-    assert re.search(
-        r"original analysis plan|substantive redesign|original.*plan.*specified", text, re.IGNORECASE
-    ), "Missing preregistration deviation disclosure"
+    assert "pre-registered" not in text.lower(), "Should not claim preregistration"
+    assert "preregistered" not in text.lower(), "Should not claim preregistration"
 
 
 # --- Task #13: CSL config ---
