@@ -1,4 +1,4 @@
-# Pre-emptive rigor: Stability-under-probing as a case-study method for evaluating decision prompts in LLMs
+# Pre-emptive rigor: Stability-under-probing, a process-level method for evaluating decision prompts in LLMs
 
 *Max Ghenis*^[Independent researcher. Contact: max@maxghenis.com]
 
@@ -6,11 +6,11 @@
 
 ## Abstract
 
-I introduce *stability-under-probing* as a methodology for evaluating structured decision prompts in large language model (LLM) decision support without requiring ground truth outcomes. I use a structured framework ("farness") as a case study, comparing it with naive and chain-of-thought (CoT) prompting across 11 scenarios spanning planning, risk, investment, and adversarial domains on Claude Opus 4.6 (n=191) and GPT-5.2 (n=198), with 6 runs per scenario-condition pair.
+I introduce *stability-under-probing*, a process-level method for evaluating decision prompts in large language model (LLM) decision support when ground-truth outcomes are unavailable. The method compares how far different prompts move after a shared bundle of follow-up probes, and whether structured prompts begin closer to their post-probe values. I demonstrate the method on a case study of a structured framework ("farness"), comparing it with naive and chain-of-thought (CoT) prompting across 11 scenarios spanning planning, risk, investment, and adversarial domains on Claude Opus 4.6 (n=191) and GPT-5.2 (n=198), with 6 runs per scenario-condition pair.
 
-Framework-guided responses show smaller updates when probed with base rates and new information (Claude: Cohen's d=−0.35, 95% CI [−0.67, −0.02]; GPT-5.2: d=−0.30 [−0.51, −0.02]), while chain-of-thought prompting provides no benefit over naive prompting (Claude: d=−0.03). The effect replicates across both models, though GPT-5.2 exhibits 2–4x larger absolute updates than Claude across all conditions. Rather than naive responses converging *toward* framework estimates, both conditions converge toward similar final values — but the framework starts closer, requiring smaller updates.
+In this case study, farness produces smaller updates under probing than naive prompting (Claude: Cohen's d=−0.35, 95% CI [−0.67, −0.02]; GPT-5.2: d=−0.30 [−0.51, −0.02]), while CoT provides no measurable benefit over naive prompting (Claude: d=−0.03). Rather than naive responses converging *toward* framework estimates, both conditions typically converge toward similar final values, but the framework starts closer and therefore moves less.
 
-These results show that stability-under-probing can distinguish between prompt structures and recover a reproducible pattern across two frontier models. In this case study, farness yields estimates that are more stable when probed on the dimensions it emphasizes (d = −0.30 to −0.35), though the observed effect may partly reflect prompt-probe alignment: the framework primes models on the same considerations the probes later test. The 11 scenarios, while varied, limit between-scenario generalization; the 6 within-scenario replications primarily inform within-scenario variance.
+The main contribution is methodological: stability-under-probing distinguishes between prompt structures and recovers a reproducible pattern across two models. The substantive case-study result is more limited. Farness appears more stable on the dimensions it explicitly emphasizes, but this may partly reflect prompt-probe alignment because the probes test the same considerations the framework names. The 11 scenarios also limit between-scenario generalization, while the repeated runs primarily inform within-scenario variance.
 
 ## Introduction {#sec-introduction}
 
@@ -18,11 +18,11 @@ Large language models are increasingly used for decision support — helping use
 
 However, evaluating whether decision frameworks actually improve *decision quality* is challenging. Ground truth is often unavailable: many decisions have no objectively correct answer, and even those that do may not resolve for months or years. Confounders abound, since real-world outcomes depend on execution, luck, and factors unknown at decision time. Most fundamentally, good decisions can have bad outcomes (and vice versa), so the goal is to measure decision *quality*, not just outcome *accuracy*.
 
-I propose a novel methodology: **stability-under-probing**. Rather than asking "did you get the right answer?", I ask whether the framework front-loads considerations that naive prompting misses, whether naive responses update significantly when challenged, and whether naive responses converge toward framework-guided responses after probing. If a framework produces responses that are robust to follow-up questions — because they already considered base rates, identified biases, and quantified uncertainty — this suggests the framework provides measurable analytical value beyond surface-level structuring.
+I propose a novel methodology: **stability-under-probing**. Rather than asking "did you get the right answer?", I ask whether a prompt front-loads considerations that naive prompting misses, whether naive responses update significantly when challenged, and whether different prompts begin closer to their post-probe values after receiving the same evidence. If a prompt produces responses that are robust to follow-up questions — because they already considered base rates, identified biases, and quantified uncertainty — that is evidence of process-level preparation even when outcome validation is unavailable.
 
-This paper should therefore be read primarily as a methods paper, with farness as a case study. The aim is not to establish that farness improves real-world decision quality in general; it is to test whether stability-under-probing can detect systematic differences between prompt structures in a domain where direct outcome validation is often unavailable.
+This paper makes two contributions. First, it proposes stability-under-probing as a process-level evaluation method for decision prompts. Second, it demonstrates the method on a bounded case study using farness, naive prompting, and CoT prompting. The paper does **not** claim that farness has been shown to improve real-world decision quality in general; the current design is better suited to detecting systematic differences in prompt behavior than to validating outcome quality.
 
-### The farness framework
+### Case study: the farness framework
 
 I introduce farness ("forecasting as a harness"),^[Framework documentation: <https://farness.ai>. Source code and experiment data: <https://github.com/MaxGhenis/farness>.] a structured decision framework that reframes subjective advice-seeking questions ("should I...?") into forecasting problems with explicit metrics. The framework operates through six required steps:
 
@@ -119,7 +119,7 @@ A convergence ratio greater than zero indicates that probing moves naive respons
 | Naive converges toward framework | Framework front-loads considerations that probing extracts |
 | Both update in correct direction | Both respond coherently to evidence |
 
-## Experimental design {#sec-experimental-design}
+## Case-study design {#sec-experimental-design}
 
 ### Decision scenarios
 
@@ -315,11 +315,9 @@ Removing CI requests from naive and CoT prompts would test whether the framework
 
 ## Conclusion {#sec-conclusion}
 
-I introduce stability-under-probing as a methodology for evaluating decision prompts in LLMs without requiring ground truth outcomes. In experiments across 11 scenarios, 3 conditions, 2 models, and 389 total responses (191 Claude + 198 GPT-5.2), the method detects a consistent separation between prompt structures: in this case study, farness yields more stable estimates under probing (Cohen's d = −0.30 to −0.35), while chain-of-thought prompting offers no measurable benefit. The effect is consistent across models, though the prompt-probe alignment between framework instructions and probing questions may partly explain the stability advantage.
+This paper introduces stability-under-probing as a process-level method for evaluating decision prompts in LLMs when ground-truth outcomes are unavailable. On a bounded case study of 11 scenarios, 3 prompting conditions, 2 models, and 389 total responses, the method detects a consistent separation between prompt structures: farness is more stable under the shared probe battery than naive prompting, while chain-of-thought prompting provides little or no benefit.
 
-Both conditions converge toward similar final estimates after probing, but the framework starts closer — requiring smaller updates. This suggests the framework's advantage comes from better initial anchoring rather than front-loading the same considerations that probing extracts.
-
-The farness framework reduces update magnitude by 35–63% relative to naive prompting across the two models tested, and this pattern does not derive from generic "think carefully" instructions alone. But the stronger claim is about measurement: stability-under-probing appears capable of surfacing structured differences in how prompts prepare models for challenge. Whether those differences translate to better real-world decisions remains an open question for future work.
+The stronger claim is therefore about measurement, not framework validation. Stability-under-probing appears capable of surfacing structured differences in how prompts prepare models for challenge. In this case study, the main behavioral pattern is that naive and farness responses often end near similar final values, but farness starts closer and thus moves less. Whether that pattern reflects broader decision value, rather than prompt-probe alignment or prompt-specific rigidity, remains for future work with held-out probes and outcome-linked benchmarks.
 
 ## References {.unnumbered}
 
