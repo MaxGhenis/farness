@@ -15,6 +15,9 @@ from typing import Optional
 _anthropic_client: Optional[object] = None
 _openai_client: Optional[object] = None
 
+MAX_RETRIES = 4
+INITIAL_RETRY_DELAY_SECONDS = 2.0
+
 
 def _is_openai_model(model: str) -> bool:
     """Detect whether a model ID is OpenAI vs Anthropic."""
@@ -90,6 +93,7 @@ def call_llm(
     max_tokens: int = 4096,
     temperature: float = 1.0,
     timeout: float = 180.0,
+    max_retries: int = MAX_RETRIES,
 ) -> tuple[str, float]:
     """Call an LLM and return (response_text, duration_seconds).
 
@@ -109,13 +113,40 @@ def call_llm(
     """
     start = time.time()
 
-    if _is_openai_model(model):
-        response = _call_openai(prompt, model, max_tokens, temperature, timeout)
-    else:
-        response = _call_anthropic(prompt, model, max_tokens, temperature, timeout)
+    provider_call = (
+        _call_openai if _is_openai_model(model) else _call_anthropic
+    )
+    response = ""
+    for attempt in range(max_retries + 1):
+        response = provider_call(prompt, model, max_tokens, temperature, timeout)
+        if not _is_retryable_error(response) or attempt == max_retries:
+            break
+        delay = min(INITIAL_RETRY_DELAY_SECONDS * (2 ** attempt), 20.0)
+        time.sleep(delay)
 
     duration = time.time() - start
     return response, duration
+
+
+def _is_retryable_error(response: str) -> bool:
+    """Return whether an API error string should be retried."""
+    if not response.startswith("ERROR:"):
+        return False
+
+    normalized = response.lower()
+    retryable_markers = (
+        "timeout",
+        "timed out",
+        "overloaded",
+        "rate limit",
+        "429",
+        "529",
+        "service unavailable",
+        "temporarily unavailable",
+        "internal server error",
+        "connection reset",
+    )
+    return any(marker in normalized for marker in retryable_markers)
 
 
 def _call_anthropic(
