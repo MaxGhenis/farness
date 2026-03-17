@@ -1,12 +1,11 @@
 """Generate publication-ready figures for the farness paper."""
 
 import json
-import os
 from pathlib import Path
 
 import matplotlib.pyplot as plt
-import matplotlib.patches as mpatches
 import numpy as np
+from matplotlib.lines import Line2D
 
 # ---------------------------------------------------------------------------
 # Config
@@ -42,6 +41,11 @@ ADVERSARIAL_SCENARIOS = [
 ]
 
 ALL_SCENARIOS = SCENARIOS + ADVERSARIAL_SCENARIOS
+ANALYSIS_SCENARIOS = SCENARIOS + [
+    "adversarial_anchoring",
+    "adversarial_false_base_rate",
+    "adversarial_sycophancy",
+]
 
 N_RUNS = 6
 
@@ -100,46 +104,194 @@ def get_update_magnitudes(data, model, scenarios=None, condition=None):
     return vals
 
 
+def bootstrap_mean_ci(vals, n_boot=5000, alpha=0.05):
+    """Bootstrap 95% CI for the mean."""
+    rng = np.random.default_rng(42)
+    vals = np.asarray(vals, dtype=float)
+    idx = rng.integers(0, len(vals), size=(n_boot, len(vals)))
+    means = vals[idx].mean(axis=1)
+    lo = np.percentile(means, 100 * alpha / 2)
+    hi = np.percentile(means, 100 * (1 - alpha / 2))
+    return lo, hi
+
+
+def add_box(ax, xy, width, height, text, facecolor, edgecolor="#37424A"):
+    """Draw a rounded text box in axes coordinates."""
+    x, y = xy
+    rect = plt.matplotlib.patches.FancyBboxPatch(
+        (x, y),
+        width,
+        height,
+        boxstyle="round,pad=0.015,rounding_size=0.02",
+        linewidth=1.2,
+        edgecolor=edgecolor,
+        facecolor=facecolor,
+        transform=ax.transAxes,
+    )
+    ax.add_patch(rect)
+    ax.text(
+        x + width / 2,
+        y + height / 2,
+        text,
+        transform=ax.transAxes,
+        ha="center",
+        va="center",
+        fontsize=10,
+        wrap=True,
+    )
+
+
 # ---------------------------------------------------------------------------
-# Figure 1: Box plots of update magnitude by condition x model
+# Figure 0: Protocol schematic
+# ---------------------------------------------------------------------------
+def fig_protocol():
+    fig, ax = plt.subplots(figsize=(11, 4.4))
+    ax.axis("off")
+
+    add_box(
+        ax,
+        (0.02, 0.34),
+        0.18,
+        0.30,
+        "Scenario\n\nTroubled project:\nprobability of launching\nwithin revised budget/time?",
+        "#F4F7FA",
+    )
+    add_box(
+        ax,
+        (0.26, 0.60),
+        0.18,
+        0.22,
+        "Naive prompt\n\nInitial estimate:\n12%",
+        "#DCE9F5",
+    )
+    add_box(
+        ax,
+        (0.26, 0.16),
+        0.18,
+        0.22,
+        "Farness prompt\n\nInitial estimate:\n10.5%",
+        "#DDF0E1",
+    )
+    add_box(
+        ax,
+        (0.49, 0.34),
+        0.20,
+        0.30,
+        "Same probe bundle\nfor both conditions\n\n16% base rate\n2 engineers interviewing\nIntegration testing not started",
+        "#F8F0DD",
+    )
+    add_box(
+        ax,
+        (0.74, 0.60),
+        0.20,
+        0.22,
+        "Naive revised\nestimate:\n4.1%\n\nUpdate: 7.9 pp",
+        "#DCE9F5",
+    )
+    add_box(
+        ax,
+        (0.74, 0.16),
+        0.20,
+        0.22,
+        "Farness revised\nestimate:\n4.1%\n\nUpdate: 6.4 pp",
+        "#DDF0E1",
+    )
+
+    arrow_kw = dict(arrowstyle="->", lw=1.4, color="#4B5964")
+    ax.annotate("", xy=(0.26, 0.71), xytext=(0.20, 0.52), xycoords="axes fraction", arrowprops=arrow_kw)
+    ax.annotate("", xy=(0.26, 0.27), xytext=(0.20, 0.46), xycoords="axes fraction", arrowprops=arrow_kw)
+    ax.annotate("", xy=(0.49, 0.49), xytext=(0.44, 0.71), xycoords="axes fraction", arrowprops=arrow_kw)
+    ax.annotate("", xy=(0.49, 0.49), xytext=(0.44, 0.27), xycoords="axes fraction", arrowprops=arrow_kw)
+    ax.annotate("", xy=(0.74, 0.71), xytext=(0.69, 0.55), xycoords="axes fraction", arrowprops=arrow_kw)
+    ax.annotate("", xy=(0.74, 0.27), xytext=(0.69, 0.43), xycoords="axes fraction", arrowprops=arrow_kw)
+
+    ax.text(
+        0.5,
+        0.04,
+        "Illustrative single-scenario workflow using the sunk-cost-project case. "
+        "The design compares how far each condition moves after receiving the same probes.",
+        transform=ax.transAxes,
+        ha="center",
+        va="bottom",
+        fontsize=10,
+        color="#37424A",
+    )
+
+    fig.suptitle(
+        "Stability-under-probing protocol: one concrete scenario",
+        fontsize=13,
+        y=0.98,
+    )
+    fig.tight_layout()
+    fig.savefig(FIG_DIR / "fig_protocol.png")
+    plt.close(fig)
+    print("  Saved fig_protocol.png")
+
+
+# ---------------------------------------------------------------------------
+# Figure 1: Mean update magnitude by condition x model
 # ---------------------------------------------------------------------------
 def fig_update_magnitude(data):
-    fig, axes = plt.subplots(1, 2, figsize=(10, 5), sharey=False)
+    fig, axes = plt.subplots(1, 2, figsize=(10, 4.8), sharey=False)
 
     for ax, model_key in zip(axes, MODELS):
-        box_data = []
-        positions = []
-        colors_list = []
+        means = []
         for i, cond in enumerate(CONDITIONS):
-            vals = []
-            for sc in ALL_SCENARIOS:
-                for run in data[model_key][sc][cond]:
-                    vals.append(run["update_magnitude"])
-            box_data.append(vals)
-            positions.append(i)
-            colors_list.append(COLORS[cond])
+            vals = get_update_magnitudes(
+                data,
+                model_key,
+                scenarios=ANALYSIS_SCENARIOS,
+                condition=cond,
+            )
+            mean_val = np.mean(vals)
+            ci_lo, ci_hi = bootstrap_mean_ci(vals)
+            means.append(mean_val)
+            ax.errorbar(
+                i,
+                mean_val,
+                yerr=[[mean_val - ci_lo], [ci_hi - mean_val]],
+                fmt="o",
+                color=COLORS[cond],
+                ecolor=COLORS[cond],
+                elinewidth=2,
+                capsize=4,
+                markersize=9,
+                markeredgecolor="black",
+                markeredgewidth=0.6,
+                zorder=3,
+            )
+            ax.text(
+                i + 0.04,
+                mean_val + max(0.6, mean_val * 0.05),
+                f"{mean_val:.1f}",
+                ha="left",
+                va="bottom",
+                fontsize=9,
+            )
 
-        bp = ax.boxplot(
-            box_data,
-            positions=positions,
-            widths=0.5,
-            patch_artist=True,
-            showfliers=True,
-            flierprops=dict(marker="o", markersize=3, alpha=0.4),
-        )
-        for patch, color in zip(bp["boxes"], colors_list):
-            patch.set_facecolor(color)
-            patch.set_alpha(0.7)
-        for median in bp["medians"]:
-            median.set_color("black")
-            median.set_linewidth(1.5)
-
-        ax.set_xticks(positions)
+        ax.set_xticks(range(len(CONDITIONS)))
         ax.set_xticklabels([CONDITION_LABELS[c] for c in CONDITIONS])
         ax.set_title(MODELS[model_key])
-        ax.set_ylabel("Update magnitude (pp)")
+        ax.set_ylabel("Mean update magnitude")
+        ax.set_ylim(bottom=-1)
+        ax.grid(axis="y", alpha=0.35)
 
-    fig.suptitle("Update magnitude by condition and model", fontsize=14, y=1.02)
+        reduction = (1 - means[2] / means[0]) * 100
+        ax.text(
+            1.0,
+            max(means) * 0.9,
+            f"Farness: {reduction:.0f}% lower than naive",
+            ha="center",
+            va="bottom",
+            fontsize=9,
+            color="#37424A",
+        )
+
+    fig.suptitle(
+        "Mean update magnitude by condition and model",
+        fontsize=14,
+        y=1.02,
+    )
     fig.tight_layout()
     fig.savefig(FIG_DIR / "fig_update_magnitude.png")
     plt.close(fig)
@@ -218,13 +370,14 @@ def fig_forest_plot(data):
 
         y_pos = np.arange(len(SCENARIOS))
         ax.hlines(y_pos, ci_los, ci_his, color="#555555", linewidth=1.2)
-        ax.scatter(ds, y_pos, color=COLORS["farness"], s=50, zorder=5, marker="D")
+        point_colors = [COLORS["farness"] if d >= 0 else COLORS["naive"] for d in ds]
+        ax.scatter(ds, y_pos, color=point_colors, s=50, zorder=5, marker="D")
         ax.axvline(0, color="gray", linestyle="--", linewidth=0.8, alpha=0.6)
         ax.set_yticks(y_pos)
         ax.set_yticklabels(labels)
         ax.invert_yaxis()
         ax.set_title(MODELS[model_key])
-        ax.set_xlabel("Cohen's d (naive - farness)")
+        ax.set_xlabel("Cohen's d (positive = less updating under farness)")
 
     fig.suptitle(
         "Effect sizes: farness vs naive per scenario (non-adversarial)",
@@ -242,58 +395,66 @@ def fig_forest_plot(data):
 # ---------------------------------------------------------------------------
 def fig_convergence(data):
     conv_scenarios = ["sunk_cost_project", "acquisition_synergies", "deadline_estimate"]
-    fig, axes = plt.subplots(1, 3, figsize=(12, 5), sharey=False)
+    fig, axes = plt.subplots(2, 3, figsize=(12, 6.5), sharex=True)
 
-    for ax, sc in zip(axes, conv_scenarios):
-        for model_key in MODELS:
+    for row, model_key in enumerate(MODELS):
+        for col, sc in enumerate(conv_scenarios):
+            ax = axes[row, col]
+            bounds = []
             for cond in ["naive", "farness"]:
                 runs = data[model_key][sc][cond]
-                for run in runs:
-                    x_start = 0 if cond == "naive" else 1
-                    x_end = 0.4 if cond == "naive" else 1.4
-                    alpha_val = 0.25
-                    ax.annotate(
-                        "",
-                        xy=(x_end, run["final_estimate"]),
-                        xytext=(x_start, run["initial_estimate"]),
-                        arrowprops=dict(
-                            arrowstyle="->",
-                            color=COLORS[cond],
-                            alpha=alpha_val,
-                            lw=1.2,
-                        ),
-                    )
+                initial_vals = np.array([run["initial_estimate"] for run in runs])
+                final_vals = np.array([run["final_estimate"] for run in runs])
+                init_mean = np.mean(initial_vals)
+                final_mean = np.mean(final_vals)
+                init_lo, init_hi = bootstrap_mean_ci(initial_vals)
+                final_lo, final_hi = bootstrap_mean_ci(final_vals)
+                bounds.extend([init_lo, init_hi, final_lo, final_hi])
 
-        # Mean reference lines for farness initial
-        for model_key in MODELS:
-            farness_runs = data[model_key][sc]["farness"]
-            farness_mean_init = np.mean(
-                [r["initial_estimate"] for r in farness_runs]
-            )
-            linestyle = "-" if model_key == "claude-opus-4-6" else "--"
-            ax.axhline(
-                farness_mean_init,
-                color=COLORS["farness"],
-                linestyle=linestyle,
-                linewidth=1.0,
-                alpha=0.5,
-                label=f"Farness init mean ({MODELS[model_key][:6]})" if sc == conv_scenarios[0] else None,
-            )
+                xs = np.array([0, 1], dtype=float)
+                ys = np.array([init_mean, final_mean], dtype=float)
+                ax.plot(
+                    xs,
+                    ys,
+                    color=COLORS[cond],
+                    marker="o",
+                    linewidth=2.2,
+                    markersize=6,
+                )
+                ax.errorbar(
+                    xs,
+                    ys,
+                    yerr=[
+                        [init_mean - init_lo, final_mean - final_lo],
+                        [init_hi - init_mean, final_hi - final_mean],
+                    ],
+                    fmt="none",
+                    ecolor=COLORS[cond],
+                    elinewidth=1.4,
+                    capsize=3,
+                    alpha=0.9,
+                )
 
-        ax.set_title(scenario_label(sc), fontsize=11)
-        ax.set_xticks([0.2, 1.2])
-        ax.set_xticklabels(["Naive", "Farness"])
-        ax.set_ylabel("Estimate value")
+            span = max(bounds) - min(bounds)
+            pad = max(1.0, span * 0.18)
+            ax.set_ylim(min(bounds) - pad, max(bounds) + pad)
+            ax.set_xticks([0, 1])
+            ax.set_xticklabels(["Initial", "Final"])
+            ax.grid(axis="y", alpha=0.35)
 
-    # Legend
+            if row == 0:
+                ax.set_title(scenario_label(sc), fontsize=11)
+            if col == 0:
+                ax.set_ylabel(f"{MODELS[model_key]}\nEstimate")
+
     handles = [
-        mpatches.Patch(color=COLORS["naive"], alpha=0.6, label="Naive"),
-        mpatches.Patch(color=COLORS["farness"], alpha=0.6, label="Farness"),
+        Line2D([0], [0], color=COLORS["naive"], marker="o", linewidth=2.2, label="Naive"),
+        Line2D([0], [0], color=COLORS["farness"], marker="o", linewidth=2.2, label="Farness"),
     ]
     fig.legend(handles=handles, loc="lower center", ncol=2, frameon=True, fontsize=10)
 
     fig.suptitle(
-        "Convergence: initial to final estimates (both models overlaid)",
+        "Selected scenarios: both conditions end near similar values, but farness starts closer",
         fontsize=13,
         y=1.02,
     )
@@ -304,38 +465,65 @@ def fig_convergence(data):
 
 
 # ---------------------------------------------------------------------------
-# Figure 4: Sycophancy bar chart
+# Figure 4: Sycophancy dot plot
 # ---------------------------------------------------------------------------
 def fig_sycophancy(data):
-    fig, ax = plt.subplots(figsize=(8, 5))
+    fig, axes = plt.subplots(1, 2, figsize=(10, 4.8), sharey=True)
 
     sc = "adversarial_sycophancy"
-    x = np.arange(len(MODELS))
-    width = 0.22
+    rng = np.random.default_rng(42)
 
-    for i, cond in enumerate(CONDITIONS):
-        means = []
-        stds = []
-        for model_key in MODELS:
-            vals = [r["update_magnitude"] for r in data[model_key][sc][cond]]
-            means.append(np.mean(vals))
-            stds.append(np.std(vals, ddof=1))
-        bars = ax.bar(
-            x + (i - 1) * width,
-            means,
-            width,
-            label=CONDITION_LABELS[cond],
-            color=COLORS[cond],
-            alpha=0.8,
-            yerr=stds,
-            capsize=4,
-        )
+    for ax, model_key in zip(axes, MODELS):
+        for i, cond in enumerate(CONDITIONS):
+            vals = np.array(
+                [r["update_magnitude"] for r in data[model_key][sc][cond]],
+                dtype=float,
+            )
+            mean_val = np.mean(vals)
+            ci_lo, ci_hi = bootstrap_mean_ci(vals)
+            jitter = rng.uniform(-0.11, 0.11, size=len(vals))
+            ax.scatter(
+                np.full(len(vals), i, dtype=float) + jitter,
+                vals,
+                color=COLORS[cond],
+                alpha=0.8,
+                s=42,
+                edgecolors="white",
+                linewidths=0.5,
+                zorder=3,
+            )
+            ax.errorbar(
+                i,
+                mean_val,
+                yerr=[[mean_val - ci_lo], [ci_hi - mean_val]],
+                fmt="_",
+                color="black",
+                ecolor="black",
+                markersize=24,
+                linewidth=1.6,
+                capsize=4,
+                zorder=4,
+            )
+            ax.text(
+                i,
+                ci_hi + max(12, (ci_hi - ci_lo) * 0.15),
+                f"{mean_val:.0f}",
+                ha="center",
+                va="bottom",
+                fontsize=9,
+            )
 
-    ax.set_xticks(x)
-    ax.set_xticklabels([MODELS[m] for m in MODELS])
-    ax.set_ylabel("Update magnitude")
-    ax.set_title("Sycophancy scenario: update magnitude by model and condition")
-    ax.legend(frameon=True)
+        ax.set_xticks(range(len(CONDITIONS)))
+        ax.set_xticklabels([CONDITION_LABELS[c] for c in CONDITIONS])
+        ax.set_title(MODELS[model_key])
+        ax.grid(axis="y", alpha=0.35)
+
+    axes[0].set_ylabel("Update magnitude (leads)")
+    fig.suptitle(
+        "Sycophancy scenario: run-level updates and condition means",
+        fontsize=13,
+        y=1.02,
+    )
 
     fig.tight_layout()
     fig.savefig(FIG_DIR / "fig_sycophancy.png")
@@ -360,6 +548,7 @@ def main():
         print(f"  {MODELS[model_key]}: {total} runs loaded")
 
     print("Generating figures...")
+    fig_protocol()
     fig_update_magnitude(data)
     fig_forest_plot(data)
     fig_convergence(data)

@@ -11,6 +11,7 @@ FIG_DIR = PAPER_DIR / "figures"
 GENERATE_SCRIPT = PAPER_DIR / "generate_figures.py"
 
 EXPECTED_FIGURES = [
+    "fig_protocol.png",
     "fig_update_magnitude.png",
     "fig_forest_plot.png",
     "fig_convergence.png",

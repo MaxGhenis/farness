@@ -131,6 +131,12 @@ pip install -e ".[dev]"
 pytest
 ```
 
+Paper build:
+
+```bash
+python3 paper/render_paper.py  # Regenerates figures, HTML, Markdown, and site/public/paper-raw
+```
+
 ### Publishing to PyPI
 
 The package is automatically published to PyPI when a new release is created on GitHub.

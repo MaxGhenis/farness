@@ -1,4 +1,4 @@
-# Pre-emptive rigor: Measuring decision framework effectiveness in LLMs
+# Pre-emptive rigor: Stability-under-probing as a case-study method for evaluating decision prompts in LLMs
 
 *Max Ghenis*^[Independent researcher. Contact: max@maxghenis.com]
 
@@ -6,11 +6,11 @@
 
 ## Abstract
 
-I introduce *stability-under-probing* as a methodology for evaluating whether structured decision frameworks improve large language model (LLM) decision support without requiring ground truth outcomes. Across 11 scenarios spanning planning, risk, investment, and adversarial domains, I test three prompting conditions — naive, chain-of-thought (CoT), and a structured framework ("farness") — on Claude Opus 4.6 (n=191) and GPT-5.2 (n=198), with 6 runs per scenario-condition pair.
+I introduce *stability-under-probing* as a methodology for evaluating structured decision prompts in large language model (LLM) decision support without requiring ground truth outcomes. I use a structured framework ("farness") as a case study, comparing it with naive and chain-of-thought (CoT) prompting across 11 scenarios spanning planning, risk, investment, and adversarial domains on Claude Opus 4.6 (n=191) and GPT-5.2 (n=198), with 6 runs per scenario-condition pair.
 
 Framework-guided responses show smaller updates when probed with base rates and new information (Claude: Cohen's d=−0.35, 95% CI [−0.67, −0.02]; GPT-5.2: d=−0.30 [−0.51, −0.02]), while chain-of-thought prompting provides no benefit over naive prompting (Claude: d=−0.03). The effect replicates across both models, though GPT-5.2 exhibits 2–4x larger absolute updates than Claude across all conditions. Rather than naive responses converging *toward* framework estimates, both conditions converge toward similar final values — but the framework starts closer, requiring smaller updates.
 
-These results suggest that the farness framework provides estimates that are more stable when probed on the dimensions it emphasizes (d = −0.30 to −0.35), though the observed effect may partly reflect prompt-probe alignment: the framework primes models on the same considerations the probes later test. The 11 scenarios, while varied, limit between-scenario generalization; the 6 within-scenario replications primarily inform within-scenario variance.
+These results show that stability-under-probing can distinguish between prompt structures and recover a reproducible pattern across two frontier models. In this case study, farness yields estimates that are more stable when probed on the dimensions it emphasizes (d = −0.30 to −0.35), though the observed effect may partly reflect prompt-probe alignment: the framework primes models on the same considerations the probes later test. The 11 scenarios, while varied, limit between-scenario generalization; the 6 within-scenario replications primarily inform within-scenario variance.
 
 ## Introduction {#sec-introduction}
 
@@ -19,6 +19,8 @@ Large language models are increasingly used for decision support — helping use
 However, evaluating whether decision frameworks actually improve *decision quality* is challenging. Ground truth is often unavailable: many decisions have no objectively correct answer, and even those that do may not resolve for months or years. Confounders abound, since real-world outcomes depend on execution, luck, and factors unknown at decision time. Most fundamentally, good decisions can have bad outcomes (and vice versa), so the goal is to measure decision *quality*, not just outcome *accuracy*.
 
 I propose a novel methodology: **stability-under-probing**. Rather than asking "did you get the right answer?", I ask whether the framework front-loads considerations that naive prompting misses, whether naive responses update significantly when challenged, and whether naive responses converge toward framework-guided responses after probing. If a framework produces responses that are robust to follow-up questions — because they already considered base rates, identified biases, and quantified uncertainty — this suggests the framework provides measurable analytical value beyond surface-level structuring.
+
+This paper should therefore be read primarily as a methods paper, with farness as a case study. The aim is not to establish that farness improves real-world decision quality in general; it is to test whether stability-under-probing can detect systematic differences between prompt structures in a domain where direct outcome validation is often unavailable.
 
 ### The farness framework
 
@@ -85,6 +87,10 @@ Conversely, if a framework produces recommendations that are stable under probin
 
 For each decision scenario, I proceed in four steps. First, I present the scenario under two conditions: a *naive* condition ("You are a helpful assistant. [Scenario]. What is your estimate?") and a *framework* condition ("You are a decision analyst using the farness framework. [Scenario]. What is your estimate with confidence interval?"). Second, I record the initial response, including point estimate, confidence interval (if provided), and full response text. Third, during the probing phase, I present 2–4 follow-up considerations (base rates, new information, bias identification) and ask for a revised estimate. Fourth, I record the final response with the same fields.
 
+![Illustrative single-scenario workflow using the sunk-cost-project case. Both conditions receive the same probe bundle; the core comparison is how far each condition moves from its initial estimate to its revised estimate.](figures/fig_protocol.png){#fig-protocol}
+
+@fig-protocol provides the clearest single-example view of the design. In this scenario, the naive and farness conditions answer the same question, receive the same probes, and end at nearly the same revised estimate. The key quantity is not which condition ends lower in absolute terms, but which one had already started closer to the post-probing value. The longer worked example in [Worked example: sunk cost project] returns to this same case later using the full multi-run results.
+
 ### Metrics
 
 **Table 1.** Primary metrics for stability-under-probing evaluation.
@@ -117,26 +123,26 @@ A convergence ratio greater than zero indicates that probing moves naive respons
 
 ### Decision scenarios
 
-I design quantitative decision scenarios across multiple domains. @tbl-scenarios summarizes the full set, with complete scenario texts and probing questions provided in [Scenario details].
+I design quantitative decision scenarios across multiple domains. @tbl-scenarios summarizes the full set, including the expected direction of legitimate updating and whether each scenario belongs to the primary analysis, adversarial battery, or post hoc exploratory set. Complete scenario texts and probing questions are provided in [Scenario details].
 
-| Domain | Scenario | Estimate type |
-|--------|----------|---------------|
-| Planning | Software project timeline | Weeks |
-| Risk | Troubled project success probability | Percentage |
-| Hiring | Candidate success prediction | Percentage |
-| Investment | M&A synergy realization | Percentage |
-| Product | Feature launch success | Percentage |
-| Startup | Growth probability after flat period | Percentage |
-| Planning | Regulatory deadline compliance | Percentage |
-| Investment | Startup investment return | Percentage |
-| Adversarial | Irrelevant anchor resistance | Weeks |
-| Adversarial | False base rate resistance | Percentage |
-| Adversarial | Sycophantic pressure resistance (upward) | Leads |
-| Adversarial | Sycophantic pressure resistance (downward)^† | Leads |
+| Domain | Scenario | Estimate type | Expected direction | Analysis role |
+|--------|----------|---------------|--------------------|---------------|
+| Planning | Software project timeline | Weeks | Up | Primary |
+| Risk | Troubled project success probability | Percentage | Down | Primary |
+| Hiring | Candidate success prediction | Percentage | Down | Primary |
+| Investment | M&A synergy realization | Percentage | Down | Primary |
+| Product | Feature launch success | Percentage | Down | Primary |
+| Startup | Growth probability after flat period | Percentage | Down | Primary |
+| Planning | Regulatory deadline compliance | Percentage | Down | Primary |
+| Investment | Startup investment return | Percentage | Down | Primary |
+| Adversarial | Irrelevant anchor resistance | Weeks | Neutral (should not move) | Adversarial |
+| Adversarial | False base rate resistance | Percentage | Neutral (should not move) | Adversarial |
+| Adversarial | Sycophantic pressure resistance (upward) | Leads | Neutral (should not move) | Adversarial |
+| Adversarial | Sycophantic pressure resistance (downward)^† | Leads | Neutral (should not move) | Post hoc exploratory |
 
 : Decision scenarios used in stability-under-probing experiments. ^†Added post hoc to test directional symmetry; excluded from primary analysis counts and statistical models. {#tbl-scenarios}
 
-Each scenario includes a realistic decision context, a quantitative question requiring a point estimate, 2–4 probing questions with base rates and new information, and an expected direction of update for validation.
+Each scenario includes a realistic decision context, a quantitative question requiring a point estimate, 2–4 probing questions with base rates and new information, and an expected direction of update for validation. The primary non-adversarial set is intentionally narrow: all 8 scenarios are quantitative, 7 probes push estimates downward, and 1 pushes upward. I therefore treat the current battery as a bounded test of prompt behavior on a specific class of decisions rather than a representative sample of decision problems in general.
 
 ### Probing questions
 
@@ -152,7 +158,7 @@ All experiments use Claude Opus 4.6 (Anthropic) and GPT-5.2 (OpenAI), accessed v
 
 ### Statistical analysis
 
-The primary analysis uses a linear mixed-effects model (update magnitude ~ condition with random intercepts for scenario) to account for the hierarchical data structure, where each scenario contributes multiple non-independent observations. I also report non-parametric Mann-Whitney U tests as a robustness check that makes no distributional or independence assumptions. Effect sizes include Cohen's d and rank-biserial correlation, both with 1000-resample bootstrap 95% CIs (seed=42). Analysis code was committed to the repository before data collection (December 2025; experiments ran February 2026).
+The primary analysis uses a linear mixed-effects model (update magnitude ~ condition with random intercepts for scenario) to account for the hierarchical data structure, where each scenario contributes multiple non-independent observations. I treat this mixed-effects model as primary because scenario is the relevant unit for between-task generalization, while the repeated runs are stochastic realizations nested within scenario. I also report non-parametric Mann-Whitney U tests as a secondary robustness check that makes no distributional assumptions, but these tests pool across scenarios and therefore should not be read as independent replications of the main inference. Effect sizes include Cohen's d and rank-biserial correlation, both with 1000-resample bootstrap 95% CIs (seed=42). Analysis code was committed to the repository before data collection (December 2025; experiments ran February 2026).
 
 ### Sample size
 
@@ -163,6 +169,8 @@ The experiment comprises 11 scenarios across 3 conditions with 6 runs each on 2 
 ### Overview
 
 I collected 191 stability results for Claude Opus 4.6 (7 missing due to transient API errors) and 198 for GPT-5.2, across 11 scenarios and 3 conditions (naive, chain-of-thought, farness) with 6 runs per scenario-condition pair. All bootstrap analyses use fixed random seeds (seed=42) for reproducibility.
+
+The figures that follow are complementary views of the same bounded dataset rather than independent replications of the claim. @fig-update-magnitude summarizes aggregate condition differences, @fig-convergence clarifies the mechanism behind the failed convergence hypothesis, @fig-sycophancy shows run-level adversarial variability, and @fig-forest-plot summarizes heterogeneity across the primary non-adversarial scenarios.
 
 ### Update magnitude
 
@@ -179,9 +187,9 @@ I collected 191 stability results for Claude Opus 4.6 (7 missing due to transien
 
 : Stability metrics by condition and model. {#tbl-stability}
 
-![Update magnitude by condition and model. Error bars show bootstrap 95% CIs.](figures/fig_update_magnitude.png){#fig-update-magnitude}
+![Mean update magnitude by condition and model on the primary 11-scenario analysis set. Points show condition means and vertical bars show bootstrap 95% confidence intervals; the post hoc downward sycophancy scenario is excluded.](figures/fig_update_magnitude.png){#fig-update-magnitude}
 
-Farness-condition responses show smaller absolute updates under probing than both naive and CoT conditions (@fig-update-magnitude). The effect is consistent across models: farness mean update magnitude is 35% lower than naive for Claude (9.02 vs 13.80) and 63% lower for GPT-5.2 (22.03 vs 59.03). Chain-of-thought prompting shows no measurable improvement over naive for either model.
+@fig-update-magnitude visualizes the same condition means reported in @tbl-stability. The pattern is clear on both models: farness has the lowest mean update magnitude, naive the highest, and CoT sits in between. For Claude, however, CoT is nearly indistinguishable from naive (13.37 vs 13.80), so the practically meaningful separation is naive/CoT versus farness. For GPT-5.2, the spacing between all three conditions is larger, but farness still produces the smallest average update (22.03 vs 29.35 for CoT and 59.03 for naive).
 
 The 100% initial CI rate across all conditions is a prompt design artifact: all three prompt templates explicitly request an 80% confidence interval with structured JSON output. This metric therefore provides no condition discrimination and should not be interpreted as evidence that the framework improves uncertainty quantification.
 
@@ -212,23 +220,21 @@ After Holm-Bonferroni correction, no comparison reaches conventional significanc
 
 ### Cross-model comparison
 
-GPT-5.2 exhibits 2–4x larger absolute update magnitudes than Claude across all conditions (naive: 59.03 vs 13.80; CoT: 29.35 vs 13.37; farness: 22.03 vs 9.02). Cross-model Mann-Whitney tests confirm these differences are statistically significant (naive: U=1506.0, p=0.007; CoT: U=1590.5, p=0.007; farness: U=1602.0, p=0.034). The high variance in GPT-5.2 naive responses (SD=165.65) is driven primarily by the deadline_estimate scenario, where GPT-5.2 naive responses update by 50-60 percentage points on average compared to Claude's 53-60. Relative update magnitudes are more comparable across models (45-58%), suggesting the gap is partly due to GPT-5.2 producing more extreme initial estimates.
+GPT-5.2 exhibits 2–4x larger absolute update magnitudes than Claude across all conditions (naive: 59.03 vs 13.80; CoT: 29.35 vs 13.37; farness: 22.03 vs 9.02). Cross-model Mann-Whitney tests confirm these differences are statistically significant (naive: U=1506.0, p=0.007; CoT: U=1590.5, p=0.007; farness: U=1602.0, p=0.034). The large variance in GPT-5.2 naive responses (SD=165.65) is driven primarily by the upward sycophancy scenario shown in @fig-sycophancy, where several runs shift by 300-1100 leads. Relative update magnitudes are more comparable across models (45-58%), suggesting that part of the cross-model gap comes from GPT-5.2 producing more extreme initial estimates and then moving further when challenged.
 
 ### Convergence analysis
 
-![Convergence analysis: initial and final estimates by condition, showing both conditions converge toward similar final values.](figures/fig_convergence.png){#fig-convergence}
+![Selected scenarios illustrating the failed convergence hypothesis. Points show mean initial and final estimates with bootstrap 95% confidence intervals. Within each panel, naive and farness usually end near similar final values, but farness starts closer.](figures/fig_convergence.png){#fig-convergence}
 
-The convergence ratio (@eq-convergence) measures whether probed naive responses move toward the framework's initial estimates. For Claude, the mean convergence ratio is −1.48 (95% bootstrap CI [−2.08, −0.94], n=53 valid pairs). For GPT-5.2, it is −5.14 (95% CI [−7.57, −2.90], n=47 valid pairs). Negative values indicate that naive responses overshoot past the framework's initial anchor — moving further away rather than converging toward it (@fig-convergence). This is especially pronounced in the deadline_estimate and sunk_cost_project scenarios, where naive responses update aggressively in the correct direction but well past where the framework started.
-
-However, the key insight is that both conditions converge toward similar *final* values after probing — the framework simply starts closer to that shared destination. The framework produces initial estimates closer to post-probing values, while naive responses start from less-anchored positions and over-correct when challenged.
+The convergence ratio (@eq-convergence) measures whether probed naive responses move toward the framework's initial estimates. For Claude, the mean convergence ratio is −1.48 (95% bootstrap CI [−2.08, −0.94], n=53 valid pairs). For GPT-5.2, it is −5.14 (95% CI [−7.57, −2.90], n=47 valid pairs). Negative values indicate overshoot: after probing, naive responses move past the framework's initial estimate instead of toward it. @fig-convergence makes the mechanism clearer than the scalar ratio alone. In the plotted scenarios, the two conditions typically end at similar final values within a model, but farness begins closer to that shared endpoint. The failed convergence hypothesis therefore reflects over-correction by naive responses, not persistent disagreement between the two conditions after probing.
 
 ### Adversarial resistance
 
 Both models and all conditions demonstrate near-zero updates on adversarial probes. In the irrelevant anchoring scenario (adversarial_anchoring), update magnitude is exactly 0.0 across all runs for both models and all conditions — neither model changes its estimate when presented with phone numbers or weather forecasts.
 
-![Sycophantic pressure resistance: update magnitude by condition and model.](figures/fig_sycophancy.png){#fig-sycophancy}
+![Run-level updates in the upward sycophancy scenario. Dots are individual runs; black bars show condition means with bootstrap 95% confidence intervals. Claude stays at zero across all runs, while GPT-5.2 shows large upward shifts that farness reduces but does not eliminate.](figures/fig_sycophancy.png){#fig-sycophancy}
 
-The sycophantic pressure scenario (adversarial_sycophancy) reveals a large model difference (@fig-sycophancy). Claude shows zero sycophantic updating across all 18 runs (6 per condition), regardless of prompting condition. GPT-5.2, by contrast, exhibits sycophantic updating: naive responses average 466.7 leads of update magnitude (individual runs: 0, 300, 400, 600, 400, 1100), while farness responses average 108.3 leads (runs: 0, 300, 200, 0, 150, 0). The framework reduces GPT-5.2's sycophantic updating by 77%, though it does not eliminate it entirely. CoT responses show intermediate vulnerability (mean 133.3 leads). This finding suggests that the framework may provide differential value for models with baseline sycophancy vulnerability — Claude's zero baseline leaves no room for improvement, while GPT-5.2's vulnerability creates a measurable gap for the framework to close.
+The sycophantic pressure scenario (adversarial_sycophancy) reveals a large model difference (@fig-sycophancy). Every Claude run stays at exactly zero, regardless of prompting condition. GPT-5.2 looks different: the naive condition contains several large upward jumps (300-1100 leads), CoT reduces but does not remove those shifts, and farness lowers the mean further while still leaving some non-zero runs. On averages, GPT-5.2 naive responses update by 466.7 leads, compared with 133.3 for CoT and 108.3 for farness. The figure therefore shows that the framework's value here is not a uniform small reduction across all runs; it is a reduction in the frequency and size of large sycophantic jumps. Claude's zero baseline, by contrast, leaves essentially no room for improvement.
 
 To test whether this sycophancy resistance is directionally symmetric, I ran a complementary scenario (adversarial_sycophancy_down) where probes push estimates *downward* ("I think 1000 is way too high — realistically more like 300 leads"). The results reveal a directional asymmetry: both models are *more* susceptible to downward sycophantic pressure. Claude naive responses update by a mean of 650.0 leads (vs 0.0 upward), while GPT-5.2 naive responses update by 660.0 leads (vs 466.7 upward). The farness framework provides partial protection for Claude (495.0 leads, ~24% reduction) but negligible protection for GPT-5.2 (640.0 leads, 3% reduction). This asymmetry suggests that "be more conservative" framing may align with perceived helpfulness norms, making it harder for models — and frameworks — to resist.
 
@@ -240,9 +246,9 @@ Correct direction rates are uniformly high across all conditions (96–100%), in
 
 ### Per-scenario analysis
 
-![Forest plot of farness effect (reduction in update magnitude) by scenario.](figures/fig_forest_plot.png){#fig-forest-plot}
+![Per-scenario effect sizes for farness versus naive on the non-adversarial scenarios. Positive values indicate less updating under farness; intervals crossing zero indicate uncertain scenario-specific effects.](figures/fig_forest_plot.png){#fig-forest-plot}
 
-@tbl-per-scenario breaks down mean update magnitude by scenario and condition (@fig-forest-plot), revealing heterogeneity in the farness effect.
+@fig-forest-plot and @tbl-per-scenario together show a mostly positive but clearly heterogeneous pattern. The forest plot standardizes across scenarios with different units, and most point estimates fall on the positive side of zero, indicating less updating under farness. But many intervals are wide with only six runs per scenario-condition cell, so the scenario-level evidence is better summarized as "usually positive, sometimes negligible, occasionally negative" than as a uniform gain.
 
 | Scenario | Claude naive | Claude farness | Reduction | GPT naive | GPT farness | Reduction |
 |----------|-------------|---------------|-----------|----------|------------|-----------|
@@ -257,7 +263,7 @@ Correct direction rates are uniformly high across all conditions (96–100%), in
 
 : Mean update magnitude by scenario and condition (non-adversarial scenarios only). {#tbl-per-scenario}
 
-The farness effect is largest for scenarios involving investment (acquisition synergies, product launch) and smallest for scenarios where initial estimates are already well-anchored (startup success, planning estimate). Notably, the effect holds for the one upward-pushing scenario (planning estimate: 18% reduction for Claude, 35% for GPT-5.2), suggesting the framework's stability advantage is not limited to resisting downward pressure. The effect is inconsistent across models for some scenarios: sunk cost shows a 19% reduction for Claude but no reduction for GPT-5.2, while product launch shows a 38% reduction for Claude but 75% for GPT-5.2. This heterogeneity suggests the framework interacts with scenario characteristics — particularly the degree to which base rates and bias identification are decision-relevant — rather than providing a uniform stability boost. Additionally, scenarios use different scales (weeks, percentages, leads), so absolute update magnitudes are not directly comparable across scenarios; the relative reduction percentage is more informative for cross-scenario comparison.
+The raw-magnitude table shows where those standardized effects come from. The farness effect is largest for scenarios involving investment (acquisition synergies, product launch, investment return) and smallest for scenarios where initial estimates are already fairly anchored (startup success, planning estimate). Notably, the effect also appears in the one upward-pushing scenario (planning estimate: 18% reduction for Claude, 35% for GPT-5.2), suggesting that the framework's stability advantage is not limited to resisting downward pressure. The pattern is inconsistent across models for some scenarios: sunk cost shows a 19% reduction for Claude but a slight increase for GPT-5.2, while product launch shows a 38% reduction for Claude but 75% for GPT-5.2. This heterogeneity suggests that the framework interacts with scenario characteristics — especially how relevant base rates and bias identification are to the prompt — rather than providing a constant stability boost. Because scenarios mix weeks, percentages, and leads, the standardized effect sizes in @fig-forest-plot are the more comparable cross-scenario summary, while the table is more useful for seeing where the raw changes come from.
 
 ### Worked example: sunk cost project {#sec-worked-example}
 
@@ -273,7 +279,9 @@ This pattern — shared destination, different starting points — recurs across
 
 ### Stability under probing
 
-The central finding is that the farness framework produces estimates that are more stable under probing, with small but consistent effects across two models (Cohen's d = −0.30 to −0.35). Farness responses update by 35–63% less than naive responses when challenged with base rates and new information across the two models tested. This suggests that the framework anchors responses on initial values closer to post-probing estimates, though it does not eliminate updating entirely — nor should it, since the probes contain genuinely relevant information. A key caveat is the prompt-probe alignment confound: the farness prompt explicitly instructs models to consider base rates and identify biases — the same considerations the probes then test. The observed stability advantage may partly reflect this alignment rather than a general improvement in decision quality.
+The central finding is methodological as much as substantive: stability-under-probing detects a small but consistent separation between prompt structures across two models. In this case study, farness produces lower update magnitudes than naive prompting (Cohen's d = −0.30 to −0.35; 35–63% lower mean updates), suggesting that the framework anchors responses on initial values closer to post-probing estimates. But this should not be read as a general claim that farness improves decision quality. A key caveat is the prompt-probe alignment confound: the farness prompt explicitly instructs models to consider base rates and identify biases — the same considerations the probes then test. The observed stability advantage may therefore partly reflect targeted priming rather than a broad improvement in judgment.
+
+The interpretation would be materially weakened, and perhaps falsified, by either of two findings: first, if the stability advantage disappeared on held-out probes that were not named in the framework prompt; second, if more stable prompts proved no more accurate, or even less accurate, on resolved tasks with known outcomes. Those are therefore the most important next tests of construct validity.
 
 ### Chain-of-thought does not help
 
@@ -301,15 +309,17 @@ Eighth, all three prompt conditions request structured JSON output for estimate 
 
 ### Future work
 
-Several directions remain for future work. Outcome-linked validation — testing the framework on decisions with known outcomes such as historical project timelines or resolved prediction market questions — would determine whether stability correlates with accuracy. Removing CI requests from naive and CoT prompts would test whether the framework genuinely improves uncertainty quantification. Human studies could evaluate whether the framework improves decision-making when used as a scaffolding tool, rather than testing the LLM in isolation. Cross-framework comparison against other structured approaches (structured analytic techniques, red team/blue team, GRADE framework) would determine whether the farness framework specifically or structured prompting generally drives the effect. Finally, expanding the adversarial battery would test whether the framework provides differential protection against sycophantic pressure, particularly for models that show baseline vulnerability (as observed with GPT-5.2 on the sycophancy scenario).
+Several directions remain for future work. The most important next step is a stronger validation design that directly attacks the prompt-probe alignment problem. A decisive follow-up would combine (1) an outcome-linked benchmark with known resolutions, such as historical project timelines, hiring outcomes, or resolved forecasting questions, and (2) a probe battery split into *on-framework* probes (base rates, bias prompts, uncertainty prompts explicitly named in farness) and *off-framework* probes (for example opportunity cost, implementation fragility, tail-risk concentration, or organizational incentives not named in the framework prompt). If farness only improves stability on on-framework probes, that would suggest priming. If it also improves stability on off-framework probes, or correlates with better realized outcomes on resolved tasks, that would be substantially stronger evidence that the framework is adding decision value rather than merely matching the test.
+
+Removing CI requests from naive and CoT prompts would test whether the framework genuinely improves uncertainty quantification. Human studies could evaluate whether the framework improves decision-making when used as a scaffolding tool, rather than testing the LLM in isolation. Cross-framework comparison against other structured approaches (structured analytic techniques, red team/blue team, GRADE framework) would determine whether the farness framework specifically or structured prompting generally drives the effect. Finally, expanding the adversarial battery would test whether the framework provides differential protection against sycophantic pressure, particularly for models that show baseline vulnerability (as observed with GPT-5.2 on the sycophancy scenario).
 
 ## Conclusion {#sec-conclusion}
 
-I introduce stability-under-probing as a methodology for evaluating decision framework effectiveness in LLMs without requiring ground truth outcomes. In experiments across 11 scenarios, 3 conditions, 2 models, and 389 total responses (191 Claude + 198 GPT-5.2), I find that the farness framework produces estimates that are more stable under probing (Cohen's d = −0.30 to −0.35), while chain-of-thought prompting offers no measurable benefit. The effect is consistent across models, though the prompt-probe alignment between framework instructions and probing questions may partly explain the stability advantage.
+I introduce stability-under-probing as a methodology for evaluating decision prompts in LLMs without requiring ground truth outcomes. In experiments across 11 scenarios, 3 conditions, 2 models, and 389 total responses (191 Claude + 198 GPT-5.2), the method detects a consistent separation between prompt structures: in this case study, farness yields more stable estimates under probing (Cohen's d = −0.30 to −0.35), while chain-of-thought prompting offers no measurable benefit. The effect is consistent across models, though the prompt-probe alignment between framework instructions and probing questions may partly explain the stability advantage.
 
 Both conditions converge toward similar final estimates after probing, but the framework starts closer — requiring smaller updates. This suggests the framework's advantage comes from better initial anchoring rather than front-loading the same considerations that probing extracts.
 
-The farness framework reduces update magnitude by 35–63% relative to naive prompting across the two models tested, though the prompt-probe alignment between framework instructions and probing questions may partly explain this effect. The effect replicates across models and does not derive from generic "think carefully" instructions. Whether this stability translates to better real-world decisions remains an open question for future work.
+The farness framework reduces update magnitude by 35–63% relative to naive prompting across the two models tested, and this pattern does not derive from generic "think carefully" instructions alone. But the stronger claim is about measurement: stability-under-probing appears capable of surfacing structured differences in how prompts prepare models for challenge. Whether those differences translate to better real-world decisions remains an open question for future work.
 
 ## References {.unnumbered}
 

@@ -51,6 +51,12 @@ bun run build    # Build for production (static export)
 bun run test     # Run vitest tests
 ```
 
+### Paper
+
+```bash
+python3 paper/render_paper.py  # Generate figures, render HTML, sync preemptive_rigor.md and site/public/paper-raw
+```
+
 ## Architecture
 
 ### Python Package (`farness/`)

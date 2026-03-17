@@ -1,5 +1,6 @@
 import { Header } from "@/components/Header";
 import fs from "fs";
+import Script from "next/script";
 import path from "path";
 
 function getQuartoContent(): { mainHtml: string; styles: string } {
@@ -38,7 +39,7 @@ function getQuartoContent(): { mainHtml: string; styles: string } {
   } catch {
     return {
       mainHtml:
-        "<main><p>Paper not yet rendered. Run: quarto render paper</p></main>",
+        "<main><p>Paper not yet rendered. Run: python3 paper/render_paper.py</p></main>",
       styles: "",
     };
   }
@@ -102,6 +103,64 @@ export default function PaperPage() {
 
   return (
     <div className="bg-[#F7FAFC] text-[#14202B] min-h-screen">
+      <Script id="paper-mathjax-config" strategy="beforeInteractive">
+        {`
+          window.MathJax = window.MathJax || {
+            tex: {
+              inlineMath: [['\\\\(', '\\\\)']],
+              displayMath: [['\\\\[', '\\\\]']],
+            },
+          };
+        `}
+      </Script>
+      <Script
+        src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"
+        strategy="afterInteractive"
+      />
+      <Script
+        src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js"
+        strategy="afterInteractive"
+      />
+      <Script id="paper-mathjax-typeset" strategy="afterInteractive">
+        {`
+          (() => {
+            const tryTypeset = () => {
+              const root = document.getElementById("quarto-paper-scope");
+              if (!root || !window.MathJax) {
+                return false;
+              }
+
+              if (typeof window.MathJax.typesetClear === "function") {
+                window.MathJax.typesetClear([root]);
+              }
+
+              if (typeof window.MathJax.typesetPromise === "function") {
+                window.MathJax.typesetPromise([root]).catch(() => {});
+                return true;
+              }
+
+              if (typeof window.MathJax.typeset === "function") {
+                window.MathJax.typeset([root]);
+                return true;
+              }
+
+              return false;
+            };
+
+            let attempts = 0;
+            const poll = () => {
+              if (tryTypeset() || attempts >= 20) {
+                return;
+              }
+              attempts += 1;
+              window.setTimeout(poll, 250);
+            };
+
+            poll();
+            window.addEventListener("pageshow", poll);
+          })();
+        `}
+      </Script>
       <Header activePage="paper" />
       <div className="animate-[fade-up_0.6s_ease-out]" dangerouslySetInnerHTML={{ __html: scopedHtml }} />
     </div>
