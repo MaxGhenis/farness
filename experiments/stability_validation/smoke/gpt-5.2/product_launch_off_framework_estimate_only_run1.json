@@ -1,0 +1,22 @@
+{
+  "case_id": "product_launch",
+  "condition": "estimate_only",
+  "probe_battery": "off_framework",
+  "model": "gpt-5.2",
+  "initial_estimate": 48.0,
+  "initial_ci": [
+    25.0,
+    70.0
+  ],
+  "final_estimate": 67.0,
+  "final_ci": [
+    52.0,
+    80.0
+  ],
+  "update_magnitude": 19.0,
+  "update_direction": "up",
+  "relative_update": 0.3958333333333333,
+  "had_initial_ci": true,
+  "initial_response_text": "```json\n{\"estimate\": 48, \"ci_low\": 25, \"ci_high\": 70}\n```",
+  "final_response_text": "```json\n{\"estimate\": 67.0, \"ci_low\": 52.0, \"ci_high\": 80.0}\n```"
+}

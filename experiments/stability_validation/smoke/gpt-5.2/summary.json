@@ -1,0 +1,210 @@
+{
+  "probe_batteries": [
+    "on_framework",
+    "off_framework"
+  ],
+  "n_results": 8,
+  "by_probe_battery": {
+    "on_framework": {
+      "conditions": [
+        "naive",
+        "estimate_only",
+        "format_control",
+        "farness"
+      ],
+      "n_naive": 1,
+      "n_estimate_only": 1,
+      "n_format_control": 1,
+      "n_farness": 1,
+      "naive": {
+        "n": 1,
+        "mean_update_magnitude": 27.0,
+        "std_update_magnitude": null,
+        "mean_relative_update": 0.6,
+        "initial_ci_rate": 1.0,
+        "correct_direction_rate": 1.0
+      },
+      "estimate_only": {
+        "n": 1,
+        "mean_update_magnitude": 22.0,
+        "std_update_magnitude": null,
+        "mean_relative_update": 0.4583333333333333,
+        "initial_ci_rate": 1.0,
+        "correct_direction_rate": 1.0
+      },
+      "format_control": {
+        "n": 1,
+        "mean_update_magnitude": 23.0,
+        "std_update_magnitude": null,
+        "mean_relative_update": 0.5111111111111111,
+        "initial_ci_rate": 1.0,
+        "correct_direction_rate": 1.0
+      },
+      "farness": {
+        "n": 1,
+        "mean_update_magnitude": 9.0,
+        "std_update_magnitude": null,
+        "mean_relative_update": 0.3333333333333333,
+        "initial_ci_rate": 1.0,
+        "correct_direction_rate": 1.0
+      },
+      "statistical_comparison": {},
+      "mixed_effects": {
+        "error": "Need at least 2 conditions and 2 cases"
+      },
+      "convergence": {
+        "mean_convergence_ratio": 0.5,
+        "ci_95": [
+          0.5,
+          0.5
+        ],
+        "n_valid": 1,
+        "n_skipped": 0,
+        "t_statistic": null,
+        "p_value_one_sided": null,
+        "cohens_d": null,
+        "interpretation": "Significant convergence: naive responses moved toward farness initial estimates (CI excludes 0)",
+        "details": [
+          {
+            "case_id": "product_launch",
+            "initial_gap": 18.0,
+            "final_gap": 9.0,
+            "convergence_ratio": 0.5,
+            "skipped": false
+          }
+        ]
+      },
+      "probe_battery": "on_framework"
+    },
+    "off_framework": {
+      "conditions": [
+        "naive",
+        "estimate_only",
+        "format_control",
+        "farness"
+      ],
+      "n_naive": 1,
+      "n_estimate_only": 1,
+      "n_format_control": 1,
+      "n_farness": 1,
+      "naive": {
+        "n": 1,
+        "mean_update_magnitude": 25.0,
+        "std_update_magnitude": null,
+        "mean_relative_update": 0.5555555555555556,
+        "initial_ci_rate": 1.0,
+        "correct_direction_rate": 1.0
+      },
+      "estimate_only": {
+        "n": 1,
+        "mean_update_magnitude": 19.0,
+        "std_update_magnitude": null,
+        "mean_relative_update": 0.3958333333333333,
+        "initial_ci_rate": 1.0,
+        "correct_direction_rate": 1.0
+      },
+      "format_control": {
+        "n": 1,
+        "mean_update_magnitude": 20.0,
+        "std_update_magnitude": null,
+        "mean_relative_update": 0.4444444444444444,
+        "initial_ci_rate": 1.0,
+        "correct_direction_rate": 1.0
+      },
+      "farness": {
+        "n": 1,
+        "mean_update_magnitude": 17.0,
+        "std_update_magnitude": null,
+        "mean_relative_update": 0.6071428571428571,
+        "initial_ci_rate": 1.0,
+        "correct_direction_rate": 1.0
+      },
+      "statistical_comparison": {},
+      "mixed_effects": {
+        "error": "Need at least 2 conditions and 2 cases"
+      },
+      "convergence": {
+        "mean_convergence_ratio": -1.4705882352941178,
+        "ci_95": [
+          -1.4705882352941178,
+          -1.4705882352941178
+        ],
+        "n_valid": 1,
+        "n_skipped": 0,
+        "t_statistic": null,
+        "p_value_one_sided": null,
+        "cohens_d": null,
+        "interpretation": "Significant divergence: naive responses moved away from farness initial estimates",
+        "details": [
+          {
+            "case_id": "product_launch",
+            "initial_gap": 17.0,
+            "final_gap": 42.0,
+            "convergence_ratio": -1.4705882352941178,
+            "skipped": false
+          }
+        ]
+      },
+      "probe_battery": "off_framework"
+    }
+  },
+  "metadata": {
+    "random_seed": 2111195631,
+    "randomize_order": true,
+    "runs_per_condition": 1,
+    "n_cases": 1,
+    "case_ids": [
+      "product_launch"
+    ],
+    "conditions": [
+      "naive",
+      "estimate_only",
+      "format_control",
+      "farness"
+    ],
+    "probe_batteries": [
+      "on_framework",
+      "off_framework"
+    ],
+    "model": "gpt-5.2",
+    "started_at": "2026-03-17T18:06:45.231756",
+    "test_orders": {
+      "product_launch_run1": [
+        {
+          "condition": "farness",
+          "probe_battery": "on_framework"
+        },
+        {
+          "condition": "farness",
+          "probe_battery": "off_framework"
+        },
+        {
+          "condition": "estimate_only",
+          "probe_battery": "on_framework"
+        },
+        {
+          "condition": "naive",
+          "probe_battery": "on_framework"
+        },
+        {
+          "condition": "estimate_only",
+          "probe_battery": "off_framework"
+        },
+        {
+          "condition": "format_control",
+          "probe_battery": "off_framework"
+        },
+        {
+          "condition": "format_control",
+          "probe_battery": "on_framework"
+        },
+        {
+          "condition": "naive",
+          "probe_battery": "off_framework"
+        }
+      ]
+    },
+    "completed_at": "2026-03-17T18:08:27.959086",
+    "n_results": 8
+  }
+}

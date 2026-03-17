@@ -1,0 +1,22 @@
+{
+  "case_id": "product_launch",
+  "condition": "estimate_only",
+  "probe_battery": "on_framework",
+  "model": "claude-opus-4-6",
+  "initial_estimate": 30.0,
+  "initial_ci": [
+    15.0,
+    50.0
+  ],
+  "final_estimate": 20.0,
+  "final_ci": [
+    8.0,
+    35.0
+  ],
+  "update_magnitude": 10.0,
+  "update_direction": "down",
+  "relative_update": 0.3333333333333333,
+  "had_initial_ci": true,
+  "initial_response_text": "```json\n{\"estimate\": 30, \"ci_low\": 15, \"ci_high\": 50}\n```",
+  "final_response_text": "Looking at the follow-up information:\n\n1. **Base rate of 20-30%** for new features meaningfully moving engagement metrics - this anchors my estimate downward from my initial 30%.\n\n2. **Beta user self-selection bias** - enthusiastic early adopters tend to engage more with any new feature. This means the positive signals from beta testing are likely inflated and not generalizable to the broader user base. This is a significant downward adjustment.\n\n3. **Builder-measurer conflict of interest** - the team measuring success is the same team that built it, introducing potential bias in how metrics are selected, interpreted, or reported. This further reduces confidence in any positive signals.\n\nStarting from the base rate of ~25% (midpoint of 20-30%), the self-selection bias of beta users and the measurement bias both suggest that whatever positive evidence led to my initial 30% estimate is less reliable than it appeared. The base rate itself should probably be the ceiling rather than the center of my estimate, since both biases point in the direction of overstating the feature's impact.\n\nI'd revise downward to approximately 20%, reflecting:\n- Base rate center (~25%) adjusted down for the two biases\n- The biases don't guarantee failure but systematically inflate apparent success\n- Wider uncertainty given the unreliability of the evidence\n\n```json\n{\"estimate\": 20.0, \"ci_low\": 8.0, \"ci_high\": 35.0}\n```"
+}

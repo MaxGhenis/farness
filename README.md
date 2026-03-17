@@ -127,7 +127,7 @@ Farness implements a structured decision process:
 ```bash
 git clone https://github.com/MaxGhenis/farness
 cd farness
-pip install -e ".[dev]"
+pip install -e ".[dev,experiments]"
 pytest
 ```
 

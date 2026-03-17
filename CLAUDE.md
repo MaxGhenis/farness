@@ -12,7 +12,7 @@ Farness is a decision-making framework that reframes subjective questions ("Shou
 
 ```bash
 # Install for development
-pip install -e ".[dev]"
+pip install -e ".[dev,experiments]"
 
 # Run tests
 pytest

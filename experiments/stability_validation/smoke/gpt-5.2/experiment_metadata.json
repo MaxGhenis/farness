@@ -1,0 +1,59 @@
+{
+  "random_seed": 2111195631,
+  "randomize_order": true,
+  "runs_per_condition": 1,
+  "n_cases": 1,
+  "case_ids": [
+    "product_launch"
+  ],
+  "conditions": [
+    "naive",
+    "estimate_only",
+    "format_control",
+    "farness"
+  ],
+  "probe_batteries": [
+    "on_framework",
+    "off_framework"
+  ],
+  "model": "gpt-5.2",
+  "started_at": "2026-03-17T18:06:45.231756",
+  "test_orders": {
+    "product_launch_run1": [
+      {
+        "condition": "farness",
+        "probe_battery": "on_framework"
+      },
+      {
+        "condition": "farness",
+        "probe_battery": "off_framework"
+      },
+      {
+        "condition": "estimate_only",
+        "probe_battery": "on_framework"
+      },
+      {
+        "condition": "naive",
+        "probe_battery": "on_framework"
+      },
+      {
+        "condition": "estimate_only",
+        "probe_battery": "off_framework"
+      },
+      {
+        "condition": "format_control",
+        "probe_battery": "off_framework"
+      },
+      {
+        "condition": "format_control",
+        "probe_battery": "on_framework"
+      },
+      {
+        "condition": "naive",
+        "probe_battery": "off_framework"
+      }
+    ]
+  },
+  "completed_at": "2026-03-17T18:08:27.959086",
+  "n_results": 8
+}

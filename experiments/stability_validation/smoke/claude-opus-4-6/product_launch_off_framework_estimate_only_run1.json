@@ -1,0 +1,22 @@
+{
+  "case_id": "product_launch",
+  "condition": "estimate_only",
+  "probe_battery": "off_framework",
+  "model": "claude-opus-4-6",
+  "initial_estimate": 30.0,
+  "initial_ci": [
+    15.0,
+    50.0
+  ],
+  "final_estimate": 55.0,
+  "final_ci": [
+    40.0,
+    70.0
+  ],
+  "update_magnitude": 25.0,
+  "update_direction": "up",
+  "relative_update": 0.8333333333333334,
+  "had_initial_ci": true,
+  "initial_response_text": "```json\n{\"estimate\": 30, \"ci_low\": 15, \"ci_high\": 50}\n```",
+  "final_response_text": "Looking at the three follow-up pieces of information:\n\n1. **Default onboarding flow inclusion**: This is a major positive signal. Being part of the default onboarding means every new user encounters the feature, dramatically increasing exposure and initial adoption compared to an opt-in or discovery-based approach.\n\n2. **Automated rollout and measurement with low friction**: This removes operational barriers that often delay or reduce adoption. The infrastructure is already in place, which de-risks the execution side.\n\n3. **Three enterprise design partners committed for week one**: Enterprise commitments provide a strong baseline of guaranteed adoption volume, and enterprise deployments tend to bring many users at once across organizations.\n\nAll three signals point strongly upward from the original 30% estimate. The default onboarding placement is particularly powerful - features placed in default flows typically see substantially higher adoption rates. The enterprise commitments provide a floor of adoption. The automated rollout reduces execution risk.\n\nHowever, there are still uncertainties: new users might skip/ignore the feature even if presented, enterprise deployments might face internal delays despite commitments, and actual sustained usage vs. initial exposure could differ.\n\nI'd revise the estimate significantly upward - roughly doubling from 30% to around 55%, with a tighter confidence interval given the reduced uncertainty from these concrete commitments.\n\n```json\n{\"estimate\": 55.0, \"ci_low\": 40.0, \"ci_high\": 70.0}\n```"
+}

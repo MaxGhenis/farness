@@ -1,0 +1,22 @@
+{
+  "case_id": "product_launch",
+  "condition": "naive",
+  "probe_battery": "off_framework",
+  "model": "gpt-5.2",
+  "initial_estimate": 45.0,
+  "initial_ci": [
+    25.0,
+    65.0
+  ],
+  "final_estimate": 70.0,
+  "final_ci": [
+    55.0,
+    82.0
+  ],
+  "update_magnitude": 25.0,
+  "update_direction": "up",
+  "relative_update": 0.5555555555555556,
+  "had_initial_ci": true,
+  "initial_response_text": "Internal testing + strong team sentiment are mildly positive signals, but they\u2019re often optimistic and not strongly predictive of a large engagement lift at full scale. An NPS of 45 from early beta users is encouraging, yet beta cohorts tend to be more motivated/power-user heavy than the general population, and \u201coverall engagement +10% in 3 months\u201d is a fairly high bar that depends on adoption, discoverability, and whether the feature changes core behavior rather than adding novelty. Given typical launch/scale uncertainty, I\u2019d put this as plausible but not more likely than not.\n\n```json\n{\"estimate\": 45, \"ci_low\": 25, \"ci_high\": 65}\n```",
+  "final_response_text": "The new info all pushes the probability upward because it directly addresses the biggest drivers of early adoption:\n\n- **Default onboarding for all new users**: This effectively guarantees exposure and removes \u201cdiscoverability\u201d as a bottleneck. If the metric is adoption among *new users*, this can move adoption from \u201copt-in\u201d to \u201cmostly happens unless users actively skip.\u201d\n- **Automated rollout + measurement**: Lowers operational friction and reduces the chance that adoption underperforms due to execution/enablement gaps (instrumentation, gating, rollout errors, comms).\n- **3 enterprise design partners deploying org-wide in week one**: This creates a meaningful early volume floor (depending on their size) and de-risks the \u201cwill anyone actually turn it on?\u201d question for at least a segment of users.\n\nGiven these, I\u2019d revise the point estimate from **45%** to **70%**.\n\nMain remaining uncertainty (hence not going even higher): the exact definition of \u201cadoption\u201d (e.g., mere exposure vs. activation vs. sustained use), the share of total user volume coming from those enterprise partners, and whether onboarding inclusion translates to completion/usage vs. being skipped.\n\n80% confidence interval: **55%\u201382%**.\n\n```json\n{\"estimate\": 70, \"ci_low\": 55, \"ci_high\": 82}\n```"
+}

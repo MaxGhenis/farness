@@ -1,0 +1,22 @@
+{
+  "case_id": "product_launch",
+  "condition": "naive",
+  "probe_battery": "on_framework",
+  "model": "gpt-5.2",
+  "initial_estimate": 45.0,
+  "initial_ci": [
+    25.0,
+    65.0
+  ],
+  "final_estimate": 18.0,
+  "final_ci": [
+    8.0,
+    30.0
+  ],
+  "update_magnitude": 27.0,
+  "update_direction": "down",
+  "relative_update": 0.6,
+  "had_initial_ci": true,
+  "initial_response_text": "Given strong internal testing and positive beta sentiment (NPS 45), there\u2019s a meaningful chance the feature moves engagement\u2014but a sustained **10% overall** lift within 3 months is a high bar and often depends on rollout reach, discovery, and whether the feature changes core user habits rather than delighting a niche segment. Many \u201csuccessful\u201d features yield smaller net lifts after novelty and selection effects fade, so I\u2019d put this in the moderate range.\n\n```json\n{\"estimate\": 45, \"ci_low\": 25, \"ci_high\": 65}\n```",
+  "final_response_text": "Start from the base rate: if only **20\u201330%** of new features meaningfully move engagement, that anchors the prior around **~25%**.\n\nThen adjust downward for the new caveats:\n\n- **Self-selected beta enthusiasts**: early engagement lift often overstates general-population impact; this reduces the chance that a measured improvement translates to a meaningful overall metric move at launch.\n- **Team measuring its own success**: increases risk of optimistic metric choice, p-hacking, selective reporting, or over-interpreting noisy uplift\u2014again lowering the probability the effect is real and generalizes.\n\nGiven those two downward pressures, I\u2019d revise from ~25% to **~18%** as the probability the feature meaningfully moves engagement in the broader user base.\n\nFor an **80% confidence interval**, reflecting substantial uncertainty (unknown sample size, effect size, measurement rigor), I\u2019d set a fairly wide range: **8% to 30%**.\n\n```json\n{\"estimate\": 18, \"ci_low\": 8, \"ci_high\": 30}\n```"
+}
