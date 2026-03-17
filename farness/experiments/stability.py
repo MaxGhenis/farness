@@ -554,7 +554,8 @@ After your reasoning, output your final answer as a JSON block:
 ```json
 {"estimate": <number>, "ci_low": <number>, "ci_high": <number>}
 ```
-where ci_low and ci_high are the bounds of your 80% confidence interval."""
+where ci_low and ci_high are the bounds of your 80% confidence interval.
+Use the same units and scale as the question. If the question asks for a percentage or probability, return 0-100 rather than 0-1."""
 
 
 def format_condition_name(condition: str) -> str:

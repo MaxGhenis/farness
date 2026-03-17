@@ -188,6 +188,7 @@ class TestPromptGeneration:
         prompt = generate_estimate_only_prompt(case)
         assert "return only" in prompt.lower()
         assert "framework" not in prompt.lower()
+        assert "0-100 rather than 0-1" in prompt
 
     def test_format_control_prompt_is_structured_without_farness(self, case):
         """Formatting-only control should preserve structure without framework content."""
