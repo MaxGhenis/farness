@@ -3,15 +3,19 @@
 import pytest
 
 from farness.experiments.stability import (
+    DEFAULT_PROBE_BATTERY,
     QuantitativeCase,
     StabilityResult,
     StabilityExperiment,
     extract_estimate,
     extract_ci,
+    generate_estimate_only_prompt,
+    generate_format_control_prompt,
     generate_naive_prompt,
     generate_farness_prompt,
     generate_probe_prompt,
     get_all_stability_cases,
+    get_primary_stability_cases,
     get_stability_case,
     STABILITY_CASES,
 )
@@ -30,6 +34,9 @@ class TestQuantitativeCases:
             assert case.estimate_unit, f"Case {case.id} missing estimate_unit"
             assert len(case.probes) >= 2, f"Case {case.id} needs at least 2 probes"
             assert case.expected_update_direction in ["up", "down", "neutral"]
+            if case.off_framework_probes:
+                assert len(case.off_framework_probes) >= 2
+                assert case.off_framework_expected_update_direction in ["up", "down", "neutral"]
 
     def test_get_case_by_id(self):
         """Should retrieve case by ID."""
@@ -41,6 +48,12 @@ class TestQuantitativeCases:
         """Should return all cases."""
         cases = get_all_stability_cases()
         assert len(cases) >= 5
+
+    def test_get_primary_cases(self):
+        """Primary cases should exclude adversarial and exploratory scenarios."""
+        cases = get_primary_stability_cases()
+        assert len(cases) == 8
+        assert all(case.analysis_role == "primary" for case in cases)
 
     def test_adversarial_sycophancy_down_exists(self):
         """The adversarial_sycophancy_down case should exist."""
@@ -72,6 +85,16 @@ class TestQuantitativeCases:
         # Both should resist pressure (neutral)
         assert up_case.expected_update_direction == "neutral"
         assert down_case.expected_update_direction == "neutral"
+
+    def test_primary_cases_support_off_framework_battery(self):
+        """Primary cases should expose an off-framework battery."""
+        for case in get_primary_stability_cases():
+            assert "off_framework" in case.available_probe_batteries()
+
+    def test_adversarial_cases_do_not_support_off_framework_battery(self):
+        """Legacy adversarial cases remain on-framework only."""
+        case = get_stability_case("adversarial_anchoring")
+        assert case.available_probe_batteries() == [DEFAULT_PROBE_BATTERY]
 
 
 class TestEstimateExtraction:
@@ -160,11 +183,30 @@ class TestPromptGeneration:
         assert "base rate" in prompt.lower()
         assert "confidence interval" in prompt.lower()
 
+    def test_estimate_only_prompt_avoids_framework_language(self, case):
+        """Estimate-only control should be terse and non-framework."""
+        prompt = generate_estimate_only_prompt(case)
+        assert "return only" in prompt.lower()
+        assert "framework" not in prompt.lower()
+
+    def test_format_control_prompt_is_structured_without_farness(self, case):
+        """Formatting-only control should preserve structure without framework content."""
+        prompt = generate_format_control_prompt(case)
+        assert "four-part structure" in prompt.lower()
+        assert "do not use any named decision framework" in prompt.lower()
+        assert "farness" not in prompt.lower()
+
     def test_probe_prompt_includes_initial_estimate(self, case):
         """Probe prompt should reference initial estimate."""
         prompt = generate_probe_prompt(case, 4.0, None, "naive")
         assert "4" in prompt
         assert case.probes[0] in prompt or case.probes[0][:50] in prompt
+
+    def test_probe_prompt_uses_off_framework_probes_when_requested(self, case):
+        """Probe prompt should switch to held-out probes when requested."""
+        prompt = generate_probe_prompt(case, 4.0, None, "naive", probe_battery="off_framework")
+        assert case.off_framework_probes[0] in prompt
+        assert case.probes[0] not in prompt
 
 
 class TestStabilityResult:
@@ -232,6 +274,7 @@ class TestStabilityResult:
         d = result_with_update.to_dict()
         assert d["case_id"] == "test"
         assert d["condition"] == "naive"
+        assert d["probe_battery"] == DEFAULT_PROBE_BATTERY
         assert d["initial_estimate"] == 10.0
         assert d["update_magnitude"] == 5.0
 
@@ -309,3 +352,41 @@ class TestStabilityExperiment:
         assert "Stability-under-probing results" in table
         assert "Naive" in table
         assert "Farness" in table
+
+    def test_analyze_groups_multiple_probe_batteries(self):
+        """Mixed probe batteries should be analyzed separately."""
+        exp = StabilityExperiment()
+        exp.results.extend([
+            StabilityResult(
+                case_id="planning_estimate",
+                condition="naive",
+                probe_battery="on_framework",
+                initial_estimate=4.0,
+                final_estimate=6.0,
+            ),
+            StabilityResult(
+                case_id="planning_estimate",
+                condition="farness",
+                probe_battery="on_framework",
+                initial_estimate=5.0,
+                final_estimate=5.5,
+            ),
+            StabilityResult(
+                case_id="planning_estimate",
+                condition="naive",
+                probe_battery="off_framework",
+                initial_estimate=4.0,
+                final_estimate=5.5,
+            ),
+            StabilityResult(
+                case_id="planning_estimate",
+                condition="farness",
+                probe_battery="off_framework",
+                initial_estimate=5.0,
+                final_estimate=5.2,
+            ),
+        ])
+        analysis = exp.analyze()
+        assert "by_probe_battery" in analysis
+        assert "on_framework" in analysis["by_probe_battery"]
+        assert "off_framework" in analysis["by_probe_battery"]

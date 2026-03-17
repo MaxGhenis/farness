@@ -17,15 +17,15 @@ from typing import Optional
 
 from farness.experiments.llm import call_llm, model_short_name
 from farness.experiments.stability import (
+    DEFAULT_PROBE_BATTERY,
     QuantitativeCase,
     StabilityResult,
     StabilityExperiment,
     extract_estimate,
     extract_ci,
-    generate_naive_prompt,
-    generate_cot_prompt,
-    generate_farness_prompt,
+    format_probe_battery_name,
     generate_probe_prompt,
+    generate_initial_prompt,
     get_all_stability_cases,
     get_stability_case,
 )
@@ -58,6 +58,7 @@ def _extract_estimate_or_raise(response: str, unit: str, phase: str) -> float:
 def run_single_stability_test(
     case: QuantitativeCase,
     condition: str,
+    probe_battery: str = DEFAULT_PROBE_BATTERY,
     model: str = "claude-opus-4-6",
     verbose: bool = True,
 ) -> StabilityResult:
@@ -65,7 +66,8 @@ def run_single_stability_test(
 
     Args:
         case: The quantitative case to test
-        condition: "naive", "cot", or "farness"
+        condition: Prompt condition to test
+        probe_battery: Probe battery to use
         model: LLM model ID
         verbose: Print progress
 
@@ -73,15 +75,12 @@ def run_single_stability_test(
         StabilityResult with initial and final estimates
     """
     if verbose:
-        print(f"  [{condition}] Running initial prompt...")
+        print(
+            f"  [{condition} | {format_probe_battery_name(probe_battery)}] Running initial prompt..."
+        )
 
     # Phase 1: Initial prompt
-    if condition == "naive":
-        initial_prompt = generate_naive_prompt(case)
-    elif condition == "cot":
-        initial_prompt = generate_cot_prompt(case)
-    else:
-        initial_prompt = generate_farness_prompt(case)
+    initial_prompt = generate_initial_prompt(case, condition)
 
     initial_response = run_prompt(initial_prompt, model=model)
 
@@ -98,13 +97,16 @@ def run_single_stability_test(
 
     # Phase 2: Probing
     if verbose:
-        print(f"  [{condition}] Running probing prompt...")
+        print(
+            f"  [{condition} | {format_probe_battery_name(probe_battery)}] Running probing prompt..."
+        )
 
     probe_prompt = generate_probe_prompt(
         case,
         initial_estimate,
         (initial_ci_low, initial_ci_high) if initial_ci_low else None,
         condition,
+        probe_battery=probe_battery,
     )
 
     final_response = run_prompt(probe_prompt, model=model)
@@ -124,6 +126,7 @@ def run_single_stability_test(
     return StabilityResult(
         case_id=case.id,
         condition=condition,
+        probe_battery=probe_battery,
         model=model,
         initial_estimate=initial_estimate,
         initial_ci_low=initial_ci_low,
@@ -146,6 +149,7 @@ def run_stability_experiment(
     start_run: int = 1,
     model: str = "claude-opus-4-6",
     conditions: Optional[list[str]] = None,
+    probe_batteries: Optional[list[str]] = None,
 ) -> StabilityExperiment:
     """Run the full stability experiment with randomization.
 
@@ -174,6 +178,19 @@ def run_stability_experiment(
 
     if conditions is None:
         conditions = ["naive", "farness"]
+    if probe_batteries is None:
+        probe_batteries = [DEFAULT_PROBE_BATTERY]
+
+    for case in cases:
+        missing_batteries = [
+            battery
+            for battery in probe_batteries
+            if battery not in case.available_probe_batteries()
+        ]
+        if missing_batteries:
+            raise ValueError(
+                f"Case {case.id} does not support probe batteries: {', '.join(missing_batteries)}"
+            )
 
     experiment = StabilityExperiment(cases=cases)
 
@@ -185,12 +202,13 @@ def run_stability_experiment(
         "n_cases": len(cases),
         "case_ids": [c.id for c in cases],
         "conditions": conditions,
+        "probe_batteries": probe_batteries,
         "model": model,
         "started_at": datetime.now().isoformat(),
-        "condition_orders": {},  # Log which order was used per case
+        "test_orders": {},  # Log randomized condition/battery order per case
     }
 
-    total_tests = len(cases) * len(conditions) * runs_per_condition
+    total_tests = len(cases) * len(conditions) * len(probe_batteries) * runs_per_condition
     test_num = 0
 
     for case in cases:
@@ -201,27 +219,42 @@ def run_stability_experiment(
 
         for run_offset in range(runs_per_condition):
             run_num = start_run + run_offset
-            # Randomize condition order per case/run
-            run_conditions = conditions.copy()
+            test_pairs = [
+                (condition, probe_battery)
+                for probe_battery in probe_batteries
+                for condition in conditions
+            ]
             if randomize_order:
-                random.shuffle(run_conditions)
+                random.shuffle(test_pairs)
 
-            # Log the order used
             run_key = f"{case.id}_run{run_num}"
-            metadata["condition_orders"][run_key] = run_conditions.copy()
+            metadata["test_orders"][run_key] = [
+                {"condition": condition, "probe_battery": probe_battery}
+                for condition, probe_battery in test_pairs
+            ]
 
-            for condition in run_conditions:
+            for condition, probe_battery in test_pairs:
                 test_num += 1
                 if verbose:
-                    print(f"\n[{test_num}/{total_tests}] {case.id} - {condition} - run {run_num}")
+                    print(
+                        f"\n[{test_num}/{total_tests}] {case.id} - {condition} - {probe_battery} - run {run_num}"
+                    )
 
                 try:
-                    result = run_single_stability_test(case, condition, model=model, verbose=verbose)
+                    result = run_single_stability_test(
+                        case,
+                        condition,
+                        probe_battery=probe_battery,
+                        model=model,
+                        verbose=verbose,
+                    )
                     experiment.results.append(result)
 
                     # Save incrementally
                     if output_dir:
-                        result_file = output_dir / f"{case.id}_{condition}_run{run_num}.json"
+                        result_file = output_dir / (
+                            f"{case.id}_{probe_battery}_{condition}_run{run_num}.json"
+                        )
                         with open(result_file, "w") as f:
                             json.dump(result.to_dict(), f, indent=2)
 
@@ -265,57 +298,8 @@ def print_experiment_summary(experiment: StabilityExperiment) -> None:
     print("\n" + "=" * 70)
     print("STABILITY-UNDER-PROBING EXPERIMENT RESULTS")
     print("=" * 70)
-
-    analysis = experiment.analyze()
-
-    print(f"\nSample sizes: Naive={analysis.get('n_naive', 0)}, Farness={analysis.get('n_farness', 0)}")
-
-    print("\n" + "-" * 70)
-    print("PRIMARY METRICS")
-    print("-" * 70)
-
-    naive = analysis.get("naive", {})
-    farness = analysis.get("farness", {})
-
-    def fmt(v, pct=False):
-        if v is None:
-            return "N/A"
-        if pct:
-            return f"{v:.0%}"
-        return f"{v:.2f}"
-
-    print(f"{'Metric':<35} {'Naive':>15} {'Farness':>15}")
-    print("-" * 70)
-    print(f"{'Mean update magnitude':<35} {fmt(naive.get('mean_update_magnitude')):>15} {fmt(farness.get('mean_update_magnitude')):>15}")
-    print(f"{'Mean relative update':<35} {fmt(naive.get('mean_relative_update'), True):>15} {fmt(farness.get('mean_relative_update'), True):>15}")
-    print(f"{'Initial CI rate':<35} {fmt(naive.get('initial_ci_rate'), True):>15} {fmt(farness.get('initial_ci_rate'), True):>15}")
-    print(f"{'Correct direction rate':<35} {fmt(naive.get('correct_direction_rate'), True):>15} {fmt(farness.get('correct_direction_rate'), True):>15}")
-
-    convergence = analysis.get("convergence", {})
-    if convergence:
-        print("\n" + "-" * 70)
-        print("CONVERGENCE ANALYSIS")
-        print("-" * 70)
-        print(f"Mean convergence ratio: {fmt(convergence.get('mean_convergence_ratio'), True)}")
-        print(f"Interpretation: {convergence.get('interpretation', 'N/A')}")
-
+    print(experiment.summary_table())
     print("\n" + "=" * 70)
-
-    # Per-case breakdown
-    print("\nPER-CASE BREAKDOWN:")
-    print("-" * 70)
-    print(f"{'Case':<25} {'Naive Δ':>12} {'Farness Δ':>12} {'Direction':>12}")
-    print("-" * 70)
-
-    for result in experiment.results:
-        if result.condition == "naive":
-            naive_update = result.final_estimate - result.initial_estimate
-            # Find matching farness result
-            farness_results = [r for r in experiment.results
-                              if r.case_id == result.case_id and r.condition == "farness"]
-            if farness_results:
-                farness_update = farness_results[0].final_estimate - farness_results[0].initial_estimate
-                print(f"{result.case_id:<25} {naive_update:>+12.2f} {farness_update:>+12.2f} {result.update_direction:>12}")
 
 
 if __name__ == "__main__":

@@ -11,14 +11,19 @@ from farness.experiments.runner import (
     score_runs,
 )
 from farness.experiments.analyze import analyze_experiment, print_results_table, load_scores
-from farness.experiments.stability import get_all_stability_cases, get_stability_case
+from farness.experiments.stability import (
+    get_all_stability_cases,
+    get_primary_stability_cases,
+    get_stability_case,
+)
 from farness.experiments.stability_runner import (
     run_stability_experiment,
     print_experiment_summary,
 )
 from farness.experiments.llm import model_short_name
 
-ALL_CONDITIONS = ["naive", "cot", "farness"]
+ALL_CONDITIONS = ["naive", "estimate_only", "format_control", "cot", "farness"]
+ALL_PROBE_BATTERIES = ["on_framework", "off_framework"]
 
 
 def _add_model_args(parser: argparse.ArgumentParser) -> None:
@@ -36,6 +41,14 @@ def _add_model_args(parser: argparse.ArgumentParser) -> None:
         choices=ALL_CONDITIONS,
         default=None,
         help="Conditions to run (default: naive farness)",
+    )
+    parser.add_argument(
+        "--probe-batteries",
+        type=str,
+        nargs="+",
+        choices=ALL_PROBE_BATTERIES,
+        default=None,
+        help="Probe batteries to run (default: on_framework)",
     )
 
 
@@ -132,6 +145,16 @@ def main():
         type=int,
         default=1,
         help="Starting run number (for appending to existing results)",
+    )
+    stability_parser.add_argument(
+        "--primary-only",
+        action="store_true",
+        help="Run only the 8 primary non-adversarial scenarios",
+    )
+    stability_parser.add_argument(
+        "--strongest-validation",
+        action="store_true",
+        help="Run the strongest reviewer-facing validation preset (primary scenarios, on/off-framework probes, naive + estimate-only + format-control + farness)",
     )
     _add_model_args(stability_parser)
 
@@ -267,7 +290,13 @@ def main():
                 print(f"  {case.id}")
                 print(f"    {case.name} ({case.domain})")
                 print(f"    Estimate: {case.estimate_unit}")
-                print(f"    Expected update: {case.expected_update_direction}")
+                print(f"    Analysis role: {case.analysis_role}")
+                print(f"    Batteries: {', '.join(case.available_probe_batteries())}")
+                print(f"    Expected update (on-framework): {case.expected_update_direction}")
+                if case.off_framework_expected_update_direction is not None:
+                    print(
+                        f"    Expected update (off-framework): {case.off_framework_expected_update_direction}"
+                    )
                 print()
             return 0
 
@@ -277,16 +306,34 @@ def main():
                 print(f"Case not found: {args.case}")
                 return 1
             cases = [case]
+        elif args.strongest_validation or args.primary_only:
+            cases = get_primary_stability_cases()
         else:
             cases = get_all_stability_cases()
 
         model = args.model
-        conditions = args.conditions
-        output_dir = args.output_dir or Path(f"experiments/stability_results/{model_short_name(model)}")
+        if args.strongest_validation and args.conditions is None:
+            conditions = ["naive", "estimate_only", "format_control", "farness"]
+        else:
+            conditions = args.conditions
+        if args.strongest_validation and args.probe_batteries is None:
+            probe_batteries = ["on_framework", "off_framework"]
+        else:
+            probe_batteries = args.probe_batteries
+
+        if args.output_dir:
+            output_dir = args.output_dir
+        elif args.strongest_validation:
+            output_dir = Path(
+                f"experiments/stability_validation/strongest/{model_short_name(model)}"
+            )
+        else:
+            output_dir = Path(f"experiments/stability_results/{model_short_name(model)}")
 
         print(f"Running stability experiment: {len(cases)} cases, {args.runs} runs/condition")
         print(f"  Model: {model}")
         print(f"  Conditions: {conditions or ['naive', 'farness']}")
+        print(f"  Probe batteries: {probe_batteries or ['on_framework']}")
         print(f"  Output: {output_dir}")
         print(f"  Starting at run {args.start_run}")
 
@@ -299,6 +346,7 @@ def main():
             start_run=args.start_run,
             model=model,
             conditions=conditions,
+            probe_batteries=probe_batteries,
         )
 
         print_experiment_summary(experiment)
@@ -386,6 +434,7 @@ def _reanalyze(args):
             results.append(StabilityResult(
                 case_id=data["case_id"],
                 condition=data["condition"],
+                probe_battery=data.get("probe_battery", "on_framework"),
                 model=data.get("model", model_name),
                 initial_estimate=data["initial_estimate"],
                 initial_ci_low=data.get("initial_ci", [None, None])[0],
