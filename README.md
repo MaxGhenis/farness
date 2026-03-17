@@ -136,6 +136,7 @@ Paper build:
 ```bash
 python3 paper/render_paper.py  # Regenerates figures, HTML, Markdown, and site/public/paper-raw
 python3 paper/run_strongest_validation.py  # Runs the strongest reviewer-facing validation on Claude Opus 4.6 and GPT-5.2
+python3 paper/run_study1_rerun.py --models gpt-5.4  # Reruns the original Study 1 design with legacy prompt wording
 python3 -m farness.experiments stability --strongest-validation --model gpt-5.2  # Single-model equivalent
 ```
 
