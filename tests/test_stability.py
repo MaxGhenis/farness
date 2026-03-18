@@ -325,6 +325,7 @@ class TestStabilityExperiment:
         assert "n_farness" in analysis
         assert "naive" in analysis
         assert "farness" in analysis
+        assert analysis["comparison_metric"] == "relative_update"
 
     def test_naive_has_larger_update(self, experiment):
         """Naive should have larger update in our mock data."""
@@ -353,6 +354,14 @@ class TestStabilityExperiment:
         assert "Stability-under-probing results" in table
         assert "Naive" in table
         assert "Farness" in table
+        assert "Primary pooled comparison metric" in table
+
+    def test_mixed_effects_uses_relative_update(self, experiment):
+        """Mixed-effects model should report the normalized comparison metric."""
+        analysis = experiment.analyze()
+        mixed = analysis["mixed_effects"]
+        if "error" not in mixed:
+            assert mixed["metric"] == "relative_update"
 
     def test_analyze_groups_multiple_probe_batteries(self):
         """Mixed probe batteries should be analyzed separately."""

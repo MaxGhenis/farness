@@ -25,6 +25,8 @@ from farness.experiments.cases import DecisionCase
 DEFAULT_PROBE_BATTERY = "on_framework"
 PROBE_BATTERY_ORDER = ["on_framework", "off_framework"]
 CONDITION_ORDER = ["naive", "estimate_only", "format_control", "cot", "farness"]
+PRIMARY_COMPARISON_METRIC = "relative_update"
+PRIMARY_COMPARISON_LABEL = "relative update"
 CONDITION_DISPLAY_NAMES = {
     "naive": "Naive",
     "estimate_only": "Estimate Only",
@@ -889,8 +891,8 @@ class StabilityExperiment:
         if HAS_SCIPY:
             for i, c1 in enumerate(conditions):
                 for c2 in conditions[i+1:]:
-                    u1 = _get_values(by_condition[c1], "update_magnitude")
-                    u2 = _get_values(by_condition[c2], "update_magnitude")
+                    u1 = _get_values(by_condition[c1], PRIMARY_COMPARISON_METRIC)
+                    u2 = _get_values(by_condition[c2], PRIMARY_COMPARISON_METRIC)
                     if len(u1) >= 2 and len(u2) >= 2:
                         pair_key = f"{c1}_vs_{c2}"
                         pair_keys.append(pair_key)
@@ -924,10 +926,14 @@ class StabilityExperiment:
                     comparison[key]["p_value_corrected"] = float(p_corr)
 
         # Mixed-effects model
-        mixed_effects = self._mixed_effects_model(results)
+        mixed_effects = self._mixed_effects_model(
+            results, metric=PRIMARY_COMPARISON_METRIC
+        )
 
         result = {
             "conditions": conditions,
+            "comparison_metric": PRIMARY_COMPARISON_METRIC,
+            "comparison_metric_label": PRIMARY_COMPARISON_LABEL,
             **{f"n_{c}": len(by_condition[c]) for c in conditions},
         }
         result.update(condition_stats)
@@ -939,8 +945,12 @@ class StabilityExperiment:
 
         return result
 
-    def _mixed_effects_model(self, results: Optional[list[StabilityResult]] = None) -> dict:
-        """Fit mixed-effects model: update_magnitude ~ condition, random=case_id.
+    def _mixed_effects_model(
+        self,
+        results: Optional[list[StabilityResult]] = None,
+        metric: str = PRIMARY_COMPARISON_METRIC,
+    ) -> dict:
+        """Fit mixed-effects model for the requested metric, random=case_id.
 
         Properly accounts for scenario-level variance rather than pooling.
         """
@@ -955,7 +965,7 @@ class StabilityExperiment:
         rows = []
         for r in results:
             rows.append({
-                "update_magnitude": r.update_magnitude,
+                "analysis_value": getattr(r, metric),
                 "condition": r.condition,
                 "case_id": r.case_id,
                 "model": r.model,
@@ -978,7 +988,7 @@ class StabilityExperiment:
             )
 
             model = smf.mixedlm(
-                "update_magnitude ~ condition",
+                "analysis_value ~ condition",
                 data=df,
                 groups=df["case_id"],
             )
@@ -996,6 +1006,7 @@ class StabilityExperiment:
                 }
 
             return {
+                "metric": metric,
                 "coefficients": coefficients,
                 "random_effect_variance": float(result.cov_re.iloc[0, 0]) if hasattr(result, 'cov_re') else None,
                 "n_groups": int(df["case_id"].nunique()),
@@ -1169,12 +1180,17 @@ class StabilityExperiment:
     def _summary_table_lines(self, analysis: dict) -> list[str]:
         """Render markdown lines for a single analysis block."""
         conditions = analysis.get("conditions", ["naive", "farness"])
+        comparison_metric_label = analysis.get(
+            "comparison_metric_label", PRIMARY_COMPARISON_LABEL
+        )
 
         sizes = " | ".join(f"n_{c} = {analysis.get(f'n_{c}', 0)}" for c in conditions)
         lines = [
             f"**Sample sizes**: {sizes}",
             "",
             "### Primary metrics",
+            "",
+            f"**Primary pooled comparison metric**: {comparison_metric_label}",
             "",
         ]
 
@@ -1202,19 +1218,27 @@ class StabilityExperiment:
                 return f"{p:.3f}"
             return f"{p:.2f}"
 
+        metric_labels = {
+            "mean_relative_update": "Mean relative update",
+            "mean_update_magnitude": "Mean update magnitude",
+            "initial_ci_rate": "Initial CI rate",
+            "correct_direction_rate": "Correct direction rate",
+        }
         for metric in [
-            "mean_update_magnitude",
             "mean_relative_update",
+            "mean_update_magnitude",
             "initial_ci_rate",
             "correct_direction_rate",
         ]:
-            label = metric.replace("_", " ").replace("mean ", "Mean ").capitalize()
+            label = metric_labels.get(metric, metric.replace("_", " ").capitalize())
             vals = " | ".join(fmt(analysis.get(c, {}).get(metric)) for c in conditions)
             lines.append(f"| {label} | {vals} |")
 
         comparison = analysis.get("statistical_comparison", {})
         if comparison:
-            lines.extend(["", "### Pairwise comparisons", ""])
+            lines.extend(
+                ["", f"### Pairwise comparisons ({comparison_metric_label})", ""]
+            )
             for pair_key, data in comparison.items():
                 c1, c2 = pair_key.split("_vs_")
                 p_raw = data.get("p_value_raw")
@@ -1244,7 +1268,10 @@ class StabilityExperiment:
 
         mixed = analysis.get("mixed_effects", {})
         if mixed and "coefficients" in mixed:
-            lines.extend(["### Mixed-effects model", ""])
+            metric = mixed.get("metric", analysis.get("comparison_metric", PRIMARY_COMPARISON_METRIC))
+            lines.extend(
+                ["### Mixed-effects model", "", f"Model: `{metric} ~ condition`", ""]
+            )
             lines.append(
                 f"Random effect (case_id) variance: {mixed.get('random_effect_variance', 'N/A')}"
             )
