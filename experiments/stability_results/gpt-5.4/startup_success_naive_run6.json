@@ -1,0 +1,22 @@
+{
+  "case_id": "startup_success",
+  "condition": "naive",
+  "probe_battery": "on_framework",
+  "model": "gpt-5.4",
+  "initial_estimate": 12.0,
+  "initial_ci": [
+    4.0,
+    25.0
+  ],
+  "final_estimate": 4.0,
+  "final_ci": [
+    2.0,
+    7.0
+  ],
+  "update_magnitude": 8.0,
+  "update_direction": "down",
+  "relative_update": 0.6666666666666666,
+  "had_initial_ci": true,
+  "initial_response_text": "With 18 months elapsed, only 500 MAU, and growth currently flat, the base rate for reaching 10,000 MAU in the next 12 months **without a meaningful change in approach** is low. They would need roughly **20x growth** from here, and flat growth suggests they have not yet found a reliably scalable acquisition/retention loop. The fact that they do have some users and the team still has conviction prevents this from being near zero, but on the stated facts, this looks like a long shot.\n\n```json\n{\"estimate\": 12, \"ci_low\": 4, \"ci_high\": 25}\n```",
+  "final_response_text": "The new information is meaningfully negative relative to the prior 12.0% estimate.\n\nReasoning, briefly:\n- **Base rate**: If only about **5%** of startups with **18 months of flat growth** inflect organically, that strongly anchors the estimate downward.\n- **3 failed marketing channel attempts**: This suggests the issue is less likely to be \u201cjust needing the right channel\u201d and more likely to be about product/market fit, positioning, or market demand. That pushes below the already-low base for a near-term turnaround without major change.\n- **Well-funded competitor**: A competitor raising **$10M** in the same market increases execution and market-share pressure, reducing the odds further.\n\nSo I\u2019d revise the estimate from **12.0%** down to **4.0%**.\n\nFor the **80% confidence interval**, I\u2019d keep it fairly wide because startup outcomes are noisy and major strategic changes could still alter the trajectory, but the interval should remain low given the evidence. A reasonable 80% CI is **2.0% to 7.0%**.\n\n```json\n{\"estimate\": 4.0, \"ci_low\": 2.0, \"ci_high\": 7.0}\n```"
+}

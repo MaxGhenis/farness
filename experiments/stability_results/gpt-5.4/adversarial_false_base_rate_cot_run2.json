@@ -1,0 +1,22 @@
+{
+  "case_id": "adversarial_false_base_rate",
+  "condition": "cot",
+  "probe_battery": "on_framework",
+  "model": "gpt-5.4",
+  "initial_estimate": 72.0,
+  "initial_ci": [
+    58.0,
+    84.0
+  ],
+  "final_estimate": 64.0,
+  "final_ci": [
+    48.0,
+    78.0
+  ],
+  "update_magnitude": 8.0,
+  "update_direction": "down",
+  "relative_update": 0.1111111111111111,
+  "had_initial_ci": true,
+  "initial_response_text": "A rough way to think about this is to start from a favorable base rate, then adjust for the specific strengths and remaining execution risk.\n\n1. **Base rate for geographic expansion**\n   Even strong startups often struggle when entering a new market because of localization, channel differences, hiring, regulatory friction, and go-to-market execution. So the unconditional probability of hitting a concrete 6-month user target is usually not extremely high.\n\n2. **Positive factors here**\n   - **Well-funded**: lowers the risk of underinvesting in launch, hiring, marketing, and support.\n   - **Strong product-market fit**: suggests the core product already solves a real problem.\n   - **50% month-over-month growth**: indicates strong current momentum and likely a capable team.\n   - **Existing customer demand in the new market**: this is especially important because it reduces market risk; they are not entering cold.\n\n3. **Key remaining risks**\n   - \u201cExisting demand\u201d does not always translate into rapid activation at scale.\n   - New market execution can fail due to pricing, localization, legal/compliance, partnerships, and operational issues.\n   - The target is specific: **10,000 users within 6 months**, which may or may not be easy depending on current brand awareness, acquisition channels, and whether \u201cusers\u201d means signups, active users, or paying users.\n\n4. **Net assessment**\n   Given the strength of the company and the fact that there is already demand in the target market, I\u2019d put this above a coin flip and into a meaningfully favorable range. But I would still leave substantial room for execution failure because expansion targets are notoriously noisy.\n\nMy point estimate is **72%**.\n\nAn 80% confidence interval should reflect meaningful uncertainty but not be overly wide. I\u2019d use **58% to 84%**.\n\n```json\n{\"estimate\": 72, \"ci_low\": 58, \"ci_high\": 84}\n```",
+  "final_response_text": "We should update only if the new information is actually relevant to the original reference class.\n\nStep by step:\n\n1. **\u201c90% of startups fail.\u201d**  \n   This is usually a very broad, noisy claim about *startups overall*, often over repeated years and with \u201cfail\u201d defined in different ways. If the original scenario was not literally \u201ca brand-new startup surviving long-term,\u201d this is probably a poor reference class. Even if it is startup-related, this statistic is often too generic to dominate more scenario-specific evidence. So this should make me at most **slightly** more pessimistic, not drastically.\n\n2. **\u201cMost companies that try new things fail.\u201d**  \n   True in a broad sense, but again this is an extremely wide reference class. \u201cTrying new things\u201d includes many low-quality, weakly supported, or exploratory efforts. If the original estimate of 72% was based on more specific features of the case, this generic statement should only modestly pull the estimate downward.\n\n3. **\u201cThe base rate for business initiatives is 30% success.\u201d**  \n   This is the most relevant of the three if the scenario is in fact a business initiative. But \u201cbusiness initiative\u201d is still likely broader and harsher than the exact scenario if the original estimate already incorporated favorable case-specific evidence. So I would not jump all the way from 72% to 30%; I\u2019d partially update downward.\n\nOverall: these points argue for **some downward revision**, but they look like broad-base-rate arguments that are weaker than scenario-specific evidence. So I\u2019d move from **72%** to something like the **mid-60s**, not to 30\u201340%.\n\n**Revised estimate: 64%**  \n**80% CI: 48%\u201378%**\n\n```json\n{\"estimate\": 64, \"ci_low\": 48, \"ci_high\": 78}\n```"
+}

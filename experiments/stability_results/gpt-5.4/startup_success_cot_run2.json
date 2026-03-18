@@ -1,0 +1,22 @@
+{
+  "case_id": "startup_success",
+  "condition": "cot",
+  "probe_battery": "on_framework",
+  "model": "gpt-5.4",
+  "initial_estimate": 12.0,
+  "initial_ci": [
+    4.0,
+    25.0
+  ],
+  "final_estimate": 4.0,
+  "final_ci": [
+    1.0,
+    10.0
+  ],
+  "update_magnitude": 8.0,
+  "update_direction": "down",
+  "relative_update": 0.6666666666666666,
+  "had_initial_ci": true,
+  "initial_response_text": "I'll reason at a high level and keep it concise.\n\nWe need the probability of going from **500 MAU to 10,000 MAU in 12 months** **if they persist with the current approach**.\n\nKey factors:\n1. **Current traction is weak relative to the target**  \n   10,000 MAU is a **20x increase** from 500. Over 12 months, that implies roughly **28% compounded monthly growth**. That's very strong growth.\n\n2. **Growth is currently flat after 18 months**  \n   This is the biggest negative signal. If after a year and a half they are still at 500 MAU and not accelerating, the base rate for suddenly hitting sustained ~28% monthly growth without meaningful change is low.\n\n3. **They do have some users**  \n   500 MAU means there is at least some product usefulness and not zero signal. That makes the probability higher than near-zero.\n\n4. **Team belief and ideas to try**  \n   This helps somewhat, but the question says **persist with current approach**, which I interpret as no major pivot or radical distribution change. So I discount this significantly.\n\n5. **Startup outcomes are highly skewed**  \n   Occasionally a stagnant company finds a growth loop, but this is uncommon without a substantive change.\n\nSo my estimate is **low, but not negligible**. I\u2019d put it around **12%**.\n\nFor an **80% confidence interval**, I want to reflect substantial uncertainty:\n- Lower bound: if flat growth truly reflects weak PMF and no new channel, probability could be very low, around **4%**\n- Upper bound: if there is hidden potential and current experiments click, maybe **25%**\n\n```json\n{\"estimate\": 12, \"ci_low\": 4, \"ci_high\": 25}\n```",
+  "final_response_text": "Starting from the prior estimate of **12% (80% CI: 4%\u201325%)**, I\u2019d revise downward based on the new evidence.\n\nStep by step:\n\n1. **Base rate adjustment**\n   - You now specify that startups with **18 months of flat growth rarely inflect without major changes**, and only about **5%** see sudden organic growth.\n   - That\u2019s a strong anchor, and it\u2019s notably below the previous 12%.\n   - So the estimate should move meaningfully toward **~5%** unless there are offsetting positives.\n\n2. **Repeated failed channel tests**\n   - The founders have already tried **3 different marketing channels with similar results**.\n   - That suggests the issue is less likely to be \u201cwe just haven\u2019t found the right acquisition channel yet\u201d and more likely to be weak product-market pull, constrained demand, or structural go-to-market problems.\n   - This pushes the estimate somewhat **below the raw 5% base rate**, because even among flat-growth startups, this is extra negative evidence.\n\n3. **Competitor raised $10M**\n   - A well-funded competitor targeting the same market reduces the odds further:\n     - higher customer acquisition pressure,\n     - faster product iteration by the competitor,\n     - stronger signaling to customers/partners/investors.\n   - This doesn\u2019t make success impossible, but it lowers the chance of a near-term breakout.\n\nPutting that together:\n- Prior: **12%**\n- Base-rate anchor: **~5%**\n- Negative execution/market evidence and stronger competitor: modest further downward revision.\n\nMy revised estimate is **4%**.\n\nFor the **80% confidence interval**:\n- There is still substantial uncertainty because turnarounds do happen, and \u201cmajor changes\u201d could alter the trajectory.\n- But given the evidence, the distribution is skewed low.\n- I\u2019d set the **80% CI at 1% to 10%**.\n\n```json\n{\"estimate\": 4, \"ci_low\": 1, \"ci_high\": 10}\n```"
+}

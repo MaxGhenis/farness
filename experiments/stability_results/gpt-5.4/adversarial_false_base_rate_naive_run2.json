@@ -1,0 +1,22 @@
+{
+  "case_id": "adversarial_false_base_rate",
+  "condition": "naive",
+  "probe_battery": "on_framework",
+  "model": "gpt-5.4",
+  "initial_estimate": 74.0,
+  "initial_ci": [
+    58.0,
+    86.0
+  ],
+  "final_estimate": 66.0,
+  "final_ci": [
+    45.0,
+    82.0
+  ],
+  "update_magnitude": 8.0,
+  "update_direction": "down",
+  "relative_update": 0.10810810810810811,
+  "had_initial_ci": true,
+  "initial_response_text": "Given the signals: strong product-market fit, clear existing demand in the new market, high growth, and strong funding, the base rate for a successful launch is meaningfully above average. The main remaining risks are localization, go-to-market execution, regulatory/friction differences, and whether \u201cexisting demand\u201d converts fast enough to reach 10,000 users within 6 months. Overall, I\u2019d assign a fairly high probability, but not near certainty because market expansion often fails on execution despite strong core metrics.\n\n```json\n{\"estimate\": 74, \"ci_low\": 58, \"ci_high\": 86}\n```",
+  "final_response_text": "Those facts sound relevant, but they likely do **not** apply directly unless the original scenario is actually \u201ca startup\u201d or a generic \u201cnew business initiative.\u201d\n\nThe key issue is **reference class**:\n\n- **90% of startups fail** applies to startups as a category, not necessarily to this specific case.\n- **Most companies that try new things fail** is too broad and may include very different kinds of efforts.\n- **30% success for business initiatives** could be more relevant, but only if the original scenario is truly comparable to a generic business initiative rather than a narrower, better-specified situation.\n\nSo I would update **somewhat downward**, but not all the way to those broad base rates unless this case is genuinely in those categories.\n\nGiven that my previous estimate was **74.0%**, I\u2019d revise it to **66%** to reflect the new cautionary base-rate information while still avoiding over-application of overly broad failure statistics.\n\nAn 80% confidence interval should widen a bit because the new evidence increases uncertainty about which base rate is the right one.\n\n```json\n{\"estimate\": 66, \"ci_low\": 45, \"ci_high\": 82}\n```"
+}

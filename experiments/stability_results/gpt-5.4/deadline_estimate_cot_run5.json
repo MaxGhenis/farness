@@ -1,0 +1,22 @@
+{
+  "case_id": "deadline_estimate",
+  "condition": "cot",
+  "probe_battery": "on_framework",
+  "model": "gpt-5.4",
+  "initial_estimate": 75.0,
+  "initial_ci": [
+    60.0,
+    88.0
+  ],
+  "final_estimate": 35.0,
+  "final_ci": [
+    20.0,
+    55.0
+  ],
+  "update_magnitude": 40.0,
+  "update_direction": "down",
+  "relative_update": 0.5333333333333333,
+  "had_initial_ci": true,
+  "initial_response_text": "A simple way to think about this:\n\n1. **Base rate:** Projects with a detailed plan and a meaningful buffer are more likely than not to finish on time.\n2. **Schedule margin:** Estimated work is 4 months against a 6-month deadline, so there is a **50% schedule buffer** relative to the estimated duration. That is substantial.\n3. **But plans are uncertain:** Compliance projects often face hidden dependencies, interpretation issues, legal review cycles, vendor delays, and rework. A 2-month buffer is good, but not a guarantee.\n4. **Overall judgment:** I\u2019d put the probability clearly above 50%, but not extremely high like 95%, because regulatory work often slips despite planning.\n\nMy best estimate is **75%**, with an **80% confidence interval of 60% to 88%**.\n\n```json\n{\"estimate\": 75, \"ci_low\": 60, \"ci_high\": 88}\n```",
+  "final_response_text": "Starting from the prior estimate of **75%**, the new information is all negative for schedule confidence:\n\n1. **Base rate for regulatory compliance projects is only 40% on-time**  \n   This is a strong anchor and is much lower than 75%, so the estimate should move down substantially.\n\n2. **Team has never done this specific type of work before**  \n   Lack of direct experience raises execution risk, making on-time delivery less likely.\n\n3. **Regulations are still being finalized**  \n   Moving requirements create scope and rework risk, which is especially damaging to schedule predictability.\n\n### Step-by-step adjustment\n- Prior estimate: **75%**\n- Base-rate correction toward industry reality: pull down materially, roughly into the **45\u201355%** range.\n- Inexperience on this specific work: reduce further.\n- Unstable regulations: reduce further and widen uncertainty.\n\nGiven all three together, a reasonable revised point estimate is **35%**.\n\n### 80% confidence interval\nBecause of changing regulations and inexperience, uncertainty is fairly high. An **80% CI of 20% to 55%** seems appropriate:\n- Lower bound reflects meaningful risk of major delay.\n- Upper bound reflects the possibility that strong execution still overcomes the odds.\n\n```json\n{\"estimate\": 35, \"ci_low\": 20, \"ci_high\": 55}\n```"
+}

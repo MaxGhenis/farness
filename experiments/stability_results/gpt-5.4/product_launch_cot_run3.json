@@ -1,0 +1,22 @@
+{
+  "case_id": "product_launch",
+  "condition": "cot",
+  "probe_battery": "on_framework",
+  "model": "gpt-5.4",
+  "initial_estimate": 42.0,
+  "initial_ci": [
+    25.0,
+    60.0
+  ],
+  "final_estimate": 28.0,
+  "final_ci": [
+    16.0,
+    43.0
+  ],
+  "update_magnitude": 14.0,
+  "update_direction": "down",
+  "relative_update": 0.3333333333333333,
+  "had_initial_ci": true,
+  "initial_response_text": "A reasonable way to think about this is to break the problem into the key uncertainties:\n\n1. **Signals are positive, but still early**\n   - Internal testing went well: good sign, but often optimistic.\n   - Team excitement: useful for execution, but not strong evidence of user impact.\n   - Beta NPS of 45: clearly positive, suggesting users like the feature.\n\n2. **The bar is fairly high**\n   - The question is not whether the feature helps, but whether it increases **overall product engagement by at least 10%** within only **3 months**.\n   - That is a meaningful lift, especially at the overall product level rather than among just exposed users.\n\n3. **Base-rate adjustment**\n   - Many promising features improve satisfaction or a local metric without producing a large overall engagement lift.\n   - Positive beta feedback increases the odds, but launch effects often shrink when exposed to the full user base.\n\n4. **Execution and adoption risk**\n   - Full-launch rollout, discoverability, onboarding, and user fit all matter.\n   - Even a genuinely valuable feature may take longer than 3 months to drive a 10% overall gain.\n\nPutting that together:\n- I\u2019d assign a **better-than-even but not high-confidence** chance.\n- The evidence supports optimism, but the threshold and time window argue for caution.\n\n```json\n{\"estimate\": 42, \"ci_low\": 25, \"ci_high\": 60}\n```",
+  "final_response_text": "Starting from the prior estimate of **42%**, the new information pushes the estimate downward for three separate reasons:\n\n1. **Base rate is low (20\u201330%)**  \n   If only about a quarter of new features meaningfully move engagement, that suggests the prior 42% was likely too optimistic unless there was unusually strong evidence for this feature.\n\n2. **Beta users are self-selected enthusiasts**  \n   Positive results from enthusiasts usually overstate likely impact in the general population. This reduces confidence that observed beta engagement gains will generalize.\n\n3. **Feature team is measuring its own success**  \n   That creates risk of confirmation bias, selective metric choice, or overly favorable interpretation. This further weakens the evidence.\n\n### Step-by-step revision\n- Prior: **42%**\n- Adjust down for weak base rate: toward the **mid-20s to low-30s**\n- Adjust down again for non-representative beta sample\n- Adjust down modestly again for measurement bias risk\n\nA reasonable revised point estimate is **28%**.\n\n### 80% confidence interval\nGiven the base-rate uncertainty plus the possibility that the feature still genuinely works despite biased early evidence, I\u2019d use a fairly wide interval, but narrower than the original because the new information is mostly negative and constraining:\n\n**80% CI: 16% to 43%**\n\n```json\n{\"estimate\": 28, \"ci_low\": 16, \"ci_high\": 43}\n```"
+}

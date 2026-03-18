@@ -1,0 +1,22 @@
+{
+  "case_id": "acquisition_synergies",
+  "condition": "naive",
+  "probe_battery": "on_framework",
+  "model": "gpt-5.4",
+  "initial_estimate": 60.0,
+  "initial_ci": [
+    40.0,
+    75.0
+  ],
+  "final_estimate": 38.0,
+  "final_ci": [
+    25.0,
+    52.0
+  ],
+  "update_magnitude": 22.0,
+  "update_direction": "down",
+  "relative_update": 0.36666666666666664,
+  "had_initial_ci": true,
+  "initial_response_text": "Realizing at least 50% of projected synergies within 2 years is plausible but far from certain. Cost synergies from duplicate functions are usually more achievable than revenue synergies from cross-selling, which often take longer and underdeliver. Without specific diligence details, a base-rate view on M&A suggests moderate odds: execution risk, integration delays, cultural friction, and customer retention issues often reduce realized synergies in the first 24 months.\n\nSo I\u2019d assign a probability a bit above even odds, with a fairly wide interval due to limited deal-specific information.\n\n```json\n{\"estimate\": 60, \"ci_low\": 40, \"ci_high\": 75}\n```",
+  "final_response_text": "Starting from the prior estimate of 60.0%:\n\n- **Synergy realization**: If acquirers realize only about **50% of projected synergies on average**, that weakens confidence materially, especially if the original case depended heavily on synergy capture. This pushes the estimate down.\n- **Base-rate on M&A outcomes**: If **60\u201380% of deals fail to create value for the acquirer**, then the success base rate is only about **20\u201340%**. That is a strong outside-view anchor and suggests 60% was likely too optimistic unless this deal is unusually advantaged.\n- **CEO enthusiasm / championing**: A CEO personally championing the deal raises the risk of **overconfidence, escalation of commitment, and weaker internal challenge**, which further lowers the estimate somewhat.\n\nBalancing these:\n- I would revise the estimate down from **60%** to around **38%**.\n- Because the evidence points to **high variance** and M&A outcomes are noisy, the interval should be fairly wide.\n\n```json\n{\"estimate\": 38, \"ci_low\": 25, \"ci_high\": 52}\n```"
+}

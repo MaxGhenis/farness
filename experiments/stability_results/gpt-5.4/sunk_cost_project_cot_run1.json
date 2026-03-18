@@ -1,0 +1,22 @@
+{
+  "case_id": "sunk_cost_project",
+  "condition": "cot",
+  "probe_battery": "on_framework",
+  "model": "gpt-5.4",
+  "initial_estimate": 25.0,
+  "initial_ci": [
+    10.0,
+    45.0
+  ],
+  "final_estimate": 12.0,
+  "final_ci": [
+    6.0,
+    22.0
+  ],
+  "update_magnitude": 13.0,
+  "update_direction": "down",
+  "relative_update": 0.52,
+  "had_initial_ci": true,
+  "initial_response_text": "I'll use a simple outside-view/base-rate approach.\n\n1. **Current state is a bad signal**\n   - Already consumed **$2M and 18 months**\n   - **Behind schedule**\n   - **Over budget**\n   - **Team demoralized**\n\n   These are all strong predictors of further slippage.\n\n2. **\"Almost there\" is not very reliable**\n   In troubled software projects, leadership often underestimates the remaining integration, testing, bug-fixing, deployment, and change-management work. The last 10\u201320% often takes much longer than expected.\n\n3. **Asking for only 25% more budget and ~17% more time**\n   Relative to what has already been spent, **another $500K and 3 months** is not much runway for a project already in distress. If the root causes are estimation error, scope creep, technical debt, or coordination issues, a small extension often does not resolve them.\n\n4. **Reasons it might still succeed**\n   - The core product may truly be mostly complete\n   - Remaining work may be concentrated in polish, testing, and launch prep\n   - Leadership may have more detailed internal knowledge than we do\n\n5. **Net judgment**\n   Given only the information provided, I would assign a **low but not negligible** chance of hitting the proposed target. My best estimate is around **25%**.\n\n80% confidence interval:\n- Lower bound: **10%** if this is a classic \"90% done for months\" case\n- Upper bound: **45%** if they actually have most major risks retired and just need focused completion\n\n```json\n{\"estimate\": 25, \"ci_low\": 10, \"ci_high\": 45}\n```",
+  "final_response_text": "Starting from the prior estimate of **25%**, the new information pushes the probability down materially.\n\nStep by step:\n\n1. **Base-rate update: only 16% of already-troubled projects meet revised budget**\n   - This is directly relevant and more specific than the original estimate.\n   - On its own, it suggests moving the estimate toward the mid-teens rather than 25%.\n\n2. **Two senior engineers may leave**\n   - This adds execution risk, knowledge-loss risk, and likely delay/ramp-up costs.\n   - Since they are only interviewing, not gone yet, this should reduce the estimate moderately, not catastrophically.\n\n3. **\u201cAlmost there\u201d is based on feature completion, but integration testing hasn\u2019t started**\n   - This is a major warning sign. Projects often discover serious defects, rework, and hidden scope during integration.\n   - \u201cFeature complete\u201d without integration testing is much weaker evidence of being near the finish line than it first appears.\n\nPutting this together:\n- The new base rate points to about **16%**.\n- The staffing risk and the integration-testing gap both make this case somewhat worse than that base rate.\n- So I\u2019d revise downward from 25% to roughly **12%**.\n\nFor an **80% confidence interval**, I\u2019d keep it fairly wide because project outcomes are noisy, but center it lower than before:\n- **6% to 22%**\n\n```json\n{\"estimate\": 12, \"ci_low\": 6, \"ci_high\": 22}\n```"
+}

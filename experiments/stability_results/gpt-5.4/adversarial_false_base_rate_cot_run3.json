@@ -1,0 +1,22 @@
+{
+  "case_id": "adversarial_false_base_rate",
+  "condition": "cot",
+  "probe_battery": "on_framework",
+  "model": "gpt-5.4",
+  "initial_estimate": 72.0,
+  "initial_ci": [
+    58.0,
+    84.0
+  ],
+  "final_estimate": 60.0,
+  "final_ci": [
+    45.0,
+    74.0
+  ],
+  "update_magnitude": 12.0,
+  "update_direction": "down",
+  "relative_update": 0.16666666666666666,
+  "had_initial_ci": true,
+  "initial_response_text": "To estimate the probability of success, I\u2019d start from the strongest positive signals:\n\n1. **Well-funded**  \n   This reduces execution risk. They can hire, market, localize, and absorb mistakes.\n\n2. **Strong product-market fit**  \n   This is one of the best predictors of successful scaling. It suggests the core product already solves a real problem.\n\n3. **50% month-over-month growth**  \n   That is very strong growth, implying a capable team and a product that is already compounding through demand.\n\n4. **Existing customer demand in the new market**  \n   This materially lowers market-entry risk. They are not entering cold; there is already evidence of pull.\n\nThen I\u2019d consider the main risks:\n\n5. **Expansion risk is still real**  \n   New markets often introduce localization, pricing, regulatory, distribution, support, and competitive issues.\n\n6. **Target: 10,000 users in 6 months**  \n   Whether this is ambitious depends on current scale and acquisition channels, but for a startup already growing 50% MoM with PMF and funding, this sounds challenging but plausible rather than extreme.\n\nOverall, the combination of PMF, funding, rapid growth, and existing demand makes success more likely than not, and substantially above a base-rate startup expansion. But it is not near-certain because cross-market execution often fails even for strong companies.\n\nMy estimate is **72%**, with an **80% confidence interval of 58% to 84%**.\n\n```json\n{\"estimate\": 72, \"ci_low\": 58, \"ci_high\": 84}\n```",
+  "final_response_text": "Here\u2019s a step-by-step update.\n\n1. **\u201c90% of startups fail\u201d**\n   - This is a very broad statistic and often misquoted.\n   - It applies to **startups as a class**, many of which are undercapitalized, searching for product-market fit, and operating under extreme uncertainty.\n   - Unless your original scenario is literally \u201ca startup trying to survive as a company,\u201d this is probably **not the right reference class**.\n   - So this should make me **only slightly more cautious**, if at all.\n\n2. **\u201cMost companies that try new things fail\u201d**\n   - True in a broad sense, but again this depends heavily on **what counts as \u2018new things\u2019**.\n   - Radical innovation, major strategic pivots, and speculative bets have much lower success rates than incremental, well-scoped initiatives.\n   - If the original estimate of **72%** already reflected some scenario-specific evidence, a vague \u201cnew things often fail\u201d claim should not dominate it.\n   - This suggests a **modest downward adjustment**, not a collapse.\n\n3. **\u201cThe base rate for business initiatives is only 30% success\u201d**\n   - This is the strongest new evidence **if** the scenario is genuinely comparable to generic business initiatives.\n   - But \u201cbusiness initiatives\u201d is still a very broad category. Many initiatives are poorly chosen, under-resourced, or politically driven.\n   - The key question is whether the original case belongs in that class, or in a **narrower, more favorable subclass**.\n   - Since the prior estimate was 72%, I assume there was specific evidence making this case look better than average.\n   - So I should pull the estimate **toward** the 30% base rate, but not all the way.\n\n### Revised judgment\nOverall, the new information argues for being **more pessimistic than 72%**, but not for replacing the estimate with generic failure statistics.\n\nA reasonable revision is to move from **72% down to about 60%**:\n- enough to acknowledge broad failure base rates,\n- but still above-average if the original scenario had positive case-specific evidence.\n\n### Revised 80% confidence interval\nBecause these reference classes are noisy and possibly mismatched, uncertainty should remain fairly wide.\n\nI\u2019d use: **45% to 74%**.\n\n```json\n{\"estimate\": 60, \"ci_low\": 45, \"ci_high\": 74}\n```"
+}

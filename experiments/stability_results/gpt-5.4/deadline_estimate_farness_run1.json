@@ -1,0 +1,22 @@
+{
+  "case_id": "deadline_estimate",
+  "condition": "farness",
+  "probe_battery": "on_framework",
+  "model": "gpt-5.4",
+  "initial_estimate": 62.0,
+  "initial_ci": [
+    40.0,
+    78.0
+  ],
+  "final_estimate": 30.0,
+  "final_ci": [
+    15.0,
+    50.0
+  ],
+  "update_magnitude": 32.0,
+  "update_direction": "down",
+  "relative_update": 0.5161290322580645,
+  "had_initial_ci": true,
+  "initial_response_text": "Using the **farness / outside-view** approach, I would be skeptical of the internal 4\u2011month estimate despite the detailed plan.\n\n### Outside view / base rates\nRelevant research strongly suggests substantial schedule overrun risk for complex organizational projects:\n\n- **Planning fallacy** research (Kahneman & Tversky): teams systematically underestimate completion times even when they have detailed plans.\n- **Software / IT / regulatory implementation projects** often show median overruns in the **20\u201350%+** range, with a meaningful tail of much larger delays. Cross-industry studies such as Flyvbjerg and related project-performance research repeatedly find that \u201con-time\u201d delivery is far from guaranteed, especially when coordination, approvals, testing, and interpretation of requirements are involved.\n- For internal transformation/compliance projects, the key empirical pattern is: **detailed plans do not eliminate execution uncertainty**; they often increase confidence without proportionally improving forecast accuracy.\n\nIf the true duration were only modestly underestimated by 25%, a 4\u2011month estimate becomes 5 months, still within deadline. But if underestimated by 50%, it becomes 6 months, consuming the entire buffer. And many such projects experience delays from late requirement clarification, legal review, vendor dependencies, remediation rework, and sign-off bottlenecks.\n\n### Biases in the framing\nMain cognitive biases present:\n\n1. **Planning fallacy**  \n   The team focuses on the inside view and best-case decomposition of tasks.\n\n2. **Optimism bias**  \n   \u201cWe have a 2-month buffer\u201d may feel safer than it is, especially if hidden dependencies emerge.\n\n3. **Anchoring on the 4-month estimate**  \n   The detailed plan creates a reference point that can be insufficiently adjusted.\n\n4. **Illusion of control / detail illusion**  \n   A detailed project plan can increase confidence even when uncertainty from external approvals and rework remains large.\n\n5. **Base-rate neglect**  \n   The framing does not mention how similar past compliance projects actually performed.\n\n### Numeric forecast\nA simple outside-view adjustment would treat the 4-month estimate as likely optimistic. If I assume something like:\n- roughly **30\u201340%** chance the project finishes in 4 months or less,\n- another **20\u201330%** chance it lands between 4 and 6 months,\n- and a meaningful **30%+** chance it slips beyond 6 months,\n\nthen the probability of meeting the deadline is better viewed as **moderately better than even, but far from assured**.\n\n### Final estimate\n**Point estimate:** **62%** chance of completing before the 6-month deadline.  \n**80% confidence interval:** **40% to 78%**.\n\n```json\n{\"estimate\": 62, \"ci_low\": 40, \"ci_high\": 78}\n```",
+  "final_response_text": "Given the new information, I would revise the estimate downward materially.\n\nReasoning, briefly:\n- The new base-rate evidence is quite negative: similar regulatory compliance projects only finish on time about 40% of the time.\n- \u201cNever done this specific type of work before\u201d adds execution risk beyond the base rate.\n- \u201cRegulations still being finalized\u201d adds scope-change risk, which is one of the strongest predictors of delay.\n- Your prior estimate of 62% now looks too optimistic relative to the new outside-view evidence.\n\nSo I\u2019d move the central estimate from 62% down to about 30%.\n\nFor the 80% CI:\n- There is still meaningful uncertainty, so I would keep a fairly wide interval.\n- Lower bound: around 15%, reflecting substantial delay risk if requirements shift materially.\n- Upper bound: around 50%, allowing for the possibility that the team performs above the industry base rate despite the risks.\n\n```json\n{\"estimate\": 30.0, \"ci_low\": 15.0, \"ci_high\": 50.0}\n```"
+}

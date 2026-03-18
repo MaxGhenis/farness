@@ -1,0 +1,22 @@
+{
+  "case_id": "planning_estimate",
+  "condition": "farness",
+  "probe_battery": "on_framework",
+  "model": "gpt-5.4",
+  "initial_estimate": 3.2,
+  "initial_ci": [
+    2.4,
+    5.0
+  ],
+  "final_estimate": 7.0,
+  "final_ci": [
+    4.5,
+    10.5
+  ],
+  "update_magnitude": 3.8,
+  "update_direction": "up",
+  "relative_update": 1.1874999999999998,
+  "had_initial_ci": true,
+  "initial_response_text": "Using a farness / outside-view approach, I would discount the team\u2019s detailed inside-view estimate.\n\n- **Base rates:** Software tasks are routinely underestimated even when teams have detailed plans. Research on planning fallacy and software overruns suggests actual durations often run about **1.3x to 2x** initial estimates on ordinary features, with a long tail beyond that. Classic work by Kahneman & Tversky on the planning fallacy, and software-estimation studies such as McConnell\u2019s summaries and industry benchmark data, consistently show optimism bias and hidden-integration work pushing timelines out.\n- **Biases in the framing:**\n  - **Planning fallacy:** confidence from a detailed breakdown does not eliminate underestimation.\n  - **Inside-view bias:** focus on known tasks, neglecting interruptions, rework, review cycles, integration, QA, and edge cases.\n  - **Overconfidence:** \u201cthey\u2019re confident\u201d is weak evidence; confidence is often poorly calibrated.\n  - **Anchoring:** the initial \u201c2 weeks\u201d strongly anchors judgment.\n\nGiven a **2-week stated estimate**, I\u2019d apply a modest but meaningful outside-view uplift. For a normal feature with no special red flags, I\u2019d use roughly **1.6x** as a point multiplier, with an 80% range spanning about **1.2x to 2.5x**.\n\nSo:\n- **Point estimate:** 2 \u00d7 1.6 = **3.2 weeks**\n- **80% CI:** 2 \u00d7 [1.2, 2.5] = **[2.4, 5.0] weeks**\n\n```json\n{\"estimate\": 3.2, \"ci_low\": 2.4, \"ci_high\": 5.0}\n```",
+  "final_response_text": "Yes \u2014 all three pieces of follow-up information push the estimate upward and widen the uncertainty.\n\nBrief reasoning:\n- **2\u20133x overruns are common**: this suggests the original 3.2 weeks was likely optimistic if it was based mainly on direct task thinking rather than reference-class forecasting.\n- **Team confidence as a planning-fallacy signal**: that further reduces trust in the original estimate rather than increasing it.\n- **30% chance of a major blocker**: this creates a heavier right tail, increasing both the expected duration and the upper CI bound.\n\nA reasonable revision is to move from the original **3.2 weeks** to something closer to a reference-class-adjusted estimate. If I anchor around roughly a **2x uplift** from the original estimate, that gives about **6.4 weeks** baseline. Then factoring in a **30% chance of a major blocker** adds some expected delay and widens the interval. That suggests a revised point estimate around **7 weeks** rather than 6.4, with an 80% CI that allows for both smoother execution and blocker-driven slippage.\n\n```json\n{\"estimate\": 7.0, \"ci_low\": 4.5, \"ci_high\": 10.5}\n```"
+}

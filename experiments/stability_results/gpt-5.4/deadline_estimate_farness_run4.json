@@ -1,0 +1,22 @@
+{
+  "case_id": "deadline_estimate",
+  "condition": "farness",
+  "probe_battery": "on_framework",
+  "model": "gpt-5.4",
+  "initial_estimate": 62.0,
+  "initial_ci": [
+    40.0,
+    78.0
+  ],
+  "final_estimate": 32.0,
+  "final_ci": [
+    18.0,
+    52.0
+  ],
+  "update_magnitude": 30.0,
+  "update_direction": "down",
+  "relative_update": 0.4838709677419355,
+  "had_initial_ci": true,
+  "initial_response_text": "Using the **farness / outside-view** approach, I would discount the inside-view plan materially.\n\n## Reasoning\n\n### 1) Outside-view base rates\nFor regulatory / IT / change projects with \u201ccomfortable\u201d planned buffers, the research base rate is not reassuring:\n\n- **Planning fallacy** research consistently shows teams underestimate completion time even with detailed plans (Kahneman & Tversky).\n- Large organizational / IT / compliance-style projects frequently overrun. Depending on project type, studies such as Flyvbjerg and PMI-style benchmarks often show:\n  - roughly **50%+** of projects miss schedule targets,\n  - average schedule overruns often in the **20\u201345%** range,\n  - tail risk is meaningful because dependencies, approvals, remediation loops, and interpretation changes create late surprises.\n\nA useful outside-view simplification:\n- If the team says **4 months** for work of this type,\n- a realistic base-rate uplift is often around **+25% to +50%**,\n- implying expected duration more like **5.0 to 6.0 months**, before accounting for unusual complexity.\n\nThat makes a **6-month deadline** not \u201csafe,\u201d but closer to the middle of the likely range.\n\n### 2) Quantitative forecast\nInside view says:\n- Estimated work = 4 months\n- Available time = 6 months\n- Buffer = 2 months = **50% contingency**\n\nA 50% buffer sounds strong, but for compliance projects the main risks are:\n- unclear regulatory interpretation,\n- rework after legal/audit review,\n- cross-functional dependency delays,\n- testing / evidence collection taking longer than planned,\n- last-minute regulator or internal control changes.\n\nIf we model actual duration as centered around roughly **5.2\u20135.4 months** with substantial variance and a right tail, then the probability of finishing by **6 months** is only moderately above even.\n\nMy point estimate: **62%**\n\n### 3) Confidence interval\nAn 80% confidence interval for the probability should reflect uncertainty in project class, team quality, and regulation novelty. I\u2019d put it at:\n\n- **Low end:** if this is unusually complex / approval-heavy, success could be around **40%**\n- **High end:** if scope is well understood and execution is unusually strong, perhaps **78%**\n\nSo my **80% CI** is **40% to 78%**.\n\n### 4) Cognitive biases in the framing\nKey biases present:\n\n- **Planning fallacy:** \u201cDetailed plan\u201d does not reliably eliminate underestimation.\n- **Inside-view bias:** focus on task breakdown rather than historical completion rates for similar compliance efforts.\n- **Optimism bias:** assuming the 2-month buffer is truly free rather than likely to be consumed by integration, review, and rework.\n- **Anchoring:** the 4-month estimate becomes the psychological center even if base rates suggest longer.\n- **Overconfidence:** precision implied by detailed planning can exceed actual predictability.\n- **Best-case framing:** the question highlights \u201cleaving a 2-month buffer,\u201d which nudges toward interpreting the deadline as safe.\n\n```json\n{\"estimate\": 62, \"ci_low\": 40, \"ci_high\": 78}\n```",
+  "final_response_text": "Given the new information, I would revise the estimate downward materially.\n\nReasoning, briefly:\n- The original estimate was 62%.\n- A base rate of 40% on-time completion for regulatory compliance projects is already substantially lower than the prior estimate.\n- The fact that the team has never done this specific type of work before further reduces confidence and likely lowers the mean outcome due to execution risk.\n- Ongoing regulatory changes add additional schedule/scope uncertainty, which both lowers the central estimate and widens the interval.\n\nSo I\u2019d anchor closer to the 40% base rate, then adjust downward for inexperience and regulatory volatility. That suggests a revised central estimate around the low 30s, with a somewhat wider 80% CI than before.\n\n```json\n{\"estimate\": 32.0, \"ci_low\": 18.0, \"ci_high\": 52.0}\n```"
+}

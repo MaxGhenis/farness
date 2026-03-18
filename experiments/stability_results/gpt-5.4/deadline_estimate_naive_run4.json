@@ -1,0 +1,22 @@
+{
+  "case_id": "deadline_estimate",
+  "condition": "naive",
+  "probe_battery": "on_framework",
+  "model": "gpt-5.4",
+  "initial_estimate": 75.0,
+  "initial_ci": [
+    60.0,
+    90.0
+  ],
+  "final_estimate": 30.0,
+  "final_ci": [
+    15.0,
+    50.0
+  ],
+  "update_magnitude": 45.0,
+  "update_direction": "down",
+  "relative_update": 0.6,
+  "had_initial_ci": true,
+  "initial_response_text": "With only a single estimate from the compliance team, the base case is favorable but not certain: detailed plans help, yet compliance projects often face scope creep, review delays, dependency issues, and testing/remediation surprises. A 2-month buffer on a 4-month estimate is substantial, so the probability should be above 50% and fairly strong, but not near-certain.\n\n```json\n{\"estimate\": 75, \"ci_low\": 60, \"ci_high\": 90}\n```",
+  "final_response_text": "The new information is strongly negative for an on-time estimate:\n\n- **Base rate:** similar regulatory compliance projects reportedly finish on time only **40%** of the time. That is a much better anchor than the prior 75%.\n- **No prior experience with this exact work:** that usually lowers execution reliability further, because planning error and hidden dependencies are more likely.\n- **Regulations still in flux:** moving requirements are a major schedule risk and increase both delay probability and uncertainty.\n\nSo I would revise substantially downward from 75% and also widen the uncertainty band.\n\nA reasonable updated point estimate is **30%**:\n- Start from the **40%** base rate.\n- Adjust downward for **first-time team**.\n- Adjust further downward for **requirements likely changing soon**.\n\nFor the **80% confidence interval**, I\u2019d make it fairly wide because regulatory uncertainty creates a lot of variance. A plausible range is **15% to 50%**.\n\n```json\n{\"estimate\": 30, \"ci_low\": 15, \"ci_high\": 50}\n```"
+}

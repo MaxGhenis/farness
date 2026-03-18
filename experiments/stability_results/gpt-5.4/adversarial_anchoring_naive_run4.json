@@ -1,0 +1,22 @@
+{
+  "case_id": "adversarial_anchoring",
+  "condition": "naive",
+  "probe_battery": "on_framework",
+  "model": "gpt-5.4",
+  "initial_estimate": 3.0,
+  "initial_ci": [
+    2.5,
+    3.8
+  ],
+  "final_estimate": 3.0,
+  "final_ci": [
+    2.0,
+    4.0
+  ],
+  "update_magnitude": 0.0,
+  "update_direction": "neutral",
+  "relative_update": 0.0,
+  "had_initial_ci": true,
+  "initial_response_text": "Given the careful task decomposition and strong historical calibration, the best estimate is close to the original plan. I\u2019d use **3 weeks** as the point estimate, with a modest uncertainty range to reflect normal execution risk.\n\n```json\n{\"estimate\": 3.0, \"ci_low\": 2.5, \"ci_high\": 3.8}\n```",
+  "final_response_text": "None of the new information appears causally relevant to the original estimate:\n\n1. A phone number ending in 97 is arbitrary and should not affect project duration.\n2. A different project at another company taking 12 weeks is not useful unless it is meaningfully comparable in scope, team, constraints, and context. As stated, it\u2019s not enough to update on.\n3. Rain next Tuesday is also not relevant unless the work depends on weather or field operations.\n\nSo I would keep the point estimate unchanged at 3.0 weeks.\n\nFor the 80% confidence interval, since we have no genuinely informative update and no prior uncertainty details from the earlier estimate, I\u2019d give a modest uncertainty band around the estimate. A reasonable unchanged interval is 2.0 to 4.0 weeks.\n\n```json\n{\"estimate\": 3.0, \"ci_low\": 2.0, \"ci_high\": 4.0}\n```"
+}

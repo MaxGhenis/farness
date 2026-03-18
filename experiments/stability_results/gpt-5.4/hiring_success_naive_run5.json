@@ -1,0 +1,22 @@
+{
+  "case_id": "hiring_success",
+  "condition": "naive",
+  "probe_battery": "on_framework",
+  "model": "gpt-5.4",
+  "initial_estimate": 32.0,
+  "initial_ci": [
+    18.0,
+    48.0
+  ],
+  "final_estimate": 24.0,
+  "final_ci": [
+    16.0,
+    34.0
+  ],
+  "update_magnitude": 8.0,
+  "update_direction": "down",
+  "relative_update": 0.25,
+  "had_initial_ci": true,
+  "initial_response_text": "A\u2019s interview chemistry is a weak but real positive signal; the \u201creminded you of your best performer\u201d effect is also a source of similarity/affinity bias, so I would discount it heavily. Since B scored higher technically, A\u2019s evidence for future top-quartile performance is mixed rather than strong.\n\nBase rate for \u201ctop performer (top 25%)\u201d is 25%. I\u2019d move A somewhat above that based on interpersonal signal, but not dramatically without stronger objective evidence.\n\n```json\n{\"estimate\": 32, \"ci_low\": 18, \"ci_high\": 48}\n```",
+  "final_response_text": "Yes \u2014 this should reduce the estimate.\n\nGiven the new information:\n\n- **Unstructured interview impression** has only **r = 0.14** with job performance, so it carries weak predictive value.\n- **\u201cReminded me of our best performer\u201d** is better treated as **similarity/halo bias** than signal, so I\u2019d discount it heavily or ignore it.\n- **Technical assessment** at **r = 0.51** is the strongest evidence here and should dominate the estimate.\n\nSo compared with the prior **32.0%**, I would revise downward because the earlier estimate likely gave too much weight to interviewer enthusiasm / perceived chemistry.\n\nA reasonable revised estimate is **24%**.\n\nFor the **80% confidence interval**, I\u2019d keep it fairly wide because we still don\u2019t know:\n- the base hiring rate,\n- how strong the candidate\u2019s technical assessment actually was relative to others,\n- whether there are structured signals beyond the unstructured interview.\n\nSo I\u2019d give an **80% CI of 16% to 34%**.\n\n```json\n{\"estimate\": 24, \"ci_low\": 16, \"ci_high\": 34}\n```"
+}

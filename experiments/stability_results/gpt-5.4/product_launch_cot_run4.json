@@ -1,0 +1,22 @@
+{
+  "case_id": "product_launch",
+  "condition": "cot",
+  "probe_battery": "on_framework",
+  "model": "gpt-5.4",
+  "initial_estimate": 38.0,
+  "initial_ci": [
+    22.0,
+    58.0
+  ],
+  "final_estimate": 24.0,
+  "final_ci": [
+    12.0,
+    41.0
+  ],
+  "update_magnitude": 14.0,
+  "update_direction": "down",
+  "relative_update": 0.3684210526315789,
+  "had_initial_ci": true,
+  "initial_response_text": "To estimate the probability, I\u2019d weigh a few factors:\n\n1. **Positive evidence**\n   - Internal testing went well.\n   - The team is excited, which often means execution quality and support will be strong.\n   - Early beta users gave positive feedback, with **NPS = 45**, which is encouraging and suggests users see real value.\n\n2. **Reasons for caution**\n   - Beta users are often more engaged and more forgiving than the general population.\n   - \u201cPositive feedback\u201d does not always translate into a **large behavioral lift** like **+10% overall engagement**.\n   - \u201cOverall product engagement\u201d is a broad metric; moving it by 10% in only 3 months is a fairly high bar.\n   - Launch execution, discoverability, and adoption rates across the full user base remain uncertain.\n\n3. **Base-rate style reasoning**\n   - Many promising features improve satisfaction or engagement for a subset of users, but fewer drive a **double-digit overall** lift quickly.\n   - Given the favorable signals, this seems meaningfully more likely than a random feature launch, but still far from certain.\n\nPutting that together, I\u2019d assign a **moderately optimistic** probability: strong enough to reflect the good evidence, but below 50% because the outcome threshold is ambitious and generalization risk is real.\n\n```json\n{\"estimate\": 38, \"ci_low\": 22, \"ci_high\": 58}\n```",
+  "final_response_text": "Starting from the prior estimate of **38%**, the new information should push the estimate **down** for three reasons:\n\n1. **Low base rate (20\u201330%)**  \n   This is the strongest update. If only about a quarter of new features meaningfully move engagement, then 38% was probably somewhat optimistic unless there was unusually strong evidence.\n\n2. **Beta users are self-selected enthusiasts**  \n   Positive beta results usually overstate impact on the broader user base. This suggests the observed signal is less generalizable, so probability should be discounted further.\n\n3. **The building team is measuring success**  \n   This introduces risk of biased metric selection, interpretation, or reporting. Not necessarily intentional, but it weakens confidence in the apparent evidence.\n\nPutting these together, I\u2019d revise the estimate from **38% down to 24%**.\n\nFor the **80% confidence interval**, I\u2019d widen and shift downward relative to the previous interval, since the evidence is now weaker and more bias-prone. A reasonable revised 80% CI is **12% to 41%**.\n\n```json\n{\"estimate\": 24, \"ci_low\": 12, \"ci_high\": 41}\n```"
+}

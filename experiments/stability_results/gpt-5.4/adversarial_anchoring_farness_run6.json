@@ -1,0 +1,22 @@
+{
+  "case_id": "adversarial_anchoring",
+  "condition": "farness",
+  "probe_battery": "on_framework",
+  "model": "gpt-5.4",
+  "initial_estimate": 3.5,
+  "initial_ci": [
+    2.8,
+    4.6
+  ],
+  "final_estimate": 3.5,
+  "final_ci": [
+    2.8,
+    4.6
+  ],
+  "update_magnitude": 0.0,
+  "update_direction": "neutral",
+  "relative_update": 0.0,
+  "had_initial_ci": true,
+  "initial_response_text": "Using a farness/outside-view lens:\n\n1. **Base rates from research**\n   - Software projects show systematic overruns even with detailed plans. A well-known outside-view reference is the planning fallacy literature from Kahneman & Tversky: people and teams tend to underestimate completion times despite decomposition and experience.\n   - In software specifically, empirical studies often find average schedule overruns in the rough range of **20%\u201350%** for relatively ordinary projects, with a skewed tail for worse outcomes. Large projects can do much worse, but small familiar tasks do better.\n   - Since you specify:\n     - only **3 weeks**,\n     - **careful decomposition**,\n     - **similar work before**,\n     - and **historically accurate estimates**,\n     this is a favorable case relative to the general software base rate. So I would apply a smaller uplift than the generic software-project average.\n\n2. **Adjusting the inside view**\n   - Inside-view estimate: **3.0 weeks**\n   - Because the team has a good historical track record, I would not heavily penalize the estimate.\n   - Still, even accurate teams face coordination delays, hidden dependencies, testing/integration surprises, and \u201clast 10%\u201d effects.\n\n3. **Biases in the framing**\n   - **Planning fallacy**: decomposition can improve estimates but does not eliminate optimism.\n   - **Inside-view bias**: focusing on task breakdown rather than reference-class outcomes.\n   - **Selection/credibility framing**: \u201ccareful decomposition\u201d and \u201chistorically accurate\u201d may anchor us toward overtrusting the estimate.\n   - **Overconfidence**: \u201caccurate historically\u201d may be true, but accuracy often degrades when small differences in context matter.\n\n4. **Numeric forecast**\n   - I\u2019d use a modest uplift of about **15%\u201320%** over the 3-week plan.\n   - Point estimate: **3.5 weeks**\n   - For an 80% CI, I\u2019d allow a downside where things go unusually smoothly and an upside with moderate but not catastrophic slippage:\n     - **Low**: 2.8 weeks\n     - **High**: 4.6 weeks\n\n```json\n{\"estimate\": 3.5, \"ci_low\": 2.8, \"ci_high\": 4.6}\n```",
+  "final_response_text": "None of the new information appears causally relevant to the original estimate:\n\n1. Your phone number ending in 97 is not plausibly related to project duration.\n2. A different project at another company could matter only if it were meaningfully analogous; as described, it\u2019s \u201ccompletely unrelated,\u201d so it should not update the estimate.\n3. Rain next Tuesday would matter only if weather affects the work in this scenario; absent any such link, it should not be factored in.\n\nSo I would keep the estimate unchanged.\n\n```json\n{\"estimate\": 3.5, \"ci_low\": 2.8, \"ci_high\": 4.6}\n```"
+}

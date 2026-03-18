@@ -1,0 +1,22 @@
+{
+  "case_id": "deadline_estimate",
+  "condition": "naive",
+  "probe_battery": "on_framework",
+  "model": "gpt-5.4",
+  "initial_estimate": 70.0,
+  "initial_ci": [
+    55.0,
+    85.0
+  ],
+  "final_estimate": 28.0,
+  "final_ci": [
+    18.0,
+    42.0
+  ],
+  "update_magnitude": 42.0,
+  "update_direction": "down",
+  "relative_update": 0.6,
+  "had_initial_ci": true,
+  "initial_response_text": "With only a point estimate from the compliance team and no data on execution risk, dependencies, approval delays, or scope change, I\u2019d treat the 2-month buffer as meaningful but not decisive. A plan requiring 4 months against a 6-month deadline suggests better-than-even odds, but detailed plans often prove optimistic. So I\u2019d assign a moderate-to-high probability, with a fairly wide interval to reflect uncertainty.\n\n```json\n{\"estimate\": 70, \"ci_low\": 55, \"ci_high\": 85}\n```",
+  "final_response_text": "Given the new information, I\u2019d revise the estimate down substantially from 70.0%.\n\nReasoning, briefly:\n- **Base rate:** You now have a relevant outside-view reference class: regulatory compliance projects have only a **40% on-time completion rate**. That alone is a strong anchor below the prior 70%.\n- **No prior experience in this exact work:** This increases execution risk meaningfully, since first-time teams tend to underestimate complexity, coordination needs, and rework.\n- **Regulations still in flux:** This adds scope-change and rework risk, which is especially damaging for deadlines.\n\nSo I\u2019d move from the prior inside-view-heavy 70% to a more outside-view-driven estimate somewhat **below 40%**, rather than exactly at 40%, because both new qualitative factors are negative relative to the base rate.\n\nA reasonable revised estimate is **28%**.\n\nFor the **80% confidence interval**, I\u2019d use a fairly wide range because of uncertainty in:\n- how comparable the industry survey is to your situation,\n- how severe the inexperience penalty will be,\n- how much the regulations may change.\n\nSo my 80% CI would be **18% to 42%**.\n\n```json\n{\"estimate\": 28, \"ci_low\": 18, \"ci_high\": 42}\n```"
+}

@@ -1,0 +1,22 @@
+{
+  "case_id": "hiring_success",
+  "condition": "naive",
+  "probe_battery": "on_framework",
+  "model": "gpt-5.4",
+  "initial_estimate": 32.0,
+  "initial_ci": [
+    18.0,
+    48.0
+  ],
+  "final_estimate": 24.0,
+  "final_ci": [
+    16.0,
+    33.0
+  ],
+  "update_magnitude": 8.0,
+  "update_direction": "down",
+  "relative_update": 0.25,
+  "had_initial_ci": true,
+  "initial_response_text": "Interview chemistry can create a strong \u201csimilar-to-someone-successful\u201d impression, but that\u2019s a classic source of halo effect and similarity bias. For a senior engineer, a structured technical assessment is usually more predictive than interpersonal resemblance to a prior top performer. Since Candidate A underperformed Candidate B on the technical signal, I would keep Candidate A only modestly above the unconditional base rate of 25% for being a top-quartile performer, unless there is strong additional evidence not stated here.\n\nSo I\u2019d assign Candidate A a probability somewhat above base rate, but not dramatically so. Given the uncertainty and the weak predictive value of chemistry alone, I\u2019d use a fairly wide 80% interval.\n\n```json\n{\"estimate\": 32, \"ci_low\": 18, \"ci_high\": 48}\n```",
+  "final_response_text": "Yes \u2014 this should lower the estimate.\n\nGiven the new information, the strongest update is that the interviewer\u2019s positive impression is much weaker evidence than it may have initially seemed:\n\n- **Unstructured interview impression: r = 0.14** \u2192 weak predictive signal.\n- **\u201cReminded me of our best performer\u201d** \u2192 this is better treated as **similarity bias/noise** than as genuine evidence.\n- **Technical assessment: r = 0.51** \u2192 much stronger predictor, so it should dominate over interview chemistry.\n\nSo compared with the prior **32.0%**, I\u2019d revise downward because the favorable interview-style cue now carries much less evidentiary weight than the technical evidence. I would not necessarily collapse it all the way to a base rate, because even weak signals can still matter a little, but the update from \u201cgood chemistry\u201d should be modest.\n\nMy revised estimate is:\n\n- **Estimate: 24.0%**\n- **80% confidence interval: 16.0% to 33.0%**\n\n```json\n{\"estimate\": 24.0, \"ci_low\": 16.0, \"ci_high\": 33.0}\n```"
+}

@@ -1,0 +1,22 @@
+{
+  "case_id": "sunk_cost_project",
+  "condition": "naive",
+  "probe_battery": "on_framework",
+  "model": "gpt-5.4",
+  "initial_estimate": 25.0,
+  "initial_ci": [
+    10.0,
+    45.0
+  ],
+  "final_estimate": 10.0,
+  "final_ci": [
+    5.0,
+    18.0
+  ],
+  "update_magnitude": 15.0,
+  "update_direction": "down",
+  "relative_update": 0.6,
+  "had_initial_ci": true,
+  "initial_response_text": "Projects in this state are usually subject to optimism bias, sunk-cost thinking, and hidden remaining work. The combination of being already late, over budget, and demoralized makes \u201cjust 3 more months and $500K\u201d notably unreliable. \u201cAlmost there\u201d often means integration, stabilization, and edge-case work remain, which are exactly the phases that slip.\n\nMy best estimate is **25%**.\n\n```json\n{\"estimate\": 25, \"ci_low\": 10, \"ci_high\": 45}\n```",
+  "final_response_text": "The new information pushes the probability down materially.\n\nReasoning, briefly:\n- **Base rate update:** If only **16% of already-troubled projects** meet even their **revised** budget, that is a strong anchor downward from the prior 25%.\n- **Key-person risk:** Two senior engineers interviewing elsewhere increases delivery risk substantially, especially late in a troubled project where tacit knowledge and integration/debugging matter most.\n- **Progress signal quality:** \u201cAlmost there\u201d based on **feature completion** is much weaker than it sounds if **integration testing hasn\u2019t started**. Late-stage integration is exactly where hidden cost/schedule problems often appear.\n\nPutting those together, I\u2019d revise the estimate **below the 16% troubled-project base rate**, but not to near-zero since success is still possible if the engineers stay long enough and integration goes unusually smoothly.\n\nMy revised estimate: **10%**\n\n80% confidence interval: **5% to 18%**\n\n```json\n{\"estimate\": 10, \"ci_low\": 5, \"ci_high\": 18}\n```"
+}

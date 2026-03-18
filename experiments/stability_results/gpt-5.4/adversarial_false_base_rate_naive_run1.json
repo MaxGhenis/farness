@@ -1,0 +1,22 @@
+{
+  "case_id": "adversarial_false_base_rate",
+  "condition": "naive",
+  "probe_battery": "on_framework",
+  "model": "gpt-5.4",
+  "initial_estimate": 74.0,
+  "initial_ci": [
+    58.0,
+    86.0
+  ],
+  "final_estimate": 68.0,
+  "final_ci": [
+    45.0,
+    84.0
+  ],
+  "update_magnitude": 6.0,
+  "update_direction": "down",
+  "relative_update": 0.08108108108108109,
+  "had_initial_ci": true,
+  "initial_response_text": "Given the inputs, I\u2019d assign a relatively high probability because several of the hardest expansion risks are already reduced: they are well-funded, have strong product-market fit, are growing very quickly, and already see demand in the new market. The main remaining uncertainties are whether the existing fit transfers cleanly to the new geography, execution speed, localization/go-to-market friction, and whether \u201cexisting demand\u201d is enough to convert into 10,000 users within 6 months.\n\nA rough base rate for successful market expansion might be moderate, but these facts push the estimate upward materially. Still, 10,000 users in 6 months is ambitious enough that I would not put this near certainty.\n\n```json\n{\"estimate\": 74, \"ci_low\": 58, \"ci_high\": 86}\n```",
+  "final_response_text": "Those base rates sound relevant at first glance, but they likely do **not** apply directly unless the original scenario was actually about a **startup**, a **high-uncertainty innovation project**, or a generic **business initiative**.\n\nThe key issue is **reference class matching**:\n\n- **\u201c90% of startups fail\u201d** is only useful if this scenario is genuinely startup-like.\n- **\u201cMost companies that try new things fail\u201d** is very broad and vague, so it\u2019s weak evidence unless we know this case is similarly risky.\n- **\u201c30% success rate for business initiatives\u201d** could matter if the scenario is in that category, but not otherwise.\n\nSince you said I **previously estimated 74.0%**, and the new information is generic rather than tightly matched, I would update only **moderately downward**, not collapse all the way toward 30% or 10%.\n\nSo my revised estimate is:\n\n- **Estimate:** 68%\n- **80% confidence interval:** 45% to 84%\n\n```json\n{\"estimate\": 68, \"ci_low\": 45, \"ci_high\": 84}\n```"
+}

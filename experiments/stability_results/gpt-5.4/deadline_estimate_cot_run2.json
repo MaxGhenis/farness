@@ -1,0 +1,22 @@
+{
+  "case_id": "deadline_estimate",
+  "condition": "cot",
+  "probe_battery": "on_framework",
+  "model": "gpt-5.4",
+  "initial_estimate": 74.0,
+  "initial_ci": [
+    58.0,
+    86.0
+  ],
+  "final_estimate": 28.0,
+  "final_ci": [
+    15.0,
+    45.0
+  ],
+  "update_magnitude": 46.0,
+  "update_direction": "down",
+  "relative_update": 0.6216216216216216,
+  "had_initial_ci": true,
+  "initial_response_text": "A simple way to think about this:\n\n1. **Base rate from the plan**  \n   The team estimates 4 months of work against a 6-month deadline, so there is a **50% schedule buffer** relative to the estimated work duration. That is a meaningful cushion.\n\n2. **Positive evidence**  \n   - The compliance team made the estimate.\n   - They have a **detailed project plan**, which usually improves forecast quality versus a vague estimate.\n\n3. **Risk factors**  \n   Compliance projects often face:\n   - interpretation changes or regulator clarifications,\n   - cross-functional dependencies,\n   - approval delays,\n   - remediation/rework after testing or audit review.\n\n4. **Overall judgment**  \n   A 2-month buffer on a 4-month estimate is fairly strong, but not enough to make success near-certain. Detailed planning pushes the probability up, while typical execution and regulatory uncertainty keep it below, say, 90%.\n\nSo I\u2019d assign a probability in the **low-to-mid 70s**.\n\n```json\n{\"estimate\": 74, \"ci_low\": 58, \"ci_high\": 86}\n```",
+  "final_response_text": "Starting from the prior estimate of **74%** on-time completion:\n\n1. **Base-rate update:**  \n   You now have an external reference point: regulatory compliance projects are on time only **40%** of the time. That is a strong anchor and materially below the prior estimate, so the estimate should move downward.\n\n2. **Team inexperience:**  \n   The team has **never done this specific type of work before**, which increases execution risk, coordination errors, and underestimation risk. This pushes the estimate further below the generic 40% base rate unless there are strong offsetting advantages.\n\n3. **Requirements volatility:**  \n   The regulations are **still being finalized** and may change in the next 2 months. That adds scope uncertainty and rework risk, which is especially damaging for schedule reliability. This is another meaningful negative adjustment.\n\nPutting these together, I\u2019d revise the estimate substantially downward from 74%, and somewhat below the 40% industry base rate because the project appears worse than average on key drivers of delay.\n\nA reasonable revised estimate is **28%**.\n\nFor the **80% confidence interval**, I\u2019d use a fairly wide range because regulatory ambiguity and first-time execution create substantial uncertainty. I\u2019d set it at **15% to 45%**.\n\n```json\n{\"estimate\": 28, \"ci_low\": 15, \"ci_high\": 45}\n```"
+}

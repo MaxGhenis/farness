@@ -1,0 +1,22 @@
+{
+  "case_id": "product_launch",
+  "condition": "farness",
+  "probe_battery": "on_framework",
+  "model": "gpt-5.4",
+  "initial_estimate": 28.0,
+  "initial_ci": [
+    15.0,
+    45.0
+  ],
+  "final_estimate": 18.0,
+  "final_ci": [
+    8.0,
+    32.0
+  ],
+  "update_magnitude": 10.0,
+  "update_direction": "down",
+  "relative_update": 0.35714285714285715,
+  "had_initial_ci": true,
+  "initial_response_text": "Using a farness-style outside view first:\n\n## Outside view / base rates\nFor new product features, the base rate of producing a **large, durable uplift** in overall engagement is usually modest. Across product experimentation literature and industry reports:\n\n- In A/B testing programs, only a minority of shipped changes produce clearly positive movement on key metrics; many are neutral, and some are negative.\n- For meaningful lifts on a top-line metric like **overall engagement**, a **10% increase sustained within 3 months** is a fairly high bar, especially for a single feature unless it affects a core user loop.\n- Positive beta feedback and an NPS of 45 are encouraging, but these are weak-to-moderate predictors of broad rollout impact because beta users are often more engaged and more favorable than the general population.\n\nA reasonable generic base rate for \u201cnew feature leads to at least 10% increase in overall engagement within 3 months\u201d is roughly **10\u201330%**, depending on how central the feature is.\n\n## Updating on your evidence\nEvidence pushing upward:\n- **Internal testing went well**: suggests implementation quality and low obvious UX issues.\n- **Team excitement**: may reflect genuine product intuition, though not strong evidence by itself.\n- **Early beta NPS = 45**: clearly positive signal; suggests user satisfaction among exposed users.\n\nEvidence limiting confidence:\n- **Selection effects**: beta users are rarely representative.\n- **Engagement vs satisfaction gap**: users can like a feature without it materially changing behavior.\n- **Local vs global metric**: a feature may increase use of itself but not overall product engagement by 10%.\n- **Short time window**: 3 months is enough to measure impact, but also short enough that adoption may still be ramping.\n\n## Cognitive biases in the framing\nKey biases likely present:\n1. **Selection bias**: beta users are often enthusiasts/power users.\n2. **Confirmation bias**: \u201cinternal testing went well\u201d and positive anecdotes may overweight supportive evidence.\n3. **Optimism bias / planning fallacy**: excitement can inflate expected impact.\n4. **Survivorship bias**: attention on positive beta signals, less on unseen failed launches elsewhere.\n5. **Metric substitution**: using NPS as a proxy for engagement impact.\n6. **Inside-view bias**: focusing on specifics of this feature rather than base rates for feature launches broadly.\n\n## Numeric forecast\nStarting from an outside-view base rate around **20%** for this magnitude of outcome, I\u2019d update upward for strong beta sentiment and apparently solid execution, but not dramatically because the target is a large uplift in an overall metric.\n\n**Point estimate: 28%**\n\n**80% confidence interval: 15% to 45%**\n\nThat interval reflects:\n- lower end if beta enthusiasm fails to generalize and impact is localized,\n- upper end if the feature is central to repeated use and rollout/adoption are strong.\n\n```json\n{\"estimate\": 28, \"ci_low\": 15, \"ci_high\": 45}\n```",
+  "final_response_text": "Given the new information, I\u2019d revise the estimate downward.\n\nReasoning, briefly:\n- **Base rate (20\u201330%)** suggests most new features do **not** meaningfully move engagement, so the prior 28% should probably drift toward the middle of that range unless there was unusually strong evidence before.\n- **Self-selected beta users** usually inflate apparent success because enthusiasts are more likely to adopt and respond positively than the general population.\n- **Builder-measured success** adds risk of optimistic interpretation, metric selection effects, or confirmation bias.\n\nPutting that together, I\u2019d move from **28%** to about **18%**, with a somewhat wide interval because there\u2019s still uncertainty, but the added information shifts probability lower and increases concern about overestimation.\n\n```json\n{\"estimate\": 18.0, \"ci_low\": 8.0, \"ci_high\": 32.0}\n```"
+}

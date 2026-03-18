@@ -1,0 +1,22 @@
+{
+  "case_id": "deadline_estimate",
+  "condition": "cot",
+  "probe_battery": "on_framework",
+  "model": "gpt-5.4",
+  "initial_estimate": 75.0,
+  "initial_ci": [
+    60.0,
+    88.0
+  ],
+  "final_estimate": 30.0,
+  "final_ci": [
+    15.0,
+    50.0
+  ],
+  "update_magnitude": 45.0,
+  "update_direction": "down",
+  "relative_update": 0.6,
+  "had_initial_ci": true,
+  "initial_response_text": "Start with the base rate: projects with a detailed plan and a nominal 50% schedule buffer are more likely than not to finish on time, but not guaranteed. A 4-month estimate for a 6-month deadline means the team has planned slack of 2 months, which is substantial.\n\nNow adjust for uncertainty:\n1. Compliance projects often face hidden complexity, external dependencies, changing interpretations of regulations, and approval bottlenecks.\n2. Team estimates are often somewhat optimistic, even when detailed.\n3. On the other hand, the work is already identified, the deadline is known, and a detailed plan reduces execution risk.\n\nSo:\n- If the estimate is reasonably calibrated, a 2-month buffer on a 4-month task is strong.\n- But if the estimate misses major issues, the buffer can disappear quickly.\n\nOverall, I\u2019d put the probability meaningfully above 50% but not extremely high. A reasonable point estimate is around 75%.\n\nFor an 80% confidence interval, I\u2019d allow for moderate uncertainty: perhaps from about 60% to 88%.\n\n```json\n{\"estimate\": 75, \"ci_low\": 60, \"ci_high\": 88}\n```",
+  "final_response_text": "Starting from the prior estimate of **75%** with an **80% CI of 60\u201388%**, the new information is all negative for on-time delivery:\n\n1. **Industry base rate: 40% on-time**\n   - This is a strong anchor and materially below the prior 75%.\n   - It suggests the original estimate was likely optimistic unless this case had clear advantages.\n\n2. **Team has never done this specific work before**\n   - Lack of direct experience increases execution risk.\n   - I\u2019d adjust downward further from the 40% base-rate anchor unless there are offsetting strengths.\n\n3. **Regulations still being finalized**\n   - Scope instability is a major schedule risk.\n   - This adds both a lower expected probability and more uncertainty, so the confidence interval should widen.\n\n### Revised judgment\nRelative to the 40% industry rate, the team\u2019s inexperience and changing requirements suggest this case is somewhat worse than average. I\u2019d revise the estimate down to **30%**.\n\nBecause of the evolving regulations, uncertainty is fairly high, so I\u2019d use a wider **80% confidence interval** of about **15% to 50%**.\n\n```json\n{\"estimate\": 30, \"ci_low\": 15, \"ci_high\": 50}\n```"
+}

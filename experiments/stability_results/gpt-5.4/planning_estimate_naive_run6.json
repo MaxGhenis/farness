@@ -1,0 +1,22 @@
+{
+  "case_id": "planning_estimate",
+  "condition": "naive",
+  "probe_battery": "on_framework",
+  "model": "gpt-5.4",
+  "initial_estimate": 3.0,
+  "initial_ci": [
+    2.0,
+    5.0
+  ],
+  "final_estimate": 8.5,
+  "final_ci": [
+    6.0,
+    12.0
+  ],
+  "update_magnitude": 5.5,
+  "update_direction": "up",
+  "relative_update": 1.8333333333333333,
+  "had_initial_ci": true,
+  "initial_response_text": "Software estimates, even with confidence and detailed breakdowns, tend to be optimistic. A common adjustment is to add a modest overrun factor rather than doubling outright when the team seems well-prepared.\n\nSo I\u2019d center the estimate at about **3 weeks**, with an **80% confidence interval of 2 to 5 weeks**.\n\n```json\n{\"estimate\": 3, \"ci_low\": 2, \"ci_high\": 5}\n```",
+  "final_response_text": "Yes \u2014 all three points push the estimate upward.\n\nReasoning, briefly:\n- Initial estimate: 3.0 weeks\n- Typical software underruns are rare; average actuals of 2\u20133x initial estimates suggest a central tendency around 2.5x if no other corrective information exists.\n- Team confidence as a planning-fallacy signal further argues against trusting the low original number.\n- A 30% chance of a major blocker increases expected duration further. If a blocker adds substantial delay, the expected value rises meaningfully and the uncertainty widens.\n\nA reasonable revision is:\n- Base adjusted estimate: about 3.0 \u00d7 2.5 = 7.5 weeks\n- Add blocker risk in expectation: if a major blocker adds roughly 2\u20134 weeks, 30% probability contributes about 0.6\u20131.2 weeks expected delay\n- Revised point estimate: about 8.5 weeks\n\nFor an 80% confidence interval, I\u2019d widen it substantially because software-task duration is right-skewed and blocker risk creates a longer tail. A plausible 80% interval is:\n- Low: 6.0 weeks\n- High: 12.0 weeks\n\n```json\n{\"estimate\": 8.5, \"ci_low\": 6.0, \"ci_high\": 12.0}\n```"
+}

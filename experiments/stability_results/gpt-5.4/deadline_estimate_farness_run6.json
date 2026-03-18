@@ -1,0 +1,22 @@
+{
+  "case_id": "deadline_estimate",
+  "condition": "farness",
+  "probe_battery": "on_framework",
+  "model": "gpt-5.4",
+  "initial_estimate": 68.0,
+  "initial_ci": [
+    45.0,
+    82.0
+  ],
+  "final_estimate": 31.0,
+  "final_ci": [
+    15.0,
+    52.0
+  ],
+  "update_magnitude": 37.0,
+  "update_direction": "down",
+  "relative_update": 0.5441176470588235,
+  "had_initial_ci": true,
+  "initial_response_text": "Using the farness framework, I\u2019d push hard toward the outside view rather than trusting the detailed plan at face value.\n\n## Outside view / base rates\nRelevant base rates from research:\n\n- **Planning fallacy / optimism bias:** Kahneman and Tversky\u2019s work shows that projects with detailed inside-view plans systematically underestimate duration.\n- **Large project overruns are common:** Bent Flyvbjerg\u2019s research across many project types finds schedule overruns are the norm, not the exception; while compliance projects are smaller than megaprojects, the directional lesson is robust: plans are usually too optimistic.\n- **IT / process-change implementations often overrun materially:** Benchmarks from tech and transformation projects often show median schedule overruns in the roughly **20\u201350%+** range, with meaningful tail risk from integration, stakeholder review, and rework.\n\nA compliance program facing a hard regulatory deadline typically has several risk multipliers:\n- hidden scope discovery\n- dependency on legal, security, engineering, vendors, and auditors\n- review/approval bottlenecks\n- late interpretation changes from regulators or counsel\n- testing / remediation cycles\n\nIf the team says **4 months of work** with a **6-month deadline**, the implied schedule buffer is **50%**. That sounds decent, but once translated into an outside-view forecast, it is not overwhelmingly safe.\n\n## Biases in the framing\nKey cognitive biases present:\n\n1. **Planning fallacy**  \n   The team\u2019s detailed plan can increase confidence without increasing accuracy.\n\n2. **Inside-view bias**  \n   Focus on task list and intended execution rather than distribution of outcomes from similar compliance efforts.\n\n3. **Anchoring**  \n   The \u201c4 months\u201d estimate may anchor discussion, making the 2-month buffer feel larger than it really is.\n\n4. **Illusion of control**  \n   A detailed plan may obscure external dependencies and approval delays that are only partially controllable.\n\n5. **Survivorship / scenario selection bias**  \n   Plans usually model the intended path, not the messy but common path involving rework and escalations.\n\n## Numeric forecast\nA simple outside-view way to think about this:\n\n- If the true median overrun versus plan is around **25\u201340%**, then a 4-month estimate often becomes **5.0\u20135.6 months**.\n- That still fits inside 6 months, but not by much.\n- There remains substantial tail risk from regulatory reinterpretation, resourcing shocks, or remediation rounds that push beyond 6 months.\n\nSo the probability of finishing before 6 months should be **better than even**, but not extremely high.\n\n## Forecast\n**Point estimate:** **68%**\n\n**80% confidence interval:** **45% to 82%**\n\nThat reflects:\n- meaningful protection from the 2-month buffer\n- but also the strong empirical tendency for complex organizational projects to slip\n\n```json\n{\"estimate\": 68, \"ci_low\": 45, \"ci_high\": 82}\n```",
+  "final_response_text": "The new information is strongly negative for schedule confidence:\n\n- A 40% industry on-time base rate is much lower than the prior implied base rate behind 68%.\n- A team with no prior experience in this exact work type adds execution risk.\n- Regulations still being finalized creates scope volatility, which is one of the biggest drivers of delay in compliance projects.\n\nSo I would revise the estimate down materially, and widen the interval somewhat because the moving regulatory target increases uncertainty.\n\nA reasonable update is:\n- Start near the 40% base rate.\n- Adjust downward for first-time execution.\n- Adjust downward again for likely rule changes / rework risk.\n\nThat suggests a central estimate around the low 30s. Because there is still some chance the project is managed well and the regulations stabilize quickly, I would not go extremely low; but the upside is now capped relative to the original estimate.\n\n```json\n{\"estimate\": 31.0, \"ci_low\": 15.0, \"ci_high\": 52.0}\n```"
+}

@@ -1,0 +1,22 @@
+{
+  "case_id": "planning_estimate",
+  "condition": "cot",
+  "probe_battery": "on_framework",
+  "model": "gpt-5.4",
+  "initial_estimate": 2.8,
+  "initial_ci": [
+    2.0,
+    4.0
+  ],
+  "final_estimate": 4.8,
+  "final_ci": [
+    3.0,
+    7.5
+  ],
+  "update_magnitude": 2.0,
+  "update_direction": "up",
+  "relative_update": 0.7142857142857143,
+  "had_initial_ci": true,
+  "initial_response_text": "Software estimates, even with confident teams and detailed breakdowns, often run longer than planned because of integration issues, hidden dependencies, testing, review cycles, and small interruptions. A common adjustment is to expect some optimism bias rather than taking the 2-week estimate literally.\n\nGiven:\n- The team is confident\n- They have detailed task breakdowns\n- But software work still tends to overrun\n\nA reasonable outside-view adjustment is to increase the estimate moderately, not dramatically. I\u2019d move from 2 weeks to about 2.8 weeks.\n\nFor an 80% confidence interval, I\u2019d allow for:\n- Some chance they finish close to plan if things go unusually smoothly\n- A meaningful chance of moderate overruns\n\nSo an 80% interval of about 2.0 to 4.0 weeks seems reasonable.\n\n```json\n{\"estimate\": 2.8, \"ci_low\": 2.0, \"ci_high\": 4.0}\n```",
+  "final_response_text": "Start from the previous estimate:\n\n- Prior estimate: **2.8 weeks**\n- Prior 80% CI: **2.0\u20134.0 weeks**\n\nNow update it with the new information.\n\n### 1) Software projects often take 2\u20133x initial estimates\nYes, this should push the estimate upward. But I would not simply multiply the whole estimate by 2\u20133 mechanically, because:\n\n- the original 2.8-week estimate may already have implicitly included some uncertainty,\n- \u201c2\u20133x\u201d is an average generalization across many projects,\n- we should update moderately rather than fully replacing the prior.\n\nSo this is strong evidence for **upward adjustment**, especially on the upper tail.\n\n### 2) Team confidence is actually a planning-fallacy warning sign\nYes, this also pushes upward.\n\nPreviously, confidence might have been interpreted as reducing risk. If instead it indicates overconfidence, then:\n\n- the central estimate should rise,\n- the interval should widen,\n- the lower bound should probably not increase much, but the upper bound should.\n\n### 3) 30% chance of a major blocker\nThis clearly increases expected duration and widens the confidence interval.\n\nA simple way to think about it:\n\n- **70% case:** no major blocker, but still adjusted upward for planning fallacy / underestimation\n- **30% case:** blocker occurs, adding substantial delay\n\nIf the \u201cno blocker\u201d adjusted estimate is roughly around **4.0 weeks**, and a blocker scenario might push duration to, say, **6\u20138 weeks**, then the expected value becomes something like:\n\n- `0.7 \u00d7 4.0 + 0.3 \u00d7 7.0 = 4.9 weeks`\n\nThat suggests a revised point estimate near **4.8\u20135.0 weeks**.\n\n### Revised estimate\nI\u2019d round to:\n\n- **Estimate: 4.8 weeks**\n\n### Revised 80% confidence interval\nBecause of the blocker risk and evidence of systematic underestimation, the interval should widen substantially.\n\nA plausible 80% CI is:\n\n- **3.0 to 7.5 weeks**\n\nThis reflects:\n\n- optimistic but still plausible execution near 3 weeks,\n- typical adjusted outcome around 4.8 weeks,\n- significant probability mass in delayed outcomes due to blocker risk.\n\n```json\n{\"estimate\": 4.8, \"ci_low\": 3.0, \"ci_high\": 7.5}\n```"
+}

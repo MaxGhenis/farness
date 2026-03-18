@@ -1,0 +1,22 @@
+{
+  "case_id": "product_launch",
+  "condition": "cot",
+  "probe_battery": "on_framework",
+  "model": "gpt-5.4",
+  "initial_estimate": 38.0,
+  "initial_ci": [
+    22.0,
+    58.0
+  ],
+  "final_estimate": 27.0,
+  "final_ci": [
+    15.0,
+    43.0
+  ],
+  "update_magnitude": 11.0,
+  "update_direction": "down",
+  "relative_update": 0.2894736842105263,
+  "had_initial_ci": true,
+  "initial_response_text": "I\u2019d estimate this by starting from a base rate: many promising feature launches do improve engagement, but getting to a **product-level** increase of **at least 10% within 3 months** is a fairly high bar. Positive signals here help:\n\n1. **Internal testing went well**: useful, but usually weak evidence because teams are biased and test conditions are favorable.\n2. **Team is excited**: mildly positive, though not very predictive on its own.\n3. **Early beta users gave positive feedback (NPS 45)**: this is the strongest signal provided. It suggests users who tried it found value, but beta users are often more engaged than the general population.\n4. **Full launch next month**: suggests implementation risk is lower, but adoption and sustained behavior change remain uncertain.\n\nSo I\u2019d start with a moderate base probability that a new feature materially lifts engagement at all, then discount for the difficulty of achieving a **10% overall** lift, while updating upward because the beta feedback is solidly positive.\n\nMy best guess is that this is **somewhat more likely than not to help meaningfully, but still far from certain**.\n\n```json\n{\"estimate\": 38, \"ci_low\": 22, \"ci_high\": 58}\n```",
+  "final_response_text": "Starting from the previous estimate of **38%**, the new information pushes the probability **down** on all three points:\n\n1. **Base rate (20\u201330%)**  \n   This is the strongest anchor. If only about a quarter of new features meaningfully move engagement, then 38% was likely somewhat optimistic unless there was unusually strong evidence.\n\n2. **Beta users are self-selected enthusiasts**  \n   This weakens positive beta evidence because enthusiasts are more likely to adopt and respond well than the general population. So any observed beta success should be discounted.\n\n3. **Feature team measures its own success**  \n   This introduces risk of optimistic interpretation, metric selection effects, or unintentional bias. That further reduces confidence in favorable early signals.\n\n### Step-by-step adjustment\n- Prior estimate: **38%**\n- Adjust toward base rate: down into the high-20s / low-30s\n- Discount for non-representative beta users: down a few more points\n- Discount for measurement bias: down a few more points\n\n### Revised estimate\nA reasonable revised estimate is **27%**.\n\n### 80% confidence interval\nBecause the evidence is noisy and somewhat biased, I\u2019d keep the interval fairly wide, but narrower than the original because the base-rate information is informative:\n\n**80% CI: 15% to 43%**\n\n```json\n{\"estimate\": 27, \"ci_low\": 15, \"ci_high\": 43}\n```"
+}

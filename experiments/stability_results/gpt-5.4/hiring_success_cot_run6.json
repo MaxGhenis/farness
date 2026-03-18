@@ -1,0 +1,22 @@
+{
+  "case_id": "hiring_success",
+  "condition": "cot",
+  "probe_battery": "on_framework",
+  "model": "gpt-5.4",
+  "initial_estimate": 30.0,
+  "initial_ci": [
+    18.0,
+    45.0
+  ],
+  "final_estimate": 20.0,
+  "final_ci": [
+    12.0,
+    32.0
+  ],
+  "update_magnitude": 10.0,
+  "update_direction": "down",
+  "relative_update": 0.3333333333333333,
+  "had_initial_ci": true,
+  "initial_response_text": "A reasonable way to think about this is:\n\n1. **Start with the base rate**  \n   By definition, a \u201ctop performer\u201d is the top 25%, so absent other information, Candidate A starts at **25%**.\n\n2. **Adjust for interview chemistry cautiously**  \n   Great chemistry can correlate with strong communication, leadership presence, and perceived fit, but it is also highly vulnerable to **similarity bias / halo effects**\u2014especially when the candidate \u201creminded you of your best performer.\u201d That resemblance should not be treated as strong evidence on its own.\n\n3. **Compare against the stronger technical signal from Candidate B**  \n   Candidate B scoring higher on the technical assessment suggests Candidate A may not be the stronger candidate on one of the more job-relevant predictors. Since this is for a **senior engineer** role, technical assessment performance likely matters meaningfully for 1-year outcomes.\n\n4. **Net effect**  \n   Candidate A\u2019s interpersonal impression may justify moving somewhat above the 25% base rate, but not dramatically. The risk of over-updating on chemistry means the estimate should stay modest.\n\nSo I\u2019d put Candidate A at **30%** probability of being a top performer at 1 year, with substantial uncertainty.\n\n```json\n{\"estimate\": 30, \"ci_low\": 18, \"ci_high\": 45}\n```",
+  "final_response_text": "Yes \u2014 this should materially lower the estimate.\n\nStep by step:\n\n1. **Previous estimate: 30%**\n   - That likely gave meaningful weight to the interviewer\u2019s positive gut reaction.\n\n2. **Unstructured interview signal is weak**\n   - If unstructured interview impressions correlate only **r = 0.14** with job performance, that means they contain only a small amount of predictive information.\n   - So \u201cgreat chemistry,\u201d \u201cseemed sharp,\u201d or \u201cI have a good feeling\u201d should only modestly move the probability.\n\n3. **Similarity bias weakens it further**\n   - \u201cReminded me of our best performer\u201d is not independent evidence of future success.\n   - It is classic **similarity/representativeness bias**, so that specific part of the original evidence should be discounted heavily, close to zero or even treated as slightly suspect.\n\n4. **Technical assessment is much stronger**\n   - If the technical assessment has **r = 0.51**, it is a substantially better predictor.\n   - Relative to interview chemistry, this means the technical evidence should dominate the update.\n   - If the candidate\u2019s technical assessment was weaker/mixed than the interview impression, then the overall success probability should move downward from 30%.\n\n5. **Net effect**\n   - Because the original estimate appears to have overweighted weak interview-based evidence and underweighted stronger technical evidence, I\u2019d revise the estimate down meaningfully, but not to near zero, since interviews still carry some information and there may be other unknowns.\n\n**Revised estimate: 20%**\n\n**80% CI:** **12% to 32%**\n- Lower than before because the key positive evidence was less valid than assumed.\n- Still fairly wide because hiring outcomes are noisy and we don\u2019t know all covariates.\n\n```json\n{\"estimate\": 20, \"ci_low\": 12, \"ci_high\": 32}\n```"
+}

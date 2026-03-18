@@ -1,0 +1,22 @@
+{
+  "case_id": "hiring_success",
+  "condition": "farness",
+  "probe_battery": "on_framework",
+  "model": "gpt-5.4",
+  "initial_estimate": 30.0,
+  "initial_ci": [
+    18.0,
+    44.0
+  ],
+  "final_estimate": 22.0,
+  "final_ci": [
+    12.0,
+    35.0
+  ],
+  "update_magnitude": 8.0,
+  "update_direction": "down",
+  "relative_update": 0.26666666666666666,
+  "had_initial_ci": true,
+  "initial_response_text": "Base rate first: by definition, an arbitrary hire has a 25% chance of landing in the top quartile at 1 year.\n\nNow adjust using the outside view on signal quality:\n\n- **Structured technical assessments** generally have **moderate predictive validity** for job performance. Across personnel-selection meta-analyses, general mental ability/work-sample style assessments often correlate around **0.3\u20130.5** with later performance, depending on role and measurement quality.\n- **Unstructured interview chemistry / \u201creminds me of my best performer\u201d** is much weaker and noisier. Research on unstructured interviews tends to show **lower predictive validity** than structured methods, and similarity-to-self or similarity-to-past-success stories is especially vulnerable to error.\n- Senior engineering performance at 1 year is also affected by many non-interview factors: team fit, manager quality, ramp-up environment, project match, motivation, and luck. So even strong interview signals usually move probability only modestly from the base rate.\n\nKey cognitive biases in the framing:\n\n1. **Halo effect**: \u201cgreat chemistry\u201d may spill over into an inflated estimate of future job performance.\n2. **Representativeness / prototype matching**: \u201creminded you of your best performer\u201d substitutes resemblance for actual predictive evidence.\n3. **Availability bias**: your best performer is salient and memorable, so the analogy feels more informative than it is.\n4. **Affect heuristic**: positive interpersonal feeling is being used as evidence.\n5. **Neglect of valid cues**: Candidate B\u2019s stronger technical assessment is likely the more predictive signal, yet the question centers A\u2019s chemistry.\n\nGiven only the information provided, I would move Candidate A **slightly above** the unconditional 25% base rate if I assume the interviewer\u2019s positive signal contains some information, but not by much because it is low-validity and bias-prone.\n\n**Point estimate for Candidate A being a top performer at 1 year: 30%**\n\nWhy not higher?\n- The \u201cgreat chemistry\u201d signal is real but weak.\n- The comparison to a prior best performer is exactly the kind of pattern-matching humans overweight.\n- The stronger technical signal belongs to Candidate B, which indirectly lowers confidence that A is the superior bet.\n\n**80% confidence interval: 18% to 44%**\n- Lower bound reflects the possibility that interview chemistry is mostly noise.\n- Upper bound reflects the possibility that the chemistry captured genuine senior-level traits not measured in the assessment (communication, leadership, stakeholder handling), but still constrained by the modest predictive power of interviews overall.\n\n```json\n{\"estimate\": 30, \"ci_low\": 18, \"ci_high\": 44}\n```",
+  "final_response_text": "Yes \u2014 this should revise the estimate downward.\n\nReasoning:\n- The original 30% estimate likely gave too much weight to the interviewer\u2019s positive subjective impression.\n- New evidence says that kind of unstructured interview signal is weak: r = 0.14 with job performance, which is only a small predictive relationship.\n- \u201cReminded me of our best performer\u201d is especially weak because it sounds like similarity/representativeness bias, not a job-relevant signal.\n- By contrast, the technical assessment has much stronger validity (r = 0.51), so any update should rely far more on that than on \u201cchemistry\u201d or resemblance to a prior employee.\n- So the positive subjective signal should be heavily discounted. Unless the technical assessment itself was clearly strong, the previous 30% seems overstated.\n\nRevised estimate: 22%\nRevised 80% CI: 12%\u201335%\n\n```json\n{\"estimate\": 22, \"ci_low\": 12, \"ci_high\": 35}\n```"
+}

@@ -1,0 +1,22 @@
+{
+  "case_id": "acquisition_synergies",
+  "condition": "naive",
+  "probe_battery": "on_framework",
+  "model": "gpt-5.4",
+  "initial_estimate": 68.0,
+  "initial_ci": [
+    45.0,
+    82.0
+  ],
+  "final_estimate": 38.0,
+  "final_ci": [
+    25.0,
+    55.0
+  ],
+  "update_magnitude": 30.0,
+  "update_direction": "down",
+  "relative_update": 0.4411764705882353,
+  "had_initial_ci": true,
+  "initial_response_text": "Realizing at least 50% of projected synergies within 2 years is more likely than not, but far from certain. Cost synergies from duplicate functions are usually achievable if management executes well; revenue synergies from cross-selling are much less reliable and often slower. Since the threshold is only $25M out of $50M, the company does not need full delivery, just enough of the easier-to-capture savings plus some partial execution elsewhere. Without deal-specific information, I would assign a moderate probability with meaningful uncertainty.\n\n```json\n{\"estimate\": 68, \"ci_low\": 45, \"ci_high\": 82}\n```",
+  "final_response_text": "I\u2019d revise the estimate downward materially from 68.0%.\n\nReasoning, briefly:\n- If acquirers realize only about 50% of projected synergies on average, that directly weakens a common source of deal value and suggests prior upside assumptions were likely too optimistic.\n- If 60\u201380% of M&A deals fail to create value for the acquirer, the base rate for success is only about 20\u201340%, which is a strong anchor downward unless there is very specific counterevidence.\n- CEO enthusiasm is not reassuring here; if anything, it raises concern about overconfidence/escalation and can be a mild negative signal because championed deals are more prone to optimism bias.\n\nSo I\u2019d move from 68% to something closer to the upper part of the generic M&A success base rate only if there are still some deal-specific positives not withdrawn. A reasonable revised point estimate is 38%.\n\nGiven the high variance in synergy realization and broad uncertainty in M&A outcomes, I\u2019d use a fairly wide 80% confidence interval: 25% to 55%.\n\n```json\n{\"estimate\": 38, \"ci_low\": 25, \"ci_high\": 55}\n```"
+}

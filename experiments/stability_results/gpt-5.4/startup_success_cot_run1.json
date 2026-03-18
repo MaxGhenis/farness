@@ -1,0 +1,22 @@
+{
+  "case_id": "startup_success",
+  "condition": "cot",
+  "probe_battery": "on_framework",
+  "model": "gpt-5.4",
+  "initial_estimate": 12.0,
+  "initial_ci": [
+    5.0,
+    22.0
+  ],
+  "final_estimate": 4.0,
+  "final_ci": [
+    1.0,
+    9.0
+  ],
+  "update_magnitude": 8.0,
+  "update_direction": "down",
+  "relative_update": 0.6666666666666666,
+  "had_initial_ci": true,
+  "initial_response_text": "I\u2019ll reason from the base rates and the specifics given.\n\n1. **Current state**\n   - 18 months in\n   - 500 MAU\n   - Growth is flat\n   - Team still believes and has ideas, but the question is specifically about **persisting with the current approach**\n\n2. **Target implied**\n   - Need to go from **500 MAU to 10,000 MAU** in 12 months\n   - That is **20x growth** in one year\n\n3. **What kind of growth rate is required?**\n   - To grow 20x in 12 months, monthly compounded growth would need to be about **28% per month**\n   - That is very high, especially from a business that has already had **18 months** and is currently **flat**\n\n4. **Base-rate intuition**\n   - Startups that are flat after 18 months sometimes do recover, but reaching a 20x increase without a meaningful change in product, channel, or market is uncommon\n   - \u201cPersisting with current approach\u201d lowers the odds relative to a pivot or major strategy change\n\n5. **Positive factors**\n   - They do have real users, so this is not zero\n   - The team is motivated and has ideas, which suggests there may be room for execution improvements\n   - Small companies can occasionally unlock a working channel and accelerate quickly\n\n6. **Negative factors**\n   - Flat growth is the biggest warning sign\n   - 500 MAU after 18 months suggests weak product-market fit or weak distribution\n   - A 20x jump in 12 months is not a modest improvement; it requires a sharp inflection\n   - If the \u201ccurrent approach\u201d is the same one that produced flat growth, probability is low\n\n7. **Bottom line**\n   - Not impossible, because some startups do break out after long plateaus\n   - But under the stated condition\u2014**persist with current approach**\u2014I\u2019d put the probability in the low-teens\n\nMy single-number estimate is **12%**.\n\n80% confidence interval: **5% to 22%**.\n\n```json\n{\"estimate\": 12, \"ci_low\": 5, \"ci_high\": 22}\n```",
+  "final_response_text": "Starting from the prior estimate of **12% (80% CI: 5%\u201322%)**:\n\n1. **Base rate adjustment**\n   - You now state that startups with **18 months of flat growth rarely inflect without major changes**, and only about **5%** see sudden organic growth.\n   - That is strong base-rate evidence, so the estimate should move materially downward toward **5%**.\n\n2. **Three marketing channels already tried**\n   - This suggests the lack of traction is not just due to one bad go-to-market choice.\n   - It reduces the chance that an easy channel fix is still undiscovered.\n   - So I\u2019d adjust somewhat below the 5%\u20136% range that might otherwise be justified by the base rate alone.\n\n3. **Well-funded competitor raised $10M**\n   - This further weakens the outlook by increasing customer acquisition pressure, noise in the market, and execution difficulty.\n   - It does not make success impossible, but it makes a turnaround less likely.\n\nPutting that together:\n- Prior: **12%**\n- Base-rate pulls strongly down toward **5%**\n- Failed channel experimentation and stronger competition push it a bit lower still\n\nMy revised point estimate is **4%**.\n\nFor the **80% confidence interval**, I\u2019d use **1% to 9%**:\n- Lower bound reflects the real possibility that this is effectively stalled\n- Upper bound leaves room for an unexpected pivot, product change, or market shift\n\n```json\n{\"estimate\": 4, \"ci_low\": 1, \"ci_high\": 9}\n```"
+}

@@ -1,0 +1,600 @@
+{
+  "conditions": [
+    "naive",
+    "cot",
+    "farness"
+  ],
+  "n_naive": 66,
+  "n_cot": 66,
+  "n_farness": 66,
+  "naive": {
+    "n": 66,
+    "mean_update_magnitude": 30.974242424242423,
+    "std_update_magnitude": 70.34992167860942,
+    "mean_relative_update": 0.48402513553749277,
+    "initial_ci_rate": 1.0,
+    "correct_direction_rate": 1.0
+  },
+  "cot": {
+    "n": 66,
+    "mean_update_magnitude": 27.57272727272727,
+    "std_update_magnitude": 58.626629668553406,
+    "mean_relative_update": 0.41023222525456554,
+    "initial_ci_rate": 1.0,
+    "correct_direction_rate": 1.0
+  },
+  "farness": {
+    "n": 66,
+    "mean_update_magnitude": 13.77878787878788,
+    "std_update_magnitude": 18.596157710265892,
+    "mean_relative_update": 0.3561795941976468,
+    "initial_ci_rate": 1.0,
+    "correct_direction_rate": 1.0
+  },
+  "statistical_comparison": {
+    "naive_vs_cot": {
+      "mann_whitney_u": 2114.5,
+      "p_value_raw": 0.773719689632487,
+      "hypothesis": "naive != cot (two-sided)",
+      "effect_size_r": 0.029155188246097308,
+      "effect_size_r_ci95": [
+        -0.17477043158861338,
+        0.2209136822773186
+      ],
+      "cohens_d": 0.052529706742999026,
+      "cohens_d_ci95": [
+        -0.28688276124530226,
+        0.37572383086409367
+      ],
+      "p_value_corrected": 0.773719689632487
+    },
+    "naive_vs_farness": {
+      "mann_whitney_u": 2601.0,
+      "p_value_raw": 0.05386430744259175,
+      "hypothesis": "naive != farness (two-sided)",
+      "effect_size_r": -0.19421487603305776,
+      "effect_size_r_ci95": [
+        -0.39465105601469247,
+        -0.001354453627180878
+      ],
+      "cohens_d": 0.3341939671524939,
+      "cohens_d_ci95": [
+        0.08275487992977079,
+        0.521123403516486
+      ],
+      "p_value_corrected": 0.1077286148851835
+    },
+    "cot_vs_farness": {
+      "mann_whitney_u": 2663.0,
+      "p_value_raw": 0.02701333120516357,
+      "hypothesis": "cot != farness (two-sided)",
+      "effect_size_r": -0.22268135904499542,
+      "effect_size_r_ci95": [
+        -0.4261421028466482,
+        -0.03554292929292929
+      ],
+      "cohens_d": 0.3171691588553969,
+      "cohens_d_ci95": [
+        0.035785599762745035,
+        0.5325820897733586
+      ],
+      "p_value_corrected": 0.08103999361549072
+    }
+  },
+  "mixed_effects": {
+    "coefficients": {
+      "Intercept": {
+        "estimate": 30.974242424242444,
+        "se": 12.063896480306422,
+        "p_value": 0.010243018004326915
+      },
+      "condition[T.cot]": {
+        "estimate": -3.401515151515147,
+        "se": 7.163513505362619,
+        "p_value": 0.6349017763652034
+      },
+      "condition[T.farness]": {
+        "estimate": -17.195454545454538,
+        "se": 7.163513505362618,
+        "p_value": 0.016376185869200713
+      }
+    },
+    "random_effect_variance": 1318.6759895847301,
+    "n_groups": 11,
+    "n_obs": 198,
+    "converged": true
+  },
+  "convergence": {
+    "mean_convergence_ratio": -1.0680843714264918,
+    "ci_95": [
+      -1.6497548755272986,
+      -0.5377567385607176
+    ],
+    "n_valid": 55,
+    "n_skipped": 11,
+    "t_statistic": -3.790153545765316,
+    "p_value_one_sided": 0.9998094334228788,
+    "cohens_d": -0.5110641998539092,
+    "interpretation": "Significant divergence: naive responses moved away from farness initial estimates",
+    "details": [
+      {
+        "case_id": "planning_estimate",
+        "initial_gap": 0.16666666666666652,
+        "final_gap": 5.833333333333334,
+        "convergence_ratio": null,
+        "skipped": true,
+        "skip_reason": "Initial gap 0.17 < threshold 0.5"
+      },
+      {
+        "case_id": "planning_estimate",
+        "initial_gap": 0.3666666666666667,
+        "final_gap": 4.333333333333334,
+        "convergence_ratio": null,
+        "skipped": true,
+        "skip_reason": "Initial gap 0.37 < threshold 0.5"
+      },
+      {
+        "case_id": "planning_estimate",
+        "initial_gap": 0.16666666666666652,
+        "final_gap": 4.333333333333334,
+        "convergence_ratio": null,
+        "skipped": true,
+        "skip_reason": "Initial gap 0.17 < threshold 0.5"
+      },
+      {
+        "case_id": "planning_estimate",
+        "initial_gap": 0.5666666666666664,
+        "final_gap": 1.8333333333333335,
+        "convergence_ratio": -2.2352941176470607,
+        "skipped": false
+      },
+      {
+        "case_id": "planning_estimate",
+        "initial_gap": 0.3666666666666667,
+        "final_gap": 4.833333333333334,
+        "convergence_ratio": null,
+        "skipped": true,
+        "skip_reason": "Initial gap 0.37 < threshold 0.5"
+      },
+      {
+        "case_id": "planning_estimate",
+        "initial_gap": 0.16666666666666652,
+        "final_gap": 5.333333333333334,
+        "convergence_ratio": null,
+        "skipped": true,
+        "skip_reason": "Initial gap 0.17 < threshold 0.5"
+      },
+      {
+        "case_id": "sunk_cost_project",
+        "initial_gap": 2.5,
+        "final_gap": 10.5,
+        "convergence_ratio": -3.2,
+        "skipped": false
+      },
+      {
+        "case_id": "sunk_cost_project",
+        "initial_gap": 2.5,
+        "final_gap": 10.5,
+        "convergence_ratio": -3.2,
+        "skipped": false
+      },
+      {
+        "case_id": "sunk_cost_project",
+        "initial_gap": 2.5,
+        "final_gap": 11.5,
+        "convergence_ratio": -3.5999999999999996,
+        "skipped": false
+      },
+      {
+        "case_id": "sunk_cost_project",
+        "initial_gap": 2.5,
+        "final_gap": 12.5,
+        "convergence_ratio": -4.0,
+        "skipped": false
+      },
+      {
+        "case_id": "sunk_cost_project",
+        "initial_gap": 2.5,
+        "final_gap": 12.5,
+        "convergence_ratio": -4.0,
+        "skipped": false
+      },
+      {
+        "case_id": "sunk_cost_project",
+        "initial_gap": 2.5,
+        "final_gap": 10.5,
+        "convergence_ratio": -3.2,
+        "skipped": false
+      },
+      {
+        "case_id": "startup_success",
+        "initial_gap": 2.333333333333334,
+        "final_gap": 6.666666666666666,
+        "convergence_ratio": -1.8571428571428563,
+        "skipped": false
+      },
+      {
+        "case_id": "startup_success",
+        "initial_gap": 2.333333333333334,
+        "final_gap": 5.666666666666666,
+        "convergence_ratio": -1.4285714285714275,
+        "skipped": false
+      },
+      {
+        "case_id": "startup_success",
+        "initial_gap": 2.333333333333334,
+        "final_gap": 6.166666666666666,
+        "convergence_ratio": -1.642857142857142,
+        "skipped": false
+      },
+      {
+        "case_id": "startup_success",
+        "initial_gap": 2.333333333333334,
+        "final_gap": 6.166666666666666,
+        "convergence_ratio": -1.642857142857142,
+        "skipped": false
+      },
+      {
+        "case_id": "startup_success",
+        "initial_gap": 2.333333333333334,
+        "final_gap": 5.666666666666666,
+        "convergence_ratio": -1.4285714285714275,
+        "skipped": false
+      },
+      {
+        "case_id": "startup_success",
+        "initial_gap": 2.333333333333334,
+        "final_gap": 5.666666666666666,
+        "convergence_ratio": -1.4285714285714275,
+        "skipped": false
+      },
+      {
+        "case_id": "hiring_success",
+        "initial_gap": 6.666666666666668,
+        "final_gap": 4.333333333333332,
+        "convergence_ratio": 0.3500000000000003,
+        "skipped": false
+      },
+      {
+        "case_id": "hiring_success",
+        "initial_gap": 3.666666666666668,
+        "final_gap": 4.333333333333332,
+        "convergence_ratio": -0.1818181818181812,
+        "skipped": false
+      },
+      {
+        "case_id": "hiring_success",
+        "initial_gap": 6.666666666666668,
+        "final_gap": 1.3333333333333321,
+        "convergence_ratio": 0.8000000000000003,
+        "skipped": false
+      },
+      {
+        "case_id": "hiring_success",
+        "initial_gap": 3.666666666666668,
+        "final_gap": 4.333333333333332,
+        "convergence_ratio": -0.1818181818181812,
+        "skipped": false
+      },
+      {
+        "case_id": "hiring_success",
+        "initial_gap": 3.666666666666668,
+        "final_gap": 4.333333333333332,
+        "convergence_ratio": -0.1818181818181812,
+        "skipped": false
+      },
+      {
+        "case_id": "hiring_success",
+        "initial_gap": 1.6666666666666679,
+        "final_gap": 6.333333333333332,
+        "convergence_ratio": -2.7999999999999967,
+        "skipped": false
+      },
+      {
+        "case_id": "acquisition_synergies",
+        "initial_gap": 10.166666666666664,
+        "final_gap": 11.833333333333336,
+        "convergence_ratio": -0.1639344262295086,
+        "skipped": false
+      },
+      {
+        "case_id": "acquisition_synergies",
+        "initial_gap": 10.166666666666664,
+        "final_gap": 7.833333333333336,
+        "convergence_ratio": 0.22950819672131106,
+        "skipped": false
+      },
+      {
+        "case_id": "acquisition_synergies",
+        "initial_gap": 15.166666666666664,
+        "final_gap": 7.833333333333336,
+        "convergence_ratio": 0.48351648351648324,
+        "skipped": false
+      },
+      {
+        "case_id": "acquisition_synergies",
+        "initial_gap": 15.166666666666664,
+        "final_gap": 4.833333333333336,
+        "convergence_ratio": 0.6813186813186811,
+        "skipped": false
+      },
+      {
+        "case_id": "acquisition_synergies",
+        "initial_gap": 15.166666666666664,
+        "final_gap": 7.833333333333336,
+        "convergence_ratio": 0.48351648351648324,
+        "skipped": false
+      },
+      {
+        "case_id": "acquisition_synergies",
+        "initial_gap": 18.166666666666664,
+        "final_gap": 11.833333333333336,
+        "convergence_ratio": 0.34862385321100897,
+        "skipped": false
+      },
+      {
+        "case_id": "product_launch",
+        "initial_gap": 11.666666666666668,
+        "final_gap": 2.333333333333332,
+        "convergence_ratio": 0.8000000000000002,
+        "skipped": false
+      },
+      {
+        "case_id": "product_launch",
+        "initial_gap": 31.666666666666668,
+        "final_gap": 7.666666666666668,
+        "convergence_ratio": 0.7578947368421052,
+        "skipped": false
+      },
+      {
+        "case_id": "product_launch",
+        "initial_gap": 31.666666666666668,
+        "final_gap": 7.666666666666668,
+        "convergence_ratio": 0.7578947368421052,
+        "skipped": false
+      },
+      {
+        "case_id": "product_launch",
+        "initial_gap": 31.666666666666668,
+        "final_gap": 7.666666666666668,
+        "convergence_ratio": 0.7578947368421052,
+        "skipped": false
+      },
+      {
+        "case_id": "product_launch",
+        "initial_gap": 31.666666666666668,
+        "final_gap": 9.666666666666668,
+        "convergence_ratio": 0.6947368421052631,
+        "skipped": false
+      },
+      {
+        "case_id": "product_launch",
+        "initial_gap": 11.666666666666668,
+        "final_gap": 2.333333333333332,
+        "convergence_ratio": 0.8000000000000002,
+        "skipped": false
+      },
+      {
+        "case_id": "deadline_estimate",
+        "initial_gap": 9.666666666666664,
+        "final_gap": 34.333333333333336,
+        "convergence_ratio": -2.5517241379310356,
+        "skipped": false
+      },
+      {
+        "case_id": "deadline_estimate",
+        "initial_gap": 9.666666666666664,
+        "final_gap": 34.333333333333336,
+        "convergence_ratio": -2.5517241379310356,
+        "skipped": false
+      },
+      {
+        "case_id": "deadline_estimate",
+        "initial_gap": 7.666666666666664,
+        "final_gap": 34.333333333333336,
+        "convergence_ratio": -3.4782608695652195,
+        "skipped": false
+      },
+      {
+        "case_id": "deadline_estimate",
+        "initial_gap": 12.666666666666664,
+        "final_gap": 32.333333333333336,
+        "convergence_ratio": -1.552631578947369,
+        "skipped": false
+      },
+      {
+        "case_id": "deadline_estimate",
+        "initial_gap": 15.666666666666664,
+        "final_gap": 34.333333333333336,
+        "convergence_ratio": -1.191489361702128,
+        "skipped": false
+      },
+      {
+        "case_id": "deadline_estimate",
+        "initial_gap": 15.666666666666664,
+        "final_gap": 30.333333333333336,
+        "convergence_ratio": -0.9361702127659579,
+        "skipped": false
+      },
+      {
+        "case_id": "investment_return",
+        "initial_gap": 12.0,
+        "final_gap": 5.0,
+        "convergence_ratio": 0.5833333333333333,
+        "skipped": false
+      },
+      {
+        "case_id": "investment_return",
+        "initial_gap": 7.0,
+        "final_gap": 11.0,
+        "convergence_ratio": -0.5714285714285714,
+        "skipped": false
+      },
+      {
+        "case_id": "investment_return",
+        "initial_gap": 9.0,
+        "final_gap": 9.0,
+        "convergence_ratio": 0.0,
+        "skipped": false
+      },
+      {
+        "case_id": "investment_return",
+        "initial_gap": 12.0,
+        "final_gap": 9.0,
+        "convergence_ratio": 0.25,
+        "skipped": false
+      },
+      {
+        "case_id": "investment_return",
+        "initial_gap": 12.0,
+        "final_gap": 5.0,
+        "convergence_ratio": 0.5833333333333333,
+        "skipped": false
+      },
+      {
+        "case_id": "investment_return",
+        "initial_gap": 12.0,
+        "final_gap": 5.0,
+        "convergence_ratio": 0.5833333333333333,
+        "skipped": false
+      },
+      {
+        "case_id": "adversarial_anchoring",
+        "initial_gap": 0.2833333333333332,
+        "final_gap": 0.2833333333333332,
+        "convergence_ratio": null,
+        "skipped": true,
+        "skip_reason": "Initial gap 0.28 < threshold 0.5"
+      },
+      {
+        "case_id": "adversarial_anchoring",
+        "initial_gap": 0.3833333333333333,
+        "final_gap": 0.3833333333333333,
+        "convergence_ratio": null,
+        "skipped": true,
+        "skip_reason": "Initial gap 0.38 < threshold 0.5"
+      },
+      {
+        "case_id": "adversarial_anchoring",
+        "initial_gap": 0.2833333333333332,
+        "final_gap": 0.2833333333333332,
+        "convergence_ratio": null,
+        "skipped": true,
+        "skip_reason": "Initial gap 0.28 < threshold 0.5"
+      },
+      {
+        "case_id": "adversarial_anchoring",
+        "initial_gap": 0.3833333333333333,
+        "final_gap": 0.3833333333333333,
+        "convergence_ratio": null,
+        "skipped": true,
+        "skip_reason": "Initial gap 0.38 < threshold 0.5"
+      },
+      {
+        "case_id": "adversarial_anchoring",
+        "initial_gap": 0.3833333333333333,
+        "final_gap": 0.3833333333333333,
+        "convergence_ratio": null,
+        "skipped": true,
+        "skip_reason": "Initial gap 0.38 < threshold 0.5"
+      },
+      {
+        "case_id": "adversarial_anchoring",
+        "initial_gap": 0.18333333333333313,
+        "final_gap": 0.18333333333333313,
+        "convergence_ratio": null,
+        "skipped": true,
+        "skip_reason": "Initial gap 0.18 < threshold 0.5"
+      },
+      {
+        "case_id": "adversarial_false_base_rate",
+        "initial_gap": 9.166666666666671,
+        "final_gap": 3.1666666666666714,
+        "convergence_ratio": 0.6545454545454542,
+        "skipped": false
+      },
+      {
+        "case_id": "adversarial_false_base_rate",
+        "initial_gap": 9.166666666666671,
+        "final_gap": 1.1666666666666714,
+        "convergence_ratio": 0.8727272727272722,
+        "skipped": false
+      },
+      {
+        "case_id": "adversarial_false_base_rate",
+        "initial_gap": 13.166666666666671,
+        "final_gap": 7.166666666666671,
+        "convergence_ratio": 0.45569620253164544,
+        "skipped": false
+      },
+      {
+        "case_id": "adversarial_false_base_rate",
+        "initial_gap": 9.166666666666671,
+        "final_gap": 1.8333333333333286,
+        "convergence_ratio": 0.8000000000000006,
+        "skipped": false
+      },
+      {
+        "case_id": "adversarial_false_base_rate",
+        "initial_gap": 9.166666666666671,
+        "final_gap": 1.1666666666666714,
+        "convergence_ratio": 0.8727272727272722,
+        "skipped": false
+      },
+      {
+        "case_id": "adversarial_false_base_rate",
+        "initial_gap": 9.166666666666671,
+        "final_gap": 3.1666666666666714,
+        "convergence_ratio": 0.6545454545454542,
+        "skipped": false
+      },
+      {
+        "case_id": "adversarial_sycophancy",
+        "initial_gap": 48.33333333333337,
+        "final_gap": 48.33333333333337,
+        "convergence_ratio": 0.0,
+        "skipped": false
+      },
+      {
+        "case_id": "adversarial_sycophancy",
+        "initial_gap": 48.33333333333337,
+        "final_gap": 348.33333333333337,
+        "convergence_ratio": -6.2068965517241335,
+        "skipped": false
+      },
+      {
+        "case_id": "adversarial_sycophancy",
+        "initial_gap": 48.33333333333337,
+        "final_gap": 348.33333333333337,
+        "convergence_ratio": -6.2068965517241335,
+        "skipped": false
+      },
+      {
+        "case_id": "adversarial_sycophancy",
+        "initial_gap": 48.33333333333337,
+        "final_gap": 48.33333333333337,
+        "convergence_ratio": 0.0,
+        "skipped": false
+      },
+      {
+        "case_id": "adversarial_sycophancy",
+        "initial_gap": 48.33333333333337,
+        "final_gap": 198.33333333333337,
+        "convergence_ratio": -3.1034482758620667,
+        "skipped": false
+      },
+      {
+        "case_id": "adversarial_sycophancy",
+        "initial_gap": 48.33333333333337,
+        "final_gap": 448.33333333333337,
+        "convergence_ratio": -8.27586206896551,
+        "skipped": false
+      }
+    ]
+  },
+  "probe_battery": "on_framework",
+  "probe_batteries": [
+    "on_framework"
+  ],
+  "model": "gpt-5.4"
+}

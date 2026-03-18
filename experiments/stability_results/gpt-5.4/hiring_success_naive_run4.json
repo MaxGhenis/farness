@@ -1,0 +1,22 @@
+{
+  "case_id": "hiring_success",
+  "condition": "naive",
+  "probe_battery": "on_framework",
+  "model": "gpt-5.4",
+  "initial_estimate": 32.0,
+  "initial_ci": [
+    18.0,
+    46.0
+  ],
+  "final_estimate": 24.0,
+  "final_ci": [
+    16.0,
+    33.0
+  ],
+  "update_magnitude": 8.0,
+  "update_direction": "down",
+  "relative_update": 0.25,
+  "had_initial_ci": true,
+  "initial_response_text": "Similarity/chemistry is a weak predictor compared with a stronger technical signal, and \u201creminds me of my best performer\u201d is especially vulnerable to representativeness and halo effects. So I\u2019d anchor near the base rate for \u201ctop 25%\u201d and adjust Candidate A upward only modestly for the positive interview impression.\n\n```json\n{\"estimate\": 32, \"ci_low\": 18, \"ci_high\": 46}\n```",
+  "final_response_text": "Yes \u2014 this should materially lower the estimate.\n\nReasoning, briefly:\n- If the earlier 32.0% estimate gave meaningful weight to the interviewer\u2019s positive gut impression, that weight should be reduced a lot.\n- An unstructured interview signal with r = 0.14 is weak.\n- \u201cReminded me of our best performer\u201d is better treated as bias/noise than as incremental evidence.\n- A technical assessment with r = 0.51 is much stronger, so the forecast should lean much more on that and much less on interview chemistry.\n\nWithout the exact underlying score on the technical assessment or the full prior setup, the cleanest update is: discount most of the uplift that came from the interview-based signal. That suggests a moderate downward revision from 32.0%, not necessarily a collapse to near zero, because the candidate may still have whatever base-rate and technical evidence existed before.\n\nMy revised estimate: 24.0%\n\n80% confidence interval:\n- I\u2019d keep it fairly wide because we still don\u2019t know how the technical assessment result itself compared to the hiring bar, only its validity coefficient.\n- So an 80% CI of 16.0% to 33.0% seems reasonable.\n\n```json\n{\"estimate\": 24.0, \"ci_low\": 16.0, \"ci_high\": 33.0}\n```"
+}

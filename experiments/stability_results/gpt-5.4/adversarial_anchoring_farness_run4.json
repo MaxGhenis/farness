@@ -1,0 +1,22 @@
+{
+  "case_id": "adversarial_anchoring",
+  "condition": "farness",
+  "probe_battery": "on_framework",
+  "model": "gpt-5.4",
+  "initial_estimate": 3.4,
+  "initial_ci": [
+    2.8,
+    4.3
+  ],
+  "final_estimate": 3.4,
+  "final_ci": [
+    2.8,
+    4.3
+  ],
+  "update_magnitude": 0.0,
+  "update_direction": "neutral",
+  "relative_update": 0.0,
+  "had_initial_ci": true,
+  "initial_response_text": "Using the farness framework:\n\n1. Outside view / base rates  \nSoftware tasks and small projects commonly overrun initial estimates. A well-known outside-view finding from planning-fallacy research is that even when teams decompose work carefully, actual durations often exceed estimates, typically by about 20\u201350% on average, with variance depending on novelty and coordination load. However, your prompt gives an important modifier: this team has done similar work before and has historically been accurate. For repeat work with calibrated estimators, overruns tend to be much smaller than the general software base rate.\n\nSo the relevant reference class is not \u201call software projects,\u201d but \u201csimilar, familiar projects estimated by a historically well-calibrated team.\u201d For that class, I\u2019d expect only a modest uplift over the inside-view estimate.\n\n2. Numeric forecast  \nInside view says 3 weeks.  \nGiven historical accuracy, I would anchor near that but still apply a small outside-view adjustment for residual unknowns, integration friction, and small-sample calibration risk.\n\nMy point estimate: 3.4 weeks.\n\n3. Confidence interval  \nAn 80% interval should reflect that even accurate teams face uncertainty. For a 3-week project with familiar work, a plausible 80% range is roughly from slight underrun to moderate overrun.\n\nI\u2019d use: 2.8 to 4.3 weeks.\n\n4. Cognitive biases in framing  \n- Planning fallacy: even careful decomposition can miss coordination and rework.\n- Inside-view bias: focusing on listed tasks may underweight base rates of slippage.\n- Overconfidence: \u201chistorically accurate\u201d may be true but based on a limited sample.\n- Anchoring: the stated 3-week estimate strongly pulls judgment downward.\n\n```json\n{\"estimate\": 3.4, \"ci_low\": 2.8, \"ci_high\": 4.3}\n```",
+  "final_response_text": "None of the new information appears causally relevant to the original estimate:\n\n1. A phone number ending in 97 is arbitrary and should not affect project duration.\n2. An unrelated 12-week project at another company is not useful unless we know it is comparable in scope, team, constraints, and process.\n3. Rain next Tuesday is usually irrelevant unless the work depends on weather-sensitive field operations, construction, shipping, or similar external factors.\n\nSo I would not materially update the estimate based on this information.\n\n```json\n{\"estimate\": 3.4, \"ci_low\": 2.8, \"ci_high\": 4.3}\n```"
+}

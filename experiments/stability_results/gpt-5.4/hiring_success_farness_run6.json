@@ -1,0 +1,22 @@
+{
+  "case_id": "hiring_success",
+  "condition": "farness",
+  "probe_battery": "on_framework",
+  "model": "gpt-5.4",
+  "initial_estimate": 30.0,
+  "initial_ci": [
+    18.0,
+    45.0
+  ],
+  "final_estimate": 22.0,
+  "final_ci": [
+    12.0,
+    36.0
+  ],
+  "update_magnitude": 8.0,
+  "update_direction": "down",
+  "relative_update": 0.26666666666666666,
+  "had_initial_ci": true,
+  "initial_response_text": "Using a farness/outside-view approach:\n\n- **Base rate:** Before considering any interview specifics, a randomly hired senior engineer has about a **25%** chance of being in the **top quartile** at 1 year, by definition.\n- **Research-informed adjustment:** Unstructured interview chemistry has limited predictive validity for job performance, while structured technical assessments generally have higher predictive validity. Meta-analyses in personnel selection commonly find:\n  - **General mental ability / work-sample style assessments:** moderate predictive validity, roughly **r \u2248 0.3 to 0.5**\n  - **Unstructured interviews / \u201cchemistry\u201d:** lower predictive validity, often **r \u2248 0.1 to 0.2**\n- Since Candidate A did well on the interpersonal/chemistry dimension but Candidate B scored higher on the technical assessment, Candidate A\u2019s evidence for future top performance is **somewhat positive but weak-to-moderate overall**, and likely inferior to Candidate B\u2019s signal.\n\n### Biases in the framing\n- **Halo effect:** Great chemistry may inflate judgments about overall competence.\n- **Representativeness / prototype matching:** \u201cReminded you of your best performer\u201d is a classic analogy-based inference that may overgeneralize from one exemplar.\n- **Availability bias:** The memorable best performer is overly salient.\n- **Affect heuristic:** Liking the candidate can distort probability estimates.\n- **Inside-view neglect of base rates:** Overweighting interview feel versus known selection-validity data.\n\n### Forecast\nStarting from the 25% base rate, I would adjust Candidate A **slightly upward** for strong interpersonal impression, but not by much because that signal is noisy and technical signal appears weaker relative to Candidate B.\n\n**Point estimate:** **30%**\n\n**80% confidence interval:** **18% to 45%**\n\n```json\n{\"estimate\": 30, \"ci_low\": 18, \"ci_high\": 45}\n```",
+  "final_response_text": "Yes \u2014 this should revise the estimate downward.\n\nReasoning, briefly:\n- The original 30% likely gave too much weight to the interviewer\u2019s positive subjective impression.\n- An unstructured interview signal with \\( r = 0.14 \\) is weak, so \u201cgood chemistry\u201d adds only limited evidence.\n- \u201cReminded me of our best performer\u201d is not just weak evidence; it is likely biased evidence, so I would discount it heavily or treat it as near-zero predictive value.\n- If the technical assessment has \\( r = 0.51 \\), it is the dominant valid predictor here. So unless the technical assessment was also strongly positive, the prior estimate should be pulled down materially.\n- Overall, the new information suggests the favorable subjective evidence was overstated, so the probability should drop from 30% to something closer to the low 20s.\n\nMy revised estimate: 22%, with an 80% CI of 12%\u201336%.\n\n```json\n{\"estimate\": 22.0, \"ci_low\": 12.0, \"ci_high\": 36.0}\n```"
+}

@@ -1,0 +1,22 @@
+{
+  "case_id": "planning_estimate",
+  "condition": "farness",
+  "probe_battery": "on_framework",
+  "model": "gpt-5.4",
+  "initial_estimate": 3.2,
+  "initial_ci": [
+    2.2,
+    5.0
+  ],
+  "final_estimate": 4.8,
+  "final_ci": [
+    3.0,
+    8.0
+  ],
+  "update_magnitude": 1.5999999999999996,
+  "update_direction": "up",
+  "relative_update": 0.4999999999999999,
+  "had_initial_ci": true,
+  "initial_response_text": "Using the farness framework, I\u2019d start with the outside view rather than the team\u2019s inside-view task breakdown.\n\n### 1) Outside view / base rates\nSoftware estimates are systematically optimistic. Across software projects and tasks, research commonly finds meaningful schedule overruns:\n\n- **Planning fallacy** research: people underestimate completion times even when they have experience and detailed plans.\n- In software specifically, studies and industry datasets often show **actual durations around 1.3x to 2.0x** estimates for nontrivial work, with substantial variance.\n- Short tasks like \u201c2 weeks\u201d are often especially vulnerable to hidden integration, testing, review, dependency, and interruption costs.\n\nFor a feature estimated at **2 weeks**, a reasonable outside-view multiplier is roughly **1.5x to 1.8x** as a central tendency unless there is unusually strong evidence this team is well-calibrated historically.\n\n### 2) Biases in the framing\nThe team being \u201cconfident\u201d and having \u201cdetailed task breakdowns\u201d is not strong evidence of accuracy; in fact it can reinforce common biases:\n\n- **Planning fallacy**: underestimating total duration despite knowing the steps.\n- **Inside-view bias**: focusing on the scenario plan rather than statistical outcomes from similar work.\n- **Overconfidence**: confidence exceeds calibration.\n- **Anchoring**: the \u201c2 weeks\u201d estimate pulls judgment downward.\n- **Scope neglect / hidden work**: integration, QA, code review, rework, dependency delays, and context switching are often omitted.\n\n### 3) Numeric forecast\nStarting from 2 weeks and applying an outside-view uplift:\n\n- Central multiplier: about **1.6x**\n- Point estimate: **2 \u00d7 1.6 = 3.2 weeks**\n\nFor an **80% confidence interval**, I\u2019d allow for a modest overrun on the low side and substantial uncertainty on the high side:\n\n- Low end: **2.2 weeks** (things go unusually smoothly, but still slightly above estimate)\n- High end: **5.0 weeks** (common hidden complexity / coordination effects)\n\nSo my forecast is:\n\n```json\n{\"estimate\": 3.2, \"ci_low\": 2.2, \"ci_high\": 5.0}\n```",
+  "final_response_text": "Yes. All three updates push the estimate upward and widen the uncertainty.\n\nReasoning, briefly:\n\n1. **Typical software underestimation (2\u20133x initial estimates)**  \n   This suggests the original 3.2 weeks was likely optimistic if it was based on a standard task-level estimate. I would not simply multiply by 2\u20133 mechanically, because some of that risk may already have been partially reflected in the original CI, but it does argue for a meaningful upward adjustment.\n\n2. **Team confidence as a planning-fallacy warning**  \n   If their confidence was previously interpreted as positive signal, and it should instead be treated as overconfidence, that further increases the median estimate and especially the upper tail.\n\n3. **30% chance of a major blocker**  \n   This directly increases expected duration. A simple mixture model helps: if the \u201cnormal\u201d case is around, say, 4.0\u20134.5 weeks after adjusting for optimism, and a blocker adds substantial delay, then the weighted estimate rises further. It also widens the 80% interval because the blocker creates a heavier right tail.\n\nA reasonable revised estimate is therefore around **4.8 weeks**, with an **80% CI of 3.0 to 8.0 weeks**.\n\n```json\n{\"estimate\": 4.8, \"ci_low\": 3.0, \"ci_high\": 8.0}\n```"
+}

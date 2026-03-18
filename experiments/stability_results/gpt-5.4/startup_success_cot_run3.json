@@ -1,0 +1,22 @@
+{
+  "case_id": "startup_success",
+  "condition": "cot",
+  "probe_battery": "on_framework",
+  "model": "gpt-5.4",
+  "initial_estimate": 12.0,
+  "initial_ci": [
+    5.0,
+    25.0
+  ],
+  "final_estimate": 4.0,
+  "final_ci": [
+    1.0,
+    9.0
+  ],
+  "update_magnitude": 8.0,
+  "update_direction": "down",
+  "relative_update": 0.6666666666666666,
+  "had_initial_ci": true,
+  "initial_response_text": "I\u2019ll reason from the base rates and the specifics given.\n\n1. **Current state**\n   - They have **500 MAU after 18 months**.\n   - Growth is **flat**.\n   - They are considering **persisting with the current approach**, not a major pivot.\n\n2. **Target difficulty**\n   - Reaching **10,000 MAU within 12 months** means going from 500 to 10,000, or **20x growth** in a year.\n   - That requires roughly **28\u201330% compounded monthly growth** sustained for 12 months.\n   - For a startup already at 500 MAU with flat growth after 18 months, that is a high bar.\n\n3. **Positive signals**\n   - They do have **some users**, so this is not zero traction.\n   - The team has conviction and ideas to try, which slightly increases the chance versus a fully stalled team.\n\n4. **Negative signals**\n   - **18 months** is long enough that flat growth is a meaningful warning sign.\n   - \u201cPersist with current approach\u201d suggests no fundamental change in product, market, or go-to-market.\n   - If there were strong product-market fit emerging, usually growth or retention signals would already be improving.\n\n5. **Base-rate style judgment**\n   - For startups in this position, the probability of suddenly inflecting to 20x MAU growth without a substantial pivot is generally **low**.\n   - Not impossible: some teams do find a channel, product improvement, or market timing shift that unlocks growth.\n   - But the most likely outcome is modest improvement or continued stagnation, not 10,000 MAU.\n\n6. **Estimate**\n   - I\u2019d put the chance in the **low-teens**, roughly around **12%**.\n\n7. **80% confidence interval**\n   - There\u2019s substantial uncertainty because we lack details on retention, activation, TAM, channel economics, and product quality.\n   - A reasonable 80% interval is **5% to 25%**.\n\n```json\n{\"estimate\": 12, \"ci_low\": 5, \"ci_high\": 25}\n```",
+  "final_response_text": "Starting from the prior estimate of **12%**, I\u2019d update downward based on all three new pieces of information:\n\n1. **18 months of flat growth**\n   - This is strong negative evidence.\n   - You note that only about **5%** of such startups see sudden organic growth without major changes.\n   - That suggests the original 12% was too high if we now know this is a \u201crare inflection\u201d profile.\n\n2. **Three marketing channels already tried with similar results**\n   - This further reduces confidence that the issue is just channel mismatch.\n   - It suggests the constraint may be deeper: product-market fit, market demand, positioning, or economics.\n\n3. **Competitor raised $10M targeting same market**\n   - This adds execution and market pressure.\n   - It doesn\u2019t necessarily kill the company\u2019s odds, but it makes a turnaround harder, especially for a startup already showing weak traction.\n\nStep-by-step, I\u2019d move:\n- Prior: **12%**\n- After flat 18 months / rare inflection stat: down toward **5\u20137%**\n- After failed channel experiments: down to around **4\u20136%**\n- After strong competitor funding: down a bit more to around **3\u20135%**\n\nSo my revised point estimate is:\n\n**4%**\n\nFor an **80% confidence interval**, I\u2019d keep it fairly wide because startup outcomes are noisy, but centered low:\n- Lower bound: **1%**\n- Upper bound: **9%**\n\n```json\n{\"estimate\": 4, \"ci_low\": 1, \"ci_high\": 9}\n```"
+}

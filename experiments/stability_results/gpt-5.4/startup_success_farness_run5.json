@@ -1,0 +1,22 @@
+{
+  "case_id": "startup_success",
+  "condition": "farness",
+  "probe_battery": "on_framework",
+  "model": "gpt-5.4",
+  "initial_estimate": 12.0,
+  "initial_ci": [
+    5.0,
+    25.0
+  ],
+  "final_estimate": 4.0,
+  "final_ci": [
+    1.5,
+    10.0
+  ],
+  "update_magnitude": 8.0,
+  "update_direction": "down",
+  "relative_update": 0.6666666666666666,
+  "had_initial_ci": true,
+  "initial_response_text": "Using a farness-style outside-view estimate:\n\n### Outside view / base rates\nRelevant base-rate facts from startup research and industry benchmarks:\n\n- **Startup survival/growth is very skewed**: most startups do not achieve sustained growth; only a minority find clear product-market fit within the first 1\u20133 years.\n- **Flat growth after 18 months is a negative signal**. In accelerator and venture literature, companies that have not shown meaningful month-over-month growth by this point have materially lower odds of breakout without a substantial change.\n- To go from **500 MAU to 10,000 MAU in 12 months** requires **20x growth**, which implies about **28% compounded monthly growth** for a full year. That is far above what flat-growth startups typically achieve without a major product/distribution shift.\n- For early consumer/SaaS products, sustained >15\u201320% monthly growth over many months is usually seen only in a relatively small subset already showing strong pull.\n\nSo the outside view says: **persisting with the same basic approach after 18 months of flatness has low odds of producing 20x growth in the next year**.\n\n### Inside-view adjustment\nPositive factors:\n- They do have **some users**: 500 MAU means the product is not completely unused.\n- The team still has conviction and a backlog of ideas, which means there is optionality.\n\nNegative factors:\n- **18 months** is long enough that flatness likely reflects lack of strong product-market fit or weak distribution.\n- \u201cIdeas to try\u201d often get overweighted; many such experiments do not change the trajectory enough.\n- \u201cPersist with current approach\u201d suggests **no major pivot**, limiting the chance of a step-function change.\n\n### Cognitive biases in the framing\n- **Commitment/escalation bias**: after 18 months, founders may overweight prior effort and want to continue because they\u2019ve already invested heavily.\n- **Inside-view optimism**: focusing on specific ideas/features rather than the base rate of similar startups in flat-growth states.\n- **Survivorship bias**: imagining the rare startups that broke out late, while underweighting the much larger set that stayed flat or died.\n- **Vision attachment / identity-protective cognition**: belief in the mission can be real, but can also make disconfirming evidence harder to accept.\n\n### Numeric forecast\nGiven the base rate and required growth, I would assign a **low but nonzero** probability.\n\n**Point estimate: 12%**\n\n**80% confidence interval: 5% to 25%**\n\nThis reflects:\n- Lower bound: most such startups continuing the same approach remain far below 10,000 MAU.\n- Upper bound: there is some chance that a few experiments, distribution wins, or a delayed fit unlock growth despite current flatness.\n\n```json\n{\"estimate\": 12, \"ci_low\": 5, \"ci_high\": 25}\n```",
+  "final_response_text": "Given the new information, I\u2019d revise the probability downward materially from 12%.\n\nReasoning, briefly:\n- The strongest update is the base rate: if only ~5% of startups with 18 months of flat growth inflect organically, that pulls the estimate down a lot.\n- The fact that they\u2019ve already tested 3 marketing channels with similar weak results suggests the problem is not just one fixable distribution mistake, which further reduces odds.\n- A well-funded competitor entering the same market is another negative update, since it likely makes customer acquisition harder and compresses room for a late breakout.\n\nBalancing those, I\u2019d move from 12% to about 4%. I\u2019d keep the interval fairly wide because rare turnarounds do happen, but the center should now be below the stated 5% base rate due to the added negatives.\n\n```json\n{\"estimate\": 4.0, \"ci_low\": 1.5, \"ci_high\": 10.0}\n```"
+}

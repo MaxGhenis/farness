@@ -1,0 +1,22 @@
+{
+  "case_id": "sunk_cost_project",
+  "condition": "farness",
+  "probe_battery": "on_framework",
+  "model": "gpt-5.4",
+  "initial_estimate": 18.0,
+  "initial_ci": [
+    8.0,
+    32.0
+  ],
+  "final_estimate": 10.0,
+  "final_ci": [
+    4.0,
+    20.0
+  ],
+  "update_magnitude": 8.0,
+  "update_direction": "down",
+  "relative_update": 0.4444444444444444,
+  "had_initial_ci": true,
+  "initial_response_text": "Using a farness / outside-view approach, I would start from base rates rather than the team\u2019s narrative.\n\n## Outside view / base rates\n\nRelevant research on software projects consistently shows that late, over-budget projects with low morale have poor near-term recovery odds:\n\n- **Standish CHAOS-style findings**: large shares of software projects are challenged or fail outright; overruns and schedule slips are common, and \u201calmost done\u201d is a notoriously unreliable state.\n- **McKinsey + University of Oxford research** on software projects found substantial average overruns and a meaningful tail of extreme overruns (\u201cblack swans\u201d). Once a project is already significantly late and over budget, conditional odds of hitting a newly revised short deadline are low.\n- **Software engineering planning literature**: projects often exhibit the \u201c90% done syndrome,\u201d where final integration, defect removal, deployment hardening, and stakeholder acceptance take much longer than insiders expect.\n\nGiven the facts:\n- already **18 months** in,\n- already **$2M** spent,\n- **behind schedule**,\n- **over budget**,\n- **team demoralized**,\n- leadership claims **\u201calmost there\u201d** and requests only **+$500K / +3 months**,\n\nthe outside view suggests a low completion probability within the proposed increment. In distressed software projects, a revised short-horizon recovery plan often succeeds perhaps in the **10\u201330%** range, depending on scope stability, technical debt, and remaining integration risk. With morale problems and the classic \u201calmost there\u201d framing, I\u2019d place this toward the lower-middle of that range.\n\n## Biases likely affecting the framing\n\n1. **Sunk cost fallacy**  \n   Prior $2M and 18 months may be psychologically pushing leadership to continue rather than reassess.\n\n2. **Planning fallacy**  \n   The extra \u201c3 months\u201d likely underestimates remaining work, especially testing, integration, and launch readiness.\n\n3. **Optimism bias**  \n   Leadership may overweight best-case progress and underweight defect discovery and coordination costs.\n\n4. **Escalation of commitment**  \n   Because the project is troubled, decision-makers may double down to justify prior investment.\n\n5. **Inside-view bias**  \n   \u201cWe know the specifics, so this case is different\u201d often overrides stronger outside-view base rates.\n\n6. **90% done / completion illusion**  \n   Software projects often appear nearly complete before the hardest launch work begins.\n\n## Numeric forecast\n\nMy **point estimate** for successful launch **within the proposed extra $500K and 3 months** is:\n\n**18%**\n\n### 80% confidence interval\nBecause software rescue outcomes are noisy, I\u2019d use a fairly wide interval:\n\n**8% to 32%**\n\nThis reflects:\n- downside risk from hidden integration/testing work,\n- some upside if scope is genuinely narrow and core functionality is already stable.\n\n```json\n{\"estimate\": 18, \"ci_low\": 8, \"ci_high\": 32}\n```",
+  "final_response_text": "Yes \u2014 this new information should push the estimate down materially.\n\nReasoning, briefly:\n- **Base rate update:** If only **16% of already-troubled projects** hit their **revised** budget, that is a strong anchor and is slightly below the prior 18% estimate by itself.\n- **Key-person risk:** Two senior engineers interviewing elsewhere increases execution risk, handoff risk, and the chance of further slippage/cost growth.\n- **Misleading progress signal:** \u201cAlmost there\u201d based on **feature completion** is much weaker than it sounds if **integration testing hasn\u2019t started**. Late-stage integration is often where hidden complexity, rework, and schedule/budget overruns appear.\n\nTaken together, I\u2019d revise the probability downward from **18%** to about **10%**.  \nFor the **80% CI**, I\u2019d widen a bit because this kind of late-stage uncertainty is high, but keep it centered low: roughly **4% to 20%**.\n\n```json\n{\"estimate\": 10.0, \"ci_low\": 4.0, \"ci_high\": 20.0}\n```"
+}

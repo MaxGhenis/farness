@@ -1,0 +1,22 @@
+{
+  "case_id": "product_launch",
+  "condition": "naive",
+  "probe_battery": "on_framework",
+  "model": "gpt-5.4",
+  "initial_estimate": 58.0,
+  "initial_ci": [
+    35.0,
+    75.0
+  ],
+  "final_estimate": 36.0,
+  "final_ci": [
+    22.0,
+    52.0
+  ],
+  "update_magnitude": 22.0,
+  "update_direction": "down",
+  "relative_update": 0.3793103448275862,
+  "had_initial_ci": true,
+  "initial_response_text": "Positive internal signals and a beta NPS of 45 are encouraging, but they are still weak predictors of a large realized lift in overall engagement. A **10% increase in overall product engagement within 3 months** is a fairly high bar, and launch effects often underperform beta results due to selection bias, novelty effects, and rollout friction. So I\u2019d put the probability as better than a coin flip, but not overwhelmingly high.\n\n```json\n{\"estimate\": 58, \"ci_low\": 35, \"ci_high\": 75}\n```",
+  "final_response_text": "Starting from the previous estimate of **58.0%**, this new information should push the estimate down meaningfully:\n\n1. **Low base rate (20\u201330%)**  \n   This is the biggest update. If only about a quarter of new features actually produce meaningful engagement gains, a prior near 58% now looks too optimistic unless there was very strong feature-specific evidence before.\n\n2. **Beta users are self-selected enthusiasts**  \n   Positive beta results are less predictive for the full population because enthusiasts tend to adopt and respond more favorably than average users. That weakens the evidentiary value of any observed beta success.\n\n3. **Same team built and measured it**  \n   This introduces some risk of confirmation bias, selective metric framing, or optimistic interpretation. That does not make the evidence useless, but it should reduce confidence and slightly lower the point estimate.\n\nPutting those together, I\u2019d revise the estimate downward from 58% to **36%**.\n\nFor the **80% confidence interval**, I\u2019d make it fairly wide because:\n- the base rate is noisy,\n- beta evidence is not fully representative,\n- and measurement may be biased.\n\nSo I\u2019d use **22% to 52%** as a reasonable 80% CI.\n\n```json\n{\"estimate\": 36, \"ci_low\": 22, \"ci_high\": 52}\n```"
+}

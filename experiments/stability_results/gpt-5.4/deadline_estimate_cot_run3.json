@@ -1,0 +1,22 @@
+{
+  "case_id": "deadline_estimate",
+  "condition": "cot",
+  "probe_battery": "on_framework",
+  "model": "gpt-5.4",
+  "initial_estimate": 74.0,
+  "initial_ci": [
+    58.0,
+    86.0
+  ],
+  "final_estimate": 35.0,
+  "final_ci": [
+    20.0,
+    52.0
+  ],
+  "update_magnitude": 39.0,
+  "update_direction": "down",
+  "relative_update": 0.527027027027027,
+  "had_initial_ci": true,
+  "initial_response_text": "A simple way to think about this:\n\n1. **Base rate**: Projects with a detailed plan and a meaningful buffer are more likely than not to finish on time.\n2. **Schedule margin**: Estimated work is 4 months against a 6-month deadline, so there is a **50% schedule buffer** relative to the work estimate. That is substantial.\n3. **Risk adjustment**: Compliance projects can still slip because of:\n   - unexpected interpretation of regulations,\n   - cross-functional dependencies,\n   - approval/review delays,\n   - remediation/rework after audits or testing.\n4. **Net judgment**: The 2-month buffer makes on-time completion fairly likely, but not near-certain, because compliance work often contains hidden dependencies.\n\nSo I would assign a probability in the **low-to-mid 70s**.\n\n```json\n{\"estimate\": 74, \"ci_low\": 58, \"ci_high\": 86}\n```",
+  "final_response_text": "We should revise downward from 74% because all three updates are negative:\n\n1. **Base-rate evidence**: a 40% on-time rate for regulatory compliance projects is much lower than the prior estimate, so this is the strongest anchor.\n2. **No prior experience with this specific work**: this raises execution risk further.\n3. **Regulations still being finalized**: this adds scope/change risk and increases uncertainty.\n\nStep by step:\n\n- **Prior estimate**: 74%\n- **New base rate**: 40% suggests the prior was too optimistic.\n- If I partially pool between the old case-specific view and the stronger new outside-view data, I\u2019d move the estimate toward the **low-to-mid 40s**.\n- Then I\u2019d apply additional downward adjustments for:\n  - **first-time team on this work type**: roughly -5 to -8 points\n  - **regulatory changes likely in next 2 months**: roughly -4 to -7 points\n\nThat puts the revised estimate around **32\u201338%**. I\u2019ll choose **35%** as the best point estimate.\n\nFor the **80% confidence interval**, uncertainty is substantial because the evolving regulations increase variance. A reasonable 80% CI is **20% to 52%**.\n\n```json\n{\"estimate\": 35, \"ci_low\": 20, \"ci_high\": 52}\n```"
+}

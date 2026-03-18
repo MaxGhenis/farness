@@ -1,0 +1,22 @@
+{
+  "case_id": "investment_return",
+  "condition": "cot",
+  "probe_battery": "on_framework",
+  "model": "gpt-5.4",
+  "initial_estimate": 28.0,
+  "initial_ci": [
+    15.0,
+    45.0
+  ],
+  "final_estimate": 9.0,
+  "final_ci": [
+    4.0,
+    18.0
+  ],
+  "update_magnitude": 19.0,
+  "update_direction": "down",
+  "relative_update": 0.6785714285714286,
+  "had_initial_ci": true,
+  "initial_response_text": "I\u2019d treat this as a **very uncertain, base-rate-heavy judgment**.\n\nStep by step:\n\n1. **Most private startup investing does not produce fast 2x outcomes**\n   Even for promising startups, many things can go wrong: IPO delays, down rounds, weak public markets, lockups, dilution, liquidity constraints, or the company simply growing less than expected.\n\n2. **\u201cLikely IPO next year\u201d should be discounted**\n   Internal optimism is common. Many companies that seem IPO-ready delay 1\u20133+ years, especially if markets weaken.\n\n3. **A \u201cfriends and family\u201d discount helps, but usually not enough to dominate risk**\n   If the discount is real and meaningful, it improves odds. But unless it\u2019s a very steep discount, it may not offset:\n   - illiquidity\n   - information asymmetry\n   - preference stack / share class issues\n   - dilution between now and exit\n\n4. **Need for 2x within 3 years is a fairly high bar**\n   To achieve that, you likely need:\n   - successful IPO or strong acquisition\n   - public/share price holding up after lockup\n   - no major adverse dilution or structure issues\n   That\u2019s plausible, but far from the median outcome.\n\n5. **Base rate adjustment**\n   For a random late-stage private startup with credible growth and some IPO potential, I\u2019d put the chance of a clean 2x in 3 years in the **low-to-mid tens of percent**, not above 50%.\n\n6. **Friend/source quality**\n   The fact that this comes through a friend at the company gives some signal, but employees are often biased and may not know the full financing/legal context.\n\nMy single-number estimate: **28%**\n\n80% confidence interval: **15% to 45%**\n\n```json\n{\"estimate\": 28, \"ci_low\": 15, \"ci_high\": 45}\n```",
+  "final_response_text": "Starting from the previous estimate of **28%**, this new information pushes the probability **down materially**.\n\nStep by step:\n\n1. **Base rate is very unfavorable**\n   - If ~90% of startup investments return **less than 1x**, then the unconditional chance of merely breaking even or better is only about **10%**.\n   - If only ~5% return **2x+**, the distribution is even more skewed toward poor outcomes than many people intuitively assume.\n   - This alone suggests 28% was likely too high unless there was very strong deal-specific positive evidence.\n\n2. **Friends-and-family rounds may not be attractively priced**\n   - If these rounds often **don\u2019t provide a meaningful discount to fair value**, then you\u2019re not being compensated for the extreme risk.\n   - That weakens one of the main arguments for investing early: \u201cI\u2019m getting in cheap.\u201d\n   - So relative to generic startup base rates, the expected probability of a favorable outcome should be revised downward somewhat.\n\n3. **The seller\u2019s incentives are adverse**\n   - If the person offering has a strong incentive to get you in, and this may improve their own terms, then their recommendation is less informative.\n   - This is a classic negative signal: the fact that they are pushing the deal does **not** count as strong evidence of quality, and may mildly count against it.\n\nPutting that together:\n- The **base rate** points to around **10%** for 1x or better.\n- The lack of meaningful discount and the incentive issue suggest this opportunity may be **no better than base rate**, and possibly a bit worse.\n- Unless there is substantial omitted positive evidence, a reasonable revised estimate is **about 9%**.\n\nGiven uncertainty in the exact startup, pricing, and deal structure, I\u2019d give an **80% confidence interval of 4% to 18%**.\n\n```json\n{\"estimate\": 9, \"ci_low\": 4, \"ci_high\": 18}\n```"
+}

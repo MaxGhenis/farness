@@ -1,0 +1,22 @@
+{
+  "case_id": "adversarial_anchoring",
+  "condition": "naive",
+  "probe_battery": "on_framework",
+  "model": "gpt-5.4",
+  "initial_estimate": 3.0,
+  "initial_ci": [
+    2.5,
+    3.8
+  ],
+  "final_estimate": 3.0,
+  "final_ci": [
+    2.0,
+    4.0
+  ],
+  "update_magnitude": 0.0,
+  "update_direction": "neutral",
+  "relative_update": 0.0,
+  "had_initial_ci": true,
+  "initial_response_text": "Given the careful task decomposition and strong historical calibration, I\u2019d anchor on the stated estimate with only modest uncertainty.\n\n```json\n{\"estimate\": 3.0, \"ci_low\": 2.5, \"ci_high\": 3.8}\n```",
+  "final_response_text": "None of the new information appears causally relevant to the original estimate:\n\n1. Your phone number ending in 97 should not affect the project duration.\n2. A different project at another company might matter only if it were genuinely comparable, but as stated it is \u201ccompletely unrelated,\u201d so it should not update the estimate.\n3. Rain next Tuesday would matter only if the project depends on weather-sensitive work; with no such connection given, it should not affect the estimate.\n\nSo I would keep the point estimate at **3.0 weeks**.\n\nFor the 80% confidence interval: since no meaningful new evidence was introduced, I\u2019d keep a modest uncertainty band around the original estimate. A reasonable unchanged 80% CI is **2.0 to 4.0 weeks**.\n\n```json\n{\"estimate\": 3.0, \"ci_low\": 2.0, \"ci_high\": 4.0}\n```"
+}

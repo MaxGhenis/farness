@@ -1,0 +1,22 @@
+{
+  "case_id": "hiring_success",
+  "condition": "cot",
+  "probe_battery": "on_framework",
+  "model": "gpt-5.4",
+  "initial_estimate": 32.0,
+  "initial_ci": [
+    20.0,
+    45.0
+  ],
+  "final_estimate": 24.0,
+  "final_ci": [
+    15.0,
+    35.0
+  ],
+  "update_magnitude": 8.0,
+  "update_direction": "down",
+  "relative_update": 0.25,
+  "had_initial_ci": true,
+  "initial_response_text": "A careful estimate should start from the base rate.\n\n- If \u201ctop performer\u201d means top 25% at the 1-year mark, the uninformed base rate for any hire is **25%**.\n- Candidate A has a strong interpersonal signal: great chemistry and resemblance to a known top performer. That can be somewhat predictive, but it is also vulnerable to **similarity bias / halo effects**.\n- Candidate B scored higher technically, which indirectly weakens confidence that A is the stronger likely performer, at least on job-relevant measured skill.\n- For a senior engineer, long-term performance usually depends on multiple factors: technical ability, execution, collaboration, scope handling, and adaptability. Interview chemistry alone is informative but not strong enough to justify a very large jump above base rate.\n\nSo I\u2019d adjust Candidate A somewhat above 25%, but not dramatically. A reasonable estimate is **32%**.\n\nGiven the uncertainty and noisiness of interview impressions, I\u2019d use a fairly wide 80% confidence interval, say **20% to 45%**.\n\n```json\n{\"estimate\": 32, \"ci_low\": 20, \"ci_high\": 45}\n```",
+  "final_response_text": "Yes \u2014 this should materially lower the estimate.\n\nStep by step:\n\n1. **Original estimate: 32%**\n   - That likely gave meaningful weight to the interviewer\u2019s positive subjective impression.\n\n2. **Unstructured interview validity is weak (r = 0.14)**\n   - An r of 0.14 implies only very limited predictive value.\n   - So \u201cgood chemistry,\u201d \u201cseemed impressive,\u201d or a strong gut feeling should only modestly move the forecast.\n\n3. **\u201cReminded me of our best performer\u201d is similarity bias**\n   - This is not independent evidence of likely performance.\n   - If anything, it suggests the interviewer may be over-updating on a cognitively attractive but low-validity signal.\n\n4. **Technical assessment is much stronger (r = 0.51)**\n   - This is a genuinely predictive signal and should dominate the estimate.\n   - Since you note it is ~4x better than interview chemistry, the technical result should carry far more weight than the interviewer\u2019s enthusiasm.\n\n5. **Net effect**\n   - If the previous 32% estimate was partly driven by subjective interview impression, then discounting that weak signal should pull the estimate down.\n   - I would not collapse it dramatically unless the technical assessment itself was weak/negative, but I would reduce it meaningfully.\n\n**Revised estimate: 24%**\n\n**80% confidence interval: 15%\u201335%**\n- Still fairly wide because hiring predictions remain noisy even with validity coefficients.\n- Narrower than pure intuition, but not tight enough to justify high confidence.\n\n```json\n{\"estimate\": 24, \"ci_low\": 15, \"ci_high\": 35}\n```"
+}

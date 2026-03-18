@@ -1,0 +1,22 @@
+{
+  "case_id": "investment_return",
+  "condition": "cot",
+  "probe_battery": "on_framework",
+  "model": "gpt-5.4",
+  "initial_estimate": 32.0,
+  "initial_ci": [
+    18.0,
+    48.0
+  ],
+  "final_estimate": 17.0,
+  "final_ci": [
+    8.0,
+    30.0
+  ],
+  "update_magnitude": 15.0,
+  "update_direction": "down",
+  "relative_update": 0.46875,
+  "had_initial_ci": true,
+  "initial_response_text": "I\u2019d frame this as a base-rate plus adjustment problem.\n\n1. **Claimed setup sounds attractive, but is highly uncertain**\n   - \u201cLikely IPO next year\u201d is a very optimistic insider-style claim.\n   - Many private companies that expect to IPO do not do so on schedule, or at all.\n   - A \u201cfriends and family\u201d discount helps, but unless the discount is very large and the terms are clean, it may not be enough to overcome startup risk and illiquidity.\n\n2. **What needs to happen for a 2x in 3 years**\n   - If you invest now and want at least 2x in 3 years, some combination of:\n     - the IPO happens,\n     - the IPO valuation is meaningfully above your entry price,\n     - the stock does not fall below your effective 2x threshold by the time you can sell,\n     - your security terms actually convert cleanly and are not diluted in unexpected ways.\n   - Even with an IPO, lockups, down markets, and over-optimistic private valuations can prevent a 2x outcome.\n\n3. **Base-rate intuition**\n   - For private startup investments broadly, the probability of achieving 2x+ in a 3-year window is not high.\n   - For a *late-stage, IPO-near* company, the odds are better than for an early-stage startup.\n   - But this specific offer is also adverse-selection-prone: if truly attractive, access is usually limited; \u201cfriends and family\u201d access can sometimes be a red flag rather than a gift.\n\n4. **Rough scenario decomposition**\n   A plausible rough breakdown:\n   - **IPO / strong liquidity event within 3 years:** maybe moderate probability, not certain.\n   - **If IPO happens, chance your net realized return reaches 2x:** perhaps moderate, depending on valuation, discount, and market conditions.\n   - **If no IPO, chance secondary or acquisition still yields 2x in 3 years:** relatively low.\n\n   Multiplying those rough paths together suggests something meaningfully below 50%, but not tiny.\n\n5. **Adjustment for the discount**\n   - A real discount improves expected return and downside protection.\n   - But without specifics on the security, liquidation preferences, pro rata rights, tax treatment, and transfer restrictions, I would not give huge weight to the vague phrase \u201cdiscount valuation.\u201d\n\nSo my best calibrated estimate is:\n\n```json\n{\"estimate\": 32, \"ci_low\": 18, \"ci_high\": 48}\n```",
+  "final_response_text": "Starting from the prior estimate of **32%**, the new information pushes the estimate down materially.\n\nStep by step:\n\n1. **Base rate is very unfavorable**\n   - If ~90% of startup investments return **less than 1x**, then the default expectation for \u201cwill this be a good investment?\u201d should already be low.\n   - If only ~5% return **2x+**, then strong upside outcomes are rare.\n\n2. **Friends-and-family pricing may not be attractive**\n   - If these rounds often **do not offer a real discount to fair value**, then one of the main reasons to participate early is weakened.\n   - So even if the company is decent, the entry price may not compensate for the risk.\n\n3. **Seller incentive / adverse selection**\n   - If the person offering the deal has a strong incentive to get you in, that raises concern about **selection effects** and **biased framing**.\n   - This doesn\u2019t prove the deal is bad, but it should reduce confidence relative to a neutral presentation.\n\nPutting this together:\n- The prior **32%** looks too high given the new base-rate evidence.\n- A reasonable revision is to move into the **mid-to-high teens**.\n- I\u2019d center at **17%**.\n\nFor the **80% confidence interval**:\n- There is still substantial uncertainty because individual startup outcomes are noisy and some exceptional opportunities do exist.\n- But the new info narrows the case for optimism.\n- A sensible 80% CI is **8% to 30%**.\n\n```json\n{\"estimate\": 17, \"ci_low\": 8, \"ci_high\": 30}\n```"
+}

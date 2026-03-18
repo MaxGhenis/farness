@@ -1,0 +1,22 @@
+{
+  "case_id": "startup_success",
+  "condition": "farness",
+  "probe_battery": "on_framework",
+  "model": "gpt-5.4",
+  "initial_estimate": 9.0,
+  "initial_ci": [
+    4.0,
+    18.0
+  ],
+  "final_estimate": 4.0,
+  "final_ci": [
+    1.5,
+    9.0
+  ],
+  "update_magnitude": 5.0,
+  "update_direction": "down",
+  "relative_update": 0.5555555555555556,
+  "had_initial_ci": true,
+  "initial_response_text": "Using a farness-style outside view first:\n\n- **Base rates:** For early-stage startups with initial user adoption but weak/flat growth after 12\u201324 months, the probability of achieving a step-change in growth without a major change is generally low. Public startup benchmarking and accelerator observations suggest that **sustained weekly/monthly growth** is the strongest predictor of later traction; startups that are flat after 18 months often do not suddenly inflect without a meaningful product, channel, or market change.\n- A rough comparable outside-view class:\n  - Seed-stage startups with some users but no clear growth engine after ~1.5 years\n  - Consumer/SaaS products needing roughly **20x growth** in 12 months (500 to 10,000 MAU)\n- To get from **500 to 10,000 MAU in 12 months**, they need about **26% compounded monthly growth** every month for a year:\n  \\[\n  500 \\times (1+g)^{12} = 10,000 \\Rightarrow g \\approx 26\\%\n  \\]\n  That is a high bar, especially starting from a flat baseline.\n\n### Outside-view judgment\nFor startups already showing flat growth at 18 months, the share that go on to achieve ~20x user growth in the next year **without materially changing approach** is likely in the **single digits to low teens**.\n\n### Inside-view adjustment\nReasons to move slightly upward from a very low base:\n- They do have **some users** (500 MAU), so not zero-market signal.\n- Team still has **ideas to try**, which may mean some room for iteration within the current vision.\n\nReasons to move downward:\n- \u201c**Flat growth**\u201d is a strong negative signal.\n- \u201c**Persist with current approach**\u201d implies no major pivot in product/channel/distribution.\n- Teams often overweight vision and anecdotal user enthusiasm relative to actual growth data.\n\n### Likely cognitive biases in the framing\n- **Commitment/escalation bias:** 18 months invested makes persistence emotionally attractive.\n- **Optimism bias:** Belief that \u201cideas to try\u201d will unlock growth despite contrary trend data.\n- **Inside-view bias:** Focusing on product specifics and team conviction instead of startup base rates.\n- **Survivorship bias:** Looking at rare cases that broke out late while ignoring the many that did not.\n- **Confirmation bias:** Interpreting the existence of 500 MAU as stronger validation than flat growth warrants.\n\n### Forecast\nMy point estimate: **9%**\n\n80% confidence interval: **4% to 18%**\n\n```json\n{\"estimate\": 9, \"ci_low\": 4, \"ci_high\": 18}\n```",
+  "final_response_text": "Given the new information, I\u2019d revise the probability downward meaningfully.\n\nReasoning, briefly:\n- The new base rate is the biggest update: if only ~5% of startups with 18 months of flat growth see sudden organic growth, that pulls the estimate below the prior 9%.\n- The fact that they\u2019ve already tried 3 marketing channels with similar weak results is additional negative evidence: it suggests the issue is less likely to be simple channel mismatch and more likely to be product/market or market-structure related.\n- A well-funded competitor entering or accelerating in the same market further reduces the odds, since it makes customer acquisition, attention, and positioning harder.\n\nSo I\u2019d move from 9% to about 4%.\n\n80% CI:\n- Lower bound around 1.5%: things could be quite bleak if the flat growth reflects structural lack of demand and the competitor sharply worsens conditions.\n- Upper bound around 9%: still allows for some chance that execution improves, a channel finally clicks, or the competitor validates the market rather than crushing it.\n\n```json\n{\"estimate\": 4.0, \"ci_low\": 1.5, \"ci_high\": 9.0}\n```"
+}

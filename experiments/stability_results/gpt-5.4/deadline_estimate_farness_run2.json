@@ -1,0 +1,22 @@
+{
+  "case_id": "deadline_estimate",
+  "condition": "farness",
+  "probe_battery": "on_framework",
+  "model": "gpt-5.4",
+  "initial_estimate": 62.0,
+  "initial_ci": [
+    40.0,
+    78.0
+  ],
+  "final_estimate": 34.0,
+  "final_ci": [
+    18.0,
+    52.0
+  ],
+  "update_magnitude": 28.0,
+  "update_direction": "down",
+  "relative_update": 0.45161290322580644,
+  "had_initial_ci": true,
+  "initial_response_text": "Using a farness / outside-view approach, I would discount the inside-view project plan fairly heavily.\n\n### Outside-view base rates\nRelevant research is consistent on a few points:\n\n- **Planning fallacy / inside-view bias:** Kahneman & Tversky\u2019s work shows teams systematically underestimate completion times, even with detailed plans.\n- **Large IT / regulatory / organizational projects often overrun:** Empirical studies such as Flyvbjerg and related project-management literature routinely find substantial schedule overruns are common, especially where there is cross-functional coordination, ambiguity in requirements, and external dependencies.\n- A practical base rate for organizational projects of this kind is that **median schedule overruns of ~20\u201350%** are common, with a meaningful tail of much worse outcomes.\n\n### Apply to this case\nThe team estimates **4 months of work** with a **6-month deadline**, so the implied schedule buffer is **50%** over the estimated effort.\n\nThat sounds decent, but several reasons suggest the true probability is materially below what the team likely believes:\n\n1. **Planning fallacy:** detailed plans often increase confidence without proportionally improving forecast accuracy.\n2. **Anchoring on the 4-month estimate:** the estimate may have become the reference point, biasing judgment.\n3. **Optimism bias / strategic optimism:** compliance teams often assume timely stakeholder responses, smooth testing, and few surprises.\n4. **Unknown unknowns:** regulatory interpretation changes, legal review, audit evidence gathering, remediation retesting, and dependency delays often appear late.\n5. **Tail risk:** if any critical path item slips, the 2-month buffer can erode quickly.\n\n### Numeric forecast\nIf we assume a rough outside-view distribution where actual duration is commonly **1.2x\u20131.5x** estimate, then:\n- 4 months \u00d7 1.2 = 4.8 months\n- 4 months \u00d7 1.5 = 6.0 months\n\nThat suggests the deadline is around the boundary between \u201cplausibly enough\u201d and \u201cnot enough,\u201d not comfortably safe.\n\nSo my point estimate for completing before 6 months is:\n\n**Point estimate: 62%**\n\n### 80% confidence interval\nTo reflect uncertainty in project type, team quality, regulatory complexity, and dependency risk, I\u2019d use a fairly wide 80% interval:\n\n**80% CI: 40% to 78%**\n\nThis says the project is more likely than not to finish on time, but far from assured.\n\n```json\n{\"estimate\": 62, \"ci_low\": 40, \"ci_high\": 78}\n```",
+  "final_response_text": "The new information is all negative for schedule confidence, so I\u2019d revise the estimate downward and widen the uncertainty somewhat.\n\nReasoning, briefly:\n- **Base rate**: If industry surveys show **40% on-time completion** for regulatory compliance projects, that is a strong anchor and already well below the previous 62%.\n- **No prior experience with this specific work**: That should push the probability lower still, since first-time execution tends to increase coordination errors, discovery work, and rework.\n- **Regulations still being finalized**: This adds both **risk of delay** and **uncertainty**, because requirements may shift midstream.\n\nPutting that together, I\u2019d move from the prior 62% to something closer to the low-to-mid 30s. I\u2019d also keep a fairly wide 80% CI because the regulatory changes create substantial uncertainty.\n\n```json\n{\"estimate\": 34.0, \"ci_low\": 18.0, \"ci_high\": 52.0}\n```"
+}

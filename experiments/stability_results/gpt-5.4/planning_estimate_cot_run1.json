@@ -1,0 +1,22 @@
+{
+  "case_id": "planning_estimate",
+  "condition": "cot",
+  "probe_battery": "on_framework",
+  "model": "gpt-5.4",
+  "initial_estimate": 2.8,
+  "initial_ci": [
+    2.1,
+    4.0
+  ],
+  "final_estimate": 5.9,
+  "final_ci": [
+    3.8,
+    8.8
+  ],
+  "update_magnitude": 3.1000000000000005,
+  "update_direction": "up",
+  "relative_update": 1.1071428571428574,
+  "had_initial_ci": true,
+  "initial_response_text": "Software estimates tend to be optimistic even when teams are confident and have detailed breakdowns. A common outside-view adjustment is to add some buffer for integration issues, testing, review cycles, scope clarification, and unexpected dependencies.\n\nGiven:\n- team estimate: 2 weeks\n- confidence is high\n- task breakdown is detailed\n\nThat suggests the estimate is better than a naive guess, so I would not inflate it dramatically. But I would still expect some overrun. A reasonable adjustment is roughly 25\u201350%, centering around about 3 weeks.\n\nSo my point estimate is:\n- 2.8 weeks\n\nAn 80% confidence interval should capture moderate uncertainty without being too wide:\n- lower bound slightly above the original estimate if things go smoothly\n- upper bound allowing for typical slippage\n\n```json\n{\"estimate\": 2.8, \"ci_low\": 2.1, \"ci_high\": 4.0}\n```",
+  "final_response_text": "Let\u2019s update the original estimate of **2.8 weeks (80% CI: 2.1\u20134.0)** using each new piece of information.\n\n## Step 1: Base estimate\nOriginal estimate:\n- **Mean:** 2.8 weeks\n- **80% CI:** 2.1 to 4.0 weeks\n\n## Step 2: Effect of \u201cprojects average 2\u20133x initial estimates\u201d\nThis is strong evidence that the original estimate is likely optimistic.  \nBut we should be careful not to naively multiply by 2\u20133x in full, because:\n- that statistic is a broad average across many project types,\n- the original estimate may already have included some adjustment,\n- applying the full factor mechanically may overcorrect.\n\nA reasonable update is to shift the estimate upward substantially, but not all the way to 2.5\u00d7.  \nI\u2019d treat this as pushing the central estimate into roughly the **4.2\u20135.0 week** range.\n\n## Step 3: Team confidence as planning-fallacy evidence\nIf the team\u2019s confidence is actually a warning sign, that further weakens trust in the low end of the estimate.  \nThis suggests:\n- raising the point estimate somewhat,\n- widening the upper tail.\n\nThat nudges the central estimate up again, say by roughly 10\u201320%.\n\nSo now we\u2019re in the neighborhood of **~5.0\u20135.5 weeks**.\n\n## Step 4: 30% chance of a major blocker\nNow explicitly model the blocker risk.\n\nSuppose:\n- 70% chance of \u201cnormal\u201d completion around the adjusted estimate,\n- 30% chance of a major blocker that adds meaningful delay.\n\nIf a blocker adds, say, **2\u20134 weeks** on average, then the expected uplift is:\n\n- \\(0.30 \\times (2 \\text{ to } 4)\\) = **0.6 to 1.2 weeks**\n\nAdding that to the 5.0\u20135.5 range gives a revised expected estimate around **5.6\u20136.3 weeks**.\n\nA reasonable midpoint is **5.9 weeks**.\n\n## Step 5: Revised 80% confidence interval\nThe uncertainty should widen materially because:\n- initial estimate optimism,\n- planning fallacy signal,\n- explicit blocker risk introduces a heavier right tail.\n\nA plausible 80% CI:\n- lower bound: still hard to see this finishing much below **~3.8 weeks**\n- upper bound: with blocker risk, **~8.8 weeks** is reasonable for the 80th percentile\n\nSo revised estimate:\n- **Estimate:** 5.9 weeks\n- **80% CI:** 3.8 to 8.8 weeks\n\n```json\n{\"estimate\": 5.9, \"ci_low\": 3.8, \"ci_high\": 8.8}\n```"
+}

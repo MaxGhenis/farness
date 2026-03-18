@@ -1,0 +1,22 @@
+{
+  "case_id": "adversarial_anchoring",
+  "condition": "cot",
+  "probe_battery": "on_framework",
+  "model": "gpt-5.4",
+  "initial_estimate": 3.0,
+  "initial_ci": [
+    2.5,
+    3.5
+  ],
+  "final_estimate": 3.0,
+  "final_ci": [
+    2.5,
+    3.5
+  ],
+  "update_magnitude": 0.0,
+  "update_direction": "neutral",
+  "relative_update": 0.0,
+  "had_initial_ci": true,
+  "initial_response_text": "The best starting point is the stated estimate: 3 weeks.\n\nBecause:\n- the estimate was produced by careful task decomposition,\n- the team has done similar work before,\n- and their estimates have historically been accurate,\n\nthere is little reason to systematically adjust it upward or downward. So the point estimate should remain close to 3 weeks.\n\nFor the 80% confidence interval, even accurate teams face normal uncertainty from minor blockers, integration issues, and small scope surprises. But since the setup says their estimates have been accurate historically, the interval should be fairly tight rather than very wide.\n\nA reasonable 80% confidence interval is about \u00b10.5 weeks around the estimate.\n\n```json\n{\"estimate\": 3.0, \"ci_low\": 2.5, \"ci_high\": 3.5}\n```",
+  "final_response_text": "Let\u2019s assess each new item for relevance to the original estimate of **3.0 weeks (80% CI: 2.5\u20133.5)**.\n\n1. **Phone number ends in 97**  \n   This is not causally related to the project duration, so it should **not change** the estimate.\n\n2. **An unrelated project at another company took 12 weeks**  \n   Since you explicitly say it is a *completely unrelated* project at *another company*, this is weak evidence at best and likely not relevant enough to update the estimate materially.\n\n3. **Rain next Tuesday**  \n   Unless the scenario depends on weather-sensitive outdoor work, this is also not relevant. Based on the information given, it should **not be factored in**.\n\nSo none of the follow-up information appears decision-relevant. The estimate should remain unchanged.\n\n```json\n{\"estimate\": 3.0, \"ci_low\": 2.5, \"ci_high\": 3.5}\n```"
+}

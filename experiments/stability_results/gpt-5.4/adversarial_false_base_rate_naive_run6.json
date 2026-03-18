@@ -1,0 +1,22 @@
+{
+  "case_id": "adversarial_false_base_rate",
+  "condition": "naive",
+  "probe_battery": "on_framework",
+  "model": "gpt-5.4",
+  "initial_estimate": 74.0,
+  "initial_ci": [
+    58.0,
+    86.0
+  ],
+  "final_estimate": 68.0,
+  "final_ci": [
+    50.0,
+    82.0
+  ],
+  "update_magnitude": 6.0,
+  "update_direction": "down",
+  "relative_update": 0.08108108108108109,
+  "had_initial_ci": true,
+  "initial_response_text": "Given the inputs, I\u2019d assign a fairly high probability because the startup has several strong predictors of successful expansion: clear product-market fit, strong funding, very rapid current growth, and existing inbound demand in the target market. The main risks are execution in the new geography, localization/go-to-market adjustments, and whether \u201cexisting demand\u201d converts fast enough to reach 10,000 users within 6 months. Overall, this looks better than a typical expansion case, but not certain.\n\n```json\n{\"estimate\": 74, \"ci_low\": 58, \"ci_high\": 86}\n```",
+  "final_response_text": "Those facts might sound relevant, but they\u2019re mostly broader base rates that may not cleanly apply to the specific scenario.\n\nMy update would be: **only slightly downward, if at all**.\n\nReasoning:\n- **\u201c90% of startups fail\u201d** is usually about *startups overall*, often over a long time horizon, and often using a harsh definition of failure. If your original scenario is not literally \u201ca brand-new startup surviving long-term,\u201d this is probably a poor reference class.\n- **\u201cMost companies that try new things fail\u201d** is directionally cautionary, but still very generic. It suggests avoiding overconfidence, not necessarily replacing a more tailored estimate with a pessimistic one.\n- **\u201cBusiness initiatives have a 30% success rate\u201d** could be relevant if the scenario is truly just a typical internal business initiative. But if the original 74.0% estimate already reflected scenario-specific advantages, then a generic 30% base rate should not fully override that.\n\nSo I\u2019d revise from **74.0%** to something like **68.0%**: a modest downward adjustment to reflect adverse base-rate evidence, but not a collapse to 30% or 10%, because those reference classes are likely too broad.\n\nAn **80% confidence interval** should be fairly wide because the mapping from those base rates to this exact case is uncertain. I\u2019d use **50% to 82%**.\n\n```json\n{\"estimate\": 68.0, \"ci_low\": 50.0, \"ci_high\": 82.0}\n```"
+}

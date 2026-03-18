@@ -1,0 +1,22 @@
+{
+  "case_id": "hiring_success",
+  "condition": "cot",
+  "probe_battery": "on_framework",
+  "model": "gpt-5.4",
+  "initial_estimate": 33.0,
+  "initial_ci": [
+    20.0,
+    50.0
+  ],
+  "final_estimate": 24.0,
+  "final_ci": [
+    14.0,
+    38.0
+  ],
+  "update_magnitude": 9.0,
+  "update_direction": "down",
+  "relative_update": 0.2727272727272727,
+  "had_initial_ci": true,
+  "initial_response_text": "Start with the base rate: if \u201ctop performer\u201d means top 25%, then absent other information Candidate A starts at 25%.\n\nNow update from the evidence:\n\n1. **Great chemistry / reminded you of your best performer**\n   - This is meaningful, but also noisy.\n   - It may reflect communication, confidence, similarity bias, or halo effects.\n   - For a senior engineer, interpersonal effectiveness does matter, so this should move the estimate up somewhat, but not dramatically.\n\n2. **Candidate B scored higher technically**\n   - This does not directly tell us A is weak, only that A was not the strongest of the two on the assessment.\n   - For a senior engineer, technical assessment performance is predictive, so this modestly tempers confidence in A being top-25%.\n\n3. **Risk of bias**\n   - \u201cReminded you of your best performer\u201d is exactly the kind of similarity-based intuition that can overweight anecdotal resemblance.\n   - So I would discount that positive signal.\n\nNet: I\u2019d move Candidate A somewhat above the 25% base rate, but keep the estimate conservative.\n\n```json\n{\"estimate\": 33, \"ci_low\": 20, \"ci_high\": 50}\n```",
+  "final_response_text": "The new information should push the estimate down.\n\nStep by step:\n\n1. **Unstructured interview impressions are weak predictors**\n   - If the original positive signal came partly from \u201cgood chemistry,\u201d that signal is much less valuable than it may have seemed.\n   - An **r = 0.14** relationship with performance is weak. So any confidence derived from interview vibe should be heavily discounted.\n\n2. **\u201cReminded me of our best performer\u201d is likely bias**\n   - If this is similarity bias rather than evidence, then it should contribute essentially **no legitimate upward adjustment**.\n   - In fact, it may be mildly negative in the sense that it indicates the evaluator may be over-weighting intuition.\n\n3. **Technical assessment is much more predictive**\n   - With **r = 0.51**, the technical assessment deserves much greater weight than interview chemistry.\n   - If the candidate\u2019s technical signal was weaker, mixed, or not clearly strong, then the overall probability should move notably downward.\n   - If the technical assessment was strong, that would dominate weak interview-based concerns. But from your framing, it sounds like the prior estimate may have been too influenced by interview impressions rather than the stronger predictor.\n\n4. **Overall revision**\n   - Since the prior estimate was **33%**, and the new evidence says the positive interview-based evidence was overvalued, I\u2019d revise downward materially but not collapse to near zero unless the technical assessment was clearly poor.\n   - A moderate downward revision feels appropriate: from **33%** to about **24%**.\n\n5. **Confidence interval**\n   - Because we still lack exact calibration details linking these signals to the target event, uncertainty remains substantial.\n   - An **80% CI of 14% to 38%** seems reasonable.\n\n```json\n{\"estimate\": 24, \"ci_low\": 14, \"ci_high\": 38}\n```"
+}

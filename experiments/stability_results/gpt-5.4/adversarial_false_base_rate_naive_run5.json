@@ -1,0 +1,22 @@
+{
+  "case_id": "adversarial_false_base_rate",
+  "condition": "naive",
+  "probe_battery": "on_framework",
+  "model": "gpt-5.4",
+  "initial_estimate": 74.0,
+  "initial_ci": [
+    58.0,
+    86.0
+  ],
+  "final_estimate": 66.0,
+  "final_ci": [
+    45.0,
+    82.0
+  ],
+  "update_magnitude": 8.0,
+  "update_direction": "down",
+  "relative_update": 0.10810810810810811,
+  "had_initial_ci": true,
+  "initial_response_text": "Given the signals:\n\n- **Well-funded** reduces execution and go-to-market constraints.\n- **Strong product-market fit** is the biggest positive predictor.\n- **50% month-over-month growth** suggests strong underlying demand and scalable acquisition.\n- **Existing customer demand in the new market** materially de-risks expansion.\n- Main remaining risks are **localization, channel fit, competition, operational execution, and timing** within a fairly short 6-month window.\n\nOverall, this looks like a **better-than-even, fairly strong** expansion case, but not near certainty because international/new-market launches often hit execution friction.\n\n```json\n{\"estimate\": 74, \"ci_low\": 58, \"ci_high\": 86}\n```",
+  "final_response_text": "Those facts sound relevant at first, but they mostly point to broader or different reference classes than the one I\u2019d want to use here.\n\nReasoning, briefly:\n\n1. **\u201c90% of startups fail\u201d**  \n   This usually refers to *startups as whole companies*, often over multi-year horizons, and \u201cfail\u201d can mean many things. If the original scenario is not literally \u201ca brand-new startup becoming a viable business,\u201d this is probably too pessimistic a base rate.\n\n2. **\u201cMost companies that try new things fail\u201d**  \n   True in a vague sense, but this is too broad. \u201cTrying new things\u201d includes many low-commitment experiments, moonshots, and poorly resourced efforts. Without a closer match to the scenario, it should only weakly update the estimate downward.\n\n3. **\u201cBusiness initiatives have a 30% success rate\u201d**  \n   Again, this may be a different class. \u201cBusiness initiatives\u201d can include internal transformations, launches, process changes, innovation bets, etc. Unless the scenario is exactly that kind of initiative, I wouldn\u2019t substitute this base rate directly.\n\nSo I would **revise downward somewhat**, because all three pieces of information push in the direction that success is generally hard, but I would **not collapse all the way to 30% or 10%** unless the scenario truly belongs to those categories.\n\nStarting from **74.0%**, I\u2019d revise to about **66%**.\n\nFor an **80% confidence interval**, I\u2019d widen it because the correct reference class is uncertain. A reasonable interval is **[45%, 82%]**.\n\n```json\n{\"estimate\": 66, \"ci_low\": 45, \"ci_high\": 82}\n```"
+}

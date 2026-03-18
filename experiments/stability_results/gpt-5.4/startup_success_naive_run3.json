@@ -1,0 +1,22 @@
+{
+  "case_id": "startup_success",
+  "condition": "naive",
+  "probe_battery": "on_framework",
+  "model": "gpt-5.4",
+  "initial_estimate": 12.0,
+  "initial_ci": [
+    4.0,
+    25.0
+  ],
+  "final_estimate": 3.5,
+  "final_ci": [
+    1.5,
+    7.0
+  ],
+  "update_magnitude": 8.5,
+  "update_direction": "down",
+  "relative_update": 0.7083333333333334,
+  "had_initial_ci": true,
+  "initial_response_text": "A rough base-rate view says this is challenging. After 18 months, they have 500 MAU and flat growth, which suggests weak product-market fit under the current approach. To reach 10,000 MAU in 12 months, they need 20x growth from here. That is possible, but usually requires a meaningful change in acquisition, retention, product value, or market pull\u2014not simply continuing as-is.\n\nThe positive signals are that they do have real users, the team is motivated, and they have ideas to try. But \u201cpersist with current approach\u201d implies limited change, and flat growth over a long period is a strong negative indicator.\n\nSo I\u2019d assign a low but non-trivial probability.\n\n```json\n{\"estimate\": 12, \"ci_low\": 4, \"ci_high\": 25}\n```",
+  "final_response_text": "Given the new information, I\u2019d revise the estimate **down materially** from 12.0%.\n\nReasoning, briefly:\n- **18 months of flat growth** is a strong negative signal. Your new base-rate input says only about **5%** of such startups see sudden organic growth without major changes.\n- **Three tried marketing channels with similar results** suggests the issue is less likely to be \u201cwrong channel\u201d and more likely to be product/market demand, messaging, or structural market limitations.\n- **A well-funded competitor entering the same market** further reduces the odds, since it increases customer acquisition difficulty, pricing pressure, and talent/attention competition.\n\nStarting from the new **~5% base rate**, I\u2019d adjust **slightly downward** because the repeated channel tests and competitive pressure are both additional negatives beyond the generic \u201cflat for 18 months\u201d case.\n\nSo my revised point estimate is:\n\n```json\n{\"estimate\": 3.5, \"ci_low\": 1.5, \"ci_high\": 7.0}\n```"
+}

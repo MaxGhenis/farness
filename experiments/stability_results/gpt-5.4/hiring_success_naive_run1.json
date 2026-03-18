@@ -1,0 +1,22 @@
+{
+  "case_id": "hiring_success",
+  "condition": "naive",
+  "probe_battery": "on_framework",
+  "model": "gpt-5.4",
+  "initial_estimate": 35.0,
+  "initial_ci": [
+    20.0,
+    50.0
+  ],
+  "final_estimate": 24.0,
+  "final_ci": [
+    15.0,
+    35.0
+  ],
+  "update_magnitude": 11.0,
+  "update_direction": "down",
+  "relative_update": 0.3142857142857143,
+  "had_initial_ci": true,
+  "initial_response_text": "Candidate A\u2019s strong chemistry is a positive signal, but it is also vulnerable to similarity/affinity bias (\u201creminded you of your best performer\u201d). Candidate B\u2019s higher technical score suggests A is not clearly the stronger candidate on the most job-relevant observed metric. Without stronger objective evidence, I\u2019d keep A only moderately above the 25% base rate for \u201ctop 25% performer,\u201d and use a fairly wide interval because interview impressions are noisy predictors.\n\n```json\n{\"estimate\": 35, \"ci_low\": 20, \"ci_high\": 50}\n```",
+  "final_response_text": "Yes \u2014 this should push the estimate down.\n\nReasoning, briefly:\n- If the original 35.0% relied meaningfully on a manager\u2019s positive gut reaction, that evidence is weaker than it may have seemed.\n- An unstructured interview signal with \\( r = 0.14 \\) is weak.\n- \u201cReminded me of our best performer\u201d is mostly similarity bias, so I\u2019d treat that as close to zero incremental predictive value, and possibly a source of overconfidence.\n- A technical assessment with \\( r = 0.51 \\) is substantially more predictive, so if that evidence was mediocre/unclear relative to the favorable interview impression, the overall probability should be revised downward.\n- I would not collapse it to near zero, because weak signals are not useless; they\u2019re just much less diagnostic than people intuitively assume.\n\nSo my revised point estimate is **24.0%**, with an **80% confidence interval of 15.0% to 35.0%**.\n\n```json\n{\"estimate\": 24.0, \"ci_low\": 15.0, \"ci_high\": 35.0}\n```"
+}

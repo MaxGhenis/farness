@@ -1,0 +1,22 @@
+{
+  "case_id": "deadline_estimate",
+  "condition": "cot",
+  "probe_battery": "on_framework",
+  "model": "gpt-5.4",
+  "initial_estimate": 75.0,
+  "initial_ci": [
+    60.0,
+    88.0
+  ],
+  "final_estimate": 28.0,
+  "final_ci": [
+    15.0,
+    45.0
+  ],
+  "update_magnitude": 47.0,
+  "update_direction": "down",
+  "relative_update": 0.6266666666666667,
+  "had_initial_ci": true,
+  "initial_response_text": "A reasonable way to think about this:\n\n1. **Base rate from plan vs. deadline**\n   - Estimated work: 4 months\n   - Time available: 6 months\n   - Buffer: 2 months, which is **50% of the estimated task duration**\n   - That is a meaningful cushion, assuming the plan is competent and execution is normal.\n\n2. **What increases confidence**\n   - There is already a **detailed project plan**, which lowers uncertainty relative to a vague estimate.\n   - A 2-month buffer is substantial for many project types.\n\n3. **What reduces confidence**\n   - Compliance projects often have risks: interpretation changes, dependency delays, approval bottlenecks, testing/rework, and resource constraints.\n   - Teams often underestimate duration even with detailed plans.\n\n4. **Overall judgment**\n   - Since the buffer is fairly large, I\u2019d put the probability **above 50% and materially so**.\n   - But because regulatory/compliance work can surprise teams, I would not go extremely high like 95%.\n\nMy best estimate is **75%**, with an **80% confidence interval of 60% to 88%**.\n\n```json\n{\"estimate\": 75, \"ci_low\": 60, \"ci_high\": 88}\n```",
+  "final_response_text": "Starting from the prior estimate of **75%**, the new information is clearly negative and should move the estimate down materially.\n\nStep by step:\n\n1. **Base-rate evidence**\n   - You now have an industry survey saying regulatory compliance projects finish on time only **40%** of the time.\n   - That is strong outside-view evidence and should pull the estimate substantially downward from 75%.\n\n2. **Lack of direct experience**\n   - Your team has **never done this specific type of work before**.\n   - First-time execution usually adds coordination errors, learning curves, and rework risk.\n   - So the estimate should go below the 40% base rate unless there are unusual offsetting strengths.\n\n3. **Requirements may change**\n   - The regulations are **still being finalized** and could change in the next 2 months.\n   - That creates scope uncertainty, which is especially damaging to deadline reliability.\n   - This further reduces the odds and increases uncertainty.\n\nPutting those together:\n- The prior 75% now looks too optimistic.\n- The new outside view is 40%, and the two scenario-specific factors both worsen odds relative to that base rate.\n- A reasonable revised point estimate is therefore in the **mid-20s to low-30s** range.\n\nI\u2019ll revise to **28%**.\n\nFor the **80% confidence interval**:\n- Because of the regulatory uncertainty and inexperience, uncertainty is fairly high.\n- A plausible 80% interval is **15% to 45%**.\n\n```json\n{\"estimate\": 28, \"ci_low\": 15, \"ci_high\": 45}\n```"
+}

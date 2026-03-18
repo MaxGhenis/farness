@@ -1,0 +1,22 @@
+{
+  "case_id": "hiring_success",
+  "condition": "cot",
+  "probe_battery": "on_framework",
+  "model": "gpt-5.4",
+  "initial_estimate": 32.0,
+  "initial_ci": [
+    18.0,
+    48.0
+  ],
+  "final_estimate": 22.0,
+  "final_ci": [
+    12.0,
+    34.0
+  ],
+  "update_magnitude": 10.0,
+  "update_direction": "down",
+  "relative_update": 0.3125,
+  "had_initial_ci": true,
+  "initial_response_text": "A disciplined way to think about this is:\n\n1. **Start from the base rate.**  \n   \u201cTop performer\u201d is defined as top 25% at the 1-year mark, so absent any other information, the baseline probability for any candidate is **25%**.\n\n2. **Adjust for interview chemistry cautiously.**  \n   Strong chemistry can matter, but it is also highly vulnerable to:\n   - similarity bias (\u201creminded you of your best performer\u201d),\n   - halo effects,\n   - over-weighting confidence/rapport relative to job-relevant predictors.\n\n   So this should move the estimate somewhat upward, but not dramatically on its own.\n\n3. **Account for the comparative signal.**  \n   Candidate B scored higher on the technical assessment. That suggests Candidate A is *not* the strongest candidate on one of the more job-relevant measurable signals. For a senior engineer role, technical assessment performance is usually at least moderately predictive, so this tempers the positive chemistry signal.\n\n4. **Net effect.**  \n   Candidate A likely ends up a bit above the base rate if the interview chemistry reflected real strengths such as leadership, communication, and collaboration\u2014but only modestly above, because the evidence is noisy and there is a clear risk of bias.\n\n5. **Uncertainty should be fairly wide.**  \n   We lack key information: structured interview scores, work samples, references, prior track record, domain fit, scope of role, and calibration of the technical assessment. So the interval should be broad.\n\nFinal estimate:\n\n```json\n{\"estimate\": 32, \"ci_low\": 18, \"ci_high\": 48}\n```",
+  "final_response_text": "Yes \u2014 this should lower the estimate.\n\nStep by step:\n\n1. **Previous estimate: 32%**\n   - That likely gave meaningful weight to the interviewer\u2019s positive gut reaction.\n\n2. **Unstructured interview impressions are weak predictors**\n   - If interview impressions correlate only **r = 0.14** with job performance, that means they contain only limited predictive signal.\n   - In practical terms, \u201cgreat chemistry\u201d or \u201cstrong impression\u201d should move the estimate only a little.\n\n3. **\u201cReminded me of our best performer\u201d is similarity bias**\n   - This is important because it suggests the interviewer\u2019s positive read is not just weak evidence, but potentially **systematically misleading**.\n   - So rather than treating that comment as positive signal, I\u2019d discount it heavily, possibly close to zero or even as a slight warning sign.\n\n4. **Technical assessment is much stronger**\n   - With **r = 0.51**, the technical assessment is far more predictive than interview vibe.\n   - If the technical assessment was weak/mediocre relative to the interviewer enthusiasm, then the stronger predictor should dominate.\n   - Since you note it is \u201c4x better than interview chemistry,\u201d the estimate should be anchored much more to the assessment than to the gut impression.\n\n5. **Net effect**\n   - Compared with the original 32%, I would revise downward because:\n     - the prior positive evidence was weak,\n     - part of it is bias rather than signal,\n     - and the stronger predictor points away from relying on that impression.\n\n### Revised estimate\nI\u2019d lower the probability from **32%** to about **22%**.\n\n### 80% confidence interval\nGiven uncertainty about how much the technical assessment and interview differed, I\u2019d use a somewhat wide interval, but narrower around the lower center:\n\n**80% CI: 12% to 34%**\n\n```json\n{\"estimate\": 22, \"ci_low\": 12, \"ci_high\": 34}\n```"
+}

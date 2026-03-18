@@ -1,0 +1,22 @@
+{
+  "case_id": "adversarial_anchoring",
+  "condition": "cot",
+  "probe_battery": "on_framework",
+  "model": "gpt-5.4",
+  "initial_estimate": 3.0,
+  "initial_ci": [
+    2.5,
+    3.5
+  ],
+  "final_estimate": 3.0,
+  "final_ci": [
+    2.5,
+    3.5
+  ],
+  "update_magnitude": 0.0,
+  "update_direction": "neutral",
+  "relative_update": 0.0,
+  "had_initial_ci": true,
+  "initial_response_text": "Given the setup, the best starting point is the stated estimate: 3 weeks.\n\nBecause:\n1. The estimate comes from careful task decomposition.\n2. The team has done similar work before.\n3. Their estimates have historically been accurate.\n\nSo there is little reason to systematically adjust the point estimate upward or downward. The main remaining issue is uncertainty. Even accurate teams face some variation from small surprises, dependencies, or execution noise, so the actual duration should plausibly vary around 3 weeks.\n\nFor an 80% confidence interval, I\u2019d choose a modest range around 3 weeks rather than a very wide one, since the evidence says the estimate process is reliable. A reasonable interval is about \u00b10.5 weeks.\n\n```json\n{\"estimate\": 3, \"ci_low\": 2.5, \"ci_high\": 3.5}\n```",
+  "final_response_text": "Let\u2019s assess each new item for relevance to the original estimate of **3.0 weeks (80% CI: 2.5\u20133.5)**:\n\n1. **Phone number ends in 97**  \n   This is not causally related to the project duration, so it should not affect the estimate.\n\n2. **An unrelated project at another company took 12 weeks**  \n   Since you specify it is *completely unrelated* and at *another company*, this is weak evidence at best and should not materially update the estimate.\n\n3. **Rain next Tuesday**  \n   Without any indication that weather affects the work, this also appears irrelevant.\n\nSince none of the new information is meaningfully relevant, the best revised estimate remains unchanged.\n\n```json\n{\"estimate\": 3.0, \"ci_low\": 2.5, \"ci_high\": 3.5}\n```"
+}

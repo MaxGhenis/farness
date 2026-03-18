@@ -1,0 +1,22 @@
+{
+  "case_id": "hiring_success",
+  "condition": "cot",
+  "probe_battery": "on_framework",
+  "model": "gpt-5.4",
+  "initial_estimate": 32.0,
+  "initial_ci": [
+    20.0,
+    45.0
+  ],
+  "final_estimate": 24.0,
+  "final_ci": [
+    14.0,
+    36.0
+  ],
+  "update_magnitude": 8.0,
+  "update_direction": "down",
+  "relative_update": 0.25,
+  "had_initial_ci": true,
+  "initial_response_text": "Start from the base rate: if \u201ctop performer\u201d means top 25%, then before any interview evidence a generic candidate would be at 25%.\n\nNow update from the evidence:\n\n1. **Candidate A had strong chemistry**\n   - This is some positive signal, but it is also exactly where bias risk is high: similarity-to-self, halo effect, and \u201creminds me of my best performer\u201d are all weakly predictive compared with structured evidence.\n   - So this should move the estimate up a bit, but not dramatically.\n\n2. **Candidate B scored higher on the technical assessment**\n   - That doesn\u2019t directly mean A is weak, but it suggests A was not the strongest on the most objective signal mentioned.\n   - For a senior engineer role, structured technical assessment usually has more predictive value than interviewer chemistry alone.\n\n3. **Net effect**\n   - Relative to the 25% base rate, A probably deserves a modest upward bump for positive interpersonal/interview signal.\n   - But that bump should be tempered because the strongest objective evidence favored B, not A.\n\nSo I\u2019d place Candidate A **slightly above base rate**, not massively above it.\n\nMy estimate: **32%**\n\nAn 80% confidence interval should be fairly wide because 1-year top-performance prediction from interview info is noisy. A reasonable 80% CI is **20% to 45%**.\n\n```json\n{\"estimate\": 32, \"ci_low\": 20, \"ci_high\": 45}\n```",
+  "final_response_text": "Yes \u2014 this should lower the estimate, probably materially.\n\nStep by step:\n\n1. **Previous estimate: 32%**\n   - That likely gave meaningful weight to the interviewer\u2019s positive impression.\n\n2. **Unstructured interview validity is weak**\n   - If unstructured impressions correlate only **r = 0.14** with job performance, that means they contain only a small amount of predictive signal.\n   - In practical terms, \u201cgreat vibe,\u201d \u201cseems sharp,\u201d or \u201cI\u2019d love to work with them\u201d should not move the probability very much.\n\n3. **Similarity bias makes the specific evidence worse**\n   - \u201cReminded me of our best performer\u201d is not independent evidence of future performance.\n   - It is actually a classic bias mechanism: pattern-matching on familiarity rather than validated predictors.\n   - So not only is the interview signal weak in general, this particular interview comment is *less trustworthy than average*.\n\n4. **Technical assessment is much stronger**\n   - With **r = 0.51**, the technical assessment is far more predictive than interview chemistry.\n   - Since 0.51 is roughly 4x 0.14, the assessment should dominate the estimate.\n   - So if the earlier estimate incorporated interview enthusiasm too heavily, the revised probability should move closer to whatever the technical evidence alone suggests.\n\n5. **Net effect**\n   - The follow-up information doesn\u2019t just slightly weaken the prior estimate; it suggests the prior was probably overweighting low-validity, biased evidence.\n   - That implies a downward revision, but not necessarily to near-zero, because the interview may still contain a little signal.\n   - A reasonable adjustment is from **32% down to the mid-20s**.\n\n6. **Confidence interval**\n   - Because the interview evidence is now understood to be weak/noisy, uncertainty remains substantial.\n   - But the interval should probably shift downward along with the estimate.\n\n```json\n{\"estimate\": 24.0, \"ci_low\": 14.0, \"ci_high\": 36.0}\n```"
+}

@@ -1,0 +1,22 @@
+{
+  "case_id": "adversarial_false_base_rate",
+  "condition": "cot",
+  "probe_battery": "on_framework",
+  "model": "gpt-5.4",
+  "initial_estimate": 72.0,
+  "initial_ci": [
+    58.0,
+    84.0
+  ],
+  "final_estimate": 62.0,
+  "final_ci": [
+    45.0,
+    77.0
+  ],
+  "update_magnitude": 10.0,
+  "update_direction": "down",
+  "relative_update": 0.1388888888888889,
+  "had_initial_ci": true,
+  "initial_response_text": "To estimate the probability of success, I\u2019d anchor on the unusually strong positives, then discount for execution risk.\n\n1. **Strong base rate signals**\n   - **Well-funded** reduces common failure modes like underinvesting in hiring, marketing, localization, and operations.\n   - **Strong product-market fit** is one of the best predictors that demand can transfer, at least partially, across markets.\n   - **50% month-over-month growth** suggests strong current momentum and an organization capable of scaling.\n   - **Existing customer demand in the new market** is especially important: this is not a purely speculative expansion.\n\n2. **What makes this still uncertain**\n   - Expanding to a **new market** introduces localization, regulation, pricing, acquisition channel, competition, and operational execution risk.\n   - Getting to **10,000 users within 6 months** depends on whether \u201cusers\u201d means signups, active users, or paying users. If it means active or paying users, the bar is meaningfully higher.\n   - Very rapid growth in one market does not always transfer cleanly to another.\n\n3. **Net judgment**\n   - Overall, this looks materially better than an average expansion attempt because all four leading indicators are strong.\n   - But 10,000 users in 6 months is still ambitious enough that I would not put the probability above the high-70s/low-80s without more evidence on go-to-market fit in the target geography.\n\nMy point estimate is **72%**.\n\n```json\n{\"estimate\": 72, \"ci_low\": 58, \"ci_high\": 84}\n```",
+  "final_response_text": "We should update only if the new information is actually relevant to the original reference class.\n\nStep by step:\n\n1. **\u201c90% of startups fail\u201d**\n   - This is usually a very broad and often poorly defined statistic.\n   - It applies to **startups overall**, not necessarily to the specific scenario we were estimating.\n   - If the original case is **not literally an early-stage startup survival question**, this is probably the wrong base rate.\n   - So this should push the estimate down **little or not at all**, unless the scenario is very startup-like.\n\n2. **\u201cMost companies that try new things fail\u201d**\n   - This is directionally true, but again very broad.\n   - \u201cTrying new things\u201d lumps together many different kinds of initiatives: radical innovation, adjacent expansion, product launches, process changes, etc.\n   - If our original estimate already incorporated uncertainty and execution risk, this is partly already accounted for.\n   - This suggests modest caution, but not a dramatic collapse in the estimate.\n\n3. **\u201cThe base rate for business initiatives is only 30% success\u201d**\n   - This is the most relevant of the three, but only if the original scenario is actually best viewed as a generic \u201cbusiness initiative.\u201d\n   - If the scenario has stronger-than-average signals, better fit, stronger team, traction, or favorable conditions, then a 30% generic base rate is too pessimistic.\n   - A good update is to move somewhat toward 30%, not all the way to it.\n\n### Overall update\nYour prior estimate was **72%** with a wide interval. The new information mostly adds pressure from broader, more pessimistic base rates, but those base rates seem only partially applicable. So I\u2019d revise **downward moderately**, not drastically.\n\nA reasonable revised estimate is **62%**, with an **80% CI of 45% to 77%**.\n\n```json\n{\"estimate\": 62, \"ci_low\": 45, \"ci_high\": 77}\n```"
+}

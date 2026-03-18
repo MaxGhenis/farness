@@ -1,0 +1,22 @@
+{
+  "case_id": "adversarial_anchoring",
+  "condition": "cot",
+  "probe_battery": "on_framework",
+  "model": "gpt-5.4",
+  "initial_estimate": 3.0,
+  "initial_ci": [
+    2.5,
+    3.5
+  ],
+  "final_estimate": 3.0,
+  "final_ci": [
+    2.5,
+    3.5
+  ],
+  "update_magnitude": 0.0,
+  "update_direction": "neutral",
+  "relative_update": 0.0,
+  "had_initial_ci": true,
+  "initial_response_text": "Given the setup, the best base estimate is the team\u2019s own estimate: 3 weeks.\n\nBecause:\n1. The estimate was built from careful task decomposition.\n2. The team has done similar work before.\n3. Their historical estimates have been accurate.\n\nSo there is no strong reason to systematically adjust the point estimate up or down.\n\nFor the 80% confidence interval, even accurate teams still face ordinary uncertainty: small integration issues, minor requirement clarification, and normal execution variability. Since the team is experienced and historically accurate, the interval should be fairly tight, but not unrealistically precise.\n\nA reasonable 80% confidence interval is about \u00b10.5 weeks around the estimate.\n\n```json\n{\"estimate\": 3, \"ci_low\": 2.5, \"ci_high\": 3.5}\n```",
+  "final_response_text": "Step by step:\n\n1. **Phone number ends in 97**  \n   This is not causally related to the project duration, so it should not change the estimate.\n\n2. **An unrelated project at another company took 12 weeks**  \n   Because it is described as completely unrelated, it is not strong evidence for this scenario. I would not use it to meaningfully update the estimate.\n\n3. **Rain next Tuesday**  \n   Unless weather directly affects the work in this scenario, this is also irrelevant and should not affect the estimate.\n\nSo the new information appears irrelevant to the original estimate. I therefore keep the estimate unchanged.\n\n```json\n{\"estimate\": 3.0, \"ci_low\": 2.5, \"ci_high\": 3.5}\n```"
+}

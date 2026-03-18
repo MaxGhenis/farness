@@ -1,0 +1,22 @@
+{
+  "case_id": "planning_estimate",
+  "condition": "cot",
+  "probe_battery": "on_framework",
+  "model": "gpt-5.4",
+  "initial_estimate": 2.8,
+  "initial_ci": [
+    2.0,
+    4.0
+  ],
+  "final_estimate": 5.3,
+  "final_ci": [
+    3.5,
+    8.0
+  ],
+  "update_magnitude": 2.5,
+  "update_direction": "up",
+  "relative_update": 0.8928571428571429,
+  "had_initial_ci": true,
+  "initial_response_text": "A reasonable outside-view adjustment is that software tasks, even with detailed breakdowns and confidence, often run over due to integration issues, hidden dependencies, testing, review cycles, and small interruptions. So I\u2019d anchor above the stated 2 weeks rather than accept it at face value.\n\nA modest optimism-bias adjustment would put the actual duration around 1.25\u00d7 to 1.5\u00d7 the estimate. Using the middle of that range gives about 2.8 weeks.\n\nFor an 80% confidence interval, I\u2019d allow for cases where things go unusually smoothly on the low end, but more often slip somewhat on the high end. That suggests something like 2.0 to 4.0 weeks.\n\n```json\n{\"estimate\": 2.8, \"ci_low\": 2.0, \"ci_high\": 4.0}\n```",
+  "final_response_text": "Start from the prior estimate:\n\n- Previous estimate: **2.8 weeks**\n- Previous 80% CI: **2.0\u20134.0 weeks**\n\nNow update it with the new information.\n\n### 1) Software projects averaging 2\u20133x initial estimates\nYes, this pushes the estimate upward. I would not mechanically multiply by 2\u20133x, because the original 2.8-week estimate was already an adjusted forecast rather than a naive team estimate. But this evidence is strong base-rate information that suggests the original estimate was still likely too low.\n\nA reasonable adjustment is to increase the central estimate substantially, but less than a full 2\u20133x. That suggests something like **~1.5\u20131.8x** on the prior adjusted estimate.\n\n### 2) Team confidence as a planning-fallacy warning sign\nYes, this further increases expected duration and especially widens the uncertainty. Overconfidence tends to mean hidden work, missed dependencies, and underestimated coordination costs. So this is another upward revision, though probably smaller than the base-rate effect above.\n\n### 3) 30% chance of a major blocker\nThis clearly raises the expected duration.\n\nA simple expected-value adjustment:\n- Suppose baseline revised duration is around **4.5 weeks**\n- If a major blocker occurs, it might add roughly **2\u20134 weeks**\n- With 30% probability, expected added time is about **0.6\u20131.2 weeks**\n\nThat would push the estimate toward roughly **5.1\u20135.7 weeks**, depending on blocker severity.\n\n### Combined revision\nPutting these together:\n\n- Prior adjusted estimate: **2.8**\n- Base-rate overrun effect: pushes toward **~4.5\u20135.0**\n- Planning-fallacy signal: pushes a bit higher\n- 30% blocker risk: adds expected delay\n\nA reasonable revised point estimate is **5.3 weeks**.\n\n### 80% confidence interval\nThe new info increases uncertainty materially, especially on the high side.\n\nA plausible 80% CI:\n- Lower bound: **3.5 weeks**  \n  (still possible if things go smoothly and the original estimate was only moderately optimistic)\n- Upper bound: **8.0 weeks**  \n  (captures blocker risk plus typical overruns without going to extreme tail outcomes)\n\n```json\n{\"estimate\": 5.3, \"ci_low\": 3.5, \"ci_high\": 8.0}\n```"
+}

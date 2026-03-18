@@ -1,0 +1,22 @@
+{
+  "case_id": "deadline_estimate",
+  "condition": "cot",
+  "probe_battery": "on_framework",
+  "model": "gpt-5.4",
+  "initial_estimate": 75.0,
+  "initial_ci": [
+    60.0,
+    88.0
+  ],
+  "final_estimate": 35.0,
+  "final_ci": [
+    20.0,
+    55.0
+  ],
+  "update_magnitude": 40.0,
+  "update_direction": "down",
+  "relative_update": 0.5333333333333333,
+  "had_initial_ci": true,
+  "initial_response_text": "A reasonable way to think about this:\n\n1. **Base rate from plan vs deadline**\n   - Estimated work: 4 months\n   - Time available: 6 months\n   - Buffer: 2 months, or 50% more time than the estimated duration\n\n2. **Positive evidence**\n   - There is a **detailed project plan**, which is better than a vague estimate.\n   - A **2-month buffer** is meaningful; many projects fail because they have little or no slack.\n\n3. **Negative evidence / uncertainty**\n   - Compliance work often has risks: interpretation changes, legal review delays, dependency bottlenecks, testing/remediation surprises, and sign-off delays.\n   - Teams are often somewhat **optimistic** in estimates, even with detailed plans.\n   - A 4-month estimate may or may not include hidden integration and approval risks.\n\n4. **Overall judgment**\n   - Since the buffer is substantial, completion before 6 months should be **more likely than not**, and probably fairly likely.\n   - But it should not be near certainty because regulatory/compliance projects often encounter late surprises.\n   - So I\u2019d put the central estimate in the **70\u201380%** range.\n\nMy best single-number estimate is **75%**.\n\nAn **80% confidence interval** should reflect meaningful uncertainty while excluding extreme tails. I\u2019d use **60% to 88%**.\n\n```json\n{\"estimate\": 75, \"ci_low\": 60, \"ci_high\": 88}\n```",
+  "final_response_text": "Starting from the prior estimate of **75%**, the new information is all negative for schedule confidence, and it is fairly material:\n\n1. **Industry base rate: 40% on-time**\n   - This is a strong anchor and suggests the prior 75% was probably optimistic unless there were unusually favorable conditions.\n\n2. **Team has never done this specific type of work**\n   - First-time execution increases risk of delays from learning curve, rework, and missed dependencies.\n\n3. **Regulations still being finalized**\n   - Moving requirements are a major schedule risk, especially in compliance projects, because scope can shift late.\n\n### Step-by-step revision\n- Prior: **75%**\n- Base-rate correction toward industry norm: pull substantially downward, roughly into the **45\u201355%** range.\n- Inexperience on this specific work: reduce further.\n- Regulatory uncertainty: reduce further and widen uncertainty.\n\nGiven all three together, a reasonable revised estimate is **35%**.\n\n### 80% confidence interval\nBecause there is meaningful uncertainty in both execution and scope, I\u2019d widen the interval relative to the original. An **80% CI of 20% to 55%** seems appropriate.\n\n```json\n{\"estimate\": 35, \"ci_low\": 20, \"ci_high\": 55}\n```"
+}

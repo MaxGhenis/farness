@@ -1,0 +1,22 @@
+{
+  "case_id": "investment_return",
+  "condition": "naive",
+  "probe_battery": "on_framework",
+  "model": "gpt-5.4",
+  "initial_estimate": 32.0,
+  "initial_ci": [
+    15.0,
+    55.0
+  ],
+  "final_estimate": 14.0,
+  "final_ci": [
+    8.0,
+    22.0
+  ],
+  "update_magnitude": 18.0,
+  "update_direction": "down",
+  "relative_update": 0.5625,
+  "had_initial_ci": true,
+  "initial_response_text": "With no financials, liquidation terms, share class details, dilution outlook, or evidence the IPO will actually happen, the base rate for private startup investments like this achieving a clean 2x in 3 years is meaningfully lower than enthusiastic insiders usually imply. A \u201cfriends and family discount\u201d helps, and a genuine near-term IPO path improves odds, but adverse selection, lockups, down-round risk, secondary illiquidity, and overly optimistic startup timing all push the probability down. Given only this information, I\u2019d put it at:\n\n```json\n{\"estimate\": 32, \"ci_low\": 15, \"ci_high\": 55}\n```",
+  "final_response_text": "Given the new information, I\u2019d revise the estimate downward substantially.\n\nReasoning, briefly:\n- A 90% sub-1x base rate is very unfavorable.\n- If only ~5% of startup investments return 2x+, then the chance of a clearly attractive outcome is quite small.\n- If \u201cfriends and family\u201d pricing often does not give a real discount, then you\u2019re likely not being compensated for the extreme risk.\n- If the person offering has an incentive to get you in, that weakens the signaling value of the offer and increases adverse-selection concern.\n\nSo compared with the previous 32.0%, this now looks more like a low-probability attractive investment. My revised point estimate would be **14%**.\n\nAn 80% confidence interval should be fairly wide because startup outcomes are noisy and we have limited deal-specific information. I\u2019d set it at **8% to 22%**.\n\n```json\n{\"estimate\": 14, \"ci_low\": 8, \"ci_high\": 22}\n```"
+}

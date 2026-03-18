@@ -1,0 +1,364 @@
+{
+  "study": "study1_rerun",
+  "prompt_version": "legacy_study1",
+  "random_seed": 42,
+  "runs_per_condition": 6,
+  "n_cases": 11,
+  "case_ids": [
+    "planning_estimate",
+    "sunk_cost_project",
+    "startup_success",
+    "hiring_success",
+    "acquisition_synergies",
+    "product_launch",
+    "deadline_estimate",
+    "investment_return",
+    "adversarial_anchoring",
+    "adversarial_false_base_rate",
+    "adversarial_sycophancy"
+  ],
+  "conditions": [
+    "naive",
+    "cot",
+    "farness"
+  ],
+  "probe_batteries": [
+    "on_framework"
+  ],
+  "model": "gpt-5.4",
+  "started_at": "2026-03-17T18:40:49.377492",
+  "condition_orders": {
+    "planning_estimate_run1": [
+      "cot",
+      "naive",
+      "farness"
+    ],
+    "planning_estimate_run2": [
+      "farness",
+      "cot",
+      "naive"
+    ],
+    "planning_estimate_run3": [
+      "cot",
+      "farness",
+      "naive"
+    ],
+    "planning_estimate_run4": [
+      "cot",
+      "farness",
+      "naive"
+    ],
+    "planning_estimate_run5": [
+      "cot",
+      "naive",
+      "farness"
+    ],
+    "planning_estimate_run6": [
+      "naive",
+      "cot",
+      "farness"
+    ],
+    "sunk_cost_project_run1": [
+      "cot",
+      "farness",
+      "naive"
+    ],
+    "sunk_cost_project_run2": [
+      "cot",
+      "farness",
+      "naive"
+    ],
+    "sunk_cost_project_run3": [
+      "cot",
+      "farness",
+      "naive"
+    ],
+    "sunk_cost_project_run4": [
+      "cot",
+      "naive",
+      "farness"
+    ],
+    "sunk_cost_project_run5": [
+      "naive",
+      "cot",
+      "farness"
+    ],
+    "sunk_cost_project_run6": [
+      "farness",
+      "cot",
+      "naive"
+    ],
+    "startup_success_run1": [
+      "naive",
+      "cot",
+      "farness"
+    ],
+    "startup_success_run2": [
+      "cot",
+      "farness",
+      "naive"
+    ],
+    "startup_success_run3": [
+      "naive",
+      "cot",
+      "farness"
+    ],
+    "startup_success_run4": [
+      "naive",
+      "farness",
+      "cot"
+    ],
+    "startup_success_run5": [
+      "cot",
+      "farness",
+      "naive"
+    ],
+    "startup_success_run6": [
+      "farness",
+      "naive",
+      "cot"
+    ],
+    "hiring_success_run1": [
+      "farness",
+      "cot",
+      "naive"
+    ],
+    "hiring_success_run2": [
+      "farness",
+      "cot",
+      "naive"
+    ],
+    "hiring_success_run3": [
+      "naive",
+      "farness",
+      "cot"
+    ],
+    "hiring_success_run4": [
+      "farness",
+      "cot",
+      "naive"
+    ],
+    "hiring_success_run5": [
+      "cot",
+      "naive",
+      "farness"
+    ],
+    "hiring_success_run6": [
+      "farness",
+      "naive",
+      "cot"
+    ],
+    "acquisition_synergies_run1": [
+      "naive",
+      "cot",
+      "farness"
+    ],
+    "acquisition_synergies_run2": [
+      "naive",
+      "cot",
+      "farness"
+    ],
+    "acquisition_synergies_run3": [
+      "cot",
+      "naive",
+      "farness"
+    ],
+    "acquisition_synergies_run4": [
+      "cot",
+      "naive",
+      "farness"
+    ],
+    "acquisition_synergies_run5": [
+      "cot",
+      "farness",
+      "naive"
+    ],
+    "acquisition_synergies_run6": [
+      "farness",
+      "naive",
+      "cot"
+    ],
+    "product_launch_run1": [
+      "cot",
+      "farness",
+      "naive"
+    ],
+    "product_launch_run2": [
+      "naive",
+      "farness",
+      "cot"
+    ],
+    "product_launch_run3": [
+      "naive",
+      "farness",
+      "cot"
+    ],
+    "product_launch_run4": [
+      "farness",
+      "cot",
+      "naive"
+    ],
+    "product_launch_run5": [
+      "farness",
+      "naive",
+      "cot"
+    ],
+    "product_launch_run6": [
+      "naive",
+      "cot",
+      "farness"
+    ],
+    "deadline_estimate_run1": [
+      "cot",
+      "naive",
+      "farness"
+    ],
+    "deadline_estimate_run2": [
+      "cot",
+      "naive",
+      "farness"
+    ],
+    "deadline_estimate_run3": [
+      "cot",
+      "naive",
+      "farness"
+    ],
+    "deadline_estimate_run4": [
+      "farness",
+      "cot",
+      "naive"
+    ],
+    "deadline_estimate_run5": [
+      "naive",
+      "farness",
+      "cot"
+    ],
+    "deadline_estimate_run6": [
+      "cot",
+      "naive",
+      "farness"
+    ],
+    "investment_return_run1": [
+      "naive",
+      "cot",
+      "farness"
+    ],
+    "investment_return_run2": [
+      "cot",
+      "farness",
+      "naive"
+    ],
+    "investment_return_run3": [
+      "farness",
+      "cot",
+      "naive"
+    ],
+    "investment_return_run4": [
+      "naive",
+      "farness",
+      "cot"
+    ],
+    "investment_return_run5": [
+      "cot",
+      "farness",
+      "naive"
+    ],
+    "investment_return_run6": [
+      "naive",
+      "cot",
+      "farness"
+    ],
+    "adversarial_anchoring_run1": [
+      "farness",
+      "cot",
+      "naive"
+    ],
+    "adversarial_anchoring_run2": [
+      "naive",
+      "farness",
+      "cot"
+    ],
+    "adversarial_anchoring_run3": [
+      "farness",
+      "cot",
+      "naive"
+    ],
+    "adversarial_anchoring_run4": [
+      "cot",
+      "farness",
+      "naive"
+    ],
+    "adversarial_anchoring_run5": [
+      "naive",
+      "cot",
+      "farness"
+    ],
+    "adversarial_anchoring_run6": [
+      "naive",
+      "cot",
+      "farness"
+    ],
+    "adversarial_false_base_rate_run1": [
+      "naive",
+      "cot",
+      "farness"
+    ],
+    "adversarial_false_base_rate_run2": [
+      "farness",
+      "naive",
+      "cot"
+    ],
+    "adversarial_false_base_rate_run3": [
+      "farness",
+      "cot",
+      "naive"
+    ],
+    "adversarial_false_base_rate_run4": [
+      "cot",
+      "farness",
+      "naive"
+    ],
+    "adversarial_false_base_rate_run5": [
+      "cot",
+      "farness",
+      "naive"
+    ],
+    "adversarial_false_base_rate_run6": [
+      "cot",
+      "naive",
+      "farness"
+    ],
+    "adversarial_sycophancy_run1": [
+      "naive",
+      "cot",
+      "farness"
+    ],
+    "adversarial_sycophancy_run2": [
+      "cot",
+      "naive",
+      "farness"
+    ],
+    "adversarial_sycophancy_run3": [
+      "naive",
+      "farness",
+      "cot"
+    ],
+    "adversarial_sycophancy_run4": [
+      "naive",
+      "cot",
+      "farness"
+    ],
+    "adversarial_sycophancy_run5": [
+      "naive",
+      "cot",
+      "farness"
+    ],
+    "adversarial_sycophancy_run6": [
+      "cot",
+      "naive",
+      "farness"
+    ]
+  },
+  "completed_at": "2026-03-17T19:21:03.437036",
+  "n_results": 198
+}

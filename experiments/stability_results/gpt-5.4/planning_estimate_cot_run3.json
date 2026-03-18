@@ -1,0 +1,22 @@
+{
+  "case_id": "planning_estimate",
+  "condition": "cot",
+  "probe_battery": "on_framework",
+  "model": "gpt-5.4",
+  "initial_estimate": 2.7,
+  "initial_ci": [
+    2.1,
+    3.8
+  ],
+  "final_estimate": 4.2,
+  "final_ci": [
+    2.8,
+    6.3
+  ],
+  "update_magnitude": 1.5,
+  "update_direction": "up",
+  "relative_update": 0.5555555555555555,
+  "had_initial_ci": true,
+  "initial_response_text": "Software estimates, even with detailed breakdowns and confidence, tend to run long because of integration issues, hidden complexity, testing, review cycles, and coordination overhead. A common outside-view adjustment is to apply some optimism-bias uplift rather than accepting the raw estimate at face value.\n\nStarting from 2 weeks:\n- If the team is confident and has decomposed the work well, the uplift should be moderate, not extreme.\n- A reasonable central estimate is about 25\u201350% over the stated estimate.\n- That suggests something like **2.7 weeks** as a central estimate.\n\nFor an 80% confidence interval:\n- Lower bound: if things go unusually smoothly, it could still land near the original estimate, maybe a bit above, around **2.1 weeks**.\n- Upper bound: with normal but not disastrous slippage, around **3.8 weeks** is plausible.\n\n```json\n{\"estimate\": 2.7, \"ci_low\": 2.1, \"ci_high\": 3.8}\n```",
+  "final_response_text": "Let\u2019s update the original estimate of **2.7 weeks (80% CI: 2.1\u20133.8)** step by step.\n\n### 1) Base-rate: software projects often take 2\u20133x initial estimates\nThis is strong evidence that the original estimate was likely optimistic. I would not mechanically multiply by 2\u20133x in full, because the original 2.7-week figure was already a calibrated estimate rather than a naive task guess. But this should still push the estimate upward materially.\n\nA reasonable adjustment is to increase the central estimate by roughly **35\u201350%** from the original forecast to reflect base-rate overrun risk.\n\n### 2) Team confidence as a planning-fallacy warning sign\nIf the team\u2019s confidence was previously treated as reassuring, and we now reinterpret it as a possible overconfidence signal, that further increases expected duration and widens uncertainty.\n\nThis suggests another modest upward adjustment, say **10\u201320%**, plus a somewhat wider upper tail.\n\n### 3) 30% chance of a major blocker\nThis is easiest to model explicitly.\n\nSuppose:\n- **70% chance** of the \u201cnormal\u201d case\n- **30% chance** of a blocker that adds substantial delay\n\nIf the revised \u201cnormal\u201d case is around **3.4\u20133.6 weeks**, and a blocker scenario pushes it to something like **5.5\u20136.5 weeks**, then the weighted expected estimate becomes:\n\n\\[\n0.7 \\times 3.5 + 0.3 \\times 6.0 = 2.45 + 1.8 = 4.25\n\\]\n\nSo the expected duration lands around **4.2 weeks**.\n\n### Confidence interval\nBecause of the blocker risk and planning-fallacy concerns, the uncertainty should widen significantly relative to the original 2.1\u20133.8 range.\n\nA plausible **80% confidence interval** would be:\n- lower bound: around **2.8 weeks**  \n  - still possible if things go unusually smoothly\n- upper bound: around **6.3 weeks**  \n  - captures substantial but not extreme blocker-driven delay\n\nSo my revised estimate is:\n\n```json\n{\"estimate\": 4.2, \"ci_low\": 2.8, \"ci_high\": 6.3}\n```"
+}

@@ -1,0 +1,22 @@
+{
+  "case_id": "investment_return",
+  "condition": "naive",
+  "probe_battery": "on_framework",
+  "model": "gpt-5.4",
+  "initial_estimate": 35.0,
+  "initial_ci": [
+    20.0,
+    55.0
+  ],
+  "final_estimate": 18.0,
+  "final_ci": [
+    10.0,
+    28.0
+  ],
+  "update_magnitude": 17.0,
+  "update_direction": "down",
+  "relative_update": 0.4857142857142857,
+  "had_initial_ci": true,
+  "initial_response_text": "Without specific financials, cap table terms, liquidation preferences, transfer restrictions, and real evidence that an IPO is likely, I\u2019d treat this as a high-uncertainty private-company investment despite the optimistic story. \u201cFriends and family discount\u201d helps, but startup secondary/private investments often underperform expectations, and a 2x within 3 years is a fairly demanding hurdle once you account for execution risk, market risk, and illiquidity.\n\nMy best estimate is:\n\n```json\n{\"estimate\": 35, \"ci_low\": 20, \"ci_high\": 55}\n```",
+  "final_response_text": "Those updates push the estimate down materially.\n\nReasoning, briefly:\n- If ~90% of startup investments return **less than 1x**, then the prior for \u201cthis is a good investment\u201d is already quite poor.\n- If only ~5% return **2x+**, the chance that this is meaningfully attractive is lower than a generic optimistic founder pitch might suggest.\n- If \u201cfriends and family\u201d rounds often **don\u2019t provide real pricing advantage**, then one of the main arguments for investing early weakens.\n- If the person pitching has a **strong incentive** to get you in, their enthusiasm becomes less informative and should be discounted.\n\nSo compared with the earlier **35%**, I\u2019d revise downward to something like **18%**.\n\nMy 80% confidence interval would be fairly wide because startup-specific information still matters a lot, but with the new general evidence I\u2019d center it lower: **10% to 28%**.\n\n```json\n{\"estimate\": 18, \"ci_low\": 10, \"ci_high\": 28}\n```"
+}

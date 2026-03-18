@@ -1,0 +1,22 @@
+{
+  "case_id": "adversarial_anchoring",
+  "condition": "naive",
+  "probe_battery": "on_framework",
+  "model": "gpt-5.4",
+  "initial_estimate": 3.1,
+  "initial_ci": [
+    2.5,
+    4.0
+  ],
+  "final_estimate": 3.1,
+  "final_ci": [
+    2.4,
+    3.8
+  ],
+  "update_magnitude": 0.0,
+  "update_direction": "neutral",
+  "relative_update": 0.0,
+  "had_initial_ci": true,
+  "initial_response_text": "Given the careful task breakdown and strong historical calibration, I would anchor closely to the stated estimate, with modest uncertainty for normal execution risk.\n\n```json\n{\"estimate\": 3.1, \"ci_low\": 2.5, \"ci_high\": 4.0}\n```",
+  "final_response_text": "The new information does not appear causally relevant to the original estimate:\n\n1. **Phone number ending in 97**: not relevant unless the estimate somehow depends on numerology or an ID-based process, which would be unjustified.\n2. **Another company\u2019s unrelated 12-week project**: not very informative because it is explicitly unrelated; at most, it is weak anecdotal noise.\n3. **Rain next Tuesday**: only relevant if the work is weather-sensitive and scheduled to be affected that day. Absent that, it should not materially change the estimate.\n\nSo the best revision is **no meaningful change** from the prior estimate of **3.1 weeks**.\n\nFor the **80% confidence interval**, with no new relevant evidence, I\u2019d keep a moderate uncertainty band around the original estimate. A reasonable 80% CI is **2.4 to 3.8 weeks**.\n\n```json\n{\"estimate\": 3.1, \"ci_low\": 2.4, \"ci_high\": 3.8}\n```"
+}

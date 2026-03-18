@@ -1,0 +1,22 @@
+{
+  "case_id": "investment_return",
+  "condition": "naive",
+  "probe_battery": "on_framework",
+  "model": "gpt-5.4",
+  "initial_estimate": 30.0,
+  "initial_ci": [
+    15.0,
+    50.0
+  ],
+  "final_estimate": 12.0,
+  "final_ci": [
+    6.0,
+    22.0
+  ],
+  "update_magnitude": 18.0,
+  "update_direction": "down",
+  "relative_update": 0.6,
+  "had_initial_ci": true,
+  "initial_response_text": "Without specific financials, terms, liquidation preferences, transfer restrictions, dilution expectations, and evidence the IPO is actually likely, I\u2019d treat this as a high-risk private-company investment despite the \u201cdiscount\u201d framing.\n\nBase rate view:\n- Many \u201clikely IPO next year\u201d startups do not IPO on that timeline.\n- Even if they do, your entry terms may not translate cleanly into public-market gains.\n- Getting to at least 2x within 3 years is plausible, but far from more-likely-than-not.\n\nMy best estimate is **30%**, with a fairly wide 80% confidence interval of **15% to 50%**.\n\n```json\n{\"estimate\": 30, \"ci_low\": 15, \"ci_high\": 50}\n```",
+  "final_response_text": "Given the new information, I would revise the estimate down substantially from 30.0%.\n\nReasoning, briefly:\n- If ~90% of startup investments return less than 1x, the baseline probability of a \u201cgood\u201d outcome is already quite low.\n- If only ~5% return 2x+, that suggests truly attractive venture-style outcomes are rare.\n- If the friends-and-family round does not actually provide a meaningful valuation discount, then one of the main reasons this might have been an especially attractive entry point largely disappears.\n- If the person offering the deal has incentive to get you to invest, that adds adverse-selection / persuasion-risk and makes the offer less trustworthy as a positive signal.\n\nPutting that together, I\u2019d move from a somewhat optimistic estimate to one closer to a skeptical base-rate-driven view. My revised point estimate would be 12%.\n\nFor an 80% confidence interval, I\u2019d use a fairly wide range because startup outcomes are noisy and we have limited deal-specific information: 6% to 22%.\n\n```json\n{\"estimate\": 12, \"ci_low\": 6, \"ci_high\": 22}\n```"
+}

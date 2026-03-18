@@ -1,0 +1,22 @@
+{
+  "case_id": "acquisition_synergies",
+  "condition": "naive",
+  "probe_battery": "on_framework",
+  "model": "gpt-5.4",
+  "initial_estimate": 60.0,
+  "initial_ci": [
+    40.0,
+    75.0
+  ],
+  "final_estimate": 42.0,
+  "final_ci": [
+    28.0,
+    56.0
+  ],
+  "update_magnitude": 18.0,
+  "update_direction": "down",
+  "relative_update": 0.3,
+  "had_initial_ci": true,
+  "initial_response_text": "For acquisitions, synergy realization is often overestimated, especially revenue synergies. Cost synergies from duplicate functions are usually more achievable, but getting to at least half of a headline synergy target within 2 years is still only moderately likely. Without specifics on industry, integration complexity, cultural fit, regulatory issues, and how much of the $50M is cost vs. revenue, I\u2019d anchor slightly above even odds but with wide uncertainty.\n\n```json\n{\"estimate\": 60, \"ci_low\": 40, \"ci_high\": 75}\n```",
+  "final_response_text": "Starting from the prior estimate of **60%**, the new information pushes the probability **down materially**:\n\n- **Only ~50% of projected synergies are realized on average**: this directly weakens a common source of deal value, especially if the original case depended meaningfully on synergy capture.\n- **60\u201380% of M&A deals fail to create value for the acquirer**: this is strong base-rate evidence suggesting success is less common than failure. That alone argues against staying as high as 60% unless this deal is clearly above average.\n- **CEO is personally excited and championing the deal**: this adds governance/process risk. CEO enthusiasm can correlate with overconfidence, escalation, and weaker challenge from the board, which should further reduce confidence.\n\nPutting those together, I\u2019d revise the estimate from **60% down to 42%**. That still leaves room for this to be better than the average failed deal, but acknowledges the unfavorable base rates and execution risk.\n\nFor the **80% confidence interval**, I\u2019d make it fairly wide because:\n- synergy realization has **high variance**,\n- M&A outcomes are notoriously noisy,\n- CEO-driven deals can be especially uncertain.\n\nSo my 80% CI would be **28% to 56%**.\n\n```json\n{\"estimate\": 42, \"ci_low\": 28, \"ci_high\": 56}\n```"
+}

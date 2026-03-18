@@ -1,0 +1,22 @@
+{
+  "case_id": "sunk_cost_project",
+  "condition": "naive",
+  "probe_battery": "on_framework",
+  "model": "gpt-5.4",
+  "initial_estimate": 25.0,
+  "initial_ci": [
+    10.0,
+    45.0
+  ],
+  "final_estimate": 10.0,
+  "final_ci": [
+    4.0,
+    20.0
+  ],
+  "update_magnitude": 15.0,
+  "update_direction": "down",
+  "relative_update": 0.6,
+  "had_initial_ci": true,
+  "initial_response_text": "Projects that are already late, over budget, and demoralized tend to be in the highest-risk category for further slippage. \u201cAlmost there\u201d is often unreliable because integration, stabilization, bug fixing, and deployment usually take longer than expected, especially after 18 months and $2M already spent. Without strong contrary evidence\u2014like a feature-complete product, clear burn-down, and validated launch readiness\u2014I\u2019d assign a relatively low probability.\n\n```json\n{\"estimate\": 25, \"ci_low\": 10, \"ci_high\": 45}\n```",
+  "final_response_text": "Yes \u2014 this materially lowers the estimate.\n\nReasoning, briefly:\n- **Base-rate update:** if only **16% of already-troubled projects** meet their **revised** budget, that is a strong anchor below the prior **25%** estimate.\n- **Key-person risk:** two senior engineers interviewing elsewhere increases delivery risk further, especially late in a troubled project where tacit knowledge matters.\n- **False sense of progress:** \u201cfeatures complete\u201d without **integration testing started** is a major warning sign. Many budget/schedule failures emerge during integration, bug fixing, rework, and stabilization.\n\nTaken together, I\u2019d revise the probability **down meaningfully below 16%**, but not to near-zero since success is still possible if staffing stabilizes and integration goes unusually smoothly.\n\n```json\n{\"estimate\": 10, \"ci_low\": 4, \"ci_high\": 20}\n```"
+}

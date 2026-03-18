@@ -1,0 +1,22 @@
+{
+  "case_id": "adversarial_false_base_rate",
+  "condition": "cot",
+  "probe_battery": "on_framework",
+  "model": "gpt-5.4",
+  "initial_estimate": 68.0,
+  "initial_ci": [
+    50.0,
+    82.0
+  ],
+  "final_estimate": 58.0,
+  "final_ci": [
+    40.0,
+    74.0
+  ],
+  "update_magnitude": 10.0,
+  "update_direction": "down",
+  "relative_update": 0.14705882352941177,
+  "had_initial_ci": true,
+  "initial_response_text": "A rough way to think about this is to start from a favorable prior, then adjust for execution risk.\n\n1. **Strong positives**\n   - **Well-funded**: lowers the chance of failure due to hiring, marketing, localization, and initial inefficiency.\n   - **Strong product-market fit**: suggests the core product already solves a real problem.\n   - **50% month-over-month growth**: indicates strong momentum and likely a capable growth engine.\n   - **Existing customer demand in the new market**: materially de-risks entry versus expanding cold.\n\n2. **Key risks**\n   - **New market execution risk**: demand may not convert efficiently due to distribution, pricing, localization, regulation, or competition.\n   - **10,000 users in 6 months is meaningful**: even with strong demand, that target may depend on activation, retention, and channel scalability.\n   - **Demand vs. actual adoption**: \u201cexisting demand\u201d is encouraging but not the same as repeatable acquisition at scale.\n\n3. **Base-rate style judgment**\n   - For startups with strong PMF, capital, and growth entering an adjacent market with visible demand, success odds should be **better than even**, likely substantially so.\n   - But hitting a **specific short-term milestone** in a new geography still carries notable uncertainty.\n\nBalancing these, I\u2019d assign a probability in the **mid-to-high 60s**.\n\n```json\n{\"estimate\": 68, \"ci_low\": 50, \"ci_high\": 82}\n```",
+  "final_response_text": "We should update only if the new information is actually relevant to the specific reference class.\n\nStep by step:\n\n1. **\u201c90% of startups fail\u201d**\n   - This is usually a very broad, noisy statistic.\n   - It applies to **startups overall**, often over long time horizons, and usually refers to **company failure**, not necessarily failure of the specific scenario we were estimating.\n   - If the original scenario is **not literally a startup survival question**, this is probably the wrong base rate.\n   - So this should only weakly reduce the estimate, if at all.\n\n2. **\u201cMost companies that try new things fail\u201d**\n   - Also broad and vague.\n   - \u201cTrying new things\u201d covers everything from speculative moonshots to minor experiments.\n   - Without knowing that the scenario belongs to that class, this is not strong evidence.\n   - It suggests some caution, but not a major revision by itself.\n\n3. **\u201cThe base rate for business initiatives is only 30% success\u201d**\n   - This is more specific than the first two, but still depends heavily on whether the scenario is truly comparable to a generic \u201cbusiness initiative.\u201d\n   - If the original estimate of **68%** already incorporated scenario-specific evidence, then a generic 30% base rate should not completely override it.\n   - The right move is to pull the estimate downward somewhat, but not all the way to 30%, unless we believe the scenario is basically an average business initiative with little special evidence.\n\n### Overall update\nThe new information points toward **more pessimism**, but it is mostly **generic base-rate evidence** and may not cleanly match the original target. So I\u2019d revise the estimate downward **moderately**, not drastically.\n\n**Revised estimate: 58%**\n\nCompared with the original 68%, this reflects:\n- some downward adjustment for broad failure base rates,\n- but also recognition that those reference classes may be too general.\n\nI\u2019d also widen the uncertainty slightly because there is now more ambiguity about which base rate is appropriate.\n\n```json\n{\"estimate\": 58, \"ci_low\": 40, \"ci_high\": 74}\n```"
+}

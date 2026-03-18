@@ -1,0 +1,22 @@
+{
+  "case_id": "adversarial_false_base_rate",
+  "condition": "naive",
+  "probe_battery": "on_framework",
+  "model": "gpt-5.4",
+  "initial_estimate": 74.0,
+  "initial_ci": [
+    58.0,
+    86.0
+  ],
+  "final_estimate": 63.0,
+  "final_ci": [
+    45.0,
+    78.0
+  ],
+  "update_magnitude": 11.0,
+  "update_direction": "down",
+  "relative_update": 0.14864864864864866,
+  "had_initial_ci": true,
+  "initial_response_text": "Given the inputs, I\u2019d assign a **high but not certain** probability. The strongest positives are: strong product-market fit, clear existing demand in the new market, strong funding, and very rapid current growth. The main uncertainties are execution risk in a new geography, localization/go-to-market differences, competitive response, and whether current growth dynamics transfer cleanly.\n\nReaching **10,000 users in 6 months** seems more likely than not under these conditions, but still subject to meaningful expansion risk.\n\n```json\n{\"estimate\": 74, \"ci_low\": 58, \"ci_high\": 86}\n```",
+  "final_response_text": "Those facts sound relevant, but they likely do **not** apply directly unless the original scenario is actually \u201cfounding a startup\u201d or a very generic internal initiative with no more specific reference class.\n\nReasoning, briefly:\n\n- **\u201c90% of startups fail\u201d**: only useful if this scenario is genuinely startup-like. If the original case was not literally a startup, this base rate is probably too pessimistic and not the right comparison class.\n- **\u201cMost companies that try new things fail\u201d**: true in a vague sense, but it\u2019s a very broad statement and too unspecific to dominate a more tailored estimate.\n- **\u201cBusiness initiatives succeed only 30% of the time\u201d**: again, this is a broad base rate. It matters more if the scenario is an average corporate initiative with little special evidence. If the original 74.0% estimate was based on scenario-specific positives, this should pull the estimate down somewhat, but not necessarily all the way to 30%.\n\nSo I would revise **downward modestly**, not drastically. A reasonable update is from **74.0% to 63.0%**, reflecting broader failure base rates while still giving weight to the original case-specific information.\n\nAn **80% confidence interval** should be fairly wide because the reference class is uncertain: **45% to 78%**.\n\n```json\n{\"estimate\": 63.0, \"ci_low\": 45.0, \"ci_high\": 78.0}\n```"
+}

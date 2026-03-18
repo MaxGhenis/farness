@@ -1,0 +1,22 @@
+{
+  "case_id": "planning_estimate",
+  "condition": "naive",
+  "probe_battery": "on_framework",
+  "model": "gpt-5.4",
+  "initial_estimate": 3.0,
+  "initial_ci": [
+    2.0,
+    5.0
+  ],
+  "final_estimate": 7.5,
+  "final_ci": [
+    5.5,
+    11.0
+  ],
+  "update_magnitude": 4.5,
+  "update_direction": "up",
+  "relative_update": 1.5,
+  "had_initial_ci": true,
+  "initial_response_text": "Software estimates tend to be optimistic even when the team is confident and has done a detailed breakdown. A common adjustment is to expect some overruns from integration, edge cases, review cycles, and testing. So I\u2019d modestly inflate the 2-week estimate rather than multiply it dramatically.\n\nA reasonable point estimate is **3 weeks**, with an **80% confidence interval of 2 to 5 weeks**.\n\n```json\n{\"estimate\": 3, \"ci_low\": 2, \"ci_high\": 5}\n```",
+  "final_response_text": "Yes \u2014 all three points push the estimate upward.\n\nReasoning, briefly:\n- Initial estimate: **3.0 weeks**\n- If software projects often run **2\u20133x initial estimates**, then a typical adjusted range would already be around **6\u20139 weeks**.\n- If the team\u2019s confidence is actually a **planning fallacy signal**, that suggests leaning toward the higher part of that range rather than treating confidence as reducing uncertainty.\n- A **30% chance of a major blocker** adds schedule risk and widens the distribution. Even if the blocker doesn\u2019t happen, it should increase the expected duration somewhat; if it does happen, the upper tail gets meaningfully larger.\n\nSo I\u2019d revise the point estimate upward to about **7.5 weeks**.\n\nFor an **80% confidence interval**, I\u2019d use a range that reflects:\n- lower end: things go relatively smoothly but still not at the naive 3-week level\n- upper end: captures overruns plus some blocker risk\n\nA reasonable 80% CI is **5.5 to 11.0 weeks**.\n\n```json\n{\"estimate\": 7.5, \"ci_low\": 5.5, \"ci_high\": 11.0}\n```"
+}

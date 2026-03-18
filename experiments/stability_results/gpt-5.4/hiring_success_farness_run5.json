@@ -1,0 +1,22 @@
+{
+  "case_id": "hiring_success",
+  "condition": "farness",
+  "probe_battery": "on_framework",
+  "model": "gpt-5.4",
+  "initial_estimate": 31.0,
+  "initial_ci": [
+    18.0,
+    46.0
+  ],
+  "final_estimate": 23.0,
+  "final_ci": [
+    14.0,
+    34.0
+  ],
+  "update_magnitude": 8.0,
+  "update_direction": "down",
+  "relative_update": 0.25806451612903225,
+  "had_initial_ci": true,
+  "initial_response_text": "Using a farness/outside-view approach:\n\n1. **Base rates**\n   - By definition, without any candidate-specific information, the prior probability a hire ends up in the **top 25%** at 1 year is **25%**.\n   - Research on personnel selection generally finds:\n     - **General mental ability / work-sample / technical assessments** have materially higher predictive validity for job performance than unstructured interview impressions.\n     - **Unstructured interviews** and \u201cchemistry\u201d are predictive, but much noisier and more vulnerable to bias.\n   - Meta-analytic personnel-selection literature commonly reports approximate validities in this range:\n     - technical/work-sample style assessments: roughly **0.3\u20130.5**\n     - unstructured interviews: roughly **0.1\u20130.3**\n   - So the fact pattern \u201cA had great chemistry; B scored higher technically\u201d is evidence that **A should be discounted relative to the warm in-interview impression**.\n\n2. **Biases in the framing**\n   - **Halo effect**: Candidate A \u201creminded you of your best performer,\u201d which can cause one salient similarity to inflate expected performance.\n   - **Representativeness bias**: matching A to a mental prototype of a star engineer.\n   - **Affect heuristic / likability bias**: good chemistry feels predictive even when it often weakly correlates with future output.\n   - **Availability bias**: your best performer is memorable, so resemblance feels stronger than it should.\n   - **Interview illusion / overconfidence**: overweighting a small sample of conversational interaction versus stronger selection signals.\n\n3. **Forecast**\n   - Start from the **25% prior**.\n   - Update slightly upward for positive interview chemistry, but not dramatically because:\n     - chemistry is a noisy predictor,\n     - the comparison candidate did better on the stronger signal (technical assessment),\n     - and \u201creminds me of my best performer\u201d is exactly the kind of cue that often reflects bias rather than information.\n   - Net result: I would place Candidate A **a bit above base rate**, but only modestly.\n\n**Point estimate: 31%**\n\n**80% confidence interval: 18% to 46%**\n- Lower bound reflects the possibility that interview chemistry is mostly noise and technical underperformance relative to B is meaningful.\n- Upper bound reflects the possibility that communication, leadership, and collaboration strengths captured in the interview matter meaningfully in a senior role.\n\n```json\n{\"estimate\": 31, \"ci_low\": 18, \"ci_high\": 46}\n```",
+  "final_response_text": "Yes \u2014 this should lower the estimate materially.\n\nReasoning, briefly:\n- The original 31% likely gave too much weight to the interviewer\u2019s positive intuitive reaction.\n- New evidence says that signal is weak: an unstructured interview impression with \\( r = 0.14 \\) has low predictive validity.\n- \u201cReminded me of our best performer\u201d is better treated as bias than evidence, so its weight should be close to zero or even slightly negative if it suggests overconfidence.\n- If the technical assessment has \\( r = 0.51 \\), that should dominate the forecast. So the right update is to discount the interview-chemistry signal heavily and anchor much more on the technical-assessment evidence.\n\nWithout new information that the technical assessment itself was especially strong or weak, the main effect is removing an overweighted weak predictor. That pushes the estimate down from 31% to something closer to the low-mid 20s. I\u2019d also tighten the interval somewhat because we now have a clearer view of which evidence deserves weight.\n\n```json\n{\"estimate\": 23.0, \"ci_low\": 14.0, \"ci_high\": 34.0}\n```"
+}

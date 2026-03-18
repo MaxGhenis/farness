@@ -1,0 +1,22 @@
+{
+  "case_id": "sunk_cost_project",
+  "condition": "naive",
+  "probe_battery": "on_framework",
+  "model": "gpt-5.4",
+  "initial_estimate": 25.0,
+  "initial_ci": [
+    10.0,
+    45.0
+  ],
+  "final_estimate": 12.0,
+  "final_ci": [
+    6.0,
+    22.0
+  ],
+  "update_magnitude": 13.0,
+  "update_direction": "down",
+  "relative_update": 0.52,
+  "had_initial_ci": true,
+  "initial_response_text": "Projects that are already late, over budget, and demoralized\u2014and are described by leadership as \u201calmost there\u201d\u2014often underestimate remaining work. The base rate for recovery in this situation is not great: hidden integration issues, quality problems, and optimism bias tend to dominate at the end.\n\nSo I\u2019d assign a relatively low chance, but not zero, since some troubled projects do make it over the line if scope is narrowed and the last mile is truly understood.\n\n```json\n{\"estimate\": 25, \"ci_low\": 10, \"ci_high\": 45}\n```",
+  "final_response_text": "The new information pushes the probability down materially.\n\nReasoning, briefly:\n- **Base update from 25%**: if only **16% of already-troubled projects meet revised budget estimates**, that is a strong reference-class indicator and should pull the estimate below 25%.\n- **Two senior engineers interviewing elsewhere**: meaningful added delivery risk, especially late in a troubled project where tacit knowledge matters.\n- **\u201cAlmost there\u201d based only on feature completion, with no integration testing yet**: this is a major negative signal. Projects often look close before integration, and integration/test is where hidden schedule and cost risk tends to surface.\n\nPutting that together, I\u2019d revise the estimate to **12%**.\n\nFor an **80% confidence interval**, I\u2019d use **6% to 22%**:\n- Lower bound reflects the possibility that integration/testing and staffing instability are even worse than they appear.\n- Upper bound allows for the chance that the revised budget already includes some contingency and the departures don\u2019t happen immediately.\n\n```json\n{\"estimate\": 12, \"ci_low\": 6, \"ci_high\": 22}\n```"
+}

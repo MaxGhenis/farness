@@ -1,0 +1,22 @@
+{
+  "case_id": "product_launch",
+  "condition": "naive",
+  "probe_battery": "on_framework",
+  "model": "gpt-5.4",
+  "initial_estimate": 38.0,
+  "initial_ci": [
+    20.0,
+    58.0
+  ],
+  "final_estimate": 24.0,
+  "final_ci": [
+    14.0,
+    36.0
+  ],
+  "update_magnitude": 14.0,
+  "update_direction": "down",
+  "relative_update": 0.3684210526315789,
+  "had_initial_ci": true,
+  "initial_response_text": "Positive internal testing and beta sentiment help, but a 10% lift in overall product engagement within 3 months is still a fairly high bar. Most feature launches underperform early enthusiasm once exposed to the full user base, and beta users are usually more receptive than average users. So I\u2019d put the probability somewhat below 50%, but not low.\n\n```json\n{\"estimate\": 38, \"ci_low\": 20, \"ci_high\": 58}\n```",
+  "final_response_text": "Given the new information, I\u2019d revise the estimate downward materially from **38.0%**.\n\nReasoning, briefly:\n- **Base rate (20\u201330%)** is the strongest anchor and already suggests the original estimate may have been too high unless there was unusually strong evidence.\n- **Beta users are self-selected enthusiasts**, so positive beta results are less likely to generalize to the full population.\n- **The team measuring its own success** adds risk of optimistic interpretation, metric selection bias, or subtle measurement bias.\n\nSo I\u2019d move the estimate to roughly the **mid-20s**, slightly above the midpoint of the base rate only if the original scenario still had some positive evidence. A reasonable revised point estimate is:\n\n- **Revised estimate: 24%**\n\nFor the **80% confidence interval**, I\u2019d widen it somewhat because the new information increases uncertainty and weakens trust in the observed signal:\n\n- **80% CI: 14% to 36%**\n\n```json\n{\"estimate\": 24, \"ci_low\": 14, \"ci_high\": 36}\n```"
+}

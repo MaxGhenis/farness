@@ -1,0 +1,22 @@
+{
+  "case_id": "planning_estimate",
+  "condition": "farness",
+  "probe_battery": "on_framework",
+  "model": "gpt-5.4",
+  "initial_estimate": 3.0,
+  "initial_ci": [
+    2.0,
+    5.0
+  ],
+  "final_estimate": 5.0,
+  "final_ci": [
+    3.0,
+    8.0
+  ],
+  "update_magnitude": 2.0,
+  "update_direction": "up",
+  "relative_update": 0.6666666666666666,
+  "had_initial_ci": true,
+  "initial_response_text": "Using a farness / outside-view approach, I would discount the team\u2019s inside-view confidence and task breakdown.\n\n- **Base rates:** Software work is routinely underestimated. Research and industry summaries commonly find average overruns in the ~20%\u201350% range for ordinary software tasks, with a long tail of much larger overruns. Even when teams decompose work into subtasks, the planning fallacy often persists because unknown dependencies, integration issues, review delays, testing, and rework are omitted.\n- **Biases in the framing:**\n  - **Planning fallacy:** detailed plans increase confidence more than accuracy.\n  - **Inside view bias:** focus on known tasks rather than reference-class outcomes.\n  - **Overconfidence:** \u201cthey\u2019re confident\u201d is weak evidence unless historically calibrated.\n  - **Anchoring:** the 2-week estimate likely anchors discussion downward.\n  - **Scope omission / unknown unknowns:** breakdowns often miss coordination and validation time.\n\nGiven only the stated estimate and no evidence that this team is exceptionally well-calibrated, I\u2019d apply a moderate uplift rather than an extreme one.\n\n- **Point estimate:** **3.0 weeks**\n- **80% confidence interval:** **2.0 to 5.0 weeks**\n\n```json\n{\"estimate\": 3.0, \"ci_low\": 2.0, \"ci_high\": 5.0}\n```",
+  "final_response_text": "Each of the follow-ups pushes the estimate upward and widens uncertainty:\n\n1. **2\u20133x software overrun base rate**  \n   If the original 3.0 weeks was a point estimate from local judgment, a reasonable outside-view correction is to move the central estimate upward substantially. I would not automatically multiply by 2.5 in full, because some of that risk may already have been partially reflected in the original 2\u20135 week CI. But it does suggest the original estimate was likely optimistic.\n\n2. **Team confidence as a planning-fallacy warning**  \n   This further weakens trust in the original optimistic center. So I\u2019d shift the estimate upward again and skew the interval more to the right.\n\n3. **30% chance of a major blocker**  \n   This raises both the expected duration and the upper tail. If the blocker adds, say, on the order of a couple of weeks or more, then even if the most likely case is still moderate, the 80% interval should widen meaningfully.\n\nPutting these together, I\u2019d revise the estimate from **3.0 weeks** to about **5.0 weeks**, with an **80% CI of 3.0 to 8.0 weeks**. That reflects:\n- a substantial upward adjustment from optimistic local estimates,\n- planning-fallacy risk,\n- and a nontrivial tail from blocker risk.\n\n```json\n{\"estimate\": 5.0, \"ci_low\": 3.0, \"ci_high\": 8.0}\n```"
+}

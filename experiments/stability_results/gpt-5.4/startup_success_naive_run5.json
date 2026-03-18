@@ -1,0 +1,22 @@
+{
+  "case_id": "startup_success",
+  "condition": "naive",
+  "probe_battery": "on_framework",
+  "model": "gpt-5.4",
+  "initial_estimate": 12.0,
+  "initial_ci": [
+    5.0,
+    25.0
+  ],
+  "final_estimate": 4.0,
+  "final_ci": [
+    2.0,
+    7.0
+  ],
+  "update_magnitude": 8.0,
+  "update_direction": "down",
+  "relative_update": 0.6666666666666666,
+  "had_initial_ci": true,
+  "initial_response_text": "Given 18 months of effort, only 500 MAU, and flat growth, the base rate for reaching 10,000 MAU in the next 12 months **without a meaningful change in approach** is low. They would need roughly **20x growth** from here, and flat growth is strong evidence that the current loop is not compounding yet. The positives are that they do have real users, the team is committed, and they may still discover improvements through iteration\u2014but that sounds more like a change in execution than true persistence with the same approach.\n\nSo I\u2019d assign a **low but nonzero** probability.\n\n```json\n{\"estimate\": 12, \"ci_low\": 5, \"ci_high\": 25}\n```",
+  "final_response_text": "The new information pushes the estimate down materially from 12.0%.\n\nReasoning, briefly:\n- **Base rate** is the biggest update: if only about **5%** of startups with **18 months of flat growth** see sudden **organic** growth without major changes, that strongly anchors the probability downward.\n- **Three marketing channels already tested** with similar weak results suggests the problem is not just channel mismatch; it lowers the chance that an easy go-to-market fix remains undiscovered.\n- **A competitor raising $10M** in the same market further reduces odds, since it likely increases customer acquisition pressure, mindshare competition, and hiring/product speed on the other side.\n\nPutting that together, I\u2019d revise from **12.0%** to roughly **4.0%**.\n\nFor the **80% confidence interval**, I\u2019d use a fairly wide range because startup outcomes are noisy and there is still some chance of an unobserved catalyst:\n- **Low end:** around **2.0%**\n- **High end:** around **7.0%**\n\n```json\n{\"estimate\": 4.0, \"ci_low\": 2.0, \"ci_high\": 7.0}\n```"
+}

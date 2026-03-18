@@ -1,0 +1,22 @@
+{
+  "case_id": "deadline_estimate",
+  "condition": "naive",
+  "probe_battery": "on_framework",
+  "model": "gpt-5.4",
+  "initial_estimate": 72.0,
+  "initial_ci": [
+    55.0,
+    85.0
+  ],
+  "final_estimate": 28.0,
+  "final_ci": [
+    15.0,
+    45.0
+  ],
+  "update_magnitude": 44.0,
+  "update_direction": "down",
+  "relative_update": 0.6111111111111112,
+  "had_initial_ci": true,
+  "initial_response_text": "With only this information, I\u2019d assign a moderate-to-high probability: the plan shows a 2-month buffer on a 4-month estimate, which is meaningful, but project estimates often slip and regulatory/compliance work can uncover surprises. So I\u2019d put the chance somewhat above even but not near certainty.\n\n```json\n{\"estimate\": 72, \"ci_low\": 55, \"ci_high\": 85}\n```",
+  "final_response_text": "Given the new information, I\u2019d revise the estimate down substantially from 72.0%.\n\nReasoning, briefly:\n- The base-rate you provided for regulatory compliance projects is only 40% on-time.\n- Your team\u2019s lack of experience with this specific type of work is an additional negative factor.\n- Regulatory uncertainty is another major risk multiplier, since late-breaking changes often cause rework and schedule slips.\n\nSo rather than staying near the original 72%, the estimate should move below the 40% base rate unless there are strong offsetting advantages not mentioned. A reasonable revised point estimate is **28%**.\n\nFor the 80% confidence interval:\n- There is high uncertainty because of changing regulations and first-time execution risk.\n- So the interval should be fairly wide.\n\nI\u2019d give an **80% confidence interval of 15% to 45%**.\n\n```json\n{\"estimate\": 28, \"ci_low\": 15, \"ci_high\": 45}\n```"
+}

@@ -1,0 +1,22 @@
+{
+  "case_id": "sunk_cost_project",
+  "condition": "cot",
+  "probe_battery": "on_framework",
+  "model": "gpt-5.4",
+  "initial_estimate": 25.0,
+  "initial_ci": [
+    10.0,
+    45.0
+  ],
+  "final_estimate": 12.0,
+  "final_ci": [
+    5.0,
+    25.0
+  ],
+  "update_magnitude": 13.0,
+  "update_direction": "down",
+  "relative_update": 0.52,
+  "had_initial_ci": true,
+  "initial_response_text": "Software projects that are already late, over budget, and demoralized are classic cases where \u201calmost there\u201d is often unreliable. A few key considerations:\n\n1. **Base rate**: Troubled software projects frequently underestimate remaining work.\n2. **Current signals**: Behind schedule + over budget + low morale all reduce odds of a clean finish.\n3. **Leadership optimism**: \u201cJust 3 more months and $500K\u201d is often affected by planning fallacy and sunk-cost thinking.\n4. **Counterpoint**: It is possible they truly are in integration/polish phase and only need a final push.\n\nBalancing these, I\u2019d assign a **fairly low but nontrivial** chance that they actually launch successfully within the proposed increment.\n\n```json\n{\"estimate\": 25, \"ci_low\": 10, \"ci_high\": 45}\n```",
+  "final_response_text": "Starting from the prior estimate of **25%**, the new information pushes the probability down materially.\n\nStep by step:\n\n1. **Base-rate update: only 16% of already-troubled projects meet revised budgets**\n   - This is directly relevant and more concrete than the original generic estimate.\n   - So the prior should move **toward 16%** from 25%, though not necessarily all the way there if this project could be somewhat better or worse than the average troubled project.\n   - On its own, this suggests something like the **high teens**.\n\n2. **Two senior engineers interviewing elsewhere**\n   - This adds meaningful execution risk:\n     - possible loss of key knowledge\n     - lower morale\n     - distraction during a critical phase\n   - For a troubled project, this is a negative signal and should reduce the estimate further.\n\n3. **\u201cAlmost there\u201d is based on feature completion, but integration testing hasn\u2019t started**\n   - This is another strong negative update.\n   - \u201cFeature complete\u201d before integration often creates false confidence; many schedule and budget failures emerge exactly in integration/testing.\n   - If integration testing has not started, the project is likely **less close to done than stakeholders believe**.\n\nPutting these together:\n- The **16% base rate** is probably a good anchor.\n- The staffing instability and lack of integration testing both make this case look **worse than the average troubled project**, not better.\n\nSo I\u2019d revise the estimate downward to about **12%**.\n\nFor an **80% confidence interval**, I\u2019d use a fairly wide range because project-outcome forecasting is noisy, but center it lower than before:\n- **5% to 25%**\n\n```json\n{\"estimate\": 12, \"ci_low\": 5, \"ci_high\": 25}\n```"
+}

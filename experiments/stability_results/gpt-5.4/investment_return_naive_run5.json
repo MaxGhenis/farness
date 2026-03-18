@@ -1,0 +1,22 @@
+{
+  "case_id": "investment_return",
+  "condition": "naive",
+  "probe_battery": "on_framework",
+  "model": "gpt-5.4",
+  "initial_estimate": 35.0,
+  "initial_ci": [
+    15.0,
+    55.0
+  ],
+  "final_estimate": 18.0,
+  "final_ci": [
+    8.0,
+    30.0
+  ],
+  "update_magnitude": 17.0,
+  "update_direction": "down",
+  "relative_update": 0.4857142857142857,
+  "had_initial_ci": true,
+  "initial_response_text": "Without specifics on the company\u2019s revenue, growth, margins, dilution terms, liquidation preferences, secondary restrictions, and whether this is common stock/SAFE/preferred, the base rate matters most.\n\nFor private late-stage startup investments offered informally to outsiders, a claimed near-term IPO is often optimistic. Even if the company does IPO, a 2x net return within 3 years from your entry price depends heavily on:\n- whether the \u201cdiscount valuation\u201d is truly attractive,\n- dilution before exit,\n- lockups and selling constraints,\n- market conditions at IPO,\n- and whether the startup avoids a down round or stalled exit.\n\nUsing a rough outside-investor base rate, I\u2019d put the chance of at least a 2x outcome in 3 years at around one-third, with substantial uncertainty.\n\n```json\n{\"estimate\": 35, \"ci_low\": 15, \"ci_high\": 55}\n```",
+  "final_response_text": "The new information should push the estimate down materially.\n\nWhy:\n\n- A 90% sub-1x base rate is very unfavorable. That means the default assumption for an undiversified startup investment is loss or at least underperformance.\n- If only ~5% return 2x+, then the upside cases are rarer than many angel investors casually assume.\n- If friends-and-family pricing often does not include a real discount, then one of the main arguments for investing early gets weaker: you may be taking very high risk without being paid for it through valuation.\n- If the person pitching has incentives that may bias their representation, then any soft positive signal from the invitation itself should be discounted.\n\nSo relative to the prior 35.0%, I\u2019d revise substantially downward.\n\nMy revised point estimate: 18%\n\nFor the 80% confidence interval, I\u2019d keep it fairly wide because startup outcomes are noisy and we likely still lack details on company quality, terms, traction, and investor protections. A reasonable 80% CI is 8% to 30%.\n\n```json\n{\"estimate\": 18, \"ci_low\": 8, \"ci_high\": 30}\n```"
+}

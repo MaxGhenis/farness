@@ -1,0 +1,22 @@
+{
+  "case_id": "sunk_cost_project",
+  "condition": "cot",
+  "probe_battery": "on_framework",
+  "model": "gpt-5.4",
+  "initial_estimate": 30.0,
+  "initial_ci": [
+    15.0,
+    45.0
+  ],
+  "final_estimate": 12.0,
+  "final_ci": [
+    5.0,
+    22.0
+  ],
+  "update_magnitude": 18.0,
+  "update_direction": "down",
+  "relative_update": 0.6,
+  "had_initial_ci": true,
+  "initial_response_text": "Projects in this state usually have several negative indicators at once:\n\n1. **Already late and over budget**  \n   If the team were reliably able to estimate the remaining work, they likely would not already be significantly off-plan.\n\n2. **\u201cAlmost there\u201d is often unreliable**  \n   In software, late-stage work often hides integration problems, testing gaps, deployment issues, performance problems, security fixes, and rework.\n\n3. **Demoralized team**  \n   Low morale tends to reduce productivity and increase turnover risk, coordination problems, and defect rates.\n\n4. **Small remaining ask relative to what\u2019s already spent can be misleading**  \n   Asking for just another $500K and 3 months after $2M and 18 months often reflects optimism bias rather than a well-calibrated forecast.\n\n5. **But not hopeless**  \n   The fact that leadership believes it is close may mean core functionality exists and the project truly is in polish/integration phase. Some such projects do finish with one more push.\n\nGiven only this information, I\u2019d assign a **modest but clearly below-even probability** that it launches successfully within the proposed increment.\n\n```json\n{\"estimate\": 30, \"ci_low\": 15, \"ci_high\": 45}\n```",
+  "final_response_text": "I\u2019d revise the estimate downward materially.\n\nStep by step:\n\n1. **Base rate update: only 16% of already-troubled projects meet revised budgets**\n   - Your previous estimate was **30%**.\n   - This new reference point is directly relevant and much more pessimistic.\n   - By itself, it suggests the estimate should move closer to the mid-teens rather than stay near 30%.\n\n2. **Two senior engineers interviewing elsewhere**\n   - This raises delivery risk further:\n     - possible knowledge loss\n     - distraction / reduced engagement\n     - transition cost even if they haven\u2019t left yet\n   - On troubled projects, senior staff instability is especially damaging, so I\u2019d shift the estimate down again.\n\n3. **\u201cAlmost there\u201d is based on feature completion, but integration testing hasn\u2019t started**\n   - This is a major warning sign.\n   - Projects often look close when judged by feature completion, but integration and test phases reveal hidden defects, rework, and schedule/budget overruns.\n   - So the \u201calmost there\u201d signal is weaker than it first appeared.\n\nPutting it together:\n- The **16% base rate** is the strongest anchor.\n- The staffing risk and lack of integration testing both push the odds somewhat **below** that base rate.\n- I would not go extremely low, because revised estimates may already reflect some trouble, but overall the new evidence is clearly negative.\n\nMy revised estimate is **12%**.\n\nFor the **80% confidence interval**, I\u2019d keep it fairly wide because project outcomes remain uncertain, but centered lower than before:\n- **CI: 5% to 22%**\n\n```json\n{\"estimate\": 12, \"ci_low\": 5, \"ci_high\": 22}\n```"
+}

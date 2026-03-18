@@ -1,0 +1,22 @@
+{
+  "case_id": "deadline_estimate",
+  "condition": "farness",
+  "probe_battery": "on_framework",
+  "model": "gpt-5.4",
+  "initial_estimate": 62.0,
+  "initial_ci": [
+    45.0,
+    75.0
+  ],
+  "final_estimate": 28.0,
+  "final_ci": [
+    15.0,
+    45.0
+  ],
+  "update_magnitude": 34.0,
+  "update_direction": "down",
+  "relative_update": 0.5483870967741935,
+  "had_initial_ci": true,
+  "initial_response_text": "Using a farness / outside-view approach, I would discount the inside-view project plan fairly heavily.\n\n### Outside view / base rates\nRelevant research findings consistently show that detailed plans tend to underestimate completion time:\n\n- **Planning fallacy** research (Kahneman & Tversky): even when people have detailed plans, projects often take materially longer than expected because teams overweight best-case internal narratives.\n- **Large project delivery base rates** from software / transformation / regulatory programs commonly show **schedule overruns are more common than on-time completion**, often in the **20\u201350%+** range depending on scope and dependencies.\n- For organizational change and compliance work specifically, deadlines are often missed due to **late interpretation changes, legal review cycles, dependency bottlenecks, testing/rework, and approval delays**.\n\nIf a team estimates **4 months of work for a 6-month deadline**, that is a **50% schedule buffer**. That is meaningful, but not huge once uncertainty, dependencies, and rework are considered.\n\n### Biases in the framing\nKey cognitive biases likely present:\n\n1. **Planning fallacy**: confidence from a detailed plan without enough reference-class adjustment.\n2. **Inside-view bias**: focus on task list rather than historical frequency of slippage in similar compliance efforts.\n3. **Overconfidence**: treating the 4-month estimate as central rather than optimistic.\n4. **Anchoring**: the \u201c2-month buffer\u201d framing may make the situation feel safer than it is.\n5. **Unknown-unknown neglect**: regulatory projects often face interpretation changes or external approval delays not fully represented in plans.\n\n### Numeric forecast\nA reasonable outside-view adjustment is to assume the 4-month estimate is more likely a median optimistic case than a robust expected duration. If actual duration ends up around:\n\n- modest overrun: 5 months \u2192 still on time\n- larger overrun: 6\u20137+ months \u2192 deadline miss\n\nGiven the 2-month buffer, I\u2019d say the project is **more likely than not** to finish before the deadline, but not by a wide margin.\n\n### Forecast\n**Point estimate:** **62%** probability of completion before 6 months.\n\n### 80% confidence interval\nReflecting uncertainty in project complexity, team quality, and regulatory volatility, I\u2019d put the **80% confidence interval** at:\n\n- **Low:** 45%\n- **High:** 75%\n\n```json\n{\"estimate\": 62, \"ci_low\": 45, \"ci_high\": 75}\n```",
+  "final_response_text": "The new information is all negative for schedule confidence, so I\u2019d revise the estimate downward from 62%.\n\nReasoning, briefly:\n- **Base rate:** If industry surveys show **40% on-time completion** for regulatory compliance projects, that\u2019s a strong anchor and already below the prior 62%.\n- **No prior experience in this exact work:** This should push the probability lower still, since first-time execution tends to increase delays.\n- **Regulations still in flux:** Moving requirements are a major source of rework and schedule slippage, so this is another meaningful downward adjustment.\n- Since all three signals point in the same direction, I\u2019d move materially below the 40% base rate rather than only slightly below it.\n\nA reasonable revised estimate is **28%**.\n\nFor the **80% CI**, uncertainty is fairly high because:\n- we have a useful base rate,\n- but project-specific conditions are unusually unfavorable,\n- and regulation changes create tail risk.\n\nSo I\u2019d widen the interval somewhat and set it to **15%\u201345%**.\n\n```json\n{\"estimate\": 28, \"ci_low\": 15, \"ci_high\": 45}\n```"
+}

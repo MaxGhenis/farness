@@ -1,0 +1,22 @@
+{
+  "case_id": "investment_return",
+  "condition": "cot",
+  "probe_battery": "on_framework",
+  "model": "gpt-5.4",
+  "initial_estimate": 42.0,
+  "initial_ci": [
+    25.0,
+    60.0
+  ],
+  "final_estimate": 23.0,
+  "final_ci": [
+    10.0,
+    40.0
+  ],
+  "update_magnitude": 19.0,
+  "update_direction": "down",
+  "relative_update": 0.4523809523809524,
+  "had_initial_ci": true,
+  "initial_response_text": "I can give a calibrated estimate, but this is highly uncertain because key inputs are missing: the company\u2019s actual traction, valuation, liquidation preferences, your exact security, dilution risk, lockups, and whether \u201clikely IPO next year\u201d is realistic.\n\nStep by step:\n\n1. Base rate first  \n   For private startup investments, even in promising companies, a 2x outcome within only 3 years is uncommon. Many startups never exit, and even successful ones often take longer than expected.\n\n2. But this is not a random startup  \n   You\u2019re describing:\n   - a fast-growing tech startup\n   - with claimed near-term IPO prospects\n   - offering a \u201cfriends and family\u201d discount\n\n   That moves the probability up substantially versus the average private startup.\n\n3. Reasons to discount the optimistic story  \n   - Employees/friends often overestimate IPO likelihood and timing.\n   - IPO windows can shut suddenly.\n   - \u201cDiscount valuation\u201d may still be expensive.\n   - Your 2x depends on both successful liquidity and entry price.\n   - Preferred/common/SAFE terms matter enormously.\n   - Dilution and lockups can reduce realized gains within 3 years.\n\n4. Rough scenario framing  \n   A stylized way to think about it:\n   - meaningful chance IPO/acquisition happens and your discounted entry gets you 2x+: moderate\n   - meaningful chance there is some positive outcome but less than 2x in 3 years: also material\n   - nontrivial chance of delay, down round, or poor exit: substantial\n\n5. Synthesis  \n   For a company that truly is on a credible IPO path, probability of 2x in 3 years might be around the high-30s to low-50s. Given how often such claims are too rosy, I\u2019d center a bit below 50%.\n\nMy single-number estimate: 42%\n\n80% confidence interval: 25% to 60%\n\n```json\n{\"estimate\": 42, \"ci_low\": 25, \"ci_high\": 60}\n```",
+  "final_response_text": "Starting from the previous estimate of **42%**, this new information pushes the estimate down materially.\n\nStep by step:\n\n1. **Base rate is very unfavorable**\n   - If ~90% of startup investments return **less than 1x**, then the default assumption should be that this investment is more likely bad than good unless there is unusually strong evidence otherwise.\n   - Also, if only ~5% return **2x+**, that means strong upside outcomes are rare.\n\n2. **Friends-and-family pricing may not be attractive**\n   - If these rounds often **don\u2019t offer a real discount to fair value**, then one of the main reasons to justify the extra risk disappears.\n   - So even if the company is decent, the investment may still not be a good bet at the offered terms.\n\n3. **Incentive misalignment from the person offering**\n   - If the person pitching benefits from getting you in, their recommendation is less informative than it first appears.\n   - That weakens any positive signal coming from access/opportunity.\n\nNet effect:\n- The prior 42% looks too high relative to the startup base rate.\n- Unless there is very strong company-specific evidence, I\u2019d revise downward to something closer to the low end of the prior CI.\n\n**Revised estimate: 23%**\n\n**80% confidence interval: 10% to 40%**\n- Lower bound reflects the very poor general startup base rates.\n- Upper bound allows for the possibility that this particular deal is somewhat better than average, but not enough evidence is given to justify a high probability.\n\n```json\n{\"estimate\": 23, \"ci_low\": 10, \"ci_high\": 40}\n```"
+}

@@ -1,0 +1,22 @@
+{
+  "case_id": "hiring_success",
+  "condition": "naive",
+  "probe_battery": "on_framework",
+  "model": "gpt-5.4",
+  "initial_estimate": 30.0,
+  "initial_ci": [
+    15.0,
+    45.0
+  ],
+  "final_estimate": 22.0,
+  "final_ci": [
+    14.0,
+    31.0
+  ],
+  "update_magnitude": 8.0,
+  "update_direction": "down",
+  "relative_update": 0.26666666666666666,
+  "had_initial_ci": true,
+  "initial_response_text": "Base rate matters most: without strong validated predictors, any one candidate\u2019s chance of ending up in the top 25% should start near 25%. \u201cGreat chemistry\u201d is weak evidence and highly susceptible to similarity/affinity bias, so I would only update slightly upward unless there is structured evidence that correlates with performance. Since Candidate B scored higher technically, that also argues against over-weighting Candidate A\u2019s interpersonal impression.\n\nSo I\u2019d put Candidate A only modestly above the base rate, with substantial uncertainty.\n\n```json\n{\"estimate\": 30, \"ci_low\": 15, \"ci_high\": 45}\n```",
+  "final_response_text": "Yes \u2014 this should lower the estimate.\n\nReasoning, briefly:\n- If the original 30.0% leaned materially on the manager\u2019s positive interview impression, that evidence is weaker than it first appeared.\n- An unstructured interview signal with r = 0.14 is weak.\n- \u201cReminded me of our best performer\u201d is better treated as bias/noise than as incremental predictive evidence.\n- A technical assessment with r = 0.51 is substantially more predictive, so the posterior should be driven much more by that than by interview chemistry.\n\nSo compared with the prior 30.0%, I\u2019d revise downward, but not to zero, because the interview is still slightly informative and there may still be some residual positive signal. A moderate downward revision seems appropriate.\n\n```json\n{\"estimate\": 22.0, \"ci_low\": 14.0, \"ci_high\": 31.0}\n```"
+}

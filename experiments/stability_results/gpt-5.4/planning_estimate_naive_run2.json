@@ -1,0 +1,22 @@
+{
+  "case_id": "planning_estimate",
+  "condition": "naive",
+  "probe_battery": "on_framework",
+  "model": "gpt-5.4",
+  "initial_estimate": 2.8,
+  "initial_ci": [
+    2.0,
+    4.0
+  ],
+  "final_estimate": 7.5,
+  "final_ci": [
+    5.0,
+    11.0
+  ],
+  "update_magnitude": 4.7,
+  "update_direction": "up",
+  "relative_update": 1.6785714285714288,
+  "had_initial_ci": true,
+  "initial_response_text": "Software projects often run longer than optimistic task-based estimates, even with strong confidence and detailed breakdowns. A common adjustment is to add some contingency for integration issues, edge cases, reviews, and testing. For a 2-week estimate from a confident team, I\u2019d modestly increase the expected duration.\n\n```json\n{\"estimate\": 2.8, \"ci_low\": 2.0, \"ci_high\": 4.0}\n```",
+  "final_response_text": "Starting from the prior estimate of **2.8 weeks**:\n\n1. **Projects averaging 2\u20133x initial estimates**  \n   This strongly suggests the original estimate was optimistic. A reasonable adjustment is toward the midpoint of that range, say about **2.5x**.\n\n2. **Team confidence as a planning-fallacy warning sign**  \n   That further pushes upward rather than downward. I\u2019d treat this as additional evidence that the original 2.8 weeks is biased low, though I would avoid fully stacking multipliers mechanically. It supports staying in the upper part of the adjusted range.\n\n3. **30% chance of a major blocker**  \n   This adds contingency. If a blocker occurs, it could easily add substantial delay. In expectation, that should increase the point estimate and widen the interval.\n\nA practical revised estimate is therefore around **7.5 weeks** overall, with an **80% confidence interval** that captures both ordinary overrun risk and the blocker scenario.\n\n```json\n{\"estimate\": 7.5, \"ci_low\": 5.0, \"ci_high\": 11.0}\n```"
+}

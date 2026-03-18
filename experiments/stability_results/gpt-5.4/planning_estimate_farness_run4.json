@@ -1,0 +1,22 @@
+{
+  "case_id": "planning_estimate",
+  "condition": "farness",
+  "probe_battery": "on_framework",
+  "model": "gpt-5.4",
+  "initial_estimate": 3.2,
+  "initial_ci": [
+    2.4,
+    5.0
+  ],
+  "final_estimate": 5.6,
+  "final_ci": [
+    3.6,
+    9.0
+  ],
+  "update_magnitude": 2.3999999999999995,
+  "update_direction": "up",
+  "relative_update": 0.7499999999999998,
+  "had_initial_ci": true,
+  "initial_response_text": "Using a farness / outside-view approach, I would discount the team\u2019s detailed plan and start from software-project base rates.\n\n- **Base rates:** Research on software estimation consistently finds optimism bias and underestimation are common. Across software tasks and projects, actuals often land around **1.3x to 2x** estimates for work that seems well-specified, with wider overruns on more novel or integration-heavy work. Classic planning-fallacy work and software-engineering studies both support this general pattern.\n- **Inside-view adjustment:** The team\u2019s confidence and detailed breakdown are useful, but they are also exactly the conditions where **planning fallacy**, **inside-view bias**, and **overconfidence** often appear. Task decomposition helps, but usually does not eliminate omitted work like integration, testing, rework, waiting time, and edge cases.\n- **Biases in framing:**\n  1. **Planning fallacy** \u2014 focusing on the happy path.\n  2. **Overconfidence** \u2014 confidence from detail can exceed predictive accuracy.\n  3. **Anchoring** \u2014 the \u201c2 weeks\u201d estimate may anchor all later judgment.\n  4. **Scope neglect / omission bias** \u2014 forgotten tasks such as reviews, bug fixes, and coordination.\n\nGiven a 2-week estimate, I\u2019d apply roughly a **1.6x multiplier** as a reasonable outside-view correction for a normal software feature with decent breakdown but no explicit historical calibration.\n\n- **Point estimate:** 2 \u00d7 1.6 = **3.2 weeks**\n- **80% CI:** roughly **2.4 to 5.0 weeks**\n  - Lower bound assumes unusually smooth execution with only modest overrun (~1.2x)\n  - Upper bound allows for common integration/rework delays (~2.5x)\n\n```json\n{\"estimate\": 3.2, \"ci_low\": 2.4, \"ci_high\": 5.0}\n```",
+  "final_response_text": "Yes \u2014 all three points push the estimate upward.\n\nReasoning, briefly:\n\n1. **Initial-estimate optimism (2\u20133x average)**  \n   If the prior 3.2 weeks came from a fairly standard software-task estimate, this suggests the base estimate was likely optimistic. I would not automatically multiply by 2.5 in full, because some adjustment may already have been implicit in the original CI, but it should materially raise the forecast.\n\n2. **Team confidence as a planning-fallacy warning**  \n   High confidence in early planning usually means *more* underestimation risk, not less. That further shifts the distribution right and widens it somewhat.\n\n3. **30% chance of a major blocker**  \n   This increases both the expected duration and the upper tail. A simple way to think about it:\n   - 70% case: project proceeds in a more normal range\n   - 30% case: blocker adds substantial delay\n\nCombining these, I\u2019d revise the point estimate upward from **3.2 weeks** to about **5.6 weeks**, with a noticeably wider 80% interval.\n\n```json\n{\"estimate\": 5.6, \"ci_low\": 3.6, \"ci_high\": 9.0}\n```"
+}

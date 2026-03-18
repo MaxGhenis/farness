@@ -1,0 +1,22 @@
+{
+  "case_id": "startup_success",
+  "condition": "farness",
+  "probe_battery": "on_framework",
+  "model": "gpt-5.4",
+  "initial_estimate": 8.0,
+  "initial_ci": [
+    3.0,
+    18.0
+  ],
+  "final_estimate": 3.5,
+  "final_ci": [
+    1.5,
+    8.0
+  ],
+  "update_magnitude": 4.5,
+  "update_direction": "down",
+  "relative_update": 0.5625,
+  "had_initial_ci": true,
+  "initial_response_text": "Here\u2019s a farness-style assessment using an outside-view first, then adjusting for the specifics.\n\n## Outside view / base rates\n\nThe target is to go from **500 MAU to 10,000 MAU in 12 months**, a **20x increase**.\n\nA few relevant base-rate considerations:\n\n- **Most startups do not achieve sustained breakout growth after 18 months of flat traction.** In startup datasets and accelerator experience, the majority of companies that remain subscale after ~12\u201324 months and show flat user growth do **not** suddenly inflect without a major change in product, market, channel, or team.\n- To reach 10,000 MAU from 500 in 12 months requires about **28% compounded monthly growth**:\n  \\[\n  500 \\times (1+g)^{12} = 10{,}000 \\Rightarrow g \\approx 28\\%\n  \\]\n  That is a demanding rate, especially for a company currently showing **flat growth**, which implies current net growth is closer to 0% than 28%.\n- For early-stage products with some usage but weak traction, a large step-up is usually associated with:\n  - finding a new distribution channel,\n  - meaningfully changing the product,\n  - entering a better segment,\n  - or benefiting from unusual exogenous tailwinds.\n  \nIf they **persist with the current approach**, the outside view is unfavorable.\n\n## Inside-view adjustments\n\nFactors increasing the probability:\n- They do have **some users**, so this is not a zero-signal situation.\n- The team still has **ideas to try**, which means there may be local optimization potential.\n\nFactors decreasing the probability:\n- **18 months** is long enough that persistent flatness is informative.\n- **500 MAU** is quite far from **10,000 MAU**.\n- \u201cPersist with current approach\u201d suggests **no major strategic discontinuity**, which removes the most common path to step-change growth.\n- Teams often overweight:\n  - **commitment/escalation bias** (\u201cwe\u2019ve invested 18 months\u201d),\n  - **inside-view optimism** (\u201cwe just need to try these next ideas\u201d),\n  - **survivorship bias** (remembering the rare late-blooming startup cases),\n  - **vision attachment / identity-protective cognition** (confusing belief in the vision with evidence of demand).\n\n## Forecast\n\nMy outside-view prior for a startup in this position hitting 10,000 MAU in 12 months **without a major pivot** is low, likely in the **single digits to low teens**.\n\nI\u2019d set the **point estimate at 8%**.\n\n### 80% confidence interval\nGiven uncertainty about product quality, retention, distribution optionality, and whether \u201ccurrent approach\u201d still allows meaningful iteration, I\u2019d use a fairly wide interval:\n\n- **Low end: 3%**\n- **High end: 18%**\n\nThat reflects:\n- lower bound: flatness is strongly diagnostic and 20x growth is rare;\n- upper bound: not impossible if one or two experiments unlock a workable acquisition loop.\n\n```json\n{\"estimate\": 8, \"ci_low\": 3, \"ci_high\": 18}\n```",
+  "final_response_text": "Given the new information, I\u2019d revise the probability downward materially.\n\nReasoning, briefly:\n- The new base rate is the biggest update: if only about 5% of startups with 18 months of flat growth see sudden organic growth, that pulls the estimate below the prior 8%.\n- The fact that they already tested 3 marketing channels with similar weak results is additional negative evidence: it suggests this is not just a channel-fit miss.\n- The competitor raising $10M and targeting the same market further reduces odds, since stronger competition usually makes breakout less likely rather than more likely.\n\nSo I\u2019d move from 8% to about 3.5%.  \nFor the 80% CI, I\u2019d set it fairly low and somewhat tight given the strong negative evidence, but still leave room for uncertainty: roughly 1.5% to 8%.\n\n```json\n{\"estimate\": 3.5, \"ci_low\": 1.5, \"ci_high\": 8.0}\n```"
+}

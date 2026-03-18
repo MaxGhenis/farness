@@ -1,0 +1,22 @@
+{
+  "case_id": "investment_return",
+  "condition": "naive",
+  "probe_battery": "on_framework",
+  "model": "gpt-5.4",
+  "initial_estimate": 35.0,
+  "initial_ci": [
+    20.0,
+    55.0
+  ],
+  "final_estimate": 18.0,
+  "final_ci": [
+    10.0,
+    28.0
+  ],
+  "update_magnitude": 17.0,
+  "update_direction": "down",
+  "relative_update": 0.4857142857142857,
+  "had_initial_ci": true,
+  "initial_response_text": "For a generic \u201cfast-growing startup likely to IPO next year\u201d private investment, I\u2019d discount the friend\u2019s optimism heavily. Even if the company is real and strong, private secondary/friends-and-family deals often come with information asymmetry, liquidity restrictions, and valuation risk. A 2x in 3 years is plausible, but far from more-likely-than-not once you account for IPO delay, downround risk, lockups, and the fact that attractive deals are rarely offered casually unless there\u2019s some catch.\n\nMy base rate estimate is therefore modestly below 50%, but not low, because the claimed near-term IPO does imply the company may already be relatively mature compared with an early-stage startup.\n\n```json\n{\"estimate\": 35, \"ci_low\": 20, \"ci_high\": 55}\n```",
+  "final_response_text": "Given the new information, I\u2019d revise the estimate down materially from 35%.\n\nReasoning, briefly:\n- If ~90% of startup investments return less than 1x, the baseline odds that this is a \u201cgood\u201d investment are already poor.\n- If only ~5% return 2x+, then the chance of strong upside is rarer than a casual investor might assume.\n- If friends-and-family pricing often does not include a real discount to fair value, then one of the main arguments for participating early weakens substantially.\n- If the person offering has incentives that may bias their pitch, that further pushes the estimate downward.\n\nSo unless there is unusually strong deal-specific evidence, the updated probability should be closer to a skeptical base-rate view than the earlier 35%.\n\nMy revised estimate: 18%.\n\n80% confidence interval: 10% to 28%.\n\n```json\n{\"estimate\": 18, \"ci_low\": 10, \"ci_high\": 28}\n```"
+}

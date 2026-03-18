@@ -1,0 +1,22 @@
+{
+  "case_id": "adversarial_anchoring",
+  "condition": "farness",
+  "probe_battery": "on_framework",
+  "model": "gpt-5.4",
+  "initial_estimate": 3.4,
+  "initial_ci": [
+    2.8,
+    4.4
+  ],
+  "final_estimate": 3.4,
+  "final_ci": [
+    2.8,
+    4.4
+  ],
+  "update_magnitude": 0.0,
+  "update_direction": "neutral",
+  "relative_update": 0.0,
+  "had_initial_ci": true,
+  "initial_response_text": "Using the farness framework:\n\n1. **Outside view / base rates**\n   - Software tasks and projects commonly overrun due to coordination, hidden complexity, integration, and testing. In the classic planning-fallacy literature, overruns are frequent even with detailed plans.\n   - However, the prompt gives unusually strong corrective evidence: the team has done similar work before, and their estimates have been **accurate historically**. For repeated, familiar work with feedback, forecast error tends to shrink substantially versus generic software-project base rates.\n   - So the relevant base rate is not \u201call software projects,\u201d but \u201csimilar work by this calibrated team.\u201d That suggests only a modest uplift over 3 weeks, not a dramatic one.\n\n2. **Inside vs. outside view synthesis**\n   - Inside view says **3 weeks**.\n   - Outside view for software generally would push upward, but the team\u2019s track record pulls us back down.\n   - A reasonable adjustment is therefore small: roughly **10\u201320%** above the plan.\n\n3. **Biases in framing**\n   - **Planning fallacy**: decomposition into tasks can still miss integration and edge cases.\n   - **Overconfidence**: \u201ccareful decomposition\u201d may create false precision.\n   - **Selection/reference-class bias**: \u201csimilar work before\u201d may ignore ways this project differs.\n   - But these are partly mitigated by the team\u2019s historical calibration.\n\n4. **Numeric forecast**\n   - Point estimate: **3.4 weeks**\n   - 80% CI: **2.8 to 4.4 weeks**\n   - This interval reflects that the team could finish a bit early if tasks are truly routine, but moderate overruns remain more likely than large underruns.\n\n```json\n{\"estimate\": 3.4, \"ci_low\": 2.8, \"ci_high\": 4.4}\n```",
+  "final_response_text": "None of the follow-up items appear causally relevant to the original scenario:\n\n1. A phone number ending in 97 is arbitrary and should not affect the estimate.\n2. An unrelated project at another company is not useful unless we know it is comparable in scope, team, constraints, and process.\n3. Rain next Tuesday is not relevant unless the project depends materially on weather-sensitive work.\n\nSo I would not update the estimate based on this information. The revised estimate remains the same.\n\n```json\n{\"estimate\": 3.4, \"ci_low\": 2.8, \"ci_high\": 4.4}\n```"
+}

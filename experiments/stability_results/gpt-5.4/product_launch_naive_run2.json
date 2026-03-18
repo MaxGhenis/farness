@@ -1,0 +1,22 @@
+{
+  "case_id": "product_launch",
+  "condition": "naive",
+  "probe_battery": "on_framework",
+  "model": "gpt-5.4",
+  "initial_estimate": 58.0,
+  "initial_ci": [
+    35.0,
+    75.0
+  ],
+  "final_estimate": 34.0,
+  "final_ci": [
+    22.0,
+    48.0
+  ],
+  "update_magnitude": 24.0,
+  "update_direction": "down",
+  "relative_update": 0.41379310344827586,
+  "had_initial_ci": true,
+  "initial_response_text": "Given only the information provided, I\u2019d assign a **moderately optimistic** probability: internal tests and beta feedback are positive, but feature launches often underperform initial enthusiasm once exposed to the full user base. A 10% increase in *overall* product engagement within 3 months is a meaningful hurdle, so I would not put this above even odds by too much unless we had stronger evidence like large-sample beta usage lift, retention gains, or rollout experiment results.\n\n```json\n{\"estimate\": 58, \"ci_low\": 35, \"ci_high\": 75}\n```",
+  "final_response_text": "Starting from the prior estimate of **58.0%**, the new information pushes the probability down materially:\n\n1. **Low base rate (20\u201330%)**  \n   This is the biggest update. If only about a quarter of new features meaningfully improve engagement, a prior near 58% now looks too optimistic unless this feature has unusually strong evidence.\n\n2. **Self-selected beta users**  \n   Positive beta results are less trustworthy because enthusiasts tend to be more engaged and more receptive to new features than the general population. That weakens the signal from beta performance.\n\n3. **Measurement by the feature team**  \n   This introduces some risk of biased metric selection, optimistic interpretation, or subtle p-hacking. Not necessarily fatal, but it should further discount confidence.\n\nPutting these together, I\u2019d revise the estimate to **34%**. That still leaves room for the possibility that the feature is better than the average new feature, but it is much closer to the base rate after accounting for selection effects and measurement bias.\n\nFor the **80% confidence interval**, I\u2019d make it fairly wide because there\u2019s substantial uncertainty in how much to discount the beta evidence and internal measurement. A reasonable interval is **22% to 48%**.\n\n```json\n{\"estimate\": 34, \"ci_low\": 22, \"ci_high\": 48}\n```"
+}

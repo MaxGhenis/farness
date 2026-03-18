@@ -1,12 +1,20 @@
 {
   "conditions": [
+    "naive",
     "cot",
-    "farness",
-    "naive"
+    "farness"
   ],
+  "n_naive": 66,
   "n_cot": 66,
   "n_farness": 66,
-  "n_naive": 66,
+  "naive": {
+    "n": 66,
+    "mean_update_magnitude": 59.02878787878788,
+    "std_update_magnitude": 165.65222491728454,
+    "mean_relative_update": 0.5759618880574763,
+    "initial_ci_rate": 1.0,
+    "correct_direction_rate": 0.9791666666666666
+  },
   "cot": {
     "n": 66,
     "mean_update_magnitude": 29.348484848484848,
@@ -23,15 +31,39 @@
     "initial_ci_rate": 1.0,
     "correct_direction_rate": 1.0
   },
-  "naive": {
-    "n": 66,
-    "mean_update_magnitude": 59.02878787878788,
-    "std_update_magnitude": 165.65222491728454,
-    "mean_relative_update": 0.5759618880574763,
-    "initial_ci_rate": 1.0,
-    "correct_direction_rate": 0.9791666666666666
-  },
   "statistical_comparison": {
+    "naive_vs_cot": {
+      "mann_whitney_u": 2183.0,
+      "p_value_raw": 0.9836425135197231,
+      "hypothesis": "naive != cot (two-sided)",
+      "effect_size_r": -0.0022956841138659367,
+      "effect_size_r_ci95": [
+        -0.21808999081726355,
+        0.17844926538108355
+      ],
+      "cohens_d": 0.24490636007201275,
+      "cohens_d_ci95": [
+        -0.09650317340440978,
+        0.4602628417241341
+      ],
+      "p_value_corrected": 0.9836425135197231
+    },
+    "naive_vs_farness": {
+      "mann_whitney_u": 2652.0,
+      "p_value_raw": 0.030880500037077895,
+      "hypothesis": "naive != farness (two-sided)",
+      "effect_size_r": -0.21763085399449045,
+      "effect_size_r_ci95": [
+        -0.41944444444444445,
+        -0.03486570247933885
+      ],
+      "cohens_d": 0.30413631771903116,
+      "cohens_d_ci95": [
+        0.011083173524192658,
+        0.5083873579844582
+      ],
+      "p_value_corrected": 0.09264150011123368
+    },
     "cot_vs_farness": {
       "mann_whitney_u": 2634.5,
       "p_value_raw": 0.037679060244950074,
@@ -47,42 +79,30 @@
         0.5485475470442596
       ],
       "p_value_corrected": 0.09264150011123368
-    },
-    "cot_vs_naive": {
-      "mann_whitney_u": 2173.0,
-      "p_value_raw": 0.9836425135197231,
-      "hypothesis": "cot != naive (two-sided)",
-      "effect_size_r": 0.0022956841138659367,
-      "effect_size_r_ci95": [
-        -0.20825872359963268,
-        0.19904155188246095
-      ],
-      "cohens_d": -0.24490636007201275,
-      "cohens_d_ci95": [
-        -0.4500187367792823,
-        0.06846433144814579
-      ],
-      "p_value_corrected": 0.9836425135197231
-    },
-    "farness_vs_naive": {
-      "mann_whitney_u": 1704.0,
-      "p_value_raw": 0.030880500037077895,
-      "hypothesis": "farness != naive (two-sided)",
-      "effect_size_r": 0.21763085399449034,
-      "effect_size_r_ci95": [
-        0.01581726354453624,
-        0.40206611570247924
-      ],
-      "cohens_d": -0.30413631771903116,
-      "cohens_d_ci95": [
-        -0.5066841492054053,
-        -0.016210468165755228
-      ],
-      "p_value_corrected": 0.09264150011123368
     }
   },
   "mixed_effects": {
-    "error": "Install pandas and statsmodels for mixed-effects model"
+    "coefficients": {
+      "Intercept": {
+        "estimate": 59.02878787878764,
+        "se": 21.95298525267089,
+        "p_value": 0.007169370336249
+      },
+      "condition[T.cot]": {
+        "estimate": -29.680303030303037,
+        "se": 14.185283042174293,
+        "p_value": 0.036408944325311283
+      },
+      "condition[T.farness]": {
+        "estimate": -37.001515151515164,
+        "se": 14.185283042174294,
+        "p_value": 0.009095491681916416
+      }
+    },
+    "random_effect_variance": 4194.546774117567,
+    "n_groups": 11,
+    "n_obs": 198,
+    "converged": true
   },
   "convergence": {
     "mean_convergence_ratio": -5.138312423238628,
@@ -580,5 +600,9 @@
       }
     ]
   },
+  "probe_battery": "on_framework",
+  "probe_batteries": [
+    "on_framework"
+  ],
   "model": "gpt-5.2"
 }

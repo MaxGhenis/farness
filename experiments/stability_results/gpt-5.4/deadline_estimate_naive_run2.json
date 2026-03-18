@@ -1,0 +1,22 @@
+{
+  "case_id": "deadline_estimate",
+  "condition": "naive",
+  "probe_battery": "on_framework",
+  "model": "gpt-5.4",
+  "initial_estimate": 72.0,
+  "initial_ci": [
+    55.0,
+    85.0
+  ],
+  "final_estimate": 28.0,
+  "final_ci": [
+    18.0,
+    42.0
+  ],
+  "update_magnitude": 44.0,
+  "update_direction": "down",
+  "relative_update": 0.6111111111111112,
+  "had_initial_ci": true,
+  "initial_response_text": "With only this information, I\u2019d put the probability above 50% because the planned duration is materially shorter than the deadline, but not extremely high because project plans and effort estimates often slip. A 2-month buffer on a 4-month estimate is meaningful, yet compliance projects can face scope surprises, approvals, and remediation delays. So a moderate-to-high estimate is appropriate, with a fairly wide interval due to uncertainty.\n\n```json\n{\"estimate\": 72, \"ci_low\": 55, \"ci_high\": 85}\n```",
+  "final_response_text": "The new information pushes the probability down materially from 72.0%.\n\nReasoning, briefly:\n- **Base-rate evidence:** if comparable regulatory compliance projects are only **40% on time**, that is a strong anchor and already much lower than 72%.\n- **No prior experience with this specific work:** this usually adds execution risk through learning curves, rework, and planning error.\n- **Regulations still in flux:** changing requirements are one of the clearest drivers of schedule slips, especially in compliance efforts where \u201cdone\u201d depends on external finalization.\n\nSo I would revise the estimate to **well below the 40% base rate**, but not collapse it too far unless there are additional signs of major resourcing or dependency issues. A reasonable update is to the **high 20s to low 30s**. I\u2019ll put the point estimate at **28%**.\n\nFor the **80% confidence interval**, I\u2019d make it fairly wide because there is substantial uncertainty from the unfinished regulations. A plausible 80% interval is **18% to 42%**.\n\n```json\n{\"estimate\": 28, \"ci_low\": 18, \"ci_high\": 42}\n```"
+}

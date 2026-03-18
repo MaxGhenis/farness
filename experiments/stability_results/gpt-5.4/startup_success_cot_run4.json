@@ -1,0 +1,22 @@
+{
+  "case_id": "startup_success",
+  "condition": "cot",
+  "probe_battery": "on_framework",
+  "model": "gpt-5.4",
+  "initial_estimate": 12.0,
+  "initial_ci": [
+    5.0,
+    25.0
+  ],
+  "final_estimate": 4.0,
+  "final_ci": [
+    2.0,
+    9.0
+  ],
+  "update_magnitude": 8.0,
+  "update_direction": "down",
+  "relative_update": 0.6666666666666666,
+  "had_initial_ci": true,
+  "initial_response_text": "To reach 10,000 MAU from 500 MAU in 12 months, they need about **20x growth** in a year. That implies roughly **28% compounded monthly growth** sustained for 12 months. For a startup that has already spent **18 months** and is now **flat**, that is a very demanding target.\n\nStep by step, the main considerations are:\n\n1. **Current signal is weak**\n   - 500 MAU is real usage, so this is not zero.\n   - But **flat growth after 18 months** suggests the current approach has not found a strong repeatable growth engine.\n\n2. **Need for a major change in trajectory**\n   - Hitting 10,000 MAU likely requires either:\n     - substantially improved retention,\n     - a new distribution channel,\n     - a much stronger product-market fit signal,\n     - or some combination.\n   - If they \u201cpersist with current approach,\u201d the odds are lower than if they made a meaningful pivot.\n\n3. **Team belief and ideas help somewhat**\n   - Founder conviction and a backlog of experiments are positive.\n   - Startups sometimes break out late.\n   - But belief alone is much weaker evidence than observed accelerating growth.\n\n4. **Base-rate view**\n   - Startups with modest usage and flat growth at 18 months can still recover, but most do not produce a 20x user increase in the next year without a material change.\n\nPutting this together, I\u2019d assign a **low but nontrivial** probability. Not near zero, because they do have users and could discover a better channel or feature set. But clearly below 25%, because the current evidence points against breakout under the same approach.\n\n```json\n{\"estimate\": 12, \"ci_low\": 5, \"ci_high\": 25}\n```",
+  "final_response_text": "Starting from the prior estimate of **12% (80% CI: 5%\u201325%)**, I\u2019d revise downward based on the new evidence.\n\nStep by step:\n\n1. **Base rate for 18 months of flat growth**\n   - This is the strongest update.\n   - If only about **5%** of startups with this pattern see sudden organic growth without major changes, then the prior 12% now looks too high unless there is strong company-specific evidence offsetting the base rate.\n   - This pulls the estimate substantially downward, toward the mid-single digits.\n\n2. **Three marketing channels already tried with similar results**\n   - This suggests the issue is less likely to be \u201cwe just haven\u2019t found the right acquisition channel yet.\u201d\n   - It reduces probability further because repeated weak signal across channels is evidence against near-term breakout under the current approach.\n\n3. **Competitor raised $10M in the same market**\n   - This is another negative update.\n   - It doesn\u2019t necessarily kill the company\u2019s odds, but it makes a sudden inflection harder: more noise, faster competitor execution, more pricing or acquisition pressure.\n   - So I\u2019d trim the estimate a bit more.\n\nPutting this together:\n- The **5% base rate** is a strong anchor.\n- The failed channel experimentation and better-funded competitor push the probability below what I\u2019d otherwise assign from the base rate alone.\n- I would land at roughly **4%**.\n\nFor the **80% confidence interval**:\n- There is still uncertainty because some startups do pivot successfully, land a large customer, or benefit from latent market timing.\n- But the range should be tighter and lower than before.\n- I\u2019d use **2% to 9%** as a reasonable 80% CI.\n\n```json\n{\"estimate\": 4.0, \"ci_low\": 2.0, \"ci_high\": 9.0}\n```"
+}

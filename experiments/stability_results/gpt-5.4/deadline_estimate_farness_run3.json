@@ -1,0 +1,22 @@
+{
+  "case_id": "deadline_estimate",
+  "condition": "farness",
+  "probe_battery": "on_framework",
+  "model": "gpt-5.4",
+  "initial_estimate": 58.0,
+  "initial_ci": [
+    35.0,
+    78.0
+  ],
+  "final_estimate": 28.0,
+  "final_ci": [
+    12.0,
+    52.0
+  ],
+  "update_magnitude": 30.0,
+  "update_direction": "down",
+  "relative_update": 0.5172413793103449,
+  "had_initial_ci": true,
+  "initial_response_text": "Using the **farness / outside-view** approach, I would discount the inside-view plan fairly heavily.\n\n### Outside view / base rates\nRelevant research is consistent on one point: **projects with detailed plans still routinely finish late**.\n\n- **Planning fallacy** research (Kahneman & Tversky): teams systematically underestimate completion times even when they have detailed task breakdowns.\n- **Large project delivery studies** (e.g., Flyvbjerg and related reference-class forecasting work): schedule overruns are common, and \u201con-time\u201d completion is materially less frequent than plans suggest.\n- Across business/IT/regulatory implementation work, a rough outside-view base rate is that **only around 30\u201350%** of projects finish on or before the original deadline, with performance worsening when there are dependencies, approvals, legal interpretation changes, or cross-functional coordination.\n\nFor a **6-month compliance program** with a **4-month estimate**, the nominal schedule buffer is **50%** (2 months over 4). That is meaningful, but not enormous once you consider:\n- changing regulatory interpretations,\n- internal review/approval bottlenecks,\n- remediation surprises,\n- testing/documentation delays,\n- external auditor/regulator feedback.\n\nA useful way to frame it:\n- If the 4-month estimate were unbiased and execution variance modest, a 2-month buffer would make success highly likely.\n- But in real organizations, **estimates are usually optimistic**, and compliance work often includes hidden tail risks.\n\n### Biases in the framing\nKey cognitive biases likely present:\n\n1. **Planning fallacy**  \n   The detailed project plan increases confidence, but detail often improves the narrative more than forecast accuracy.\n\n2. **Inside-view bias**  \n   The team is reasoning from specific tasks rather than reference-class outcomes for similar compliance projects.\n\n3. **Optimism bias**  \n   Teams overweight smooth execution and underweight interruptions, rework, and approval delays.\n\n4. **Anchoring on the 4-month estimate**  \n   The \u201c2-month buffer\u201d sounds comfortable because it is framed relative to the initial estimate, which itself may be biased low.\n\n5. **Illusion of control**  \n   A detailed plan can create unjustified confidence that uncertainties are managed when many are external or emergent.\n\n### Numeric forecast\nStarting from an outside-view base rate of roughly **40% on-time** for similar projects, I would adjust upward because:\n- this is a compliance deadline with likely executive attention,\n- there is some explicit schedule buffer,\n- the team has already created a detailed plan.\n\nBut I would not adjust too far upward because:\n- compliance projects often uncover scope during execution,\n- six months is short enough that delays are hard to recover from,\n- the estimate likely contains optimism.\n\n### Final estimate\nMy point estimate for finishing before the 6-month deadline is:\n\n- **Estimate: 58%**\n\n80% confidence interval:\n- **35% to 78%**\n\n```json\n{\"estimate\": 58, \"ci_low\": 35, \"ci_high\": 78}\n```",
+  "final_response_text": "The new information is all unfavorable for on-time delivery, so I\u2019d revise the estimate downward from 58%.\n\nReasoning, briefly:\n- **Base rate:** If similar regulatory compliance projects are only **40% on time**, that\u2019s a strong anchor below the prior estimate.\n- **No prior experience in this exact work:** This adds execution risk, suggesting performance may be worse than the already-tough base rate.\n- **Regulations still changing:** Scope instability is a major source of delay, so this further lowers the probability and increases uncertainty.\n\nPutting that together, I\u2019d move the point estimate to **about 28%**. I\u2019d also keep the interval fairly wide because regulatory uncertainty and first-time execution create substantial variance. An **80% CI of 12% to 52%** seems reasonable.\n\n```json\n{\"estimate\": 28.0, \"ci_low\": 12.0, \"ci_high\": 52.0}\n```"
+}

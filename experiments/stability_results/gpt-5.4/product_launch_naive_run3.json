@@ -1,0 +1,22 @@
+{
+  "case_id": "product_launch",
+  "condition": "naive",
+  "probe_battery": "on_framework",
+  "model": "gpt-5.4",
+  "initial_estimate": 58.0,
+  "initial_ci": [
+    35.0,
+    75.0
+  ],
+  "final_estimate": 34.0,
+  "final_ci": [
+    20.0,
+    50.0
+  ],
+  "update_magnitude": 24.0,
+  "update_direction": "down",
+  "relative_update": 0.41379310344827586,
+  "had_initial_ci": true,
+  "initial_response_text": "New features often test well internally and with beta users, but broad-launch uplift is usually lower because of selection effects, novelty, and rollout friction. A beta NPS of 45 is encouraging, and \u201cteam is excited + testing went well\u201d pushes the odds up, but achieving a **10% overall product engagement increase** within **3 months** is still a fairly high bar unless the feature is very central to core usage.\n\nSo I\u2019d put the probability a bit above even odds, but not extremely high.\n\n```json\n{\"estimate\": 58, \"ci_low\": 35, \"ci_high\": 75}\n```",
+  "final_response_text": "Starting from the previous estimate of **58.0%**, this new information pushes the probability down meaningfully:\n\n1. **Low base rate (20\u201330%)**  \n   This is the biggest update. If only about a quarter of new features materially improve engagement, then a prior near 58% was probably too optimistic unless there was very strong direct evidence.\n\n2. **Beta users are self-selected enthusiasts**  \n   Positive beta results from enthusiastic early adopters often do not generalize well to the broader population. That weakens the evidentiary value of any encouraging beta signal.\n\n3. **Same team built and measured the feature**  \n   This introduces some risk of confirmation bias, selective metric choice, or optimistic interpretation. It doesn\u2019t make the evidence useless, but it should be discounted.\n\nPutting these together, I\u2019d revise the estimate downward to around the **low-to-mid 30s**. That still leaves room for the possibility that the feature is genuinely good, but the prior and evidence quality no longer justify a probability above 50%.\n\nAn appropriate **80% confidence interval** should be fairly wide, because we have a weak base rate and multiple reasons the observed evidence may be inflated. I\u2019d use **20% to 50%**.\n\n```json\n{\"estimate\": 34, \"ci_low\": 20, \"ci_high\": 50}\n```"
+}

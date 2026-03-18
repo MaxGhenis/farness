@@ -1,0 +1,22 @@
+{
+  "case_id": "sunk_cost_project",
+  "condition": "naive",
+  "probe_battery": "on_framework",
+  "model": "gpt-5.4",
+  "initial_estimate": 25.0,
+  "initial_ci": [
+    10.0,
+    45.0
+  ],
+  "final_estimate": 11.0,
+  "final_ci": [
+    5.0,
+    20.0
+  ],
+  "update_magnitude": 14.0,
+  "update_direction": "down",
+  "relative_update": 0.56,
+  "had_initial_ci": true,
+  "initial_response_text": "Projects that are already late, over budget, and demoralized are statistically poor bets for suddenly finishing on a tight final increment. \u201cAlmost there\u201d is also a common planning bias signal, especially in software, where the last 10\u201320% often hides integration, QA, deployment, and scope surprises.\n\nGiven:\n- 18 months and $2M already spent\n- currently behind schedule and over budget\n- low team morale\n- management optimism about a small final extension\n\nI\u2019d assign a relatively low probability that it truly launches within just the additional $500K and 3 months.\n\n```json\n{\"estimate\": 25, \"ci_low\": 10, \"ci_high\": 45}\n```",
+  "final_response_text": "Yes \u2014 this new information should push the estimate down materially from 25%.\n\nReasoning, briefly:\n\n- **Only 16% of already-troubled projects meet revised budget estimates**: this is a strong base-rate signal and is directly relevant. If your project is already in the \u201ctroubled\u201d bucket, 16% is a better anchor than 25%.\n- **Two senior engineers interviewing elsewhere**: meaningful added execution risk. Even if they do not leave immediately, reduced focus, knowledge concentration risk, and possible morale effects all hurt odds of recovery.\n- **\u201cAlmost there\u201d based only on feature completion, with integration testing not started**: this is another major negative update. Projects often discover substantial defects, rework, and schedule/budget slippage during integration. \u201cFeature complete\u201d before integration is much weaker than it sounds.\n\nPutting those together, I\u2019d revise the estimate **below 16%**, but not to near-zero because recovery is still possible if the team stabilizes and integration goes unusually smoothly.\n\nMy revised point estimate: **11%**\n\n80% confidence interval: **5% to 20%**\n\n```json\n{\"estimate\": 11, \"ci_low\": 5, \"ci_high\": 20}\n```"
+}

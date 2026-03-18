@@ -1,0 +1,22 @@
+{
+  "case_id": "deadline_estimate",
+  "condition": "naive",
+  "probe_battery": "on_framework",
+  "model": "gpt-5.4",
+  "initial_estimate": 78.0,
+  "initial_ci": [
+    60.0,
+    90.0
+  ],
+  "final_estimate": 28.0,
+  "final_ci": [
+    15.0,
+    45.0
+  ],
+  "update_magnitude": 50.0,
+  "update_direction": "down",
+  "relative_update": 0.6410256410256411,
+  "had_initial_ci": true,
+  "initial_response_text": "Given only that the estimated work is 4 months against a hard 6-month deadline, with a detailed plan and a 2-month buffer, I\u2019d assign a fairly high but not near-certain probability. Projects with regulatory/compliance dependencies often face scope creep, review delays, or unexpected remediation work, so a 50% schedule buffer is meaningful but not definitive.\n\n```json\n{\"estimate\": 78, \"ci_low\": 60, \"ci_high\": 90}\n```",
+  "final_response_text": "The new information should materially lower the estimate from 78%.\n\nReasoning, briefly:\n- A base rate of 40% on-time completion for regulatory compliance projects is much lower than the prior estimate and is strong evidence.\n- A team with no prior experience in this specific type of work increases execution risk.\n- Unfinalized regulations add scope-change and rework risk, which is especially important for schedule forecasts.\n\nStarting from the 40% base rate, I\u2019d adjust downward further for:\n- first-time team risk\n- regulatory uncertainty / likely changes soon\n\nThat suggests a revised estimate in the high-20s to low-30s rather than anywhere near the original 78%.\n\nA reasonable revised point estimate is **28%**.\n\nFor an 80% confidence interval, I\u2019d keep it fairly wide because the situation is highly uncertain and dependent on how much the regulations change. A plausible 80% interval is **15% to 45%**.\n\n```json\n{\"estimate\": 28, \"ci_low\": 15, \"ci_high\": 45}\n```"
+}

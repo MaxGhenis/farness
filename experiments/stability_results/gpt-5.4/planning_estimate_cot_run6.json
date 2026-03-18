@@ -1,0 +1,22 @@
+{
+  "case_id": "planning_estimate",
+  "condition": "cot",
+  "probe_battery": "on_framework",
+  "model": "gpt-5.4",
+  "initial_estimate": 3.0,
+  "initial_ci": [
+    2.0,
+    4.5
+  ],
+  "final_estimate": 5.4,
+  "final_ci": [
+    3.5,
+    8.5
+  ],
+  "update_magnitude": 2.4000000000000004,
+  "update_direction": "up",
+  "relative_update": 0.8000000000000002,
+  "had_initial_ci": true,
+  "initial_response_text": "Software estimates tend to be optimistic even when teams are confident and have detailed breakdowns. A common outside-view adjustment is to apply some uplift for unknowns, integration issues, interruptions, testing, and rework.\n\nStarting from **2 weeks**:\n- If things go unusually smoothly, it could stay close to **2 weeks**.\n- More commonly, even strong estimates slip by around **25\u201375%**.\n- That suggests a central estimate around **3 weeks** rather than 2.\n\nSo my best estimate is **3 weeks**, with an **80% confidence interval** of roughly **2 to 4.5 weeks**.\n\n```json\n{\"estimate\": 3, \"ci_low\": 2, \"ci_high\": 4.5}\n```",
+  "final_response_text": "Let\u2019s update the original estimate of **3.0 weeks (80% CI: 2.0\u20134.5)** step by step.\n\n### 1) Effect of \u201csoftware projects average 2\u20133x initial estimates\u201d\nYes, this should push the estimate upward. But I would **not** blindly multiply 3.0 by 2\u20133, because:\n\n- that statistic is broad and includes many kinds of projects,\n- the original estimate may already have included some uncertainty,\n- applying the full multiplier mechanically would likely overcorrect.\n\nSo instead of jumping to 6\u20139 weeks, I\u2019d treat this as evidence that the original estimate is **systematically optimistic** and apply a **moderate uplift**.\n\nA reasonable adjustment is roughly **+35% to +50%** to the central estimate.\n\nThat moves 3.0 weeks to about **4.1\u20134.5 weeks**.\n\n### 2) Effect of \u201cteam confidence is a planning-fallacy warning sign\u201d\nYes, this also pushes the estimate upward. If confidence was previously interpreted as reassurance, and now we reinterpret it as a risk factor, that means the earlier estimate was too low.\n\nThis doesn\u2019t necessarily require a huge separate multiplier, because it overlaps with the optimism-bias point above. Still, it supports nudging the estimate and especially **widening the uncertainty interval**.\n\nSo after combining (1) and (2), a sensible revised point estimate is around **4.5 weeks**.\n\n### 3) Add a 30% chance of a major blocker\nNow we can model this explicitly.\n\nSuppose:\n- **70% chance** things proceed normally around the revised baseline of **4.5 weeks**\n- **30% chance** of a major blocker causing a meaningful delay\n\nWe need to estimate blocker impact. For \u201cintegration issue / unclear requirements,\u201d a plausible added delay is around **2\u20134 weeks**, say **3 weeks on average**.\n\nExpected-value adjustment:\n- Added expected delay = 0.30 \u00d7 3 = **0.9 weeks**\n\nSo:\n- Revised estimate = 4.5 + 0.9 = **5.4 weeks**\n\nThat\u2019s a good central estimate.\n\n### 4) Revised 80% confidence interval\nThe uncertainty is now materially wider because:\n- the base estimate was likely optimistic,\n- confidence is not protective,\n- there is a discrete blocker risk.\n\nA plausible 80% CI should cover:\n- lower end: things go smoothly and original optimism wasn\u2019t too severe\n- upper end: blocker occurs and/or scoping/integration expands\n\nI\u2019d set the **80% CI** to about **3.5 to 8.5 weeks**.\n\nThis reflects:\n- lower bound above the original 2.0 because new evidence mostly pushes upward,\n- upper bound substantially higher because blocker risk creates a heavier right tail.\n\n```json\n{\"estimate\": 5.4, \"ci_low\": 3.5, \"ci_high\": 8.5}\n```"
+}

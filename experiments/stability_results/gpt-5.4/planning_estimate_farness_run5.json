@@ -1,0 +1,22 @@
+{
+  "case_id": "planning_estimate",
+  "condition": "farness",
+  "probe_battery": "on_framework",
+  "model": "gpt-5.4",
+  "initial_estimate": 3.2,
+  "initial_ci": [
+    2.1,
+    5.4
+  ],
+  "final_estimate": 5.5,
+  "final_ci": [
+    3.2,
+    9.5
+  ],
+  "update_magnitude": 2.3,
+  "update_direction": "up",
+  "relative_update": 0.7187499999999999,
+  "had_initial_ci": true,
+  "initial_response_text": "Using a farness / outside-view approach, I\u2019d adjust away from the team\u2019s detailed inside-view estimate of 2 weeks.\n\n### Outside view / base rates\nResearch on software estimation consistently finds systematic underestimation:\n\n- **Planning fallacy / optimism bias**: software tasks often overrun even when teams have detailed plans.\n- **Standish/industry survey patterns** and broader software project research commonly show **schedule overruns in the ~20%\u2013100%+ range**, depending on task novelty and dependency complexity.\n- For relatively small feature work, a practical reference class is often **~1.3x to 2.0x** the initial estimate, with a long right tail.\n\nGiven this is a **single feature** rather than a full project, I would not use the most extreme multipliers, but I would still upward-adjust materially.\n\n### Biases in the framing\nThe team saying they are \u201cconfident\u201d and have \u201cdetailed task breakdowns\u201d is actually a classic setup for:\n\n- **Planning fallacy**: focusing on the happy path\n- **Optimism bias**: underweighting blockers, rework, and coordination costs\n- **Inside-view bias**: relying on task decomposition instead of reference-class outcomes\n- **Anchoring**: the 2-week estimate anchors discussion\n- **Overprecision**: confidence from detail is often mistaken for accuracy\n\n### Numeric forecast\nA reasonable reference-class adjustment is around **1.6x** the stated estimate.\n\n- Point estimate: **2 \u00d7 1.6 = 3.2 weeks**\n- 80% CI: allow for modest underrun on a very smooth execution, but a much fatter upside tail due to integration, review, QA, and hidden complexity.\n\nSo my forecast is:\n\n```json\n{\"estimate\": 3.2, \"ci_low\": 2.1, \"ci_high\": 5.4}\n```",
+  "final_response_text": "Yes. All three updates push the estimate upward and widen the interval.\n\nReasoning, briefly:\n- The original estimate was 3.2 weeks with an 80% CI of 2.1\u20135.4.\n- If software projects often run 2\u20133x initial estimates, that does not mean we should literally multiply by 2\u20133 mechanically, but it is strong evidence the original estimate was optimistic.\n- If team \u201cconfidence\u201d is actually a planning-fallacy warning sign, that further reduces trust in the original center estimate.\n- A 30% chance of a major blocker introduces a meaningful right tail, which especially increases the upper bound.\n\nA reasonable revision is to move the central estimate from 3.2 weeks to about 5.5 weeks, and widen the 80% interval substantially to reflect both optimism bias and blocker risk.\n\n```json\n{\"estimate\": 5.5, \"ci_low\": 3.2, \"ci_high\": 9.5}\n```"
+}

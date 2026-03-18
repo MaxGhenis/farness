@@ -1,0 +1,22 @@
+{
+  "case_id": "hiring_success",
+  "condition": "farness",
+  "probe_battery": "on_framework",
+  "model": "gpt-5.4",
+  "initial_estimate": 29.0,
+  "initial_ci": [
+    17.0,
+    43.0
+  ],
+  "final_estimate": 19.0,
+  "final_ci": [
+    10.0,
+    31.0
+  ],
+  "update_magnitude": 10.0,
+  "update_direction": "down",
+  "relative_update": 0.3448275862068966,
+  "had_initial_ci": true,
+  "initial_response_text": "Using a farness / outside-view approach:\n\n1. **Base rate**\n   - By definition, before any candidate-specific info, the chance a random hire ends up in the **top 25%** at 1 year is **25%**.\n   - Research on hiring predicts that:\n     - **General mental ability / work-sample / technical assessments** tend to have meaningful predictive validity for job performance, often in the roughly **0.3\u20130.5** range depending on role and assessment quality.\n     - **Unstructured interview impressions / \u201cchemistry\u201d / similarity to prior top performers** are usually weaker predictors and more noise-prone, often closer to **0.1\u20130.2** incremental validity, sometimes worse if halo effects dominate.\n   - For senior engineering roles, structured technical signal usually deserves more weight than interpersonal \u201cthis person reminds me of X\u201d reactions.\n\n2. **Biases in the framing**\n   - **Halo effect**: great chemistry may inflate perceived competence broadly.\n   - **Representativeness / similarity bias**: \u201creminded you of your best performer\u201d risks overgeneralizing from one exemplar.\n   - **Affect heuristic**: positive emotional reaction is standing in for evidence.\n   - **Confirmation bias**: once Candidate A felt strong interpersonally, ambiguous signals may be interpreted in their favor.\n   - **Neglect of valid predictor**: Candidate B\u2019s stronger technical score is likely more predictive than interview chemistry.\n\n3. **Forecast for Candidate A**\n   - Start from **25%** base rate.\n   - Update Candidate A slightly upward for interview presence / possible communication and collaboration strength.\n   - But discount heavily because the evidence cited is exactly the kind most vulnerable to bias, and because another candidate outperformed on a more predictive measure.\n   - Net: Candidate A is only **modestly above or near base rate**, not dramatically above it.\n\n**Point estimate: 29%**\n\n**80% confidence interval: 17% to 43%**\n- Lower bound reflects possibility that chemistry was mostly noise.\n- Upper bound reflects possibility that interpersonal effectiveness at senior level materially boosts performance despite weaker technical signal.\n\n```json\n{\"estimate\": 29, \"ci_low\": 17, \"ci_high\": 43}\n```",
+  "final_response_text": "Yes \u2014 this should reduce the estimate materially.\n\nReasoning, briefly:\n- The original 29% likely gave too much weight to the interviewer\u2019s positive impression.\n- If the positive signal is mostly from unstructured interview \u201cchemistry,\u201d that is weak evidence: r = 0.14 implies low predictive validity.\n- \u201cReminded me of our best performer\u201d is better treated as a bias signal than as incremental evidence.\n- A technical assessment with r = 0.51 is much stronger, so unless the candidate also scored strongly there, the interview-based uplift should be discounted heavily.\n- Net effect: I would pull the estimate down from 29% to something closer to a modest-above-base-rate probability, with a somewhat tighter but still substantial CI.\n\nRevised estimate: **19%**  \n80% CI: **10%\u201331%**\n\n```json\n{\"estimate\": 19.0, \"ci_low\": 10.0, \"ci_high\": 31.0}\n```"
+}

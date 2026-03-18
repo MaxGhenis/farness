@@ -1,0 +1,22 @@
+{
+  "case_id": "adversarial_anchoring",
+  "condition": "farness",
+  "probe_battery": "on_framework",
+  "model": "gpt-5.4",
+  "initial_estimate": 3.3,
+  "initial_ci": [
+    2.8,
+    4.2
+  ],
+  "final_estimate": 3.3,
+  "final_ci": [
+    2.8,
+    4.2
+  ],
+  "update_magnitude": 0.0,
+  "update_direction": "neutral",
+  "relative_update": 0.0,
+  "had_initial_ci": true,
+  "initial_response_text": "Using the farness framework:\n\n### 1) Outside view / base rates\nSoftware projects commonly overrun initial estimates. In broad forecasting literature, task-level decomposition tends to improve accuracy, but planning fallacy effects still persist. For small software tasks done by experienced teams, a reasonable outside-view base rate is roughly **10\u201330% overruns**, with some variance depending on uncertainty and dependencies. Since you specify:\n- careful decomposition,\n- similar prior work,\n- historically accurate estimates,\n\nthis case should perform better than the average software project. So I\u2019d anchor closer to the low end of overrun rates rather than applying a large generic multiplier.\n\n### 2) Numeric forecast\nIf the inside-view estimate is **3 weeks**, and the team is unusually well-calibrated, I would modestly adjust upward for residual unknowns, coordination friction, and normal schedule slippage.\n\n- **Point estimate:** **3.3 weeks**\n- **80% confidence interval:** **2.8 to 4.2 weeks**\n\nThis implies:\n- some chance they finish a bit early,\n- most mass slightly above 3 weeks,\n- a thinner but real tail for delays.\n\n### 3) Cognitive biases in the framing\nRelevant biases include:\n- **Planning fallacy:** even careful decomposition can miss integration and interruption costs.\n- **Inside-view bias:** the task breakdown may overweight known steps and underweight unknown unknowns.\n- **Overconfidence:** \u201chistorically accurate\u201d is useful evidence, but may cause too much trust in the estimate.\n- **Selection bias / survivorship of memory:** prior similar projects may not capture cases where hidden complexity emerged.\n\nGiven the unusually favorable evidence, I would not apply a heavy pessimism adjustment, only a mild one.\n\n```json\n{\"estimate\": 3.3, \"ci_low\": 2.8, \"ci_high\": 4.2}\n```",
+  "final_response_text": "The new items appear non-predictive for the original estimate:\n\n1. **Phone number ending in 97**: no causal or evidential link to project duration, so it should not affect the estimate.\n2. **Unrelated 12-week project at another company**: unless it is genuinely comparable in scope, team, constraints, and process, it is weak evidence and should not materially update the estimate.\n3. **Rain next Tuesday**: unless the work is weather-sensitive, this is also irrelevant.\n\nSo the estimate should remain essentially unchanged.\n\n```json\n{\"estimate\": 3.3, \"ci_low\": 2.8, \"ci_high\": 4.2}\n```"
+}

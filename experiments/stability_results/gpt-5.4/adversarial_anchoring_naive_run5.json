@@ -1,0 +1,22 @@
+{
+  "case_id": "adversarial_anchoring",
+  "condition": "naive",
+  "probe_battery": "on_framework",
+  "model": "gpt-5.4",
+  "initial_estimate": 3.0,
+  "initial_ci": [
+    2.5,
+    3.8
+  ],
+  "final_estimate": 3.0,
+  "final_ci": [
+    2.0,
+    4.5
+  ],
+  "update_magnitude": 0.0,
+  "update_direction": "neutral",
+  "relative_update": 0.0,
+  "had_initial_ci": true,
+  "initial_response_text": "Given the estimate is based on careful task decomposition and the team has a strong track record of accurate estimates on similar work, I\u2019d center the forecast close to the original 3 weeks, with a modest uncertainty range to reflect normal execution variance.\n\n```json\n{\"estimate\": 3.0, \"ci_low\": 2.5, \"ci_high\": 3.8}\n```",
+  "final_response_text": "The new information does not appear causally relevant to the original estimate:\n\n1. Your phone number ending in 97 is arbitrary and should not affect project duration.\n2. A different project at another company taking 12 weeks is not automatically informative unless it is highly comparable in scope, team, constraints, and context. As stated, it is too unrelated to update from.\n3. Rain next Tuesday is also not relevant unless the work depends on weather-sensitive field operations or logistics.\n\nSo I would not materially revise the estimate based on these details.\n\nUsing the prior estimate of 3.0 weeks, I\u2019d keep the point estimate at 3.0 weeks. For an 80% confidence interval, in the absence of stronger project-specific uncertainty information, a modest uncertainty band such as 2.0 to 4.5 weeks is reasonable.\n\n```json\n{\"estimate\": 3.0, \"ci_low\": 2.0, \"ci_high\": 4.5}\n```"
+}

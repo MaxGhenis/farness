@@ -1,0 +1,22 @@
+{
+  "case_id": "hiring_success",
+  "condition": "cot",
+  "probe_battery": "on_framework",
+  "model": "gpt-5.4",
+  "initial_estimate": 32.0,
+  "initial_ci": [
+    20.0,
+    45.0
+  ],
+  "final_estimate": 24.0,
+  "final_ci": [
+    15.0,
+    35.0
+  ],
+  "update_magnitude": 8.0,
+  "update_direction": "down",
+  "relative_update": 0.25,
+  "had_initial_ci": true,
+  "initial_response_text": "To estimate Candidate A\u2019s probability of being a top performer at 1 year, I\u2019d anchor on the base rate first, then adjust carefully.\n\n1. **Base rate**: By definition, \u201ctop performer\u201d here is top 25%, so an uninformed prior is **25%**.\n2. **Positive signal**: Strong interview chemistry and resemblance to a past high performer is a real signal, but it is also vulnerable to:\n   - similarity/affinity bias\n   - halo effect\n   - over-weighting interpersonal comfort\n3. **Counterweight**: Candidate B scored higher technically, which suggests Candidate A may not be the strongest on the most job-relevant measured dimension.\n4. **Net adjustment**: I\u2019d move Candidate A somewhat above the 25% base rate because interview chemistry can correlate with collaboration, influence, and leadership in a senior role, but only modestly because that evidence is noisy.\n\nSo I\u2019d place Candidate A at **32%**.\n\nGiven the uncertainty and risk of bias in the evidence, I\u2019d use a fairly wide 80% confidence interval: **20% to 45%**.\n\n```json\n{\"estimate\": 32, \"ci_low\": 20, \"ci_high\": 45}\n```",
+  "final_response_text": "Yes \u2014 this should materially lower the estimate.\n\nStep by step:\n\n1. **Original 32% estimate**\n   That likely gave meaningful weight to the interviewer\u2019s positive gut reaction.\n\n2. **Unstructured interview validity is weak (`r = 0.14`)**\n   A correlation of 0.14 is small. It means interview \u201cchemistry\u201d or general impression adds only limited predictive value for actual job performance. So the prior evidence from the interviewer should be discounted substantially.\n\n3. **\u201cReminded me of our best performer\u201d is similarity bias**\n   This is not independent evidence of candidate quality. If anything, it suggests the interviewer may be over-weighting resemblance rather than job-relevant capability. So this part should contribute close to zero predictive value, and possibly slightly negative if it signals noise or bias in the decision process.\n\n4. **Technical assessment is much stronger (`r = 0.51`)**\n   This is genuinely predictive and should dominate the estimate. If the candidate did well on the technical assessment, that remains strong evidence. But if the original 32% estimate was partly boosted by interview enthusiasm, removing that weak evidence should pull the probability down.\n\n5. **Net effect**\n   Since the strongest new information is that the interview signal was much less valid than assumed, I\u2019d revise downward, but not collapse the estimate entirely because the technical assessment still carries real predictive power.\n\n**Revised estimate: 24%**\n\n**80% confidence interval: 15%\u201335%**\n\n```json\n{\"estimate\": 24, \"ci_low\": 15, \"ci_high\": 35}\n```"
+}

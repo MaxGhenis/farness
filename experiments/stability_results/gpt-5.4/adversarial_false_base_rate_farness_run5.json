@@ -1,0 +1,22 @@
+{
+  "case_id": "adversarial_false_base_rate",
+  "condition": "farness",
+  "probe_battery": "on_framework",
+  "model": "gpt-5.4",
+  "initial_estimate": 64.0,
+  "initial_ci": [
+    45.0,
+    80.0
+  ],
+  "final_estimate": 58.0,
+  "final_ci": [
+    38.0,
+    75.0
+  ],
+  "update_magnitude": 6.0,
+  "update_direction": "down",
+  "relative_update": 0.09375,
+  "had_initial_ci": true,
+  "initial_response_text": "Using a farness/outside-view approach:\n\n1. **Base rates from research**\n   - Startup expansion success rates are generally modest. Across startups, international/new-market expansion often underperforms internal projections; broad venture outcomes suggest only a minority of growth initiatives hit ambitious short-term adoption targets.\n   - For well-funded startups with demonstrated PMF, outcomes are much better than the average startup. Research on diffusion/adoption and adjacent-market entry suggests prior PMF, existing inbound demand, and strong growth materially improve odds.\n   - A reasonable outside-view anchor:\n     - Average startup hitting a major 6-month market-entry user target: roughly **20\u201335%**\n     - Strong PMF + strong funding + existing demand signal: can raise this into the **50\u201375%** range, depending on operational execution and market similarity.\n\n2. **Adjustment for the specifics**\n   Positive factors:\n   - **Strong PMF**\n   - **50% month-over-month growth**\n   - **Well-funded**\n   - **Existing customer demand in the new market**\n\n   Negative/uncertain factors:\n   - New market execution risk\n   - Channel/recruiting/localization/regulatory friction\n   - Demand signal may not fully convert into acquisition at scale\n   - \u201c10,000 users in 6 months\u201d may depend heavily on current baseline, CAC, and product fit transferability\n\n3. **Cognitive biases in the framing**\n   - **Selection effect / halo effect**: the framing highlights only favorable indicators.\n   - **Base-rate neglect**: temptation to ignore how often expansions still miss targets.\n   - **Overconfidence / planning fallacy**: 6-month expansion timelines are often too optimistic.\n   - **Extrapolation bias**: assuming 50% MoM growth in one market transfers to another.\n   - **Confirmation bias**: \u201cexisting demand\u201d may overweight anecdotal positive signals.\n\n4. **Numeric forecast**\n   Balancing the favorable signals against standard expansion failure/friction, I\u2019d assign:\n\n- **Point estimate:** **64%**\n- **80% confidence interval:** **45% to 80%**\n\n```json\n{\"estimate\": 64, \"ci_low\": 45, \"ci_high\": 80}\n```",
+  "final_response_text": "The new information sounds alarming, but it mostly concerns **different reference classes** than the one we should use here.\n\n- **\u201c90% of startups fail\u201d**: usually refers to brand-new companies, often over long horizons, and often using broad definitions of failure. If this scenario is **not literally a startup survival question**, that base rate is likely too pessimistic and not directly applicable.\n- **\u201cMost companies that try new things fail\u201d**: true in a vague sense, but still too broad. \u201cTrying new things\u201d covers everything from speculative moonshots to routine product tweaks. Broad statements like this should only modestly nudge the estimate unless the scenario is especially novel/high-risk.\n- **\u201cBusiness initiatives have 30% success\u201d**: this is the most relevant of the three if the scenario is indeed a business initiative. But even then, \u201cbusiness initiative\u201d is a very heterogeneous class. If my prior 64% came from scenario-specific positives, I should update downward, but not all the way to 30% unless this case is otherwise generic.\n\nSo I would revise **downward somewhat**, but not dramatically. The new evidence argues for a **more conservative base rate**, yet it does not seem specific enough to overwhelm the original case-specific estimate.\n\nRevised estimate: **58%**\n\nRevised 80% CI: **38%\u201375%**\n\n```json\n{\"estimate\": 58, \"ci_low\": 38, \"ci_high\": 75}\n```"
+}

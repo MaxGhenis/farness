@@ -1,0 +1,22 @@
+{
+  "case_id": "sunk_cost_project",
+  "condition": "naive",
+  "probe_battery": "on_framework",
+  "model": "gpt-5.4",
+  "initial_estimate": 25.0,
+  "initial_ci": [
+    10.0,
+    45.0
+  ],
+  "final_estimate": 12.0,
+  "final_ci": [
+    6.0,
+    22.0
+  ],
+  "update_magnitude": 13.0,
+  "update_direction": "down",
+  "relative_update": 0.52,
+  "had_initial_ci": true,
+  "initial_response_text": "Projects that are already late, over budget, and suffering morale problems are statistically much less likely to hit a newly proposed \u201cjust a little more time and money\u201d plan than leadership expects. The phrase \u201calmost there\u201d is especially weak evidence, because teams in troubled projects often say that repeatedly. Without stronger indicators\u2014like a frozen scope, passing end-to-end tests, low defect backlog, and a credible recovery plan\u2014the base rate is poor.\n\nSo I\u2019d assign a fairly low probability, though not near zero, because some troubled projects do recover if the remaining work is genuinely narrow.\n\n```json\n{\"estimate\": 25, \"ci_low\": 10, \"ci_high\": 45}\n```",
+  "final_response_text": "The new information pushes the probability down materially.\n\nReasoning, briefly:\n- **Base update from 25%**: if only **16% of already-troubled projects meet revised budget estimates**, that is a strong anchor downward, since this project appears to be in that category.\n- **Two senior engineers interviewing elsewhere** adds meaningful delivery risk: possible knowledge loss, reduced morale, slower debugging, and weaker execution during the most failure-prone stage.\n- **\u201cAlmost there\u201d based only on feature completion** is a major warning sign. If **integration testing hasn\u2019t started**, then substantial unknowns remain. Late-stage integration often reveals schedule and budget surprises, especially in troubled projects.\n\nTaken together, I\u2019d revise the estimate to **12%**.\n\nAn **80% confidence interval** should be fairly wide because project outcomes are highly uncertain, but centered lower given the negative evidence. I\u2019d use **6% to 22%**.\n\n```json\n{\"estimate\": 12, \"ci_low\": 6, \"ci_high\": 22}\n```"
+}

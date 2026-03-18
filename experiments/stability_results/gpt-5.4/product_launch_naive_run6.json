@@ -1,0 +1,22 @@
+{
+  "case_id": "product_launch",
+  "condition": "naive",
+  "probe_battery": "on_framework",
+  "model": "gpt-5.4",
+  "initial_estimate": 38.0,
+  "initial_ci": [
+    22.0,
+    58.0
+  ],
+  "final_estimate": 24.0,
+  "final_ci": [
+    14.0,
+    36.0
+  ],
+  "update_magnitude": 14.0,
+  "update_direction": "down",
+  "relative_update": 0.3684210526315789,
+  "had_initial_ci": true,
+  "initial_response_text": "A reasonable base rate for a new feature driving a **10%+ overall engagement lift within 3 months** is usually well below 50%, because many promising launches produce only modest gains once exposed to the full user base.  \n\nThe evidence here is directionally positive:\n- internal testing went well,\n- the team is confident,\n- beta feedback was positive,\n- NPS of 45 is good.\n\nBut there are still important uncertainties:\n- beta users are often more engaged than average users,\n- \u201cpositive feedback\u201d does not always translate into measurable behavior change,\n- achieving **overall** product engagement lift of **at least 10%** is a fairly high bar.\n\nSo I\u2019d put the probability somewhat above a generic base rate, but not overwhelmingly high.\n\n```json\n{\"estimate\": 38, \"ci_low\": 22, \"ci_high\": 58}\n```",
+  "final_response_text": "Starting from the previous estimate of **38.0%**, this new information pushes the probability down materially:\n\n1. **Base rate (20\u201330%)**  \n   This is the biggest update. If only about a quarter of new features meaningfully move engagement, then 38% was probably somewhat optimistic unless there was unusually strong evidence.\n\n2. **Beta users are enthusiasts**  \n   Positive beta results should be discounted because enthusiastic early adopters often overstate real-world impact. This reduces external validity.\n\n3. **Same team built and measured it**  \n   This introduces some risk of optimistic interpretation, selective metric framing, or non-malicious confirmation bias. Not necessarily huge, but directionally negative.\n\nPutting that together, I\u2019d revise the estimate from **38%** down to about **24%**.\n\nFor an **80% confidence interval**, I\u2019d keep it fairly wide because:\n- feature success is inherently noisy,\n- the beta signal is less trustworthy than it first appeared,\n- and the base rate itself is a range, not a precise number.\n\nSo my revised **80% CI** would be **14% to 36%**.\n\n```json\n{\"estimate\": 24, \"ci_low\": 14, \"ci_high\": 36}\n```"
+}

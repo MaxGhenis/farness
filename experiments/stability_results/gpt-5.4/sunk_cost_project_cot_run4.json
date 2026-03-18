@@ -1,0 +1,22 @@
+{
+  "case_id": "sunk_cost_project",
+  "condition": "cot",
+  "probe_battery": "on_framework",
+  "model": "gpt-5.4",
+  "initial_estimate": 30.0,
+  "initial_ci": [
+    15.0,
+    45.0
+  ],
+  "final_estimate": 12.0,
+  "final_ci": [
+    5.0,
+    22.0
+  ],
+  "update_magnitude": 18.0,
+  "update_direction": "down",
+  "relative_update": 0.6,
+  "had_initial_ci": true,
+  "initial_response_text": "Given only the description, I\u2019d start from a low base rate.\n\nReasoning, step by step:\n1. The project has already consumed substantial time and money: $2M and 18 months.\n2. It is explicitly behind schedule and over budget, which is a strong warning sign that earlier estimates were unreliable.\n3. Team demoralization further reduces the chance of a clean finish, because morale problems often slow execution and increase turnover or quality issues.\n4. Leadership saying \u201calmost there\u201d is common in troubled projects and is not strong evidence by itself; in many failed projects, leaders remain optimistic late into the process.\n5. The ask for only 25% more budget ($500K on $2M) and about 17% more time (3 months on 18) could be plausible if the remaining work is truly integration/testing/deployment, but in troubled software efforts the final stretch is often where hidden complexity appears.\n6. So the probability of launching within exactly that additional budget and time is meaningfully below 50%, likely closer to the 20\u201335% range.\n\nMy best single estimate is 30%, with a fairly wide 80% confidence interval because we lack key details like scope, team size, technical debt, customer readiness, and whether \u201claunch\u201d means MVP or full production rollout.\n\n```json\n{\"estimate\": 30, \"ci_low\": 15, \"ci_high\": 45}\n```",
+  "final_response_text": "Starting from the prior estimate of **30%**:\n\n1. **Base-rate update:** If only **16% of already-troubled projects** meet revised budget estimates, that is a strong anchor downward from 30%. By itself, this suggests the prior may have been optimistic.\n\n2. **Key-person retention risk:** Two senior engineers interviewing elsewhere meaningfully increases execution risk, especially on a troubled project. Even if they do not leave, distraction and reduced commitment can hurt delivery.\n\n3. **Misleading progress signal:** \u201cAlmost there\u201d based on **feature completion** is much weaker once we learn **integration testing hasn\u2019t started**. Late-stage integration often reveals major schedule and cost surprises. This is a substantial negative update.\n\nPutting those together, I would revise the estimate down materially, to **about 12%**. That is below the 16% base rate because the additional evidence points to this case being worse than a typical \u201calready-troubled\u201d project.\n\nAn **80% confidence interval** should remain fairly wide because project outcomes are noisy, but centered lower than before. I\u2019d use **5% to 22%**.\n\n```json\n{\"estimate\": 12, \"ci_low\": 5, \"ci_high\": 22}\n```"
+}

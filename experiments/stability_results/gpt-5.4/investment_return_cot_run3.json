@@ -1,0 +1,22 @@
+{
+  "case_id": "investment_return",
+  "condition": "cot",
+  "probe_battery": "on_framework",
+  "model": "gpt-5.4",
+  "initial_estimate": 30.0,
+  "initial_ci": [
+    15.0,
+    50.0
+  ],
+  "final_estimate": 12.0,
+  "final_ci": [
+    5.0,
+    22.0
+  ],
+  "update_magnitude": 18.0,
+  "update_direction": "down",
+  "relative_update": 0.6,
+  "had_initial_ci": true,
+  "initial_response_text": "I can give a structured estimate, but this is inherently very uncertain because the outcome depends on facts we do not have: the company\u2019s stage, valuation, liquidation preferences, dilution, lockups, secondary restrictions, your exact security, and whether the \u201cdiscount\u201d is actually meaningful.\n\nStep by step:\n\n1. **Base rate**\n   For private startup investments, the probability of achieving **at least 2x within 3 years** is generally not high. Even strong startups often take longer than expected to exit, and many IPO plans slip.\n\n2. **Positive signal: possible IPO next year**\n   If the startup is truly on a credible IPO path, that materially improves odds. Companies that are genuinely IPO-ready are already in the far-right tail of startup outcomes.\n\n3. **But \u201clikely IPO next year\u201d is weak evidence**\n   Many private companies believe they will IPO \u201cnext year\u201d and do not. Market windows close, growth slows, legal/accounting readiness lags, or valuation expectations reset.\n\n4. **The 2x hurdle within 3 years**\n   Even if an IPO happens, you only get 2x if:\n   - your entry price is low enough,\n   - the IPO valuation and post-lockup trading support it,\n   - your shares are not heavily diluted or subordinated,\n   - and the stock does not fall after listing.\n\n5. **Friends-and-family discount**\n   This helps, but often less than people think. If you are buying common or a SAFE with ambiguous terms, the \u201cdiscount\u201d may not fully protect you. If it is truly preferred equity at a strong discount to the latest round, odds improve.\n\n6. **Synthesis**\n   Relative to a generic startup investment, this sounds better than average, but still far from a coin flip to deliver 2x in only 3 years.\n\nMy single-number estimate is **30%**.\n\nMy 80% confidence interval is **15% to 50%**.\n\n```json\n{\"estimate\": 30, \"ci_low\": 15, \"ci_high\": 50}\n```",
+  "final_response_text": "Starting from the previous estimate of 30%, the new information pushes the probability down substantially.\n\nStep by step:\n\n1. **Base rate dominates**\n   - If ~90% of startup investments return **less than 1x**, then the default expectation is poor.\n   - If only ~5% return **2x+**, then strong upside is rare.\n   - This alone suggests that any estimate meaningfully above, say, the low double digits needs unusually strong deal-specific evidence.\n\n2. **Friends-and-family discount may be illusory**\n   - If these rounds often **don\u2019t actually offer a meaningful discount to fair value**, then one of the main reasons to invest early disappears.\n   - Without a real pricing edge, you are just taking startup risk without obvious compensation.\n   - That lowers the chance that this is a genuinely attractive opportunity versus just a risky illiquid investment.\n\n3. **Seller incentive / adverse selection**\n   - The person offering the investment has a strong incentive to get you in, possibly to improve their own terms.\n   - That creates a meaningful risk that the opportunity is being framed more favorably than warranted.\n   - This doesn\u2019t necessarily mean it\u2019s bad, but it should further reduce confidence.\n\nPutting that together:\n- A prior of **30%** now looks too high relative to the base rate.\n- Given the weak general startup base rate, questionable pricing advantage, and possible adverse-selection concerns, I\u2019d revise to **around 12%**.\n\n80% CI:\n- Lower bound: **5%** \u2014 roughly consistent with the idea that only a small minority of startup investments produce clearly good outcomes.\n- Upper bound: **22%** \u2014 allows for the possibility that this specific opportunity is better than average, but still reflects that the new evidence is mostly negative.\n\n```json\n{\"estimate\": 12, \"ci_low\": 5, \"ci_high\": 22}\n```"
+}

@@ -1,0 +1,22 @@
+{
+  "case_id": "startup_success",
+  "condition": "cot",
+  "probe_battery": "on_framework",
+  "model": "gpt-5.4",
+  "initial_estimate": 12.0,
+  "initial_ci": [
+    5.0,
+    25.0
+  ],
+  "final_estimate": 4.0,
+  "final_ci": [
+    1.5,
+    10.0
+  ],
+  "update_magnitude": 8.0,
+  "update_direction": "down",
+  "relative_update": 0.6666666666666666,
+  "had_initial_ci": true,
+  "initial_response_text": "To reach 10,000 MAU from 500 MAU in 12 months, they need about **20x growth** in a year.\n\nQuick reasoning:\n1. **Current evidence is weak**: after 18 months they have only 500 MAU and growth is flat. That suggests current distribution/product loop is not yet working.\n2. **Base rate for startups** in this situation is low: most teams with modest usage and stalled growth do not suddenly find 20x growth without a meaningful change.\n3. **Positive factors**: they do have real users, still believe in the vision, and have ideas to try. That means the probability is not near zero.\n4. **But the question says \u201cpersist with current approach\u201d**: if they are not materially changing approach, flat growth is a strong negative signal.\n5. So I\u2019d put the chance in the **low but non-trivial** range.\n\nMy single-number estimate is **12%**.\n\n80% confidence interval: **5% to 25%**.\n\n```json\n{\"estimate\": 12, \"ci_low\": 5, \"ci_high\": 25}\n```",
+  "final_response_text": "Starting from the prior estimate of **12% (80% CI: 5%\u201325%)**:\n\n1. **Base rate update**  \n   You now provide a stronger reference class: startups with **18 months of flat growth** rarely inflect without major changes, and only about **5%** see sudden organic growth.  \n   That should pull the estimate down materially, since this is directly relevant base-rate evidence.\n\n2. **Three marketing channels already tried**  \n   This is additional negative evidence. It suggests the issue is less likely to be \u201cthey just haven\u2019t found the right obvious distribution lever yet.\u201d That lowers the chance somewhat further.\n\n3. **Competitor raised $10M in same market**  \n   This makes a turnaround harder, especially if the market is contested and the company is already flat. It doesn\u2019t make success impossible, but it increases execution pressure and likely reduces odds further.\n\nPutting that together:\n- The **5% base rate** is the anchor.\n- The failed channel experimentation and stronger competitor push me **below** that base rate slightly, though not dramatically, because there is still some residual chance of a pivot, product change, or non-organic growth driver.\n\nSo my revised estimate is **4%**.\n\nFor the **80% confidence interval**, I\u2019d widen it enough to reflect uncertainty about whether the company could still make a major change:\n- Lower bound: **1.5%**\n- Upper bound: **10%**\n\n```json\n{\"estimate\": 4.0, \"ci_low\": 1.5, \"ci_high\": 10.0}\n```"
+}

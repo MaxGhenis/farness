@@ -1,0 +1,22 @@
+{
+  "case_id": "hiring_success",
+  "condition": "naive",
+  "probe_battery": "on_framework",
+  "model": "gpt-5.4",
+  "initial_estimate": 35.0,
+  "initial_ci": [
+    20.0,
+    50.0
+  ],
+  "final_estimate": 27.0,
+  "final_ci": [
+    18.0,
+    37.0
+  ],
+  "update_magnitude": 8.0,
+  "update_direction": "down",
+  "relative_update": 0.22857142857142856,
+  "had_initial_ci": true,
+  "initial_response_text": "Candidate A\u2019s strong chemistry is informative but also especially vulnerable to similarity/affinity bias (\u201creminded you of your best performer\u201d), while Candidate B\u2019s higher technical assessment is a more job-relevant signal. Since the question is specifically about Candidate A being a top performer at 1 year, I\u2019d start from the base rate of 25% and adjust upward modestly for interview strength, but not dramatically because the strongest positive evidence described is partly subjective and potentially biased.\n\nSo I\u2019d assign Candidate A a probability somewhat above base rate, with substantial uncertainty.\n\n```json\n{\"estimate\": 35, \"ci_low\": 20, \"ci_high\": 50}\n```",
+  "final_response_text": "Yes \u2014 this should lower the estimate meaningfully.\n\nReasoning, briefly:\n- If the original 35.0% leaned materially on the manager\u2019s positive interview impression, that evidence is weaker than it first appeared.\n- An unstructured interview correlation of **r = 0.14** implies only very modest predictive value.\n- \u201cReminded me of our best performer\u201d is better treated as **bias/noise** than as positive signal.\n- A technical assessment with **r = 0.51** is substantially more predictive, so the estimate should be anchored much more heavily on that and much less on interview chemistry.\n\nSo compared with the prior 35.0%, I\u2019d revise downward, but not collapse the estimate entirely, because the interview still contains a little signal and the technical assessment remains strong. A reasonable updated point estimate is:\n\n```json\n{\"estimate\": 27, \"ci_low\": 18, \"ci_high\": 37}\n```"
+}

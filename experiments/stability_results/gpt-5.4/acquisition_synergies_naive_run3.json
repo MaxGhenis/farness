@@ -1,0 +1,22 @@
+{
+  "case_id": "acquisition_synergies",
+  "condition": "naive",
+  "probe_battery": "on_framework",
+  "model": "gpt-5.4",
+  "initial_estimate": 65.0,
+  "initial_ci": [
+    45.0,
+    80.0
+  ],
+  "final_estimate": 42.0,
+  "final_ci": [
+    28.0,
+    56.0
+  ],
+  "update_magnitude": 23.0,
+  "update_direction": "down",
+  "relative_update": 0.35384615384615387,
+  "had_initial_ci": true,
+  "initial_response_text": "Realizing at least 50% of projected synergies within 2 years is more likely than not, but far from certain.\n\nTypical pattern:\n- Cost synergies are usually more achievable than revenue synergies.\n- Duplicate-function elimination can often be executed within 2 years if integration is well managed.\n- Revenue synergies from cross-selling are slower, less reliable, and often underdeliver.\n- Since the hurdle is only 50% of total projected synergies, the company does not need full success\u2014moderate cost synergy capture alone may get much of the way there.\n\nSo I\u2019d assign a probability modestly above 50%, reflecting that:\n- downside risks are significant: integration complexity, cultural issues, customer disruption, systems migration delays, regulatory constraints;\n- but the threshold is relatively forgiving versus needing the full $50M.\n\n```json\n{\"estimate\": 65, \"ci_low\": 45, \"ci_high\": 80}\n```",
+  "final_response_text": "Starting from the prior estimate of 65.0%, this new information pushes the estimate down materially.\n\nReasoning, briefly:\n- **Only 50% of projected synergies realized on average**: this weakens the core value-creation case, especially if the original thesis depended on synergy capture.\n- **60\u201380% of M&A deals fail to create value for the acquirer**: this is strong base-rate evidence that should pull the estimate downward significantly unless this deal is unusually advantaged.\n- **CEO is personally excited and championing the deal**: that raises concern about overconfidence, escalation, and selective interpretation of evidence, which further reduces confidence in success.\n\nPutting these together, I\u2019d revise the estimate from **65% down to 42%**.\n\nFor the **80% confidence interval**, I\u2019d use a fairly wide range because M&A outcomes are noisy and the new evidence emphasizes high variance. A reasonable 80% CI is **28% to 56%**.\n\n```json\n{\"estimate\": 42, \"ci_low\": 28, \"ci_high\": 56}\n```"
+}

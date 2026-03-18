@@ -1,0 +1,22 @@
+{
+  "case_id": "sunk_cost_project",
+  "condition": "naive",
+  "probe_battery": "on_framework",
+  "model": "gpt-5.4",
+  "initial_estimate": 25.0,
+  "initial_ci": [
+    10.0,
+    45.0
+  ],
+  "final_estimate": 12.0,
+  "final_ci": [
+    6.0,
+    22.0
+  ],
+  "update_magnitude": 13.0,
+  "update_direction": "down",
+  "relative_update": 0.52,
+  "had_initial_ci": true,
+  "initial_response_text": "Projects already behind schedule and over budget, with low morale and \u201calmost there\u201d claims, have a strong base-rate tendency to slip again. The combination of sunk cost, optimism bias, and the fact that the remaining work is often the hardest integration/polish phase makes the stated plan unreliable. Without evidence of a tightly bounded remaining scope, resolved critical risks, and recent execution stability, I\u2019d assign a fairly low chance of meeting the new target.\n\n```json\n{\"estimate\": 25, \"ci_low\": 10, \"ci_high\": 45}\n```",
+  "final_response_text": "The new information pushes the probability down materially from 25%.\n\nReasoning, briefly:\n- **Base-rate update:** if only **16% of already-troubled projects** hit their **revised** budget, that is a strong anchor and is lower than the prior estimate.\n- **Key-person risk:** two senior engineers interviewing elsewhere increases delivery risk, coordination risk, and the chance of further schedule/budget slippage.\n- **Misleading \u201calmost there\u201d:** being feature-complete before **integration testing** is not close to done in many projects. Integration is often where major hidden costs and delays appear, especially in troubled projects.\n\nPutting that together, I\u2019d revise the estimate to **12%**.\n\nFor an **80% confidence interval**, I\u2019d use **6% to 22%**:\n- lower bound reflects the possibility that integration and staffing issues are worse than currently visible,\n- upper bound allows for the chance that the revised budget already includes some contingency and the engineers do not actually leave.\n\n```json\n{\"estimate\": 12, \"ci_low\": 6, \"ci_high\": 22}\n```"
+}

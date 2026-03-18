@@ -1,0 +1,22 @@
+{
+  "case_id": "adversarial_false_base_rate",
+  "condition": "farness",
+  "probe_battery": "on_framework",
+  "model": "gpt-5.4",
+  "initial_estimate": 63.0,
+  "initial_ci": [
+    42.0,
+    79.0
+  ],
+  "final_estimate": 56.0,
+  "final_ci": [
+    36.0,
+    74.0
+  ],
+  "update_magnitude": 7.0,
+  "update_direction": "down",
+  "relative_update": 0.1111111111111111,
+  "had_initial_ci": true,
+  "initial_response_text": "Using a farness/outside-view approach:\n\n1. **Base rates from research**\n   - Startup expansion success rates are generally modest. Across startups, market expansion initiatives often underperform internal expectations; broad venture outcomes suggest many growth bets fail to hit near-term traction targets.\n   - For well-funded startups with strong PMF, the odds improve materially. Research on PMF and adjacent market expansion suggests prior traction and demand signals are among the strongest predictors of success.\n   - However, **international/new-market launches** still face common frictions: localization, channel mismatch, pricing differences, regulatory issues, and operational lag. Even strong companies frequently see growth slow versus the home market.\n\n2. **Reference class / outside view**\n   A reasonable reference class is:\n   - venture-backed startup\n   - proven PMF in existing market\n   - very high recent growth (50% MoM, though likely not fully sustainable)\n   - entering a new market with some pre-existing demand\n\n   For that class, I\u2019d put the base rate of hitting a concrete 6-month user target like this in the **50\u201370%** range, before adjusting for specifics.\n\n3. **Inside-view adjustments**\n   Positive updates:\n   - well-funded\n   - strong PMF\n   - existing inbound demand in new market\n   - demonstrated growth capability\n\n   Negative/cautionary updates:\n   - 50% MoM often regresses\n   - \u201cexisting demand\u201d may not translate cleanly into activation/retention\n   - new-market execution risk is commonly underestimated\n   - target definition matters: 10,000 signups vs active retained users\n\n4. **Biases in framing**\n   - **Selection effect / halo effect**: \u201cwell-funded,\u201d \u201cstrong PMF,\u201d and \u201c50% MoM\u201d may cause overextrapolation.\n   - **Base-rate neglect**: ignoring how often expansions disappoint despite strong origin-market performance.\n   - **Planning fallacy**: underestimating time-to-launch and go-to-market friction.\n   - **Metric ambiguity**: \u201c10,000 users\u201d may hide uncertainty around what counts as a user.\n   - **Extrapolation bias**: assuming home-market growth translates linearly to the new market.\n\n5. **Forecast**\n   Balancing the strong setup against common expansion friction, I assign a **63%** probability of success.\n\n   **80% confidence interval:** **42% to 79%**\n\n```json\n{\"estimate\": 63, \"ci_low\": 42, \"ci_high\": 79}\n```",
+  "final_response_text": "Those points sound compelling, but they mostly risk applying the wrong reference class.\n\n- **\u201c90% of startups fail\u201d**: usually not directly applicable unless this scenario is literally an early-stage startup survival question. Startup failure rates are about a very specific population with extreme funding, market, and execution risk. If the original scenario is narrower or has stronger evidence than \u201crandom startup,\u201d this base rate is too pessimistic.\n- **\u201cMost companies that try new things fail\u201d**: true in a loose sense, but again too broad. \u201cTrying new things\u201d covers everything from minor experiments to transformative bets. Broad innovation failure rates are usually poor substitutes for a specific forecast unless we have almost no other information.\n- **\u201cBusiness initiatives succeed only 30% of the time\u201d**: this is a more relevant base rate than the first two if the scenario is genuinely a generic business initiative. But even then, \u201cinitiative success\u201d depends heavily on what counts as success, time horizon, and domain. It should pull the estimate down somewhat, but not automatically all the way to 30%.\n\nGiven that my prior estimate was **63% (80% CI: 42\u201379)**, I would revise **down modestly**, not dramatically. The new info is mostly weak-to-moderate outside-view evidence suggesting I may have been somewhat optimistic, but not enough to override the original scenario-specific reasoning.\n\n**Revised estimate:** **56%**  \n**Revised 80% CI:** **36%\u201374%**\n\n```json\n{\"estimate\": 56, \"ci_low\": 36, \"ci_high\": 74}\n```"
+}

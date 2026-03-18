@@ -1,0 +1,22 @@
+{
+  "case_id": "hiring_success",
+  "condition": "farness",
+  "probe_battery": "on_framework",
+  "model": "gpt-5.4",
+  "initial_estimate": 22.0,
+  "initial_ci": [
+    12.0,
+    35.0
+  ],
+  "final_estimate": 17.0,
+  "final_ci": [
+    9.0,
+    28.0
+  ],
+  "update_magnitude": 5.0,
+  "update_direction": "down",
+  "relative_update": 0.22727272727272727,
+  "had_initial_ci": true,
+  "initial_response_text": "Using a farness / outside-view approach:\n\n1. Base rates\n- By definition, before any candidate-specific info, a random hire has a 25% chance of ending up in the top quartile at 1 year.\n- Research on hiring suggests structured work-sample and cognitive/technical assessments are materially more predictive of job performance than unstructured interview impressions or \u201cchemistry.\u201d A common summary from industrial-organizational psychology is:\n  - General mental ability / cognitive tests: moderate validity\n  - Work-sample tests: moderate-to-strong validity\n  - Unstructured interviews: relatively weak validity\n  - Structured interviews: better than unstructured, but still typically not as strong as good work-sample evidence\n- So the fact pattern \u201cA felt great and reminded me of a star performer\u201d should get discounted relative to \u201cB scored higher on the technical assessment.\u201d\n\n2. Relevant biases in the framing\n- Halo effect: liking A\u2019s interpersonal style may inflate beliefs about total job performance.\n- Representativeness bias: \u201creminded me of my best performer\u201d encourages superficial pattern-matching from a tiny sample.\n- Affect heuristic: positive chemistry feels like evidence even when predictive validity is limited.\n- Availability bias: your best performer is salient, so similarities feel more diagnostic than they are.\n- Overconfidence / narrative fallacy: constructing a compelling story from interview interaction.\n\n3. Forecast\n- Start from 25% base rate.\n- Update upward somewhat because \u201cgreat chemistry\u201d is not useless; interpersonal effectiveness can matter for senior engineers, especially in collaboration-heavy roles.\n- But update downward relative to that instinct because the more predictive observed signal in the prompt points against A: B outperformed on the technical assessment, implying A\u2019s comparative evidence is weaker.\n- Net: A should be below or roughly around the unconditional base rate, not above it by much.\n\nPoint estimate for Candidate A being top 25% at 1 year: 22%\n\n80% confidence interval: 12% to 35%\n- Lower bound reflects many charismatic interview favorites not turning into top performers.\n- Upper bound allows for the possibility that senior-role success depends substantially on communication, influence, and organizational fit beyond measured technical skill.\n\n```json\n{\"estimate\": 22, \"ci_low\": 12, \"ci_high\": 35}\n```",
+  "final_response_text": "The new information should push the estimate downward.\n\nWhy:\n- An unstructured interview signal with **r = 0.14** is weak. That means \u201cgood chemistry\u201d or a strong general impression has limited predictive value.\n- \u201cReminded me of our best performer\u201d is better treated as **similarity bias** than as evidence, so it should be discounted heavily or even counted slightly against confidence in the decision process.\n- A technical assessment with **r = 0.51** is substantially more predictive, so if the earlier estimate gave much weight to interview impression, that weight should now shift toward the assessment instead.\n\nSo relative to the prior **22% (80% CI: 12%\u201335%)**, I\u2019d revise modestly downward rather than collapse it entirely, because the interview signal is not zero, just weak. A reasonable update is to move into the high teens and keep a fairly wide interval due to uncertainty about how much of the original estimate depended on the interview versus other evidence.\n\n```json\n{\"estimate\": 17.0, \"ci_low\": 9.0, \"ci_high\": 28.0}\n```"
+}

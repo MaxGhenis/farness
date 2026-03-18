@@ -1,0 +1,22 @@
+{
+  "case_id": "sunk_cost_project",
+  "condition": "cot",
+  "probe_battery": "on_framework",
+  "model": "gpt-5.4",
+  "initial_estimate": 25.0,
+  "initial_ci": [
+    10.0,
+    45.0
+  ],
+  "final_estimate": 10.0,
+  "final_ci": [
+    4.0,
+    22.0
+  ],
+  "update_magnitude": 15.0,
+  "update_direction": "down",
+  "relative_update": 0.6,
+  "had_initial_ci": true,
+  "initial_response_text": "We have only a few facts, but they point in a pretty consistent direction:\n\n1. **Base rate for troubled software projects**\n   Projects that are already **behind schedule and over budget** have a much lower chance of hitting a newly revised \u201cfinal\u201d estimate than healthy projects do.\n\n2. **\u201cAlmost there\u201d is weak evidence**\n   Leadership often says this in good faith, but in software, \u201c90% done\u201d can hide integration, testing, deployment, bug fixing, and scope surprises. The last 10\u201320% is frequently where timelines slip.\n\n3. **Current burn and revision credibility**\n   The project has already spent **$2M and 18 months**. Asking for **another $500K and 3 months** is a relatively modest increment compared with what has already been consumed, which often suggests **optimism bias** rather than a fully re-grounded plan.\n\n4. **Team demoralization**\n   Low morale tends to reduce productivity, increase turnover risk, and make final execution less predictable.\n\n5. **Counterpoint**\n   It is possible the project truly is near completion, and many projects do eventually launch after one last extension. So the probability should not be extremely close to zero.\n\nBalancing these, I\u2019d put the chance of **successfully launching within exactly the proposed extra $500K and 3 months** at **about one in four**.\n\n```json\n{\"estimate\": 25, \"ci_low\": 10, \"ci_high\": 45}\n```",
+  "final_response_text": "Yes \u2014 this should lower the estimate, and by a fair amount.\n\nStep by step:\n\n1. **Base rate update**\n   You previously had **25%**.  \n   The new fact that only **16% of already-troubled projects meet their revised budget estimates** is strong outside-view evidence. If this project is indeed in the \u201calready troubled\u201d category, that pulls the estimate downward toward the mid-teens.\n\n2. **Flight risk from two senior engineers**\n   This is materially negative. Even if they have not left yet, key-person instability tends to hurt:\n   - delivery continuity,\n   - integration/debugging speed,\n   - morale and coordination,\n   - credibility of revised plans.\n\n   This pushes the estimate lower still.\n\n3. **\u201cAlmost there\u201d is based only on feature completion**\n   This is another important negative update. \u201cFeature complete\u201d before **integration testing has even started** often means substantial hidden schedule/budget risk remains:\n   - integration defects,\n   - performance issues,\n   - environment/config problems,\n   - rework from components not fitting together.\n\n   In troubled projects, this can be a major source of overruns. So this further reduces the chance of meeting the revised budget.\n\n### Synthesis\nStarting from **25%**, the outside-view base rate of **16%** already suggests a downward move.  \nThe engineer attrition risk and the lack of integration testing both make this specific case look **worse than the average troubled project**, not better.\n\nSo I\u2019d revise to roughly **10%**.\n\n### 80% confidence interval\nGiven uncertainty, I\u2019d keep a fairly wide interval, but centered lower than before:\n- **Low end:** around **4%**\n- **High end:** around **22%**\n\n```json\n{\"estimate\": 10, \"ci_low\": 4, \"ci_high\": 22}\n```"
+}

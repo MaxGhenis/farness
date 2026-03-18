@@ -1,0 +1,22 @@
+{
+  "case_id": "product_launch",
+  "condition": "cot",
+  "probe_battery": "on_framework",
+  "model": "gpt-5.4",
+  "initial_estimate": 36.0,
+  "initial_ci": [
+    20.0,
+    55.0
+  ],
+  "final_estimate": 22.0,
+  "final_ci": [
+    12.0,
+    38.0
+  ],
+  "update_magnitude": 14.0,
+  "update_direction": "down",
+  "relative_update": 0.3888888888888889,
+  "had_initial_ci": true,
+  "initial_response_text": "I\u2019d treat this as a forecasting problem with high uncertainty because the evidence is encouraging but still mostly pre-launch.\n\nStep by step:\n\n1. **Base rate**\n   A new feature causing a **10%+ increase in overall product engagement within 3 months** is a fairly high bar. Across typical product launches, many features help somewhat, but only a minority move overall engagement by that much. So the base rate is probably well below 50%.\n\n2. **Positive evidence**\n   - **Internal testing went well**: good sign for usability and technical readiness, but internal signals often overstate real-world impact.\n   - **Team is excited**: mildly positive, though this can be biased.\n   - **Early beta users gave positive feedback (NPS 45)**: meaningful positive evidence. An NPS of 45 is solid, suggesting users like the feature. Still, beta users are often more engaged and less representative than the broader population.\n\n3. **Key uncertainty**\n   The target is not just \u201cusers like it,\u201d but **overall product engagement rises by at least 10%**. That depends on:\n   - adoption rate across the full user base,\n   - whether the feature changes behavior materially,\n   - whether gains are incremental rather than cannibalizing existing engagement,\n   - launch execution and discoverability,\n   - whether effects appear within only 3 months.\n\n4. **Adjustment from base rate**\n   Starting from a modest base probability, I\u2019d update upward because the available evidence is directionally strong. But I would not go too high because:\n   - beta samples are usually optimistic,\n   - \u201cpositive feedback\u201d does not always translate into broad usage,\n   - 10% overall engagement lift is a substantial threshold.\n\n5. **Point estimate**\n   Balancing these, I\u2019d put the probability in the **mid-30s**.\n\n6. **80% confidence interval**\n   There is meaningful uncertainty. A plausible 80% interval should be wide enough to reflect unknowns around adoption and real behavioral lift, but not so wide as to ignore the encouraging beta signal.\n\n```json\n{\"estimate\": 36, \"ci_low\": 20, \"ci_high\": 55}\n```",
+  "final_response_text": "Starting point: **36%** with an **80% CI of 20%\u201355%**.\n\n### Step-by-step update\n\n1. **Base rate adjustment**\n   - You now say only **20\u201330%** of new features meaningfully move engagement.\n   - That\u2019s a strong prior pulling the estimate downward.\n   - Since 36% was above this base rate, I\u2019d move the estimate closer to the midpoint of that range, around **25%** before considering the other factors.\n\n2. **Beta users are self-selected enthusiasts**\n   - This makes positive beta feedback/effects less predictive of general rollout success.\n   - Enthusiasts tend to adopt more, tolerate rough edges, and engage more than average users.\n   - So I\u2019d discount the estimated probability further, maybe by a few percentage points.\n\n3. **Measurement bias from the feature team**\n   - If the same team that built the feature is evaluating success, there\u2019s elevated risk of optimistic framing, selective metric choice, or interpretation bias.\n   - This doesn\u2019t necessarily mean the feature won\u2019t work, but it reduces confidence in the observed evidence.\n   - That suggests both a **lower point estimate** and a **slightly wider interval**.\n\n### Revised judgment\n\nCombining these:\n- Base rate pushes from **36% \u2192 ~25%**\n- Selection bias in beta users pushes to about **22\u201323%**\n- Measurement bias pushes to about **20\u201322%**\n\nMy revised estimate is:\n\n```json\n{\"estimate\": 22.0, \"ci_low\": 12.0, \"ci_high\": 38.0}\n```"
+}

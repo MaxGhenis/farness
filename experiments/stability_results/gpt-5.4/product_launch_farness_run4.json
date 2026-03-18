@@ -1,0 +1,22 @@
+{
+  "case_id": "product_launch",
+  "condition": "farness",
+  "probe_battery": "on_framework",
+  "model": "gpt-5.4",
+  "initial_estimate": 24.0,
+  "initial_ci": [
+    10.0,
+    40.0
+  ],
+  "final_estimate": 18.0,
+  "final_ci": [
+    6.0,
+    32.0
+  ],
+  "update_magnitude": 6.0,
+  "update_direction": "down",
+  "relative_update": 0.25,
+  "had_initial_ci": true,
+  "initial_response_text": "Using a farness-style outside view first:\n\n### Outside view / base rates\nFor product feature launches, the base rate for meaningfully moving top-line engagement is usually modest.\n\nRelevant benchmarks from industry research and large-scale experimentation:\n- **Microsoft/Booking/Google-style A/B testing reports** commonly find that only a minority of product changes produce statistically detectable positive movement on core metrics; many are neutral, and a nontrivial share are negative. A rough base rate from experimentation literature is that **perhaps 10\u201330%** of shipped ideas produce clearly positive primary-metric lifts.\n- For **large lifts** like **+10% overall engagement**, the base rate is lower than for \u201cany positive effect,\u201d especially when the metric is aggregate product-wide rather than feature-specific. In mature products, a +10% overall engagement shift from one feature within 3 months is relatively uncommon.\n- Positive **beta feedback / NPS** is helpful, but it is only weak-to-moderate evidence for broad behavioral lift because stated enthusiasm often exceeds revealed behavior after full rollout.\n\nSo my starting prior would be something like:\n- Probability of **any positive engagement lift**: around **25\u201335%**\n- Probability of **at least +10% overall engagement in 3 months**: more like **10\u201320%** in a typical product context\n\n### Updating on your evidence\nEvidence you gave:\n1. **Internal testing went well**\n   - Mild positive evidence, but internal tests often overstate real-world impact.\n2. **Team is excited**\n   - Very weak evidence; mostly a bias signal, not predictive.\n3. **Early beta users gave positive feedback (NPS 45)**\n   - Moderately positive evidence, but beta users are selected, more motivated, and often not representative.\n4. **Launch next month**\n   - Neutral by itself.\n\n### Biases in the framing\nA few cognitive biases are likely present:\n- **Selection bias**: Beta users are typically more engaged and more favorable than the general population.\n- **Confirmation bias**: \u201cInternal testing went well\u201d may emphasize validating signals while underweighting failure modes.\n- **Optimism bias / planning fallacy**: Team excitement can lead to overestimating adoption and short-term impact.\n- **Survivorship bias**: Attention is focused on successful internal examples rather than the many features that launch and do little.\n- **Metric substitution**: Positive NPS may be standing in for actual engagement behavior, which is the real target.\n\n### Numeric forecast\nGiven the outside view and modestly positive inside-view evidence, I would update upward from a base rate around 15% to something in the low-to-mid 20s.\n\n### Forecast\n- **Point estimate:** **24%**\n- **80% confidence interval:** **10% to 40%**\n\nThis reflects:\n- Lower bound: many launches with positive beta sentiment still fail to move aggregate engagement materially.\n- Upper bound: if the feature has unusually broad applicability and high discoverability, a +10% lift is plausible but still not the modal outcome.\n\n```json\n{\"estimate\": 24, \"ci_low\": 10, \"ci_high\": 40}\n```",
+  "final_response_text": "Given the new information, I\u2019d revise the estimate downward.\n\nReasoning, briefly:\n- **Base rate (20\u201330%)**: This is the strongest anchor. If only about a quarter of new features meaningfully move engagement, a prior estimate of 24% was already near the middle of that range.\n- **Self-selected beta users**: This reduces confidence that observed beta enthusiasm will generalize. That pushes the estimate down.\n- **Team measuring its own success**: This introduces risk of optimistic interpretation or metric selection bias, which also pushes the estimate down and widens uncertainty.\n\nSo I\u2019d move from **24%** to about **18%**, and widen the 80% CI somewhat because both representativeness and measurement quality are now in doubt.\n\n```json\n{\"estimate\": 18.0, \"ci_low\": 6.0, \"ci_high\": 32.0}\n```"
+}

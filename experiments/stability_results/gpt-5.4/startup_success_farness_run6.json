@@ -1,0 +1,22 @@
+{
+  "case_id": "startup_success",
+  "condition": "farness",
+  "probe_battery": "on_framework",
+  "model": "gpt-5.4",
+  "initial_estimate": 8.0,
+  "initial_ci": [
+    3.0,
+    18.0
+  ],
+  "final_estimate": 3.0,
+  "final_ci": [
+    1.0,
+    7.0
+  ],
+  "update_magnitude": 5.0,
+  "update_direction": "down",
+  "relative_update": 0.625,
+  "had_initial_ci": true,
+  "initial_response_text": "Outside view first: startups with ~500 MAU after 18 months and flat growth are, empirically, in a weak position for hitting a 20x user increase in the next year without a major change. In startup benchmarking research and investor/operator heuristics, the strongest early-stage products typically show meaningful month-over-month growth well before 18 months; flat usage at this stage is more consistent with low product-market fit. While there is no perfect published base rate for exactly \u201c500 MAU at month 18 to 10,000 MAU by month 30,\u201d adjacent evidence suggests the probability is low.\n\nRelevant outside-view anchors:\n- Early-stage SaaS/consumer benchmarks often treat sustained 5\u201310%+ monthly growth as a sign of traction; flat growth is a negative predictor.\n- Y Combinator / venture screening norms strongly discount companies that have had substantial time in market without clear acceleration.\n- Survival studies of startups show many continue operating for years, but only a minority achieve breakout adoption; among those already showing stalled growth after 18 months, the share that later inflects without a meaningful pivot is small.\n\nTo get from 500 to 10,000 MAU in 12 months requires 20x growth, equivalent to about 28% compounded monthly growth for a year:\n- 500 * (1 + g)^12 = 10,000\n- g \u2248 28.4% per month\n\nThat is a very demanding threshold. If they are currently flat, then under \u201cpersist with current approach\u201d they would need either:\n1. dormant growth loops to suddenly activate,\n2. distribution to improve sharply,\n3. retention/cohort quality to reveal delayed PMF,\nwithout a major strategy change.\n\nThat can happen, but base-rate-wise it is uncommon.\n\nInside-view adjustments:\n- Positive:\n  - They do have 500 MAU, so this is not zero demand.\n  - The team still has ideas to try; execution improvements can matter.\n- Negative:\n  - 18 months is enough time that flat growth is strong evidence against current approach.\n  - \u201cBelieves in the vision\u201d may indicate escalation of commitment rather than evidence.\n  - \u201cIdeas to try\u201d is weak evidence unless tied to observed user behavior and a clear growth thesis.\n  - \u201cPersist with current approach\u201d explicitly rules out the sort of major pivot that often precedes late breakouts.\n\nCognitive biases in the framing:\n- Commitment / sunk-cost bias: after 18 months, teams overweight prior effort.\n- Optimism bias: belief in the vision may be standing in for evidence.\n- Inside-view bias: focusing on specific ideas rather than the reference class of similar startups.\n- Survivorship bias: overemphasis on stories of companies that \u201clooked dead then took off.\u201d\n- Planning fallacy: underestimating how hard 20x growth in 12 months really is.\n\nForecast:\nGiven the base rate and the required growth rate, I\u2019d assign a low but nontrivial probability. Not 0%, because some startups do discover a scalable channel or feature inflection late. But under \u201ccurrent approach,\u201d it should stay clearly in the single digits to low teens.\n\nPoint estimate: 8%\n\n80% confidence interval: 3% to 18%\n\n```json\n{\"estimate\": 8, \"ci_low\": 3, \"ci_high\": 18}\n```",
+  "final_response_text": "Given the new information, I\u2019d revise the estimate downward materially.\n\nReasoning, briefly:\n- The original 8% already implied a fairly low chance.\n- The stated base rate of ~5% for startups with 18 months of flat growth and no major change is a strong anchor downward.\n- The fact that the founders have already tested 3 marketing channels with similar weak results reduces the likelihood that the answer is just \u201cfind the right channel.\u201d\n- A well-funded competitor entering the same market is another negative update, especially for a startup that has not yet found traction.\n\nSo I\u2019d move from 8% to around 3%.\n\nFor the 80% CI, I\u2019d keep it fairly wide because startup outcomes are noisy, but narrower and lower than before: roughly 1% to 7%.\n\n```json\n{\"estimate\": 3.0, \"ci_low\": 1.0, \"ci_high\": 7.0}\n```"
+}

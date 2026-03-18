@@ -1,0 +1,22 @@
+{
+  "case_id": "startup_success",
+  "condition": "naive",
+  "probe_battery": "on_framework",
+  "model": "gpt-5.4",
+  "initial_estimate": 12.0,
+  "initial_ci": [
+    4.0,
+    25.0
+  ],
+  "final_estimate": 3.0,
+  "final_ci": [
+    1.0,
+    6.0
+  ],
+  "update_magnitude": 9.0,
+  "update_direction": "down",
+  "relative_update": 0.75,
+  "had_initial_ci": true,
+  "initial_response_text": "Given 18 months of effort, only 500 MAU, and flat growth, the base rate is unfavorable. Reaching 10,000 MAU in 12 months means a 20x increase from the current level, which is possible but unlikely without a meaningful change in product, channel, or market pull. \u201cSome users\u201d and \u201cideas to try\u201d prevent this from being near zero, but persisting with the *current approach* suggests limited odds.\n\n```json\n{\"estimate\": 12, \"ci_low\": 4, \"ci_high\": 25}\n```",
+  "final_response_text": "The new information pushes the estimate down materially from 12.0%.\n\nReasoning, briefly:\n- **Base rate** is the strongest update: if only ~5% of startups with **18 months of flat growth** see sudden **organic** inflection without major changes, that becomes the anchor.\n- **Three marketing channels already tried with similar weak results** suggests the problem is less likely to be channel selection and more likely to be product/market fit, demand, positioning, or economics. That nudges the odds lower than the raw 5% base rate for \u201corganic turnaround.\u201d\n- **A well-funded competitor raising $10M** in the same market adds execution and market-share pressure, which further reduces the chance of this company being the one that breaks out soon.\n\nSo I\u2019d revise the estimate to **about 3%**.\n\nFor an **80% confidence interval**, I\u2019d use something like **1% to 6%**:\n- Lower bound reflects the possibility that flat growth + failed channel tests + stronger competition means the company is effectively stalled.\n- Upper bound allows for some chance that the prior evidence is incomplete and a meaningful change in execution, product, or segment focus could still create an uptick.\n\n```json\n{\"estimate\": 3.0, \"ci_low\": 1.0, \"ci_high\": 6.0}\n```"
+}

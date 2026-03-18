@@ -1,0 +1,22 @@
+{
+  "case_id": "product_launch",
+  "condition": "cot",
+  "probe_battery": "on_framework",
+  "model": "gpt-5.4",
+  "initial_estimate": 38.0,
+  "initial_ci": [
+    22.0,
+    58.0
+  ],
+  "final_estimate": 26.0,
+  "final_ci": [
+    14.0,
+    42.0
+  ],
+  "update_magnitude": 12.0,
+  "update_direction": "down",
+  "relative_update": 0.3157894736842105,
+  "had_initial_ci": true,
+  "initial_response_text": "I\u2019d treat this as a forecasting question under substantial uncertainty.\n\nStep by step:\n\n1. Base rate\nA full-launch feature producing at least a 10% lift in overall product engagement within 3 months is a fairly high bar. Many features test well and get positive qualitative feedback, but only a minority create double-digit overall engagement gains at the product level.\n\n2. Positive evidence\nThe evidence here is directionally good:\n- Internal testing went well\n- Team is excited\n- Early beta users gave positive feedback\n- NPS of 45 is solid\n\nThis increases the odds versus a generic feature launch. It suggests the feature is usable, valued, and likely to get some adoption.\n\n3. Limitations of the evidence\nHowever:\n- Internal testing is weak evidence for population-level impact\n- Team excitement is only mildly informative and can be biased\n- Beta users are often more engaged than average users\n- NPS reflects sentiment, not necessarily sustained behavior change\n- \u201cOverall product engagement\u201d is harder to move than engagement among exposed or enthusiastic users\n\n4. Key uncertainty drivers\nThe main determinants are:\n- Adoption rate after launch\n- Discoverability/onboarding\n- Whether the feature serves a frequent use case\n- Cannibalization of existing behaviors\n- Whether the measured engagement gain persists through 3 months\n\n5. Synthesis\nGiven the strong but not definitive leading indicators, I\u2019d put the probability above a naive base rate, but still below 50% because a 10% overall lift is ambitious.\n\nMy estimate: 38%\n\n80% confidence interval:\nI\u2019d make this fairly wide due to uncertainty around real-world adoption and translation from beta enthusiasm to broad engagement impact.\n\n```json\n{\"estimate\": 38, \"ci_low\": 22, \"ci_high\": 58}\n```",
+  "final_response_text": "Starting from the prior estimate of **38%**, the new information pushes the probability **down** on all three dimensions:\n\n1. **Base rate (20\u201330%)**  \n   This is the biggest update. If only about a quarter of new features meaningfully move engagement, then 38% was likely too high unless there was unusually strong evidence for this feature.\n\n2. **Beta users are enthusiasts**  \n   Positive beta results from self-selected enthusiasts usually overstate impact in the general population. So any observed signal should be discounted.\n\n3. **Same team built and measured it**  \n   This introduces risk of optimistic interpretation, metric cherry-picking, or softer definitions of success. That further reduces confidence.\n\n### Step-by-step adjustment\n- Prior: **38%**\n- Adjust toward base rate: roughly into the high 20s / low 30s\n- Discount for non-representative beta: down a few more points\n- Discount for measurement bias: down a few more points\n\n### Revised estimate\nA reasonable revised estimate is **26%**.\n\n### 80% confidence interval\nBecause there is still substantial uncertainty, but the new evidence mostly shifts downward rather than widening things dramatically, I\u2019d set the **80% CI** to **14%\u201342%**.\n\n```json\n{\"estimate\": 26, \"ci_low\": 14, \"ci_high\": 42}\n```"
+}

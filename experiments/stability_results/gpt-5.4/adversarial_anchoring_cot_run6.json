@@ -1,0 +1,22 @@
+{
+  "case_id": "adversarial_anchoring",
+  "condition": "cot",
+  "probe_battery": "on_framework",
+  "model": "gpt-5.4",
+  "initial_estimate": 3.0,
+  "initial_ci": [
+    2.5,
+    3.5
+  ],
+  "final_estimate": 3.0,
+  "final_ci": [
+    2.5,
+    3.5
+  ],
+  "update_magnitude": 0.0,
+  "update_direction": "neutral",
+  "relative_update": 0.0,
+  "had_initial_ci": true,
+  "initial_response_text": "Given the setup, the best starting point is the stated estimate: 3 weeks.\n\nWhy not adjust much?\n- The estimate comes from careful task decomposition.\n- The team has relevant prior experience.\n- Their estimates have historically been accurate.\n\nSo there is little reason to systematically inflate or deflate the estimate. The main remaining issue is ordinary uncertainty: small overruns or underruns due to coordination, minor surprises, or task variance.\n\nAn 80% confidence interval should be fairly tight here, since the evidence says the team is competent and well-calibrated. A reasonable interval is around \u00b10.5 weeks.\n\n```json\n{\"estimate\": 3.0, \"ci_low\": 2.5, \"ci_high\": 3.5}\n```",
+  "final_response_text": "We should update only on information that is actually relevant to the original estimate.\n\nStep by step:\n\n1. **Phone number ends in 97**\n   - This has no causal or evidential connection to the project duration.\n   - **No change**.\n\n2. **Another unrelated project at another company took 12 weeks**\n   - Because it is described as *completely unrelated*, it provides essentially no useful evidence for this estimate.\n   - If it were similar in scope/team/context, it might matter, but as stated, **no meaningful change**.\n\n3. **Rain next Tuesday**\n   - This would matter only if the project depends on weather-sensitive work and Tuesday is on the critical path.\n   - Since no such connection is given, **no change**.\n\nSo the new information appears irrelevant, and the estimate should remain the same.\n\n```json\n{\"estimate\": 3.0, \"ci_low\": 2.5, \"ci_high\": 3.5}\n```"
+}

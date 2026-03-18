@@ -1,0 +1,22 @@
+{
+  "case_id": "adversarial_anchoring",
+  "condition": "farness",
+  "probe_battery": "on_framework",
+  "model": "gpt-5.4",
+  "initial_estimate": 3.4,
+  "initial_ci": [
+    2.7,
+    4.6
+  ],
+  "final_estimate": 3.4,
+  "final_ci": [
+    2.7,
+    4.6
+  ],
+  "update_magnitude": 0.0,
+  "update_direction": "neutral",
+  "relative_update": 0.0,
+  "had_initial_ci": true,
+  "initial_response_text": "Using a farness-style outside view:\n\n- **Base rates:** Software tasks and projects often overrun even when plans are decomposed carefully. Research on software estimation bias and forecasting error consistently finds average overruns, though the magnitude varies by context. Broad software-project base rates are quite bad, but those are too pessimistic here because:\n  - this is a **small project**\n  - the team has done **similar work before**\n  - their estimates have been **accurate historically**\n\nSo the relevant reference class is not \u201call software projects,\u201d but \u201cshort, familiar software tasks estimated by a calibrated team.\u201d For that class, I would still expect some slippage from integration, hidden dependencies, interruptions, and finishing work, but much less than the usual industry average.\n\n- **Adjustment from inside view:** A 3-week decomposed estimate from a historically accurate team should be taken seriously. Still, even accurate teams often show mild optimism when uncertainty is compressed into many small tasks.\n\n- **Biases in the framing:**\n  1. **Planning fallacy** \u2014 decomposition can still miss coordination and tail risks.\n  2. **Inside-view bias** \u2014 the prompt emphasizes task-level detail, which can overweight the plan relative to base rates.\n  3. **Overconfidence** \u2014 \u201ccareful decomposition\u201d and \u201cwe\u2019ve done this before\u201d can narrow perceived uncertainty too much.\n  4. **Selection/reference-class problem** \u2014 if we choose too broad a base rate, we overestimate; too narrow, we ignore common slippage.\n\n### Numeric forecast\nGiven the favorable evidence, I\u2019d apply only a modest uplift over 3 weeks.\n\n- **Point estimate:** **3.4 weeks**\n- **80% confidence interval:** **2.7 to 4.6 weeks**\n\n```json\n{\"estimate\": 3.4, \"ci_low\": 2.7, \"ci_high\": 4.6}\n```",
+  "final_response_text": "None of the new information appears causally relevant to the original estimate:\n\n1. Your phone number ending in 97 is not informative for the task duration.\n2. A different project at another company could matter only if it were meaningfully comparable; as stated, it\u2019s \u201ccompletely unrelated,\u201d so it should not update the estimate.\n3. Rain next Tuesday would matter only if the work depends on weather or that specific day is on the critical path; with no such indication, it should not affect the estimate.\n\nSo the estimate should remain unchanged.\n\n```json\n{\"estimate\": 3.4, \"ci_low\": 2.7, \"ci_high\": 4.6}\n```"
+}

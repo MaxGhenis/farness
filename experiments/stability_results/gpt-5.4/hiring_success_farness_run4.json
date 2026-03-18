@@ -1,0 +1,22 @@
+{
+  "case_id": "hiring_success",
+  "condition": "farness",
+  "probe_battery": "on_framework",
+  "model": "gpt-5.4",
+  "initial_estimate": 28.0,
+  "initial_ci": [
+    18.0,
+    40.0
+  ],
+  "final_estimate": 21.0,
+  "final_ci": [
+    12.0,
+    32.0
+  ],
+  "update_magnitude": 7.0,
+  "update_direction": "down",
+  "relative_update": 0.25,
+  "had_initial_ci": true,
+  "initial_response_text": "Using a **farness / outside-view** approach, I\u2019d start from the base rate and then adjust only modestly for the evidence.\n\n### 1) Base rate\nBy definition, the prior probability that any hire ends up in the **top 25%** of performers at 1 year is **25%**.\n\nResearch on hiring suggests:\n- **Structured work-sample / technical assessments** have materially better predictive validity for job performance than unstructured interview impressions.\n- **Unstructured interviews** and interpersonal \u201cchemistry\u201d add signal, but are more weakly predictive and more vulnerable to noise and bias.\n- Similarity-based judgments (\u201creminds me of my best performer\u201d) are especially risky because they often overweight anecdotal resemblance versus broader evidence.\n\nSo the outside view says:\n- Start at **25%**\n- Candidate A\u2019s \u201cgreat chemistry\u201d is some positive signal\n- But the fact that **Candidate B scored higher on the technical assessment** implies A is *not* the stronger candidate on the more predictive measure\n\nThat means Candidate A should likely be **at or only slightly above the unconditional base rate**, not dramatically above it.\n\n### 2) Cognitive biases in the framing\nImportant biases here:\n- **Halo effect**: positive interpersonal impression spills over into assumed competence\n- **Representativeness**: \u201creminded you of your best performer\u201d feels diagnostic but may just be superficial similarity\n- **Availability / vividness bias**: memorable chemistry is easier to recall than assessment data\n- **Affect heuristic**: liking the candidate increases perceived expected performance\n- **Base-rate neglect**: ignoring that most candidates, even strong-feeling ones, won\u2019t land in the top quartile\n- **Overconfidence**: interviewers typically overstate how much they can infer from a good interaction\n\n### 3) Numeric forecast\nGiven all that, I\u2019d assign Candidate A a probability **slightly above 25% but below what intuition from chemistry alone might suggest**.\n\n### Point estimate\n**28%**\n\n### 80% confidence interval\nBecause 1-year top performance is noisy and interview signal is limited, uncertainty should be fairly wide.\n\n**80% CI: 18% to 40%**\n\n```json\n{\"estimate\": 28, \"ci_low\": 18, \"ci_high\": 40}\n```",
+  "final_response_text": "Yes \u2014 this should lower the estimate.\n\nReasoning, briefly:\n- The original 28% likely gave too much weight to the interviewer\u2019s positive gut reaction.\n- If unstructured interview impressions correlate only **r = 0.14**, that is weak predictive power.\n- \u201cReminded me of our best performer\u201d is strong evidence of **similarity bias / representativeness**, so I would discount it heavily, close to noise.\n- A technical assessment with **r = 0.51** is much more predictive, so in any combined judgment, the interview-chemistry component should carry far less weight than the technical signal.\n\nSo compared with the prior 28%, I\u2019d revise downward into the low 20s. I\u2019d also keep substantial uncertainty because weak predictors are not worthless, just limited.\n\n```json\n{\"estimate\": 21.0, \"ci_low\": 12.0, \"ci_high\": 32.0}\n```"
+}

@@ -1,0 +1,22 @@
+{
+  "case_id": "sunk_cost_project",
+  "condition": "cot",
+  "probe_battery": "on_framework",
+  "model": "gpt-5.4",
+  "initial_estimate": 25.0,
+  "initial_ci": [
+    10.0,
+    40.0
+  ],
+  "final_estimate": 12.0,
+  "final_ci": [
+    5.0,
+    22.0
+  ],
+  "update_magnitude": 13.0,
+  "update_direction": "down",
+  "relative_update": 0.52,
+  "had_initial_ci": true,
+  "initial_response_text": "Given only the information provided, I\u2019d treat this as a classic late software project with several strong risk signals:\n\n1. **Already late and over budget**  \n   Past forecasting has been inaccurate. That sharply reduces confidence in the new estimate.\n\n2. **\u201cAlmost there\u201d is weak evidence**  \n   In software, teams often feel near completion when the hardest integration, stabilization, testing, and deployment work still remains.\n\n3. **Demoralized team**  \n   Low morale tends to reduce productivity, increase mistakes, and increase attrition risk.\n\n4. **Small final ask relative to sunk cost can be misleading**  \n   Asking for \u201cjust\u201d another $500K and 3 months after $2M and 18 months often reflects optimism bias rather than true remaining effort.\n\n5. **Base-rate view**  \n   Troubled software projects in this state do sometimes ship, but hitting the newly proposed budget and schedule specifically is much less likely than eventually launching at all.\n\nSo I would assign a **fairly low but not negligible** probability that it launches **within the proposed extra $500K and 3 months**.\n\n```json\n{\"estimate\": 25, \"ci_low\": 10, \"ci_high\": 40}\n```",
+  "final_response_text": "Starting from the prior estimate of **25%**, the new information pushes the probability down materially.\n\nStep by step:\n\n1. **Base-rate update: only 16% of already-troubled projects meet revised budgets**  \n   This is strong negative evidence because it directly matches the reference class.  \n   - Prior: 25%\n   - Base-rate anchor suggests something closer to **16%**\n\n2. **Two senior engineers interviewing elsewhere**  \n   This raises delivery risk further:\n   - possible knowledge loss\n   - lower morale / distraction\n   - increased execution risk right when troubled projects need stability  \n   This should push the estimate down a bit more, though not catastrophically unless departures are certain.\n\n3. **\u201cAlmost there\u201d is feature-complete, but integration testing hasn\u2019t started**  \n   This is also significant negative evidence. Projects often discover major issues in integration:\n   - defects across components\n   - performance/regression problems\n   - rework and schedule slippage  \n   \u201cFeature complete\u201d without integration testing is much less reassuring than it first sounded.\n\nCombining these, I would revise the estimate from **25%** down to about **12%**.\n\nFor the **80% confidence interval**, uncertainty remains substantial, but the downside evidence is pretty consistent. A reasonable 80% CI is **5% to 22%**.\n\n```json\n{\"estimate\": 12, \"ci_low\": 5, \"ci_high\": 22}\n```"
+}

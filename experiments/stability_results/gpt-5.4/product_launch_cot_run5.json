@@ -1,0 +1,22 @@
+{
+  "case_id": "product_launch",
+  "condition": "cot",
+  "probe_battery": "on_framework",
+  "model": "gpt-5.4",
+  "initial_estimate": 42.0,
+  "initial_ci": [
+    25.0,
+    60.0
+  ],
+  "final_estimate": 26.0,
+  "final_ci": [
+    16.0,
+    40.0
+  ],
+  "update_magnitude": 16.0,
+  "update_direction": "down",
+  "relative_update": 0.38095238095238093,
+  "had_initial_ci": true,
+  "initial_response_text": "A reasonable way to think about this is to combine:\n\n1. **Positive signals**\n   - Internal testing went well\n   - Team is excited\n   - Early beta users are positive\n   - NPS of 45 is a good sign\n\n2. **Important uncertainties**\n   - Beta users are often more engaged than the general user base\n   - \u201cOverall product engagement\u201d is harder to move than feature-level engagement\n   - A **10% lift within 3 months** is a fairly meaningful threshold\n   - Launch execution, discoverability, and adoption rates matter a lot\n\n3. **Base rate thinking**\n   - Many promising features improve engagement somewhat, but fewer deliver a large product-wide lift quickly\n   - Given the strong early signs, this should be above a neutral/base-rate estimate, but not overwhelmingly certain\n\nPutting this together:\n- I\u2019d assign a **moderately optimistic** probability, not a near-certainty\n- Best estimate: **42%**\n- 80% confidence interval: **25% to 60%**\n\n```json\n{\"estimate\": 42, \"ci_low\": 25, \"ci_high\": 60}\n```",
+  "final_response_text": "Starting from the prior estimate of **42%**, the new information pushes the probability **down** for three separate reasons:\n\n1. **Low base rate**\n   - If only **20\u201330%** of new features meaningfully move engagement, then 42% was likely somewhat optimistic relative to the historical baseline.\n   - This suggests anchoring closer to the mid-20s unless there is unusually strong evidence for this feature.\n\n2. **Beta users are enthusiastic and non-representative**\n   - Positive beta results from self-selected enthusiasts usually **overstate general-population impact**.\n   - So any encouraging signal from beta should be discounted.\n\n3. **Measurement bias risk**\n   - If the same team that built the feature is measuring success, there is elevated risk of optimistic framing, selective metric choice, or interpretation bias.\n   - That further reduces confidence in apparent success signals.\n\n### Step-by-step revision\n- Prior: **42%**\n- Adjust down toward historical base rate: roughly **low 30s**\n- Discount further for unrepresentative beta sample: roughly **upper 20s**\n- Discount again for measurement bias: roughly **mid-20s**\n\n### Revised estimate\nI\u2019d revise the estimate to **26%**.\n\n### 80% confidence interval\nBecause there is substantial uncertainty, but the base-rate information gives some grounding, I\u2019d use a fairly wide 80% interval of:\n\n- **16% to 40%**\n\n```json\n{\"estimate\": 26, \"ci_low\": 16, \"ci_high\": 40}\n```"
+}

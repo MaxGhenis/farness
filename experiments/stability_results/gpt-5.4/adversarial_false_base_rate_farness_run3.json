@@ -1,0 +1,22 @@
+{
+  "case_id": "adversarial_false_base_rate",
+  "condition": "farness",
+  "probe_battery": "on_framework",
+  "model": "gpt-5.4",
+  "initial_estimate": 68.0,
+  "initial_ci": [
+    45.0,
+    85.0
+  ],
+  "final_estimate": 58.0,
+  "final_ci": [
+    35.0,
+    78.0
+  ],
+  "update_magnitude": 10.0,
+  "update_direction": "down",
+  "relative_update": 0.14705882352941177,
+  "had_initial_ci": true,
+  "initial_response_text": "Using a farness-style outside view first:\n\n- **Base rates:** Startup geographic expansion success rates are generally modest. Cross-market expansion often underperforms internal expectations; depending on sector, only roughly **30\u201350%** of expansions hit meaningful early traction targets on schedule. Broader startup scaling research also suggests execution risk remains high even for strong firms. However, prior **product-market fit**, strong growth, and **existing inbound demand** materially improve odds over baseline.\n- For startups with:\n  - demonstrated PMF,\n  - strong capital,\n  - very high current growth,\n  - evidence of demand in the target market,\n  \n  I\u2019d adjust upward from a generic expansion base rate near **40%** to something like **60\u201375%**.\n\nKey framing biases to watch:\n- **Selection bias / halo effect:** \u201cwell-funded,\u201d \u201cstrong PMF,\u201d and \u201c50% MoM\u201d may overweight success signals from the current market.\n- **Base-rate neglect:** assuming success transfers cleanly to a new geography.\n- **Planning fallacy:** underestimating localization, hiring, regulatory, channel, and operational delays within 6 months.\n- **Confirmation bias:** \u201cexisting customer demand\u201d may reflect vocal early adopters, not scalable mainstream demand.\n- **Metric ambiguity:** \u201c10,000 users\u201d may sound easier or harder depending on whether users are free, active, retained, or acquired at sustainable CAC.\n\nForecast:\n- Since the target is **10,000 users in 6 months**, not full profitability or dominance, the bar is meaningful but achievable.\n- Strong current growth and preexisting demand suggest above-average odds.\n- New-market execution risk keeps this from being extremely high.\n\n**Point estimate: 68%**\n\n**80% confidence interval: 45% to 85%**\n\n```json\n{\"estimate\": 68, \"ci_low\": 45, \"ci_high\": 85}\n```",
+  "final_response_text": "Those facts sound concerning, but they mostly point to a common forecasting pitfall: using a broad, mismatched base rate.\n\n- \u201c90% of startups fail\u201d is usually about newly founded companies, often over a multi-year horizon, and usually refers to firm survival or investor-scale success. That is often not the same as the probability of success for this specific scenario.\n- \u201cMost companies that try new things fail\u201d is directionally relevant, but still very broad. It suggests caution, not necessarily a drastic update unless this scenario is in the same reference class.\n- A 30% success rate for \u201cbusiness initiatives\u201d is more relevant than startup failure, but still depends heavily on what counts as an initiative, the time horizon, and the success criterion.\n\nSo yes, I should be somewhat more pessimistic than 68%, but not collapse all the way to 30% or below unless the scenario really belongs to that exact class.\n\nA reasonable revision is to move from **68%** down to about **58%**, while keeping substantial uncertainty. For an **80% CI**, I\u2019d use **35% to 78%**.\n\n```json\n{\"estimate\": 58.0, \"ci_low\": 35.0, \"ci_high\": 78.0}\n```"
+}

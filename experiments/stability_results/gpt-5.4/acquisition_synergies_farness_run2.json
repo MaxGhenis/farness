@@ -1,0 +1,22 @@
+{
+  "case_id": "acquisition_synergies",
+  "condition": "farness",
+  "probe_battery": "on_framework",
+  "model": "gpt-5.4",
+  "initial_estimate": 45.0,
+  "initial_ci": [
+    25.0,
+    65.0
+  ],
+  "final_estimate": 32.0,
+  "final_ci": [
+    18.0,
+    50.0
+  ],
+  "update_magnitude": 13.0,
+  "update_direction": "down",
+  "relative_update": 0.28888888888888886,
+  "had_initial_ci": true,
+  "initial_response_text": "Using a farness / outside-view approach, I would start from merger-integration base rates rather than the deal team\u2019s model.\n\n### 1) Outside-view base rates\nResearch on M&A synergy realization consistently shows:\n- **Cost synergies** are more likely to be realized than revenue synergies.\n- **Revenue synergies** are often delayed, overestimated, or not realized at all within the first 2 years.\n- A substantial share of acquisitions underdeliver versus announced synergy targets.\n\nBroadly, studies by consulting firms and post-merger reviews suggest:\n- Around **60\u201380% of announced cost synergies** are eventually captured in deals where they are credible and execution is strong.\n- **Revenue synergies** often realize at much lower rates, commonly **0\u201330% within the first 2 years**.\n- For combined synergy programs, the probability of achieving **at least half of total announced synergies within 2 years** is often only around **40\u201360%**, depending on integration complexity, overlap, and commercial assumptions.\n\nSo the base rate for hitting **50% of total projected synergies within 2 years** is roughly around the middle of that range.\n\n### 2) Deal-specific adjustment\nWe are not told:\n- what share of the $50M is cost vs revenue,\n- whether there is strong overlap,\n- whether there are antitrust constraints,\n- whether systems / sales integration is easy or hard.\n\nAbsent such specifics, I would penalize the forecast for the usual pattern:\n- deal teams tend to **overweight upside**,\n- they often **double-count cross-sell potential**,\n- they underestimate **integration friction** and **time-to-capture**.\n\nIf the $50M contains a meaningful revenue-synergy component, then getting to **$25M within 2 years** is far from automatic. If instead most of it is duplicate-function cost takeout, odds improve materially.\n\nWith no decomposition provided, I\u2019d assume a typical mixed synergy case and place the probability modestly below 50/50 but not low.\n\n### 3) Cognitive biases in the framing\nLikely biases:\n- **Optimism bias**: management overestimates execution quality and customer receptivity.\n- **Planning fallacy**: underestimation of integration time and dis-synergies.\n- **Inside-view bias**: focus on this deal\u2019s strategic logic rather than base rates from comparable integrations.\n- **Confirmation bias**: selective use of assumptions supporting the deal thesis.\n- **Anchoring**: the $50M headline target may anchor discussion even if precision is unjustified.\n- **Motivated reasoning / deal fever**: incentives may favor getting the transaction approved.\n\n### 4) Numeric forecast\nMy point estimate for the probability of realizing **at least $25M** of the projected **$50M** within **2 years**:\n\n- **Point estimate:** **45%**\n\nGiven uncertainty around the cost/revenue mix and integration difficulty, my **80% confidence interval** is:\n\n- **80% CI:** **25% to 65%**\n\n```json\n{\"estimate\": 45, \"ci_low\": 25, \"ci_high\": 65}\n```",
+  "final_response_text": "The new information is mostly negative for the probability that this deal succeeds, and it also increases uncertainty somewhat.\n\nQuick update from the prior 45%:\n- **Only 50% of projected synergies realized on average**: this weakens the case materially if the original thesis depended on modeled synergies.\n- **60\u201380% of M&A deals fail to create value for the acquirer**: this is a strong base-rate warning. It suggests success rates are often only about 20\u201340% on a value-creation definition.\n- **CEO personally championing the deal**: this adds concern about escalation/overconfidence/agency bias, which nudges the estimate down further.\n\nSo I would revise the estimate downward from **45%** to about **32%**.\n\nFor the **80% CI**, I\u2019d shift the interval downward and keep it fairly wide because M&A outcomes are noisy and deal-specific details still matter. A reasonable revised interval is **18% to 50%**.\n\n```json\n{\"estimate\": 32.0, \"ci_low\": 18.0, \"ci_high\": 50.0}\n```"
+}

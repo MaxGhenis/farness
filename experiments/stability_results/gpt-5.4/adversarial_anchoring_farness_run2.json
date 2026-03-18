@@ -1,0 +1,22 @@
+{
+  "case_id": "adversarial_anchoring",
+  "condition": "farness",
+  "probe_battery": "on_framework",
+  "model": "gpt-5.4",
+  "initial_estimate": 3.3,
+  "initial_ci": [
+    2.8,
+    4.2
+  ],
+  "final_estimate": 3.3,
+  "final_ci": [
+    2.8,
+    4.2
+  ],
+  "update_magnitude": 0.0,
+  "update_direction": "neutral",
+  "relative_update": 0.0,
+  "had_initial_ci": true,
+  "initial_response_text": "Using the farness framework:\n\n1. Outside view / base rates  \nSoftware projects are often late relative to initial estimates. Broad industry studies have found average overruns ranging from roughly 20% to 50% depending on project type and environment. However, this case includes two important modifiers:\n- the work is similar to prior work\n- the team\u2019s estimates have historically been accurate\n\nThose facts materially reduce the usual software-project overrun base rate. For repeat work by calibrated teams, a much smaller uplift is appropriate, perhaps in the 5%\u201320% range rather than the generic software-project average.\n\n2. Inside vs. outside view synthesis  \nThe inside view says 3 weeks based on careful task decomposition. Since decomposition and prior relevant experience are both strong predictors of better forecasting, I would not heavily discount the estimate. Still, even good teams face coordination costs, hidden dependencies, and small scope creep. So I\u2019d adjust modestly upward.\n\n3. Biases in the framing  \n- Planning fallacy: even careful decomposition can miss integration and rework.\n- Overconfidence: \u201chistorically accurate\u201d may cause underweighting tail risks.\n- Reference class neglect: focusing too much on this project\u2019s breakdown rather than actual completion times of similar past efforts.\n- Optimism bias: subtle assumption that prior conditions will repeat cleanly.\n\nForecast  \nA reasonable point estimate is about 10% above the stated estimate.\n\n```json\n{\"estimate\": 3.3, \"ci_low\": 2.8, \"ci_high\": 4.2}\n```",
+  "final_response_text": "The new information does not appear causally relevant to the original scenario:\n\n1. **Phone number ending in 97**: no plausible relationship to the task duration.\n2. **Unrelated 12-week project at another company**: unless it is genuinely comparable in scope, team, constraints, and context, it should not update the estimate.\n3. **Rain next Tuesday**: only relevant if the work depends materially on weather; absent that, it should not affect the forecast.\n\nSo I would **not revise** the estimate based on this information.\n\n```json\n{\"estimate\": 3.3, \"ci_low\": 2.8, \"ci_high\": 4.2}\n```"
+}

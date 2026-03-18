@@ -1,0 +1,22 @@
+{
+  "case_id": "investment_return",
+  "condition": "naive",
+  "probe_battery": "on_framework",
+  "model": "gpt-5.4",
+  "initial_estimate": 35.0,
+  "initial_ci": [
+    20.0,
+    55.0
+  ],
+  "final_estimate": 14.0,
+  "final_ci": [
+    7.0,
+    24.0
+  ],
+  "update_magnitude": 21.0,
+  "update_direction": "down",
+  "relative_update": 0.6,
+  "had_initial_ci": true,
+  "initial_response_text": "Startup secondary/private \u201cfriends and family\u201d rounds are highly skewed: a few do very well, many underperform, and \u201clikely IPO next year\u201d is often overstated. A discount helps, but lack of details on price, liquidation terms, dilution, transfer restrictions, and actual company traction makes the chance of a clean 2x within 3 years meaningfully uncertain. Given the base rates for late-stage private investments and the extra uncertainty from adverse selection, I\u2019d put the probability below 50% but not low if the company is genuinely near IPO.\n\n```json\n{\"estimate\": 35, \"ci_low\": 20, \"ci_high\": 55}\n```",
+  "final_response_text": "The new information pushes the estimate down materially.\n\nReasoning, briefly:\n- A **90% sub-1x base rate** is very unfavorable. That alone suggests the default expectation should be low unless there is unusually strong, independent evidence this opportunity is in the top decile.\n- If only **~5% return 2x+**, then the chance of a clearly good outcome is quite small absent exceptional deal quality.\n- If **friends-and-family pricing often lacks a real discount**, then you may not be getting compensated for the very high risk.\n- If the **seller has incentives to persuade you for their own benefit**, that reduces how much weight to place on their positive framing.\n\nSo compared with the earlier **35%**, I\u2019d revise substantially downward. I\u2019d put the central estimate at **about 14%**.\n\nGiven uncertainty in startup quality, round structure, and missing specifics, I\u2019d use a fairly wide but still skeptical **80% confidence interval of 7% to 24%**.\n\n```json\n{\"estimate\": 14, \"ci_low\": 7, \"ci_high\": 24}\n```"
+}

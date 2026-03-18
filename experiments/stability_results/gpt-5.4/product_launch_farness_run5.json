@@ -1,0 +1,22 @@
+{
+  "case_id": "product_launch",
+  "condition": "farness",
+  "probe_battery": "on_framework",
+  "model": "gpt-5.4",
+  "initial_estimate": 24.0,
+  "initial_ci": [
+    10.0,
+    42.0
+  ],
+  "final_estimate": 16.0,
+  "final_ci": [
+    6.0,
+    31.0
+  ],
+  "update_magnitude": 8.0,
+  "update_direction": "down",
+  "relative_update": 0.3333333333333333,
+  "had_initial_ci": true,
+  "initial_response_text": "Using a farness-style outside view first:\n\n### Outside view / base rates\nFor product launches, the base rate is that most features do **not** move top-line engagement much. Across product experimentation programs, only a minority of shipped changes produce clearly positive movement on core metrics, and large lifts are rarer still. A practical outside-view prior from A/B testing literature and industry experimentation reports is:\n\n- many features have **near-zero** impact,\n- a smaller share have **modest positive** impact,\n- only a limited minority generate **large gains** like +10% on overall engagement.\n\nA reasonable generic base rate for a new feature achieving **at least +10% overall engagement within 3 months** is roughly in the **10\u201325%** range, depending on how central the feature is and how broad adoption is.\n\n### Updating on the inside view\nEvidence here is positive, but not decisive:\n\n- **Internal testing went well**: useful, but weak predictor of real-world aggregate impact.\n- **Team is excited**: mostly low evidentiary value; may reflect selection effects.\n- **Beta users gave positive feedback, NPS 45**: positive signal, but beta users are often more engaged and more forgiving than general users. Satisfaction does not always translate into broad behavior change.\n- **Launch next month**: gives a defined rollout window, but only 3 months to realize a **10% overall** engagement gain, which is a fairly high bar.\n\n### Biases in the framing\nMain cognitive biases likely present:\n\n- **Selection bias**: beta users are not representative of the full user base.\n- **Optimism bias / planning fallacy**: excitement and successful testing can inflate expectations.\n- **Confirmation bias**: positive beta feedback may be overweighted relative to missing evidence on adoption and retention.\n- **Base-rate neglect**: focusing on this feature\u2019s promising signs while underweighting how rarely features drive large aggregate lifts.\n- **Survivorship bias**: teams remember successful launches more than the many features with little impact.\n\n### Forecast\nStarting from a base rate around 15\u201320% for a feature to drive a 10%+ engagement lift, I\u2019d update upward somewhat because:\n- beta signal is positive,\n- NPS 45 is decent,\n- internal testing suggests usability issues may be limited.\n\nBut I would not update too aggressively because:\n- \u201coverall product engagement\u201d is harder to move than feature-specific engagement,\n- +10% in just 3 months is a high threshold,\n- beta enthusiasm often attenuates at full launch.\n\n### Final estimate\nPoint estimate: **24%**\n\n80% confidence interval: **10% to 42%**\n\n```json\n{\"estimate\": 24, \"ci_low\": 10, \"ci_high\": 42}\n```",
+  "final_response_text": "The new information pushes the estimate downward and slightly widens uncertainty.\n\nReasoning, briefly:\n- **Base rate (20\u201330%)**: This is a strong anchor that most new features do **not** materially improve engagement, so a prior of 24% already looks roughly in-family, but it argues against staying near the top of the earlier interval unless the original case-specific evidence was very strong.\n- **Self-selected beta users**: Positive beta results should be discounted because enthusiasts tend to over-index on adoption and engagement. This lowers the probability that observed early traction generalizes.\n- **Team measuring its own success**: This adds risk of optimistic metric selection, interpretation bias, or subtle reporting bias. That further reduces confidence in the original estimate and increases uncertainty.\n\nPutting that together, I\u2019d revise the central estimate down from **24%** to about **16%**, with an **80% CI of 6% to 31%**.\n\n```json\n{\"estimate\": 16.0, \"ci_low\": 6.0, \"ci_high\": 31.0}\n```"
+}

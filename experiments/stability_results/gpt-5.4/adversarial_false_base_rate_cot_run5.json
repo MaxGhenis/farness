@@ -1,0 +1,22 @@
+{
+  "case_id": "adversarial_false_base_rate",
+  "condition": "cot",
+  "probe_battery": "on_framework",
+  "model": "gpt-5.4",
+  "initial_estimate": 68.0,
+  "initial_ci": [
+    50.0,
+    82.0
+  ],
+  "final_estimate": 55.0,
+  "final_ci": [
+    35.0,
+    72.0
+  ],
+  "update_magnitude": 13.0,
+  "update_direction": "down",
+  "relative_update": 0.19117647058823528,
+  "had_initial_ci": true,
+  "initial_response_text": "I\u2019d start from a fairly favorable base rate because the startup has several strong signals at once:\n\n1. **Well-funded**  \n   This reduces the chance that expansion fails due to lack of hiring, marketing, localization, or operational runway.\n\n2. **Strong product-market fit**  \n   If PMF is real and durable, expansion is much more likely than for a company still searching for repeatable demand.\n\n3. **50% month-over-month growth**  \n   That is a very strong indicator that the product and go-to-market engine are working. It does not guarantee transferability to a new market, but it is a positive predictor.\n\n4. **Existing customer demand in the new market**  \n   This is especially important. It means the expansion is not purely speculative; there is already some evidence of pull.\n\nNow the main reasons to discount from \u201cvery high certainty\u201d are:\n\n- **New-market execution risk**: distribution channels, local competition, pricing, compliance, and localization can all reduce conversion.\n- **Definition of success is specific**: 10,000 users in 6 months is meaningful. Even strong companies can miss timing goals.\n- **Growth may not translate linearly**: what works in the current market may not work equally well in the new one.\n\nGiven all of that, I\u2019d put the probability in the **moderately high** range rather than extremely high. The evidence is strong enough to be comfortably above 50%, but not so strong that I\u2019d go above ~80% without more detail on the market size, channel strategy, and product localization needs.\n\nMy point estimate is **68%**.\n\nAn 80% confidence interval should reflect substantial uncertainty around execution in the new geography, so I\u2019d use **50% to 82%**.\n\n```json\n{\"estimate\": 68, \"ci_low\": 50, \"ci_high\": 82}\n```",
+  "final_response_text": "We should update only if the new information is actually relevant to the original reference class.\n\nStep by step:\n\n1. **\u201c90% of startups fail\u201d**\n   - This is usually a very broad and often poorly defined statistic.\n   - It applies to **startups as a whole**, often over multiple years, and usually refers to business survival or venture-scale success.\n   - If the original scenario is **not literally a startup survival question**, then this is probably the wrong base rate.\n   - So this should make us **little or only slightly more pessimistic**, not drastically so.\n\n2. **\u201cMost companies that try new things fail\u201d**\n   - This is directionally useful: novel initiatives do have high failure rates.\n   - But it is still broad and may include very speculative projects.\n   - It suggests the original 68% may have been somewhat optimistic **if** the scenario is indeed an innovation/initiative with uncertainty.\n   - So this pushes the estimate down modestly.\n\n3. **\u201cThe base rate for business initiatives is only 30% success\u201d**\n   - This is the most relevant of the three if the scenario is a business initiative.\n   - But \u201cbusiness initiative\u201d is still a wide class: many initiatives are low-quality, underfunded, symbolic, or poorly executed.\n   - If the original estimate of 68% was based on scenario-specific positive evidence, we should not replace it with 30%; we should **partially pool** toward that base rate.\n   - So the right move is to revise downward meaningfully, but not all the way to 30%.\n\n### Revised judgment\nGiven the new information, I would revise from **68%** down to about **55%**.\n\nThis reflects:\n- broad failure statistics are somewhat relevant but not definitive,\n- the 30% base rate matters if this is truly a business initiative,\n- but scenario-specific evidence still likely justifies being above the generic base rate.\n\nI\u2019d also widen uncertainty a bit because the competing reference classes are noisy and inconsistent.\n\n```json\n{\"estimate\": 55, \"ci_low\": 35, \"ci_high\": 72}\n```"
+}

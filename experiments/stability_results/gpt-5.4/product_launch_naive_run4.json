@@ -1,0 +1,22 @@
+{
+  "case_id": "product_launch",
+  "condition": "naive",
+  "probe_battery": "on_framework",
+  "model": "gpt-5.4",
+  "initial_estimate": 58.0,
+  "initial_ci": [
+    35.0,
+    75.0
+  ],
+  "final_estimate": 34.0,
+  "final_ci": [
+    22.0,
+    48.0
+  ],
+  "update_magnitude": 24.0,
+  "update_direction": "down",
+  "relative_update": 0.41379310344827586,
+  "had_initial_ci": true,
+  "initial_response_text": "58\n\nReasoning: The evidence is directionally positive but limited. Good internal testing and enthusiastic team sentiment help, and an early beta NPS of 45 suggests users generally value the feature. But predicting a **10% increase in overall product engagement** within only **3 months** is a fairly high bar, especially when beta feedback often overstates impact relative to broad rollout. Key uncertainties are adoption rate at launch, whether the feature affects core engagement behavior versus niche usage, and whether gains persist beyond initial novelty. So I\u2019d put the outcome as somewhat more likely than not, but far from certain.\n\n```json\n{\"estimate\": 58, \"ci_low\": 35, \"ci_high\": 75}\n```",
+  "final_response_text": "Starting from the previous estimate of **58.0%**, the new information pushes the probability down meaningfully:\n\n1. **Base rate (20\u201330%)**  \n   This is the biggest update. If only about a quarter of new features actually move engagement, then 58% was likely too optimistic unless there was unusually strong evidence.\n\n2. **Beta users are self-selected enthusiasts**  \n   Positive beta results are less predictive for the full population. This suggests the observed signal likely overstates real-world impact.\n\n3. **Same team built and measured the feature**  \n   This introduces some risk of confirmation bias, selective metric framing, or optimistic interpretation. Not necessarily invalid, but it weakens confidence further.\n\nPutting these together, I\u2019d revise the estimate downward to around **34%**. That still leaves room for some positive evidence from the original scenario, but anchors much more strongly to the low base rate and discounts the beta/measurement evidence.\n\nAn appropriate **80% confidence interval** would be fairly wide because of the uncertainty and bias risks: **22% to 48%**.\n\n```json\n{\"estimate\": 34, \"ci_low\": 22, \"ci_high\": 48}\n```"
+}

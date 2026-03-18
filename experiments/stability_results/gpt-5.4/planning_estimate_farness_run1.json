@@ -1,0 +1,22 @@
+{
+  "case_id": "planning_estimate",
+  "condition": "farness",
+  "probe_battery": "on_framework",
+  "model": "gpt-5.4",
+  "initial_estimate": 3.2,
+  "initial_ci": [
+    2.2,
+    5.0
+  ],
+  "final_estimate": 5.0,
+  "final_ci": [
+    3.0,
+    8.0
+  ],
+  "update_magnitude": 1.7999999999999998,
+  "update_direction": "up",
+  "relative_update": 0.5624999999999999,
+  "had_initial_ci": true,
+  "initial_response_text": "Using the **farness / outside-view** approach, I\u2019d discount the team\u2019s inside-view estimate of **2 weeks**.\n\n### 1) Outside-view base rates\nResearch on software estimation consistently finds systematic underestimation:\n\n- **Planning fallacy** literature: even with detailed plans, task duration estimates tend to be optimistic.\n- **Software project forecasting studies** commonly show overruns around **20%\u2013100%+** depending on scope and uncertainty.\n- For **small feature work** rather than whole projects, a reasonable base-rate uplift is often around **1.3x to 2x** the initial estimate, with a fat tail for dependencies, QA, integration, and rework.\n\nSo for a **2-week estimate**, the outside view suggests something like:\n- typical actual: **2.6 to 4 weeks**\n- with some chance it still lands near 2 weeks if the work is truly isolated and well-understood\n\n### 2) Biases in the framing\nKey likely biases:\n\n- **Planning fallacy**: detailed breakdowns increase confidence but do not eliminate unknowns\n- **Inside-view bias**: focus on tasks envisioned, not historical slippage for similar features\n- **Overconfidence**: confidence level is probably too high relative to true uncertainty\n- **Scope creep / hidden work neglect**: reviews, QA, bug fixes, deployment, coordination often omitted or underweighted\n- **Anchoring**: the initial \u201c2 weeks\u201d anchors subsequent judgment\n\n### 3) Numeric forecast\nGiven the estimate is for a **feature** (not a huge project), I would not apply an extreme multiplier, but I would still adjust materially upward.\n\nMy forecast:\n- **Point estimate:** **3.2 weeks**\n- **80% confidence interval:** **2.2 to 5.0 weeks**\n\nThis reflects:\n- some chance they are close to right\n- a higher probability of modest overrun\n- a meaningful but not dominant tail for integration/rework issues\n\n```json\n{\"estimate\": 3.2, \"ci_low\": 2.2, \"ci_high\": 5.0}\n```",
+  "final_response_text": "Yes. All three points push the estimate upward and widen the uncertainty.\n\nReasoning, briefly:\n1. **2\u20133x average overrun**: I would not mechanically multiply by 2\u20133, because the original 3.2 weeks may already have partially accounted for uncertainty. But it is strong evidence the prior estimate was still optimistic. So this increases the central estimate materially.\n2. **Team confidence as planning-fallacy evidence**: This further reduces trust in the lower end of the original range and shifts the estimate upward a bit more.\n3. **30% chance of a major blocker**: This raises both the expected duration and especially the upper tail, so the 80% interval should get wider.\n\nA reasonable revision is:\n- Move the point estimate from **3.2 weeks** to about **5.0 weeks**\n- Widen the 80% CI from **2.2\u20135.0** to about **3.0\u20138.0**\n\n```json\n{\"estimate\": 5.0, \"ci_low\": 3.0, \"ci_high\": 8.0}\n```"
+}

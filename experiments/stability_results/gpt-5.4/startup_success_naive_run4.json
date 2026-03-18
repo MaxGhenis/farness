@@ -1,0 +1,22 @@
+{
+  "case_id": "startup_success",
+  "condition": "naive",
+  "probe_battery": "on_framework",
+  "model": "gpt-5.4",
+  "initial_estimate": 12.0,
+  "initial_ci": [
+    5.0,
+    25.0
+  ],
+  "final_estimate": 3.5,
+  "final_ci": [
+    2.0,
+    6.0
+  ],
+  "update_magnitude": 8.5,
+  "update_direction": "down",
+  "relative_update": 0.7083333333333334,
+  "had_initial_ci": true,
+  "initial_response_text": "With 18 months elapsed, only 500 MAU, and growth flat, the base rate for reaching 10,000 MAU in the next 12 months **without changing approach materially** is low. They would need roughly **20x growth in a year**, which is possible but uncommon when current momentum is stalled. The positives are that they do have real users, the team is committed, and they still have experiments to run\u2014but \u201cpersist with current approach\u201d suggests no major reset in product, market, or distribution.\n\nMy estimate is therefore **12%**, with a fairly wide 80% confidence interval to reflect uncertainty across team quality, hidden retention strength, and possible breakout channels.\n\n```json\n{\"estimate\": 12, \"ci_low\": 5, \"ci_high\": 25}\n```",
+  "final_response_text": "The new information pushes the estimate down materially from 12.0%.\n\nReasoning, briefly:\n- **Base rate** is the biggest update: if only about **5%** of startups with **18 months of flat growth** see sudden **organic** growth without major changes, that becomes the anchor.\n- **Three marketing channels already tested** with similar weak results suggests the issue is less likely to be a single-channel execution miss and more likely to be product/market fit, positioning, or market demand. That should push the probability somewhat **below** the raw 5% base rate for a near-term inflection under current conditions.\n- **A well-funded competitor raising $10M** and targeting the same market further reduces odds, since competitive pressure typically makes breakout harder, not easier.\n\nSo I\u2019d revise from **12.0%** down to about **3.5%**.\n\nFor an **80% confidence interval**, I\u2019d keep it fairly wide because startup outcomes are noisy, but centered low given the evidence: **2.0% to 6.0%**.\n\n```json\n{\"estimate\": 3.5, \"ci_low\": 2.0, \"ci_high\": 6.0}\n```"
+}

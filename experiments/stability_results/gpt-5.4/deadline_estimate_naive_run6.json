@@ -1,0 +1,22 @@
+{
+  "case_id": "deadline_estimate",
+  "condition": "naive",
+  "probe_battery": "on_framework",
+  "model": "gpt-5.4",
+  "initial_estimate": 78.0,
+  "initial_ci": [
+    60.0,
+    90.0
+  ],
+  "final_estimate": 32.0,
+  "final_ci": [
+    20.0,
+    48.0
+  ],
+  "update_magnitude": 46.0,
+  "update_direction": "down",
+  "relative_update": 0.5897435897435898,
+  "had_initial_ci": true,
+  "initial_response_text": "With only this information, I\u2019d assign a fairly high probability because the planned duration is materially shorter than the deadline, but not near-certain because project plans often slip and compliance work can uncover surprises. A 2-month buffer on a 4-month estimate is meaningful, though not huge.\n\n```json\n{\"estimate\": 78, \"ci_low\": 60, \"ci_high\": 90}\n```",
+  "final_response_text": "Given the new information, I\u2019d revise the estimate down substantially from 78.0%.\n\nReasoning, briefly:\n- A 40% industry on-time rate for regulatory compliance projects is a strong negative base-rate anchor.\n- Your team having no prior experience with this specific type of work further reduces confidence relative to that base rate.\n- Regulations still being finalized introduces meaningful scope volatility, which is one of the biggest drivers of delay in compliance projects.\n\nTaken together, these factors suggest the original 78% was too optimistic. I\u2019d move the estimate to roughly one-third probability, with a fairly wide interval because of the unresolved regulatory uncertainty.\n\n```json\n{\"estimate\": 32, \"ci_low\": 20, \"ci_high\": 48}\n```"
+}
