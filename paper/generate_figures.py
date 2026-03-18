@@ -6,21 +6,41 @@ from pathlib import Path
 import matplotlib.pyplot as plt
 import numpy as np
 from matplotlib.lines import Line2D
+from matplotlib.ticker import PercentFormatter
 
 # ---------------------------------------------------------------------------
 # Config
 # ---------------------------------------------------------------------------
 DATA_ROOT = Path(__file__).resolve().parent.parent / "experiments" / "stability_results"
+VALIDATION_ROOT = (
+    Path(__file__).resolve().parent.parent
+    / "experiments"
+    / "stability_validation"
+    / "strongest"
+    / "claude-opus-4-6"
+)
 FIG_DIR = Path(__file__).resolve().parent / "figures"
 FIG_DIR.mkdir(exist_ok=True)
 
 MODELS = {
     "claude-opus-4-6": "Claude Opus 4.6",
-    "gpt-5.2": "GPT-5.2",
+    "gpt-5.4": "GPT-5.4",
 }
 
 CONDITIONS = ["naive", "cot", "farness"]
 CONDITION_LABELS = {"naive": "Naive", "cot": "CoT", "farness": "Farness"}
+VALIDATION_CONDITIONS = ["naive", "estimate_only", "format_control", "farness"]
+VALIDATION_CONDITION_LABELS = {
+    "naive": "Naive",
+    "estimate_only": "Estimate\nOnly",
+    "format_control": "Format\nControl",
+    "farness": "Farness",
+}
+VALIDATION_PROBE_BATTERIES = ["on_framework", "off_framework"]
+VALIDATION_PROBE_BATTERY_LABELS = {
+    "on_framework": "On-Framework Probes",
+    "off_framework": "Off-Framework Probes",
+}
 
 SCENARIOS = [
     "planning_estimate",
@@ -50,7 +70,13 @@ ANALYSIS_SCENARIOS = SCENARIOS + [
 N_RUNS = 6
 
 # Style
-COLORS = {"naive": "#4878A8", "cot": "#E8913A", "farness": "#56A868"}
+COLORS = {
+    "naive": "#4878A8",
+    "cot": "#E8913A",
+    "estimate_only": "#C44E52",
+    "format_control": "#8172B3",
+    "farness": "#56A868",
+}
 plt.rcParams.update({
     "font.size": 11,
     "axes.titlesize": 13,
@@ -92,16 +118,36 @@ def load_all_data():
     return data
 
 
-def get_update_magnitudes(data, model, scenarios=None, condition=None):
-    """Get list of update_magnitude values."""
+def get_metric_values(data, model, metric, scenarios=None, condition=None):
+    """Get a list of metric values from Study 1 raw result records."""
     if scenarios is None:
         scenarios = ALL_SCENARIOS
     vals = []
     for sc in scenarios:
         for cond in (CONDITIONS if condition is None else [condition]):
             for run in data[model][sc][cond]:
-                vals.append(run["update_magnitude"])
+                vals.append(run[metric])
     return vals
+
+
+def load_validation_data():
+    """Return dict: data[probe_battery][condition] = list of raw result dicts."""
+    data = {
+        probe_battery: {condition: [] for condition in VALIDATION_CONDITIONS}
+        for probe_battery in VALIDATION_PROBE_BATTERIES
+    }
+    for scenario in SCENARIOS:
+        for probe_battery in VALIDATION_PROBE_BATTERIES:
+            for condition in VALIDATION_CONDITIONS:
+                for run_idx in range(1, N_RUNS + 1):
+                    fpath = (
+                        VALIDATION_ROOT
+                        / f"{scenario}_{probe_battery}_{condition}_run{run_idx}.json"
+                    )
+                    if fpath.exists():
+                        with open(fpath) as f:
+                            data[probe_battery][condition].append(json.load(f))
+    return data
 
 
 def bootstrap_mean_ci(vals, n_boot=5000, alpha=0.05):
@@ -229,7 +275,7 @@ def fig_protocol():
 
 
 # ---------------------------------------------------------------------------
-# Figure 1: Mean update magnitude by condition x model
+# Figure 1: Mean relative update by condition x model
 # ---------------------------------------------------------------------------
 def fig_update_magnitude(data):
     fig, axes = plt.subplots(1, 2, figsize=(10, 4.8), sharey=False)
@@ -237,9 +283,10 @@ def fig_update_magnitude(data):
     for ax, model_key in zip(axes, MODELS):
         means = []
         for i, cond in enumerate(CONDITIONS):
-            vals = get_update_magnitudes(
+            vals = get_metric_values(
                 data,
                 model_key,
+                metric="relative_update",
                 scenarios=ANALYSIS_SCENARIOS,
                 condition=cond,
             )
@@ -262,8 +309,8 @@ def fig_update_magnitude(data):
             )
             ax.text(
                 i + 0.04,
-                mean_val + max(0.6, mean_val * 0.05),
-                f"{mean_val:.1f}",
+                mean_val + max(0.02, mean_val * 0.05),
+                f"{mean_val:.0%}",
                 ha="left",
                 va="bottom",
                 fontsize=9,
@@ -272,8 +319,9 @@ def fig_update_magnitude(data):
         ax.set_xticks(range(len(CONDITIONS)))
         ax.set_xticklabels([CONDITION_LABELS[c] for c in CONDITIONS])
         ax.set_title(MODELS[model_key])
-        ax.set_ylabel("Mean update magnitude")
-        ax.set_ylim(bottom=-1)
+        ax.set_ylabel("Mean relative update")
+        ax.yaxis.set_major_formatter(PercentFormatter(1.0))
+        ax.set_ylim(0, max(means) * 1.35)
         ax.grid(axis="y", alpha=0.35)
 
         reduction = (1 - means[2] / means[0]) * 100
@@ -288,7 +336,7 @@ def fig_update_magnitude(data):
         )
 
     fig.suptitle(
-        "Mean update magnitude by condition and model",
+        "Mean relative update by condition and model",
         fontsize=14,
         y=1.02,
     )
@@ -299,7 +347,68 @@ def fig_update_magnitude(data):
 
 
 # ---------------------------------------------------------------------------
-# Figure 2: Forest plot of per-scenario Cohen's d (farness vs naive)
+# Figure 2: Construct-validity check with on/off-framework probes
+# ---------------------------------------------------------------------------
+def fig_probe_validation():
+    data = load_validation_data()
+    fig, axes = plt.subplots(1, 2, figsize=(11, 4.8), sharey=True)
+
+    for ax, probe_battery in zip(axes, VALIDATION_PROBE_BATTERIES):
+        means = []
+        for i, condition in enumerate(VALIDATION_CONDITIONS):
+            vals = np.array(
+                [run["relative_update"] for run in data[probe_battery][condition]],
+                dtype=float,
+            )
+            mean_val = float(np.mean(vals))
+            ci_lo, ci_hi = bootstrap_mean_ci(vals)
+            means.append(mean_val)
+            ax.errorbar(
+                i,
+                mean_val,
+                yerr=[[mean_val - ci_lo], [ci_hi - mean_val]],
+                fmt="o",
+                color=COLORS[condition],
+                ecolor=COLORS[condition],
+                elinewidth=2,
+                capsize=4,
+                markersize=9,
+                markeredgecolor="black",
+                markeredgewidth=0.6,
+                zorder=3,
+            )
+            ax.text(
+                i,
+                mean_val + max(0.02, mean_val * 0.05),
+                f"{mean_val:.0%}",
+                ha="center",
+                va="bottom",
+                fontsize=9,
+            )
+
+        ax.set_xticks(range(len(VALIDATION_CONDITIONS)))
+        ax.set_xticklabels(
+            [VALIDATION_CONDITION_LABELS[c] for c in VALIDATION_CONDITIONS]
+        )
+        ax.set_title(VALIDATION_PROBE_BATTERY_LABELS[probe_battery])
+        ax.grid(axis="y", alpha=0.35)
+        ax.set_ylim(0, max(means) * 1.35)
+        ax.yaxis.set_major_formatter(PercentFormatter(1.0))
+
+    axes[0].set_ylabel("Mean relative update")
+    fig.suptitle(
+        "Claude construct-validity check: farness helps on framework-aligned probes, not held-out probes",
+        fontsize=13,
+        y=1.02,
+    )
+    fig.tight_layout()
+    fig.savefig(FIG_DIR / "fig_probe_validation.png")
+    plt.close(fig)
+    print("  Saved fig_probe_validation.png")
+
+
+# ---------------------------------------------------------------------------
+# Figure 3: Forest plot of per-scenario Cohen's d (farness vs naive)
 # ---------------------------------------------------------------------------
 def cohens_d(group1, group2):
     """Cohen's d: (mean1 - mean2) / pooled_sd. Positive = group1 larger.
@@ -391,7 +500,7 @@ def fig_forest_plot(data):
 
 
 # ---------------------------------------------------------------------------
-# Figure 3: Convergence visualization
+# Figure 4: Convergence visualization
 # ---------------------------------------------------------------------------
 def fig_convergence(data):
     conv_scenarios = ["sunk_cost_project", "acquisition_synergies", "deadline_estimate"]
@@ -465,7 +574,7 @@ def fig_convergence(data):
 
 
 # ---------------------------------------------------------------------------
-# Figure 4: Sycophancy dot plot
+# Figure 5: Sycophancy dot plot
 # ---------------------------------------------------------------------------
 def fig_sycophancy(data):
     fig, axes = plt.subplots(1, 2, figsize=(10, 4.8), sharey=True)
@@ -550,6 +659,7 @@ def main():
     print("Generating figures...")
     fig_protocol()
     fig_update_magnitude(data)
+    fig_probe_validation()
     fig_forest_plot(data)
     fig_convergence(data)
     fig_sycophancy(data)

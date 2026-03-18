@@ -1,7 +1,6 @@
-# Stability Experiment Results
+# Stability experiment results (claude-opus-4-6)
 
-**Random seed**: 2111785411
-**Runs per condition**: 6
+**Total results**: 384
 
 ## Stability-under-probing results
 
@@ -11,62 +10,66 @@
 
 ### Primary metrics
 
+**Primary pooled comparison metric**: relative update
+
 | Metric |Naive | Estimate Only | Format Control | Farness |
 |--------|------- | ------- | ------- | ------- |
-| Mean update magnitude | 16.73 | 16.06 | 14.12 | 11.82 |
 | Mean relative update | 68% | 62% | 52% | 56% |
-| Initial ci rate | 1.00 | 1.00 | 1.00 | 1.00 |
+| Mean update magnitude | 16.73 | 16.06 | 14.12 | 11.82 |
+| Initial CI rate | 1.00 | 1.00 | 1.00 | 1.00 |
 | Correct direction rate | 1.00 | 1.00 | 1.00 | 1.00 |
 
-### Pairwise comparisons
+### Pairwise comparisons (relative update)
 
 **Naive vs Estimate Only**:
-- Mann-Whitney U = 1187.0
-- p (raw) = 0.80, p (Holm-Bonferroni) = 1.00
-- Cohen's d = 0.04 (small), 95% CI: [-0.38, 0.45]
-- Rank-biserial r = -0.03, 95% CI: [-0.29, 0.21]
+- Mann-Whitney U = 1188.0
+- p (raw) = 0.79, p (Holm-Bonferroni) = 1.00
+- Cohen's d = 0.18 (small), 95% CI: [-0.23, 0.54]
+- Rank-biserial r = -0.03, 95% CI: [-0.26, 0.20]
 
 **Naive vs Format Control**:
-- Mann-Whitney U = 1370.5
-- p (raw) = 0.11, p (Holm-Bonferroni) = 0.66
-- Cohen's d = 0.15 (small), 95% CI: [-0.28, 0.55]
-- Rank-biserial r = -0.19, 95% CI: [-0.42, 0.04]
+- Mann-Whitney U = 1414.5
+- p (raw) = 0.05, p (Holm-Bonferroni) = 0.32
+- Cohen's d = 0.56 (medium), 95% CI: [0.22, 0.87]
+- Rank-biserial r = -0.23, 95% CI: [-0.45, -0.01]
 
 **Naive vs Farness**:
-- Mann-Whitney U = 1354.0
-- p (raw) = 0.14, p (Holm-Bonferroni) = 0.70
-- Cohen's d = 0.33 (small), 95% CI: [-0.09, 0.70]
-- Rank-biserial r = -0.18, 95% CI: [-0.42, 0.06]
+- Mann-Whitney U = 1355.0
+- p (raw) = 0.14, p (Holm-Bonferroni) = 0.55
+- Cohen's d = 0.39 (small), 95% CI: [0.01, 0.74]
+- Rank-biserial r = -0.18, 95% CI: [-0.41, 0.06]
 
 **Estimate Only vs Format Control**:
-- Mann-Whitney U = 1347.5
-- p (raw) = 0.15, p (Holm-Bonferroni) = 0.70
-- Cohen's d = 0.11 (small), 95% CI: [-0.34, 0.51]
-- Rank-biserial r = -0.17, 95% CI: [-0.42, 0.06]
+- Mann-Whitney U = 1383.0
+- p (raw) = 0.09, p (Holm-Bonferroni) = 0.45
+- Cohen's d = 0.48 (small), 95% CI: [0.11, 0.85]
+- Rank-biserial r = -0.20, 95% CI: [-0.43, 0.02]
 
 **Estimate Only vs Farness**:
-- Mann-Whitney U = 1320.0
-- p (raw) = 0.22, p (Holm-Bonferroni) = 0.70
-- Cohen's d = 0.28 (small), 95% CI: [-0.14, 0.64]
-- Rank-biserial r = -0.15, 95% CI: [-0.39, 0.08]
+- Mann-Whitney U = 1320.5
+- p (raw) = 0.22, p (Holm-Bonferroni) = 0.65
+- Cohen's d = 0.25 (small), 95% CI: [-0.14, 0.66]
+- Rank-biserial r = -0.15, 95% CI: [-0.39, 0.10]
 
 **Format Control vs Farness**:
-- Mann-Whitney U = 1132.5
-- p (raw) = 0.89, p (Holm-Bonferroni) = 1.00
-- Cohen's d = 0.16 (small), 95% CI: [-0.26, 0.54]
-- Rank-biserial r = 0.02, 95% CI: [-0.25, 0.26]
+- Mann-Whitney U = 1086.5
+- p (raw) = 0.63, p (Holm-Bonferroni) = 1.00
+- Cohen's d = -0.23 (small), 95% CI: [-0.64, 0.18]
+- Rank-biserial r = 0.06, 95% CI: [-0.19, 0.29]
 
 ### Mixed-effects model
 
-Random effect (case_id) variance: 275.0614855663513
+Model: `relative_update ~ condition`
+
+Random effect (case_id) variance: 0.05759130692679704
 Groups: 8, Obs: 192
 
 | Term | Estimate | SE | p-value |
 |------|----------|------|---------|
-| Intercept | 16.729 | 5.89 | 0.004 |
-| condition[T.estimate_only] | -0.667 | 77% | 0.38 |
-| condition[T.format_control] | -2.604 | 77% | <0.001 |
-| condition[T.farness] | -4.910 | 77% | <0.001 |
+| Intercept | 0.676 | 9% | <0.001 |
+| condition[T.estimate_only] | -0.056 | 2% | 0.02 |
+| condition[T.format_control] | -0.157 | 2% | <0.001 |
+| condition[T.farness] | -0.112 | 2% | <0.001 |
 
 ### Convergence analysis
 
@@ -83,62 +86,66 @@ Groups: 8, Obs: 192
 
 ### Primary metrics
 
+**Primary pooled comparison metric**: relative update
+
 | Metric |Naive | Estimate Only | Format Control | Farness |
 |--------|------- | ------- | ------- | ------- |
-| Mean update magnitude | 16.70 | 18.76 | 12.94 | 16.50 |
 | Mean relative update | 70% | 83% | 60% | 83% |
-| Initial ci rate | 1.00 | 1.00 | 1.00 | 1.00 |
+| Mean update magnitude | 16.70 | 18.76 | 12.94 | 16.50 |
+| Initial CI rate | 1.00 | 1.00 | 1.00 | 1.00 |
 | Correct direction rate | 92% | 1.00 | 81% | 96% |
 
-### Pairwise comparisons
+### Pairwise comparisons (relative update)
 
 **Naive vs Estimate Only**:
-- Mann-Whitney U = 1046.0
-- p (raw) = 0.44, p (Holm-Bonferroni) = 1.00
-- Cohen's d = -0.16 (small), 95% CI: [-0.60, 0.24]
-- Rank-biserial r = 0.09, 95% CI: [-0.15, 0.33]
+- Mann-Whitney U = 1088.0
+- p (raw) = 0.64, p (Holm-Bonferroni) = 1.00
+- Cohen's d = -0.27 (small), 95% CI: [-0.64, 0.14]
+- Rank-biserial r = 0.06, 95% CI: [-0.18, 0.29]
 
 **Naive vs Format Control**:
-- Mann-Whitney U = 1324.0
-- p (raw) = 0.21, p (Holm-Bonferroni) = 0.83
-- Cohen's d = 0.35 (small), 95% CI: [-0.05, 0.74]
-- Rank-biserial r = -0.15, 95% CI: [-0.38, 0.09]
+- Mann-Whitney U = 1250.0
+- p (raw) = 0.47, p (Holm-Bonferroni) = 1.00
+- Cohen's d = 0.26 (small), 95% CI: [-0.14, 0.66]
+- Rank-biserial r = -0.09, 95% CI: [-0.30, 0.16]
 
 **Naive vs Farness**:
-- Mann-Whitney U = 1142.5
-- p (raw) = 0.95, p (Holm-Bonferroni) = 1.00
-- Cohen's d = 0.02 (small), 95% CI: [-0.42, 0.42]
-- Rank-biserial r = 0.01, 95% CI: [-0.23, 0.24]
+- Mann-Whitney U = 1026.0
+- p (raw) = 0.36, p (Holm-Bonferroni) = 1.00
+- Cohen's d = -0.29 (small), 95% CI: [-0.68, 0.11]
+- Rank-biserial r = 0.11, 95% CI: [-0.12, 0.33]
 
 **Estimate Only vs Format Control**:
-- Mann-Whitney U = 1466.5
-- p (raw) = 0.02, p (Holm-Bonferroni) = 0.13
-- Cohen's d = 0.52 (medium), 95% CI: [0.11, 0.96]
-- Rank-biserial r = -0.27, 95% CI: [-0.50, -0.03]
+- Mann-Whitney U = 1305.5
+- p (raw) = 0.26, p (Holm-Bonferroni) = 1.00
+- Cohen's d = 0.49 (small), 95% CI: [0.13, 0.85]
+- Rank-biserial r = -0.13, 95% CI: [-0.37, 0.10]
 
 **Estimate Only vs Farness**:
-- Mann-Whitney U = 1275.5
-- p (raw) = 0.37, p (Holm-Bonferroni) = 1.00
-- Cohen's d = 0.18 (small), 95% CI: [-0.25, 0.60]
-- Rank-biserial r = -0.11, 95% CI: [-0.34, 0.14]
+- Mann-Whitney U = 1098.5
+- p (raw) = 0.70, p (Holm-Bonferroni) = 1.00
+- Cohen's d = -0.00 (small), 95% CI: [-0.44, 0.39]
+- Rank-biserial r = 0.05, 95% CI: [-0.19, 0.28]
 
 **Format Control vs Farness**:
-- Mann-Whitney U = 958.0
-- p (raw) = 0.16, p (Holm-Bonferroni) = 0.78
-- Cohen's d = -0.33 (small), 95% CI: [-0.75, 0.08]
-- Rank-biserial r = 0.17, 95% CI: [-0.08, 0.40]
+- Mann-Whitney U = 924.5
+- p (raw) = 0.10, p (Holm-Bonferroni) = 0.57
+- Cohen's d = -0.54 (medium), 95% CI: [-0.90, -0.18]
+- Rank-biserial r = 0.20, 95% CI: [-0.03, 0.42]
 
 ### Mixed-effects model
 
-Random effect (case_id) variance: 117.66880021945629
+Model: `relative_update ~ condition`
+
+Random effect (case_id) variance: 0.1619282576826335
 Groups: 8, Obs: 192
 
 | Term | Estimate | SE | p-value |
 |------|----------|------|---------|
-| Intercept | 16.698 | 3.93 | <0.001 |
-| condition[T.estimate_only] | 2.067 | 1.24 | 0.10 |
-| condition[T.format_control] | -3.754 | 1.24 | 0.002 |
-| condition[T.farness] | -0.196 | 1.24 | 0.87 |
+| Intercept | 0.696 | 15% | <0.001 |
+| condition[T.estimate_only] | 0.137 | 6% | 0.02 |
+| condition[T.format_control] | -0.092 | 6% | 0.11 |
+| condition[T.farness] | 0.139 | 6% | 0.01 |
 
 ### Convergence analysis
 

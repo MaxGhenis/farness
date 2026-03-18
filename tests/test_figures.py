@@ -13,6 +13,7 @@ GENERATE_SCRIPT = PAPER_DIR / "generate_figures.py"
 EXPECTED_FIGURES = [
     "fig_protocol.png",
     "fig_update_magnitude.png",
+    "fig_probe_validation.png",
     "fig_forest_plot.png",
     "fig_convergence.png",
     "fig_sycophancy.png",
@@ -29,10 +30,14 @@ def _figures_are_stale() -> bool:
             return True
 
     # Newest source: the generation script itself or any result JSON
-    data_dir = PAPER_DIR.parent / "experiments" / "stability_results"
+    data_dirs = [
+        PAPER_DIR.parent / "experiments" / "stability_results",
+        PAPER_DIR.parent / "experiments" / "stability_validation" / "strongest",
+    ]
     source_paths = [GENERATE_SCRIPT]
-    if data_dir.exists():
-        source_paths.extend(data_dir.rglob("*.json"))
+    for data_dir in data_dirs:
+        if data_dir.exists():
+            source_paths.extend(data_dir.rglob("*.json"))
 
     newest_source = max(p.stat().st_mtime for p in source_paths)
     oldest_figure = min(

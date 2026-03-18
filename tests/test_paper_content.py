@@ -114,6 +114,27 @@ def test_prompt_probe_confound_in_discussion():
     ), "Missing prompt-probe alignment discussion in body"
 
 
+def test_held_out_probe_result_present():
+    """Paper should report that held-out / off-framework probes weaken or reverse the farness advantage."""
+    text = _read_paper()
+    assert re.search(
+        r"off-framework|held-out probes", text, re.IGNORECASE
+    ), "Missing held-out probe discussion"
+    assert re.search(
+        r"disappears and reverses|reverses", text, re.IGNORECASE
+    ), "Missing statement that the held-out advantage reverses"
+
+
+def test_relative_update_primary_metric():
+    """Paper should say pooled inference uses relative update because scenarios mix units."""
+    text = _read_paper()
+    assert re.search(
+        r"relative update.*primary|pooled inference uses \*relative update\*|mixes weeks, percentages, and leads",
+        text,
+        re.IGNORECASE | re.DOTALL,
+    ), "Missing relative-update primary-metric explanation"
+
+
 def test_no_preregistration_claims():
     """Paper should not claim preregistration."""
     text = _read_paper()

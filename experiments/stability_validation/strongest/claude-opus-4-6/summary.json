@@ -12,6 +12,8 @@
         "format_control",
         "farness"
       ],
+      "comparison_metric": "relative_update",
+      "comparison_metric_label": "relative update",
       "n_naive": 48,
       "n_estimate_only": 48,
       "n_format_control": 48,
@@ -50,126 +52,127 @@
       },
       "statistical_comparison": {
         "naive_vs_estimate_only": {
-          "mann_whitney_u": 1187.0,
-          "p_value_raw": 0.800109489722908,
+          "mann_whitney_u": 1188.0,
+          "p_value_raw": 0.7940996050984284,
           "hypothesis": "naive != estimate_only (two-sided)",
-          "effect_size_r": -0.03038194444444442,
+          "effect_size_r": -0.03125,
           "effect_size_r_ci95": [
-            -0.28560112847222213,
-            0.20879991319444446
+            -0.26307508680555547,
+            0.19921875
           ],
-          "cohens_d": 0.037440720214072014,
+          "cohens_d": 0.18336247709825088,
           "cohens_d_ci95": [
-            -0.3816494317213536,
-            0.44621972561442635
+            -0.22990215297771566,
+            0.544493879822413
           ],
           "p_value_corrected": 1.0
         },
         "naive_vs_format_control": {
-          "mann_whitney_u": 1370.5,
-          "p_value_raw": 0.10968371993886726,
+          "mann_whitney_u": 1414.5,
+          "p_value_raw": 0.05415343629260704,
           "hypothesis": "naive != format_control (two-sided)",
-          "effect_size_r": -0.18967013888888884,
+          "effect_size_r": -0.22786458333333326,
           "effect_size_r_ci95": [
-            -0.4154405381944444,
-            0.04433593749999998
+            -0.4492404513888889,
+            -0.00690104166666668
           ],
-          "cohens_d": 0.15196821310761047,
+          "cohens_d": 0.5613485261748363,
           "cohens_d_ci95": [
-            -0.27869214441367435,
-            0.5549743544950863
+            0.22354715059703936,
+            0.8702072147775476
           ],
-          "p_value_corrected": 0.6581023196332035
+          "p_value_corrected": 0.32492061775564224
         },
         "naive_vs_farness": {
-          "mann_whitney_u": 1354.0,
-          "p_value_raw": 0.139288996972964,
+          "mann_whitney_u": 1355.0,
+          "p_value_raw": 0.13734638448362657,
           "hypothesis": "naive != farness (two-sided)",
-          "effect_size_r": -0.17534722222222232,
+          "effect_size_r": -0.17621527777777768,
           "effect_size_r_ci95": [
-            -0.4188368055555556,
-            0.06476779513888875
+            -0.4075846354166666,
+            0.06258680555555547
           ],
-          "cohens_d": 0.3262551657968938,
+          "cohens_d": 0.38518555571928764,
           "cohens_d_ci95": [
-            -0.08817524184066812,
-            0.700775935363112
+            0.014923010161771187,
+            0.7364753995626516
           ],
-          "p_value_corrected": 0.6964449848648201
+          "p_value_corrected": 0.5493855379345063
         },
         "estimate_only_vs_format_control": {
-          "mann_whitney_u": 1347.5,
-          "p_value_raw": 0.15228362455406325,
+          "mann_whitney_u": 1383.0,
+          "p_value_raw": 0.09025303117681915,
           "hypothesis": "estimate_only != format_control (two-sided)",
-          "effect_size_r": -0.16970486111111116,
+          "effect_size_r": -0.20052083333333326,
           "effect_size_r_ci95": [
-            -0.4158094618055556,
-            0.06294487847222223
+            -0.42804904513888886,
+            0.022677951388888767
           ],
-          "cohens_d": 0.11314259809225971,
+          "cohens_d": 0.4783675008751922,
           "cohens_d_ci95": [
-            -0.33978178319490604,
-            0.5114360335573359
+            0.11069299631476358,
+            0.8480949206560114
           ],
-          "p_value_corrected": 0.6964449848648201
+          "p_value_corrected": 0.45126515588409577
         },
         "estimate_only_vs_farness": {
-          "mann_whitney_u": 1320.0,
-          "p_value_raw": 0.21890869466718432,
+          "mann_whitney_u": 1320.5,
+          "p_value_raw": 0.21768364222714265,
           "hypothesis": "estimate_only != farness (two-sided)",
-          "effect_size_r": -0.14583333333333326,
+          "effect_size_r": -0.14626736111111116,
           "effect_size_r_ci95": [
-            -0.3858723958333333,
-            0.0824978298611111
+            -0.39109157986111104,
+            0.09550781250000002
           ],
-          "cohens_d": 0.28221390417897557,
+          "cohens_d": 0.248494650386039,
           "cohens_d_ci95": [
-            -0.14010739864133778,
-            0.6442805469583152
+            -0.1426692536740152,
+            0.660163256024409
           ],
-          "p_value_corrected": 0.6964449848648201
+          "p_value_corrected": 0.653050926681428
         },
         "format_control_vs_farness": {
-          "mann_whitney_u": 1132.5,
-          "p_value_raw": 0.8890444730270518,
+          "mann_whitney_u": 1086.5,
+          "p_value_raw": 0.6335109814653893,
           "hypothesis": "format_control != farness (two-sided)",
-          "effect_size_r": 0.01692708333333337,
+          "effect_size_r": 0.05685763888888884,
           "effect_size_r_ci95": [
-            -0.24785156250000004,
-            0.2561523437499999
+            -0.18880208333333326,
+            0.293532986111111
           ],
-          "cohens_d": 0.16197781719850912,
+          "cohens_d": -0.23189133620310912,
           "cohens_d_ci95": [
-            -0.2596346324589,
-            0.5353242451468376
+            -0.6356733324096762,
+            0.1801076216273052
           ],
           "p_value_corrected": 1.0
         }
       },
       "mixed_effects": {
+        "metric": "relative_update",
         "coefficients": {
           "Intercept": {
-            "estimate": 16.72916666666739,
-            "se": 5.888610393060529,
-            "p_value": 0.004498130474990919
+            "estimate": 0.6757256526538171,
+            "se": 0.08646198738006879,
+            "p_value": 5.483588816553386e-15
           },
           "condition[T.estimate_only]": {
-            "estimate": -0.666666666666665,
-            "se": 0.765567326190069,
-            "p_value": 0.383855776097486
+            "estimate": -0.05598903341260921,
+            "se": 0.02352708634155047,
+            "p_value": 0.017323488522002533
           },
           "condition[T.format_control]": {
-            "estimate": -2.6041666666666647,
-            "se": 0.7655673261900691,
-            "p_value": 0.0006698849980285104
+            "estimate": -0.15665303545618445,
+            "se": 0.02352708634155047,
+            "p_value": 2.7680182522363953e-11
           },
           "condition[T.farness]": {
-            "estimate": -4.910416666666665,
-            "se": 0.7655673261900691,
-            "p_value": 1.4166779527604453e-10
+            "estimate": -0.11246994260163687,
+            "se": 0.02352708634155047,
+            "p_value": 1.7490759336853585e-06
           }
         },
-        "random_effect_variance": 275.0614855663513,
+        "random_effect_variance": 0.05759130692679704,
         "n_groups": 8,
         "n_obs": 192,
         "converged": true
@@ -545,6 +548,8 @@
         "format_control",
         "farness"
       ],
+      "comparison_metric": "relative_update",
+      "comparison_metric_label": "relative update",
       "n_naive": 48,
       "n_estimate_only": 48,
       "n_format_control": 48,
@@ -583,126 +588,127 @@
       },
       "statistical_comparison": {
         "naive_vs_estimate_only": {
-          "mann_whitney_u": 1046.0,
-          "p_value_raw": 0.43887947724944476,
+          "mann_whitney_u": 1088.0,
+          "p_value_raw": 0.6408140872468564,
           "hypothesis": "naive != estimate_only (two-sided)",
-          "effect_size_r": 0.09201388888888884,
+          "effect_size_r": 0.05555555555555558,
           "effect_size_r_ci95": [
-            -0.15029296875000003,
-            0.33076171874999993
+            -0.18103298611111104,
+            0.29427083333333337
           ],
-          "cohens_d": -0.15814184298092765,
+          "cohens_d": -0.26625345719164156,
           "cohens_d_ci95": [
-            -0.5976094252106546,
-            0.24249393185847257
+            -0.6445370763787589,
+            0.13686519389614785
           ],
           "p_value_corrected": 1.0
         },
         "naive_vs_format_control": {
-          "mann_whitney_u": 1324.0,
-          "p_value_raw": 0.2083720570001858,
+          "mann_whitney_u": 1250.0,
+          "p_value_raw": 0.4733429209262764,
           "hypothesis": "naive != format_control (two-sided)",
-          "effect_size_r": -0.14930555555555558,
+          "effect_size_r": -0.08506944444444442,
           "effect_size_r_ci95": [
-            -0.3784830729166668,
-            0.08511284722222216
+            -0.3003906250000001,
+            0.16279296874999993
           ],
-          "cohens_d": 0.3450952831907137,
+          "cohens_d": 0.2564419039982606,
           "cohens_d_ci95": [
-            -0.04692776854050913,
-            0.7410074259076234
+            -0.13615092806907447,
+            0.6613124234272162
           ],
-          "p_value_corrected": 0.8334882280007432
+          "p_value_corrected": 1.0
         },
         "naive_vs_farness": {
-          "mann_whitney_u": 1142.5,
-          "p_value_raw": 0.9473693024834191,
+          "mann_whitney_u": 1026.0,
+          "p_value_raw": 0.3568250911114892,
           "hypothesis": "naive != farness (two-sided)",
-          "effect_size_r": 0.00824652777777779,
+          "effect_size_r": 0.109375,
           "effect_size_r_ci95": [
-            -0.2322374131944445,
-            0.24479166666666663
+            -0.12159288194444434,
+            0.3338107638888889
           ],
-          "cohens_d": 0.015477261866503457,
+          "cohens_d": -0.29345959797537013,
           "cohens_d_ci95": [
-            -0.42267047546146175,
-            0.42247812695118975
+            -0.6755643508037827,
+            0.11371790073705992
           ],
           "p_value_corrected": 1.0
         },
         "estimate_only_vs_format_control": {
-          "mann_whitney_u": 1466.5,
-          "p_value_raw": 0.021147309359548058,
+          "mann_whitney_u": 1305.5,
+          "p_value_raw": 0.2606856033070005,
           "hypothesis": "estimate_only != format_control (two-sided)",
-          "effect_size_r": -0.2730034722222223,
+          "effect_size_r": -0.13324652777777768,
           "effect_size_r_ci95": [
-            -0.5017469618055556,
-            -0.03036024305555555
+            -0.36507161458333337,
+            0.10164930555555547
           ],
-          "cohens_d": 0.522919929695742,
+          "cohens_d": 0.48616794624675563,
           "cohens_d_ci95": [
-            0.11327301335765459,
-            0.9623792401292041
+            0.13048686911642207,
+            0.846900641195498
           ],
-          "p_value_corrected": 0.12688385615728834
+          "p_value_corrected": 1.0
         },
         "estimate_only_vs_farness": {
-          "mann_whitney_u": 1275.5,
-          "p_value_raw": 0.3667967398394566,
+          "mann_whitney_u": 1098.5,
+          "p_value_raw": 0.6971845020644406,
           "hypothesis": "estimate_only != farness (two-sided)",
-          "effect_size_r": -0.10720486111111116,
+          "effect_size_r": 0.04644097222222221,
           "effect_size_r_ci95": [
-            -0.3442382812499999,
-            0.13636067708333324
+            -0.1875,
+            0.27693142361111106
           ],
-          "cohens_d": 0.17578360657824596,
+          "cohens_d": -0.0037554740426793826,
           "cohens_d_ci95": [
-            -0.24516308566662745,
-            0.6046315526450772
+            -0.4397884296334888,
+            0.38934826451457644
           ],
           "p_value_corrected": 1.0
         },
         "format_control_vs_farness": {
-          "mann_whitney_u": 958.0,
-          "p_value_raw": 0.1555718553776514,
+          "mann_whitney_u": 924.5,
+          "p_value_raw": 0.0953157725967542,
           "hypothesis": "format_control != farness (two-sided)",
-          "effect_size_r": 0.1684027777777778,
+          "effect_size_r": 0.19748263888888884,
           "effect_size_r_ci95": [
-            -0.08209635416666666,
-            0.40149739583333327
+            -0.03132595486111111,
+            0.4216579861111109
           ],
-          "cohens_d": -0.3344118263127306,
+          "cohens_d": -0.5421179989632501,
           "cohens_d_ci95": [
-            -0.7475353729150067,
-            0.07590079185583307
+            -0.8984104509028635,
+            -0.1793477687960966
           ],
-          "p_value_corrected": 0.777859276888257
+          "p_value_corrected": 0.5718946355805252
         }
       },
       "mixed_effects": {
+        "metric": "relative_update",
         "coefficients": {
           "Intercept": {
-            "estimate": 16.697916666666913,
-            "se": 3.9339855387891407,
-            "p_value": 2.190527996779257e-05
+            "estimate": 0.6959305364672442,
+            "se": 0.1478290271234939,
+            "p_value": 2.505621336767366e-06
           },
           "condition[T.estimate_only]": {
-            "estimate": 2.0666666666666664,
-            "se": 1.2390659320389723,
-            "p_value": 0.09533099718517013
+            "estimate": 0.13670891701062068,
+            "se": 0.056787129702945055,
+            "p_value": 0.01606688629569742
           },
           "condition[T.format_control]": {
-            "estimate": -3.7541666666666673,
-            "se": 1.2390659320389723,
-            "p_value": 0.0024468650022329576
+            "estimate": -0.09154854995649478,
+            "se": 0.056787129702945055,
+            "p_value": 0.10693244865841027
           },
           "condition[T.farness]": {
-            "estimate": -0.19583333333333375,
-            "se": 1.2390659320389723,
-            "p_value": 0.8744180591290542
+            "estimate": 0.13882258153994664,
+            "se": 0.056787129702945055,
+            "p_value": 0.014500746281807706
           }
         },
-        "random_effect_variance": 117.66880021945629,
+        "random_effect_variance": 0.1619282576826335,
         "n_groups": 8,
         "n_obs": 192,
         "converged": true
@@ -1067,1668 +1073,5 @@
       "probe_battery": "off_framework"
     }
   },
-  "metadata": {
-    "random_seed": 2111785411,
-    "randomize_order": true,
-    "runs_per_condition": 6,
-    "n_cases": 8,
-    "case_ids": [
-      "planning_estimate",
-      "sunk_cost_project",
-      "startup_success",
-      "hiring_success",
-      "acquisition_synergies",
-      "product_launch",
-      "deadline_estimate",
-      "investment_return"
-    ],
-    "conditions": [
-      "naive",
-      "estimate_only",
-      "format_control",
-      "farness"
-    ],
-    "probe_batteries": [
-      "on_framework",
-      "off_framework"
-    ],
-    "model": "claude-opus-4-6",
-    "started_at": "2026-03-17T18:16:35.011190",
-    "test_orders": {
-      "planning_estimate_run1": [
-        {
-          "condition": "farness",
-          "probe_battery": "off_framework"
-        },
-        {
-          "condition": "estimate_only",
-          "probe_battery": "on_framework"
-        },
-        {
-          "condition": "naive",
-          "probe_battery": "off_framework"
-        },
-        {
-          "condition": "farness",
-          "probe_battery": "on_framework"
-        },
-        {
-          "condition": "naive",
-          "probe_battery": "on_framework"
-        },
-        {
-          "condition": "estimate_only",
-          "probe_battery": "off_framework"
-        },
-        {
-          "condition": "format_control",
-          "probe_battery": "off_framework"
-        },
-        {
-          "condition": "format_control",
-          "probe_battery": "on_framework"
-        }
-      ],
-      "planning_estimate_run2": [
-        {
-          "condition": "format_control",
-          "probe_battery": "off_framework"
-        },
-        {
-          "condition": "naive",
-          "probe_battery": "off_framework"
-        },
-        {
-          "condition": "estimate_only",
-          "probe_battery": "off_framework"
-        },
-        {
-          "condition": "format_control",
-          "probe_battery": "on_framework"
-        },
-        {
-          "condition": "farness",
-          "probe_battery": "off_framework"
-        },
-        {
-          "condition": "naive",
-          "probe_battery": "on_framework"
-        },
-        {
-          "condition": "farness",
-          "probe_battery": "on_framework"
-        },
-        {
-          "condition": "estimate_only",
-          "probe_battery": "on_framework"
-        }
-      ],
-      "planning_estimate_run3": [
-        {
-          "condition": "format_control",
-          "probe_battery": "on_framework"
-        },
-        {
-          "condition": "naive",
-          "probe_battery": "on_framework"
-        },
-        {
-          "condition": "naive",
-          "probe_battery": "off_framework"
-        },
-        {
-          "condition": "estimate_only",
-          "probe_battery": "on_framework"
-        },
-        {
-          "condition": "format_control",
-          "probe_battery": "off_framework"
-        },
-        {
-          "condition": "farness",
-          "probe_battery": "on_framework"
-        },
-        {
-          "condition": "farness",
-          "probe_battery": "off_framework"
-        },
-        {
-          "condition": "estimate_only",
-          "probe_battery": "off_framework"
-        }
-      ],
-      "planning_estimate_run4": [
-        {
-          "condition": "naive",
-          "probe_battery": "on_framework"
-        },
-        {
-          "condition": "naive",
-          "probe_battery": "off_framework"
-        },
-        {
-          "condition": "farness",
-          "probe_battery": "on_framework"
-        },
-        {
-          "condition": "estimate_only",
-          "probe_battery": "off_framework"
-        },
-        {
-          "condition": "format_control",
-          "probe_battery": "off_framework"
-        },
-        {
-          "condition": "farness",
-          "probe_battery": "off_framework"
-        },
-        {
-          "condition": "format_control",
-          "probe_battery": "on_framework"
-        },
-        {
-          "condition": "estimate_only",
-          "probe_battery": "on_framework"
-        }
-      ],
-      "planning_estimate_run5": [
-        {
-          "condition": "estimate_only",
-          "probe_battery": "off_framework"
-        },
-        {
-          "condition": "farness",
-          "probe_battery": "on_framework"
-        },
-        {
-          "condition": "format_control",
-          "probe_battery": "on_framework"
-        },
-        {
-          "condition": "estimate_only",
-          "probe_battery": "on_framework"
-        },
-        {
-          "condition": "farness",
-          "probe_battery": "off_framework"
-        },
-        {
-          "condition": "naive",
-          "probe_battery": "on_framework"
-        },
-        {
-          "condition": "naive",
-          "probe_battery": "off_framework"
-        },
-        {
-          "condition": "format_control",
-          "probe_battery": "off_framework"
-        }
-      ],
-      "planning_estimate_run6": [
-        {
-          "condition": "farness",
-          "probe_battery": "off_framework"
-        },
-        {
-          "condition": "estimate_only",
-          "probe_battery": "off_framework"
-        },
-        {
-          "condition": "farness",
-          "probe_battery": "on_framework"
-        },
-        {
-          "condition": "naive",
-          "probe_battery": "off_framework"
-        },
-        {
-          "condition": "format_control",
-          "probe_battery": "on_framework"
-        },
-        {
-          "condition": "estimate_only",
-          "probe_battery": "on_framework"
-        },
-        {
-          "condition": "format_control",
-          "probe_battery": "off_framework"
-        },
-        {
-          "condition": "naive",
-          "probe_battery": "on_framework"
-        }
-      ],
-      "sunk_cost_project_run1": [
-        {
-          "condition": "farness",
-          "probe_battery": "on_framework"
-        },
-        {
-          "condition": "estimate_only",
-          "probe_battery": "off_framework"
-        },
-        {
-          "condition": "farness",
-          "probe_battery": "off_framework"
-        },
-        {
-          "condition": "format_control",
-          "probe_battery": "on_framework"
-        },
-        {
-          "condition": "naive",
-          "probe_battery": "off_framework"
-        },
-        {
-          "condition": "naive",
-          "probe_battery": "on_framework"
-        },
-        {
-          "condition": "format_control",
-          "probe_battery": "off_framework"
-        },
-        {
-          "condition": "estimate_only",
-          "probe_battery": "on_framework"
-        }
-      ],
-      "sunk_cost_project_run2": [
-        {
-          "condition": "estimate_only",
-          "probe_battery": "on_framework"
-        },
-        {
-          "condition": "farness",
-          "probe_battery": "on_framework"
-        },
-        {
-          "condition": "naive",
-          "probe_battery": "off_framework"
-        },
-        {
-          "condition": "format_control",
-          "probe_battery": "off_framework"
-        },
-        {
-          "condition": "estimate_only",
-          "probe_battery": "off_framework"
-        },
-        {
-          "condition": "format_control",
-          "probe_battery": "on_framework"
-        },
-        {
-          "condition": "naive",
-          "probe_battery": "on_framework"
-        },
-        {
-          "condition": "farness",
-          "probe_battery": "off_framework"
-        }
-      ],
-      "sunk_cost_project_run3": [
-        {
-          "condition": "estimate_only",
-          "probe_battery": "off_framework"
-        },
-        {
-          "condition": "format_control",
-          "probe_battery": "off_framework"
-        },
-        {
-          "condition": "farness",
-          "probe_battery": "on_framework"
-        },
-        {
-          "condition": "naive",
-          "probe_battery": "off_framework"
-        },
-        {
-          "condition": "naive",
-          "probe_battery": "on_framework"
-        },
-        {
-          "condition": "farness",
-          "probe_battery": "off_framework"
-        },
-        {
-          "condition": "format_control",
-          "probe_battery": "on_framework"
-        },
-        {
-          "condition": "estimate_only",
-          "probe_battery": "on_framework"
-        }
-      ],
-      "sunk_cost_project_run4": [
-        {
-          "condition": "farness",
-          "probe_battery": "off_framework"
-        },
-        {
-          "condition": "farness",
-          "probe_battery": "on_framework"
-        },
-        {
-          "condition": "format_control",
-          "probe_battery": "on_framework"
-        },
-        {
-          "condition": "naive",
-          "probe_battery": "on_framework"
-        },
-        {
-          "condition": "format_control",
-          "probe_battery": "off_framework"
-        },
-        {
-          "condition": "estimate_only",
-          "probe_battery": "on_framework"
-        },
-        {
-          "condition": "estimate_only",
-          "probe_battery": "off_framework"
-        },
-        {
-          "condition": "naive",
-          "probe_battery": "off_framework"
-        }
-      ],
-      "sunk_cost_project_run5": [
-        {
-          "condition": "estimate_only",
-          "probe_battery": "off_framework"
-        },
-        {
-          "condition": "naive",
-          "probe_battery": "on_framework"
-        },
-        {
-          "condition": "naive",
-          "probe_battery": "off_framework"
-        },
-        {
-          "condition": "farness",
-          "probe_battery": "off_framework"
-        },
-        {
-          "condition": "farness",
-          "probe_battery": "on_framework"
-        },
-        {
-          "condition": "format_control",
-          "probe_battery": "on_framework"
-        },
-        {
-          "condition": "format_control",
-          "probe_battery": "off_framework"
-        },
-        {
-          "condition": "estimate_only",
-          "probe_battery": "on_framework"
-        }
-      ],
-      "sunk_cost_project_run6": [
-        {
-          "condition": "naive",
-          "probe_battery": "off_framework"
-        },
-        {
-          "condition": "farness",
-          "probe_battery": "on_framework"
-        },
-        {
-          "condition": "estimate_only",
-          "probe_battery": "off_framework"
-        },
-        {
-          "condition": "format_control",
-          "probe_battery": "on_framework"
-        },
-        {
-          "condition": "naive",
-          "probe_battery": "on_framework"
-        },
-        {
-          "condition": "farness",
-          "probe_battery": "off_framework"
-        },
-        {
-          "condition": "format_control",
-          "probe_battery": "off_framework"
-        },
-        {
-          "condition": "estimate_only",
-          "probe_battery": "on_framework"
-        }
-      ],
-      "startup_success_run1": [
-        {
-          "condition": "format_control",
-          "probe_battery": "on_framework"
-        },
-        {
-          "condition": "naive",
-          "probe_battery": "on_framework"
-        },
-        {
-          "condition": "estimate_only",
-          "probe_battery": "on_framework"
-        },
-        {
-          "condition": "estimate_only",
-          "probe_battery": "off_framework"
-        },
-        {
-          "condition": "farness",
-          "probe_battery": "off_framework"
-        },
-        {
-          "condition": "naive",
-          "probe_battery": "off_framework"
-        },
-        {
-          "condition": "format_control",
-          "probe_battery": "off_framework"
-        },
-        {
-          "condition": "farness",
-          "probe_battery": "on_framework"
-        }
-      ],
-      "startup_success_run2": [
-        {
-          "condition": "format_control",
-          "probe_battery": "off_framework"
-        },
-        {
-          "condition": "naive",
-          "probe_battery": "on_framework"
-        },
-        {
-          "condition": "estimate_only",
-          "probe_battery": "on_framework"
-        },
-        {
-          "condition": "naive",
-          "probe_battery": "off_framework"
-        },
-        {
-          "condition": "format_control",
-          "probe_battery": "on_framework"
-        },
-        {
-          "condition": "estimate_only",
-          "probe_battery": "off_framework"
-        },
-        {
-          "condition": "farness",
-          "probe_battery": "off_framework"
-        },
-        {
-          "condition": "farness",
-          "probe_battery": "on_framework"
-        }
-      ],
-      "startup_success_run3": [
-        {
-          "condition": "naive",
-          "probe_battery": "on_framework"
-        },
-        {
-          "condition": "farness",
-          "probe_battery": "off_framework"
-        },
-        {
-          "condition": "naive",
-          "probe_battery": "off_framework"
-        },
-        {
-          "condition": "format_control",
-          "probe_battery": "on_framework"
-        },
-        {
-          "condition": "format_control",
-          "probe_battery": "off_framework"
-        },
-        {
-          "condition": "estimate_only",
-          "probe_battery": "on_framework"
-        },
-        {
-          "condition": "farness",
-          "probe_battery": "on_framework"
-        },
-        {
-          "condition": "estimate_only",
-          "probe_battery": "off_framework"
-        }
-      ],
-      "startup_success_run4": [
-        {
-          "condition": "format_control",
-          "probe_battery": "on_framework"
-        },
-        {
-          "condition": "estimate_only",
-          "probe_battery": "on_framework"
-        },
-        {
-          "condition": "naive",
-          "probe_battery": "on_framework"
-        },
-        {
-          "condition": "format_control",
-          "probe_battery": "off_framework"
-        },
-        {
-          "condition": "naive",
-          "probe_battery": "off_framework"
-        },
-        {
-          "condition": "farness",
-          "probe_battery": "off_framework"
-        },
-        {
-          "condition": "farness",
-          "probe_battery": "on_framework"
-        },
-        {
-          "condition": "estimate_only",
-          "probe_battery": "off_framework"
-        }
-      ],
-      "startup_success_run5": [
-        {
-          "condition": "estimate_only",
-          "probe_battery": "off_framework"
-        },
-        {
-          "condition": "naive",
-          "probe_battery": "off_framework"
-        },
-        {
-          "condition": "format_control",
-          "probe_battery": "on_framework"
-        },
-        {
-          "condition": "naive",
-          "probe_battery": "on_framework"
-        },
-        {
-          "condition": "estimate_only",
-          "probe_battery": "on_framework"
-        },
-        {
-          "condition": "farness",
-          "probe_battery": "on_framework"
-        },
-        {
-          "condition": "farness",
-          "probe_battery": "off_framework"
-        },
-        {
-          "condition": "format_control",
-          "probe_battery": "off_framework"
-        }
-      ],
-      "startup_success_run6": [
-        {
-          "condition": "naive",
-          "probe_battery": "on_framework"
-        },
-        {
-          "condition": "format_control",
-          "probe_battery": "on_framework"
-        },
-        {
-          "condition": "estimate_only",
-          "probe_battery": "off_framework"
-        },
-        {
-          "condition": "farness",
-          "probe_battery": "on_framework"
-        },
-        {
-          "condition": "estimate_only",
-          "probe_battery": "on_framework"
-        },
-        {
-          "condition": "naive",
-          "probe_battery": "off_framework"
-        },
-        {
-          "condition": "format_control",
-          "probe_battery": "off_framework"
-        },
-        {
-          "condition": "farness",
-          "probe_battery": "off_framework"
-        }
-      ],
-      "hiring_success_run1": [
-        {
-          "condition": "format_control",
-          "probe_battery": "off_framework"
-        },
-        {
-          "condition": "farness",
-          "probe_battery": "off_framework"
-        },
-        {
-          "condition": "estimate_only",
-          "probe_battery": "off_framework"
-        },
-        {
-          "condition": "farness",
-          "probe_battery": "on_framework"
-        },
-        {
-          "condition": "estimate_only",
-          "probe_battery": "on_framework"
-        },
-        {
-          "condition": "format_control",
-          "probe_battery": "on_framework"
-        },
-        {
-          "condition": "naive",
-          "probe_battery": "off_framework"
-        },
-        {
-          "condition": "naive",
-          "probe_battery": "on_framework"
-        }
-      ],
-      "hiring_success_run2": [
-        {
-          "condition": "estimate_only",
-          "probe_battery": "off_framework"
-        },
-        {
-          "condition": "format_control",
-          "probe_battery": "on_framework"
-        },
-        {
-          "condition": "farness",
-          "probe_battery": "off_framework"
-        },
-        {
-          "condition": "naive",
-          "probe_battery": "on_framework"
-        },
-        {
-          "condition": "farness",
-          "probe_battery": "on_framework"
-        },
-        {
-          "condition": "estimate_only",
-          "probe_battery": "on_framework"
-        },
-        {
-          "condition": "naive",
-          "probe_battery": "off_framework"
-        },
-        {
-          "condition": "format_control",
-          "probe_battery": "off_framework"
-        }
-      ],
-      "hiring_success_run3": [
-        {
-          "condition": "estimate_only",
-          "probe_battery": "off_framework"
-        },
-        {
-          "condition": "naive",
-          "probe_battery": "off_framework"
-        },
-        {
-          "condition": "farness",
-          "probe_battery": "off_framework"
-        },
-        {
-          "condition": "estimate_only",
-          "probe_battery": "on_framework"
-        },
-        {
-          "condition": "farness",
-          "probe_battery": "on_framework"
-        },
-        {
-          "condition": "format_control",
-          "probe_battery": "on_framework"
-        },
-        {
-          "condition": "naive",
-          "probe_battery": "on_framework"
-        },
-        {
-          "condition": "format_control",
-          "probe_battery": "off_framework"
-        }
-      ],
-      "hiring_success_run4": [
-        {
-          "condition": "estimate_only",
-          "probe_battery": "on_framework"
-        },
-        {
-          "condition": "naive",
-          "probe_battery": "on_framework"
-        },
-        {
-          "condition": "format_control",
-          "probe_battery": "off_framework"
-        },
-        {
-          "condition": "farness",
-          "probe_battery": "on_framework"
-        },
-        {
-          "condition": "estimate_only",
-          "probe_battery": "off_framework"
-        },
-        {
-          "condition": "farness",
-          "probe_battery": "off_framework"
-        },
-        {
-          "condition": "naive",
-          "probe_battery": "off_framework"
-        },
-        {
-          "condition": "format_control",
-          "probe_battery": "on_framework"
-        }
-      ],
-      "hiring_success_run5": [
-        {
-          "condition": "estimate_only",
-          "probe_battery": "off_framework"
-        },
-        {
-          "condition": "estimate_only",
-          "probe_battery": "on_framework"
-        },
-        {
-          "condition": "naive",
-          "probe_battery": "on_framework"
-        },
-        {
-          "condition": "format_control",
-          "probe_battery": "on_framework"
-        },
-        {
-          "condition": "naive",
-          "probe_battery": "off_framework"
-        },
-        {
-          "condition": "farness",
-          "probe_battery": "on_framework"
-        },
-        {
-          "condition": "farness",
-          "probe_battery": "off_framework"
-        },
-        {
-          "condition": "format_control",
-          "probe_battery": "off_framework"
-        }
-      ],
-      "hiring_success_run6": [
-        {
-          "condition": "naive",
-          "probe_battery": "on_framework"
-        },
-        {
-          "condition": "farness",
-          "probe_battery": "off_framework"
-        },
-        {
-          "condition": "estimate_only",
-          "probe_battery": "off_framework"
-        },
-        {
-          "condition": "estimate_only",
-          "probe_battery": "on_framework"
-        },
-        {
-          "condition": "naive",
-          "probe_battery": "off_framework"
-        },
-        {
-          "condition": "format_control",
-          "probe_battery": "off_framework"
-        },
-        {
-          "condition": "format_control",
-          "probe_battery": "on_framework"
-        },
-        {
-          "condition": "farness",
-          "probe_battery": "on_framework"
-        }
-      ],
-      "acquisition_synergies_run1": [
-        {
-          "condition": "naive",
-          "probe_battery": "off_framework"
-        },
-        {
-          "condition": "format_control",
-          "probe_battery": "off_framework"
-        },
-        {
-          "condition": "farness",
-          "probe_battery": "on_framework"
-        },
-        {
-          "condition": "format_control",
-          "probe_battery": "on_framework"
-        },
-        {
-          "condition": "farness",
-          "probe_battery": "off_framework"
-        },
-        {
-          "condition": "estimate_only",
-          "probe_battery": "on_framework"
-        },
-        {
-          "condition": "estimate_only",
-          "probe_battery": "off_framework"
-        },
-        {
-          "condition": "naive",
-          "probe_battery": "on_framework"
-        }
-      ],
-      "acquisition_synergies_run2": [
-        {
-          "condition": "estimate_only",
-          "probe_battery": "off_framework"
-        },
-        {
-          "condition": "naive",
-          "probe_battery": "on_framework"
-        },
-        {
-          "condition": "farness",
-          "probe_battery": "off_framework"
-        },
-        {
-          "condition": "estimate_only",
-          "probe_battery": "on_framework"
-        },
-        {
-          "condition": "naive",
-          "probe_battery": "off_framework"
-        },
-        {
-          "condition": "farness",
-          "probe_battery": "on_framework"
-        },
-        {
-          "condition": "format_control",
-          "probe_battery": "off_framework"
-        },
-        {
-          "condition": "format_control",
-          "probe_battery": "on_framework"
-        }
-      ],
-      "acquisition_synergies_run3": [
-        {
-          "condition": "naive",
-          "probe_battery": "off_framework"
-        },
-        {
-          "condition": "estimate_only",
-          "probe_battery": "on_framework"
-        },
-        {
-          "condition": "estimate_only",
-          "probe_battery": "off_framework"
-        },
-        {
-          "condition": "format_control",
-          "probe_battery": "off_framework"
-        },
-        {
-          "condition": "format_control",
-          "probe_battery": "on_framework"
-        },
-        {
-          "condition": "farness",
-          "probe_battery": "off_framework"
-        },
-        {
-          "condition": "naive",
-          "probe_battery": "on_framework"
-        },
-        {
-          "condition": "farness",
-          "probe_battery": "on_framework"
-        }
-      ],
-      "acquisition_synergies_run4": [
-        {
-          "condition": "format_control",
-          "probe_battery": "off_framework"
-        },
-        {
-          "condition": "format_control",
-          "probe_battery": "on_framework"
-        },
-        {
-          "condition": "farness",
-          "probe_battery": "on_framework"
-        },
-        {
-          "condition": "naive",
-          "probe_battery": "on_framework"
-        },
-        {
-          "condition": "farness",
-          "probe_battery": "off_framework"
-        },
-        {
-          "condition": "estimate_only",
-          "probe_battery": "on_framework"
-        },
-        {
-          "condition": "estimate_only",
-          "probe_battery": "off_framework"
-        },
-        {
-          "condition": "naive",
-          "probe_battery": "off_framework"
-        }
-      ],
-      "acquisition_synergies_run5": [
-        {
-          "condition": "estimate_only",
-          "probe_battery": "on_framework"
-        },
-        {
-          "condition": "format_control",
-          "probe_battery": "on_framework"
-        },
-        {
-          "condition": "farness",
-          "probe_battery": "off_framework"
-        },
-        {
-          "condition": "naive",
-          "probe_battery": "off_framework"
-        },
-        {
-          "condition": "format_control",
-          "probe_battery": "off_framework"
-        },
-        {
-          "condition": "estimate_only",
-          "probe_battery": "off_framework"
-        },
-        {
-          "condition": "farness",
-          "probe_battery": "on_framework"
-        },
-        {
-          "condition": "naive",
-          "probe_battery": "on_framework"
-        }
-      ],
-      "acquisition_synergies_run6": [
-        {
-          "condition": "farness",
-          "probe_battery": "off_framework"
-        },
-        {
-          "condition": "format_control",
-          "probe_battery": "on_framework"
-        },
-        {
-          "condition": "estimate_only",
-          "probe_battery": "off_framework"
-        },
-        {
-          "condition": "naive",
-          "probe_battery": "on_framework"
-        },
-        {
-          "condition": "format_control",
-          "probe_battery": "off_framework"
-        },
-        {
-          "condition": "farness",
-          "probe_battery": "on_framework"
-        },
-        {
-          "condition": "naive",
-          "probe_battery": "off_framework"
-        },
-        {
-          "condition": "estimate_only",
-          "probe_battery": "on_framework"
-        }
-      ],
-      "product_launch_run1": [
-        {
-          "condition": "estimate_only",
-          "probe_battery": "on_framework"
-        },
-        {
-          "condition": "format_control",
-          "probe_battery": "on_framework"
-        },
-        {
-          "condition": "estimate_only",
-          "probe_battery": "off_framework"
-        },
-        {
-          "condition": "format_control",
-          "probe_battery": "off_framework"
-        },
-        {
-          "condition": "farness",
-          "probe_battery": "off_framework"
-        },
-        {
-          "condition": "farness",
-          "probe_battery": "on_framework"
-        },
-        {
-          "condition": "naive",
-          "probe_battery": "on_framework"
-        },
-        {
-          "condition": "naive",
-          "probe_battery": "off_framework"
-        }
-      ],
-      "product_launch_run2": [
-        {
-          "condition": "farness",
-          "probe_battery": "on_framework"
-        },
-        {
-          "condition": "estimate_only",
-          "probe_battery": "off_framework"
-        },
-        {
-          "condition": "naive",
-          "probe_battery": "on_framework"
-        },
-        {
-          "condition": "estimate_only",
-          "probe_battery": "on_framework"
-        },
-        {
-          "condition": "format_control",
-          "probe_battery": "on_framework"
-        },
-        {
-          "condition": "naive",
-          "probe_battery": "off_framework"
-        },
-        {
-          "condition": "format_control",
-          "probe_battery": "off_framework"
-        },
-        {
-          "condition": "farness",
-          "probe_battery": "off_framework"
-        }
-      ],
-      "product_launch_run3": [
-        {
-          "condition": "farness",
-          "probe_battery": "on_framework"
-        },
-        {
-          "condition": "farness",
-          "probe_battery": "off_framework"
-        },
-        {
-          "condition": "estimate_only",
-          "probe_battery": "on_framework"
-        },
-        {
-          "condition": "estimate_only",
-          "probe_battery": "off_framework"
-        },
-        {
-          "condition": "format_control",
-          "probe_battery": "on_framework"
-        },
-        {
-          "condition": "format_control",
-          "probe_battery": "off_framework"
-        },
-        {
-          "condition": "naive",
-          "probe_battery": "on_framework"
-        },
-        {
-          "condition": "naive",
-          "probe_battery": "off_framework"
-        }
-      ],
-      "product_launch_run4": [
-        {
-          "condition": "farness",
-          "probe_battery": "on_framework"
-        },
-        {
-          "condition": "estimate_only",
-          "probe_battery": "off_framework"
-        },
-        {
-          "condition": "farness",
-          "probe_battery": "off_framework"
-        },
-        {
-          "condition": "format_control",
-          "probe_battery": "off_framework"
-        },
-        {
-          "condition": "format_control",
-          "probe_battery": "on_framework"
-        },
-        {
-          "condition": "naive",
-          "probe_battery": "off_framework"
-        },
-        {
-          "condition": "naive",
-          "probe_battery": "on_framework"
-        },
-        {
-          "condition": "estimate_only",
-          "probe_battery": "on_framework"
-        }
-      ],
-      "product_launch_run5": [
-        {
-          "condition": "naive",
-          "probe_battery": "off_framework"
-        },
-        {
-          "condition": "naive",
-          "probe_battery": "on_framework"
-        },
-        {
-          "condition": "format_control",
-          "probe_battery": "on_framework"
-        },
-        {
-          "condition": "estimate_only",
-          "probe_battery": "on_framework"
-        },
-        {
-          "condition": "estimate_only",
-          "probe_battery": "off_framework"
-        },
-        {
-          "condition": "farness",
-          "probe_battery": "off_framework"
-        },
-        {
-          "condition": "format_control",
-          "probe_battery": "off_framework"
-        },
-        {
-          "condition": "farness",
-          "probe_battery": "on_framework"
-        }
-      ],
-      "product_launch_run6": [
-        {
-          "condition": "format_control",
-          "probe_battery": "off_framework"
-        },
-        {
-          "condition": "naive",
-          "probe_battery": "off_framework"
-        },
-        {
-          "condition": "estimate_only",
-          "probe_battery": "off_framework"
-        },
-        {
-          "condition": "farness",
-          "probe_battery": "on_framework"
-        },
-        {
-          "condition": "format_control",
-          "probe_battery": "on_framework"
-        },
-        {
-          "condition": "estimate_only",
-          "probe_battery": "on_framework"
-        },
-        {
-          "condition": "naive",
-          "probe_battery": "on_framework"
-        },
-        {
-          "condition": "farness",
-          "probe_battery": "off_framework"
-        }
-      ],
-      "deadline_estimate_run1": [
-        {
-          "condition": "farness",
-          "probe_battery": "on_framework"
-        },
-        {
-          "condition": "format_control",
-          "probe_battery": "off_framework"
-        },
-        {
-          "condition": "estimate_only",
-          "probe_battery": "off_framework"
-        },
-        {
-          "condition": "farness",
-          "probe_battery": "off_framework"
-        },
-        {
-          "condition": "format_control",
-          "probe_battery": "on_framework"
-        },
-        {
-          "condition": "naive",
-          "probe_battery": "on_framework"
-        },
-        {
-          "condition": "naive",
-          "probe_battery": "off_framework"
-        },
-        {
-          "condition": "estimate_only",
-          "probe_battery": "on_framework"
-        }
-      ],
-      "deadline_estimate_run2": [
-        {
-          "condition": "estimate_only",
-          "probe_battery": "off_framework"
-        },
-        {
-          "condition": "naive",
-          "probe_battery": "on_framework"
-        },
-        {
-          "condition": "format_control",
-          "probe_battery": "on_framework"
-        },
-        {
-          "condition": "farness",
-          "probe_battery": "on_framework"
-        },
-        {
-          "condition": "format_control",
-          "probe_battery": "off_framework"
-        },
-        {
-          "condition": "estimate_only",
-          "probe_battery": "on_framework"
-        },
-        {
-          "condition": "naive",
-          "probe_battery": "off_framework"
-        },
-        {
-          "condition": "farness",
-          "probe_battery": "off_framework"
-        }
-      ],
-      "deadline_estimate_run3": [
-        {
-          "condition": "format_control",
-          "probe_battery": "on_framework"
-        },
-        {
-          "condition": "naive",
-          "probe_battery": "on_framework"
-        },
-        {
-          "condition": "farness",
-          "probe_battery": "off_framework"
-        },
-        {
-          "condition": "format_control",
-          "probe_battery": "off_framework"
-        },
-        {
-          "condition": "estimate_only",
-          "probe_battery": "on_framework"
-        },
-        {
-          "condition": "farness",
-          "probe_battery": "on_framework"
-        },
-        {
-          "condition": "naive",
-          "probe_battery": "off_framework"
-        },
-        {
-          "condition": "estimate_only",
-          "probe_battery": "off_framework"
-        }
-      ],
-      "deadline_estimate_run4": [
-        {
-          "condition": "farness",
-          "probe_battery": "on_framework"
-        },
-        {
-          "condition": "naive",
-          "probe_battery": "on_framework"
-        },
-        {
-          "condition": "farness",
-          "probe_battery": "off_framework"
-        },
-        {
-          "condition": "format_control",
-          "probe_battery": "off_framework"
-        },
-        {
-          "condition": "naive",
-          "probe_battery": "off_framework"
-        },
-        {
-          "condition": "format_control",
-          "probe_battery": "on_framework"
-        },
-        {
-          "condition": "estimate_only",
-          "probe_battery": "off_framework"
-        },
-        {
-          "condition": "estimate_only",
-          "probe_battery": "on_framework"
-        }
-      ],
-      "deadline_estimate_run5": [
-        {
-          "condition": "farness",
-          "probe_battery": "off_framework"
-        },
-        {
-          "condition": "estimate_only",
-          "probe_battery": "off_framework"
-        },
-        {
-          "condition": "format_control",
-          "probe_battery": "off_framework"
-        },
-        {
-          "condition": "format_control",
-          "probe_battery": "on_framework"
-        },
-        {
-          "condition": "naive",
-          "probe_battery": "on_framework"
-        },
-        {
-          "condition": "farness",
-          "probe_battery": "on_framework"
-        },
-        {
-          "condition": "naive",
-          "probe_battery": "off_framework"
-        },
-        {
-          "condition": "estimate_only",
-          "probe_battery": "on_framework"
-        }
-      ],
-      "deadline_estimate_run6": [
-        {
-          "condition": "naive",
-          "probe_battery": "on_framework"
-        },
-        {
-          "condition": "estimate_only",
-          "probe_battery": "off_framework"
-        },
-        {
-          "condition": "format_control",
-          "probe_battery": "off_framework"
-        },
-        {
-          "condition": "naive",
-          "probe_battery": "off_framework"
-        },
-        {
-          "condition": "format_control",
-          "probe_battery": "on_framework"
-        },
-        {
-          "condition": "farness",
-          "probe_battery": "on_framework"
-        },
-        {
-          "condition": "estimate_only",
-          "probe_battery": "on_framework"
-        },
-        {
-          "condition": "farness",
-          "probe_battery": "off_framework"
-        }
-      ],
-      "investment_return_run1": [
-        {
-          "condition": "naive",
-          "probe_battery": "on_framework"
-        },
-        {
-          "condition": "estimate_only",
-          "probe_battery": "off_framework"
-        },
-        {
-          "condition": "format_control",
-          "probe_battery": "off_framework"
-        },
-        {
-          "condition": "naive",
-          "probe_battery": "off_framework"
-        },
-        {
-          "condition": "estimate_only",
-          "probe_battery": "on_framework"
-        },
-        {
-          "condition": "farness",
-          "probe_battery": "off_framework"
-        },
-        {
-          "condition": "format_control",
-          "probe_battery": "on_framework"
-        },
-        {
-          "condition": "farness",
-          "probe_battery": "on_framework"
-        }
-      ],
-      "investment_return_run2": [
-        {
-          "condition": "estimate_only",
-          "probe_battery": "off_framework"
-        },
-        {
-          "condition": "estimate_only",
-          "probe_battery": "on_framework"
-        },
-        {
-          "condition": "naive",
-          "probe_battery": "off_framework"
-        },
-        {
-          "condition": "farness",
-          "probe_battery": "on_framework"
-        },
-        {
-          "condition": "format_control",
-          "probe_battery": "off_framework"
-        },
-        {
-          "condition": "naive",
-          "probe_battery": "on_framework"
-        },
-        {
-          "condition": "format_control",
-          "probe_battery": "on_framework"
-        },
-        {
-          "condition": "farness",
-          "probe_battery": "off_framework"
-        }
-      ],
-      "investment_return_run3": [
-        {
-          "condition": "format_control",
-          "probe_battery": "off_framework"
-        },
-        {
-          "condition": "naive",
-          "probe_battery": "on_framework"
-        },
-        {
-          "condition": "farness",
-          "probe_battery": "on_framework"
-        },
-        {
-          "condition": "farness",
-          "probe_battery": "off_framework"
-        },
-        {
-          "condition": "estimate_only",
-          "probe_battery": "on_framework"
-        },
-        {
-          "condition": "format_control",
-          "probe_battery": "on_framework"
-        },
-        {
-          "condition": "naive",
-          "probe_battery": "off_framework"
-        },
-        {
-          "condition": "estimate_only",
-          "probe_battery": "off_framework"
-        }
-      ],
-      "investment_return_run4": [
-        {
-          "condition": "format_control",
-          "probe_battery": "on_framework"
-        },
-        {
-          "condition": "farness",
-          "probe_battery": "on_framework"
-        },
-        {
-          "condition": "format_control",
-          "probe_battery": "off_framework"
-        },
-        {
-          "condition": "estimate_only",
-          "probe_battery": "on_framework"
-        },
-        {
-          "condition": "naive",
-          "probe_battery": "off_framework"
-        },
-        {
-          "condition": "estimate_only",
-          "probe_battery": "off_framework"
-        },
-        {
-          "condition": "naive",
-          "probe_battery": "on_framework"
-        },
-        {
-          "condition": "farness",
-          "probe_battery": "off_framework"
-        }
-      ],
-      "investment_return_run5": [
-        {
-          "condition": "farness",
-          "probe_battery": "off_framework"
-        },
-        {
-          "condition": "farness",
-          "probe_battery": "on_framework"
-        },
-        {
-          "condition": "estimate_only",
-          "probe_battery": "off_framework"
-        },
-        {
-          "condition": "format_control",
-          "probe_battery": "off_framework"
-        },
-        {
-          "condition": "naive",
-          "probe_battery": "off_framework"
-        },
-        {
-          "condition": "format_control",
-          "probe_battery": "on_framework"
-        },
-        {
-          "condition": "naive",
-          "probe_battery": "on_framework"
-        },
-        {
-          "condition": "estimate_only",
-          "probe_battery": "on_framework"
-        }
-      ],
-      "investment_return_run6": [
-        {
-          "condition": "naive",
-          "probe_battery": "on_framework"
-        },
-        {
-          "condition": "farness",
-          "probe_battery": "on_framework"
-        },
-        {
-          "condition": "format_control",
-          "probe_battery": "off_framework"
-        },
-        {
-          "condition": "naive",
-          "probe_battery": "off_framework"
-        },
-        {
-          "condition": "format_control",
-          "probe_battery": "on_framework"
-        },
-        {
-          "condition": "estimate_only",
-          "probe_battery": "on_framework"
-        },
-        {
-          "condition": "farness",
-          "probe_battery": "off_framework"
-        },
-        {
-          "condition": "estimate_only",
-          "probe_battery": "off_framework"
-        }
-      ]
-    },
-    "completed_at": "2026-03-17T21:56:35.540574",
-    "n_results": 384
-  }
+  "model": "claude-opus-4-6"
 }

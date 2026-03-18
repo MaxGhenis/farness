@@ -4,6 +4,8 @@
     "cot",
     "farness"
   ],
+  "comparison_metric": "relative_update",
+  "comparison_metric_label": "relative update",
   "n_naive": 66,
   "n_cot": 66,
   "n_farness": 66,
@@ -33,73 +35,74 @@
   },
   "statistical_comparison": {
     "naive_vs_cot": {
-      "mann_whitney_u": 2114.5,
-      "p_value_raw": 0.773719689632487,
+      "mann_whitney_u": 2192.0,
+      "p_value_raw": 0.9509440110545733,
       "hypothesis": "naive != cot (two-sided)",
-      "effect_size_r": 0.029155188246097308,
+      "effect_size_r": -0.006427915518824712,
       "effect_size_r_ci95": [
-        -0.17477043158861338,
-        0.2209136822773186
+        -0.205102157943067,
+        0.1804752066115702
       ],
-      "cohens_d": 0.052529706742999026,
+      "cohens_d": 0.20635092091164856,
       "cohens_d_ci95": [
-        -0.28688276124530226,
-        0.37572383086409367
+        -0.13849949591774433,
+        0.514560963111074
       ],
-      "p_value_corrected": 0.773719689632487
+      "p_value_corrected": 0.9509440110545733
     },
     "naive_vs_farness": {
-      "mann_whitney_u": 2601.0,
-      "p_value_raw": 0.05386430744259175,
+      "mann_whitney_u": 2505.5,
+      "p_value_raw": 0.13625940694392902,
       "hypothesis": "naive != farness (two-sided)",
-      "effect_size_r": -0.19421487603305776,
+      "effect_size_r": -0.15036730945821852,
       "effect_size_r_ci95": [
-        -0.39465105601469247,
-        -0.001354453627180878
+        -0.35079201101928364,
+        0.02962580348943984
       ],
-      "cohens_d": 0.3341939671524939,
+      "cohens_d": 0.3618726005693221,
       "cohens_d_ci95": [
-        0.08275487992977079,
-        0.521123403516486
+        0.04214099081685099,
+        0.6551912897311264
       ],
-      "p_value_corrected": 0.1077286148851835
+      "p_value_corrected": 0.40877822083178705
     },
     "cot_vs_farness": {
-      "mann_whitney_u": 2663.0,
-      "p_value_raw": 0.02701333120516357,
+      "mann_whitney_u": 2493.0,
+      "p_value_raw": 0.1519139531615656,
       "hypothesis": "cot != farness (two-sided)",
-      "effect_size_r": -0.22268135904499542,
+      "effect_size_r": -0.1446280991735538,
       "effect_size_r_ci95": [
-        -0.4261421028466482,
-        -0.03554292929292929
+        -0.3381714876033058,
+        0.050763314967860344
       ],
-      "cohens_d": 0.3171691588553969,
+      "cohens_d": 0.22026553970411278,
       "cohens_d_ci95": [
-        0.035785599762745035,
-        0.5325820897733586
+        -0.12190790483039618,
+        0.5686976133883161
       ],
-      "p_value_corrected": 0.08103999361549072
+      "p_value_corrected": 0.40877822083178705
     }
   },
   "mixed_effects": {
+    "metric": "relative_update",
     "coefficients": {
       "Intercept": {
-        "estimate": 30.974242424242444,
-        "se": 12.063896480306422,
-        "p_value": 0.010243018004326915
+        "estimate": 0.4840251355374963,
+        "se": 0.09108138555244343,
+        "p_value": 1.0712409132898793e-07
       },
       "condition[T.cot]": {
-        "estimate": -3.401515151515147,
-        "se": 7.163513505362619,
-        "p_value": 0.6349017763652034
+        "estimate": -0.07379291028292721,
+        "se": 0.02680913859786788,
+        "p_value": 0.005913705116146341
       },
       "condition[T.farness]": {
-        "estimate": -17.195454545454538,
-        "se": 7.163513505362618,
-        "p_value": 0.016376185869200713
+        "estimate": -0.12784554133984596,
+        "se": 0.02680913859786788,
+        "p_value": 1.8539100537931696e-06
       }
     },
-    "random_effect_variance": 1318.6759895847301,
+    "random_effect_variance": 0.08730099221770166,
     "n_groups": 11,
     "n_obs": 198,
     "converged": true
