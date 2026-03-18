@@ -161,6 +161,45 @@ def bootstrap_mean_ci(vals, n_boot=5000, alpha=0.05):
     return lo, hi
 
 
+def plot_mean_ci_point(
+    ax,
+    x,
+    vals,
+    color,
+    *,
+    label,
+    text_x_offset=0.0,
+    ha="center",
+    min_text_offset=0.02,
+):
+    """Plot a mean with bootstrap CI and a small text label."""
+    mean_val = float(np.mean(vals))
+    ci_lo, ci_hi = bootstrap_mean_ci(vals)
+    ax.errorbar(
+        x,
+        mean_val,
+        yerr=[[mean_val - ci_lo], [ci_hi - mean_val]],
+        fmt="o",
+        color=color,
+        ecolor=color,
+        elinewidth=2,
+        capsize=4,
+        markersize=9,
+        markeredgecolor="black",
+        markeredgewidth=0.6,
+        zorder=3,
+    )
+    ax.text(
+        x + text_x_offset,
+        mean_val + max(min_text_offset, mean_val * 0.05),
+        label,
+        ha=ha,
+        va="bottom",
+        fontsize=9,
+    )
+    return mean_val
+
+
 def add_box(ax, xy, width, height, text, facecolor, edgecolor="#37424A"):
     """Draw a rounded text box in axes coordinates."""
     x, y = xy
@@ -283,38 +322,26 @@ def fig_update_magnitude(data):
     for ax, model_key in zip(axes, MODELS):
         means = []
         for i, cond in enumerate(CONDITIONS):
-            vals = get_metric_values(
+            vals = np.asarray(
+                get_metric_values(
                 data,
                 model_key,
                 metric="relative_update",
                 scenarios=ANALYSIS_SCENARIOS,
                 condition=cond,
+                ),
+                dtype=float,
             )
-            mean_val = np.mean(vals)
-            ci_lo, ci_hi = bootstrap_mean_ci(vals)
-            means.append(mean_val)
-            ax.errorbar(
+            mean_val = plot_mean_ci_point(
+                ax,
                 i,
-                mean_val,
-                yerr=[[mean_val - ci_lo], [ci_hi - mean_val]],
-                fmt="o",
-                color=COLORS[cond],
-                ecolor=COLORS[cond],
-                elinewidth=2,
-                capsize=4,
-                markersize=9,
-                markeredgecolor="black",
-                markeredgewidth=0.6,
-                zorder=3,
-            )
-            ax.text(
-                i + 0.04,
-                mean_val + max(0.02, mean_val * 0.05),
-                f"{mean_val:.0%}",
+                vals,
+                COLORS[cond],
+                label=f"{np.mean(vals):.0%}",
+                text_x_offset=0.04,
                 ha="left",
-                va="bottom",
-                fontsize=9,
             )
+            means.append(mean_val)
 
         ax.set_xticks(range(len(CONDITIONS)))
         ax.set_xticklabels([CONDITION_LABELS[c] for c in CONDITIONS])
@@ -356,35 +383,18 @@ def fig_probe_validation():
     for ax, probe_battery in zip(axes, VALIDATION_PROBE_BATTERIES):
         means = []
         for i, condition in enumerate(VALIDATION_CONDITIONS):
-            vals = np.array(
+            vals = np.asarray(
                 [run["relative_update"] for run in data[probe_battery][condition]],
                 dtype=float,
             )
-            mean_val = float(np.mean(vals))
-            ci_lo, ci_hi = bootstrap_mean_ci(vals)
+            mean_val = plot_mean_ci_point(
+                ax,
+                i,
+                vals,
+                COLORS[condition],
+                label=f"{np.mean(vals):.0%}",
+            )
             means.append(mean_val)
-            ax.errorbar(
-                i,
-                mean_val,
-                yerr=[[mean_val - ci_lo], [ci_hi - mean_val]],
-                fmt="o",
-                color=COLORS[condition],
-                ecolor=COLORS[condition],
-                elinewidth=2,
-                capsize=4,
-                markersize=9,
-                markeredgecolor="black",
-                markeredgewidth=0.6,
-                zorder=3,
-            )
-            ax.text(
-                i,
-                mean_val + max(0.02, mean_val * 0.05),
-                f"{mean_val:.0%}",
-                ha="center",
-                va="bottom",
-                fontsize=9,
-            )
 
         ax.set_xticks(range(len(VALIDATION_CONDITIONS)))
         ax.set_xticklabels(
