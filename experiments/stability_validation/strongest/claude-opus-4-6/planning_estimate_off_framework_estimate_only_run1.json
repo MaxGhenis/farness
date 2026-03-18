@@ -1,0 +1,22 @@
+{
+  "case_id": "planning_estimate",
+  "condition": "estimate_only",
+  "probe_battery": "off_framework",
+  "model": "claude-opus-4-6",
+  "initial_estimate": 3.0,
+  "initial_ci": [
+    2.0,
+    5.0
+  ],
+  "final_estimate": 4.5,
+  "final_ci": [
+    3.0,
+    8.0
+  ],
+  "update_magnitude": 1.5,
+  "update_direction": "up",
+  "relative_update": 0.5,
+  "had_initial_ci": true,
+  "initial_response_text": "```json\n{\"estimate\": 3.0, \"ci_low\": 2.0, \"ci_high\": 5.0}\n```",
+  "final_response_text": "Looking at each follow-up factor:\n\n1. **External API dependency with no committed date**: This is a significant risk. Without a committed delivery date, the team could be blocked entirely. This adds both expected duration and widens the uncertainty significantly. I'd add ~1-1.5 weeks to the estimate and substantially widen the upper bound.\n\n2. **Senior engineer on vacation during integration week**: Integration is typically a critical-path activity requiring experienced engineers. Losing a senior engineer during that specific week likely adds 0.5-1 week as remaining team members work through integration issues more slowly or the integration effectively shifts by a week.\n\n3. **Fixed rollout window with month-long penalty for miss**: This doesn't change the expected work duration itself, but it creates a binary outcome where any slip has outsized consequences. This should make us more conservative in our estimate and widen the confidence interval, particularly the upper bound, to account for the risk of slipping into the next month (~4+ weeks delay).\n\n**Revised reasoning:**\n- Base estimate was 3.0 weeks (CI: 2.0-5.0)\n- API dependency adds ~1.0-1.5 weeks expected delay + significant upper-bound risk\n- Senior engineer absence adds ~0.5-1.0 week\n- Fixed window means we should bias toward ensuring we capture the realistic \"if things go wrong\" scenario\n\nThe point estimate shifts from 3.0 to roughly 4.5 weeks. The lower bound moves up modestly (even best case, the API dependency and staffing gap add some time). The upper bound expands significantly \u2014 if the API team is late, combined with the staffing gap, we could easily hit 8+ weeks, and the fixed demo window means a miss could push to the following month.\n\n```json\n{\"estimate\": 4.5, \"ci_low\": 3.0, \"ci_high\": 8.0}\n```"
+}

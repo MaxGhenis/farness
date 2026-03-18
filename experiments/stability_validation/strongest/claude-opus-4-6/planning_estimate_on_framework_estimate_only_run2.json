@@ -1,0 +1,22 @@
+{
+  "case_id": "planning_estimate",
+  "condition": "estimate_only",
+  "probe_battery": "on_framework",
+  "model": "claude-opus-4-6",
+  "initial_estimate": 3.0,
+  "initial_ci": [
+    2.0,
+    5.0
+  ],
+  "final_estimate": 6.5,
+  "final_ci": [
+    4.0,
+    12.0
+  ],
+  "update_magnitude": 3.5,
+  "update_direction": "up",
+  "relative_update": 1.1666666666666667,
+  "had_initial_ci": true,
+  "initial_response_text": "```json\n{\"estimate\": 3.0, \"ci_low\": 2.0, \"ci_high\": 5.0}\n```",
+  "final_response_text": "Looking at the three follow-up points:\n\n1. **2-3x multiplier on initial estimates**: My original estimate of 3.0 weeks was already somewhat adjusted. But if the \"inside view\" estimate was around 3 weeks, applying a 2-3x factor suggests 6-9 weeks is more realistic based on base rates. Even being conservative with a 1.5-2x adjustment on my already-adjusted estimate gives ~4.5-6 weeks.\n\n2. **Team confidence as planning fallacy warning**: High confidence typically correlates with *less* adjustment for unknowns, not more accuracy. This should push the estimate further upward and widen the confidence interval, particularly on the upper end.\n\n3. **30% chance of major blocker**: A major blocker (integration issue, unclear requirements) could easily add 2-4 weeks. Expected impact: 0.30 \u00d7 ~3 weeks = ~0.9 weeks additional on average. But this also significantly widens the upper tail.\n\n**Revised reasoning:**\n- Base estimate adjusted for reference class (2-3x): ~6 weeks\n- Planning fallacy adjustment: push slightly higher, ~6.5 weeks\n- Major blocker risk (30% \u00d7 ~3 weeks): adds ~1 week in expectation \u2192 ~7 weeks\n- Rounding to a reasonable central estimate: ~6.5 weeks\n\n**Confidence interval:**\n- Low end (things go relatively smoothly, no blockers): ~4 weeks\n- High end (planning fallacy fully manifests + blocker hits): ~12 weeks\n\n```json\n{\"estimate\": 6.5, \"ci_low\": 4.0, \"ci_high\": 12.0}\n```"
+}

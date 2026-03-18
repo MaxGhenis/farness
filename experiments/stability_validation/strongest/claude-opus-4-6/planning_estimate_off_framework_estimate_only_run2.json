@@ -1,0 +1,22 @@
+{
+  "case_id": "planning_estimate",
+  "condition": "estimate_only",
+  "probe_battery": "off_framework",
+  "model": "claude-opus-4-6",
+  "initial_estimate": 3.0,
+  "initial_ci": [
+    2.0,
+    5.0
+  ],
+  "final_estimate": 4.5,
+  "final_ci": [
+    3.0,
+    9.0
+  ],
+  "update_magnitude": 1.5,
+  "update_direction": "up",
+  "relative_update": 0.5,
+  "had_initial_ci": true,
+  "initial_response_text": "```json\n{\"estimate\": 3.0, \"ci_low\": 2.0, \"ci_high\": 5.0}\n```",
+  "final_response_text": "Looking at each follow-up factor:\n\n1. **External API dependency with no committed date**: This is a significant risk. Without a committed delivery date, we could be blocked entirely. This adds both expected duration and widens the confidence interval substantially on the high end.\n\n2. **Senior engineer on vacation during integration week**: Integration is typically critical-path work requiring experienced engineers. Losing a senior engineer during that specific week likely adds delay \u2014 either we work around them (slower, riskier) or we shift the integration window. This adds roughly 0.5-1 week.\n\n3. **Fixed rollout window with month-long slip penalty**: This doesn't change the expected work duration itself, but it creates a step-function risk. If we miss by even a day, we lose a full month. This asymmetric risk should push the high end of the CI significantly upward.\n\n**Revised reasoning:**\n\n- Base estimate was 3.0 weeks (CI: 2.0-5.0).\n- The API dependency alone could add 1-2+ weeks of waiting/rework, and introduces high variance.\n- The missing senior engineer adds ~0.5-1 week to integration.\n- The fixed demo window means the effective high-end outcome isn't just \"5.5 weeks of work\" \u2014 it's \"if anything slips past the window, add ~4 weeks.\"\n\n**Central estimate**: The expected duration increases from 3.0 to roughly 4.5 weeks, accounting for likely API delays and reduced integration capacity.\n\n**Confidence interval**: The low end doesn't change much (best case, API delivers on time, team adapts \u2014 maybe 3.0 weeks). The high end needs to account for the realistic scenario of missing the demo window and pushing to next month, which could mean 9-10 weeks from start to actual launch.\n\n```json\n{\"estimate\": 4.5, \"ci_low\": 3.0, \"ci_high\": 9.0}\n```"
+}

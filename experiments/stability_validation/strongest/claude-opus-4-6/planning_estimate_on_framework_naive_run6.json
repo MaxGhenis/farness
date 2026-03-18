@@ -1,0 +1,22 @@
+{
+  "case_id": "planning_estimate",
+  "condition": "naive",
+  "probe_battery": "on_framework",
+  "model": "claude-opus-4-6",
+  "initial_estimate": 3.0,
+  "initial_ci": [
+    2.0,
+    5.0
+  ],
+  "final_estimate": 7.5,
+  "final_ci": [
+    4.5,
+    13.0
+  ],
+  "update_magnitude": 4.5,
+  "update_direction": "up",
+  "relative_update": 1.5,
+  "had_initial_ci": true,
+  "initial_response_text": "## Reasoning\n\nSoftware estimation is notoriously optimistic, even when teams feel confident and have detailed breakdowns. Key factors:\n\n1. **Planning fallacy**: Teams consistently underestimate due to optimism bias, even with detailed plans. Detailed task breakdowns can actually increase confidence without improving accuracy (the \"illusion of planning\").\n\n2. **Empirical data**: Research (Standish Group, various studies) shows software projects typically take 1.5x-3x the original estimate. For smaller features (as opposed to full projects), the multiplier tends to be lower but still significant.\n\n3. **The team is confident with detailed breakdowns**: This is a positive signal but doesn't eliminate the systematic bias. It might reduce the multiplier somewhat \u2014 perhaps they've accounted for some risks. But \"unknown unknowns,\" integration issues, code review cycles, testing, bug fixes, and context-switching are commonly underestimated.\n\n4. **Typical multiplier for a well-scoped feature**: ~1.5x is a reasonable central estimate. So 2 weeks \u00d7 1.5 = 3 weeks.\n\n5. **Confidence interval (80%)**: \n   - Best case: They nail it close to estimate, maybe 2 weeks (things go smoothly)\n   - Worst case: Unexpected complexity, dependencies, or scope creep push it to 5-6 weeks\n   - 80% CI: roughly 2 to 5 weeks\n\n```json\n{\"estimate\": 3, \"ci_low\": 2, \"ci_high\": 5}\n```",
+  "final_response_text": "I'll reason through each piece of follow-up information and how it should update my original estimate of 3.0 weeks.\n\n## Reasoning Through Each Update\n\n### 1. Software projects average 2-3x their initial estimates\nThis is well-documented in software engineering literature (Standish Group, McConnell's estimation research). If my initial estimate of 3.0 weeks is subject to this same bias, the \"true\" expected duration would be closer to 3.0 \u00d7 2.0 to 3.0 \u00d7 3.0 = 6.0\u20139.0 weeks. A reasonable central multiplier might be ~2.0x for a moderately complex project, giving ~6.0 weeks. This is a significant upward adjustment.\n\n### 2. Team confidence as a planning fallacy warning sign\nHigh team confidence is often inversely correlated with estimation accuracy \u2014 it means the team is likely anchored on the best-case scenario and hasn't adequately considered risks, unknowns, or complexity that will emerge. This reinforces the need for the 2-3x multiplier rather than discounting it. I'll nudge slightly further upward \u2014 perhaps another 10-20% adjustment.\n\n### 3. 30% chance of a major blocker\nA major blocker (integration issue, unclear requirements) could easily add 2-4 weeks. Expected additional time from this risk:\n- 0.30 \u00d7 ~3 weeks (average blocker duration) = ~0.9 weeks added to the expected value\n- But blockers also dramatically widen the confidence interval on the high end\n\n## Revised Calculation\n\n- Base estimate after debiasing (2x multiplier): 6.0 weeks\n- Planning fallacy adjustment (+15%): 6.9 weeks\n- Major blocker expected value (+0.9 weeks): ~7.8 weeks\n\nRounding to a reasonable precision: **~7.5 weeks**\n\n## 80% Confidence Interval\n\n- **Low end (10th percentile):** If things go relatively smoothly but still experience some overrun: ~4.5 weeks\n- **High end (90th percentile):** If a major blocker hits plus typical scope creep and integration challenges: ~13 weeks\n\nThe distribution is right-skewed, which is typical for software projects \u2014 things rarely finish early but can be delayed significantly.\n\n```json\n{\"estimate\": 7.5, \"ci_low\": 4.5, \"ci_high\": 13.0}\n```"
+}

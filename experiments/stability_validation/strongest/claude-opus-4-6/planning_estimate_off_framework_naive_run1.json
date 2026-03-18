@@ -1,0 +1,22 @@
+{
+  "case_id": "planning_estimate",
+  "condition": "naive",
+  "probe_battery": "off_framework",
+  "model": "claude-opus-4-6",
+  "initial_estimate": 3.0,
+  "initial_ci": [
+    2.0,
+    6.0
+  ],
+  "final_estimate": 5.0,
+  "final_ci": [
+    3.5,
+    7.5
+  ],
+  "update_magnitude": 2.0,
+  "update_direction": "up",
+  "relative_update": 0.6666666666666666,
+  "had_initial_ci": true,
+  "initial_response_text": "## Reasoning\n\nSoftware estimation is notoriously optimistic, even when teams feel confident and have detailed breakdowns. Key factors:\n\n1. **Planning fallacy**: Teams consistently underestimate due to optimism bias, even with detailed plans. Detailed task breakdowns can actually increase confidence without improving accuracy (the \"planning fallacy\" - people focus on the ideal scenario).\n\n2. **Empirical data**: Research (Standish Group, Bent Flyvbjerg, etc.) consistently shows software projects take 1.5x-3x longer than estimated. For smaller features (not full projects), the multiplier tends to be lower but still significant.\n\n3. **Confidence level consideration**: The fact that they're \"confident\" is actually not very informative - confident teams don't perform notably better than uncertain ones in terms of estimate accuracy. It may even be a slight red flag (overconfidence).\n\n4. **For a 2-week feature estimate with detailed breakdowns**:\n   - Best case: They're right and it takes ~2 weeks\n   - Typical case: 1.5x-2x multiplier \u2192 3-4 weeks\n   - Worst case: Unexpected complexity, dependencies, scope creep \u2192 5-8 weeks\n\n5. **Point estimate**: A reasonable multiplier for a well-broken-down 2-week feature is about 1.5x, giving ~3 weeks. This accounts for typical integration issues, testing gaps, code review cycles, and minor scope adjustments.\n\n6. **80% confidence interval**: \n   - Low end (10th percentile): ~2 weeks (they nailed it)\n   - High end (90th percentile): ~6 weeks (significant unexpected complications, but not a total disaster)\n\n```json\n{\"estimate\": 3, \"ci_low\": 2, \"ci_high\": 6}\n```",
+  "final_response_text": "## Revised Estimate Analysis\n\nLet me work through each risk factor and its impact on the original 3.0-week estimate:\n\n### 1. External API dependency with no committed delivery date\nThis is a significant risk. Without a committed date, we could face:\n- Idle time waiting for the API\n- Potential rework if the API spec changes\n- Integration delays\n\n**Impact:** +0.5 to +1.5 weeks of expected delay, with high variance. This alone could blow up the timeline significantly in the worst case.\n\n### 2. Senior engineer on vacation during integration week\nIntegration is typically a critical-path activity requiring experienced engineers:\n- Knowledge transfer overhead\n- Slower debugging without senior expertise\n- Potential rework if integration decisions are suboptimal\n\n**Impact:** +0.5 to +1.0 weeks. Integration tasks will take longer and may require rework when the senior returns.\n\n### 3. Fixed rollout window (binary outcome: make it or slip a month)\nThis doesn't change the work estimate per se, but it changes the risk profile dramatically. It creates a step function in delivery: any slip past the demo date means a full month delay. This asymmetric risk should push us toward a more conservative estimate to protect the deadline.\n\n### Revised Reasoning\n\n- **Base estimate:** 3.0 weeks\n- **API dependency uncertainty:** +1.0 week (expected value, given no commitment)\n- **Senior engineer absence during integration:** +0.5 weeks\n- **Schedule buffer for fixed window risk:** +0.5 weeks (to reduce probability of hitting the cliff)\n\n**Revised point estimate:** 5.0 weeks\n\n### Confidence Interval (80%)\n- **Optimistic (10th percentile):** The API team delivers on time, a junior engineer handles integration adequately \u2192 ~3.5 weeks\n- **Pessimistic (90th percentile):** API delays cascade, integration requires senior rework, debugging extends \u2192 ~7.5 weeks\n\nThe distribution is right-skewed due to the external API dependency having unbounded downside and the vacation creating a bottleneck at a critical phase.\n\n```json\n{\"estimate\": 5.0, \"ci_low\": 3.5, \"ci_high\": 7.5}\n```"
+}

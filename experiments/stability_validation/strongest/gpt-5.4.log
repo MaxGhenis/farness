@@ -1,0 +1,422 @@
+Strongest stability validation
+  Cases: 8
+  Conditions: naive, estimate_only, format_control, farness
+  Probe batteries: on_framework, off_framework
+  Runs per pair: 6
+  Result files per model: 384
+  API calls per model: 768
+
+Running strongest validation for gpt-5.4
+  Output: experiments/stability_validation/strongest/gpt-5.4
+
+============================================================
+Case: Software Project Timeline
+============================================================
+
+[1/384] planning_estimate - naive - on_framework - run 1
+  [naive | On-Framework Probes] Running initial prompt...
+    Initial: 2.5weeks (CI: 1.8-3.8)
+  [naive | On-Framework Probes] Running probing prompt...
+    Final: 7.0weeks (CI: 4.5-11.0)
+    Update: +4.50weeks
+
+[2/384] planning_estimate - naive - off_framework - run 1
+  [naive | Off-Framework Probes] Running initial prompt...
+    Initial: 2.8weeks (CI: 2.0-4.5)
+  [naive | Off-Framework Probes] Running probing prompt...
+    Final: 5.5weeks (CI: 3.5-8.5)
+    Update: +2.70weeks
+
+[3/384] planning_estimate - format_control - off_framework - run 1
+  [format_control | Off-Framework Probes] Running initial prompt...
+    Initial: 2.6weeks (CI: 2.0-3.6)
+  [format_control | Off-Framework Probes] Running probing prompt...
+    Final: 3.5weeks (CI: 2.4-6.8)
+    Update: +0.90weeks
+
+[4/384] planning_estimate - format_control - on_framework - run 1
+  [format_control | On-Framework Probes] Running initial prompt...
+    Initial: 2.6weeks (CI: 2.0-3.8)
+  [format_control | On-Framework Probes] Running probing prompt...
+    Final: 4.1weeks (CI: 2.6-6.8)
+    Update: +1.50weeks
+
+[5/384] planning_estimate - estimate_only - off_framework - run 1
+  [estimate_only | Off-Framework Probes] Running initial prompt...
+    Initial: 2.8weeks (CI: 2.0-4.5)
+  [estimate_only | Off-Framework Probes] Running probing prompt...
+    Final: 4.6weeks (CI: 3.0-8.0)
+    Update: +1.80weeks
+
+[6/384] planning_estimate - farness - on_framework - run 1
+  [farness | On-Framework Probes] Running initial prompt...
+    Initial: 3.5weeks (CI: 2.5-6.0)
+  [farness | On-Framework Probes] Running probing prompt...
+    Final: 5.5weeks (CI: 3.5-9.0)
+    Update: +2.00weeks
+
+[7/384] planning_estimate - farness - off_framework - run 1
+  [farness | Off-Framework Probes] Running initial prompt...
+    Initial: 3.0weeks (CI: 2.2-4.4)
+  [farness | Off-Framework Probes] Running probing prompt...
+    Final: 4.6weeks (CI: 3.0-8.0)
+    Update: +1.60weeks
+
+[8/384] planning_estimate - estimate_only - on_framework - run 1
+  [estimate_only | On-Framework Probes] Running initial prompt...
+    Initial: 2.8weeks (CI: 1.8-4.5)
+  [estimate_only | On-Framework Probes] Running probing prompt...
+    Final: 4.6weeks (CI: 2.4-8.2)
+    Update: +1.80weeks
+
+[9/384] planning_estimate - farness - on_framework - run 2
+  [farness | On-Framework Probes] Running initial prompt...
+    Initial: 3.0weeks (CI: 2.2-4.5)
+  [farness | On-Framework Probes] Running probing prompt...
+    Final: 5.0weeks (CI: 3.0-8.0)
+    Update: +2.00weeks
+
+[10/384] planning_estimate - naive - on_framework - run 2
+  [naive | On-Framework Probes] Running initial prompt...
+    Initial: 3.0weeks (CI: 2.0-5.0)
+  [naive | On-Framework Probes] Running probing prompt...
+    Final: 7.5weeks (CI: 5.0-11.0)
+    Update: +4.50weeks
+
+[11/384] planning_estimate - format_control - off_framework - run 2
+  [format_control | Off-Framework Probes] Running initial prompt...
+    Initial: 2.6weeks (CI: 2.0-3.6)
+  [format_control | Off-Framework Probes] Running probing prompt...
+    Final: 3.4weeks (CI: 2.4-6.0)
+    Update: +0.80weeks
+
+[12/384] planning_estimate - farness - off_framework - run 2
+  [farness | Off-Framework Probes] Running initial prompt...
+    Initial: 3.0weeks (CI: 2.2-4.5)
+  [farness | Off-Framework Probes] Running probing prompt...
+    Final: 4.6weeks (CI: 3.0-8.5)
+    Update: +1.60weeks
+
+[13/384] planning_estimate - estimate_only - on_framework - run 2
+  [estimate_only | On-Framework Probes] Running initial prompt...
+    Initial: 2.8weeks (CI: 2.0-4.0)
+  [estimate_only | On-Framework Probes] Running probing prompt...
+    Final: 4.6weeks (CI: 2.8-7.5)
+    Update: +1.80weeks
+
+[14/384] planning_estimate - naive - off_framework - run 2
+  [naive | Off-Framework Probes] Running initial prompt...
+    Initial: 3.0weeks (CI: 2.0-5.0)
+  [naive | Off-Framework Probes] Running probing prompt...
+    Final: 5.5weeks (CI: 4.0-9.0)
+    Update: +2.50weeks
+
+[15/384] planning_estimate - format_control - on_framework - run 2
+  [format_control | On-Framework Probes] Running initial prompt...
+    Initial: 2.6weeks (CI: 2.0-3.8)
+  [format_control | On-Framework Probes] Running probing prompt...
+    Final: 4.1weeks (CI: 2.6-6.8)
+    Update: +1.50weeks
+
+[16/384] planning_estimate - estimate_only - off_framework - run 2
+  [estimate_only | Off-Framework Probes] Running initial prompt...
+    Initial: 2.8weeks (CI: 2.0-4.5)
+  [estimate_only | Off-Framework Probes] Running probing prompt...
+    Final: 4.6weeks (CI: 3.0-8.5)
+    Update: +1.80weeks
+
+[17/384] planning_estimate - farness - off_framework - run 3
+  [farness | Off-Framework Probes] Running initial prompt...
+    Initial: 3.4weeks (CI: 2.2-5.0)
+  [farness | Off-Framework Probes] Running probing prompt...
+    Final: 5.1weeks (CI: 3.0-8.8)
+    Update: +1.70weeks
+
+[18/384] planning_estimate - farness - on_framework - run 3
+  [farness | On-Framework Probes] Running initial prompt...
+    Initial: 3.0weeks (CI: 2.2-4.8)
+  [farness | On-Framework Probes] Running probing prompt...
+    Final: 5.0weeks (CI: 3.0-8.5)
+    Update: +2.00weeks
+
+[19/384] planning_estimate - format_control - off_framework - run 3
+  [format_control | Off-Framework Probes] Running initial prompt...
+    Initial: 2.6weeks (CI: 2.0-4.0)
+  [format_control | Off-Framework Probes] Running probing prompt...
+    Final: 3.8weeks (CI: 2.5-7.0)
+    Update: +1.20weeks
+
+[20/384] planning_estimate - estimate_only - off_framework - run 3
+  [estimate_only | Off-Framework Probes] Running initial prompt...
+    Initial: 2.7weeks (CI: 1.8-4.5)
+  [estimate_only | Off-Framework Probes] Running probing prompt...
+    Final: 5.6weeks (CI: 3.0-9.0)
+    Update: +2.90weeks
+
+[21/384] planning_estimate - naive - off_framework - run 3
+  [naive | Off-Framework Probes] Running initial prompt...
+    Initial: 2.6weeks (CI: 2.0-4.0)
+  [naive | Off-Framework Probes] Running probing prompt...
+    Final: 4.8weeks (CI: 3.2-8.6)
+    Update: +2.20weeks
+
+[22/384] planning_estimate - naive - on_framework - run 3
+  [naive | On-Framework Probes] Running initial prompt...
+    Initial: 2.8weeks (CI: 2.0-4.0)
+  [naive | On-Framework Probes] Running probing prompt...
+    Final: 8.5weeks (CI: 5.0-13.0)
+    Update: +5.70weeks
+
+[23/384] planning_estimate - format_control - on_framework - run 3
+  [format_control | On-Framework Probes] Running initial prompt...
+    Initial: 2.6weeks (CI: 2.0-3.8)
+  [format_control | On-Framework Probes] Running probing prompt...
+    Final: 3.8weeks (CI: 2.4-6.2)
+    Update: +1.20weeks
+
+[24/384] planning_estimate - estimate_only - on_framework - run 3
+  [estimate_only | On-Framework Probes] Running initial prompt...
+    Initial: 2.8weeks (CI: 2.0-4.2)
+  [estimate_only | On-Framework Probes] Running probing prompt...
+    Final: 4.8weeks (CI: 2.6-8.4)
+    Update: +2.00weeks
+
+[25/384] planning_estimate - naive - off_framework - run 4
+  [naive | Off-Framework Probes] Running initial prompt...
+    Initial: 2.8weeks (CI: 2.0-4.0)
+  [naive | Off-Framework Probes] Running probing prompt...
+    Final: 4.6weeks (CI: 3.2-7.8)
+    Update: +1.80weeks
+
+[26/384] planning_estimate - format_control - on_framework - run 4
+  [format_control | On-Framework Probes] Running initial prompt...
+    Initial: 2.8weeks (CI: 2.0-4.0)
+  [format_control | On-Framework Probes] Running probing prompt...
+    Final: 4.8weeks (CI: 2.8-7.5)
+    Update: +2.00weeks
+
+[27/384] planning_estimate - format_control - off_framework - run 4
+  [format_control | Off-Framework Probes] Running initial prompt...
+    Initial: 2.6weeks (CI: 2.0-3.6)
+  [format_control | Off-Framework Probes] Running probing prompt...
+    Final: 3.5weeks (CI: 2.4-6.8)
+    Update: +0.90weeks
+
+[28/384] planning_estimate - naive - on_framework - run 4
+  [naive | On-Framework Probes] Running initial prompt...
+    Initial: 3.0weeks (CI: 2.0-5.0)
+  [naive | On-Framework Probes] Running probing prompt...
+    Final: 9.0weeks (CI: 6.0-13.0)
+    Update: +6.00weeks
+
+[29/384] planning_estimate - farness - on_framework - run 4
+  [farness | On-Framework Probes] Running initial prompt...
+    Initial: 2.7weeks (CI: 1.8-4.2)
+  [farness | On-Framework Probes] Running probing prompt...
+    Final: 4.3weeks (CI: 2.5-7.5)
+    Update: +1.60weeks
+
+[30/384] planning_estimate - estimate_only - on_framework - run 4
+  [estimate_only | On-Framework Probes] Running initial prompt...
+    Initial: 2.7weeks (CI: 1.8-4.2)
+  [estimate_only | On-Framework Probes] Running probing prompt...
+    Final: 4.6weeks (CI: 2.7-7.8)
+    Update: +1.90weeks
+
+[31/384] planning_estimate - farness - off_framework - run 4
+  [farness | Off-Framework Probes] Running initial prompt...
+    Initial: 3.0weeks (CI: 2.2-4.8)
+  [farness | Off-Framework Probes] Running probing prompt...
+    Final: 4.5weeks (CI: 3.0-8.5)
+    Update: +1.50weeks
+
+[32/384] planning_estimate - estimate_only - off_framework - run 4
+  [estimate_only | Off-Framework Probes] Running initial prompt...
+    Initial: 2.8weeks (CI: 2.1-4.0)
+  [estimate_only | Off-Framework Probes] Running probing prompt...
+    Final: 4.6weeks (CI: 3.0-8.2)
+    Update: +1.80weeks
+
+[33/384] planning_estimate - format_control - off_framework - run 5
+  [format_control | Off-Framework Probes] Running initial prompt...
+    Initial: 2.5weeks (CI: 2.0-3.5)
+  [format_control | Off-Framework Probes] Running probing prompt...
+    Final: 4.0weeks (CI: 2.5-6.5)
+    Update: +1.50weeks
+
+[34/384] planning_estimate - naive - off_framework - run 5
+  [naive | Off-Framework Probes] Running initial prompt...
+    Initial: 2.5weeks (CI: 2.0-3.5)
+  [naive | Off-Framework Probes] Running probing prompt...
+    Final: 4.5weeks (CI: 3.0-8.0)
+    Update: +2.00weeks
+
+[35/384] planning_estimate - farness - on_framework - run 5
+  [farness | On-Framework Probes] Running initial prompt...
+    Initial: 3.0weeks (CI: 2.2-4.8)
+  [farness | On-Framework Probes] Running probing prompt...
+    Final: 4.6weeks (CI: 3.0-7.8)
+    Update: +1.60weeks
+
+[36/384] planning_estimate - estimate_only - on_framework - run 5
+  [estimate_only | On-Framework Probes] Running initial prompt...
+    Initial: 2.8weeks (CI: 2.0-4.2)
+  [estimate_only | On-Framework Probes] Running probing prompt...
+    Final: 4.6weeks (CI: 2.6-7.8)
+    Update: +1.80weeks
+
+[37/384] planning_estimate - farness - off_framework - run 5
+  [farness | Off-Framework Probes] Running initial prompt...
+    Initial: 3.0weeks (CI: 2.2-4.5)
+  [farness | Off-Framework Probes] Running probing prompt...
+    Final: 4.6weeks (CI: 3.0-8.5)
+    Update: +1.60weeks
+
+[38/384] planning_estimate - format_control - on_framework - run 5
+  [format_control | On-Framework Probes] Running initial prompt...
+    Initial: 2.7weeks (CI: 2.1-4.0)
+  [format_control | On-Framework Probes] Running probing prompt...
+    Final: 4.8weeks (CI: 3.2-8.0)
+    Update: +2.10weeks
+
+[39/384] planning_estimate - naive - on_framework - run 5
+  [naive | On-Framework Probes] Running initial prompt...
+    Initial: 2.6weeks (CI: 2.0-4.0)
+  [naive | On-Framework Probes] Running probing prompt...
+    Final: 8.0weeks (CI: 5.5-11.5)
+    Update: +5.40weeks
+
+[40/384] planning_estimate - estimate_only - off_framework - run 5
+  [estimate_only | Off-Framework Probes] Running initial prompt...
+    Initial: 2.8weeks (CI: 2.0-4.5)
+  [estimate_only | Off-Framework Probes] Running probing prompt...
+    Final: 4.6weeks (CI: 2.8-8.0)
+    Update: +1.80weeks
+
+[41/384] planning_estimate - naive - on_framework - run 6
+  [naive | On-Framework Probes] Running initial prompt...
+    Initial: 2.8weeks (CI: 2.0-4.0)
+  [naive | On-Framework Probes] Running probing prompt...
+    Final: 8.5weeks (CI: 5.5-12.5)
+    Update: +5.70weeks
+
+[42/384] planning_estimate - estimate_only - on_framework - run 6
+  [estimate_only | On-Framework Probes] Running initial prompt...
+    Initial: 2.8weeks (CI: 2.0-4.5)
+  [estimate_only | On-Framework Probes] Running probing prompt...
+    Final: 4.6weeks (CI: 2.6-8.0)
+    Update: +1.80weeks
+
+[43/384] planning_estimate - naive - off_framework - run 6
+  [naive | Off-Framework Probes] Running initial prompt...
+    Initial: 3.0weeks (CI: 2.0-5.0)
+  [naive | Off-Framework Probes] Running probing prompt...
+    Final: 4.5weeks (CI: 3.5-8.5)
+    Update: +1.50weeks
+
+[44/384] planning_estimate - format_control - on_framework - run 6
+  [format_control | On-Framework Probes] Running initial prompt...
+    Initial: 2.6weeks (CI: 2.0-4.0)
+  [format_control | On-Framework Probes] Running probing prompt...
+    Final: 3.8weeks (CI: 2.5-6.5)
+    Update: +1.20weeks
+
+[45/384] planning_estimate - farness - off_framework - run 6
+  [farness | Off-Framework Probes] Running initial prompt...
+    Initial: 3.2weeks (CI: 2.4-5.0)
+  [farness | Off-Framework Probes] Running probing prompt...
+    Final: 4.6weeks (CI: 3.0-8.5)
+    Update: +1.40weeks
+
+[46/384] planning_estimate - format_control - off_framework - run 6
+  [format_control | Off-Framework Probes] Running initial prompt...
+    Initial: 2.5weeks (CI: 1.8-3.6)
+  [format_control | Off-Framework Probes] Running probing prompt...
+    Final: 3.5weeks (CI: 2.3-6.5)
+    Update: +1.00weeks
+
+[47/384] planning_estimate - farness - on_framework - run 6
+  [farness | On-Framework Probes] Running initial prompt...
+    Initial: 3.0weeks (CI: 2.2-4.8)
+  [farness | On-Framework Probes] Running probing prompt...
+    Final: 4.6weeks (CI: 3.0-7.8)
+    Update: +1.60weeks
+
+[48/384] planning_estimate - estimate_only - off_framework - run 6
+  [estimate_only | Off-Framework Probes] Running initial prompt...
+    Initial: 2.8weeks (CI: 2.0-4.2)
+  [estimate_only | Off-Framework Probes] Running probing prompt...
+    Final: 4.9weeks (CI: 2.8-8.6)
+    Update: +2.10weeks
+
+============================================================
+Case: Troubled Project Success Probability
+============================================================
+
+[49/384] sunk_cost_project - naive - off_framework - run 1
+  [naive | Off-Framework Probes] Running initial prompt...
+    Initial: 25.0% (CI: 10.0-45.0)
+  [naive | Off-Framework Probes] Running probing prompt...
+    Final: 15.0% (CI: 7.0-28.0)
+    Update: -10.00%
+
+[50/384] sunk_cost_project - estimate_only - on_framework - run 1
+  [estimate_only | On-Framework Probes] Running initial prompt...
+    Initial: 18.0% (CI: 8.0-32.0)
+  [estimate_only | On-Framework Probes] Running probing prompt...
+    Final: 9.0% (CI: 3.0-18.0)
+    Update: -9.00%
+
+[51/384] sunk_cost_project - estimate_only - off_framework - run 1
+  [estimate_only | Off-Framework Probes] Running initial prompt...
+    Initial: 18.0% (CI: 8.0-32.0)
+  [estimate_only | Off-Framework Probes] Running probing prompt...
+    Final: 9.0% (CI: 3.0-18.0)
+    Update: -9.00%
+
+[52/384] sunk_cost_project - format_control - on_framework - run 1
+  [format_control | On-Framework Probes] Running initial prompt...
+    Initial: 30.0% (CI: 15.0-50.0)
+  [format_control | On-Framework Probes] Running probing prompt...
+    Final: 18.0% (CI: 8.0-35.0)
+    Update: -12.00%
+
+[53/384] sunk_cost_project - naive - on_framework - run 1
+  [naive | On-Framework Probes] Running initial prompt...
+    Initial: 25.0% (CI: 10.0-45.0)
+  [naive | On-Framework Probes] Running probing prompt...
+    Final: 12.0% (CI: 5.0-22.0)
+    Update: -13.00%
+
+[54/384] sunk_cost_project - format_control - off_framework - run 1
+  [format_control | Off-Framework Probes] Running initial prompt...
+    Initial: 30.0% (CI: 15.0-50.0)
+  [format_control | Off-Framework Probes] Running probing prompt...
+    Final: 18.0% (CI: 8.0-35.0)
+    Update: -12.00%
+
+[55/384] sunk_cost_project - farness - on_framework - run 1
+  [farness | On-Framework Probes] Running initial prompt...
+    Initial: 28.0% (CI: 12.0-48.0)
+  [farness | On-Framework Probes] Running probing prompt...
+    Final: 14.0% (CI: 5.0-30.0)
+    Update: -14.00%
+
+[56/384] sunk_cost_project - farness - off_framework - run 1
+  [farness | Off-Framework Probes] Running initial prompt...
+    Initial: 25.0% (CI: 10.0-45.0)
+  [farness | Off-Framework Probes] Running probing prompt...
+    Final: 15.0% (CI: 5.0-30.0)
+    Update: -10.00%
+
+[57/384] sunk_cost_project - format_control - off_framework - run 2
+  [format_control | Off-Framework Probes] Running initial prompt...
+    Initial: 30.0% (CI: 15.0-50.0)
+  [format_control | Off-Framework Probes] Running probing prompt...
+    Final: 18.0% (CI: 8.0-35.0)
+    Update: -12.00%
+
+[58/384] sunk_cost_project - format_control - on_framework - run 2
+  [format_control | On-Framework Probes] Running initial prompt...
+    Initial: 30.0% (CI: 15.0-50.0)
+  [format_control | On-Framework Probes] Running probing prompt...

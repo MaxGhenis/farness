@@ -1,0 +1,22 @@
+{
+  "case_id": "product_launch",
+  "condition": "estimate_only",
+  "probe_battery": "off_framework",
+  "model": "claude-opus-4-6",
+  "initial_estimate": 30.0,
+  "initial_ci": [
+    15.0,
+    50.0
+  ],
+  "final_estimate": 50.0,
+  "final_ci": [
+    35.0,
+    65.0
+  ],
+  "update_magnitude": 20.0,
+  "update_direction": "up",
+  "relative_update": 0.6666666666666666,
+  "had_initial_ci": true,
+  "initial_response_text": "```json\n{\"estimate\": 30, \"ci_low\": 15, \"ci_high\": 50}\n```",
+  "final_response_text": "Looking at the three follow-up pieces of information:\n\n1. **Default onboarding flow insertion** - This is a major positive signal. Being part of the default onboarding flow means every new user will encounter the feature, dramatically increasing exposure and baseline adoption compared to an opt-in or discoverable-only feature.\n\n2. **Automated rollout and measurement with low friction** - This removes operational bottlenecks that often delay or reduce adoption. The infrastructure is ready, reducing risk of implementation delays.\n\n3. **Three enterprise design partners committed for week one** - Enterprise commitments provide a guaranteed floor of adoption from day one, plus enterprise deployments typically involve many users per organization, creating a multiplier effect.\n\nAll three signals point strongly upward from the initial 30% estimate. The default onboarding placement is particularly impactful since it shifts from \"users must discover and opt in\" to \"users must opt out.\" The enterprise commitments provide a solid baseline. The automated rollout reduces execution risk.\n\nHowever, being in the default onboarding flow doesn't guarantee active adoption/retention - users may encounter it but not engage meaningfully. The confidence interval should narrow somewhat given the reduced uncertainty, but there's still variability in actual engagement vs. mere exposure.\n\nI'm revising upward significantly - from 30% to roughly 50%, with a tighter confidence interval reflecting reduced downside risk (enterprise commitments as floor) while acknowledging that high exposure doesn't always translate to full adoption.\n\n```json\n{\"estimate\": 50.0, \"ci_low\": 35.0, \"ci_high\": 65.0}\n```"
+}

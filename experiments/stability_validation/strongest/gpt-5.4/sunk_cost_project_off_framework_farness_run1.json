@@ -1,0 +1,22 @@
+{
+  "case_id": "sunk_cost_project",
+  "condition": "farness",
+  "probe_battery": "off_framework",
+  "model": "gpt-5.4",
+  "initial_estimate": 25.0,
+  "initial_ci": [
+    10.0,
+    45.0
+  ],
+  "final_estimate": 15.0,
+  "final_ci": [
+    5.0,
+    30.0
+  ],
+  "update_magnitude": 10.0,
+  "update_direction": "down",
+  "relative_update": 0.4,
+  "had_initial_ci": true,
+  "initial_response_text": "Using a farness / outside-view approach:\n\n- **Base rates:** Software projects that are already **late, over budget, and asking for a \u201csmall final push\u201d** have poor short-term completion reliability. Large industry studies like the **Standish CHAOS reports** and related project-management research consistently find substantial rates of delay, budget overrun, descoping, or failure. Depending on project type, only a minority land close to original cost/schedule targets, and projects already in distress perform materially worse than the average.\n- **Reference class:** \u201c18 months and $2M spent, demoralized team, behind schedule, leadership says \u2018almost there,\u2019 asking for 25% more budget and ~17% more time.\u201d\n  - In distressed software projects, a claim of \u201cjust 3 more months\u201d is often an **inside-view underestimate**.\n  - If a project is truly in the final integration/polish phase, success is plausible.\n  - But the combination of **schedule slip + budget overrun + morale problems** is a strong negative signal for hidden work, quality issues, rework, and integration surprises.\n\n### Cognitive biases likely present\n- **Sunk cost fallacy:** \u201cWe\u2019ve already spent $2M, so we should keep going.\u201d\n- **Planning fallacy:** Underestimating remaining effort despite prior misses.\n- **Optimism bias:** \u201cAlmost there\u201d without strong evidence.\n- **Escalation of commitment:** Leadership doubling down after bad news.\n- **Inside-view bias:** Focusing on known remaining tasks, ignoring base rates and unknown unknowns.\n- **Motivated reasoning / face-saving:** Framing the ask as small and final.\n\n### Numeric forecast\nMy outside-view-adjusted estimate for **successful launch within the proposed additional $500K and 3 months** is:\n\n- **Point estimate:** 25%\n- **80% confidence interval:** 10% to 45%\n\nThis reflects:\n- some chance they truly are near completion,\n- but a larger-than-usual chance that the \u201clast 10%\u201d takes much longer,\n- and substantial risk that launch either slips beyond 3 months, requires more budget, or launches unsuccessfully.\n\n```json\n{\"estimate\": 25, \"ci_low\": 10, \"ci_high\": 45}\n```",
+  "final_response_text": "The new information pushes the estimate down materially.\n\nReasoning, briefly:\n- **Opportunity cost of the last $500K**: if funding this displaces a project likely to ship **$1.2M ARR this quarter**, that raises the bar for rational continuation and suggests the current project is weaker on expected value than it first appeared.\n- **Risk concentrated in final integration/cutover with no production-like staging**: this is a major execution risk amplifier. Projects often look \u201calmost done\u201d right before integration, but that phase is where hidden incompatibilities, data issues, performance problems, rollback concerns, and operational surprises appear. Lack of a realistic staging environment makes schedule and success estimates much less reliable.\n- **Sponsor incentive misalignment**: if the executive sponsor is judged on **keeping the project alive until the next board meeting**, that is a red flag. It increases the chance of continued funding/reporting optimism even when underlying odds are poor.\n\nSo I\u2019d revise from **25%** downward to around **15%**, with a somewhat wide 80% CI because late-stage integration risk can still resolve well sometimes, but the incentive and staging signals are both notably negative.\n\n```json\n{\"estimate\": 15.0, \"ci_low\": 5.0, \"ci_high\": 30.0}\n```"
+}

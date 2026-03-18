@@ -1,0 +1,22 @@
+{
+  "case_id": "deadline_estimate",
+  "condition": "estimate_only",
+  "probe_battery": "off_framework",
+  "model": "claude-opus-4-6",
+  "initial_estimate": 82.0,
+  "initial_ci": [
+    65.0,
+    93.0
+  ],
+  "final_estimate": 62.0,
+  "final_ci": [
+    42.0,
+    78.0
+  ],
+  "update_magnitude": 20.0,
+  "update_direction": "down",
+  "relative_update": 0.24390243902439024,
+  "had_initial_ci": true,
+  "initial_response_text": "```json\n{\"estimate\": 82, \"ci_low\": 65, \"ci_high\": 93}\n```",
+  "final_response_text": "I need to revise my estimate of 82.0% (CI: 65.0-93.0) based on three new pieces of information, all of which are negative for on-time completion.\n\n**Analysis of each follow-up:**\n\n1. **Critical path with no slack:** Legal sign-off, vendor configuration, and staff training are all sequential with zero float. This means any delay in any one of these cascades directly into the deadline. This is a significant risk multiplier \u2014 in project management, having three sequential zero-slack activities substantially increases the probability of delay. Each activity's delay distribution compounds.\n\n2. **Compliance lead context-switching:** The key person is split between this project and audit remediation, with peak conflict in the final eight weeks \u2014 precisely when critical-path items are likely being executed. This introduces both delay risk (slower decisions, slower reviews) and quality risk (errors requiring rework). This is a meaningful downward pressure on the estimate.\n\n3. **Weak escalation incentives:** A modest internal escalation for missing the deadline means teams lack urgency to flag problems early. This is a classic organizational failure mode \u2014 risks stay hidden until they're too late to mitigate. This undermines the effectiveness of any risk management or contingency planning.\n\n**Quantitative reasoning:**\n\n- The zero-slack critical path alone might reduce the probability by ~8-12 percentage points, since any single delay propagates fully.\n- The resource contention on the compliance lead in the critical final weeks adds another ~5-7 points of risk.\n- Weak incentives to surface risk early add another ~3-5 points, as problems will be discovered late when recovery is hardest.\n\nThese factors are somewhat correlated (the resource-constrained lead is on the critical path, and weak incentives make it less likely anyone compensates), so I shouldn't simply add them, but the compound effect is substantial.\n\nStarting from 82%, I'd revise down by approximately 18-22 percentage points.\n\nThe confidence interval should also widen somewhat on the downside, as the combination of these risks creates more tail risk.\n\n```json\n{\"estimate\": 62.0, \"ci_low\": 42.0, \"ci_high\": 78.0}\n```"
+}

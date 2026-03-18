@@ -1,0 +1,22 @@
+{
+  "case_id": "hiring_success",
+  "condition": "estimate_only",
+  "probe_battery": "on_framework",
+  "model": "claude-opus-4-6",
+  "initial_estimate": 30.0,
+  "initial_ci": [
+    15.0,
+    45.0
+  ],
+  "final_estimate": 15.0,
+  "final_ci": [
+    8.0,
+    25.0
+  ],
+  "update_magnitude": 15.0,
+  "update_direction": "down",
+  "relative_update": 0.5,
+  "had_initial_ci": true,
+  "initial_response_text": "```json\n{\"estimate\": 30, \"ci_low\": 15, \"ci_high\": 45}\n```",
+  "final_response_text": "I need to revise my estimate based on the follow-up information about the validity of different hiring signals.\n\nLet me reconsider the scenario:\n\n1. **Unstructured interview impressions** (r=0.14 with job performance): The \"great interview chemistry\" signal is essentially noise - it has very low predictive validity. This means the positive interview impression should barely move the needle.\n\n2. **Similarity bias**: \"Reminded me of our best performer\" is a classic cognitive bias, not a valid predictor. This further undermines the interview-based positive signal.\n\n3. **Technical assessment** (r=0.51 with job performance): This is a much stronger predictor - 4x better than interview chemistry. The candidate scored below the threshold on this measure.\n\nSo the situation is: the one strong, validated predictor (technical assessment) says the candidate is below threshold, while the weak, bias-laden signal (interview impression) says positive. \n\nGiven that:\n- The technical assessment is the best predictor and indicates poor fit\n- The interview chemistry is largely noise/bias\n- Hiring based on chemistry over technical assessment would be a well-documented error\n\nThe probability of the candidate being a successful hire should be lower than my original 30% estimate. The technical score being below threshold, weighted by its much higher validity, should dominate the prediction. A below-threshold technical score with r=0.51 suggests substantially below-average expected performance. The interview chemistry barely shifts this.\n\nI'd estimate roughly 15% probability of successful hire - the technical assessment strongly predicts against success, and the interview signal is essentially uninformative.\n\n```json\n{\"estimate\": 15.0, \"ci_low\": 8.0, \"ci_high\": 25.0}\n```"
+}

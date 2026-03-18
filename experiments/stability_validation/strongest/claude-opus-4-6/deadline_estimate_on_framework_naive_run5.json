@@ -1,0 +1,22 @@
+{
+  "case_id": "deadline_estimate",
+  "condition": "naive",
+  "probe_battery": "on_framework",
+  "model": "claude-opus-4-6",
+  "initial_estimate": 80.0,
+  "initial_ci": [
+    65.0,
+    90.0
+  ],
+  "final_estimate": 22.0,
+  "final_ci": [
+    8.0,
+    40.0
+  ],
+  "update_magnitude": 58.0,
+  "update_direction": "down",
+  "relative_update": 0.725,
+  "had_initial_ci": true,
+  "initial_response_text": "## Reasoning\n\nKey factors to consider:\n\n**Favorable factors:**\n- 2-month buffer (50% of estimated work time) is substantial\n- Detailed project plan already exists\n- Compliance team has provided the estimate (domain expertise)\n\n**Unfavorable factors:**\n- Software/compliance projects notoriously overrun estimates (planning fallacy)\n- Regulatory compliance often involves external dependencies (regulators, vendors, auditors)\n- Scope creep is common as regulations are interpreted more carefully\n- Resource availability may shift over 4-6 months\n- The 4-month estimate likely assumes things go mostly right\n\n**Reference class thinking:**\n- Projects with a 50% buffer relative to estimated duration have decent but not guaranteed completion rates\n- The planning fallacy suggests the \"4 months\" is likely optimistic; real work might take 5-6 months\n- Having a detailed plan helps but doesn't eliminate uncertainty\n- Compliance projects have hard external dependencies that can cause delays\n\n**Assessment:**\nThe 2-month buffer helps significantly, pushing this from maybe ~50-60% (if no buffer) to something higher. But compliance work can encounter unexpected regulatory clarifications, system integration issues, or resource bottlenecks. I'd estimate roughly 75-85% probability of on-time completion.\n\nThe confidence interval around my estimate reflects uncertainty about the company's track record, team competence, and regulatory complexity \u2014 factors I don't know.\n\n```json\n{\"estimate\": 80, \"ci_low\": 65, \"ci_high\": 90}\n```",
+  "final_response_text": "I need to revise my initial estimate of 80% downward based on three significant pieces of negative information.\n\n## Analyzing Each Factor\n\n**Factor 1: Industry base rate of 40% on-time completion**\nMy initial estimate of 80% was significantly above the industry base rate. This alone should pull my estimate substantially downward. A reasonable anchor-and-adjust approach would start much closer to 40%.\n\n**Factor 2: Team has no experience with this specific type of work**\nThis is a significant risk factor. Teams without relevant experience typically perform worse than the industry average, not better. This should push the estimate below the 40% base rate, or at best keep it near that level.\n\n**Factor 3: Regulations still being finalized and may change**\nThis introduces substantial exogenous uncertainty. If the target itself is moving, the project scope may shift, requiring rework or delays. This is a major risk factor that further reduces the probability of on-time completion.\n\n## Revision Logic\n\n- Starting from the base rate of 40% (industry average for regulatory compliance)\n- Team inexperience: adjust downward by ~8-10 percentage points (inexperienced teams likely perform below average)\n- Regulatory uncertainty: adjust downward by another ~8-10 percentage points (moving targets cause delays and rework)\n\nCombined, these factors suggest an estimate around 20-25%.\n\nThe team inexperience and regulatory uncertainty are partially correlated (an inexperienced team will be even less able to adapt to changing requirements), which could compound the negative effects slightly.\n\n## Confidence Interval\n\nThere's substantial uncertainty here:\n- Things could go better if regulations stabilize quickly and the team ramps up fast (~35-40%)\n- Things could go much worse if regulations change significantly and the team struggles (~8-10%)\n\nAn 80% confidence interval should capture the range of plausible outcomes.\n\n```json\n{\"estimate\": 22, \"ci_low\": 8, \"ci_high\": 40}\n```"
+}

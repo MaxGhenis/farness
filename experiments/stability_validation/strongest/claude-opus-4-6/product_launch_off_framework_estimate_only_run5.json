@@ -1,0 +1,22 @@
+{
+  "case_id": "product_launch",
+  "condition": "estimate_only",
+  "probe_battery": "off_framework",
+  "model": "claude-opus-4-6",
+  "initial_estimate": 30.0,
+  "initial_ci": [
+    15.0,
+    50.0
+  ],
+  "final_estimate": 55.0,
+  "final_ci": [
+    38.0,
+    72.0
+  ],
+  "update_magnitude": 25.0,
+  "update_direction": "up",
+  "relative_update": 0.8333333333333334,
+  "had_initial_ci": true,
+  "initial_response_text": "```json\n{\"estimate\": 30, \"ci_low\": 15, \"ci_high\": 50}\n```",
+  "final_response_text": "Looking at the three follow-up pieces of information:\n\n1. **Default onboarding flow integration**: This is a major boost. Being in the default path for all new users dramatically increases exposure and adoption compared to an opt-in or secondary feature. This alone could significantly raise the estimate.\n\n2. **Automated rollout and measurement**: Low friction in deployment and tracking means fewer operational barriers that could slow adoption. This removes a common source of underperformance.\n\n3. **Three enterprise design partners committed for week one**: Enterprise commitments provide a guaranteed baseline of adoption from day one, plus these serve as proof points that can accelerate further adoption.\n\nAll three signals are strongly positive and address different risk factors:\n- Signal 1 addresses discovery/awareness risk\n- Signal 2 addresses operational/friction risk\n- Signal 3 addresses demand/commitment risk\n\nThe original estimate of 30% with a wide CI reflected significant uncertainty. These updates substantially reduce downside risk and shift the distribution upward. The default onboarding placement is particularly powerful - features placed in default flows typically see much higher engagement than optional ones.\n\nI'd revise upward significantly, perhaps to around 55%, with a narrower confidence interval since much of the uncertainty has been resolved. There's still some residual risk (user drop-off, enterprise partners not fully deploying, market reception), but the fundamentals are much stronger.\n\n```json\n{\"estimate\": 55.0, \"ci_low\": 38.0, \"ci_high\": 72.0}\n```"
+}

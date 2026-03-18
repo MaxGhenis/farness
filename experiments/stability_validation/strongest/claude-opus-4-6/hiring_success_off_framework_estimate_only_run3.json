@@ -1,0 +1,22 @@
+{
+  "case_id": "hiring_success",
+  "condition": "estimate_only",
+  "probe_battery": "off_framework",
+  "model": "claude-opus-4-6",
+  "initial_estimate": 30.0,
+  "initial_ci": [
+    15.0,
+    45.0
+  ],
+  "final_estimate": 62.0,
+  "final_ci": [
+    48.0,
+    76.0
+  ],
+  "update_magnitude": 32.0,
+  "update_direction": "up",
+  "relative_update": 1.0666666666666667,
+  "had_initial_ci": true,
+  "initial_response_text": "```json\n{\"estimate\": 30, \"ci_low\": 15, \"ci_high\": 45}\n```",
+  "final_response_text": "Looking at the follow-up information:\n\n1. **Cross-functional leadership shift** + **Candidate A excelled in stakeholder simulation** \u2014 This strongly favors Candidate A, as the role now emphasizes exactly the skills where A demonstrated strength.\n\n2. **Reserved candidate scored higher technically but couldn't explain tradeoffs** \u2014 Technical skill alone is less valuable if the person can't communicate effectively in design reviews, which is critical for cross-functional roles.\n\n3. **Urgent need to rebuild trust with product and sales** \u2014 This is a strong contextual factor that heavily favors someone with interpersonal and stakeholder management skills (Candidate A).\n\nAll three pieces of evidence point in the same direction: away from the reserved/technical candidate and toward Candidate A. The original estimate of 30% (which I interpret as the probability of selecting Candidate A or the probability of a successful outcome) should be revised significantly upward.\n\nThe convergence of role redefinition, simulation performance, and urgent organizational need creates a compelling case. I'd estimate this moves the probability substantially \u2014 perhaps roughly doubling from the original estimate.\n\n```json\n{\"estimate\": 62.0, \"ci_low\": 48.0, \"ci_high\": 76.0}\n```"
+}

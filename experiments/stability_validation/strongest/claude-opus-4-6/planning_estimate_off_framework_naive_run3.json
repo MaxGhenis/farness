@@ -1,0 +1,22 @@
+{
+  "case_id": "planning_estimate",
+  "condition": "naive",
+  "probe_battery": "off_framework",
+  "model": "claude-opus-4-6",
+  "initial_estimate": 3.0,
+  "initial_ci": [
+    2.0,
+    5.0
+  ],
+  "final_estimate": 4.5,
+  "final_ci": [
+    3.5,
+    6.5
+  ],
+  "update_magnitude": 1.5,
+  "update_direction": "up",
+  "relative_update": 0.5,
+  "had_initial_ci": true,
+  "initial_response_text": "## Reasoning\n\nSoftware estimation is notoriously optimistic, even when teams feel confident and have detailed breakdowns. Empirical research on software projects (e.g., Standish Group, Bent Flyvbjerg's work on planning fallacy) consistently shows:\n\n- Teams tend to underestimate by a factor of 1.5x to 2x on average\n- Detailed task breakdowns help but don't eliminate optimism bias\n- \"Confident\" teams are often just as subject to the planning fallacy\n- Integration, testing, code review, unexpected dependencies, and context-switching are commonly underestimated\n\nHowever, this team has two things going for them: confidence AND detailed breakdowns. Detailed breakdowns are one of the better debiasing techniques. This suggests they're better positioned than average, but still likely optimistic.\n\n**Point estimate:** I'd apply roughly a 1.5x multiplier \u2192 **3 weeks**. This accounts for the typical underestimation while crediting their preparation.\n\n**80% confidence interval:**\n- **Low end (ci_low):** ~2 weeks \u2014 it's possible they nailed it, especially with good breakdowns. Maybe they've done similar work before.\n- **High end (ci_high):** ~5 weeks \u2014 scope creep, unexpected blockers, illness, dependencies on other teams, or discovering the problem is harder than anticipated could easily push to 2-2.5x.\n\nThe distribution is right-skewed (things can go much worse than planned, but rarely finish much earlier).\n\n```json\n{\"estimate\": 3, \"ci_low\": 2, \"ci_high\": 5}\n```",
+  "final_response_text": "## Revised Estimate Analysis\n\nLet me work through each new risk factor and its impact on the original 3.0-week estimate.\n\n### Risk Factor Assessment\n\n**1. External API team with no committed delivery date**\n- This is a significant dependency risk. Without a committed date, there's a real possibility of blocking work. This could add anywhere from 0.5 to 2+ weeks depending on their responsiveness.\n- Expected impact: +0.5 to 1.0 weeks for likely delays, coordination overhead, and potential need for mocking/workarounds.\n\n**2. Senior engineer on vacation during integration week**\n- Integration is typically the phase where senior expertise is most critical for debugging, architecture decisions, and unblocking others.\n- Loss of a senior engineer during this critical phase likely means slower integration, possible rework, and knowledge gaps.\n- Expected impact: +0.5 to 0.75 weeks (slower integration, potential need to reschedule or work around their absence).\n\n**3. Fixed rollout window with binary outcome (hit it or slip a full month)**\n- This doesn't change the point estimate of work effort directly, but it dramatically affects the risk profile and may require building in more buffer to avoid the cliff.\n- It also means the team should front-load risk mitigation, which itself takes coordination time.\n- Expected impact on planning: +0.25 to 0.5 weeks of additional buffer/contingency work.\n\n### Combined Assessment\n\nThese risks are partially correlated \u2014 the API delay compounds with the missing senior engineer during integration, making the worst case significantly worse than each risk independently.\n\n- **Base estimate:** 3.0 weeks\n- **API dependency risk:** +0.75 weeks\n- **Staffing gap:** +0.5 weeks\n- **Risk correlation/buffer for fixed deadline:** +0.25 weeks\n- **Revised point estimate:** ~4.5 weeks\n\n### Confidence Interval (80%)\n\n- **Best case (P10):** The API team delivers on time, other engineers handle integration adequately \u2192 ~3.5 weeks\n- **Worst case (P90):** API team delays significantly, integration issues compound without senior engineer \u2192 ~6.5 weeks\n\nThe distribution is right-skewed because the API dependency has unbounded upside risk, and the fixed demo deadline creates pressure that could lead to rushed work and rework.\n\n```json\n{\"estimate\": 4.5, \"ci_low\": 3.5, \"ci_high\": 6.5}\n```"
+}

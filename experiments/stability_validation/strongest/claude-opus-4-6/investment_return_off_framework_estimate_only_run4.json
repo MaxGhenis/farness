@@ -1,0 +1,22 @@
+{
+  "case_id": "investment_return",
+  "condition": "estimate_only",
+  "probe_battery": "off_framework",
+  "model": "claude-opus-4-6",
+  "initial_estimate": 15.0,
+  "initial_ci": [
+    5.0,
+    30.0
+  ],
+  "final_estimate": 50.0,
+  "final_ci": [
+    32.0,
+    68.0
+  ],
+  "update_magnitude": 35.0,
+  "update_direction": "up",
+  "relative_update": 2.3333333333333335,
+  "had_initial_ci": true,
+  "initial_response_text": "```json\n{\"estimate\": 15, \"ci_low\": 5, \"ci_high\": 30}\n```",
+  "final_response_text": "I need to reassess the probability based on the three follow-up pieces of information.\n\nStarting from my prior estimate of 15.0% (CI: 5.0-30.0), let me consider how each piece of information shifts things:\n\n1. **35% discount with pro-rata rights**: This is a concrete, structured discount rather of a vague promise. Pro-rata rights are a meaningful sweetener that gives investors the ability to maintain their ownership stake in future rounds. This makes the deal significantly more attractive and credible compared to a vague \"friends and family\" arrangement. This should increase the estimate notably.\n\n2. **Two institutional investors leading on the same terms after completing diligence**: This is a very strong positive signal. Institutional investors doing diligence and committing provides substantial validation. It reduces the risk of adverse selection (the deal isn't just being offered to unsophisticated investors). Having two institutions leading means the round is likely well-structured and properly priced. This is a major positive update.\n\n3. **Revenue diversified across customers and cash-flow positive**: This dramatically reduces the risk profile. Cash-flow positive means the company isn't dependent on future fundraising to survive. Diversified revenue reduces concentration risk. This makes the investment fundamentally less risky.\n\nWithout knowing the exact scenario (it seems to be about whether this is a good investment opportunity or whether the round will close successfully, or perhaps the probability of a positive return), I'll assume this is about the probability of achieving a successful outcome (e.g., positive return on investment or the round being a worthwhile investment).\n\nAll three factors are strongly positive:\n- The discount + pro-rata rights make the terms favorable\n- Institutional validation after diligence is a strong signal\n- Cash-flow positive with diversified revenue significantly de-risks\n\nEach factor independently would push the estimate up substantially. Combined, I'd expect a significant upward revision. Moving from 15% to something in the range of 45-55% seems appropriate. The combination of institutional validation, favorable terms, and strong business fundamentals is quite compelling, though inherent startup/investment risks remain.\n\n```json\n{\"estimate\": 50.0, \"ci_low\": 32.0, \"ci_high\": 68.0}\n```"
+}

@@ -1,0 +1,22 @@
+{
+  "case_id": "planning_estimate",
+  "condition": "naive",
+  "probe_battery": "on_framework",
+  "model": "claude-opus-4-6",
+  "initial_estimate": 3.0,
+  "initial_ci": [
+    2.0,
+    5.0
+  ],
+  "final_estimate": 7.5,
+  "final_ci": [
+    4.5,
+    14.0
+  ],
+  "update_magnitude": 4.5,
+  "update_direction": "up",
+  "relative_update": 1.5,
+  "had_initial_ci": true,
+  "initial_response_text": "## Reasoning\n\nSoftware estimation is notoriously optimistic, even when teams feel confident and have detailed breakdowns. Several well-documented biases apply:\n\n1. **Planning fallacy**: People consistently underestimate task duration, even when aware of past overruns. Studies suggest actual times are typically 1.5-2x initial estimates.\n\n2. **Detailed breakdowns can increase overconfidence**: Having granular task lists makes teams feel more in control, but they often miss integration work, edge cases, testing overhead, code review cycles, and unforeseen dependencies.\n\n3. **\"Confident\" is a warning sign**: High confidence in software estimates often correlates with underestimating unknowns. The things you don't know you don't know are what blow up timelines.\n\n4. **Empirical data**: Research (e.g., Standish Group, Bent Flyvbjerg's work) consistently shows software projects take ~1.5-3x their estimates. A well-scoped feature with detailed breakdowns is on the better end, but still likely to overrun.\n\n**Point estimate**: A reasonable multiplier for a confident team with detailed breakdowns is ~1.5x, giving **3 weeks**.\n\n**80% confidence interval**: \n- Best case (things go smoothly, maybe minor overrun): ~2.5 weeks\n- Worst case (unexpected complexity, dependencies, scope creep, bugs): ~5 weeks\n- The distribution is right-skewed (delays are more likely than early finishes)\n\n```json\n{\"estimate\": 3, \"ci_low\": 2, \"ci_high\": 5}\n```",
+  "final_response_text": "I'll reason through each piece of follow-up information and how it should update my original estimate of 3.0 weeks.\n\n## Reasoning Through Each Update\n\n### 1. Software projects average 2-3x their initial estimates\nThis is well-documented in software engineering research (Standish Group, Kahneman's work, etc.). If my initial estimate of 3.0 weeks is subject to this bias, the \"true\" expected duration would be somewhere around 6-9 weeks. However, my original estimate may have already partially accounted for some overrun risk. A reasonable adjustment would be to apply at least a 1.5-2x multiplier to account for the typical underestimation bias.\n\n### 2. Team confidence as a warning sign (planning fallacy)\nHigh team confidence is paradoxically correlated with larger estimation errors. When teams feel very confident, they've often constructed a narrative of how things will go smoothly without adequately considering failure modes. This is a classic inside-view problem. This should push the estimate further upward - perhaps another 20-30% adjustment beyond the base rate correction.\n\n### 3. 30% chance of a major blocker\nA major blocker (integration issue, unclear requirements) could easily add 1-3 weeks. Expected additional time from this: 0.30 \u00d7 ~2 weeks = ~0.6 weeks on average. But this also adds significant right-tail risk, widening the confidence interval substantially.\n\n## Revised Calculation\n\n- Original estimate: 3.0 weeks\n- Apply 2x multiplier for base rate of software overruns: 6.0 weeks\n- Additional adjustment for planning fallacy (team overconfidence): +20% \u2192 7.2 weeks\n- Expected value of major blocker risk: +0.6 weeks \u2192 ~7.8 weeks\n- Round to: ~7.5 weeks\n\n## 80% Confidence Interval\n\n- **Low end (10th percentile):** Things go relatively smoothly but still take longer than the naive estimate. Maybe 4.5 weeks.\n- **High end (90th percentile):** Major blocker hits, scope creep, integration issues compound. Could easily reach 12-14 weeks.\n\n```json\n{\"estimate\": 7.5, \"ci_low\": 4.5, \"ci_high\": 14.0}\n```"
+}

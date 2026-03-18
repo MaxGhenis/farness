@@ -1,0 +1,22 @@
+{
+  "case_id": "planning_estimate",
+  "condition": "estimate_only",
+  "probe_battery": "off_framework",
+  "model": "claude-opus-4-6",
+  "initial_estimate": 3.0,
+  "initial_ci": [
+    2.0,
+    5.0
+  ],
+  "final_estimate": 4.5,
+  "final_ci": [
+    3.0,
+    9.0
+  ],
+  "update_magnitude": 1.5,
+  "update_direction": "up",
+  "relative_update": 0.5,
+  "had_initial_ci": true,
+  "initial_response_text": "```json\n{\"estimate\": 3.0, \"ci_low\": 2.0, \"ci_high\": 5.0}\n```",
+  "final_response_text": "Looking at each follow-up factor:\n\n1. **External API dependency with no committed date**: This is a significant risk. The team cannot complete integration without this API, and there's no firm commitment. This could add anywhere from 0 to several weeks of waiting/blocking time. This widens the CI substantially and shifts the estimate upward.\n\n2. **Senior engineer on vacation during integration week**: Integration is typically a critical phase requiring experienced engineers. Losing a senior resource here likely adds delays due to slower debugging, less institutional knowledge, and potential rework. This could add 0.5-1.0 weeks.\n\n3. **Fixed rollout window with binary outcome (hit or miss by a month)**: This doesn't change the work estimate per se, but it creates a step-function risk. If the team misses by even a day, the delay jumps by a full month (~4 weeks). This dramatically widens the upper bound of the CI.\n\n**Revised reasoning:**\n\n- Base estimate was 3.0 weeks (CI: 2.0-5.0)\n- The external API uncertainty adds ~1.0-1.5 weeks to the central estimate and significantly widens the upper bound\n- The missing senior engineer adds ~0.5-1.0 weeks\n- The fixed window means the upper bound should account for the possibility of slipping to the next month (original estimate + ~4 weeks)\n\nCentral estimate: ~4.5 weeks (accounting for likely API delays and reduced team capacity)\n\nFor the 80% CI:\n- Low end: If the API comes through quickly and the team manages without the senior engineer \u2192 ~3.0 weeks\n- High end: If the API is late enough to miss the demo window, launch pushes by a month \u2192 ~9.0 weeks\n\n```json\n{\"estimate\": 4.5, \"ci_low\": 3.0, \"ci_high\": 9.0}\n```"
+}

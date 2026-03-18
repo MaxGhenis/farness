@@ -1,0 +1,22 @@
+{
+  "case_id": "investment_return",
+  "condition": "estimate_only",
+  "probe_battery": "on_framework",
+  "model": "claude-opus-4-6",
+  "initial_estimate": 15.0,
+  "initial_ci": [
+    5.0,
+    30.0
+  ],
+  "final_estimate": 5.0,
+  "final_ci": [
+    1.5,
+    12.0
+  ],
+  "update_magnitude": 10.0,
+  "update_direction": "down",
+  "relative_update": 0.6666666666666666,
+  "had_initial_ci": true,
+  "initial_response_text": "```json\n{\"estimate\": 15, \"ci_low\": 5, \"ci_high\": 30}\n```",
+  "final_response_text": "The follow-up information suggests the probability of a good outcome (presumably returning 2x+ or some meaningful positive return) should be revised downward from my initial 15% estimate.\n\nKey considerations:\n- Base rate of 2x+ returns is only ~5%\n- The \"friends and family\" discount may not provide meaningful edge\n- The person offering has misaligned incentives, which is a negative signal\n- These factors all point in the same direction: lower probability than initially estimated\n\nThe base rate alone suggests ~5%. The additional negative signals (misaligned incentives, lack of real discount) would push this somewhat below the base rate, as the selection process may be adversely biased. However, there's some chance the investment could still work out despite these headwinds.\n\nI'd revise down significantly from 15% to something closer to or slightly below the base rate.\n\n```json\n{\"estimate\": 5.0, \"ci_low\": 1.5, \"ci_high\": 12.0}\n```"
+}

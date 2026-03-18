@@ -1,0 +1,22 @@
+{
+  "case_id": "planning_estimate",
+  "condition": "farness",
+  "probe_battery": "off_framework",
+  "model": "gpt-5.4",
+  "initial_estimate": 3.0,
+  "initial_ci": [
+    2.2,
+    4.5
+  ],
+  "final_estimate": 4.6,
+  "final_ci": [
+    3.0,
+    8.5
+  ],
+  "update_magnitude": 1.5999999999999996,
+  "update_direction": "up",
+  "relative_update": 0.5333333333333332,
+  "had_initial_ci": true,
+  "initial_response_text": "Using a farness / outside-view approach, I would discount the team\u2019s inside-view estimate of 2 weeks upward.\n\nBase rates:\n- In software projects, task-level estimates are often optimistic due to the planning fallacy. Across studies and industry reports, overruns of roughly 20\u201350% are common even for relatively small scoped work, with a long tail of larger overruns.\n- Detailed task breakdowns help, but they do not eliminate hidden integration work, rework, interruptions, testing delays, and dependency risk.\n\nBiases likely present:\n- Planning fallacy: focusing on the ideal path rather than actual historical delivery times.\n- Optimism bias: overweighting team confidence.\n- Inside-view bias: relying on task breakdown specifics instead of class-reference outcomes.\n- Scope creep / unknown unknown neglect: underweighting late-discovered edge cases.\n\nForecast:\n- For a nominal 2-week estimate with high confidence and task decomposition, I\u2019d use a moderate uplift rather than an extreme one.\n- Point estimate: about 3 weeks.\n- 80% confidence interval: about 2.2 to 4.5 weeks.\n\n```json\n{\"estimate\": 3.0, \"ci_low\": 2.2, \"ci_high\": 4.5}\n```",
+  "final_response_text": "The new information increases both the expected duration and, more importantly, the uncertainty:\n\n- **External API team with no committed date** adds schedule risk and likely waiting time.\n- **Senior engineer vacation during integration** reduces capacity right when coordination/debugging risk is highest.\n- **Fixed rollout window with a miss causing a push to the following month** creates a step-function delay risk: even a small slip can turn into a much larger calendar delay.\n\nStarting from the prior estimate of **3.0 weeks (80% CI: 2.2\u20134.5)**, I\u2019d revise upward to reflect:\n- a modest increase in the \u201cif things go reasonably well\u201d path, and\n- a much fatter upper tail because of the possibility of missing the demo window and slipping roughly a month.\n\nMy revised estimate is **4.6 weeks**, with an **80% CI of 3.0\u20138.5 weeks**.\n\n```json\n{\"estimate\": 4.6, \"ci_low\": 3.0, \"ci_high\": 8.5}\n```"
+}

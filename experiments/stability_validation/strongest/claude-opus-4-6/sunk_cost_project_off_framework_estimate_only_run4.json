@@ -1,0 +1,22 @@
+{
+  "case_id": "sunk_cost_project",
+  "condition": "estimate_only",
+  "probe_battery": "off_framework",
+  "model": "claude-opus-4-6",
+  "initial_estimate": 12.0,
+  "initial_ci": [
+    5.0,
+    25.0
+  ],
+  "final_estimate": 5.5,
+  "final_ci": [
+    2.0,
+    14.0
+  ],
+  "update_magnitude": 6.5,
+  "update_direction": "down",
+  "relative_update": 0.5416666666666666,
+  "had_initial_ci": true,
+  "initial_response_text": "```json\n{\"estimate\": 12, \"ci_low\": 5, \"ci_high\": 25}\n```",
+  "final_response_text": "I need to assess how these three follow-up pieces of information affect the probability of this project succeeding (or whatever the original scenario was estimating at 12%).\n\nLet me analyze each piece:\n\n1. **Funding displaces a $1.2M ARR project**: This creates a significant opportunity cost and organizational tension. Decision-makers may rationally choose to cut this project in favor of the higher-value alternative. This increases the chance of cancellation or defunding, and even if funded, creates political headwinds. This pushes the estimate **down**.\n\n2. **Remaining work is final integration/cutover with no production-like staging environment**: This is a major red flag. Integration and cutover are where projects frequently fail, and doing so without a production-like staging environment means issues will only be discovered in production. This dramatically increases the risk of failure, delays, and rework. This pushes the estimate **down significantly**.\n\n3. **Executive sponsor incentivized to keep project alive until next board meeting**: This means the project may be kept on life support for political reasons rather than genuine viability. It suggests the sponsor knows the project is at risk and is managing optics rather than outcomes. The project might survive in name but not actually deliver value. This is a mixed signal\u2014it might keep funding flowing short-term, but it indicates underlying weakness and misaligned incentives. Net effect: slightly **down** on actual success probability, even if it reduces near-term cancellation risk.\n\n**Combined assessment:**\n- The opportunity cost argument (#1) creates rational pressure to kill the project\n- The technical risk (#2) is very high\u2014integration without staging is a recipe for failure\n- The sponsor's incentives (#3) suggest the project is being kept alive artificially\n\nAll three signals are negative. The original 12% was already low, and each of these factors compounds the risk. The lack of staging environment during the most critical phase is particularly damaging. The sponsor's political motivations may keep it \"alive\" but won't help it succeed.\n\nI'd revise downward substantially, perhaps to around 5-6%.\n\n```json\n{\"estimate\": 5.5, \"ci_low\": 2.0, \"ci_high\": 14.0}\n```"
+}

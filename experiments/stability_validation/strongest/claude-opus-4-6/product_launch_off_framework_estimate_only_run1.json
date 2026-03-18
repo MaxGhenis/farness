@@ -1,0 +1,22 @@
+{
+  "case_id": "product_launch",
+  "condition": "estimate_only",
+  "probe_battery": "off_framework",
+  "model": "claude-opus-4-6",
+  "initial_estimate": 30.0,
+  "initial_ci": [
+    15.0,
+    50.0
+  ],
+  "final_estimate": 55.0,
+  "final_ci": [
+    40.0,
+    72.0
+  ],
+  "update_magnitude": 25.0,
+  "update_direction": "up",
+  "relative_update": 0.8333333333333334,
+  "had_initial_ci": true,
+  "initial_response_text": "```json\n{\"estimate\": 30, \"ci_low\": 15, \"ci_high\": 50}\n```",
+  "final_response_text": "Looking at the three follow-up pieces of information:\n\n1. **Default onboarding flow integration**: This significantly increases exposure and adoption since every new user will encounter the feature. This removes the biggest barrier - discovery/opt-in friction.\n\n2. **Automated rollout and measurement**: Low adoption friction means the operational barriers that could slow things down are already handled. This de-risks execution.\n\n3. **Three enterprise design partners committed for week one**: Enterprise deployments bring bulk users quickly, providing a strong initial adoption base that can demonstrate traction early.\n\nAll three signals point strongly upward from the initial 30% estimate. The default onboarding placement is particularly impactful - it shifts from opt-in to opt-out dynamics. The enterprise commitments provide a reliable floor for early adoption. The automated infrastructure reduces execution risk.\n\nHowever, there are still unknowns: user retention after initial exposure, whether the feature delivers value in practice, potential technical issues at scale, and whether beyond the three partners there's broader market pull.\n\nI'd revise the estimate substantially upward - roughly doubling it - while also narrowing the confidence interval since much of the uncertainty around rollout mechanics has been resolved.\n\n```json\n{\"estimate\": 55.0, \"ci_low\": 40.0, \"ci_high\": 72.0}\n```"
+}

@@ -1,0 +1,22 @@
+{
+  "case_id": "acquisition_synergies",
+  "condition": "estimate_only",
+  "probe_battery": "on_framework",
+  "model": "claude-opus-4-6",
+  "initial_estimate": 45.0,
+  "initial_ci": [
+    30.0,
+    60.0
+  ],
+  "final_estimate": 25.0,
+  "final_ci": [
+    12.0,
+    40.0
+  ],
+  "update_magnitude": 20.0,
+  "update_direction": "down",
+  "relative_update": 0.4444444444444444,
+  "had_initial_ci": true,
+  "initial_response_text": "```json\n{\"estimate\": 45, \"ci_low\": 30, \"ci_high\": 60}\n```",
+  "final_response_text": "I need to revise my estimate based on the three pieces of follow-up information.\n\n**Starting point:** 45.0% (CI: 30.0-60.0) - this appears to be the probability that this M&A deal will create value for the acquirer.\n\n**Analyzing the new information:**\n\n1. **Synergies realized at ~50% of projections with high variance** - This is a significant downward pressure. If the deal's value case was built on projected synergies, only achieving half of them makes value creation much harder. The high variance adds uncertainty.\n\n2. **60-80% of M&A deals fail to create value for the acquirer** - This is strong base rate evidence. It suggests only 20-40% of deals create value. My prior estimate of 45% was already above this base rate, so this pushes the estimate down significantly.\n\n3. **CEO is personally excited and championing the deal** - This is a red flag. CEO personal attachment introduces agency problems and cognitive biases (commitment bias, overconfidence, empire-building motivation). Research on \"hubris hypothesis\" in M&A suggests deals driven by CEO enthusiasm tend to perform worse than average. This should push the estimate further below the base rate, not just toward it.\n\n**Revision reasoning:**\n- The base rate for value creation is 20-40% (midpoint ~30%)\n- CEO enthusiasm is a negative signal that pushes below the base rate, perhaps to 25%\n- Synergy realization at 50% further supports a below-average outcome expectation\n- These factors are somewhat correlated (they all point in the same direction), so I shouldn't triple-count, but collectively they paint a clear picture\n\nI'll revise down from 45% to approximately 25%, with wider uncertainty given the high variance in synergy realization.\n\n```json\n{\"estimate\": 25.0, \"ci_low\": 12.0, \"ci_high\": 40.0}\n```"
+}

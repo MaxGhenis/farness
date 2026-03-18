@@ -1,0 +1,22 @@
+{
+  "case_id": "acquisition_synergies",
+  "condition": "estimate_only",
+  "probe_battery": "off_framework",
+  "model": "claude-opus-4-6",
+  "initial_estimate": 45.0,
+  "initial_ci": [
+    30.0,
+    60.0
+  ],
+  "final_estimate": 72.0,
+  "final_ci": [
+    58.0,
+    84.0
+  ],
+  "update_magnitude": 27.0,
+  "update_direction": "up",
+  "relative_update": 0.6,
+  "had_initial_ci": true,
+  "initial_response_text": "```json\n{\"estimate\": 45, \"ci_low\": 30, \"ci_high\": 60}\n```",
+  "final_response_text": "Looking at the three follow-up pieces of information:\n\n1. **Shared ERP and suppliers** - This dramatically reduces integration risk on the cost synergy side. Systems integration is often the biggest stumbling block in realizing synergies, and this is essentially already done.\n\n2. **Aligned sales compensation from day one** - This addresses one of the most common failure modes in M&A: sales team conflicts and misaligned incentives. Having combined account revenue compensation from day one means cross-selling and revenue synergies are much more likely to materialize.\n\n3. **Experienced integration PMO with track record** - A dedicated PMO that has successfully done this twice before significantly reduces execution risk. They know the playbook and potential pitfalls.\n\nAll three factors are strongly positive and address the major risk categories (systems/operations, revenue/culture, and execution/management). Each independently would push the estimate upward, and together they substantially de-risk the integration.\n\nStarting from 45%, I'd revise significantly upward. The combination of pre-existing operational alignment, smart incentive design, and proven execution capability suggests this is well above a typical acquisition integration scenario. I'd estimate around 72%, with the remaining uncertainty coming from market conditions, customer retention, unforeseen cultural issues, or other external factors that even good execution can't fully control.\n\n```json\n{\"estimate\": 72.0, \"ci_low\": 58.0, \"ci_high\": 84.0}\n```"
+}

@@ -1,0 +1,22 @@
+{
+  "case_id": "planning_estimate",
+  "condition": "estimate_only",
+  "probe_battery": "on_framework",
+  "model": "claude-opus-4-6",
+  "initial_estimate": 3.0,
+  "initial_ci": [
+    2.0,
+    5.0
+  ],
+  "final_estimate": 6.5,
+  "final_ci": [
+    4.0,
+    11.0
+  ],
+  "update_magnitude": 3.5,
+  "update_direction": "up",
+  "relative_update": 1.1666666666666667,
+  "had_initial_ci": true,
+  "initial_response_text": "```json\n{\"estimate\": 3.0, \"ci_low\": 2.0, \"ci_high\": 5.0}\n```",
+  "final_response_text": "Looking at the three follow-up points:\n\n1. **2-3x multiplier on initial estimates**: My original estimate of 3.0 weeks was already somewhat adjusted, but if the \"inside view\" estimate was likely around 2-3 weeks from the team, applying a 2-3x multiplier would push toward 4-7.5 weeks. Even applying it to my own estimate: 3.0 \u00d7 2-3x = 6-9 weeks. I should adjust upward significantly.\n\n2. **Planning fallacy / team confidence as warning sign**: High team confidence correlates with underestimation, not accuracy. This further supports moving toward the higher end of the adjustment range. Teams that feel confident tend to be the ones who haven't fully considered edge cases and unknowns.\n\n3. **30% chance of major blocker**: A major blocker (integration issue, unclear requirements) could easily add 2-4 weeks. Expected additional time from this: 0.30 \u00d7 ~3 weeks = ~0.9 weeks on the mean, but it significantly widens the upper tail of the distribution.\n\n**Revised reasoning:**\n- Base estimate adjusted for reference class (2-3x): ~6-7.5 weeks\n- Planning fallacy adjustment: push toward higher end \u2192 ~7 weeks\n- Major blocker risk adds to both mean and upper bound\n- Revised central estimate: ~6.5 weeks\n- The lower bound assumes things go relatively smoothly but still accounting for typical overrun: ~4 weeks\n- The upper bound accounts for blocker + compounding delays: ~11 weeks\n\n```json\n{\"estimate\": 6.5, \"ci_low\": 4.0, \"ci_high\": 11.0}\n```"
+}

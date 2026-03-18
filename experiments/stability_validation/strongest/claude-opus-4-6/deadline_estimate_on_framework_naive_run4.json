@@ -1,0 +1,22 @@
+{
+  "case_id": "deadline_estimate",
+  "condition": "naive",
+  "probe_battery": "on_framework",
+  "model": "claude-opus-4-6",
+  "initial_estimate": 78.0,
+  "initial_ci": [
+    62.0,
+    92.0
+  ],
+  "final_estimate": 22.0,
+  "final_ci": [
+    9.0,
+    40.0
+  ],
+  "update_magnitude": 56.0,
+  "update_direction": "down",
+  "relative_update": 0.717948717948718,
+  "had_initial_ci": true,
+  "initial_response_text": "## Reasoning\n\n**Factors supporting completion:**\n- 2-month buffer (50% extra time beyond estimate)\n- Detailed project plan already exists\n- Dedicated compliance team\n\n**Factors introducing risk:**\n- The planning fallacy: projects almost always take longer than estimated. A 4-month estimate often becomes 5-7 months in practice.\n- Regulatory compliance work often involves dependencies on external parties (regulators, vendors, auditors) that are hard to control.\n- Scope creep is common with regulatory work as requirements get clarified.\n- Resource availability issues, competing priorities.\n\n**Analysis:**\n- A 2-month buffer on a 4-month project is generous (50% buffer), which is better than most projects get.\n- However, research on project completion shows that even with buffers, significant overruns are common. The base rate for projects completing on time is roughly 50-70% depending on the domain.\n- The detailed plan and dedicated team are positive signals, pushing this above base rates.\n- Compliance projects have external dependencies (regulator clarifications, third-party assessments) that add uncertainty.\n- I'd estimate roughly 75-80% probability of on-time completion. The buffer helps significantly, but the planning fallacy and external dependencies create meaningful risk.\n\n**My estimate:** ~78%\n\n**Confidence interval (80%):** I'm fairly uncertain about this estimate itself. The true probability could reasonably range from about 60% (if this is a complex, multi-stakeholder regulatory effort) to about 92% (if it's straightforward with a well-experienced team).\n\n```json\n{\"estimate\": 78, \"ci_low\": 62, \"ci_high\": 92}\n```",
+  "final_response_text": "I need to revise my previous estimate of 78.0% downward based on three significant pieces of negative information.\n\n## Analyzing Each Factor\n\n**Factor 1: Industry base rate of 40% on-time completion for regulatory compliance projects.**\nThis is a strong anchor point. My previous estimate of 78% was nearly double the industry base rate. This alone would pull my estimate significantly downward. Good calibration practice suggests weighting base rates heavily.\n\n**Factor 2: The compliance team has never done this specific type of work before.**\nLack of experience typically increases risk of delays, errors, and rework. Teams doing novel work tend to perform below the base rate, not above it. This should push the estimate below the 40% base rate.\n\n**Factor 3: Regulations are still being finalized and may change in 2 months.**\nThis introduces significant scope uncertainty. If regulations change, work may need to be redone, requirements may shift, and timelines could be disrupted. This is a major risk factor that further reduces the probability of on-time completion.\n\n## Revised Reasoning\n\nStarting from the base rate of 40%:\n- Inexperienced team: This is a negative modifier. Teams without relevant experience likely perform worse than average. Adjust down ~8-12 percentage points.\n- Regulatory uncertainty: Potential scope changes represent a substantial risk. Adjust down another ~8-10 percentage points.\n\nCombined effect: These factors compound. An inexperienced team dealing with changing requirements is particularly problematic because they have less ability to adapt efficiently.\n\n**Revised estimate: ~22%**\n\n## Confidence Interval (80%)\n\nThere's considerable uncertainty here:\n- **Low end:** If regulations change significantly and the team struggles, completion probability could be very low (~8-10%).\n- **High end:** If regulations stabilize quickly and the team adapts well, it could approach or slightly exceed the base rate (~38-40%).\n\nAn 80% confidence interval should capture most plausible outcomes.\n\n```json\n{\"estimate\": 22, \"ci_low\": 9, \"ci_high\": 40}\n```"
+}

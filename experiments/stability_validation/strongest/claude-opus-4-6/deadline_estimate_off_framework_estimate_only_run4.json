@@ -1,0 +1,22 @@
+{
+  "case_id": "deadline_estimate",
+  "condition": "estimate_only",
+  "probe_battery": "off_framework",
+  "model": "claude-opus-4-6",
+  "initial_estimate": 82.0,
+  "initial_ci": [
+    65.0,
+    93.0
+  ],
+  "final_estimate": 64.0,
+  "final_ci": [
+    45.0,
+    80.0
+  ],
+  "update_magnitude": 18.0,
+  "update_direction": "down",
+  "relative_update": 0.21951219512195122,
+  "had_initial_ci": true,
+  "initial_response_text": "```json\n{\"estimate\": 82, \"ci_low\": 65, \"ci_high\": 93}\n```",
+  "final_response_text": "Looking at the three follow-up pieces of information:\n\n1. **No slack on critical path**: Legal sign-off, vendor configuration, and staff training are all sequential with zero float. Any delay in one directly delays the whole project. This significantly increases the probability of missing the deadline since there's no buffer to absorb delays in any of these three activities.\n\n2. **Compliance lead is overloaded**: The key person is split between this project and audit remediation, with context-switching peaking in the final eight weeks \u2014 exactly when execution pressure is highest. This creates a bottleneck risk on decisions, reviews, and approvals. This is a meaningful downward pressure on the probability of on-time completion.\n\n3. **Weak incentives to surface risk**: A modest internal escalation (rather than a hard regulatory or financial penalty) means teams are likely to under-report schedule slippage until it's too late to recover. This is a classic organizational failure mode that compounds the first two risks \u2014 problems on the critical path won't be flagged early enough to mitigate.\n\nEach of these factors independently pushes the probability of on-time completion downward. Together, they compound: a zero-slack critical path where the key resource is overloaded and where nobody has strong incentives to flag problems early is a recipe for late delivery.\n\nStarting from 82%, I'd adjust:\n- No slack on critical path: -8 to -10 points\n- Overloaded compliance lead: -5 to -7 points\n- Weak escalation incentives: -4 to -5 points\n\nThese aren't fully independent (they interact), so I'll moderate the combined adjustment somewhat, but the compound effect is still substantial. I estimate roughly a 15-18 percentage point reduction.\n\nThe confidence interval should also widen somewhat on the downside given the structural risks.\n\n```json\n{\"estimate\": 64.0, \"ci_low\": 45.0, \"ci_high\": 80.0}\n```"
+}

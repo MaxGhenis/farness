@@ -1,0 +1,22 @@
+{
+  "case_id": "investment_return",
+  "condition": "estimate_only",
+  "probe_battery": "off_framework",
+  "model": "claude-opus-4-6",
+  "initial_estimate": 15.0,
+  "initial_ci": [
+    5.0,
+    30.0
+  ],
+  "final_estimate": 42.0,
+  "final_ci": [
+    28.0,
+    58.0
+  ],
+  "update_magnitude": 27.0,
+  "update_direction": "up",
+  "relative_update": 1.8,
+  "had_initial_ci": true,
+  "initial_response_text": "```json\n{\"estimate\": 15, \"ci_low\": 5, \"ci_high\": 30}\n```",
+  "final_response_text": "I need to reassess the probability given these three pieces of follow-up information. The original estimate was 15.0% (CI: 5.0-30.0).\n\nLet me consider how each piece of information shifts the estimate:\n\n1. **35% discount with pro-rata rights**: This is a concrete, structured deal term rather than a vague promise. A 35% discount is a meaningful incentive, and pro-rata rights give investors the ability to maintain their stake in future rounds. This makes the investment significantly more attractive and signals a more professionally structured round. This is a positive signal that should increase the estimate.\n\n2. **Two institutional investors leading on the same terms after completing diligence**: This is a very strong signal. Institutional investors have done their due diligence and are committing capital on these terms. This provides social proof, validation of the valuation/terms, and reduces the risk of adverse selection. This is a major positive update.\n\n3. **Revenue diversified across customers and cash-flow positive**: This dramatically reduces the risk profile. Cash-flow positive means the company isn't dependent on future fundraising to survive. Diversified revenue means no single-customer concentration risk. This addresses some of the biggest risks in early-stage investing.\n\nAll three pieces of information are strongly positive. The combination of:\n- Professional deal structure with meaningful discount and rights\n- Institutional validation through completed diligence\n- Strong business fundamentals (cash-flow positive, diversified revenue)\n\nThis significantly reduces risk and increases attractiveness. Without knowing the exact scenario being estimated, but given the original was 15% and all three updates are substantially positive, I would revise upward significantly.\n\nThe institutional backing after diligence is particularly powerful - it suggests the deal is real, properly valued, and has been vetted. Combined with cash-flow positivity, this moves from a speculative bet to a much more de-risked opportunity.\n\nI'd estimate roughly a 2.5-3x increase from the baseline, moving from 15% to around 40-45%.\n\n```json\n{\"estimate\": 42.0, \"ci_low\": 28.0, \"ci_high\": 58.0}\n```"
+}

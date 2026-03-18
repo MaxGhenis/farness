@@ -1,0 +1,22 @@
+{
+  "case_id": "planning_estimate",
+  "condition": "farness",
+  "probe_battery": "on_framework",
+  "model": "gpt-5.4",
+  "initial_estimate": 3.0,
+  "initial_ci": [
+    2.2,
+    4.8
+  ],
+  "final_estimate": 4.6,
+  "final_ci": [
+    3.0,
+    7.8
+  ],
+  "update_magnitude": 1.5999999999999996,
+  "update_direction": "up",
+  "relative_update": 0.5333333333333332,
+  "had_initial_ci": true,
+  "initial_response_text": "Using the **farness / outside-view** approach, I\u2019d discount the team\u2019s detailed inside-view estimate.\n\n### 1) Outside-view base rates\nResearch on software estimation consistently finds systematic **underestimation**:\n\n- Classic studies on software projects often find average overruns in the **20%\u201350%+** range for tasks/projects, with substantial variance.\n- Kahneman and Lovallo\u2019s work on the **planning fallacy** suggests even detailed plans often ignore typical delays, rework, integration issues, and interruptions.\n- In software specifically, task-level estimates can be better than project-level ones, but even then actuals commonly land around **1.3x\u20132x** the estimate when uncertainty is nontrivial.\n\nFor a \u201c2 week\u201d estimate with high confidence and detailed breakdowns, I would still expect some optimism correction, but not assume a massive disaster. So a reasonable outside-view multiplier is around **1.5x**.\n\n### 2) Numeric forecast\nStarting from 2 weeks:\n\n- Point estimate = **2 \u00d7 1.5 = 3.0 weeks**\n\nFor an **80% confidence interval**, I\u2019d allow for:\n- lower side: things go smoothly, some estimates are accurate \u2192 around **2.2 weeks**\n- upper side: moderate integration/rework/slippage \u2192 around **4.8 weeks**\n\n### 3) Likely cognitive biases\nThe framing suggests several biases:\n\n- **Planning fallacy**: confidence from a detailed breakdown does not eliminate underestimation.\n- **Inside-view bias**: focusing on this feature\u2019s task list rather than reference-class outcomes.\n- **Overconfidence**: \u201cthey\u2019re confident\u201d is weak evidence unless they are calibrated forecasters.\n- **Anchoring**: the 2-week estimate may anchor subsequent judgment too low.\n- **Scope omission**: hidden work like testing, review cycles, edge cases, deployment, coordination.\n\n```json\n{\"estimate\": 3.0, \"ci_low\": 2.2, \"ci_high\": 4.8}\n```",
+  "final_response_text": "The new information pushes the estimate upward and widens the interval.\n\nReasoning, briefly:\n- If 3.0 weeks was based on a fairly typical optimistic software estimate, then the \u201cprojects average 2\u20133x initial estimates\u201d fact suggests the original point estimate was likely low.\n- The team\u2019s confidence being a planning-fallacy warning is another upward adjustment, since it weakens one of the original reassuring signals.\n- A 30% chance of a major blocker increases both the expected duration and the uncertainty. Even if the blocker does not always occur, it creates a heavier right tail.\n\nI would not simply multiply 3.0 by 2.5 mechanically, because the original estimate may already have included some realism. But taken together, these updates suggest moving from 3.0 weeks to something like the mid-4s, with a broader 80% CI.\n\n```json\n{\"estimate\": 4.6, \"ci_low\": 3.0, \"ci_high\": 7.8}\n```"
+}

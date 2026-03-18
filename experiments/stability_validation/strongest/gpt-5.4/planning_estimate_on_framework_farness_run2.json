@@ -1,0 +1,22 @@
+{
+  "case_id": "planning_estimate",
+  "condition": "farness",
+  "probe_battery": "on_framework",
+  "model": "gpt-5.4",
+  "initial_estimate": 3.0,
+  "initial_ci": [
+    2.2,
+    4.5
+  ],
+  "final_estimate": 5.0,
+  "final_ci": [
+    3.0,
+    8.0
+  ],
+  "update_magnitude": 2.0,
+  "update_direction": "up",
+  "relative_update": 0.6666666666666666,
+  "had_initial_ci": true,
+  "initial_response_text": "Using a farness / outside-view approach, I would adjust upward from the team\u2019s 2-week inside-view estimate.\n\nReasoning:\n1. Base rates / outside view:\n   - Software projects and tasks are routinely underestimated due to the planning fallacy. Research by Kahneman and Tversky, and later work in software estimation, finds systematic overruns are common even when teams provide detailed decompositions.\n   - In software delivery datasets, \u201csmall\u201d features often overrun by roughly 20\u2013100% depending on uncertainty, dependencies, testing, review cycles, and integration friction.\n   - Detailed task breakdowns help, but they do not eliminate unknown unknowns, coordination overhead, QA/rework, and waiting time.\n\n2. Likely biases in the framing:\n   - Planning fallacy: confidence based on best-case task execution.\n   - Inside-view bias: focusing on the decomposition rather than historical completion rates for similar features.\n   - Overconfidence: \u201cthey\u2019re confident\u201d is weak evidence of accuracy; confidence often exceeds calibration.\n   - Scope creep / hidden work neglect: omission of review, bug fixing, edge cases, deployment, and interruptions.\n\n3. Numeric forecast:\n   - Starting estimate: 2 weeks.\n   - Reasonable outside-view uplift: about 50% for a modest but meaningful correction.\n   - Point estimate: 3.0 weeks.\n   - 80% CI: roughly from a mild overrun to a substantial one, while still allowing a near-on-time completion:\n     - Low end: 2.2 weeks\n     - High end: 4.5 weeks\n\n```json\n{\"estimate\": 3.0, \"ci_low\": 2.2, \"ci_high\": 4.5}\n```",
+  "final_response_text": "Yes \u2014 all three points push the estimate upward and widen the interval.\n\nReasoning, briefly:\n- If software projects commonly land at 2\u20133x initial estimates, that is strong evidence the original 3.0 weeks was optimistic.\n- If team confidence is actually a planning-fallacy signal, that further reduces trust in the low end.\n- A 30% chance of a major blocker adds tail risk, which especially increases the upper bound.\n\nA reasonable revision is:\n- Move the central estimate from 3.0 weeks to about 5.0 weeks.\n- Widen the 80% CI to reflect both ordinary overruns and blocker risk.\n\n```json\n{\"estimate\": 5.0, \"ci_low\": 3.0, \"ci_high\": 8.0}\n```"
+}

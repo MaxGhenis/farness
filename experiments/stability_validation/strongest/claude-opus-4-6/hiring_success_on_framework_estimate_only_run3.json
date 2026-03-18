@@ -1,0 +1,22 @@
+{
+  "case_id": "hiring_success",
+  "condition": "estimate_only",
+  "probe_battery": "on_framework",
+  "model": "claude-opus-4-6",
+  "initial_estimate": 30.0,
+  "initial_ci": [
+    15.0,
+    45.0
+  ],
+  "final_estimate": 18.0,
+  "final_ci": [
+    8.0,
+    30.0
+  ],
+  "update_magnitude": 12.0,
+  "update_direction": "down",
+  "relative_update": 0.4,
+  "had_initial_ci": true,
+  "initial_response_text": "```json\n{\"estimate\": 30, \"ci_low\": 15, \"ci_high\": 45}\n```",
+  "final_response_text": "I need to revise my estimate based on the follow-up information about the validity of different hiring signals.\n\nLet me reconsider:\n\n1. **Unstructured interview impressions** (r=0.14 with job performance): The \"great chemistry\" and positive interview impression is a very weak predictor. This means the strong positive signal from the interview should be heavily discounted.\n\n2. **Similarity bias**: \"Reminded me of our best performer\" is explicitly identified as similarity bias - a cognitive bias, not a valid predictor. This further undermines the interview-based positive impression.\n\n3. **Technical assessment** (r=0.51 with job performance): The technical assessment is 4x more predictive than interview chemistry. The candidate scored only 62/100, which is below average/mediocre on the most valid predictor available.\n\nSo the situation is: the strongest valid predictor (technical assessment) gives a negative signal (below-average score of 62/100), while the positive signals (interview chemistry, similarity to best performer) come from sources with very low predictive validity and known biases.\n\nGiven that:\n- The most valid predictor suggests below-average performance\n- The positive signals are largely noise/bias\n- A 62/100 technical score likely places the candidate below the threshold for strong performance\n- Base rates for \"successful hires\" typically hover around 50% even with good processes\n\nThe probability of this being a successful hire should be revised significantly downward from my initial 30%. The technical score being mediocre combined with discounting the interview impressions suggests this candidate is more likely to underperform.\n\nI should revise downward. The 62/100 on the most predictive measure, combined with the fact that the positive signals are essentially noise, suggests maybe around 15-20% chance of success.\n\n```json\n{\"estimate\": 18.0, \"ci_low\": 8.0, \"ci_high\": 30.0}\n```"
+}

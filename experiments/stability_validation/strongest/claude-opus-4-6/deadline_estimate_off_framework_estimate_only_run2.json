@@ -1,0 +1,22 @@
+{
+  "case_id": "deadline_estimate",
+  "condition": "estimate_only",
+  "probe_battery": "off_framework",
+  "model": "claude-opus-4-6",
+  "initial_estimate": 82.0,
+  "initial_ci": [
+    65.0,
+    93.0
+  ],
+  "final_estimate": 55.0,
+  "final_ci": [
+    35.0,
+    72.0
+  ],
+  "update_magnitude": 27.0,
+  "update_direction": "down",
+  "relative_update": 0.32926829268292684,
+  "had_initial_ci": true,
+  "initial_response_text": "```json\n{\"estimate\": 82, \"ci_low\": 65, \"ci_high\": 93}\n```",
+  "final_response_text": "Looking at the three follow-up pieces of information:\n\n1. **No slack on the critical path**: Legal sign-off, vendor configuration, and staff training are all sequential with zero float. Any delay in one directly delays the whole project. This significantly increases the probability of missing the deadline \u2014 even small slippages cascade.\n\n2. **Compliance lead is overloaded**: The key person is splitting attention between this project and audit remediation, with peak context-switching in the final critical weeks. This is a major risk factor \u2014 it means the person most needed to unblock issues will be least available when it matters most.\n\n3. **Weak incentives to surface risk**: A modest internal escalation as the only consequence means teams will tend to under-report delays and hope to catch up rather than flag problems early. This is a classic failure mode that causes late-breaking surprises.\n\nAll three factors point strongly downward from the original 82% estimate:\n\n- Zero slack + sequential critical path: reduces by ~10-15 percentage points\n- Overloaded compliance lead in final stretch: reduces by ~5-8 percentage points\n- Weak escalation incentives masking risk: reduces by ~5-7 percentage points\n\nThese factors also compound \u2014 the weak incentives make the zero-slack problem worse because you won't know about delays until it's too late to recover, and the overloaded lead makes recovery from any slip much harder.\n\nI'd revise substantially downward, from 82% to roughly 55%, and widen the confidence interval somewhat given the increased uncertainty from hidden risks.\n\n```json\n{\"estimate\": 55.0, \"ci_low\": 35.0, \"ci_high\": 72.0}\n```"
+}

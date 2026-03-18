@@ -1,0 +1,22 @@
+{
+  "case_id": "startup_success",
+  "condition": "naive",
+  "probe_battery": "on_framework",
+  "model": "claude-opus-4-6",
+  "initial_estimate": 5.0,
+  "initial_ci": [
+    1.0,
+    15.0
+  ],
+  "final_estimate": 2.5,
+  "final_ci": [
+    1.0,
+    6.0
+  ],
+  "update_magnitude": 2.5,
+  "update_direction": "down",
+  "relative_update": 0.5,
+  "had_initial_ci": true,
+  "initial_response_text": "## Reasoning\n\nLet me think through this carefully.\n\n**Key signals:**\n- 18 months is a significant runway with minimal traction - most successful startups show stronger growth signals by this point\n- 500 MAU after 18 months suggests weak product-market fit\n- Growth is flat, not just slow - flat growth is a particularly bad signal because it suggests they've saturated their reachable audience without organic/viral growth kicking in\n- Reaching 10,000 MAU from 500 means 20x growth in 12 months\n- \"Persist with current approach\" is the key qualifier - this means no pivot, no fundamental change\n\n**Base rates:**\n- Most startups that have flat growth at 18 months and don't change approach fail to achieve breakout growth\n- 20x growth in 12 months is achievable for startups with product-market fit (roughly 15% month-over-month growth needed), but flat growth at 500 MAU strongly suggests PMF hasn't been found\n- The fact that the team is even *considering* pivoting suggests internal recognition that things aren't working\n- Some small percentage of startups in this position do find a way through persistence - maybe a market shift, a feature that clicks, word of mouth that suddenly compounds - but this is rare when growth has been flat\n\n**Estimate:**\nPersisting with the current approach when growth is flat after 18 months has a very low probability of producing 20x growth. I'd estimate roughly 5% probability. There's some chance an external catalyst (press coverage, market change, a particular user community discovering them) could trigger growth, but the flat trajectory is a strong negative signal.\n\n**Confidence interval (80%):**\n- I'm fairly confident the true probability is low, but there's uncertainty about just how low\n- Low end: ~1% (it's almost never zero - unexpected things happen)\n- High end: ~15% (accounting for my uncertainty about their specific situation, market dynamics, etc.)\n\n```json\n{\"estimate\": 5, \"ci_low\": 1, \"ci_high\": 15}\n```",
+  "final_response_text": "I need to revise my initial estimate of 5.0% given three pieces of follow-up information.\n\n**Analyzing each piece of information:**\n\n1. **Base rate confirmation:** The ~5% base rate for sudden organic growth after 18 months of flat growth aligns with my prior estimate. This anchors the estimate but doesn't move it much on its own.\n\n2. **Three failed marketing channels:** This is meaningfully negative. It suggests the founders have already exhausted some of the obvious levers for growth. Each failed attempt reduces the remaining option space and may signal deeper product-market fit issues. This should push the estimate down.\n\n3. **Competitor raised $10M:** A well-funded competitor targeting the same market creates additional headwinds. They can outspend on customer acquisition, talent, and product development. This compresses the window of opportunity and makes it harder for a struggling startup to break through.\n\n**Reasoning through the revision:**\n\n- Starting from the 5% base rate\n- Factor 2 (failed channels): This is a negative signal suggesting the problem may be fundamental (product-market fit) rather than just a distribution problem. I'd discount by roughly 30-40%, bringing it to ~3-3.5%.\n- Factor 3 (funded competitor): This adds competitive pressure that further reduces the probability of inflection. Another ~20-30% discount, bringing it to ~2-2.5%.\n\nThe combination of these factors paints a picture of a startup that has been unable to find growth despite multiple attempts, and now faces a strengthening competitor. The most likely path to inflection would require a significant pivot or external catalyst (e.g., acquisition offer, partnership), but the question seems to be about organic growth/success.\n\n**Revised estimate:** ~2.5%\n\n**80% Confidence Interval:** The true probability could be somewhat higher if there are unseen factors (new product insight, niche the competitor ignores), or lower if the situation is even more dire. I'll set the interval at 1% to 6%.\n\n```json\n{\"estimate\": 2.5, \"ci_low\": 1.0, \"ci_high\": 6.0}\n```"
+}

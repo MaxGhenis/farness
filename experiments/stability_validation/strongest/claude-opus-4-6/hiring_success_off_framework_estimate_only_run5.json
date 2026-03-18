@@ -1,0 +1,22 @@
+{
+  "case_id": "hiring_success",
+  "condition": "estimate_only",
+  "probe_battery": "off_framework",
+  "model": "claude-opus-4-6",
+  "initial_estimate": 30.0,
+  "initial_ci": [
+    15.0,
+    45.0
+  ],
+  "final_estimate": 70.0,
+  "final_ci": [
+    55.0,
+    85.0
+  ],
+  "update_magnitude": 40.0,
+  "update_direction": "up",
+  "relative_update": 1.3333333333333333,
+  "had_initial_ci": true,
+  "initial_response_text": "```json\n{\"estimate\": 30, \"ci_low\": 15, \"ci_high\": 45}\n```",
+  "final_response_text": "Looking at the follow-up information:\n\n1. **Cross-functional leadership shift + Candidate A excelled in stakeholder simulation** - This strongly favors Candidate A, as the role now prioritizes exactly the skills where A demonstrated strength.\n\n2. **Reserved candidate scored higher technically but couldn't explain tradeoffs** - This weakens the reserved candidate significantly. Technical skill matters less if you can't communicate design decisions effectively, especially in a cross-functional leadership role.\n\n3. **Urgent need to rebuild trust with product and sales** - This is a critical contextual factor that heavily favors Candidate A's interpersonal and stakeholder management strengths. The reserved candidate's communication struggles would likely exacerbate the existing trust deficit.\n\nAll three pieces of evidence point in the same direction: strongly favoring Candidate A over the reserved/technical candidate. The original estimate of 30% (which I interpret as the probability of the reserved candidate being selected, or perhaps Candidate A being selected) needs significant revision.\n\nGiven the context, if the original 30% represented the probability of Candidate A being selected (with the reserved candidate initially favored), all three signals now strongly shift toward Candidate A. The cross-functional leadership emphasis, stakeholder simulation performance, and urgent trust-rebuilding need all align to favor A.\n\nI'd revise the estimate upward substantially - from 30% to roughly 70%, reflecting that Candidate A is now clearly the stronger fit for the redefined role requirements.\n\n```json\n{\"estimate\": 70.0, \"ci_low\": 55.0, \"ci_high\": 85.0}\n```"
+}

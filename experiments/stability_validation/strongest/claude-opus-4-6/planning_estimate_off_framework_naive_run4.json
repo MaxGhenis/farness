@@ -1,0 +1,22 @@
+{
+  "case_id": "planning_estimate",
+  "condition": "naive",
+  "probe_battery": "off_framework",
+  "model": "claude-opus-4-6",
+  "initial_estimate": 3.0,
+  "initial_ci": [
+    2.0,
+    5.5
+  ],
+  "final_estimate": 5.0,
+  "final_ci": [
+    3.5,
+    7.0
+  ],
+  "update_magnitude": 2.0,
+  "update_direction": "up",
+  "relative_update": 0.6666666666666666,
+  "had_initial_ci": true,
+  "initial_response_text": "## Reasoning\n\nSoftware estimation is notoriously optimistic, even when teams feel confident and have detailed breakdowns. Empirical research on software projects (e.g., Standish Group, Bent Flyvbjerg's work on planning fallacy) consistently shows:\n\n- Teams systematically underestimate by a factor of roughly 1.5-2x on average\n- Detailed task breakdowns help but don't eliminate the bias \u2014 they often miss integration work, testing edge cases, code review iterations, unexpected dependencies, context switching, and deployment issues\n- Confidence level doesn't correlate well with accuracy; in fact, high confidence sometimes signals insufficient consideration of risks\n\nFor a 2-week estimate with high confidence and detailed breakdowns, the detailed planning helps somewhat (this isn't a wild guess), so I'd apply a more moderate multiplier than the worst cases. A reasonable central estimate is about 3 weeks (~1.5x the original estimate).\n\nFor the 80% confidence interval:\n- **Best case (10th percentile):** Things go smoothly, maybe 2 weeks as estimated \u2014 possible but unlikely to beat\n- **Worst case (90th percentile):** Significant unforeseen complications push it to 5-6 weeks\n\nThe distribution is right-skewed (things can go much worse than planned, but rarely much better).\n\n```json\n{\"estimate\": 3, \"ci_low\": 2, \"ci_high\": 5.5}\n```",
+  "final_response_text": "## Revised Estimate Analysis\n\nLet me work through each new risk factor and its impact on the original 3.0-week estimate.\n\n### Risk Factor Assessment\n\n**1. External API team with no committed delivery date**\nThis is a significant risk. Without a committed date, we face potential blocking dependencies. This could add anywhere from 0 to several weeks of delay. Even in an optimistic scenario, there's likely coordination overhead and potential for stub/mock work while waiting. I'd add ~0.5\u20131.5 weeks in expectation, with high variance.\n\n**2. Senior engineer on vacation during integration week**\nIntegration is typically a critical-path activity requiring deep expertise. Losing a senior engineer during this phase means:\n- Slower integration work\n- Potential rework if less experienced engineers handle it\n- Knowledge transfer overhead before/after vacation\nThis likely adds ~0.5\u20131.0 weeks.\n\n**3. Fixed rollout window (binary outcome: hit it or slip a full month)**\nThis doesn't change the engineering effort estimate directly, but it creates a \"quantized\" delivery risk. It also means the team may need to front-load work or build in buffer to avoid the cliff. This creates schedule pressure that can paradoxically increase estimate if we need to account for the risk of slipping to the next window.\n\n### Revised Point Estimate\n\nStarting from 3.0 weeks:\n- External API dependency: +1.0 week (expected value, accounting for probability of delay)\n- Senior engineer absence during integration: +0.75 weeks\n- Buffer for fixed window risk (need to plan conservatively): +0.25 weeks\n\n**Revised estimate: ~5.0 weeks**\n\n### Confidence Interval (80%)\n\n- **Best case (P10):** External API delivers on time, integration goes smoothly despite the absence, everything aligns \u2192 ~3.5 weeks\n- **Worst case (P90):** External API delays significantly, integration needs rework, approaches or misses the demo window \u2192 ~7.0 weeks\n\nThe distribution is right-skewed due to the unbounded nature of the API dependency and the month-slip cliff.\n\n```json\n{\"estimate\": 5.0, \"ci_low\": 3.5, \"ci_high\": 7.0}\n```"
+}

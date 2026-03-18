@@ -1,0 +1,22 @@
+{
+  "case_id": "startup_success",
+  "condition": "estimate_only",
+  "probe_battery": "on_framework",
+  "model": "claude-opus-4-6",
+  "initial_estimate": 5.0,
+  "initial_ci": [
+    2.0,
+    12.0
+  ],
+  "final_estimate": 2.5,
+  "final_ci": [
+    0.8,
+    6.0
+  ],
+  "update_magnitude": 2.5,
+  "update_direction": "down",
+  "relative_update": 0.5,
+  "had_initial_ci": true,
+  "initial_response_text": "```json\n{\"estimate\": 5, \"ci_low\": 2, \"ci_high\": 12}\n```",
+  "final_response_text": "Looking at the follow-up information:\n\n1. **Base rate of ~5% for sudden organic growth** after 18 months of flat growth aligns with my prior estimate, but the additional factors below should push this lower.\n\n2. **Three failed marketing channels** suggests the founders have already exhausted obvious growth levers. This reduces the probability of a turnaround since the low-hanging fruit has been tried. This is a negative signal.\n\n3. **Competitor raising $10M** means the competitive landscape is getting harder, not easier. This well-funded competitor will likely drive up customer acquisition costs and capture market share, making organic inflection even less likely.\n\nEach of these factors compounds downward pressure on the estimate. The base rate alone is 5%, but the exhausted marketing channels and intensifying competition both argue for moving below that base rate. The scenario is now one where not only has growth been flat, but the founders have demonstrated inability to find product-market fit through multiple attempts, and external conditions are worsening.\n\nRevised reasoning:\n- Base rate: 5%\n- Adjustment for exhausted channels: reduces to ~3%\n- Adjustment for well-funded competitor: reduces further to ~2-2.5%\n\n```json\n{\"estimate\": 2.5, \"ci_low\": 0.8, \"ci_high\": 6.0}\n```"
+}

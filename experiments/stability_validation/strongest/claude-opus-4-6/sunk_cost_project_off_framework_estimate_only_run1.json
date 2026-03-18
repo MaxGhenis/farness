@@ -1,0 +1,22 @@
+{
+  "case_id": "sunk_cost_project",
+  "condition": "estimate_only",
+  "probe_battery": "off_framework",
+  "model": "claude-opus-4-6",
+  "initial_estimate": 12.0,
+  "initial_ci": [
+    5.0,
+    25.0
+  ],
+  "final_estimate": 4.0,
+  "final_ci": [
+    1.5,
+    10.0
+  ],
+  "update_magnitude": 8.0,
+  "update_direction": "down",
+  "relative_update": 0.6666666666666666,
+  "had_initial_ci": true,
+  "initial_response_text": "```json\n{\"estimate\": 12, \"ci_low\": 5, \"ci_high\": 25}\n```",
+  "final_response_text": "I need to reassess the probability of this project succeeding given the three new pieces of information.\n\n**Starting point:** 12.0% (CI: 5.0-25.0)\n\n**Analyzing the follow-up information:**\n\n1. **Funding displacement of a $1.2M ARR project:** This creates a significant organizational tension. The $500K needed to finish this project comes at the cost of a higher-value project ($1.2M ARR vs. whatever this project delivers). This makes it likely that rational decision-makers would resist funding completion, OR that the funding gets pulled mid-stream. This is a strong negative signal for successful delivery.\n\n2. **No production-like staging environment for final integration/cutover:** This is a critical risk factor. The remaining work is concentrated in the hardest, most failure-prone phase (integration and cutover), and they lack the infrastructure to de-risk it. Integration issues discovered in production during cutover are notoriously difficult and time-consuming to resolve. This substantially increases the probability of failure or significant delay.\n\n3. **Executive sponsor's incentive misalignment:** The sponsor is motivated to keep the project *alive* (not necessarily to deliver it successfully) until the next board meeting. This means the project may continue to consume resources without genuine progress toward completion. It introduces a principal-agent problem where the appearance of progress is valued over actual delivery. This is a strong negative signal \u2014 it suggests zombie project dynamics.\n\n**Combined assessment:**\n\n- The displacement cost creates political headwinds and rational objections to continued funding\n- The technical risk is concentrated in the most dangerous phase without proper safety nets\n- The sponsor's incentives actively work against honest assessment and course correction\n- These three factors are compounding, not independent \u2014 misaligned incentives will mask the technical problems, and funding pressure creates shortcuts\n\nEach factor individually would push the estimate down. Together, they paint a picture of a project that is very likely to either fail technically during cutover, get defunded due to opportunity cost, or be kept artificially alive without actually delivering value.\n\nI'd revise significantly downward from 12% to approximately 4%.\n\n```json\n{\"estimate\": 4.0, \"ci_low\": 1.5, \"ci_high\": 10.0}\n```"
+}

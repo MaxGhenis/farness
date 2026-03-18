@@ -1,0 +1,22 @@
+{
+  "case_id": "product_launch",
+  "condition": "estimate_only",
+  "probe_battery": "on_framework",
+  "model": "claude-opus-4-6",
+  "initial_estimate": 30.0,
+  "initial_ci": [
+    15.0,
+    50.0
+  ],
+  "final_estimate": 20.0,
+  "final_ci": [
+    10.0,
+    35.0
+  ],
+  "update_magnitude": 10.0,
+  "update_direction": "down",
+  "relative_update": 0.3333333333333333,
+  "had_initial_ci": true,
+  "initial_response_text": "```json\n{\"estimate\": 30, \"ci_low\": 15, \"ci_high\": 50}\n```",
+  "final_response_text": "Looking at the follow-up information:\n\n1. **Base rate of 20-30%** for new features meaningfully moving engagement metrics - this anchors my estimate downward from 30% since even 30% would be at the top of the base rate range.\n\n2. **Self-selected beta users** - This is a significant concern. Enthusiasts who opt into betas are more engaged, more forgiving, and more likely to use new features than the general population. Any positive signal from beta testing is inflated and not generalizable. This should push the estimate down meaningfully.\n\n3. **Team measuring its own success** - This introduces measurement bias (conscious or unconscious). They may choose favorable metrics, favorable time windows, or favorable comparison groups. This further discounts any positive signals we might have.\n\n**Reasoning through the revision:**\n\n- Starting from the base rate of 20-30%, I'd normally center around 25%.\n- The beta user self-selection bias means that even if beta results looked promising, we should discount them. This pushes below the base rate midpoint.\n- The team's conflict of interest in measurement means reported metrics may overstate true impact.\n- Both pieces of follow-up information are directionally negative (suggesting we should be less confident in success, not more).\n\nI'd revise downward from my original 30% to something in the range of 18-20%, reflecting that we're slightly below the base rate midpoint due to the two bias factors.\n\nThe confidence interval should remain fairly wide given the uncertainties, but shifted lower.\n\n```json\n{\"estimate\": 20.0, \"ci_low\": 10.0, \"ci_high\": 35.0}\n```"
+}

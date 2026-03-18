@@ -1,0 +1,22 @@
+{
+  "case_id": "planning_estimate",
+  "condition": "naive",
+  "probe_battery": "on_framework",
+  "model": "claude-opus-4-6",
+  "initial_estimate": 3.0,
+  "initial_ci": [
+    2.0,
+    5.0
+  ],
+  "final_estimate": 8.0,
+  "final_ci": [
+    4.5,
+    14.0
+  ],
+  "update_magnitude": 5.0,
+  "update_direction": "up",
+  "relative_update": 1.6666666666666667,
+  "had_initial_ci": true,
+  "initial_response_text": "## Reasoning\n\nSoftware estimates are notoriously optimistic, even when teams feel confident and have detailed breakdowns. Key factors:\n\n1. **Planning fallacy**: Teams consistently underestimate due to optimism bias, even with detailed plans. Detailed task breakdowns can actually increase confidence without improving accuracy (the \"planning fallacy\" - people focus on the specific plan rather than base rates).\n\n2. **Base rates from research**: Studies (e.g., Standish Group, Bent Flyvbjerg's work) consistently show software projects take 1.5x-3x longer than estimated. For smaller features (not full projects), the multiplier tends to be smaller but still significant.\n\n3. **Confidence level consideration**: High confidence from the team is actually a slight warning sign - it suggests they may not have fully accounted for unknowns (unknown unknowns, integration issues, code review cycles, testing edge cases, scope clarification, etc.).\n\n4. **For a 2-week estimate with high confidence and detailed breakdowns**: The detailed breakdown is a positive signal (better than a gut estimate), but the typical multiplier for well-scoped features is around 1.5x. So ~3 weeks is a reasonable point estimate.\n\n5. **80% confidence interval**: There's maybe a 10% chance they nail it in 2 weeks or less (things go perfectly), and the upper tail could stretch to 5-6 weeks if significant blockers or scope changes emerge. For the 80% CI (cutting off 10% on each tail):\n   - Low end: ~2 weeks (they were right)\n   - High end: ~5 weeks (significant but not catastrophic delays)\n\n```json\n{\"estimate\": 3, \"ci_low\": 2, \"ci_high\": 5}\n```",
+  "final_response_text": "I'll reason through each piece of follow-up information and how it should update my original estimate of 3.0 weeks.\n\n## Reasoning Through Each Update\n\n### 1. Software projects average 2-3x their initial estimates\nThis is well-documented in software engineering literature (Standish Group, Kahneman's work, etc.). If my initial estimate of 3.0 weeks was an \"inside view\" estimate, applying the base rate would suggest 6.0-9.0 weeks. However, I should weight this against the specific scenario rather than blindly multiplying. A reasonable Bayesian update would pull my estimate significantly upward - perhaps toward the geometric mean of the range, around 7.5 weeks as a reference class midpoint.\n\n### 2. Team confidence as a planning fallacy warning sign\nHigh confidence in software teams is indeed inversely correlated with estimate accuracy in many studies. Overconfident teams tend to underestimate complexity, skip contingency planning, and dismiss tail risks. This should push the estimate further up, perhaps another 10-20% beyond the base-rate adjustment, since it suggests even the inputs to my original estimate were optimistically biased.\n\n### 3. 30% chance of a major blocker\nA major blocker (integration issue, unclear requirements) could easily add 2-4 weeks. Expected value of this risk alone: 0.30 \u00d7 3 weeks \u2248 0.9 weeks. But blockers also cascade and cause context-switching costs, so the real impact might be higher.\n\n## Synthesis\n\n- Base estimate adjusted for reference class (2-3x): ~7.0 weeks\n- Planning fallacy correction (team overconfidence): push toward ~7.5-8.0 weeks\n- Major blocker risk (expected value ~1.0-1.5 weeks additional): ~8.5-9.0 weeks\n\nI'll settle on approximately 8.0 weeks as my point estimate, reflecting all three corrections without over-compounding.\n\n## 80% Confidence Interval\n- **Low end (10th percentile):** If things go relatively well but still slower than the naive estimate: ~4.5 weeks\n- **High end (90th percentile):** If a major blocker hits plus typical scope creep and integration issues: ~14 weeks\n\nThe right-skew is intentional - software project delays have fat right tails.\n\n```json\n{\"estimate\": 8.0, \"ci_low\": 4.5, \"ci_high\": 14.0}\n```"
+}

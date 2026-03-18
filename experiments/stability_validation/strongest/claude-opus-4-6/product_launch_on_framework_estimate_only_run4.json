@@ -1,0 +1,22 @@
+{
+  "case_id": "product_launch",
+  "condition": "estimate_only",
+  "probe_battery": "on_framework",
+  "model": "claude-opus-4-6",
+  "initial_estimate": 30.0,
+  "initial_ci": [
+    15.0,
+    50.0
+  ],
+  "final_estimate": 18.0,
+  "final_ci": [
+    8.0,
+    32.0
+  ],
+  "update_magnitude": 12.0,
+  "update_direction": "down",
+  "relative_update": 0.4,
+  "had_initial_ci": true,
+  "initial_response_text": "```json\n{\"estimate\": 30, \"ci_low\": 15, \"ci_high\": 50}\n```",
+  "final_response_text": "Looking at the follow-up information:\n\n1. **Base rate of 20-30%** for new features meaningfully moving engagement metrics - this anchors my estimate downward from 30% since the base rate itself is already at or below my prior estimate.\n\n2. **Beta user self-selection bias** - Beta users are enthusiasts who are more likely to engage positively with any new feature. This means the positive signals from beta testing are inflated and less predictive of general user behavior. This should push my estimate notably downward.\n\n3. **Team measuring its own success** - This introduces measurement/confirmation bias. The team has incentives (conscious or not) to frame metrics favorably, choose favorable time windows, or select metrics that look good. This further erodes confidence in positive signals.\n\n**Reasoning through the update:**\n\n- Starting from the base rate of 20-30%, I'd normally adjust based on evidence from beta testing and team reports. But both of those evidence sources are compromised (points 2 and 3).\n- With contaminated positive evidence, I should weight the base rate more heavily and potentially even shade below it, since the \"positive signals\" that might have pushed me to 30% originally are now less trustworthy.\n- The combination of self-selected beta users AND team-measured metrics means the evidence for success is doubly inflated.\n\nI'd revise downward from 30% to roughly 18-20%, and widen the confidence interval slightly to reflect uncertainty about how much these biases distort the picture.\n\n```json\n{\"estimate\": 18.0, \"ci_low\": 8.0, \"ci_high\": 32.0}\n```"
+}

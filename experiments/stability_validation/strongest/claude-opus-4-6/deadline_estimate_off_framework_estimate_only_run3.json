@@ -1,0 +1,22 @@
+{
+  "case_id": "deadline_estimate",
+  "condition": "estimate_only",
+  "probe_battery": "off_framework",
+  "model": "claude-opus-4-6",
+  "initial_estimate": 82.0,
+  "initial_ci": [
+    65.0,
+    93.0
+  ],
+  "final_estimate": 62.0,
+  "final_ci": [
+    42.0,
+    78.0
+  ],
+  "update_magnitude": 20.0,
+  "update_direction": "down",
+  "relative_update": 0.24390243902439024,
+  "had_initial_ci": true,
+  "initial_response_text": "```json\n{\"estimate\": 82, \"ci_low\": 65, \"ci_high\": 93}\n```",
+  "final_response_text": "Looking at the three follow-up pieces of information:\n\n1. **No slack on critical path**: Legal sign-off, vendor configuration, and staff training are all sequential with zero float. Any delay in one directly delays the whole project. This significantly increases the probability of missing the deadline since there's no buffer to absorb even minor slippage.\n\n2. **Compliance lead is dual-hatted**: The key person is splitting attention with audit remediation, with context-switching peaking precisely when the project is in its final stretch. This is a strong downward pressure on on-time delivery \u2014 cognitive overload and competing priorities during the critical final weeks.\n\n3. **Weak escalation incentives**: A modest internal escalation for missing the deadline means teams won't proactively flag risks. Problems will be discovered late, reducing time for corrective action. This is a classic organizational failure mode that compounds the first two issues.\n\n**Reassessment:**\n- The original 82% estimate assumed some reasonable likelihood of on-time completion.\n- Factor 1 (no slack) alone would drop this meaningfully \u2014 perhaps 8-10 points, since any single delay cascades.\n- Factor 2 (resource contention) adds another 5-8 points of risk \u2014 a distracted lead on the critical path is a significant threat.\n- Factor 3 (weak incentives to surface risk) adds another 3-5 points \u2014 hidden risks compound late.\n\nThese factors are also correlated: the lack of slack means the distracted lead's delays can't be absorbed, and the weak incentives mean those delays won't be flagged until it's too late.\n\nCombined, I'd estimate roughly a 15-20 percentage point reduction from the original 82%.\n\n```json\n{\"estimate\": 62.0, \"ci_low\": 42.0, \"ci_high\": 78.0}\n```"
+}

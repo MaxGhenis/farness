@@ -1,0 +1,22 @@
+{
+  "case_id": "product_launch",
+  "condition": "estimate_only",
+  "probe_battery": "on_framework",
+  "model": "claude-opus-4-6",
+  "initial_estimate": 30.0,
+  "initial_ci": [
+    15.0,
+    50.0
+  ],
+  "final_estimate": 18.0,
+  "final_ci": [
+    8.0,
+    30.0
+  ],
+  "update_magnitude": 12.0,
+  "update_direction": "down",
+  "relative_update": 0.4,
+  "had_initial_ci": true,
+  "initial_response_text": "```json\n{\"estimate\": 30, \"ci_low\": 15, \"ci_high\": 50}\n```",
+  "final_response_text": "Looking at the follow-up information:\n\n1. **Base rate of 20-30%** for new features meaningfully moving engagement metrics - this anchors my estimate downward from my initial 30%.\n\n2. **Beta user self-selection bias** - enthusiastic early adopters will show inflated engagement compared to the general user base. This means any positive signals from beta testing are likely overstated, pushing the true probability lower.\n\n3. **Team measuring their own success** - this introduces confirmation bias in how metrics are selected, interpreted, and reported. Positive results may be cherry-picked or framed favorably.\n\nMy initial estimate of 30% was already at the top of the base rate range. Given that both the measurement process (team self-evaluation) and the testing sample (self-selected beta users) introduce upward biases, the actual probability should be adjusted below the base rate midpoint.\n\n- Base rate midpoint: ~25%\n- Adjustment for beta user bias: -3 to -5 percentage points (positive beta signals are unreliable)\n- Adjustment for team measurement bias: -2 to -3 percentage points (reported metrics may overstate impact)\n\nThis brings me to roughly 18-20%.\n\nThe confidence interval should remain fairly wide given the uncertainty, but shifted downward.\n\n```json\n{\"estimate\": 18.0, \"ci_low\": 8.0, \"ci_high\": 30.0}\n```"
+}

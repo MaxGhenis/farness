@@ -1,0 +1,22 @@
+{
+  "case_id": "investment_return",
+  "condition": "estimate_only",
+  "probe_battery": "on_framework",
+  "model": "claude-opus-4-6",
+  "initial_estimate": 15.0,
+  "initial_ci": [
+    5.0,
+    30.0
+  ],
+  "final_estimate": 4.0,
+  "final_ci": [
+    1.5,
+    10.0
+  ],
+  "update_magnitude": 11.0,
+  "update_direction": "down",
+  "relative_update": 0.7333333333333333,
+  "had_initial_ci": true,
+  "initial_response_text": "```json\n{\"estimate\": 15, \"ci_low\": 5, \"ci_high\": 30}\n```",
+  "final_response_text": "The follow-up information suggests the original estimate was likely too optimistic. Let me reason through this:\n\n1. **Base rate of 2x+ return is ~5%** - This is already much lower than my previous 15% estimate.\n2. **Friends and family rounds don't offer meaningful discounts** - This removes any valuation advantage that might have justified a higher probability.\n3. **Strong incentive bias from the person offering** - This suggests adverse selection; the opportunity may be presented more favorably than warranted.\n\nThe base rate alone (5%) would be the starting point. The additional factors (no real discount, incentive misalignment) should push this *below* the base rate, not above it. Adverse selection from the referral source and lack of genuine discount suggest maybe 3-4% is appropriate.\n\nHowever, there's some small chance the startup is legitimately good and the personal connection provides genuine access to a quality deal, so I won't go too far below the base rate.\n\n```json\n{\"estimate\": 4.0, \"ci_low\": 1.5, \"ci_high\": 10.0}\n```"
+}

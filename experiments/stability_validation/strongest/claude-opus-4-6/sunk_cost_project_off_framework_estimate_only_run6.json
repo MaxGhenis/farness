@@ -1,0 +1,22 @@
+{
+  "case_id": "sunk_cost_project",
+  "condition": "estimate_only",
+  "probe_battery": "off_framework",
+  "model": "claude-opus-4-6",
+  "initial_estimate": 12.0,
+  "initial_ci": [
+    5.0,
+    25.0
+  ],
+  "final_estimate": 5.5,
+  "final_ci": [
+    2.0,
+    14.0
+  ],
+  "update_magnitude": 6.5,
+  "update_direction": "down",
+  "relative_update": 0.5416666666666666,
+  "had_initial_ci": true,
+  "initial_response_text": "```json\n{\"estimate\": 12, \"ci_low\": 5, \"ci_high\": 25}\n```",
+  "final_response_text": "I need to reassess the probability of project success given these three new pieces of information.\n\n**Starting point:** 12.0% (CI: 5.0-25.0)\n\n**Analyzing each follow-up:**\n\n1. **Funding displacement of a $1.2M ARR project:** This creates significant organizational tension. The opportunity cost is concrete and visible. This means the funding decision itself is politically fragile\u2014rational actors would likely pull funding or at least scrutinize heavily. However, if the executive sponsor controls the decision (see point 3), funding might continue despite poor economics. Net effect on success: slightly negative (resources may be contested, morale issues, potential mid-stream defunding).\n\n2. **Final integration/cutover with no production-like staging environment:** This is a major red flag. Integration and cutover are where projects most commonly fail, and doing this without a production-like staging environment dramatically increases the risk of failed deployments, unexpected production issues, rollbacks, and delays. This is probably the most impactful new information\u2014it substantially lowers the probability of successful delivery.\n\n3. **Executive sponsor motivated to keep project alive until board meeting:** This introduces a principal-agent problem. The sponsor isn't optimizing for project success\u2014they're optimizing for project survival (appearance of progress). This means the project may continue consuming resources without genuine progress toward completion, decisions may be made to defer hard problems, and \"success\" metrics may be gamed. This reduces the probability of genuine, functional delivery.\n\n**Combined assessment:**\n- The lack of staging environment for the riskiest phase (integration/cutover) is the strongest downward signal\u2014I'd weight this as reducing probability by ~30-40% relative.\n- The misaligned sponsor incentives mean the project is likely to zombie forward without real resolution, further reducing genuine success probability.\n- The funding displacement creates organizational antibodies that could kill or starve the project.\n\nAll three factors point in the same direction: lower probability of genuine success. I'd revise down from 12% to approximately 5-6%.\n\nThe confidence interval should widen slightly on the low end given the compounding risks, but the upper bound should come down significantly since these aren't ambiguous signals\u2014they're consistently negative.\n\n```json\n{\"estimate\": 5.5, \"ci_low\": 2.0, \"ci_high\": 14.0}\n```"
+}

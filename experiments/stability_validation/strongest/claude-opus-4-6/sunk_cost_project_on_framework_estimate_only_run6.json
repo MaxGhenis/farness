@@ -1,0 +1,22 @@
+{
+  "case_id": "sunk_cost_project",
+  "condition": "estimate_only",
+  "probe_battery": "on_framework",
+  "model": "claude-opus-4-6",
+  "initial_estimate": 12.0,
+  "initial_ci": [
+    5.0,
+    25.0
+  ],
+  "final_estimate": 3.0,
+  "final_ci": [
+    1.0,
+    8.0
+  ],
+  "update_magnitude": 9.0,
+  "update_direction": "down",
+  "relative_update": 0.75,
+  "had_initial_ci": true,
+  "initial_response_text": "```json\n{\"estimate\": 12, \"ci_low\": 5, \"ci_high\": 25}\n```",
+  "final_response_text": "I need to revise my estimate based on three significant pieces of negative information.\n\n**Starting point:** 12.0% (CI: 5.0-25.0) probability of success (I'm inferring this was about a troubled project meeting its budget/timeline).\n\n**Factor 1: Only 16% of already-troubled projects meet revised budgets.**\nThis is a strong base rate. My prior of 12% was already below this, but this confirms the general difficulty. This anchors us around 12-16% before considering project-specific factors.\n\n**Factor 2: Two senior engineers interviewing elsewhere.**\nThis is a serious risk multiplier. Losing senior engineers during a critical phase would be devastating. Even the *distraction* of job searching reduces productivity. If one or both leave, the project likely fails. The probability of at least one leaving seems moderate-to-high (say 40-60%). This should substantially reduce the success estimate - perhaps cutting it by 30-50%.\n\n**Factor 3: \"Almost there\" based on features complete, but no integration testing.**\nThis is a classic red flag. Integration testing is where hidden problems emerge - interface mismatches, performance issues, race conditions, etc. Teams that claim they're \"almost done\" before integration testing frequently discover they're much further away than believed. Integration testing on complex projects often takes as long as initial development. This means the project is likely significantly less complete than reported, which means budget/timeline overruns are very probable.\n\n**Combined assessment:**\n- Base rate for troubled projects meeting revised budget: ~16%\n- My prior was already 12%, reflecting some pessimism\n- Factor 2 (engineer flight risk) reduces this substantially: multiply by ~0.5-0.6\n- Factor 3 (no integration testing) is very significant: multiply by ~0.4-0.5\n- These factors compound: 12% \u00d7 0.55 \u00d7 0.45 \u2248 3.0%\n\nThe combination of key personnel likely leaving AND a major undiscovered testing phase ahead makes success quite unlikely.\n\n```json\n{\"estimate\": 3.0, \"ci_low\": 1.0, \"ci_high\": 8.0}\n```"
+}

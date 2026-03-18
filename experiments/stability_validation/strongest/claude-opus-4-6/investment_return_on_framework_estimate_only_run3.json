@@ -1,0 +1,22 @@
+{
+  "case_id": "investment_return",
+  "condition": "estimate_only",
+  "probe_battery": "on_framework",
+  "model": "claude-opus-4-6",
+  "initial_estimate": 15.0,
+  "initial_ci": [
+    5.0,
+    30.0
+  ],
+  "final_estimate": 4.5,
+  "final_ci": [
+    1.5,
+    10.0
+  ],
+  "update_magnitude": 10.5,
+  "update_direction": "down",
+  "relative_update": 0.7,
+  "had_initial_ci": true,
+  "initial_response_text": "```json\n{\"estimate\": 15, \"ci_low\": 5, \"ci_high\": 30}\n```",
+  "final_response_text": "The follow-up information suggests the probability of a good outcome (presumably returning 2x+ or similar) should be lower than my initial estimate. Let me reconsider:\n\n1. Base rate of ~5% for 2x+ returns is much lower than my initial 15% estimate\n2. The \"discount\" may not be real, eliminating any edge over base rates\n3. Adverse selection / incentive misalignment further reduces expected value\n\nThe friends-and-family framing might even select for worse deals (founders who can't raise from sophisticated investors). The informational disadvantage and incentive issues could push this below the base rate of 5%.\n\nHowever, there's some chance the relationship provides genuine access to a decent company, so I wouldn't go too far below base rate. I'll estimate around 5%, maybe slightly below given the negative signals.\n\n```json\n{\"estimate\": 4.5, \"ci_low\": 1.5, \"ci_high\": 10.0}\n```"
+}

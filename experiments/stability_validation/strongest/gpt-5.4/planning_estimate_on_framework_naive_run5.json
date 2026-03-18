@@ -1,0 +1,22 @@
+{
+  "case_id": "planning_estimate",
+  "condition": "naive",
+  "probe_battery": "on_framework",
+  "model": "gpt-5.4",
+  "initial_estimate": 2.6,
+  "initial_ci": [
+    2.0,
+    4.0
+  ],
+  "final_estimate": 8.0,
+  "final_ci": [
+    5.5,
+    11.5
+  ],
+  "update_magnitude": 5.4,
+  "update_direction": "up",
+  "relative_update": 2.076923076923077,
+  "had_initial_ci": true,
+  "initial_response_text": "Software estimates, even with confident teams and detailed breakdowns, tend to run somewhat over plan due to integration issues, hidden dependencies, testing, and coordination overhead. For a 2-week estimate from a confident team, I\u2019d modestly adjust upward rather than dramatically.\n\n```json\n{\"estimate\": 2.6, \"ci_low\": 2.0, \"ci_high\": 4.0}\n```",
+  "final_response_text": "Starting from the prior estimate of **2.6 weeks**:\n\n1. **Typical software overruns (2\u20133x initial estimates)**  \n   If 2.6 was based on an initial optimistic plan, this pushes the expected duration upward substantially. A midpoint multiplier here is about **2.5x**, which would imply **6.5 weeks**.\n\n2. **Team confidence as planning-fallacy evidence**  \n   If their confidence should be treated as a risk factor rather than a positive signal, I\u2019d adjust upward further rather than downward. I\u2019d treat this as a modest extra uplift, roughly **10\u201320%**. Applied to 6.5, that gives about **7.2\u20137.5 weeks**.\n\n3. **30% chance of a major blocker**  \n   This should increase the expected value and widen the uncertainty interval. If a major blocker adds, say, around **2\u20134 weeks** when it occurs, the expected addition is roughly **0.6\u20131.2 weeks**. That pushes the central estimate to around **8.0 weeks**.\n\nSo my revised point estimate is **8.0 weeks**.\n\nFor an **80% confidence interval**, I\u2019d make it fairly wide because blocker risk and estimate inflation both increase variance. A reasonable 80% range is about **5.5 to 11.5 weeks**.\n\n```json\n{\"estimate\": 8.0, \"ci_low\": 5.5, \"ci_high\": 11.5}\n```"
+}

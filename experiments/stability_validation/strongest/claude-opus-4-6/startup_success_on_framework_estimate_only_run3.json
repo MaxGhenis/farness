@@ -1,0 +1,22 @@
+{
+  "case_id": "startup_success",
+  "condition": "estimate_only",
+  "probe_battery": "on_framework",
+  "model": "claude-opus-4-6",
+  "initial_estimate": 5.0,
+  "initial_ci": [
+    2.0,
+    12.0
+  ],
+  "final_estimate": 3.0,
+  "final_ci": [
+    1.0,
+    7.0
+  ],
+  "update_magnitude": 2.0,
+  "update_direction": "down",
+  "relative_update": 0.4,
+  "had_initial_ci": true,
+  "initial_response_text": "```json\n{\"estimate\": 5, \"ci_low\": 2, \"ci_high\": 12}\n```",
+  "final_response_text": "Looking at the follow-up information:\n\n1. **Base rate confirmation**: The ~5% base rate for sudden organic growth after 18 months of flat growth aligns with my prior estimate, but this was before considering the additional negative signals.\n\n2. **Exhausted marketing channels**: Having tried 3 different channels with similar (presumably poor) results suggests the problem may be product-market fit rather than distribution. This is a significant negative signal that should push the estimate down.\n\n3. **Well-funded competitor**: A competitor raising $10M targeting the same market adds competitive pressure, making it harder to gain traction and potentially pulling away potential customers/talent.\n\nEach of these factors compounds negatively:\n- The base rate alone suggests ~5%\n- Failed marketing experiments suggest the startup may be below the average case (pushing toward 3-4%)\n- Competitive pressure further reduces chances (pushing toward 2-3%)\n\nThe combination of all three factors \u2014 flat growth, exhausted obvious channels, and increasing competition \u2014 paints a notably worse picture than the base rate alone. I should revise downward meaningfully.\n\n```json\n{\"estimate\": 3.0, \"ci_low\": 1.0, \"ci_high\": 7.0}\n```"
+}

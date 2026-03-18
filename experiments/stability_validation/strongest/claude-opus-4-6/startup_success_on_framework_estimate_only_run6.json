@@ -1,0 +1,22 @@
+{
+  "case_id": "startup_success",
+  "condition": "estimate_only",
+  "probe_battery": "on_framework",
+  "model": "claude-opus-4-6",
+  "initial_estimate": 5.0,
+  "initial_ci": [
+    2.0,
+    12.0
+  ],
+  "final_estimate": 2.5,
+  "final_ci": [
+    1.0,
+    6.0
+  ],
+  "update_magnitude": 2.5,
+  "update_direction": "down",
+  "relative_update": 0.5,
+  "had_initial_ci": true,
+  "initial_response_text": "```json\n{\"estimate\": 5, \"ci_low\": 2, \"ci_high\": 12}\n```",
+  "final_response_text": "Looking at the follow-up information:\n\n1. **Base rate of ~5% for sudden organic growth** after 18 months of flat growth aligns with my previous point estimate, but the additional factors should push this lower.\n\n2. **Three failed marketing channels** suggests the founders have already exhausted obvious growth levers. This reduces the probability that they'll find a working channel without a fundamental pivot or product change. This is a negative signal.\n\n3. **Competitor raising $10M** actively targeting the same market means the startup faces increasing competitive pressure, likely driving up customer acquisition costs and making it harder to gain traction even if they find a working channel.\n\nEach of these factors compounds negatively. The base rate of ~5% should be adjusted downward:\n- Failed marketing attempts suggest the product-market fit may be weak \u2192 discount by ~40-50%\n- Well-funded competitor entering the space \u2192 additional discount of ~30-40%\n\nCombined, these factors suggest roughly a 50-65% total discount from the 5% base rate, bringing the estimate to approximately 2-2.5%.\n\nThe confidence interval should also shift downward and narrow somewhat, since the additional information reduces uncertainty while pointing consistently in the negative direction.\n\n```json\n{\"estimate\": 2.5, \"ci_low\": 1.0, \"ci_high\": 6.0}\n```"
+}

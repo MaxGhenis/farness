@@ -1,0 +1,22 @@
+{
+  "case_id": "acquisition_synergies",
+  "condition": "estimate_only",
+  "probe_battery": "off_framework",
+  "model": "claude-opus-4-6",
+  "initial_estimate": 45.0,
+  "initial_ci": [
+    30.0,
+    60.0
+  ],
+  "final_estimate": 67.0,
+  "final_ci": [
+    55.0,
+    78.0
+  ],
+  "update_magnitude": 22.0,
+  "update_direction": "up",
+  "relative_update": 0.4888888888888889,
+  "had_initial_ci": true,
+  "initial_response_text": "```json\n{\"estimate\": 45, \"ci_low\": 30, \"ci_high\": 60}\n```",
+  "final_response_text": "Looking at the three follow-up pieces of information:\n\n1. **Shared ERP and suppliers** - This dramatically reduces integration risk on the cost synergy side. ERP integration is typically one of the biggest sources of delay and failure in M&A synergy capture. This removes a major obstacle.\n\n2. **Aligned sales compensation from day one** - This addresses the most common revenue synergy killer: misaligned incentives. Having both teams paid on combined account revenue eliminates channel conflict and encourages cross-selling immediately.\n\n3. **Experienced integration PMO with two successful bolt-on acquisitions** - This provides proven execution capability and institutional knowledge of how to run integrations, reducing project management and coordination risk significantly.\n\nAll three factors are strongly positive and address the most common failure modes in post-merger integration (systems incompatibility, cultural/incentive misalignment, and poor execution management). Each independently would move the estimate upward, and together they substantially de-risk the scenario.\n\nRevising upward from 45.0%:\n- Factor 1 adds ~8-10 percentage points (removes major technical risk)\n- Factor 2 adds ~8-10 percentage points (removes major behavioral risk)\n- Factor 3 adds ~5-7 percentage points (proven execution capability)\n\nWith some overlap/diminishing returns, I'd estimate a combined uplift of roughly 20-22 percentage points. The confidence interval should also narrow given the reduced uncertainty.\n\n```json\n{\"estimate\": 67.0, \"ci_low\": 55.0, \"ci_high\": 78.0}\n```"
+}

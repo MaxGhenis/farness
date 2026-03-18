@@ -1,0 +1,22 @@
+{
+  "case_id": "sunk_cost_project",
+  "condition": "estimate_only",
+  "probe_battery": "off_framework",
+  "model": "claude-opus-4-6",
+  "initial_estimate": 12.0,
+  "initial_ci": [
+    5.0,
+    25.0
+  ],
+  "final_estimate": 5.5,
+  "final_ci": [
+    2.0,
+    14.0
+  ],
+  "update_magnitude": 6.5,
+  "update_direction": "down",
+  "relative_update": 0.5416666666666666,
+  "had_initial_ci": true,
+  "initial_response_text": "```json\n{\"estimate\": 12, \"ci_low\": 5, \"ci_high\": 25}\n```",
+  "final_response_text": "I need to assess how these three pieces of follow-up information affect the probability of this project succeeding (or whatever the original scenario was estimating - likely project success/delivery).\n\nStarting from my prior estimate of 12.0% (CI: 5.0-25.0), let me evaluate each new piece of information:\n\n1. **Funding displacement of a $1.2M ARR project**: This creates significant organizational tension. The opportunity cost is very high ($1.2M ARR vs. completing this project). This makes it more likely that rational decision-makers would pull funding, BUT it also means there's political pressure to justify the sunk cost. Net effect on success: slightly negative - the funding is contested and could be pulled, and if it proceeds, it's under duress.\n\n2. **No production-like staging environment for final integration/cutover**: This is a major red flag. The remaining work is precisely the riskiest phase (integration and cutover), and there's no safe environment to test it. This dramatically increases the risk of failure during the most critical phase. This is a strong downward signal on success probability.\n\n3. **Executive sponsor's incentive is to keep the project *alive* until the next board meeting, not to deliver it successfully**: This is a perverse incentive. The sponsor is optimizing for project continuation, not completion. This means the project may zombie along without the hard decisions needed to actually ship. This is a significant downward signal - it suggests the project will be kept on life support rather than driven to genuine completion.\n\n**Combined assessment:**\n- The lack of staging for the most critical remaining work substantially increases technical failure risk.\n- The executive sponsor's misaligned incentives mean the project is likely to be managed for optics rather than outcomes.\n- The funding tension means resources may be contested or half-hearted.\n\nAll three factors point downward. The perverse incentive structure (#3) combined with the technical risk (#2) is particularly damaging - you have high technical risk AND the person in charge isn't actually trying to deliver.\n\nI'd revise downward significantly, from 12% to around 5-6%.\n\n```json\n{\"estimate\": 5.5, \"ci_low\": 2.0, \"ci_high\": 14.0}\n```"
+}

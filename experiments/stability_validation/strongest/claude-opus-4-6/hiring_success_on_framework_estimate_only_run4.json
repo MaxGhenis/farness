@@ -1,0 +1,22 @@
+{
+  "case_id": "hiring_success",
+  "condition": "estimate_only",
+  "probe_battery": "on_framework",
+  "model": "claude-opus-4-6",
+  "initial_estimate": 30.0,
+  "initial_ci": [
+    15.0,
+    45.0
+  ],
+  "final_estimate": 15.0,
+  "final_ci": [
+    8.0,
+    25.0
+  ],
+  "update_magnitude": 15.0,
+  "update_direction": "down",
+  "relative_update": 0.5,
+  "had_initial_ci": true,
+  "initial_response_text": "```json\n{\"estimate\": 30, \"ci_low\": 15, \"ci_high\": 45}\n```",
+  "final_response_text": "I need to revise my estimate based on the follow-up information about the validity of different hiring signals.\n\nLet me think through this:\n\n1. **Original estimate**: 30.0% (CI: 15.0-45.0) - This seems to have been for a scenario where a candidate had strong interview chemistry/\"reminded me of our best performer\" but presumably weaker technical assessment scores.\n\n2. **Key updates from follow-up**:\n   - Unstructured interview impressions have very low predictive validity (r=0.14)\n   - \"Reminded me of our best performer\" is similarity bias, essentially noise\n   - Technical assessment has r=0.51 - far more predictive\n\nThe follow-up information is telling me that the positive signal (interview chemistry/similarity) is essentially worthless as a predictor, while the technical assessment (which the candidate presumably scored lower on) is the much stronger predictor.\n\nThis means I should:\n- Heavily discount the interview chemistry signal\n- Weight the technical assessment much more heavily\n- The similarity bias point means the positive impression is even less informative than a typical unstructured interview impression\n\nIf the candidate's main positive signal was interview chemistry and similarity to a top performer, and these are essentially invalid predictors, while their technical assessment (the valid predictor) was presumably mediocre or poor, I should revise downward substantially.\n\nThe technical assessment being 4x more predictive means the candidate's actual likelihood of success should be driven primarily by their technical score. Without the inflated interview impression, this candidate looks weaker.\n\nI should revise from 30% downward - the interview chemistry was likely inflating my estimate. The base rate for any hire succeeding might be around 50%, but if the technical assessment was poor while only the interview was strong, this should pull well below base rate.\n\nI'll revise to approximately 15%, reflecting that the main positive signal is invalid and the valid predictor likely points negatively.\n\n```json\n{\"estimate\": 15.0, \"ci_low\": 8.0, \"ci_high\": 25.0}\n```"
+}

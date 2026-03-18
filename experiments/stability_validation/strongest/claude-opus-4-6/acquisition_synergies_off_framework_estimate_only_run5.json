@@ -1,0 +1,22 @@
+{
+  "case_id": "acquisition_synergies",
+  "condition": "estimate_only",
+  "probe_battery": "off_framework",
+  "model": "claude-opus-4-6",
+  "initial_estimate": 45.0,
+  "initial_ci": [
+    30.0,
+    60.0
+  ],
+  "final_estimate": 70.0,
+  "final_ci": [
+    55.0,
+    82.0
+  ],
+  "update_magnitude": 25.0,
+  "update_direction": "up",
+  "relative_update": 0.5555555555555556,
+  "had_initial_ci": true,
+  "initial_response_text": "```json\n{\"estimate\": 45, \"ci_low\": 30, \"ci_high\": 60}\n```",
+  "final_response_text": "Looking at the three follow-up pieces of information:\n\n1. **Shared ERP and suppliers** - This dramatically reduces integration risk on the cost synergy side. Systems integration is typically one of the biggest failure points and time sinks in M&A. This removes that barrier almost entirely.\n\n2. **Aligned sales compensation from day one** - This addresses the most common revenue synergy killer: misaligned incentives. By paying both teams on combined account revenue immediately, cross-selling and collaboration happen naturally rather than being fought over.\n\n3. **Experienced integration PMO with two successful bolt-ons** - Execution capability is proven. This isn't a team learning on the job; they have a playbook and institutional knowledge of what works.\n\nEach of these factors independently would shift the estimate upward meaningfully:\n- Factor 1 reduces the technical/operational risk significantly\n- Factor 2 reduces the behavioral/cultural risk on the revenue side\n- Factor 3 reduces the execution/project management risk\n\nTogether, these address the three most common failure modes in post-merger integration: systems incompatibility, incentive misalignment, and poor execution management. The remaining risks would be things like market shifts, customer churn, cultural clashes beyond compensation, or unforeseen regulatory issues.\n\nI'd revise upward substantially from 45% - probably to around 68-70%. The confidence interval should also narrow since much of the uncertainty has been resolved.\n\n```json\n{\"estimate\": 70.0, \"ci_low\": 55.0, \"ci_high\": 82.0}\n```"
+}

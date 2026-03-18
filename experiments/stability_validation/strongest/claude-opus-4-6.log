@@ -1,0 +1,2734 @@
+Strongest stability validation
+  Cases: 8
+  Conditions: naive, estimate_only, format_control, farness
+  Probe batteries: on_framework, off_framework
+  Runs per pair: 6
+  Result files per model: 384
+  API calls per model: 768
+
+Running strongest validation for claude-opus-4-6
+  Output: experiments/stability_validation/strongest/claude-opus-4-6
+
+============================================================
+Case: Software Project Timeline
+============================================================
+
+[1/384] planning_estimate - farness - off_framework - run 1
+  [farness | Off-Framework Probes] Running initial prompt...
+    Initial: 3.5weeks (CI: 2.2-6.0)
+  [farness | Off-Framework Probes] Running probing prompt...
+    Final: 5.0weeks (CI: 3.0-10.0)
+    Update: +1.50weeks
+
+[2/384] planning_estimate - estimate_only - on_framework - run 1
+  [estimate_only | On-Framework Probes] Running initial prompt...
+    Initial: 3.0weeks (CI: 2.0-5.0)
+  [estimate_only | On-Framework Probes] Running probing prompt...
+    Final: 6.5weeks (CI: 4.0-12.0)
+    Update: +3.50weeks
+
+[3/384] planning_estimate - naive - off_framework - run 1
+  [naive | Off-Framework Probes] Running initial prompt...
+    Initial: 3.0weeks (CI: 2.0-6.0)
+  [naive | Off-Framework Probes] Running probing prompt...
+    Final: 5.0weeks (CI: 3.5-7.5)
+    Update: +2.00weeks
+
+[4/384] planning_estimate - farness - on_framework - run 1
+  [farness | On-Framework Probes] Running initial prompt...
+    Initial: 3.4weeks (CI: 2.2-6.0)
+  [farness | On-Framework Probes] Running probing prompt...
+    Final: 7.0weeks (CI: 4.0-14.0)
+    Update: +3.60weeks
+
+[5/384] planning_estimate - naive - on_framework - run 1
+  [naive | On-Framework Probes] Running initial prompt...
+    Initial: 3.0weeks (CI: 2.0-5.0)
+  [naive | On-Framework Probes] Running probing prompt...
+    Final: 7.5weeks (CI: 4.5-13.0)
+    Update: +4.50weeks
+
+[6/384] planning_estimate - estimate_only - off_framework - run 1
+  [estimate_only | Off-Framework Probes] Running initial prompt...
+    Initial: 3.0weeks (CI: 2.0-5.0)
+  [estimate_only | Off-Framework Probes] Running probing prompt...
+    Final: 4.5weeks (CI: 3.0-8.0)
+    Update: +1.50weeks
+
+[7/384] planning_estimate - format_control - off_framework - run 1
+  [format_control | Off-Framework Probes] Running initial prompt...
+    Initial: 3.0weeks (CI: 2.2-4.5)
+  [format_control | Off-Framework Probes] Running probing prompt...
+    Final: 4.5weeks (CI: 3.2-7.0)
+    Update: +1.50weeks
+
+[8/384] planning_estimate - format_control - on_framework - run 1
+  [format_control | On-Framework Probes] Running initial prompt...
+    Initial: 3.0weeks (CI: 2.2-4.5)
+  [format_control | On-Framework Probes] Running probing prompt...
+    Final: 5.0weeks (CI: 3.2-8.5)
+    Update: +2.00weeks
+
+[9/384] planning_estimate - format_control - off_framework - run 2
+  [format_control | Off-Framework Probes] Running initial prompt...
+    Initial: 3.0weeks (CI: 2.2-4.5)
+  [format_control | Off-Framework Probes] Running probing prompt...
+    Final: 4.5weeks (CI: 3.0-7.0)
+    Update: +1.50weeks
+
+[10/384] planning_estimate - naive - off_framework - run 2
+  [naive | Off-Framework Probes] Running initial prompt...
+    Initial: 3.0weeks (CI: 2.5-5.0)
+  [naive | Off-Framework Probes] Running probing prompt...
+    Final: 5.5weeks (CI: 4.0-8.0)
+    Update: +2.50weeks
+
+[11/384] planning_estimate - estimate_only - off_framework - run 2
+  [estimate_only | Off-Framework Probes] Running initial prompt...
+    Initial: 3.0weeks (CI: 2.0-5.0)
+  [estimate_only | Off-Framework Probes] Running probing prompt...
+    Final: 4.5weeks (CI: 3.0-9.0)
+    Update: +1.50weeks
+
+[12/384] planning_estimate - format_control - on_framework - run 2
+  [format_control | On-Framework Probes] Running initial prompt...
+    Initial: 3.0weeks (CI: 2.2-5.0)
+  [format_control | On-Framework Probes] Running probing prompt...
+    Final: 5.0weeks (CI: 3.0-9.0)
+    Update: +2.00weeks
+
+[13/384] planning_estimate - farness - off_framework - run 2
+  [farness | Off-Framework Probes] Running initial prompt...
+    Initial: 3.2weeks (CI: 2.2-5.5)
+  [farness | Off-Framework Probes] Running probing prompt...
+    Final: 5.2weeks (CI: 3.5-9.5)
+    Update: +2.00weeks
+
+[14/384] planning_estimate - naive - on_framework - run 2
+  [naive | On-Framework Probes] Running initial prompt...
+    Initial: 3.0weeks (CI: 2.0-5.0)
+  [naive | On-Framework Probes] Running probing prompt...
+    Final: 8.0weeks (CI: 4.5-14.0)
+    Update: +5.00weeks
+
+[15/384] planning_estimate - farness - on_framework - run 2
+  [farness | On-Framework Probes] Running initial prompt...
+    Initial: 3.5weeks (CI: 2.5-6.0)
+  [farness | On-Framework Probes] Running probing prompt...
+    Final: 7.0weeks (CI: 4.0-14.0)
+    Update: +3.50weeks
+
+[16/384] planning_estimate - estimate_only - on_framework - run 2
+  [estimate_only | On-Framework Probes] Running initial prompt...
+    Initial: 3.0weeks (CI: 2.0-5.0)
+  [estimate_only | On-Framework Probes] Running probing prompt...
+    Final: 6.5weeks (CI: 4.0-12.0)
+    Update: +3.50weeks
+
+[17/384] planning_estimate - format_control - on_framework - run 3
+  [format_control | On-Framework Probes] Running initial prompt...
+    Initial: 3.0weeks (CI: 2.0-4.5)
+  [format_control | On-Framework Probes] Running probing prompt...
+    Final: 5.5weeks (CI: 3.5-9.0)
+    Update: +2.50weeks
+
+[18/384] planning_estimate - naive - on_framework - run 3
+  [naive | On-Framework Probes] Running initial prompt...
+    Initial: 3.0weeks (CI: 2.0-5.0)
+  [naive | On-Framework Probes] Running probing prompt...
+    Final: 7.5weeks (CI: 4.5-14.0)
+    Update: +4.50weeks
+
+[19/384] planning_estimate - naive - off_framework - run 3
+  [naive | Off-Framework Probes] Running initial prompt...
+    Initial: 3.0weeks (CI: 2.0-5.0)
+  [naive | Off-Framework Probes] Running probing prompt...
+    Final: 4.5weeks (CI: 3.5-6.5)
+    Update: +1.50weeks
+
+[20/384] planning_estimate - estimate_only - on_framework - run 3
+  [estimate_only | On-Framework Probes] Running initial prompt...
+    Initial: 3.0weeks (CI: 2.0-5.0)
+  [estimate_only | On-Framework Probes] Running probing prompt...
+    Final: 6.5weeks (CI: 4.0-11.0)
+    Update: +3.50weeks
+
+[21/384] planning_estimate - format_control - off_framework - run 3
+  [format_control | Off-Framework Probes] Running initial prompt...
+    Initial: 3.0weeks (CI: 2.2-5.0)
+  [format_control | Off-Framework Probes] Running probing prompt...
+    Final: 4.5weeks (CI: 3.0-8.0)
+    Update: +1.50weeks
+
+[22/384] planning_estimate - farness - on_framework - run 3
+  [farness | On-Framework Probes] Running initial prompt...
+    Initial: 3.5weeks (CI: 2.5-6.0)
+  [farness | On-Framework Probes] Running probing prompt...
+    Final: 7.0weeks (CI: 4.0-14.0)
+    Update: +3.50weeks
+
+[23/384] planning_estimate - farness - off_framework - run 3
+  [farness | Off-Framework Probes] Running initial prompt...
+    Initial: 3.3weeks (CI: 2.2-6.0)
+  [farness | Off-Framework Probes] Running probing prompt...
+    Final: 4.8weeks (CI: 3.0-9.0)
+    Update: +1.50weeks
+
+[24/384] planning_estimate - estimate_only - off_framework - run 3
+  [estimate_only | Off-Framework Probes] Running initial prompt...
+    Initial: 3.0weeks (CI: 2.0-5.0)
+  [estimate_only | Off-Framework Probes] Running probing prompt...
+    Final: 5.0weeks (CI: 3.5-9.0)
+    Update: +2.00weeks
+
+[25/384] planning_estimate - naive - on_framework - run 4
+  [naive | On-Framework Probes] Running initial prompt...
+    Initial: 3.0weeks (CI: 2.0-5.0)
+  [naive | On-Framework Probes] Running probing prompt...
+    Final: 8.0weeks (CI: 4.5-14.0)
+    Update: +5.00weeks
+
+[26/384] planning_estimate - naive - off_framework - run 4
+  [naive | Off-Framework Probes] Running initial prompt...
+    Initial: 3.0weeks (CI: 2.0-5.5)
+  [naive | Off-Framework Probes] Running probing prompt...
+    Final: 5.0weeks (CI: 3.5-7.0)
+    Update: +2.00weeks
+
+[27/384] planning_estimate - farness - on_framework - run 4
+  [farness | On-Framework Probes] Running initial prompt...
+    Initial: 3.5weeks (CI: 2.3-7.0)
+  [farness | On-Framework Probes] Running probing prompt...
+    Final: 7.0weeks (CI: 4.5-14.0)
+    Update: +3.50weeks
+
+[28/384] planning_estimate - estimate_only - off_framework - run 4
+  [estimate_only | Off-Framework Probes] Running initial prompt...
+    Initial: 3.0weeks (CI: 2.0-5.0)
+  [estimate_only | Off-Framework Probes] Running probing prompt...
+    Final: 4.5weeks (CI: 3.0-8.0)
+    Update: +1.50weeks
+
+[29/384] planning_estimate - format_control - off_framework - run 4
+  [format_control | Off-Framework Probes] Running initial prompt...
+    Initial: 3.0weeks (CI: 2.2-5.0)
+  [format_control | Off-Framework Probes] Running probing prompt...
+    Final: 4.5weeks (CI: 3.0-8.0)
+    Update: +1.50weeks
+
+[30/384] planning_estimate - farness - off_framework - run 4
+  [farness | Off-Framework Probes] Running initial prompt...
+    Initial: 3.5weeks (CI: 2.4-6.0)
+  [farness | Off-Framework Probes] Running probing prompt...
+    Final: 5.5weeks (CI: 3.5-9.5)
+    Update: +2.00weeks
+
+[31/384] planning_estimate - format_control - on_framework - run 4
+  [format_control | On-Framework Probes] Running initial prompt...
+    Initial: 3.0weeks (CI: 2.2-5.0)
+  [format_control | On-Framework Probes] Running probing prompt...
+    Final: 5.5weeks (CI: 3.5-10.0)
+    Update: +2.50weeks
+
+[32/384] planning_estimate - estimate_only - on_framework - run 4
+  [estimate_only | On-Framework Probes] Running initial prompt...
+    Initial: 3.0weeks (CI: 2.0-5.0)
+  [estimate_only | On-Framework Probes] Running probing prompt...
+    Final: 6.5weeks (CI: 4.0-12.0)
+    Update: +3.50weeks
+
+[33/384] planning_estimate - estimate_only - off_framework - run 5
+  [estimate_only | Off-Framework Probes] Running initial prompt...
+    Initial: 3.0weeks (CI: 2.0-5.0)
+  [estimate_only | Off-Framework Probes] Running probing prompt...
+    Final: 4.5weeks (CI: 3.0-9.0)
+    Update: +1.50weeks
+
+[34/384] planning_estimate - farness - on_framework - run 5
+  [farness | On-Framework Probes] Running initial prompt...
+    Initial: 3.4weeks (CI: 2.2-6.0)
+  [farness | On-Framework Probes] Running probing prompt...
+    Final: 6.5weeks (CI: 3.5-12.0)
+    Update: +3.10weeks
+
+[35/384] planning_estimate - format_control - on_framework - run 5
+  [format_control | On-Framework Probes] Running initial prompt...
+    Initial: 3.0weeks (CI: 2.0-5.0)
+  [format_control | On-Framework Probes] Running probing prompt...
+    Final: 5.0weeks (CI: 3.5-9.0)
+    Update: +2.00weeks
+
+[36/384] planning_estimate - estimate_only - on_framework - run 5
+  [estimate_only | On-Framework Probes] Running initial prompt...
+    Initial: 3.0weeks (CI: 2.0-5.0)
+  [estimate_only | On-Framework Probes] Running probing prompt...
+    Final: 6.5weeks (CI: 4.0-11.0)
+    Update: +3.50weeks
+
+[37/384] planning_estimate - farness - off_framework - run 5
+  [farness | Off-Framework Probes] Running initial prompt...
+    Initial: 3.2weeks (CI: 2.0-5.5)
+  [farness | Off-Framework Probes] Running probing prompt...
+    Final: 5.2weeks (CI: 3.5-9.5)
+    Update: +2.00weeks
+
+[38/384] planning_estimate - naive - on_framework - run 5
+  [naive | On-Framework Probes] Running initial prompt...
+    Initial: 3.0weeks (CI: 2.0-5.0)
+  [naive | On-Framework Probes] Running probing prompt...
+    Final: 7.0weeks (CI: 4.5-12.0)
+    Update: +4.00weeks
+
+[39/384] planning_estimate - naive - off_framework - run 5
+  [naive | Off-Framework Probes] Running initial prompt...
+    Initial: 3.0weeks (CI: 2.5-5.0)
+  [naive | Off-Framework Probes] Running probing prompt...
+    Final: 5.0weeks (CI: 3.5-7.5)
+    Update: +2.00weeks
+
+[40/384] planning_estimate - format_control - off_framework - run 5
+  [format_control | Off-Framework Probes] Running initial prompt...
+    Initial: 3.0weeks (CI: 2.2-4.5)
+  [format_control | Off-Framework Probes] Running probing prompt...
+    Final: 4.5weeks (CI: 3.0-7.5)
+    Update: +1.50weeks
+
+[41/384] planning_estimate - farness - off_framework - run 6
+  [farness | Off-Framework Probes] Running initial prompt...
+    Initial: 3.4weeks (CI: 2.5-6.0)
+  [farness | Off-Framework Probes] Running probing prompt...
+    Final: 6.5weeks (CI: 4.0-12.0)
+    Update: +3.10weeks
+
+[42/384] planning_estimate - estimate_only - off_framework - run 6
+  [estimate_only | Off-Framework Probes] Running initial prompt...
+    Initial: 3.0weeks (CI: 2.0-5.0)
+  [estimate_only | Off-Framework Probes] Running probing prompt...
+    Final: 4.5weeks (CI: 3.0-9.0)
+    Update: +1.50weeks
+
+[43/384] planning_estimate - farness - on_framework - run 6
+  [farness | On-Framework Probes] Running initial prompt...
+    Initial: 3.4weeks (CI: 2.5-6.0)
+  [farness | On-Framework Probes] Running probing prompt...
+    Final: 6.5weeks (CI: 3.5-12.0)
+    Update: +3.10weeks
+
+[44/384] planning_estimate - naive - off_framework - run 6
+  [naive | Off-Framework Probes] Running initial prompt...
+    Initial: 3.0weeks (CI: 2.2-5.5)
+  [naive | Off-Framework Probes] Running probing prompt...
+    Final: 5.0weeks (CI: 3.5-7.5)
+    Update: +2.00weeks
+
+[45/384] planning_estimate - format_control - on_framework - run 6
+  [format_control | On-Framework Probes] Running initial prompt...
+    Initial: 3.0weeks (CI: 2.0-4.5)
+  [format_control | On-Framework Probes] Running probing prompt...
+    Final: 5.0weeks (CI: 3.0-9.0)
+    Update: +2.00weeks
+
+[46/384] planning_estimate - estimate_only - on_framework - run 6
+  [estimate_only | On-Framework Probes] Running initial prompt...
+    Initial: 3.0weeks (CI: 2.0-5.0)
+  [estimate_only | On-Framework Probes] Running probing prompt...
+    Final: 6.0weeks (CI: 3.5-11.0)
+    Update: +3.00weeks
+
+[47/384] planning_estimate - format_control - off_framework - run 6
+  [format_control | Off-Framework Probes] Running initial prompt...
+    Initial: 3.0weeks (CI: 2.0-5.0)
+  [format_control | Off-Framework Probes] Running probing prompt...
+    Final: 4.5weeks (CI: 3.0-8.0)
+    Update: +1.50weeks
+
+[48/384] planning_estimate - naive - on_framework - run 6
+  [naive | On-Framework Probes] Running initial prompt...
+    Initial: 3.0weeks (CI: 2.0-5.0)
+  [naive | On-Framework Probes] Running probing prompt...
+    Final: 7.5weeks (CI: 4.5-13.0)
+    Update: +4.50weeks
+
+============================================================
+Case: Troubled Project Success Probability
+============================================================
+
+[49/384] sunk_cost_project - farness - on_framework - run 1
+  [farness | On-Framework Probes] Running initial prompt...
+    Initial: 12.0% (CI: 5.0-25.0)
+  [farness | On-Framework Probes] Running probing prompt...
+    Final: 7.0% (CI: 2.0-15.0)
+    Update: -5.00%
+
+[50/384] sunk_cost_project - estimate_only - off_framework - run 1
+  [estimate_only | Off-Framework Probes] Running initial prompt...
+    Initial: 12.0% (CI: 5.0-25.0)
+  [estimate_only | Off-Framework Probes] Running probing prompt...
+    Final: 4.0% (CI: 1.5-10.0)
+    Update: -8.00%
+
+[51/384] sunk_cost_project - farness - off_framework - run 1
+  [farness | Off-Framework Probes] Running initial prompt...
+    Initial: 8.0% (CI: 2.0-20.0)
+  [farness | Off-Framework Probes] Running probing prompt...
+    Final: 4.0% (CI: 1.0-12.0)
+    Update: -4.00%
+
+[52/384] sunk_cost_project - format_control - on_framework - run 1
+  [format_control | On-Framework Probes] Running initial prompt...
+    Initial: 12.0% (CI: 5.0-25.0)
+  [format_control | On-Framework Probes] Running probing prompt...
+    Final: 5.0% (CI: 1.5-12.0)
+    Update: -7.00%
+
+[53/384] sunk_cost_project - naive - off_framework - run 1
+  [naive | Off-Framework Probes] Running initial prompt...
+    Initial: 15.0% (CI: 5.0-30.0)
+  [naive | Off-Framework Probes] Running probing prompt...
+    Final: 5.0% (CI: 1.0-12.0)
+    Update: -10.00%
+
+[54/384] sunk_cost_project - naive - on_framework - run 1
+  [naive | On-Framework Probes] Running initial prompt...
+    Initial: 12.0% (CI: 3.0-25.0)
+  [naive | On-Framework Probes] Running probing prompt...
+    Final: 4.0% (CI: 1.0-10.0)
+    Update: -8.00%
+
+[55/384] sunk_cost_project - format_control - off_framework - run 1
+  [format_control | Off-Framework Probes] Running initial prompt...
+    Initial: 12.0% (CI: 5.0-25.0)
+  [format_control | Off-Framework Probes] Running probing prompt...
+    Final: 4.0% (CI: 1.0-10.0)
+    Update: -8.00%
+
+[56/384] sunk_cost_project - estimate_only - on_framework - run 1
+  [estimate_only | On-Framework Probes] Running initial prompt...
+    Initial: 12.0% (CI: 5.0-25.0)
+  [estimate_only | On-Framework Probes] Running probing prompt...
+    Final: 4.5% (CI: 1.5-10.0)
+    Update: -7.50%
+
+[57/384] sunk_cost_project - estimate_only - on_framework - run 2
+  [estimate_only | On-Framework Probes] Running initial prompt...
+    Initial: 12.0% (CI: 5.0-25.0)
+  [estimate_only | On-Framework Probes] Running probing prompt...
+    Final: 4.0% (CI: 1.5-10.0)
+    Update: -8.00%
+
+[58/384] sunk_cost_project - farness - on_framework - run 2
+  [farness | On-Framework Probes] Running initial prompt...
+    Initial: 12.0% (CI: 5.0-25.0)
+  [farness | On-Framework Probes] Running probing prompt...
+    Final: 5.0% (CI: 1.5-12.0)
+    Update: -7.00%
+
+[59/384] sunk_cost_project - naive - off_framework - run 2
+  [naive | Off-Framework Probes] Running initial prompt...
+    Initial: 12.0% (CI: 5.0-25.0)
+  [naive | Off-Framework Probes] Running probing prompt...
+    Final: 5.0% (CI: 1.5-11.0)
+    Update: -7.00%
+
+[60/384] sunk_cost_project - format_control - off_framework - run 2
+  [format_control | Off-Framework Probes] Running initial prompt...
+    Initial: 12.0% (CI: 5.0-25.0)
+  [format_control | Off-Framework Probes] Running probing prompt...
+    Final: 5.0% (CI: 1.5-12.0)
+    Update: -7.00%
+
+[61/384] sunk_cost_project - estimate_only - off_framework - run 2
+  [estimate_only | Off-Framework Probes] Running initial prompt...
+    Initial: 12.0% (CI: 5.0-25.0)
+  [estimate_only | Off-Framework Probes] Running probing prompt...
+    Final: 5.0% (CI: 1.5-12.0)
+    Update: -7.00%
+
+[62/384] sunk_cost_project - format_control - on_framework - run 2
+  [format_control | On-Framework Probes] Running initial prompt...
+    Initial: 12.0% (CI: 5.0-25.0)
+  [format_control | On-Framework Probes] Running probing prompt...
+    Final: 5.0% (CI: 1.5-12.0)
+    Update: -7.00%
+
+[63/384] sunk_cost_project - naive - on_framework - run 2
+  [naive | On-Framework Probes] Running initial prompt...
+    Initial: 12.0% (CI: 5.0-25.0)
+  [naive | On-Framework Probes] Running probing prompt...
+    Final: 6.0% (CI: 2.0-14.0)
+    Update: -6.00%
+
+[64/384] sunk_cost_project - farness - off_framework - run 2
+  [farness | Off-Framework Probes] Running initial prompt...
+    Initial: 8.0% (CI: 3.0-18.0)
+  [farness | Off-Framework Probes] Running probing prompt...
+    Final: 3.5% (CI: 1.0-10.0)
+    Update: -4.50%
+
+[65/384] sunk_cost_project - estimate_only - off_framework - run 3
+  [estimate_only | Off-Framework Probes] Running initial prompt...
+    Initial: 12.0% (CI: 5.0-25.0)
+  [estimate_only | Off-Framework Probes] Running probing prompt...
+    Final: 5.5% (CI: 1.5-14.0)
+    Update: -6.50%
+
+[66/384] sunk_cost_project - format_control - off_framework - run 3
+  [format_control | Off-Framework Probes] Running initial prompt...
+    Initial: 12.0% (CI: 5.0-25.0)
+  [format_control | Off-Framework Probes] Running probing prompt...
+    Final: 5.0% (CI: 1.5-12.0)
+    Update: -7.00%
+
+[67/384] sunk_cost_project - farness - on_framework - run 3
+  [farness | On-Framework Probes] Running initial prompt...
+    Initial: 12.0% (CI: 5.0-25.0)
+  [farness | On-Framework Probes] Running probing prompt...
+    Final: 5.0% (CI: 1.5-12.0)
+    Update: -7.00%
+
+[68/384] sunk_cost_project - naive - off_framework - run 3
+  [naive | Off-Framework Probes] Running initial prompt...
+    Initial: 12.0% (CI: 5.0-25.0)
+  [naive | Off-Framework Probes] Running probing prompt...
+    Final: 4.5% (CI: 1.5-11.0)
+    Update: -7.50%
+
+[69/384] sunk_cost_project - naive - on_framework - run 3
+  [naive | On-Framework Probes] Running initial prompt...
+    Initial: 12.0% (CI: 3.0-25.0)
+  [naive | On-Framework Probes] Running probing prompt...
+    Final: 4.0% (CI: 1.5-9.0)
+    Update: -8.00%
+
+[70/384] sunk_cost_project - farness - off_framework - run 3
+  [farness | Off-Framework Probes] Running initial prompt...
+    Initial: 8.0% (CI: 2.0-20.0)
+  [farness | Off-Framework Probes] Running probing prompt...
+    Final: 3.0% (CI: 0.5-10.0)
+    Update: -5.00%
+
+[71/384] sunk_cost_project - format_control - on_framework - run 3
+  [format_control | On-Framework Probes] Running initial prompt...
+    Initial: 12.0% (CI: 5.0-25.0)
+  [format_control | On-Framework Probes] Running probing prompt...
+    Final: 5.0% (CI: 1.5-12.0)
+    Update: -7.00%
+
+[72/384] sunk_cost_project - estimate_only - on_framework - run 3
+  [estimate_only | On-Framework Probes] Running initial prompt...
+    Initial: 12.0% (CI: 5.0-25.0)
+  [estimate_only | On-Framework Probes] Running probing prompt...
+    Final: 4.0% (CI: 1.5-10.0)
+    Update: -8.00%
+
+[73/384] sunk_cost_project - farness - off_framework - run 4
+  [farness | Off-Framework Probes] Running initial prompt...
+    Initial: 8.0% (CI: 2.0-25.0)
+  [farness | Off-Framework Probes] Running probing prompt...
+    Final: 4.0% (CI: 1.0-12.0)
+    Update: -4.00%
+
+[74/384] sunk_cost_project - farness - on_framework - run 4
+  [farness | On-Framework Probes] Running initial prompt...
+    Initial: 10.0% (CI: 3.0-25.0)
+  [farness | On-Framework Probes] Running probing prompt...
+    Final: 4.0% (CI: 1.5-10.0)
+    Update: -6.00%
+
+[75/384] sunk_cost_project - format_control - on_framework - run 4
+  [format_control | On-Framework Probes] Running initial prompt...
+    Initial: 15.0% (CI: 5.0-30.0)
+  [format_control | On-Framework Probes] Running probing prompt...
+    Final: 7.0% (CI: 2.0-15.0)
+    Update: -8.00%
+
+[76/384] sunk_cost_project - naive - on_framework - run 4
+  [naive | On-Framework Probes] Running initial prompt...
+    Initial: 12.0% (CI: 3.0-25.0)
+  [naive | On-Framework Probes] Running probing prompt...
+    Final: 3.5% (CI: 1.0-8.0)
+    Update: -8.50%
+
+[77/384] sunk_cost_project - format_control - off_framework - run 4
+  [format_control | Off-Framework Probes] Running initial prompt...
+    Initial: 12.0% (CI: 5.0-25.0)
+  [format_control | Off-Framework Probes] Running probing prompt...
+    Final: 7.0% (CI: 2.0-15.0)
+    Update: -5.00%
+
+[78/384] sunk_cost_project - estimate_only - on_framework - run 4
+  [estimate_only | On-Framework Probes] Running initial prompt...
+    Initial: 12.0% (CI: 5.0-25.0)
+  [estimate_only | On-Framework Probes] Running probing prompt...
+    Final: 3.0% (CI: 1.0-8.0)
+    Update: -9.00%
+
+[79/384] sunk_cost_project - estimate_only - off_framework - run 4
+  [estimate_only | Off-Framework Probes] Running initial prompt...
+    Initial: 12.0% (CI: 5.0-25.0)
+  [estimate_only | Off-Framework Probes] Running probing prompt...
+    Final: 5.5% (CI: 2.0-14.0)
+    Update: -6.50%
+
+[80/384] sunk_cost_project - naive - off_framework - run 4
+  [naive | Off-Framework Probes] Running initial prompt...
+    Initial: 12.0% (CI: 5.0-25.0)
+  [naive | Off-Framework Probes] Running probing prompt...
+    Final: 4.0% (CI: 1.5-9.0)
+    Update: -8.00%
+
+[81/384] sunk_cost_project - estimate_only - off_framework - run 5
+  [estimate_only | Off-Framework Probes] Running initial prompt...
+    Initial: 12.0% (CI: 5.0-25.0)
+  [estimate_only | Off-Framework Probes] Running probing prompt...
+    Final: 5.5% (CI: 2.0-14.0)
+    Update: -6.50%
+
+[82/384] sunk_cost_project - naive - on_framework - run 5
+  [naive | On-Framework Probes] Running initial prompt...
+    Initial: 15.0% (CI: 5.0-30.0)
+  [naive | On-Framework Probes] Running probing prompt...
+    Final: 5.0% (CI: 2.0-12.0)
+    Update: -10.00%
+
+[83/384] sunk_cost_project - naive - off_framework - run 5
+  [naive | Off-Framework Probes] Running initial prompt...
+    Initial: 12.0% (CI: 5.0-25.0)
+  [naive | Off-Framework Probes] Running probing prompt...
+    Final: 4.0% (CI: 1.0-11.0)
+    Update: -8.00%
+
+[84/384] sunk_cost_project - farness - off_framework - run 5
+  [farness | Off-Framework Probes] Running initial prompt...
+    Initial: 10.0% (CI: 3.0-25.0)
+  [farness | Off-Framework Probes] Running probing prompt...
+    Final: 4.0% (CI: 1.0-12.0)
+    Update: -6.00%
+
+[85/384] sunk_cost_project - farness - on_framework - run 5
+  [farness | On-Framework Probes] Running initial prompt...
+    Initial: 8.0% (CI: 3.0-20.0)
+  [farness | On-Framework Probes] Running probing prompt...
+    Final: 3.0% (CI: 1.0-8.0)
+    Update: -5.00%
+
+[86/384] sunk_cost_project - format_control - on_framework - run 5
+  [format_control | On-Framework Probes] Running initial prompt...
+    Initial: 12.0% (CI: 5.0-25.0)
+  [format_control | On-Framework Probes] Running probing prompt...
+    Final: 6.0% (CI: 2.0-14.0)
+    Update: -6.00%
+
+[87/384] sunk_cost_project - format_control - off_framework - run 5
+  [format_control | Off-Framework Probes] Running initial prompt...
+    Initial: 12.0% (CI: 5.0-25.0)
+  [format_control | Off-Framework Probes] Running probing prompt...
+    Final: 4.0% (CI: 1.0-10.0)
+    Update: -8.00%
+
+[88/384] sunk_cost_project - estimate_only - on_framework - run 5
+  [estimate_only | On-Framework Probes] Running initial prompt...
+    Initial: 12.0% (CI: 5.0-25.0)
+  [estimate_only | On-Framework Probes] Running probing prompt...
+    Final: 5.0% (CI: 1.5-12.0)
+    Update: -7.00%
+
+[89/384] sunk_cost_project - naive - off_framework - run 6
+  [naive | Off-Framework Probes] Running initial prompt...
+    Initial: 12.0% (CI: 5.0-25.0)
+  [naive | Off-Framework Probes] Running probing prompt...
+    Final: 4.5% (CI: 1.5-12.0)
+    Update: -7.50%
+
+[90/384] sunk_cost_project - farness - on_framework - run 6
+  [farness | On-Framework Probes] Running initial prompt...
+    Initial: 12.0% (CI: 5.0-25.0)
+  [farness | On-Framework Probes] Running probing prompt...
+    Final: 4.0% (CI: 1.5-10.0)
+    Update: -8.00%
+
+[91/384] sunk_cost_project - estimate_only - off_framework - run 6
+  [estimate_only | Off-Framework Probes] Running initial prompt...
+    Initial: 12.0% (CI: 5.0-25.0)
+  [estimate_only | Off-Framework Probes] Running probing prompt...
+    Final: 5.5% (CI: 2.0-14.0)
+    Update: -6.50%
+
+[92/384] sunk_cost_project - format_control - on_framework - run 6
+  [format_control | On-Framework Probes] Running initial prompt...
+    Initial: 12.0% (CI: 5.0-25.0)
+  [format_control | On-Framework Probes] Running probing prompt...
+    Final: 4.0% (CI: 1.0-10.0)
+    Update: -8.00%
+
+[93/384] sunk_cost_project - naive - on_framework - run 6
+  [naive | On-Framework Probes] Running initial prompt...
+    Initial: 12.0% (CI: 5.0-25.0)
+  [naive | On-Framework Probes] Running probing prompt...
+    Final: 4.0% (CI: 1.5-10.0)
+    Update: -8.00%
+
+[94/384] sunk_cost_project - farness - off_framework - run 6
+  [farness | Off-Framework Probes] Running initial prompt...
+    Initial: 12.0% (CI: 5.0-25.0)
+  [farness | Off-Framework Probes] Running probing prompt...
+    Final: 5.0% (CI: 1.5-14.0)
+    Update: -7.00%
+
+[95/384] sunk_cost_project - format_control - off_framework - run 6
+  [format_control | Off-Framework Probes] Running initial prompt...
+    Initial: 12.0% (CI: 5.0-25.0)
+  [format_control | Off-Framework Probes] Running probing prompt...
+    Final: 5.0% (CI: 1.5-14.0)
+    Update: -7.00%
+
+[96/384] sunk_cost_project - estimate_only - on_framework - run 6
+  [estimate_only | On-Framework Probes] Running initial prompt...
+    Initial: 12.0% (CI: 5.0-25.0)
+  [estimate_only | On-Framework Probes] Running probing prompt...
+    Final: 3.0% (CI: 1.0-8.0)
+    Update: -9.00%
+
+============================================================
+Case: Startup Pivot Decision
+============================================================
+
+[97/384] startup_success - format_control - on_framework - run 1
+  [format_control | On-Framework Probes] Running initial prompt...
+    Initial: 6.0% (CI: 2.0-14.0)
+  [format_control | On-Framework Probes] Running probing prompt...
+    Final: 2.5% (CI: 0.5-6.0)
+    Update: -3.50%
+
+[98/384] startup_success - naive - on_framework - run 1
+  [naive | On-Framework Probes] Running initial prompt...
+    Initial: 5.0% (CI: 2.0-14.0)
+  [naive | On-Framework Probes] Running probing prompt...
+    Final: 2.0% (CI: 0.5-5.0)
+    Update: -3.00%
+
+[99/384] startup_success - estimate_only - on_framework - run 1
+  [estimate_only | On-Framework Probes] Running initial prompt...
+    Initial: 5.0% (CI: 2.0-12.0)
+  [estimate_only | On-Framework Probes] Running probing prompt...
+    Final: 3.0% (CI: 1.0-7.0)
+    Update: -2.00%
+
+[100/384] startup_success - estimate_only - off_framework - run 1
+  [estimate_only | Off-Framework Probes] Running initial prompt...
+    Initial: 5.0% (CI: 2.0-12.0)
+  [estimate_only | Off-Framework Probes] Running probing prompt...
+    Final: 2.0% (CI: 0.5-5.0)
+    Update: -3.00%
+
+[101/384] startup_success - farness - off_framework - run 1
+  [farness | Off-Framework Probes] Running initial prompt...
+    Initial: 8.0% (CI: 2.0-18.0)
+  [farness | Off-Framework Probes] Running probing prompt...
+    Final: 4.0% (CI: 1.0-10.0)
+    Update: -4.00%
+
+[102/384] startup_success - naive - off_framework - run 1
+  [naive | Off-Framework Probes] Running initial prompt...
+    Initial: 5.0% (CI: 2.0-14.0)
+  [naive | Off-Framework Probes] Running probing prompt...
+    Final: 2.5% (CI: 0.5-6.0)
+    Update: -2.50%
+
+[103/384] startup_success - format_control - off_framework - run 1
+  [format_control | Off-Framework Probes] Running initial prompt...
+    Initial: 4.0% (CI: 1.0-10.0)
+  [format_control | Off-Framework Probes] Running probing prompt...
+    Final: 2.0% (CI: 0.5-5.0)
+    Update: -2.00%
+
+[104/384] startup_success - farness - on_framework - run 1
+  [farness | On-Framework Probes] Running initial prompt...
+    Initial: 6.0% (CI: 2.0-15.0)
+  [farness | On-Framework Probes] Running probing prompt...
+    Final: 2.5% (CI: 0.5-6.0)
+    Update: -3.50%
+
+[105/384] startup_success - format_control - off_framework - run 2
+  [format_control | Off-Framework Probes] Running initial prompt...
+    Initial: 5.0% (CI: 2.0-12.0)
+  [format_control | Off-Framework Probes] Running probing prompt...
+    Final: 2.0% (CI: 0.5-5.0)
+    Update: -3.00%
+
+[106/384] startup_success - naive - on_framework - run 2
+  [naive | On-Framework Probes] Running initial prompt...
+    Initial: 6.0% (CI: 2.0-15.0)
+  [naive | On-Framework Probes] Running probing prompt...
+    Final: 2.5% (CI: 0.5-6.0)
+    Update: -3.50%
+
+[107/384] startup_success - estimate_only - on_framework - run 2
+  [estimate_only | On-Framework Probes] Running initial prompt...
+    Initial: 5.0% (CI: 2.0-12.0)
+  [estimate_only | On-Framework Probes] Running probing prompt...
+    Final: 2.5% (CI: 0.8-6.0)
+    Update: -2.50%
+
+[108/384] startup_success - naive - off_framework - run 2
+  [naive | Off-Framework Probes] Running initial prompt...
+    Initial: 5.0% (CI: 2.0-12.0)
+  [naive | Off-Framework Probes] Running probing prompt...
+    Final: 2.0% (CI: 0.5-4.5)
+    Update: -3.00%
+
+[109/384] startup_success - format_control - on_framework - run 2
+  [format_control | On-Framework Probes] Running initial prompt...
+    Initial: 5.0% (CI: 2.0-12.0)
+  [format_control | On-Framework Probes] Running probing prompt...
+    Final: 2.5% (CI: 0.5-6.0)
+    Update: -2.50%
+
+[110/384] startup_success - estimate_only - off_framework - run 2
+  [estimate_only | Off-Framework Probes] Running initial prompt...
+    Initial: 5.0% (CI: 2.0-12.0)
+  [estimate_only | Off-Framework Probes] Running probing prompt...
+    Final: 2.8% (CI: 0.8-7.0)
+    Update: -2.20%
+
+[111/384] startup_success - farness - off_framework - run 2
+  [farness | Off-Framework Probes] Running initial prompt...
+    Initial: 5.0% (CI: 2.0-12.0)
+  [farness | Off-Framework Probes] Running probing prompt...
+    Final: 2.5% (CI: 0.8-7.0)
+    Update: -2.50%
+
+[112/384] startup_success - farness - on_framework - run 2
+  [farness | On-Framework Probes] Running initial prompt...
+    Initial: 5.0% (CI: 2.0-12.0)
+  [farness | On-Framework Probes] Running probing prompt...
+    Final: 2.5% (CI: 1.0-7.0)
+    Update: -2.50%
+
+[113/384] startup_success - naive - on_framework - run 3
+  [naive | On-Framework Probes] Running initial prompt...
+    Initial: 5.0% (CI: 1.0-15.0)
+  [naive | On-Framework Probes] Running probing prompt...
+    Final: 2.5% (CI: 1.0-6.0)
+    Update: -2.50%
+
+[114/384] startup_success - farness - off_framework - run 3
+  [farness | Off-Framework Probes] Running initial prompt...
+    Initial: 5.0% (CI: 2.0-12.0)
+  [farness | Off-Framework Probes] Running probing prompt...
+    Final: 2.5% (CI: 0.8-6.0)
+    Update: -2.50%
+
+[115/384] startup_success - naive - off_framework - run 3
+  [naive | Off-Framework Probes] Running initial prompt...
+    Initial: 5.0% (CI: 2.0-12.0)
+  [naive | Off-Framework Probes] Running probing prompt...
+    Final: 2.0% (CI: 0.5-4.5)
+    Update: -3.00%
+
+[116/384] startup_success - format_control - on_framework - run 3
+  [format_control | On-Framework Probes] Running initial prompt...
+    Initial: 5.0% (CI: 2.0-12.0)
+  [format_control | On-Framework Probes] Running probing prompt...
+    Final: 3.0% (CI: 1.0-7.0)
+    Update: -2.00%
+
+[117/384] startup_success - format_control - off_framework - run 3
+  [format_control | Off-Framework Probes] Running initial prompt...
+    Initial: 5.0% (CI: 2.0-12.0)
+  [format_control | Off-Framework Probes] Running probing prompt...
+    Final: 2.5% (CI: 0.5-7.0)
+    Update: -2.50%
+
+[118/384] startup_success - estimate_only - on_framework - run 3
+  [estimate_only | On-Framework Probes] Running initial prompt...
+    Initial: 5.0% (CI: 2.0-12.0)
+  [estimate_only | On-Framework Probes] Running probing prompt...
+    Final: 3.0% (CI: 1.0-7.0)
+    Update: -2.00%
+
+[119/384] startup_success - farness - on_framework - run 3
+  [farness | On-Framework Probes] Running initial prompt...
+    Initial: 5.0% (CI: 2.0-12.0)
+  [farness | On-Framework Probes] Running probing prompt...
+    Final: 2.5% (CI: 0.5-6.0)
+    Update: -2.50%
+
+[120/384] startup_success - estimate_only - off_framework - run 3
+  [estimate_only | Off-Framework Probes] Running initial prompt...
+    Initial: 5.0% (CI: 2.0-12.0)
+  [estimate_only | Off-Framework Probes] Running probing prompt...
+    Final: 2.0% (CI: 0.5-5.0)
+    Update: -3.00%
+
+[121/384] startup_success - format_control - on_framework - run 4
+  [format_control | On-Framework Probes] Running initial prompt...
+    Initial: 4.0% (CI: 1.0-10.0)
+  [format_control | On-Framework Probes] Running probing prompt...
+    Final: 2.0% (CI: 0.5-5.0)
+    Update: -2.00%
+
+[122/384] startup_success - estimate_only - on_framework - run 4
+  [estimate_only | On-Framework Probes] Running initial prompt...
+    Initial: 5.0% (CI: 2.0-12.0)
+  [estimate_only | On-Framework Probes] Running probing prompt...
+    Final: 3.0% (CI: 1.0-7.0)
+    Update: -2.00%
+
+[123/384] startup_success - naive - on_framework - run 4
+  [naive | On-Framework Probes] Running initial prompt...
+    Initial: 5.0% (CI: 2.0-12.0)
+  [naive | On-Framework Probes] Running probing prompt...
+    Final: 2.5% (CI: 0.5-6.0)
+    Update: -2.50%
+
+[124/384] startup_success - format_control - off_framework - run 4
+  [format_control | Off-Framework Probes] Running initial prompt...
+    Initial: 5.0% (CI: 2.0-12.0)
+  [format_control | Off-Framework Probes] Running probing prompt...
+    Final: 2.0% (CI: 0.5-5.0)
+    Update: -3.00%
+
+[125/384] startup_success - naive - off_framework - run 4
+  [naive | Off-Framework Probes] Running initial prompt...
+    Initial: 5.0% (CI: 1.0-15.0)
+  [naive | Off-Framework Probes] Running probing prompt...
+    Final: 2.5% (CI: 0.8-5.5)
+    Update: -2.50%
+
+[126/384] startup_success - farness - off_framework - run 4
+  [farness | Off-Framework Probes] Running initial prompt...
+    Initial: 5.0% (CI: 2.0-12.0)
+  [farness | Off-Framework Probes] Running probing prompt...
+    Final: 2.0% (CI: 0.5-5.0)
+    Update: -3.00%
+
+[127/384] startup_success - farness - on_framework - run 4
+  [farness | On-Framework Probes] Running initial prompt...
+    Initial: 5.0% (CI: 2.0-14.0)
+  [farness | On-Framework Probes] Running probing prompt...
+    Final: 2.0% (CI: 0.5-5.0)
+    Update: -3.00%
+
+[128/384] startup_success - estimate_only - off_framework - run 4
+  [estimate_only | Off-Framework Probes] Running initial prompt...
+    Initial: 5.0% (CI: 2.0-12.0)
+  [estimate_only | Off-Framework Probes] Running probing prompt...
+    Final: 2.5% (CI: 0.8-6.0)
+    Update: -2.50%
+
+[129/384] startup_success - estimate_only - off_framework - run 5
+  [estimate_only | Off-Framework Probes] Running initial prompt...
+    Initial: 5.0% (CI: 2.0-12.0)
+  [estimate_only | Off-Framework Probes] Running probing prompt...
+    Final: 2.0% (CI: 0.5-5.0)
+    Update: -3.00%
+
+[130/384] startup_success - naive - off_framework - run 5
+  [naive | Off-Framework Probes] Running initial prompt...
+    Initial: 5.0% (CI: 2.0-14.0)
+  [naive | Off-Framework Probes] Running probing prompt...
+    Final: 2.5% (CI: 1.0-5.0)
+    Update: -2.50%
+
+[131/384] startup_success - format_control - on_framework - run 5
+  [format_control | On-Framework Probes] Running initial prompt...
+    Initial: 5.0% (CI: 2.0-12.0)
+  [format_control | On-Framework Probes] Running probing prompt...
+    Final: 2.5% (CI: 0.5-6.0)
+    Update: -2.50%
+
+[132/384] startup_success - naive - on_framework - run 5
+  [naive | On-Framework Probes] Running initial prompt...
+    Initial: 5.0% (CI: 2.0-12.0)
+  [naive | On-Framework Probes] Running probing prompt...
+    Final: 2.5% (CI: 0.5-7.0)
+    Update: -2.50%
+
+[133/384] startup_success - estimate_only - on_framework - run 5
+  [estimate_only | On-Framework Probes] Running initial prompt...
+    Initial: 5.0% (CI: 2.0-12.0)
+  [estimate_only | On-Framework Probes] Running probing prompt...
+    Final: 2.0% (CI: 0.5-5.0)
+    Update: -3.00%
+
+[134/384] startup_success - farness - on_framework - run 5
+  [farness | On-Framework Probes] Running initial prompt...
+    Initial: 5.0% (CI: 2.0-12.0)
+  [farness | On-Framework Probes] Running probing prompt...
+    Final: 2.5% (CI: 0.5-6.0)
+    Update: -2.50%
+
+[135/384] startup_success - farness - off_framework - run 5
+  [farness | Off-Framework Probes] Running initial prompt...
+    Initial: 5.0% (CI: 2.0-12.0)
+  [farness | Off-Framework Probes] Running probing prompt...
+    Final: 2.0% (CI: 0.5-5.0)
+    Update: -3.00%
+
+[136/384] startup_success - format_control - off_framework - run 5
+  [format_control | Off-Framework Probes] Running initial prompt...
+    Initial: 5.0% (CI: 2.0-12.0)
+  [format_control | Off-Framework Probes] Running probing prompt...
+    Final: 2.0% (CI: 0.5-6.0)
+    Update: -3.00%
+
+[137/384] startup_success - naive - on_framework - run 6
+  [naive | On-Framework Probes] Running initial prompt...
+    Initial: 5.0% (CI: 2.0-12.0)
+  [naive | On-Framework Probes] Running probing prompt...
+    Final: 2.0% (CI: 0.5-5.0)
+    Update: -3.00%
+
+[138/384] startup_success - format_control - on_framework - run 6
+  [format_control | On-Framework Probes] Running initial prompt...
+    Initial: 5.0% (CI: 2.0-12.0)
+  [format_control | On-Framework Probes] Running probing prompt...
+    Final: 2.5% (CI: 0.8-6.0)
+    Update: -2.50%
+
+[139/384] startup_success - estimate_only - off_framework - run 6
+  [estimate_only | Off-Framework Probes] Running initial prompt...
+    Initial: 5.0% (CI: 2.0-12.0)
+  [estimate_only | Off-Framework Probes] Running probing prompt...
+    Final: 2.5% (CI: 0.8-6.0)
+    Update: -2.50%
+
+[140/384] startup_success - farness - on_framework - run 6
+  [farness | On-Framework Probes] Running initial prompt...
+    Initial: 5.0% (CI: 2.0-12.0)
+  [farness | On-Framework Probes] Running probing prompt...
+    Final: 2.0% (CI: 0.5-6.0)
+    Update: -3.00%
+
+[141/384] startup_success - estimate_only - on_framework - run 6
+  [estimate_only | On-Framework Probes] Running initial prompt...
+    Initial: 5.0% (CI: 2.0-12.0)
+  [estimate_only | On-Framework Probes] Running probing prompt...
+    Final: 2.5% (CI: 1.0-6.0)
+    Update: -2.50%
+
+[142/384] startup_success - naive - off_framework - run 6
+  [naive | Off-Framework Probes] Running initial prompt...
+    Initial: 5.0% (CI: 2.0-12.0)
+  [naive | Off-Framework Probes] Running probing prompt...
+    Final: 2.0% (CI: 0.5-5.0)
+    Update: -3.00%
+
+[143/384] startup_success - format_control - off_framework - run 6
+  [format_control | Off-Framework Probes] Running initial prompt...
+    Initial: 3.0% (CI: 1.0-8.0)
+  [format_control | Off-Framework Probes] Running probing prompt...
+    Final: 1.2% (CI: 0.3-3.5)
+    Update: -1.80%
+
+[144/384] startup_success - farness - off_framework - run 6
+  [farness | Off-Framework Probes] Running initial prompt...
+    Initial: 5.0% (CI: 2.0-12.0)
+  [farness | Off-Framework Probes] Running probing prompt...
+    Final: 2.5% (CI: 0.8-7.0)
+    Update: -2.50%
+
+============================================================
+Case: Candidate Success Prediction
+============================================================
+
+[145/384] hiring_success - format_control - off_framework - run 1
+  [format_control | Off-Framework Probes] Running initial prompt...
+    Initial: 22.0% (CI: 10.0-38.0)
+  [format_control | Off-Framework Probes] Running probing prompt...
+    Final: 8.0% (CI: 3.0-18.0)
+    Update: -14.00%
+
+[146/384] hiring_success - farness - off_framework - run 1
+  [farness | Off-Framework Probes] Running initial prompt...
+    Initial: 23.0% (CI: 10.0-40.0)
+  [farness | Off-Framework Probes] Running probing prompt...
+    Final: 11.0% (CI: 4.0-22.0)
+    Update: -12.00%
+
+[147/384] hiring_success - estimate_only - off_framework - run 1
+  [estimate_only | Off-Framework Probes] Running initial prompt...
+    Initial: 30.0% (CI: 15.0-45.0)
+  [estimate_only | Off-Framework Probes] Running probing prompt...
+    Final: 72.0% (CI: 55.0-85.0)
+    Update: +42.00%
+
+[148/384] hiring_success - farness - on_framework - run 1
+  [farness | On-Framework Probes] Running initial prompt...
+    Initial: 28.0% (CI: 12.0-48.0)
+  [farness | On-Framework Probes] Running probing prompt...
+    Final: 15.0% (CI: 7.0-28.0)
+    Update: -13.00%
+
+[149/384] hiring_success - estimate_only - on_framework - run 1
+  [estimate_only | On-Framework Probes] Running initial prompt...
+    Initial: 30.0% (CI: 15.0-45.0)
+  [estimate_only | On-Framework Probes] Running probing prompt...
+    Final: 18.0% (CI: 8.0-30.0)
+    Update: -12.00%
+
+[150/384] hiring_success - format_control - on_framework - run 1
+  [format_control | On-Framework Probes] Running initial prompt...
+    Initial: 22.0% (CI: 10.0-38.0)
+  [format_control | On-Framework Probes] Running probing prompt...
+    Final: 12.0% (CI: 5.0-22.0)
+    Update: -10.00%
+
+[151/384] hiring_success - naive - off_framework - run 1
+  [naive | Off-Framework Probes] Running initial prompt...
+    Initial: 28.0% (CI: 15.0-45.0)
+  [naive | Off-Framework Probes] Running probing prompt...
+    Final: 12.0% (CI: 5.0-22.0)
+    Update: -16.00%
+
+[152/384] hiring_success - naive - on_framework - run 1
+  [naive | On-Framework Probes] Running initial prompt...
+    Initial: 30.0% (CI: 15.0-50.0)
+  [naive | On-Framework Probes] Running probing prompt...
+    Final: 15.0% (CI: 8.0-25.0)
+    Update: -15.00%
+
+[153/384] hiring_success - estimate_only - off_framework - run 2
+  [estimate_only | Off-Framework Probes] Running initial prompt...
+    Initial: 30.0% (CI: 15.0-45.0)
+  [estimate_only | Off-Framework Probes] Running probing prompt...
+    Final: 72.0% (CI: 58.0-85.0)
+    Update: +42.00%
+
+[154/384] hiring_success - format_control - on_framework - run 2
+  [format_control | On-Framework Probes] Running initial prompt...
+    Initial: 25.0% (CI: 12.0-42.0)
+  [format_control | On-Framework Probes] Running probing prompt...
+    Final: 15.0% (CI: 5.0-30.0)
+    Update: -10.00%
+
+[155/384] hiring_success - farness - off_framework - run 2
+  [farness | Off-Framework Probes] Running initial prompt...
+    Initial: 28.0% (CI: 12.0-45.0)
+  [farness | Off-Framework Probes] Running probing prompt...
+    Final: 65.0% (CI: 48.0-80.0)
+    Update: +37.00%
+
+[156/384] hiring_success - naive - on_framework - run 2
+  [naive | On-Framework Probes] Running initial prompt...
+    Initial: 30.0% (CI: 15.0-50.0)
+  [naive | On-Framework Probes] Running probing prompt...
+    Final: 18.0% (CI: 10.0-30.0)
+    Update: -12.00%
+
+[157/384] hiring_success - farness - on_framework - run 2
+  [farness | On-Framework Probes] Running initial prompt...
+    Initial: 23.0% (CI: 10.0-42.0)
+  [farness | On-Framework Probes] Running probing prompt...
+    Final: 15.0% (CI: 5.0-30.0)
+    Update: -8.00%
+
+[158/384] hiring_success - estimate_only - on_framework - run 2
+  [estimate_only | On-Framework Probes] Running initial prompt...
+    Initial: 30.0% (CI: 15.0-45.0)
+  [estimate_only | On-Framework Probes] Running probing prompt...
+    Final: 20.0% (CI: 10.0-35.0)
+    Update: -10.00%
+
+[159/384] hiring_success - naive - off_framework - run 2
+  [naive | Off-Framework Probes] Running initial prompt...
+    Initial: 30.0% (CI: 15.0-50.0)
+  [naive | Off-Framework Probes] Running probing prompt...
+    Final: 75.0% (CI: 60.0-88.0)
+    Update: +45.00%
+
+[160/384] hiring_success - format_control - off_framework - run 2
+  [format_control | Off-Framework Probes] Running initial prompt...
+    Initial: 22.0% (CI: 10.0-38.0)
+  [format_control | Off-Framework Probes] Running probing prompt...
+    Final: 8.0% (CI: 3.0-18.0)
+    Update: -14.00%
+
+[161/384] hiring_success - estimate_only - off_framework - run 3
+  [estimate_only | Off-Framework Probes] Running initial prompt...
+    Initial: 30.0% (CI: 15.0-45.0)
+  [estimate_only | Off-Framework Probes] Running probing prompt...
+    Final: 62.0% (CI: 48.0-76.0)
+    Update: +32.00%
+
+[162/384] hiring_success - naive - off_framework - run 3
+  [naive | Off-Framework Probes] Running initial prompt...
+    Initial: 30.0% (CI: 15.0-50.0)
+  [naive | Off-Framework Probes] Running probing prompt...
+    Final: 72.0% (CI: 55.0-85.0)
+    Update: +42.00%
+
+[163/384] hiring_success - farness - off_framework - run 3
+  [farness | Off-Framework Probes] Running initial prompt...
+    Initial: 28.0% (CI: 12.0-45.0)
+  [farness | Off-Framework Probes] Running probing prompt...
+    Final: 65.0% (CI: 48.0-80.0)
+    Update: +37.00%
+
+[164/384] hiring_success - estimate_only - on_framework - run 3
+  [estimate_only | On-Framework Probes] Running initial prompt...
+    Initial: 30.0% (CI: 15.0-45.0)
+  [estimate_only | On-Framework Probes] Running probing prompt...
+    Final: 18.0% (CI: 8.0-30.0)
+    Update: -12.00%
+
+[165/384] hiring_success - farness - on_framework - run 3
+  [farness | On-Framework Probes] Running initial prompt...
+    Initial: 28.0% (CI: 15.0-45.0)
+  [farness | On-Framework Probes] Running probing prompt...
+    Final: 18.0% (CI: 10.0-30.0)
+    Update: -10.00%
+
+[166/384] hiring_success - format_control - on_framework - run 3
+  [format_control | On-Framework Probes] Running initial prompt...
+    Initial: 22.0% (CI: 10.0-38.0)
+  [format_control | On-Framework Probes] Running probing prompt...
+    Final: 15.0% (CI: 6.0-28.0)
+    Update: -7.00%
+
+[167/384] hiring_success - naive - on_framework - run 3
+  [naive | On-Framework Probes] Running initial prompt...
+    Initial: 28.0% (CI: 12.0-48.0)
+  [naive | On-Framework Probes] Running probing prompt...
+    Final: 15.0% (CI: 8.0-25.0)
+    Update: -13.00%
+
+[168/384] hiring_success - format_control - off_framework - run 3
+  [format_control | Off-Framework Probes] Running initial prompt...
+    Initial: 28.0% (CI: 15.0-45.0)
+  [format_control | Off-Framework Probes] Running probing prompt...
+    Final: 12.0% (CI: 5.0-22.0)
+    Update: -16.00%
+
+[169/384] hiring_success - estimate_only - on_framework - run 4
+  [estimate_only | On-Framework Probes] Running initial prompt...
+    Initial: 30.0% (CI: 15.0-45.0)
+  [estimate_only | On-Framework Probes] Running probing prompt...
+    Final: 15.0% (CI: 8.0-25.0)
+    Update: -15.00%
+
+[170/384] hiring_success - naive - on_framework - run 4
+  [naive | On-Framework Probes] Running initial prompt...
+    Initial: 23.0% (CI: 10.0-42.0)
+  [naive | On-Framework Probes] Running probing prompt...
+    Final: 14.0% (CI: 6.0-25.0)
+    Update: -9.00%
+
+[171/384] hiring_success - format_control - off_framework - run 4
+  [format_control | Off-Framework Probes] Running initial prompt...
+    Initial: 22.0% (CI: 10.0-40.0)
+  [format_control | Off-Framework Probes] Running probing prompt...
+    Final: 10.0% (CI: 3.0-22.0)
+    Update: -12.00%
+
+[172/384] hiring_success - farness - on_framework - run 4
+  [farness | On-Framework Probes] Running initial prompt...
+    Initial: 28.0% (CI: 12.0-48.0)
+  [farness | On-Framework Probes] Running probing prompt...
+    Final: 15.0% (CI: 5.0-28.0)
+    Update: -13.00%
+
+[173/384] hiring_success - estimate_only - off_framework - run 4
+  [estimate_only | Off-Framework Probes] Running initial prompt...
+    Initial: 30.0% (CI: 15.0-45.0)
+  [estimate_only | Off-Framework Probes] Running probing prompt...
+    Final: 72.0% (CI: 58.0-85.0)
+    Update: +42.00%
+
+[174/384] hiring_success - farness - off_framework - run 4
+  [farness | Off-Framework Probes] Running initial prompt...
+    Initial: 28.0% (CI: 15.0-45.0)
+  [farness | Off-Framework Probes] Running probing prompt...
+    Final: 72.0% (CI: 55.0-85.0)
+    Update: +44.00%
+
+[175/384] hiring_success - naive - off_framework - run 4
+  [naive | Off-Framework Probes] Running initial prompt...
+    Initial: 30.0% (CI: 10.0-55.0)
+  [naive | Off-Framework Probes] Running probing prompt...
+    Final: 72.0% (CI: 55.0-85.0)
+    Update: +42.00%
+
+[176/384] hiring_success - format_control - on_framework - run 4
+  [format_control | On-Framework Probes] Running initial prompt...
+    Initial: 25.0% (CI: 12.0-42.0)
+  [format_control | On-Framework Probes] Running probing prompt...
+    Final: 15.0% (CI: 6.0-28.0)
+    Update: -10.00%
+
+[177/384] hiring_success - estimate_only - off_framework - run 5
+  [estimate_only | Off-Framework Probes] Running initial prompt...
+    Initial: 30.0% (CI: 15.0-45.0)
+  [estimate_only | Off-Framework Probes] Running probing prompt...
+    Final: 70.0% (CI: 55.0-85.0)
+    Update: +40.00%
+
+[178/384] hiring_success - estimate_only - on_framework - run 5
+  [estimate_only | On-Framework Probes] Running initial prompt...
+    Initial: 30.0% (CI: 15.0-45.0)
+  [estimate_only | On-Framework Probes] Running probing prompt...
+    Final: 15.0% (CI: 8.0-25.0)
+    Update: -15.00%
+
+[179/384] hiring_success - naive - on_framework - run 5
+  [naive | On-Framework Probes] Running initial prompt...
+    Initial: 30.0% (CI: 12.0-55.0)
+  [naive | On-Framework Probes] Running probing prompt...
+    Final: 18.0% (CI: 10.0-28.0)
+    Update: -12.00%
+
+[180/384] hiring_success - format_control - on_framework - run 5
+  [format_control | On-Framework Probes] Running initial prompt...
+    Initial: 25.0% (CI: 12.0-42.0)
+  [format_control | On-Framework Probes] Running probing prompt...
+    Final: 18.0% (CI: 8.0-32.0)
+    Update: -7.00%
+
+[181/384] hiring_success - naive - off_framework - run 5
+  [naive | Off-Framework Probes] Running initial prompt...
+    Initial: 30.0% (CI: 15.0-50.0)
+  [naive | Off-Framework Probes] Running probing prompt...
+    Final: 75.0% (CI: 60.0-88.0)
+    Update: +45.00%
+
+[182/384] hiring_success - farness - on_framework - run 5
+  [farness | On-Framework Probes] Running initial prompt...
+    Initial: 28.0% (CI: 12.0-45.0)
+  [farness | On-Framework Probes] Running probing prompt...
+    Final: 15.0% (CI: 6.0-28.0)
+    Update: -13.00%
+
+[183/384] hiring_success - farness - off_framework - run 5
+  [farness | Off-Framework Probes] Running initial prompt...
+    Initial: 28.0% (CI: 12.0-45.0)
+  [farness | Off-Framework Probes] Running probing prompt...
+    Final: 14.0% (CI: 5.0-25.0)
+    Update: -14.00%
+
+[184/384] hiring_success - format_control - off_framework - run 5
+  [format_control | Off-Framework Probes] Running initial prompt...
+    Initial: 20.0% (CI: 8.0-38.0)
+  [format_control | Off-Framework Probes] Running probing prompt...
+    Final: 8.0% (CI: 3.0-18.0)
+    Update: -12.00%
+
+[185/384] hiring_success - naive - on_framework - run 6
+  [naive | On-Framework Probes] Running initial prompt...
+    Initial: 25.0% (CI: 10.0-45.0)
+  [naive | On-Framework Probes] Running probing prompt...
+    Final: 15.0% (CI: 8.0-25.0)
+    Update: -10.00%
+
+[186/384] hiring_success - farness - off_framework - run 6
+  [farness | Off-Framework Probes] Running initial prompt...
+    Initial: 25.0% (CI: 10.0-45.0)
+  [farness | Off-Framework Probes] Running probing prompt...
+    Final: 70.0% (CI: 52.0-85.0)
+    Update: +45.00%
+
+[187/384] hiring_success - estimate_only - off_framework - run 6
+  [estimate_only | Off-Framework Probes] Running initial prompt...
+    Initial: 30.0% (CI: 15.0-45.0)
+  [estimate_only | Off-Framework Probes] Running probing prompt...
+    Final: 62.0% (CI: 48.0-76.0)
+    Update: +32.00%
+
+[188/384] hiring_success - estimate_only - on_framework - run 6
+  [estimate_only | On-Framework Probes] Running initial prompt...
+    Initial: 30.0% (CI: 15.0-45.0)
+  [estimate_only | On-Framework Probes] Running probing prompt...
+    Final: 15.0% (CI: 8.0-25.0)
+    Update: -15.00%
+
+[189/384] hiring_success - naive - off_framework - run 6
+  [naive | Off-Framework Probes] Running initial prompt...
+    Initial: 28.0% (CI: 15.0-45.0)
+  [naive | Off-Framework Probes] Running probing prompt...
+    Final: 12.0% (CI: 5.0-22.0)
+    Update: -16.00%
+
+[190/384] hiring_success - format_control - off_framework - run 6
+  [format_control | Off-Framework Probes] Running initial prompt...
+    Initial: 20.0% (CI: 10.0-35.0)
+  [format_control | Off-Framework Probes] Running probing prompt...
+    Final: 8.0% (CI: 3.0-18.0)
+    Update: -12.00%
+
+[191/384] hiring_success - format_control - on_framework - run 6
+  [format_control | On-Framework Probes] Running initial prompt...
+    Initial: 22.0% (CI: 10.0-40.0)
+  [format_control | On-Framework Probes] Running probing prompt...
+    Final: 10.0% (CI: 4.0-20.0)
+    Update: -12.00%
+
+[192/384] hiring_success - farness - on_framework - run 6
+  [farness | On-Framework Probes] Running initial prompt...
+    Initial: 28.0% (CI: 15.0-45.0)
+  [farness | On-Framework Probes] Running probing prompt...
+    Final: 18.0% (CI: 8.0-32.0)
+    Update: -10.00%
+
+============================================================
+Case: M&A Synergy Realization
+============================================================
+
+[193/384] acquisition_synergies - naive - off_framework - run 1
+  [naive | Off-Framework Probes] Running initial prompt...
+    Initial: 55.0% (CI: 35.0-75.0)
+  [naive | Off-Framework Probes] Running probing prompt...
+    Final: 72.0% (CI: 58.0-84.0)
+    Update: +17.00%
+
+[194/384] acquisition_synergies - format_control - off_framework - run 1
+  [format_control | Off-Framework Probes] Running initial prompt...
+    Initial: 45.0% (CI: 30.0-60.0)
+  [format_control | Off-Framework Probes] Running probing prompt...
+    Final: 72.0% (CI: 58.0-84.0)
+    Update: +27.00%
+
+[195/384] acquisition_synergies - farness - on_framework - run 1
+  [farness | On-Framework Probes] Running initial prompt...
+    Initial: 35.0% (CI: 20.0-55.0)
+  [farness | On-Framework Probes] Running probing prompt...
+    Final: 25.0% (CI: 12.0-42.0)
+    Update: -10.00%
+
+[196/384] acquisition_synergies - format_control - on_framework - run 1
+  [format_control | On-Framework Probes] Running initial prompt...
+    Initial: 55.0% (CI: 35.0-72.0)
+  [format_control | On-Framework Probes] Running probing prompt...
+    Final: 30.0% (CI: 15.0-48.0)
+    Update: -25.00%
+
+[197/384] acquisition_synergies - farness - off_framework - run 1
+  [farness | Off-Framework Probes] Running initial prompt...
+    Initial: 35.0% (CI: 20.0-50.0)
+  [farness | Off-Framework Probes] Running probing prompt...
+    Final: 62.0% (CI: 45.0-78.0)
+    Update: +27.00%
+
+[198/384] acquisition_synergies - estimate_only - on_framework - run 1
+  [estimate_only | On-Framework Probes] Running initial prompt...
+    Initial: 45.0% (CI: 30.0-60.0)
+  [estimate_only | On-Framework Probes] Running probing prompt...
+    Final: 28.0% (CI: 15.0-42.0)
+    Update: -17.00%
+
+[199/384] acquisition_synergies - estimate_only - off_framework - run 1
+  [estimate_only | Off-Framework Probes] Running initial prompt...
+    Initial: 45.0% (CI: 30.0-60.0)
+  [estimate_only | Off-Framework Probes] Running probing prompt...
+    Final: 68.0% (CI: 52.0-82.0)
+    Update: +23.00%
+
+[200/384] acquisition_synergies - naive - on_framework - run 1
+  [naive | On-Framework Probes] Running initial prompt...
+    Initial: 45.0% (CI: 25.0-65.0)
+  [naive | On-Framework Probes] Running probing prompt...
+    Final: 30.0% (CI: 12.0-50.0)
+    Update: -15.00%
+
+[201/384] acquisition_synergies - estimate_only - off_framework - run 2
+  [estimate_only | Off-Framework Probes] Running initial prompt...
+    Initial: 45.0% (CI: 30.0-60.0)
+  [estimate_only | Off-Framework Probes] Running probing prompt...
+    Final: 68.0% (CI: 52.0-82.0)
+    Update: +23.00%
+
+[202/384] acquisition_synergies - naive - on_framework - run 2
+  [naive | On-Framework Probes] Running initial prompt...
+    Initial: 50.0% (CI: 30.0-70.0)
+  [naive | On-Framework Probes] Running probing prompt...
+    Final: 25.0% (CI: 12.0-40.0)
+    Update: -25.00%
+
+[203/384] acquisition_synergies - farness - off_framework - run 2
+  [farness | Off-Framework Probes] Running initial prompt...
+    Initial: 40.0% (CI: 25.0-55.0)
+  [farness | Off-Framework Probes] Running probing prompt...
+    Final: 62.0% (CI: 48.0-75.0)
+    Update: +22.00%
+
+[204/384] acquisition_synergies - estimate_only - on_framework - run 2
+  [estimate_only | On-Framework Probes] Running initial prompt...
+    Initial: 45.0% (CI: 30.0-60.0)
+  [estimate_only | On-Framework Probes] Running probing prompt...
+    Final: 25.0% (CI: 12.0-40.0)
+    Update: -20.00%
+
+[205/384] acquisition_synergies - naive - off_framework - run 2
+  [naive | Off-Framework Probes] Running initial prompt...
+    Initial: 45.0% (CI: 30.0-65.0)
+  [naive | Off-Framework Probes] Running probing prompt...
+    Final: 70.0% (CI: 58.0-82.0)
+    Update: +25.00%
+
+[206/384] acquisition_synergies - farness - on_framework - run 2
+  [farness | On-Framework Probes] Running initial prompt...
+    Initial: 35.0% (CI: 20.0-50.0)
+  [farness | On-Framework Probes] Running probing prompt...
+    Final: 23.0% (CI: 10.0-38.0)
+    Update: -12.00%
+
+[207/384] acquisition_synergies - format_control - off_framework - run 2
+  [format_control | Off-Framework Probes] Running initial prompt...
+    Initial: 45.0% (CI: 30.0-60.0)
+  [format_control | Off-Framework Probes] Running probing prompt...
+    Final: 68.0% (CI: 55.0-80.0)
+    Update: +23.00%
+
+[208/384] acquisition_synergies - format_control - on_framework - run 2
+  [format_control | On-Framework Probes] Running initial prompt...
+    Initial: 55.0% (CI: 35.0-70.0)
+  [format_control | On-Framework Probes] Running probing prompt...
+    Final: 30.0% (CI: 15.0-45.0)
+    Update: -25.00%
+
+[209/384] acquisition_synergies - naive - off_framework - run 3
+  [naive | Off-Framework Probes] Running initial prompt...
+    Initial: 45.0% (CI: 25.0-65.0)
+  [naive | Off-Framework Probes] Running probing prompt...
+    Final: 68.0% (CI: 52.0-82.0)
+    Update: +23.00%
+
+[210/384] acquisition_synergies - estimate_only - on_framework - run 3
+  [estimate_only | On-Framework Probes] Running initial prompt...
+    Initial: 45.0% (CI: 30.0-60.0)
+  [estimate_only | On-Framework Probes] Running probing prompt...
+    Final: 25.0% (CI: 12.0-40.0)
+    Update: -20.00%
+
+[211/384] acquisition_synergies - estimate_only - off_framework - run 3
+  [estimate_only | Off-Framework Probes] Running initial prompt...
+    Initial: 45.0% (CI: 30.0-60.0)
+  [estimate_only | Off-Framework Probes] Running probing prompt...
+    Final: 67.0% (CI: 52.0-80.0)
+    Update: +22.00%
+
+[212/384] acquisition_synergies - format_control - off_framework - run 3
+  [format_control | Off-Framework Probes] Running initial prompt...
+    Initial: 45.0% (CI: 30.0-60.0)
+  [format_control | Off-Framework Probes] Running probing prompt...
+    Final: 68.0% (CI: 55.0-80.0)
+    Update: +23.00%
+
+[213/384] acquisition_synergies - format_control - on_framework - run 3
+  [format_control | On-Framework Probes] Running initial prompt...
+    Initial: 45.0% (CI: 30.0-60.0)
+  [format_control | On-Framework Probes] Running probing prompt...
+    Final: 28.0% (CI: 15.0-42.0)
+    Update: -17.00%
+
+[214/384] acquisition_synergies - farness - off_framework - run 3
+  [farness | Off-Framework Probes] Running initial prompt...
+    Initial: 40.0% (CI: 25.0-55.0)
+  [farness | Off-Framework Probes] Running probing prompt...
+    Final: 63.0% (CI: 50.0-75.0)
+    Update: +23.00%
+
+[215/384] acquisition_synergies - naive - on_framework - run 3
+  [naive | On-Framework Probes] Running initial prompt...
+    Initial: 45.0% (CI: 25.0-65.0)
+  [naive | On-Framework Probes] Running probing prompt...
+    Final: 28.0% (CI: 12.0-45.0)
+    Update: -17.00%
+
+[216/384] acquisition_synergies - farness - on_framework - run 3
+  [farness | On-Framework Probes] Running initial prompt...
+    Initial: 40.0% (CI: 25.0-55.0)
+  [farness | On-Framework Probes] Running probing prompt...
+    Final: 25.0% (CI: 12.0-38.0)
+    Update: -15.00%
+
+[217/384] acquisition_synergies - format_control - off_framework - run 4
+  [format_control | Off-Framework Probes] Running initial prompt...
+    Initial: 45.0% (CI: 30.0-62.0)
+  [format_control | Off-Framework Probes] Running probing prompt...
+    Final: 66.0% (CI: 50.0-80.0)
+    Update: +21.00%
+
+[218/384] acquisition_synergies - format_control - on_framework - run 4
+  [format_control | On-Framework Probes] Running initial prompt...
+    Initial: 45.0% (CI: 30.0-60.0)
+  [format_control | On-Framework Probes] Running probing prompt...
+    Final: 28.0% (CI: 15.0-42.0)
+    Update: -17.00%
+
+[219/384] acquisition_synergies - farness - on_framework - run 4
+  [farness | On-Framework Probes] Running initial prompt...
+    Initial: 40.0% (CI: 20.0-60.0)
+  [farness | On-Framework Probes] Running probing prompt...
+    Final: 25.0% (CI: 10.0-42.0)
+    Update: -15.00%
+
+[220/384] acquisition_synergies - naive - on_framework - run 4
+  [naive | On-Framework Probes] Running initial prompt...
+    Initial: 55.0% (CI: 35.0-75.0)
+  [naive | On-Framework Probes] Running probing prompt...
+    Final: 25.0% (CI: 10.0-45.0)
+    Update: -30.00%
+
+[221/384] acquisition_synergies - farness - off_framework - run 4
+  [farness | Off-Framework Probes] Running initial prompt...
+    Initial: 40.0% (CI: 20.0-60.0)
+  [farness | Off-Framework Probes] Running probing prompt...
+    Final: 68.0% (CI: 50.0-82.0)
+    Update: +28.00%
+
+[222/384] acquisition_synergies - estimate_only - on_framework - run 4
+  [estimate_only | On-Framework Probes] Running initial prompt...
+    Initial: 45.0% (CI: 30.0-60.0)
+  [estimate_only | On-Framework Probes] Running probing prompt...
+    Final: 25.0% (CI: 12.0-40.0)
+    Update: -20.00%
+
+[223/384] acquisition_synergies - estimate_only - off_framework - run 4
+  [estimate_only | Off-Framework Probes] Running initial prompt...
+    Initial: 45.0% (CI: 30.0-60.0)
+  [estimate_only | Off-Framework Probes] Running probing prompt...
+    Final: 72.0% (CI: 58.0-84.0)
+    Update: +27.00%
+
+[224/384] acquisition_synergies - naive - off_framework - run 4
+  [naive | Off-Framework Probes] Running initial prompt...
+    Initial: 50.0% (CI: 30.0-70.0)
+  [naive | Off-Framework Probes] Running probing prompt...
+    Final: 72.0% (CI: 60.0-82.0)
+    Update: +22.00%
+
+[225/384] acquisition_synergies - estimate_only - on_framework - run 5
+  [estimate_only | On-Framework Probes] Running initial prompt...
+    Initial: 45.0% (CI: 30.0-60.0)
+  [estimate_only | On-Framework Probes] Running probing prompt...
+    Final: 25.0% (CI: 12.0-40.0)
+    Update: -20.00%
+
+[226/384] acquisition_synergies - format_control - on_framework - run 5
+  [format_control | On-Framework Probes] Running initial prompt...
+    Initial: 45.0% (CI: 25.0-65.0)
+  [format_control | On-Framework Probes] Running probing prompt...
+    Final: 25.0% (CI: 12.0-40.0)
+    Update: -20.00%
+
+[227/384] acquisition_synergies - farness - off_framework - run 5
+  [farness | Off-Framework Probes] Running initial prompt...
+    Initial: 35.0% (CI: 20.0-55.0)
+  [farness | Off-Framework Probes] Running probing prompt...
+    Final: 53.0% (CI: 35.0-70.0)
+    Update: +18.00%
+
+[228/384] acquisition_synergies - naive - off_framework - run 5
+  [naive | Off-Framework Probes] Running initial prompt...
+    Initial: 50.0% (CI: 30.0-70.0)
+  [naive | Off-Framework Probes] Running probing prompt...
+    Final: 72.0% (CI: 58.0-84.0)
+    Update: +22.00%
+
+[229/384] acquisition_synergies - format_control - off_framework - run 5
+  [format_control | Off-Framework Probes] Running initial prompt...
+    Initial: 45.0% (CI: 30.0-60.0)
+  [format_control | Off-Framework Probes] Running probing prompt...
+    Final: 68.0% (CI: 55.0-80.0)
+    Update: +23.00%
+
+[230/384] acquisition_synergies - estimate_only - off_framework - run 5
+  [estimate_only | Off-Framework Probes] Running initial prompt...
+    Initial: 45.0% (CI: 30.0-60.0)
+  [estimate_only | Off-Framework Probes] Running probing prompt...
+    Final: 70.0% (CI: 55.0-82.0)
+    Update: +25.00%
+
+[231/384] acquisition_synergies - farness - on_framework - run 5
+  [farness | On-Framework Probes] Running initial prompt...
+    Initial: 40.0% (CI: 25.0-55.0)
+  [farness | On-Framework Probes] Running probing prompt...
+    Final: 25.0% (CI: 12.0-40.0)
+    Update: -15.00%
+
+[232/384] acquisition_synergies - naive - on_framework - run 5
+  [naive | On-Framework Probes] Running initial prompt...
+    Initial: 50.0% (CI: 30.0-70.0)
+  [naive | On-Framework Probes] Running probing prompt...
+    Final: 25.0% (CI: 10.0-45.0)
+    Update: -25.00%
+
+[233/384] acquisition_synergies - farness - off_framework - run 6
+  [farness | Off-Framework Probes] Running initial prompt...
+    Initial: 35.0% (CI: 15.0-55.0)
+  [farness | Off-Framework Probes] Running probing prompt...
+    Final: 58.0% (CI: 42.0-72.0)
+    Update: +23.00%
+
+[234/384] acquisition_synergies - format_control - on_framework - run 6
+  [format_control | On-Framework Probes] Running initial prompt...
+    Initial: 45.0% (CI: 30.0-60.0)
+  [format_control | On-Framework Probes] Running probing prompt...
+    Final: 25.0% (CI: 12.0-38.0)
+    Update: -20.00%
+
+[235/384] acquisition_synergies - estimate_only - off_framework - run 6
+  [estimate_only | Off-Framework Probes] Running initial prompt...
+    Initial: 45.0% (CI: 30.0-60.0)
+  [estimate_only | Off-Framework Probes] Running probing prompt...
+    Final: 67.0% (CI: 55.0-78.0)
+    Update: +22.00%
+
+[236/384] acquisition_synergies - naive - on_framework - run 6
+  [naive | On-Framework Probes] Running initial prompt...
+    Initial: 50.0% (CI: 30.0-70.0)
+  [naive | On-Framework Probes] Running probing prompt...
+    Final: 25.0% (CI: 10.0-45.0)
+    Update: -25.00%
+
+[237/384] acquisition_synergies - format_control - off_framework - run 6
+  [format_control | Off-Framework Probes] Running initial prompt...
+    Initial: 50.0% (CI: 35.0-65.0)
+  [format_control | Off-Framework Probes] Running probing prompt...
+    Final: 70.0% (CI: 55.0-82.0)
+    Update: +20.00%
+
+[238/384] acquisition_synergies - farness - on_framework - run 6
+  [farness | On-Framework Probes] Running initial prompt...
+    Initial: 35.0% (CI: 20.0-55.0)
+  [farness | On-Framework Probes] Running probing prompt...
+    Final: 24.0% (CI: 10.0-42.0)
+    Update: -11.00%
+
+[239/384] acquisition_synergies - naive - off_framework - run 6
+  [naive | Off-Framework Probes] Running initial prompt...
+    Initial: 50.0% (CI: 30.0-70.0)
+  [naive | Off-Framework Probes] Running probing prompt...
+    Final: 75.0% (CI: 60.0-87.0)
+    Update: +25.00%
+
+[240/384] acquisition_synergies - estimate_only - on_framework - run 6
+  [estimate_only | On-Framework Probes] Running initial prompt...
+    Initial: 45.0% (CI: 30.0-60.0)
+  [estimate_only | On-Framework Probes] Running probing prompt...
+    Final: 28.0% (CI: 15.0-42.0)
+    Update: -17.00%
+
+============================================================
+Case: Product Launch Success
+============================================================
+
+[241/384] product_launch - estimate_only - on_framework - run 1
+  [estimate_only | On-Framework Probes] Running initial prompt...
+    Initial: 30.0% (CI: 15.0-50.0)
+  [estimate_only | On-Framework Probes] Running probing prompt...
+    Final: 18.0% (CI: 8.0-30.0)
+    Update: -12.00%
+
+[242/384] product_launch - format_control - on_framework - run 1
+  [format_control | On-Framework Probes] Running initial prompt...
+    Initial: 25.0% (CI: 12.0-42.0)
+  [format_control | On-Framework Probes] Running probing prompt...
+    Final: 20.0% (CI: 8.0-35.0)
+    Update: -5.00%
+
+[243/384] product_launch - estimate_only - off_framework - run 1
+  [estimate_only | Off-Framework Probes] Running initial prompt...
+    Initial: 30.0% (CI: 15.0-50.0)
+  [estimate_only | Off-Framework Probes] Running probing prompt...
+    Final: 55.0% (CI: 40.0-72.0)
+    Update: +25.00%
+
+[244/384] product_launch - format_control - off_framework - run 1
+  [format_control | Off-Framework Probes] Running initial prompt...
+    Initial: 20.0% (CI: 10.0-35.0)
+  [format_control | Off-Framework Probes] Running probing prompt...
+    Final: 40.0% (CI: 25.0-55.0)
+    Update: +20.00%
+
+[245/384] product_launch - farness - off_framework - run 1
+  [farness | Off-Framework Probes] Running initial prompt...
+    Initial: 15.0% (CI: 5.0-30.0)
+  [farness | Off-Framework Probes] Running probing prompt...
+    Final: 30.0% (CI: 18.0-45.0)
+    Update: +15.00%
+
+[246/384] product_launch - farness - on_framework - run 1
+  [farness | On-Framework Probes] Running initial prompt...
+    Initial: 15.0% (CI: 5.0-30.0)
+  [farness | On-Framework Probes] Running probing prompt...
+    Final: 8.0% (CI: 2.0-20.0)
+    Update: -7.00%
+
+[247/384] product_launch - naive - on_framework - run 1
+  [naive | On-Framework Probes] Running initial prompt...
+    Initial: 28.0% (CI: 15.0-45.0)
+  [naive | On-Framework Probes] Running probing prompt...
+    Final: 17.0% (CI: 7.0-30.0)
+    Update: -11.00%
+
+[248/384] product_launch - naive - off_framework - run 1
+  [naive | Off-Framework Probes] Running initial prompt...
+    Initial: 30.0% (CI: 15.0-50.0)
+  [naive | Off-Framework Probes] Running probing prompt...
+    Final: 52.0% (CI: 38.0-68.0)
+    Update: +22.00%
+
+[249/384] product_launch - farness - on_framework - run 2
+  [farness | On-Framework Probes] Running initial prompt...
+    Initial: 15.0% (CI: 4.0-35.0)
+  [farness | On-Framework Probes] Running probing prompt...
+    Final: 10.0% (CI: 2.0-25.0)
+    Update: -5.00%
+
+[250/384] product_launch - estimate_only - off_framework - run 2
+  [estimate_only | Off-Framework Probes] Running initial prompt...
+    Initial: 30.0% (CI: 15.0-50.0)
+  [estimate_only | Off-Framework Probes] Running probing prompt...
+    Final: 55.0% (CI: 40.0-72.0)
+    Update: +25.00%
+
+[251/384] product_launch - naive - on_framework - run 2
+  [naive | On-Framework Probes] Running initial prompt...
+    Initial: 30.0% (CI: 15.0-50.0)
+  [naive | On-Framework Probes] Running probing prompt...
+    Final: 18.0% (CI: 8.0-32.0)
+    Update: -12.00%
+
+[252/384] product_launch - estimate_only - on_framework - run 2
+  [estimate_only | On-Framework Probes] Running initial prompt...
+    Initial: 30.0% (CI: 15.0-50.0)
+  [estimate_only | On-Framework Probes] Running probing prompt...
+    Final: 18.0% (CI: 8.0-30.0)
+    Update: -12.00%
+
+[253/384] product_launch - format_control - on_framework - run 2
+  [format_control | On-Framework Probes] Running initial prompt...
+    Initial: 25.0% (CI: 12.0-40.0)
+  [format_control | On-Framework Probes] Running probing prompt...
+    Final: 20.0% (CI: 8.0-32.0)
+    Update: -5.00%
+
+[254/384] product_launch - naive - off_framework - run 2
+  [naive | Off-Framework Probes] Running initial prompt...
+    Initial: 30.0% (CI: 15.0-50.0)
+  [naive | Off-Framework Probes] Running probing prompt...
+    Final: 48.0% (CI: 35.0-62.0)
+    Update: +18.00%
+
+[255/384] product_launch - format_control - off_framework - run 2
+  [format_control | Off-Framework Probes] Running initial prompt...
+    Initial: 25.0% (CI: 12.0-42.0)
+  [format_control | Off-Framework Probes] Running probing prompt...
+    Final: 42.0% (CI: 28.0-58.0)
+    Update: +17.00%
+
+[256/384] product_launch - farness - off_framework - run 2
+  [farness | Off-Framework Probes] Running initial prompt...
+    Initial: 20.0% (CI: 8.0-35.0)
+  [farness | Off-Framework Probes] Running probing prompt...
+    Final: 38.0% (CI: 22.0-55.0)
+    Update: +18.00%
+
+[257/384] product_launch - farness - on_framework - run 3
+  [farness | On-Framework Probes] Running initial prompt...
+    Initial: 20.0% (CI: 8.0-35.0)
+  [farness | On-Framework Probes] Running probing prompt...
+    Final: 14.0% (CI: 5.0-26.0)
+    Update: -6.00%
+
+[258/384] product_launch - farness - off_framework - run 3
+  [farness | Off-Framework Probes] Running initial prompt...
+    Initial: 15.0% (CI: 5.0-30.0)
+  [farness | Off-Framework Probes] Running probing prompt...
+    Final: 32.0% (CI: 18.0-48.0)
+    Update: +17.00%
+
+[259/384] product_launch - estimate_only - on_framework - run 3
+  [estimate_only | On-Framework Probes] Running initial prompt...
+    Initial: 30.0% (CI: 15.0-50.0)
+  [estimate_only | On-Framework Probes] Running probing prompt...
+    Final: 20.0% (CI: 8.0-35.0)
+    Update: -10.00%
+
+[260/384] product_launch - estimate_only - off_framework - run 3
+  [estimate_only | Off-Framework Probes] Running initial prompt...
+    Initial: 30.0% (CI: 15.0-50.0)
+  [estimate_only | Off-Framework Probes] Running probing prompt...
+    Final: 55.0% (CI: 40.0-72.0)
+    Update: +25.00%
+
+[261/384] product_launch - format_control - on_framework - run 3
+  [format_control | On-Framework Probes] Running initial prompt...
+    Initial: 25.0% (CI: 12.0-42.0)
+  [format_control | On-Framework Probes] Running probing prompt...
+    Final: 20.0% (CI: 8.0-35.0)
+    Update: -5.00%
+
+[262/384] product_launch - format_control - off_framework - run 3
+  [format_control | Off-Framework Probes] Running initial prompt...
+    Initial: 25.0% (CI: 12.0-42.0)
+  [format_control | Off-Framework Probes] Running probing prompt...
+    Final: 42.0% (CI: 28.0-58.0)
+    Update: +17.00%
+
+[263/384] product_launch - naive - on_framework - run 3
+  [naive | On-Framework Probes] Running initial prompt...
+    Initial: 28.0% (CI: 12.0-48.0)
+  [naive | On-Framework Probes] Running probing prompt...
+    Final: 19.0% (CI: 8.0-32.0)
+    Update: -9.00%
+
+[264/384] product_launch - naive - off_framework - run 3
+  [naive | Off-Framework Probes] Running initial prompt...
+    Initial: 25.0% (CI: 10.0-45.0)
+  [naive | Off-Framework Probes] Running probing prompt...
+    Final: 40.0% (CI: 28.0-55.0)
+    Update: +15.00%
+
+[265/384] product_launch - farness - on_framework - run 4
+  [farness | On-Framework Probes] Running initial prompt...
+    Initial: 20.0% (CI: 8.0-40.0)
+  [farness | On-Framework Probes] Running probing prompt...
+    Final: 15.0% (CI: 5.0-30.0)
+    Update: -5.00%
+
+[266/384] product_launch - estimate_only - off_framework - run 4
+  [estimate_only | Off-Framework Probes] Running initial prompt...
+    Initial: 30.0% (CI: 15.0-50.0)
+  [estimate_only | Off-Framework Probes] Running probing prompt...
+    Final: 50.0% (CI: 35.0-65.0)
+    Update: +20.00%
+
+[267/384] product_launch - farness - off_framework - run 4
+  [farness | Off-Framework Probes] Running initial prompt...
+    Initial: 18.0% (CI: 5.0-35.0)
+  [farness | Off-Framework Probes] Running probing prompt...
+    Final: 32.0% (CI: 18.0-50.0)
+    Update: +14.00%
+
+[268/384] product_launch - format_control - off_framework - run 4
+  [format_control | Off-Framework Probes] Running initial prompt...
+    Initial: 25.0% (CI: 12.0-42.0)
+  [format_control | Off-Framework Probes] Running probing prompt...
+    Final: 42.0% (CI: 28.0-58.0)
+    Update: +17.00%
+
+[269/384] product_launch - format_control - on_framework - run 4
+  [format_control | On-Framework Probes] Running initial prompt...
+    Initial: 25.0% (CI: 12.0-42.0)
+  [format_control | On-Framework Probes] Running probing prompt...
+    Final: 18.0% (CI: 8.0-32.0)
+    Update: -7.00%
+
+[270/384] product_launch - naive - off_framework - run 4
+  [naive | Off-Framework Probes] Running initial prompt...
+    Initial: 25.0% (CI: 12.0-45.0)
+  [naive | Off-Framework Probes] Running probing prompt...
+    Final: 39.0% (CI: 28.0-52.0)
+    Update: +14.00%
+
+[271/384] product_launch - naive - on_framework - run 4
+  [naive | On-Framework Probes] Running initial prompt...
+    Initial: 25.0% (CI: 10.0-45.0)
+  [naive | On-Framework Probes] Running probing prompt...
+    Final: 17.0% (CI: 5.0-30.0)
+    Update: -8.00%
+
+[272/384] product_launch - estimate_only - on_framework - run 4
+  [estimate_only | On-Framework Probes] Running initial prompt...
+    Initial: 30.0% (CI: 15.0-50.0)
+  [estimate_only | On-Framework Probes] Running probing prompt...
+    Final: 18.0% (CI: 8.0-32.0)
+    Update: -12.00%
+
+[273/384] product_launch - naive - off_framework - run 5
+  [naive | Off-Framework Probes] Running initial prompt...
+    Initial: 28.0% (CI: 15.0-45.0)
+  [naive | Off-Framework Probes] Running probing prompt...
+    Final: 40.0% (CI: 31.0-52.0)
+    Update: +12.00%
+
+[274/384] product_launch - naive - on_framework - run 5
+  [naive | On-Framework Probes] Running initial prompt...
+    Initial: 25.0% (CI: 10.0-45.0)
+  [naive | On-Framework Probes] Running probing prompt...
+    Final: 18.0% (CI: 8.0-32.0)
+    Update: -7.00%
+
+[275/384] product_launch - format_control - on_framework - run 5
+  [format_control | On-Framework Probes] Running initial prompt...
+    Initial: 25.0% (CI: 12.0-42.0)
+  [format_control | On-Framework Probes] Running probing prompt...
+    Final: 20.0% (CI: 8.0-35.0)
+    Update: -5.00%
+
+[276/384] product_launch - estimate_only - on_framework - run 5
+  [estimate_only | On-Framework Probes] Running initial prompt...
+    Initial: 30.0% (CI: 15.0-50.0)
+  [estimate_only | On-Framework Probes] Running probing prompt...
+    Final: 20.0% (CI: 10.0-35.0)
+    Update: -10.00%
+
+[277/384] product_launch - estimate_only - off_framework - run 5
+  [estimate_only | Off-Framework Probes] Running initial prompt...
+    Initial: 30.0% (CI: 15.0-50.0)
+  [estimate_only | Off-Framework Probes] Running probing prompt...
+    Final: 55.0% (CI: 38.0-72.0)
+    Update: +25.00%
+
+[278/384] product_launch - farness - off_framework - run 5
+  [farness | Off-Framework Probes] Running initial prompt...
+    Initial: 15.0% (CI: 5.0-35.0)
+  [farness | Off-Framework Probes] Running probing prompt...
+    Final: 32.0% (CI: 18.0-50.0)
+    Update: +17.00%
+
+[279/384] product_launch - format_control - off_framework - run 5
+  [format_control | Off-Framework Probes] Running initial prompt...
+    Initial: 25.0% (CI: 12.0-42.0)
+  [format_control | Off-Framework Probes] Running probing prompt...
+    Final: 40.0% (CI: 25.0-58.0)
+    Update: +15.00%
+
+[280/384] product_launch - farness - on_framework - run 5
+  [farness | On-Framework Probes] Running initial prompt...
+    Initial: 15.0% (CI: 5.0-35.0)
+  [farness | On-Framework Probes] Running probing prompt...
+    Final: 10.0% (CI: 3.0-22.0)
+    Update: -5.00%
+
+[281/384] product_launch - format_control - off_framework - run 6
+  [format_control | Off-Framework Probes] Running initial prompt...
+    Initial: 25.0% (CI: 12.0-42.0)
+  [format_control | Off-Framework Probes] Running probing prompt...
+    Final: 45.0% (CI: 28.0-62.0)
+    Update: +20.00%
+
+[282/384] product_launch - naive - off_framework - run 6
+  [naive | Off-Framework Probes] Running initial prompt...
+    Initial: 30.0% (CI: 15.0-50.0)
+  [naive | Off-Framework Probes] Running probing prompt...
+    Final: 48.0% (CI: 35.0-62.0)
+    Update: +18.00%
+
+[283/384] product_launch - estimate_only - off_framework - run 6
+  [estimate_only | Off-Framework Probes] Running initial prompt...
+    Initial: 30.0% (CI: 15.0-50.0)
+  [estimate_only | Off-Framework Probes] Running probing prompt...
+    Final: 55.0% (CI: 38.0-72.0)
+    Update: +25.00%
+
+[284/384] product_launch - farness - on_framework - run 6
+  [farness | On-Framework Probes] Running initial prompt...
+    Initial: 25.0% (CI: 10.0-45.0)
+  [farness | On-Framework Probes] Running probing prompt...
+    Final: 15.0% (CI: 5.0-30.0)
+    Update: -10.00%
+
+[285/384] product_launch - format_control - on_framework - run 6
+  [format_control | On-Framework Probes] Running initial prompt...
+    Initial: 25.0% (CI: 12.0-42.0)
+  [format_control | On-Framework Probes] Running probing prompt...
+    Final: 18.0% (CI: 8.0-30.0)
+    Update: -7.00%
+
+[286/384] product_launch - estimate_only - on_framework - run 6
+  [estimate_only | On-Framework Probes] Running initial prompt...
+    Initial: 30.0% (CI: 15.0-50.0)
+  [estimate_only | On-Framework Probes] Running probing prompt...
+    Final: 18.0% (CI: 8.0-32.0)
+    Update: -12.00%
+
+[287/384] product_launch - naive - on_framework - run 6
+  [naive | On-Framework Probes] Running initial prompt...
+    Initial: 30.0% (CI: 15.0-50.0)
+  [naive | On-Framework Probes] Running probing prompt...
+    Final: 17.0% (CI: 5.0-35.0)
+    Update: -13.00%
+
+[288/384] product_launch - farness - off_framework - run 6
+  [farness | Off-Framework Probes] Running initial prompt...
+    Initial: 20.0% (CI: 8.0-35.0)
+  [farness | Off-Framework Probes] Running probing prompt...
+    Final: 40.0% (CI: 25.0-55.0)
+    Update: +20.00%
+
+============================================================
+Case: Regulatory Deadline Compliance
+============================================================
+
+[289/384] deadline_estimate - farness - on_framework - run 1
+  [farness | On-Framework Probes] Running initial prompt...
+    Initial: 65.0% (CI: 45.0-80.0)
+  [farness | On-Framework Probes] Running probing prompt...
+    Final: 25.0% (CI: 10.0-40.0)
+    Update: -40.00%
+
+[290/384] deadline_estimate - format_control - off_framework - run 1
+  [format_control | Off-Framework Probes] Running initial prompt...
+    Initial: 78.0% (CI: 65.0-88.0)
+  [format_control | Off-Framework Probes] Running probing prompt...
+    Final: 60.0% (CI: 45.0-72.0)
+    Update: -18.00%
+
+[291/384] deadline_estimate - estimate_only - off_framework - run 1
+  [estimate_only | Off-Framework Probes] Running initial prompt...
+    Initial: 82.0% (CI: 65.0-93.0)
+  [estimate_only | Off-Framework Probes] Running probing prompt...
+    Final: 62.0% (CI: 42.0-78.0)
+    Update: -20.00%
+
+[292/384] deadline_estimate - farness - off_framework - run 1
+  [farness | Off-Framework Probes] Running initial prompt...
+    Initial: 65.0% (CI: 45.0-82.0)
+  [farness | Off-Framework Probes] Running probing prompt...
+    Final: 45.0% (CI: 25.0-65.0)
+    Update: -20.00%
+
+[293/384] deadline_estimate - format_control - on_framework - run 1
+  [format_control | On-Framework Probes] Running initial prompt...
+    Initial: 75.0% (CI: 60.0-88.0)
+  [format_control | On-Framework Probes] Running probing prompt...
+    Final: 25.0% (CI: 12.0-38.0)
+    Update: -50.00%
+
+[294/384] deadline_estimate - naive - on_framework - run 1
+  [naive | On-Framework Probes] Running initial prompt...
+    Initial: 80.0% (CI: 65.0-92.0)
+  [naive | On-Framework Probes] Running probing prompt...
+    Final: 20.0% (CI: 8.0-38.0)
+    Update: -60.00%
+
+[295/384] deadline_estimate - naive - off_framework - run 1
+  [naive | Off-Framework Probes] Running initial prompt...
+    Initial: 78.0% (CI: 60.0-90.0)
+  [naive | Off-Framework Probes] Running probing prompt...
+    Final: 58.0% (CI: 42.0-72.0)
+    Update: -20.00%
+
+[296/384] deadline_estimate - estimate_only - on_framework - run 1
+  [estimate_only | On-Framework Probes] Running initial prompt...
+    Initial: 82.0% (CI: 65.0-93.0)
+  [estimate_only | On-Framework Probes] Running probing prompt...
+    Final: 22.0% (CI: 10.0-38.0)
+    Update: -60.00%
+
+[297/384] deadline_estimate - estimate_only - off_framework - run 2
+  [estimate_only | Off-Framework Probes] Running initial prompt...
+    Initial: 82.0% (CI: 65.0-93.0)
+  [estimate_only | Off-Framework Probes] Running probing prompt...
+    Final: 55.0% (CI: 35.0-72.0)
+    Update: -27.00%
+
+[298/384] deadline_estimate - naive - on_framework - run 2
+  [naive | On-Framework Probes] Running initial prompt...
+    Initial: 85.0% (CI: 72.0-93.0)
+  [naive | On-Framework Probes] Running probing prompt...
+    Final: 18.0% (CI: 5.0-35.0)
+    Update: -67.00%
+
+[299/384] deadline_estimate - format_control - on_framework - run 2
+  [format_control | On-Framework Probes] Running initial prompt...
+    Initial: 78.0% (CI: 62.0-92.0)
+  [format_control | On-Framework Probes] Running probing prompt...
+    Final: 22.0% (CI: 10.0-38.0)
+    Update: -56.00%
+
+[300/384] deadline_estimate - farness - on_framework - run 2
+  [farness | On-Framework Probes] Running initial prompt...
+    Initial: 70.0% (CI: 55.0-85.0)
+  [farness | On-Framework Probes] Running probing prompt...
+    Final: 25.0% (CI: 12.0-40.0)
+    Update: -45.00%
+
+[301/384] deadline_estimate - format_control - off_framework - run 2
+  [format_control | Off-Framework Probes] Running initial prompt...
+    Initial: 75.0% (CI: 60.0-88.0)
+  [format_control | Off-Framework Probes] Running probing prompt...
+    Final: 50.0% (CI: 35.0-65.0)
+    Update: -25.00%
+
+[302/384] deadline_estimate - estimate_only - on_framework - run 2
+  [estimate_only | On-Framework Probes] Running initial prompt...
+    Initial: 82.0% (CI: 65.0-93.0)
+  [estimate_only | On-Framework Probes] Running probing prompt...
+    Final: 22.0% (CI: 10.0-38.0)
+    Update: -60.00%
+
+[303/384] deadline_estimate - naive - off_framework - run 2
+  [naive | Off-Framework Probes] Running initial prompt...
+    Initial: 78.0% (CI: 62.0-90.0)
+  [naive | Off-Framework Probes] Running probing prompt...
+    Final: 56.0% (CI: 38.0-70.0)
+    Update: -22.00%
+
+[304/384] deadline_estimate - farness - off_framework - run 2
+  [farness | Off-Framework Probes] Running initial prompt...
+    Initial: 68.0% (CI: 50.0-82.0)
+  [farness | Off-Framework Probes] Running probing prompt...
+    Final: 48.0% (CI: 30.0-65.0)
+    Update: -20.00%
+
+[305/384] deadline_estimate - format_control - on_framework - run 3
+  [format_control | On-Framework Probes] Running initial prompt...
+    Initial: 80.0% (CI: 65.0-90.0)
+  [format_control | On-Framework Probes] Running probing prompt...
+    Final: 20.0% (CI: 10.0-35.0)
+    Update: -60.00%
+
+[306/384] deadline_estimate - naive - on_framework - run 3
+  [naive | On-Framework Probes] Running initial prompt...
+    Initial: 85.0% (CI: 70.0-95.0)
+  [naive | On-Framework Probes] Running probing prompt...
+    Final: 20.0% (CI: 8.0-35.0)
+    Update: -65.00%
+
+[307/384] deadline_estimate - farness - off_framework - run 3
+  [farness | Off-Framework Probes] Running initial prompt...
+    Initial: 45.0% (CI: 25.0-70.0)
+  [farness | Off-Framework Probes] Running probing prompt...
+    Final: 28.0% (CI: 12.0-45.0)
+    Update: -17.00%
+
+[308/384] deadline_estimate - format_control - off_framework - run 3
+  [format_control | Off-Framework Probes] Running initial prompt...
+    Initial: 75.0% (CI: 60.0-88.0)
+  [format_control | Off-Framework Probes] Running probing prompt...
+    Final: 55.0% (CI: 40.0-68.0)
+    Update: -20.00%
+
+[309/384] deadline_estimate - estimate_only - on_framework - run 3
+  [estimate_only | On-Framework Probes] Running initial prompt...
+    Initial: 82.0% (CI: 65.0-93.0)
+  [estimate_only | On-Framework Probes] Running probing prompt...
+    Final: 22.0% (CI: 10.0-38.0)
+    Update: -60.00%
+
+[310/384] deadline_estimate - farness - on_framework - run 3
+  [farness | On-Framework Probes] Running initial prompt...
+    Initial: 70.0% (CI: 55.0-85.0)
+  [farness | On-Framework Probes] Running probing prompt...
+    Final: 25.0% (CI: 10.0-40.0)
+    Update: -45.00%
+
+[311/384] deadline_estimate - naive - off_framework - run 3
+  [naive | Off-Framework Probes] Running initial prompt...
+    Initial: 80.0% (CI: 65.0-90.0)
+  [naive | Off-Framework Probes] Running probing prompt...
+    Final: 53.0% (CI: 35.0-68.0)
+    Update: -27.00%
+
+[312/384] deadline_estimate - estimate_only - off_framework - run 3
+  [estimate_only | Off-Framework Probes] Running initial prompt...
+    Initial: 82.0% (CI: 65.0-93.0)
+  [estimate_only | Off-Framework Probes] Running probing prompt...
+    Final: 62.0% (CI: 42.0-78.0)
+    Update: -20.00%
+
+[313/384] deadline_estimate - farness - on_framework - run 4
+  [farness | On-Framework Probes] Running initial prompt...
+    Initial: 58.0% (CI: 35.0-75.0)
+  [farness | On-Framework Probes] Running probing prompt...
+    Final: 25.0% (CI: 10.0-45.0)
+    Update: -33.00%
+
+[314/384] deadline_estimate - naive - on_framework - run 4
+  [naive | On-Framework Probes] Running initial prompt...
+    Initial: 78.0% (CI: 62.0-92.0)
+  [naive | On-Framework Probes] Running probing prompt...
+    Final: 22.0% (CI: 9.0-40.0)
+    Update: -56.00%
+
+[315/384] deadline_estimate - farness - off_framework - run 4
+  [farness | Off-Framework Probes] Running initial prompt...
+    Initial: 65.0% (CI: 45.0-82.0)
+  [farness | Off-Framework Probes] Running probing prompt...
+    Final: 45.0% (CI: 25.0-65.0)
+    Update: -20.00%
+
+[316/384] deadline_estimate - format_control - off_framework - run 4
+  [format_control | Off-Framework Probes] Running initial prompt...
+    Initial: 78.0% (CI: 62.0-90.0)
+  [format_control | Off-Framework Probes] Running probing prompt...
+    Final: 61.0% (CI: 45.0-75.0)
+    Update: -17.00%
+
+[317/384] deadline_estimate - naive - off_framework - run 4
+  [naive | Off-Framework Probes] Running initial prompt...
+    Initial: 80.0% (CI: 65.0-90.0)
+  [naive | Off-Framework Probes] Running probing prompt...
+    Final: 52.0% (CI: 32.0-68.0)
+    Update: -28.00%
+
+[318/384] deadline_estimate - format_control - on_framework - run 4
+  [format_control | On-Framework Probes] Running initial prompt...
+    Initial: 78.0% (CI: 62.0-90.0)
+  [format_control | On-Framework Probes] Running probing prompt...
+    Final: 22.0% (CI: 10.0-38.0)
+    Update: -56.00%
+
+[319/384] deadline_estimate - estimate_only - off_framework - run 4
+  [estimate_only | Off-Framework Probes] Running initial prompt...
+    Initial: 82.0% (CI: 65.0-93.0)
+  [estimate_only | Off-Framework Probes] Running probing prompt...
+    Final: 64.0% (CI: 45.0-80.0)
+    Update: -18.00%
+
+[320/384] deadline_estimate - estimate_only - on_framework - run 4
+  [estimate_only | On-Framework Probes] Running initial prompt...
+    Initial: 82.0% (CI: 65.0-93.0)
+  [estimate_only | On-Framework Probes] Running probing prompt...
+    Final: 20.0% (CI: 8.0-35.0)
+    Update: -62.00%
+
+[321/384] deadline_estimate - farness - off_framework - run 5
+  [farness | Off-Framework Probes] Running initial prompt...
+    Initial: 65.0% (CI: 45.0-80.0)
+  [farness | Off-Framework Probes] Running probing prompt...
+    Final: 40.0% (CI: 22.0-58.0)
+    Update: -25.00%
+
+[322/384] deadline_estimate - estimate_only - off_framework - run 5
+  [estimate_only | Off-Framework Probes] Running initial prompt...
+    Initial: 82.0% (CI: 65.0-93.0)
+  [estimate_only | Off-Framework Probes] Running probing prompt...
+    Final: 65.0% (CI: 45.0-80.0)
+    Update: -17.00%
+
+[323/384] deadline_estimate - format_control - off_framework - run 5
+  [format_control | Off-Framework Probes] Running initial prompt...
+    Initial: 82.0% (CI: 65.0-92.0)
+  [format_control | Off-Framework Probes] Running probing prompt...
+    Final: 62.0% (CI: 45.0-76.0)
+    Update: -20.00%
+
+[324/384] deadline_estimate - format_control - on_framework - run 5
+  [format_control | On-Framework Probes] Running initial prompt...
+    Initial: 75.0% (CI: 60.0-88.0)
+  [format_control | On-Framework Probes] Running probing prompt...
+    Final: 25.0% (CI: 12.0-40.0)
+    Update: -50.00%
+
+[325/384] deadline_estimate - naive - on_framework - run 5
+  [naive | On-Framework Probes] Running initial prompt...
+    Initial: 80.0% (CI: 65.0-90.0)
+  [naive | On-Framework Probes] Running probing prompt...
+    Final: 22.0% (CI: 8.0-40.0)
+    Update: -58.00%
+
+[326/384] deadline_estimate - farness - on_framework - run 5
+  [farness | On-Framework Probes] Running initial prompt...
+    Initial: 55.0% (CI: 35.0-75.0)
+  [farness | On-Framework Probes] Running probing prompt...
+    Final: 23.0% (CI: 10.0-40.0)
+    Update: -32.00%
+
+[327/384] deadline_estimate - naive - off_framework - run 5
+  [naive | Off-Framework Probes] Running initial prompt...
+    Initial: 82.0% (CI: 65.0-92.0)
+  [naive | Off-Framework Probes] Running probing prompt...
+    Final: 65.0% (CI: 48.0-78.0)
+    Update: -17.00%
+
+[328/384] deadline_estimate - estimate_only - on_framework - run 5
+  [estimate_only | On-Framework Probes] Running initial prompt...
+    Initial: 82.0% (CI: 65.0-93.0)
+  [estimate_only | On-Framework Probes] Running probing prompt...
+    Final: 22.0% (CI: 10.0-38.0)
+    Update: -60.00%
+
+[329/384] deadline_estimate - naive - on_framework - run 6
+  [naive | On-Framework Probes] Running initial prompt...
+    Initial: 80.0% (CI: 65.0-90.0)
+  [naive | On-Framework Probes] Running probing prompt...
+    Final: 25.0% (CI: 10.0-40.0)
+    Update: -55.00%
+
+[330/384] deadline_estimate - estimate_only - off_framework - run 6
+  [estimate_only | Off-Framework Probes] Running initial prompt...
+    Initial: 82.0% (CI: 65.0-93.0)
+  [estimate_only | Off-Framework Probes] Running probing prompt...
+    Final: 62.0% (CI: 42.0-78.0)
+    Update: -20.00%
+
+[331/384] deadline_estimate - format_control - off_framework - run 6
+  [format_control | Off-Framework Probes] Running initial prompt...
+    Initial: 75.0% (CI: 60.0-87.0)
+  [format_control | Off-Framework Probes] Running probing prompt...
+    Final: 58.0% (CI: 42.0-72.0)
+    Update: -17.00%
+
+[332/384] deadline_estimate - naive - off_framework - run 6
+  [naive | Off-Framework Probes] Running initial prompt...
+    Initial: 80.0% (CI: 65.0-92.0)
+  [naive | Off-Framework Probes] Running probing prompt...
+    Final: 55.0% (CI: 35.0-70.0)
+    Update: -25.00%
+
+[333/384] deadline_estimate - format_control - on_framework - run 6
+  [format_control | On-Framework Probes] Running initial prompt...
+    Initial: 78.0% (CI: 65.0-88.0)
+  [format_control | On-Framework Probes] Running probing prompt...
+    Final: 25.0% (CI: 12.0-40.0)
+    Update: -53.00%
+
+[334/384] deadline_estimate - farness - on_framework - run 6
+  [farness | On-Framework Probes] Running initial prompt...
+    Initial: 65.0% (CI: 45.0-85.0)
+  [farness | On-Framework Probes] Running probing prompt...
+    Final: 20.0% (CI: 8.0-35.0)
+    Update: -45.00%
+
+[335/384] deadline_estimate - estimate_only - on_framework - run 6
+  [estimate_only | On-Framework Probes] Running initial prompt...
+    Initial: 82.0% (CI: 65.0-93.0)
+  [estimate_only | On-Framework Probes] Running probing prompt...
+    Final: 20.0% (CI: 8.0-35.0)
+    Update: -62.00%
+
+[336/384] deadline_estimate - farness - off_framework - run 6
+  [farness | Off-Framework Probes] Running initial prompt...
+    Initial: 68.0% (CI: 45.0-85.0)
+  [farness | Off-Framework Probes] Running probing prompt...
+    Final: 48.0% (CI: 25.0-68.0)
+    Update: -20.00%
+
+============================================================
+Case: Investment Return Expectation
+============================================================
+
+[337/384] investment_return - naive - on_framework - run 1
+  [naive | On-Framework Probes] Running initial prompt...
+    Initial: 25.0% (CI: 10.0-40.0)
+  [naive | On-Framework Probes] Running probing prompt...
+    Final: 5.0% (CI: 2.0-10.0)
+    Update: -20.00%
+
+[338/384] investment_return - estimate_only - off_framework - run 1
+  [estimate_only | Off-Framework Probes] Running initial prompt...
+    Initial: 15.0% (CI: 5.0-30.0)
+  [estimate_only | Off-Framework Probes] Running probing prompt...
+    Final: 55.0% (CI: 35.0-72.0)
+    Update: +40.00%
+
+[339/384] investment_return - format_control - off_framework - run 1
+  [format_control | Off-Framework Probes] Running initial prompt...
+    Initial: 15.0% (CI: 7.0-28.0)
+  [format_control | Off-Framework Probes] Running probing prompt...
+    Final: 42.0% (CI: 28.0-58.0)
+    Update: +27.00%
+
+[340/384] investment_return - naive - off_framework - run 1
+  [naive | Off-Framework Probes] Running initial prompt...
+    Initial: 23.0% (CI: 12.0-38.0)
+  [naive | Off-Framework Probes] Running probing prompt...
+    Final: 42.0% (CI: 33.0-52.0)
+    Update: +19.00%
+
+[341/384] investment_return - estimate_only - on_framework - run 1
+  [estimate_only | On-Framework Probes] Running initial prompt...
+    Initial: 15.0% (CI: 5.0-30.0)
+  [estimate_only | On-Framework Probes] Running probing prompt...
+    Final: 5.0% (CI: 2.0-12.0)
+    Update: -10.00%
+
+[342/384] investment_return - farness - off_framework - run 1
+  [farness | Off-Framework Probes] Running initial prompt...
+    Initial: 18.0% (CI: 8.0-32.0)
+  [farness | Off-Framework Probes] Running probing prompt...
+    Final: 42.0% (CI: 25.0-58.0)
+    Update: +24.00%
+
+[343/384] investment_return - format_control - on_framework - run 1
+  [format_control | On-Framework Probes] Running initial prompt...
+    Initial: 22.0% (CI: 10.0-38.0)
+  [format_control | On-Framework Probes] Running probing prompt...
+    Final: 6.0% (CI: 2.0-14.0)
+    Update: -16.00%
+
+[344/384] investment_return - farness - on_framework - run 1
+  [farness | On-Framework Probes] Running initial prompt...
+    Initial: 15.0% (CI: 5.0-30.0)
+  [farness | On-Framework Probes] Running probing prompt...
+    Final: 6.0% (CI: 2.0-12.0)
+    Update: -9.00%
+
+[345/384] investment_return - estimate_only - off_framework - run 2
+  [estimate_only | Off-Framework Probes] Running initial prompt...
+    Initial: 15.0% (CI: 5.0-30.0)
+  [estimate_only | Off-Framework Probes] Running probing prompt...
+    Final: 42.0% (CI: 25.0-60.0)
+    Update: +27.00%
+
+[346/384] investment_return - estimate_only - on_framework - run 2
+  [estimate_only | On-Framework Probes] Running initial prompt...
+    Initial: 15.0% (CI: 5.0-30.0)
+  [estimate_only | On-Framework Probes] Running probing prompt...
+    Final: 4.5% (CI: 1.5-10.0)
+    Update: -10.50%
+
+[347/384] investment_return - naive - off_framework - run 2
+  [naive | Off-Framework Probes] Running initial prompt...
+    Initial: 20.0% (CI: 10.0-35.0)
+  [naive | Off-Framework Probes] Running probing prompt...
+    Final: 48.0% (CI: 35.0-62.0)
+    Update: +28.00%
+
+[348/384] investment_return - farness - on_framework - run 2
+  [farness | On-Framework Probes] Running initial prompt...
+    Initial: 15.0% (CI: 5.0-30.0)
+  [farness | On-Framework Probes] Running probing prompt...
+    Final: 4.0% (CI: 1.0-10.0)
+    Update: -11.00%
+
+[349/384] investment_return - format_control - off_framework - run 2
+  [format_control | Off-Framework Probes] Running initial prompt...
+    Initial: 18.0% (CI: 8.0-32.0)
+  [format_control | Off-Framework Probes] Running probing prompt...
+    Final: 42.0% (CI: 28.0-58.0)
+    Update: +24.00%
+
+[350/384] investment_return - naive - on_framework - run 2
+  [naive | On-Framework Probes] Running initial prompt...
+    Initial: 18.0% (CI: 8.0-35.0)
+  [naive | On-Framework Probes] Running probing prompt...
+    Final: 7.0% (CI: 3.0-14.0)
+    Update: -11.00%
+
+[351/384] investment_return - format_control - on_framework - run 2
+  [format_control | On-Framework Probes] Running initial prompt...
+    Initial: 20.0% (CI: 8.0-35.0)
+  [format_control | On-Framework Probes] Running probing prompt...
+    Final: 7.0% (CI: 2.0-15.0)
+    Update: -13.00%
+
+[352/384] investment_return - farness - off_framework - run 2
+  [farness | Off-Framework Probes] Running initial prompt...
+    Initial: 15.0% (CI: 5.0-30.0)
+  [farness | Off-Framework Probes] Running probing prompt...
+    Final: 40.0% (CI: 25.0-55.0)
+    Update: +25.00%
+
+[353/384] investment_return - format_control - off_framework - run 3
+  [format_control | Off-Framework Probes] Running initial prompt...
+    Initial: 20.0% (CI: 10.0-35.0)
+  [format_control | Off-Framework Probes] Running probing prompt...
+    Final: 50.0% (CI: 35.0-65.0)
+    Update: +30.00%
+
+[354/384] investment_return - naive - on_framework - run 3
+  [naive | On-Framework Probes] Running initial prompt...
+    Initial: 18.0% (CI: 8.0-35.0)
+  [naive | On-Framework Probes] Running probing prompt...
+    Final: 6.0% (CI: 2.0-12.0)
+    Update: -12.00%
+
+[355/384] investment_return - farness - on_framework - run 3
+  [farness | On-Framework Probes] Running initial prompt...
+    Initial: 15.0% (CI: 5.0-30.0)
+  [farness | On-Framework Probes] Running probing prompt...
+    Final: 8.0% (CI: 3.0-15.0)
+    Update: -7.00%
+
+[356/384] investment_return - farness - off_framework - run 3
+  [farness | Off-Framework Probes] Running initial prompt...
+    Initial: 15.0% (CI: 5.0-30.0)
+  [farness | Off-Framework Probes] Running probing prompt...
+    Final: 48.0% (CI: 30.0-65.0)
+    Update: +33.00%
+
+[357/384] investment_return - estimate_only - on_framework - run 3
+  [estimate_only | On-Framework Probes] Running initial prompt...
+    Initial: 15.0% (CI: 5.0-30.0)
+  [estimate_only | On-Framework Probes] Running probing prompt...
+    Final: 4.5% (CI: 1.5-10.0)
+    Update: -10.50%
+
+[358/384] investment_return - format_control - on_framework - run 3
+  [format_control | On-Framework Probes] Running initial prompt...
+    Initial: 15.0% (CI: 5.0-30.0)
+  [format_control | On-Framework Probes] Running probing prompt...
+    Final: 6.0% (CI: 2.0-15.0)
+    Update: -9.00%
+
+[359/384] investment_return - naive - off_framework - run 3
+  [naive | Off-Framework Probes] Running initial prompt...
+    Initial: 20.0% (CI: 8.0-35.0)
+  [naive | Off-Framework Probes] Running probing prompt...
+    Final: 62.0% (CI: 48.0-75.0)
+    Update: +42.00%
+
+[360/384] investment_return - estimate_only - off_framework - run 3
+  [estimate_only | Off-Framework Probes] Running initial prompt...
+    Initial: 15.0% (CI: 5.0-30.0)
+  [estimate_only | Off-Framework Probes] Running probing prompt...
+    Final: 48.0% (CI: 30.0-65.0)
+    Update: +33.00%
+
+[361/384] investment_return - format_control - on_framework - run 4
+  [format_control | On-Framework Probes] Running initial prompt...
+    Initial: 15.0% (CI: 8.0-28.0)
+  [format_control | On-Framework Probes] Running probing prompt...
+    Final: 9.0% (CI: 4.0-18.0)
+    Update: -6.00%
+
+[362/384] investment_return - farness - on_framework - run 4
+  [farness | On-Framework Probes] Running initial prompt...
+    Initial: 20.0% (CI: 8.0-35.0)
+  [farness | On-Framework Probes] Running probing prompt...
+    Final: 5.0% (CI: 1.5-12.0)
+    Update: -15.00%
+
+[363/384] investment_return - format_control - off_framework - run 4
+  [format_control | Off-Framework Probes] Running initial prompt...
+    Initial: 18.0% (CI: 8.0-32.0)
+  [format_control | Off-Framework Probes] Running probing prompt...
+    Final: 7.0% (CI: 3.0-14.0)
+    Update: -11.00%
+
+[364/384] investment_return - estimate_only - on_framework - run 4
+  [estimate_only | On-Framework Probes] Running initial prompt...
+    Initial: 15.0% (CI: 5.0-30.0)
+  [estimate_only | On-Framework Probes] Running probing prompt...
+    Final: 4.0% (CI: 1.0-10.0)
+    Update: -11.00%
+
+[365/384] investment_return - naive - off_framework - run 4
+  [naive | Off-Framework Probes] Running initial prompt...
+    Initial: 20.0% (CI: 10.0-35.0)
+  [naive | Off-Framework Probes] Running probing prompt...
+    Final: 58.0% (CI: 42.0-72.0)
+    Update: +38.00%
+
+[366/384] investment_return - estimate_only - off_framework - run 4
+  [estimate_only | Off-Framework Probes] Running initial prompt...
+    Initial: 15.0% (CI: 5.0-30.0)
+  [estimate_only | Off-Framework Probes] Running probing prompt...
+    Final: 50.0% (CI: 32.0-68.0)
+    Update: +35.00%
+
+[367/384] investment_return - naive - on_framework - run 4
+  [naive | On-Framework Probes] Running initial prompt...
+    Initial: 18.0% (CI: 8.0-35.0)
+  [naive | On-Framework Probes] Running probing prompt...
+    Final: 5.0% (CI: 2.0-12.0)
+    Update: -13.00%
+
+[368/384] investment_return - farness - off_framework - run 4
+  [farness | Off-Framework Probes] Running initial prompt...
+    Initial: 15.0% (CI: 5.0-30.0)
+  [farness | Off-Framework Probes] Running probing prompt...
+    Final: 45.0% (CI: 28.0-65.0)
+    Update: +30.00%
+
+[369/384] investment_return - farness - off_framework - run 5
+  [farness | Off-Framework Probes] Running initial prompt...
+    Initial: 15.0% (CI: 5.0-30.0)
+  [farness | Off-Framework Probes] Running probing prompt...
+    Final: 52.0% (CI: 35.0-70.0)
+    Update: +37.00%
+
+[370/384] investment_return - farness - on_framework - run 5
+  [farness | On-Framework Probes] Running initial prompt...
+    Initial: 21.0% (CI: 8.0-38.0)
+  [farness | On-Framework Probes] Running probing prompt...
+    Final: 5.0% (CI: 1.5-12.0)
+    Update: -16.00%
+
+[371/384] investment_return - estimate_only - off_framework - run 5
+  [estimate_only | Off-Framework Probes] Running initial prompt...
+    Initial: 15.0% (CI: 5.0-30.0)
+  [estimate_only | Off-Framework Probes] Running probing prompt...
+    Final: 42.0% (CI: 28.0-58.0)
+    Update: +27.00%
+
+[372/384] investment_return - format_control - off_framework - run 5
+  [format_control | Off-Framework Probes] Running initial prompt...
+    Initial: 17.0% (CI: 8.0-28.0)
+  [format_control | Off-Framework Probes] Running probing prompt...
+    Final: 5.0% (CI: 2.0-10.0)
+    Update: -12.00%
+
+[373/384] investment_return - naive - off_framework - run 5
+  [naive | Off-Framework Probes] Running initial prompt...
+    Initial: 18.0% (CI: 8.0-30.0)
+  [naive | Off-Framework Probes] Running probing prompt...
+    Final: 9.0% (CI: 5.0-14.0)
+    Update: -9.00%
+
+[374/384] investment_return - format_control - on_framework - run 5
+  [format_control | On-Framework Probes] Running initial prompt...
+    Initial: 20.0% (CI: 8.0-35.0)
+  [format_control | On-Framework Probes] Running probing prompt...
+    Final: 7.0% (CI: 2.0-15.0)
+    Update: -13.00%
+
+[375/384] investment_return - naive - on_framework - run 5
+  [naive | On-Framework Probes] Running initial prompt...
+    Initial: 20.0% (CI: 10.0-35.0)
+  [naive | On-Framework Probes] Running probing prompt...
+    Final: 5.0% (CI: 2.0-10.0)
+    Update: -15.00%
+
+[376/384] investment_return - estimate_only - on_framework - run 5
+  [estimate_only | On-Framework Probes] Running initial prompt...
+    Initial: 15.0% (CI: 5.0-30.0)
+  [estimate_only | On-Framework Probes] Running probing prompt...
+    Final: 5.0% (CI: 1.5-12.0)
+    Update: -10.00%
+
+[377/384] investment_return - naive - on_framework - run 6
+  [naive | On-Framework Probes] Running initial prompt...
+    Initial: 15.0% (CI: 7.0-28.0)
+  [naive | On-Framework Probes] Running probing prompt...
+    Final: 5.0% (CI: 2.0-10.0)
+    Update: -10.00%
+
+[378/384] investment_return - farness - on_framework - run 6
+  [farness | On-Framework Probes] Running initial prompt...
+    Initial: 15.0% (CI: 5.0-30.0)
+  [farness | On-Framework Probes] Running probing prompt...
+    Final: 4.0% (CI: 1.5-10.0)
+    Update: -11.00%
+
+[379/384] investment_return - format_control - off_framework - run 6
+  [format_control | Off-Framework Probes] Running initial prompt...
+    Initial: 18.0% (CI: 8.0-30.0)
+  [format_control | Off-Framework Probes] Running probing prompt...
+    Final: 7.0% (CI: 3.0-14.0)
+    Update: -11.00%
+
+[380/384] investment_return - naive - off_framework - run 6
+  [naive | Off-Framework Probes] Running initial prompt...
+    Initial: 19.0% (CI: 10.0-30.0)
+  [naive | Off-Framework Probes] Running probing prompt...
+    Final: 8.0% (CI: 4.0-13.0)
+    Update: -11.00%
+
+[381/384] investment_return - format_control - on_framework - run 6
+  [format_control | On-Framework Probes] Running initial prompt...
+    Initial: 18.0% (CI: 8.0-30.0)
+  [format_control | On-Framework Probes] Running probing prompt...
+    Final: 7.0% (CI: 2.0-15.0)
+    Update: -11.00%
+
+[382/384] investment_return - estimate_only - on_framework - run 6
+  [estimate_only | On-Framework Probes] Running initial prompt...
+    Initial: 15.0% (CI: 5.0-30.0)
+  [estimate_only | On-Framework Probes] Running probing prompt...
+    Final: 4.0% (CI: 1.5-10.0)
+    Update: -11.00%
+
+[383/384] investment_return - farness - off_framework - run 6
+  [farness | Off-Framework Probes] Running initial prompt...
+    Initial: 20.0% (CI: 10.0-35.0)
+  [farness | Off-Framework Probes] Running probing prompt...
+    Final: 50.0% (CI: 35.0-65.0)
+    Update: +30.00%
+
+[384/384] investment_return - estimate_only - off_framework - run 6
+  [estimate_only | Off-Framework Probes] Running initial prompt...
+    Initial: 15.0% (CI: 5.0-30.0)
+  [estimate_only | Off-Framework Probes] Running probing prompt...
+    Final: 48.0% (CI: 32.0-65.0)
+    Update: +33.00%
+
+[Experiment metadata]
+  Random seed: 2111785411
+  Randomize order: True

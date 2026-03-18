@@ -1,0 +1,22 @@
+{
+  "case_id": "hiring_success",
+  "condition": "estimate_only",
+  "probe_battery": "on_framework",
+  "model": "claude-opus-4-6",
+  "initial_estimate": 30.0,
+  "initial_ci": [
+    15.0,
+    45.0
+  ],
+  "final_estimate": 18.0,
+  "final_ci": [
+    8.0,
+    30.0
+  ],
+  "update_magnitude": 12.0,
+  "update_direction": "down",
+  "relative_update": 0.4,
+  "had_initial_ci": true,
+  "initial_response_text": "```json\n{\"estimate\": 30, \"ci_low\": 15, \"ci_high\": 45}\n```",
+  "final_response_text": "I need to revise my estimate based on the follow-up information about predictive validity of different hiring signals.\n\n**Original scenario context:** A hiring decision where there's a conflict between:\n- Strong interview chemistry / \"reminded me of our best performer\" impression\n- A technical assessment score (presumably lower or middling)\n\n**Original estimate:** 30.0% (CI: 15.0-45.0) \u2014 likely estimating the probability that this candidate will be a successful hire.\n\n**Reassessing with the new information:**\n\n1. **Unstructured interview impressions correlate r=0.14 with job performance** \u2014 This dramatically reduces the weight we should place on the positive interview impression. The \"great chemistry\" signal is nearly noise.\n\n2. **\"Reminded me of our best performer\" is similarity bias** \u2014 This further invalidates the primary positive signal. It's not even a genuine unstructured interview assessment; it's a cognitive bias masquerading as evaluation.\n\n3. **Technical assessment has r=0.51 correlation** \u2014 This is the most valid predictor available, and it's 4x more predictive than the interview impression. If the technical assessment was weak/mediocre (which seems implied by the conflict), we should weight this heavily downward.\n\nThe original 30% estimate was likely already somewhat skeptical of the interview-driven enthusiasm. But given that:\n- The positive signal (interview chemistry) is essentially invalid (r=0.14 + similarity bias)\n- The technical assessment (presumably unfavorable) is far more predictive (r=0.51)\n- We should be anchoring almost entirely on the technical assessment result\n\nThe estimate should decrease meaningfully. The interview impression should be nearly discounted entirely, and the technical assessment (which apparently wasn't strong) should dominate the prediction.\n\nI'll revise downward from 30% to approximately 18%, reflecting that the only valid predictor (technical assessment) was apparently unfavorable.\n\n```json\n{\"estimate\": 18.0, \"ci_low\": 8.0, \"ci_high\": 30.0}\n```"
+}

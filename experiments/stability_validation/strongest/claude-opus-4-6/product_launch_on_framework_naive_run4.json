@@ -1,0 +1,22 @@
+{
+  "case_id": "product_launch",
+  "condition": "naive",
+  "probe_battery": "on_framework",
+  "model": "claude-opus-4-6",
+  "initial_estimate": 25.0,
+  "initial_ci": [
+    10.0,
+    45.0
+  ],
+  "final_estimate": 17.0,
+  "final_ci": [
+    5.0,
+    30.0
+  ],
+  "update_magnitude": 8.0,
+  "update_direction": "down",
+  "relative_update": 0.32,
+  "had_initial_ci": true,
+  "initial_response_text": "## Reasoning\n\nLet me think through the base rates and evidence here:\n\n**Positive signals:**\n- Internal testing went well\n- Team is excited\n- Beta users gave positive feedback with NPS of 45 (good, but not exceptional \u2014 world-class is 50+)\n\n**Reasons for caution:**\n- Beta users are self-selected and typically more enthusiastic than the general user base\n- \"10% increase in overall product engagement\" is a high bar \u2014 this is a single feature moving a product-wide metric\n- Most launched features don't move top-line engagement metrics by 10%+ (base rate for any single feature having this impact is probably 10-20%)\n- Internal excitement and good testing are weak signals \u2014 teams are almost always excited about their own features\n- There's a gap between \"users like it\" (NPS 45) and \"it changes user behavior enough to move aggregate engagement 10%\"\n- NPS of 45 is solid but not extraordinary \u2014 it suggests the feature is well-received but not a game-changer\n\n**Base rate reasoning:**\n- Most product features, even well-received ones, have modest impact on overall engagement (1-5% is more typical for a successful feature)\n- Perhaps 15-25% of features that test well in beta actually hit ambitious engagement targets at full scale\n- Selection effects in beta (enthusiastic early adopters, smaller sample) often lead to regression to the mean\n\n**Adjusting from base rate:**\n- The positive signals push me up somewhat from a base rate of maybe 15%\n- But the 10% threshold is quite high for a single feature\n- I'd estimate around 25-30%\n\n**Confidence interval:**\n- This is inherently uncertain \u2014 I could see arguments for as low as 10% or as high as 50%\n- 80% CI should capture substantial uncertainty\n\n```json\n{\"estimate\": 25, \"ci_low\": 10, \"ci_high\": 45}\n```",
+  "final_response_text": "I need to revise my initial estimate of 25.0% given three pieces of follow-up information.\n\nLet me work through each piece:\n\n**1. Base rate: 20-30% of new features meaningfully move engagement metrics.**\n\nMy initial estimate of 25% already sits right in the middle of this base rate range, so this is roughly consistent. This anchors me around 25%.\n\n**2. Beta users are self-selected enthusiasts - not representative of the general user base.**\n\nThis is a significant downward adjustment factor. If the initial signals about this feature's success came from beta testing, those results are likely inflated. Self-selected enthusiasts tend to:\n- Be more engaged with any new feature\n- Give more positive feedback\n- Use features more intensively than typical users\n\nThis means whatever positive signal led to the initial 25% estimate is likely overstated. The general population will likely show lower engagement. This pushes the estimate down.\n\n**3. The team measuring success built the feature - potential bias.**\n\nThis introduces measurement/confirmation bias. Teams measuring their own features tend to:\n- Choose metrics that look favorable\n- Interpret ambiguous results positively\n- Potentially p-hack or cherry-pick time windows\n\nThis further suggests that reported positive signals are inflated, pushing the estimate down further.\n\n**Revised reasoning:**\n\nStarting from 25%, the base rate information is neutral (already aligned). The beta user bias is a meaningful downward factor - I'd adjust down by roughly 5-7 percentage points since the signal quality is compromised. The measurement bias adds another 2-3 percentage points of downward pressure.\n\nCombined adjustment: approximately -7 to -10 percentage points from the initial 25%.\n\nRevised estimate: ~17%\n\nFor the confidence interval, there's substantial uncertainty here. The base rate alone spans 20-30%, but the bias factors could push this well below 20%. I should also account for the possibility that despite the biases, the feature could genuinely work.\n\n80% CI: roughly 5% to 30%\n\n```json\n{\"estimate\": 17, \"ci_low\": 5, \"ci_high\": 30}\n```"
+}

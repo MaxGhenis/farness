@@ -1,0 +1,22 @@
+{
+  "case_id": "planning_estimate",
+  "condition": "naive",
+  "probe_battery": "on_framework",
+  "model": "gpt-5.4",
+  "initial_estimate": 2.8,
+  "initial_ci": [
+    2.0,
+    4.0
+  ],
+  "final_estimate": 8.5,
+  "final_ci": [
+    5.5,
+    12.5
+  ],
+  "update_magnitude": 5.7,
+  "update_direction": "up",
+  "relative_update": 2.035714285714286,
+  "had_initial_ci": true,
+  "initial_response_text": "Software estimates, even with confident teams and detailed breakdowns, tend to run somewhat over the nominal estimate due to integration issues, hidden dependencies, testing, and coordination overhead. A reasonable outside-view adjustment from 2 weeks is modest but upward.\n\n```json\n{\"estimate\": 2.8, \"ci_low\": 2.0, \"ci_high\": 4.0}\n```",
+  "final_response_text": "Yes \u2014 all three pieces of follow-up information push the estimate upward.\n\nReasoning, briefly:\n\n- Initial estimate: **2.8 weeks**\n- If software projects average **2\u20133x initial estimates**, a reasonable central adjustment is around **2.5x**:\n  - 2.8 \u00d7 2.5 = **7.0 weeks**\n- If team confidence is actually a **planning fallacy warning sign**, that suggests the estimate should lean somewhat higher rather than lower. I\u2019d adjust the central estimate up modestly from 7.0 to about **7.5 weeks**.\n- With a **30% chance of a major blocker**, the expected duration increases further. For example, if a blocker adds substantial delay, the expected value should rise above 7.5. A moderate adjustment gives a revised point estimate around **8.5 weeks**.\n\nFor the **80% confidence interval**:\n- Lower bound: optimistic but still accounting for the evidence, about **5.5 weeks**\n- Upper bound: allowing for overruns plus blocker risk, about **12.5 weeks**\n\n```json\n{\"estimate\": 8.5, \"ci_low\": 5.5, \"ci_high\": 12.5}\n```"
+}

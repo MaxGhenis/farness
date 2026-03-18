@@ -1,0 +1,22 @@
+{
+  "case_id": "product_launch",
+  "condition": "estimate_only",
+  "probe_battery": "off_framework",
+  "model": "claude-opus-4-6",
+  "initial_estimate": 30.0,
+  "initial_ci": [
+    15.0,
+    50.0
+  ],
+  "final_estimate": 55.0,
+  "final_ci": [
+    38.0,
+    72.0
+  ],
+  "update_magnitude": 25.0,
+  "update_direction": "up",
+  "relative_update": 0.8333333333333334,
+  "had_initial_ci": true,
+  "initial_response_text": "```json\n{\"estimate\": 30, \"ci_low\": 15, \"ci_high\": 50}\n```",
+  "final_response_text": "Looking at the follow-up information:\n\n1. **Default onboarding flow integration**: This is a major positive signal. Being in the default flow means every new user encounters it, dramatically increasing adoption compared to an opt-in or discoverable feature.\n\n2. **Automated rollout and measurement**: Low friction reduces barriers to adoption. The infrastructure is ready, so there's no operational bottleneck.\n\n3. **Three enterprise design partners committed for week one**: Enterprise deployments bring bulk users immediately, providing a strong baseline of adoption from day one.\n\nAll three pieces of evidence point strongly upward from the original 30% estimate. The default onboarding placement is particularly impactful - features placed in default flows typically see much higher engagement than optional ones. The enterprise commitments provide a floor of guaranteed adoption. The automated infrastructure removes execution risk.\n\nHowever, there are still unknowns: user retention after initial exposure, whether the feature delivers enough value to sustain usage, and whether enterprise users actually engage meaningfully vs. just having it deployed. These temper the upper bound somewhat.\n\nRevising upward significantly from 30% to around 55%, with a tighter confidence interval given the concrete commitments reducing downside risk.\n\n```json\n{\"estimate\": 55.0, \"ci_low\": 38.0, \"ci_high\": 72.0}\n```"
+}

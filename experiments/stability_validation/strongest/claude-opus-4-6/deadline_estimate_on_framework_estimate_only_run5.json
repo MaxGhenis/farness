@@ -1,0 +1,22 @@
+{
+  "case_id": "deadline_estimate",
+  "condition": "estimate_only",
+  "probe_battery": "on_framework",
+  "model": "claude-opus-4-6",
+  "initial_estimate": 82.0,
+  "initial_ci": [
+    65.0,
+    93.0
+  ],
+  "final_estimate": 22.0,
+  "final_ci": [
+    10.0,
+    38.0
+  ],
+  "update_magnitude": 60.0,
+  "update_direction": "down",
+  "relative_update": 0.7317073170731707,
+  "had_initial_ci": true,
+  "initial_response_text": "```json\n{\"estimate\": 82, \"ci_low\": 65, \"ci_high\": 93}\n```",
+  "final_response_text": "I need to revise my estimate of 82.0% downward based on the three pieces of follow-up information.\n\n**Analysis of each factor:**\n\n1. **40% on-time completion rate for regulatory compliance projects industry-wide.** This is a strong base rate that suggests my original estimate of 82% was far too optimistic. This alone would pull my estimate significantly downward.\n\n2. **The compliance team has never done this specific type of work before.** Lack of experience typically increases the risk of delays, errors, and rework. Teams new to a type of work tend to underperform the industry average, not match or exceed it.\n\n3. **Regulations are still being finalized and may change in the next 2 months.** This introduces significant scope uncertainty. If requirements change mid-project, rework is likely, timelines slip, and completion probability drops further. This is a major risk factor.\n\n**Reasoning:**\n\n- The industry base rate is 40% for on-time completion.\n- An inexperienced team would likely perform below the industry average, perhaps pulling this down to ~25-30%.\n- Regulatory uncertainty adds another layer of risk. If there's a meaningful probability (say 40-50%) that regulations change and cause rework, this further reduces the on-time probability.\n- Combining these factors: starting from 40%, adjusting down for inexperience (~30%), and further down for regulatory uncertainty (~20-25%).\n\nI'll estimate around 22%, with a wide confidence interval reflecting the significant uncertainty from all three factors.\n\n```json\n{\"estimate\": 22.0, \"ci_low\": 10.0, \"ci_high\": 38.0}\n```"
+}

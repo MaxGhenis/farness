@@ -1,0 +1,22 @@
+{
+  "case_id": "planning_estimate",
+  "condition": "naive",
+  "probe_battery": "on_framework",
+  "model": "claude-opus-4-6",
+  "initial_estimate": 3.0,
+  "initial_ci": [
+    2.0,
+    5.0
+  ],
+  "final_estimate": 7.0,
+  "final_ci": [
+    4.5,
+    12.0
+  ],
+  "update_magnitude": 4.0,
+  "update_direction": "up",
+  "relative_update": 1.3333333333333333,
+  "had_initial_ci": true,
+  "initial_response_text": "## Reasoning\n\nSoftware estimation is notoriously optimistic, even when teams feel confident and have detailed breakdowns. Empirical research on software projects (e.g., Standish Group data, Bent Flyvbjerg's work on planning fallacy) consistently shows:\n\n- **Confident teams with detailed plans** still typically underestimate by 20-50%+\n- Common overlooked factors: integration issues, code review cycles, testing edge cases, unexpected dependencies, context switching, meetings, PTO, etc.\n- The \"planning fallacy\" means inside-view estimates are systematically biased downward\n- A 2-week estimate from a confident team most commonly lands around 3 weeks in practice\n- Detailed task breakdowns help but don't eliminate the bias \u2014 they often miss integration work, rework, and the \"long tail\" of finishing touches\n\n**Point estimate:** ~3 weeks (1.5x multiplier, which is on the conservative/kind end of typical adjustment factors)\n\n**80% confidence interval:**\n- **Low end:** 2 weeks \u2014 it's possible they nailed it, especially if the work is well-understood and isolated\n- **High end:** 5 weeks \u2014 scope creep, unexpected blockers, or architectural surprises could stretch this significantly. The right tail of software estimates is fat.\n\n```json\n{\"estimate\": 3, \"ci_low\": 2, \"ci_high\": 5}\n```",
+  "final_response_text": "# Revised Estimate Analysis\n\n## Starting Point\nMy previous estimate was 3.0 weeks. Let me systematically incorporate each piece of new information.\n\n## Processing Follow-up Information\n\n### 1. Software projects average 2-3x initial estimates\nThis is a well-documented empirical finding (Standish Group, Kahneman's work on planning fallacy, etc.). If my initial estimate of 3.0 weeks is treated as a typical \"inside view\" estimate, the base rate suggests the true duration is more likely 6-9 weeks. However, not every project hits the full 3x multiplier. A reasonable reference class adjustment would apply roughly a 2x multiplier to the initial estimate, giving ~6.0 weeks.\n\n### 2. Team confidence as a warning sign (planning fallacy)\nHigh team confidence often correlates with *under*-estimation, not accuracy. Teams that feel confident are typically anchored on the best-case scenario and haven't adequately considered risks, dependencies, and unknowns. This reinforces the need for the upward adjustment and suggests I should lean toward the higher end of the 2-3x range rather than the lower end.\n\n### 3. 30% chance of a major blocker\nA major blocker (integration issue, unclear requirements) could easily add 2-4 weeks. \n\nExpected additional time from blockers: 0.30 \u00d7 ~3 weeks = ~0.9 weeks added to the expected value. But this also significantly widens the confidence interval and adds right-skew (fat tail on the upside).\n\n## Revised Estimate Calculation\n\n- Base estimate adjusted for reference class (2-2.5x): ~6.0-7.5 weeks\n- Planning fallacy correction pushes toward higher end: ~7.0 weeks\n- Expected blocker impact: +0.9 weeks \u2192 ~7.0 weeks (rounding)\n- Combined estimate: **7.0 weeks**\n\n## 80% Confidence Interval\n- **Low end (10th percentile):** Everything goes relatively smoothly, minimal scope creep, no major blockers \u2192 ~4.5 weeks\n- **High end (90th percentile):** Multiple issues compound - blocker hits, scope creep, planning fallacy in full effect \u2192 ~12.0 weeks\n\nThe distribution is right-skewed, as software projects can always take longer but rarely finish significantly faster than the optimistic case.\n\n```json\n{\"estimate\": 7.0, \"ci_low\": 4.5, \"ci_high\": 12.0}\n```"
+}

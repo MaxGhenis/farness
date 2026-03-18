@@ -1,0 +1,22 @@
+{
+  "case_id": "sunk_cost_project",
+  "condition": "estimate_only",
+  "probe_battery": "on_framework",
+  "model": "claude-opus-4-6",
+  "initial_estimate": 12.0,
+  "initial_ci": [
+    5.0,
+    25.0
+  ],
+  "final_estimate": 5.0,
+  "final_ci": [
+    1.5,
+    12.0
+  ],
+  "update_magnitude": 7.0,
+  "update_direction": "down",
+  "relative_update": 0.5833333333333334,
+  "had_initial_ci": true,
+  "initial_response_text": "```json\n{\"estimate\": 12, \"ci_low\": 5, \"ci_high\": 25}\n```",
+  "final_response_text": "I need to revise my estimate based on three significant pieces of negative information.\n\n**Starting point:** 12.0% (CI: 5.0-25.0) probability of success (presumably on-time/on-budget delivery).\n\n**Revision reasoning:**\n\n1. **Only 16% of already-troubled projects meet REVISED budgets.** This is a strong base rate. The project is already troubled enough to have revised its budget, and even against that lowered bar, only 16% succeed. This alone would push my estimate down significantly - probably to around 16% or lower since my prior was already below that.\n\n2. **Two senior engineers interviewing elsewhere.** This is a serious risk factor. Loss of key personnel during a critical phase can be devastating. Even if they haven't left yet, their engagement and productivity are likely already diminished. Senior engineers carry disproportionate knowledge and capability. This is a substantial downward pressure - maybe cutting the probability by 30-50%.\n\n3. **\"Almost there\" based on features complete but no integration testing.** This is a classic red flag in software projects. Integration testing is where hidden problems surface - interface mismatches, performance issues, race conditions, etc. The \"almost there\" claim is essentially misleading. Projects often spend as much time in integration/testing as in feature development. This significantly increases the risk of major delays and suggests the team may be underestimating remaining work.\n\n**Combined assessment:**\n- Base rate for troubled projects meeting revised budget: 16%\n- Senior engineer attrition risk: reduces probability substantially (maybe by 40-50%)\n- Integration testing not started (masking true remaining work): reduces probability substantially (maybe by another 30-40%)\n\nThese factors compound. Starting from 16% base rate:\n- After engineer attrition risk: ~16% \u00d7 0.55 \u2248 9%\n- After integration testing reality: ~9% \u00d7 0.55 \u2248 5%\n\nThis feels right - around 4-5%. The combination of a weak base rate, potential loss of key staff, and a major untested phase ahead makes success quite unlikely.\n\n```json\n{\"estimate\": 5.0, \"ci_low\": 1.5, \"ci_high\": 12.0}\n```"
+}

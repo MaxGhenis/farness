@@ -1,0 +1,22 @@
+{
+  "case_id": "deadline_estimate",
+  "condition": "naive",
+  "probe_battery": "off_framework",
+  "model": "claude-opus-4-6",
+  "initial_estimate": 80.0,
+  "initial_ci": [
+    65.0,
+    90.0
+  ],
+  "final_estimate": 52.0,
+  "final_ci": [
+    32.0,
+    68.0
+  ],
+  "update_magnitude": 28.0,
+  "update_direction": "down",
+  "relative_update": 0.35,
+  "had_initial_ci": true,
+  "initial_response_text": "## Reasoning\n\nKey factors to consider:\n\n1. **Planning fallacy**: Teams systematically underestimate how long projects take. The 4-month estimate is likely optimistic.\n\n2. **2-month buffer (50% of estimated work time)**: This is a reasonable but not generous buffer. In software/compliance projects, overruns of 50-100% are common.\n\n3. **Positive signals**: There's a detailed project plan (suggests some rigor), a dedicated compliance team, and awareness of the deadline.\n\n4. **Risk factors**: Regulatory compliance often involves external dependencies (regulators clarifying rules, third-party vendors, IT system changes), scope creep as requirements become clearer, resource competition with other priorities, and potential for discovering unexpected gaps.\n\n5. **Base rates**: Projects with ~50% buffer and detailed plans probably complete on time roughly 75-85% of the time. The detailed plan helps, but compliance work often reveals surprises.\n\n**Estimate**: The 2-month buffer on a 4-month project is decent. With a detailed plan in place, I'd put this around **80%** probability of on-time completion. The plan and buffer are good signs, but the planning fallacy and external dependencies create meaningful risk.\n\n**Confidence interval**: My uncertainty about this probability estimate itself spans roughly 65-90%. It's hard to see this going below 60% (the buffer is real) or above 92% (there's always meaningful project risk).\n\n```json\n{\"estimate\": 80, \"ci_low\": 65, \"ci_high\": 90}\n```",
+  "final_response_text": "I need to reassess the 80.0% estimate given three significant pieces of negative information.\n\n**Analyzing each factor:**\n\n1. **Critical path with no slack:** Legal sign-off, vendor configuration, and staff training are all sequential on the critical path with zero float. This means any delay in any one of these cascades directly to the deadline. This is a substantial risk factor \u2014 in project management, having multiple activities on the critical path with no buffer is a classic setup for schedule failure. This alone would drop my estimate meaningfully.\n\n2. **Compliance lead context-switching:** The key resource is split between this project and audit remediation, with peak conflict in the final eight weeks \u2014 precisely when the critical path activities are likely converging. This introduces both throughput reduction and quality/attention risks. Resource contention on critical path activities is one of the most common causes of project delay.\n\n3. **Weak escalation incentives:** A modest internal escalation for missing the deadline means teams lack urgency to flag problems early. This creates an information asymmetry problem \u2014 risks will be hidden until they're too large to mitigate. This is particularly dangerous combined with factors 1 and 2, because by the time delays surface, there's no slack to absorb them.\n\n**Interaction effects:** These three factors compound each other:\n- No slack means you need early warning to take corrective action\n- But weak incentives suppress early warning\n- And the key person is distracted during the critical period\n- So problems will emerge late, on a path with no buffer, managed by someone who is overloaded\n\n**Revised estimate:**\n\nStarting from 80%, each factor warrants a significant downward revision:\n- No slack on critical path: ~8-12 percentage point reduction\n- Resource contention: ~6-10 percentage point reduction\n- Weak incentive to surface risk: ~5-8 percentage point reduction\n\nSome of these interact (compounding), so the combined effect is probably slightly more than additive. I'd estimate the combined reduction at roughly 25-30 percentage points.\n\nRevised point estimate: ~52%\n\nFor the 80% confidence interval, there's substantial uncertainty about how these risks actually manifest. Things could go smoothly if the tasks happen to proceed without issues (upside), or multiple risks could materialize simultaneously (downside).\n\n```json\n{\"estimate\": 52, \"ci_low\": 32, \"ci_high\": 68}\n```"
+}

@@ -1,0 +1,22 @@
+{
+  "case_id": "startup_success",
+  "condition": "naive",
+  "probe_battery": "on_framework",
+  "model": "claude-opus-4-6",
+  "initial_estimate": 5.0,
+  "initial_ci": [
+    2.0,
+    12.0
+  ],
+  "final_estimate": 2.5,
+  "final_ci": [
+    0.5,
+    7.0
+  ],
+  "update_magnitude": 2.5,
+  "update_direction": "down",
+  "relative_update": 0.5,
+  "had_initial_ci": true,
+  "initial_response_text": "## Reasoning\n\nLet me think through the key signals here:\n\n**Negative signals:**\n- 18 months is a long time without traction \u2014 most successful startups show some organic growth momentum well before this point\n- 500 MAU after 18 months is very low for most categories\n- Growth is **flat** \u2014 this is the most damning signal. It's not slow growth, it's no growth. This suggests poor product-market fit.\n- The base rate for startups succeeding is already low (~10% broadly), and flat growth at 18 months is a strong negative filter\n\n**Positive signals:**\n- They have *some* users (not zero)\n- Team believes in vision and has ideas to try\n- 500 MAU means the product works for someone\n\n**The ask:** Going from 500 to 10,000 MAU = 20x growth in 12 months while persisting with the **current approach**.\n\nThe key constraint is \"current approach.\" If growth is flat at 500 MAU after 18 months with the current approach, continuing the same approach is unlikely to suddenly produce 20x growth. Growth curves for startups with PMF tend to be visible early. Flat growth for 18 months strongly suggests the current approach lacks PMF.\n\nBase rate considerations:\n- Among startups with flat growth at 18 months who persist with the same approach, I'd estimate maybe 5-8% achieve a significant breakout. But 20x in 12 months is a very high bar.\n- Some could get lucky with a viral moment, press coverage, or market shift, but these are low-probability events.\n- I'd estimate roughly 5% probability.\n\n**Confidence interval (80%):**\n- There's uncertainty in my estimate. The true probability could be as low as 1-2% (if the flat growth is truly indicative of no PMF) or as high as 10-12% (if there are hidden factors like a market about to inflect, or network effects that kick in at some threshold).\n\n```json\n{\"estimate\": 5, \"ci_low\": 2, \"ci_high\": 12}\n```",
+  "final_response_text": "I need to revise my previous estimate of 5.0% given three pieces of follow-up information.\n\n**Analyzing each piece of information:**\n\n1. **Base rate confirmation:** The ~5% base rate for sudden organic growth after 18 months of flat growth aligns with my prior estimate. This anchors the estimate around 5%, but the follow-up information is uniformly negative, suggesting I should revise downward.\n\n2. **Three failed marketing channels:** This is meaningfully negative. It suggests the founders have already exhausted obvious growth levers. Each failed attempt reduces the probability that the next attempt will work, and it may signal deeper product-market fit issues rather than just a distribution problem. This should push the estimate down notably.\n\n3. **Well-funded competitor ($10M raise):** A competitor with significant capital targeting the same market creates headwinds. This competitor can outspend on marketing, talent, and product development. For a startup already struggling with flat growth, this competitive pressure makes inflection even less likely - it could actively erode their existing base.\n\n**Revision reasoning:**\n\n- Starting from the 5% base rate\n- Failed marketing channels (3 attempts): suggests product-market fit issues, not just channel issues \u2192 reduce by ~30-40% relative\n- Competitive threat with $10M: significant headwind for an already struggling startup \u2192 reduce by another ~20-30% relative\n- Combined effect: these factors are partially correlated (all point to a challenging market position), so I shouldn't fully multiply the reductions independently, but the overall picture is clearly worse than the base rate.\n\nRevised estimate: ~5% \u00d7 0.65 \u00d7 0.75 \u2248 ~2.4%. I'll round to about 2.5%.\n\n**Confidence interval (80%):**\n- The lower bound reflects the possibility that the startup is essentially dead (near 0%)\n- The upper bound reflects the small chance that despite these signals, something unexpected happens (a pivot, acquisition interest, market shift)\n- 80% CI: roughly 0.5% to 7%\n\n```json\n{\"estimate\": 2.5, \"ci_low\": 0.5, \"ci_high\": 7.0}\n```"
+}

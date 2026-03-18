@@ -1,0 +1,22 @@
+{
+  "case_id": "planning_estimate",
+  "condition": "naive",
+  "probe_battery": "off_framework",
+  "model": "gpt-5.4",
+  "initial_estimate": 2.8,
+  "initial_ci": [
+    2.0,
+    4.5
+  ],
+  "final_estimate": 5.5,
+  "final_ci": [
+    3.5,
+    8.5
+  ],
+  "update_magnitude": 2.7,
+  "update_direction": "up",
+  "relative_update": 0.9642857142857144,
+  "had_initial_ci": true,
+  "initial_response_text": "Software estimates tend to be optimistic even with detailed breakdowns, but confidence and decomposition do improve accuracy. A reasonable outside-view adjustment is a modest uplift from 2 weeks rather than a dramatic one.\n\n```json\n{\"estimate\": 2.8, \"ci_low\": 2.0, \"ci_high\": 4.5}\n```",
+  "final_response_text": "The new information increases both expected duration and uncertainty:\n\n- **External API dependency with no committed date**: this is the biggest risk driver. It adds schedule uncertainty and likely waiting time.\n- **Senior engineer vacation during integration**: reduces capacity exactly when coordination/integration risk is highest, making delays more likely.\n- **Fixed rollout window with monthly slip**: if the work misses the demo window, effective delivery jumps by about another month, which skews the estimate upward.\n\nStarting from **2.8 weeks**, I\u2019d revise upward substantially because this is no longer just implementation effort; it now includes meaningful dependency and calendar risk. A reasonable revised point estimate is **5.5 weeks**.\n\nFor an **80% confidence interval**, I\u2019d widen it significantly to reflect:\n- some chance the API is ready soon and the team works around the vacation,\n- but also a material chance of missing the demo window and slipping close to a month.\n\nSo an 80% CI of **3.5 to 8.5 weeks** is reasonable.\n\n```json\n{\"estimate\": 5.5, \"ci_low\": 3.5, \"ci_high\": 8.5}\n```"
+}

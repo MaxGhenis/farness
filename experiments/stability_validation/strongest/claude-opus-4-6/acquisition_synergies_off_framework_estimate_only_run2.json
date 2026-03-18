@@ -1,0 +1,22 @@
+{
+  "case_id": "acquisition_synergies",
+  "condition": "estimate_only",
+  "probe_battery": "off_framework",
+  "model": "claude-opus-4-6",
+  "initial_estimate": 45.0,
+  "initial_ci": [
+    30.0,
+    60.0
+  ],
+  "final_estimate": 68.0,
+  "final_ci": [
+    52.0,
+    82.0
+  ],
+  "update_magnitude": 23.0,
+  "update_direction": "up",
+  "relative_update": 0.5111111111111111,
+  "had_initial_ci": true,
+  "initial_response_text": "```json\n{\"estimate\": 45, \"ci_low\": 30, \"ci_high\": 60}\n```",
+  "final_response_text": "Looking at the three follow-up pieces of information:\n\n1. **Shared ERP and suppliers** - This dramatically reduces integration risk on the cost synergy side. Systems integration is typically one of the biggest sources of delay and failure in M&A. This removes that obstacle.\n\n2. **Aligned sales compensation from day one** - This addresses the most common revenue synergy killer: misaligned incentives. When sales teams aren't motivated to cross-sell or collaborate, revenue synergies evaporate. Having combined account revenue compensation from day one is a strong positive signal.\n\n3. **Experienced integration PMO with track record** - A dedicated PMO that has already done two similar bolt-on acquisitions successfully suggests organizational learning, established playbooks, and realistic planning. This significantly de-risks execution.\n\nAll three factors are strongly positive and address the most common failure modes in M&A integration (systems incompatibility, cultural/incentive misalignment, and poor execution management). Each independently would push the estimate upward, and together they substantially reduce downside risk.\n\nI'm revising upward significantly from 45% and also tightening the confidence interval since many of the key uncertainties have been resolved favorably.\n\n```json\n{\"estimate\": 68.0, \"ci_low\": 52.0, \"ci_high\": 82.0}\n```"
+}

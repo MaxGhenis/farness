@@ -1,0 +1,22 @@
+{
+  "case_id": "investment_return",
+  "condition": "estimate_only",
+  "probe_battery": "on_framework",
+  "model": "claude-opus-4-6",
+  "initial_estimate": 15.0,
+  "initial_ci": [
+    5.0,
+    30.0
+  ],
+  "final_estimate": 4.5,
+  "final_ci": [
+    1.5,
+    10.0
+  ],
+  "update_magnitude": 10.5,
+  "update_direction": "down",
+  "relative_update": 0.7,
+  "had_initial_ci": true,
+  "initial_response_text": "```json\n{\"estimate\": 15, \"ci_low\": 5, \"ci_high\": 30}\n```",
+  "final_response_text": "The follow-up information suggests the probability of a good outcome (presumably returning 2x+ or some meaningful positive return) should be lower than my initial estimate of 15%.\n\nKey considerations:\n- Base rate of 2x+ returns is only ~5%\n- The \"friends and family\" discount may not be real, removing a key potential advantage\n- The person offering has misaligned incentives, which could mean adverse selection (they're pushing harder because the deal is weaker)\n\nThese three factors all push downward from my initial 15% estimate. The base rate alone suggests ~5%, and the additional negative signals (no real discount, incentive misalignment) could push it even lower. However, there's some chance the startup is legitimate and does well, so I shouldn't go too far below the base rate.\n\nI'll revise down significantly, centering around 5% or slightly below given the additional negative factors.\n\n```json\n{\"estimate\": 4.5, \"ci_low\": 1.5, \"ci_high\": 10.0}\n```"
+}

@@ -1,0 +1,22 @@
+{
+  "case_id": "planning_estimate",
+  "condition": "estimate_only",
+  "probe_battery": "on_framework",
+  "model": "claude-opus-4-6",
+  "initial_estimate": 3.0,
+  "initial_ci": [
+    2.0,
+    5.0
+  ],
+  "final_estimate": 6.5,
+  "final_ci": [
+    4.0,
+    11.0
+  ],
+  "update_magnitude": 3.5,
+  "update_direction": "up",
+  "relative_update": 1.1666666666666667,
+  "had_initial_ci": true,
+  "initial_response_text": "```json\n{\"estimate\": 3.0, \"ci_low\": 2.0, \"ci_high\": 5.0}\n```",
+  "final_response_text": "Looking at the three follow-up pieces of information:\n\n1. **2-3x multiplier on software estimates**: My initial estimate of 3.0 weeks should be treated as a base case subject to this systematic bias. Applying even a conservative 1.5-2x multiplier to account for this well-documented phenomenon pushes the estimate to 4.5-6.0 weeks.\n\n2. **Planning fallacy / overconfidence**: The team's confidence is actually a negative signal. Confident teams tend to underestimate more severely because they discount potential complications. This reinforces the need for an upward adjustment and widens the confidence interval, particularly on the upper end.\n\n3. **30% chance of major blocker**: A major blocker (integration issue, unclear requirements) could easily add 2-4 weeks. Expected value contribution: 0.30 \u00d7 ~3 weeks = ~0.9 weeks additional. But more importantly, this fattens the right tail of the distribution significantly.\n\n**Revised reasoning:**\n- Base estimate adjusted for bias: ~3.0 \u00d7 2.0 = 6.0 weeks (using 2x as a reasonable central multiplier given the planning fallacy signal)\n- Adding expected blocker impact: ~6.0 + 0.9 \u2248 6.5 weeks\n- The CI should be wide and right-skewed: the lower bound assumes things go relatively smoothly (maybe ~4 weeks), while the upper bound accounts for compounding delays (blockers + estimation bias + scope creep \u2192 11+ weeks)\n\n```json\n{\"estimate\": 6.5, \"ci_low\": 4.0, \"ci_high\": 11.0}\n```"
+}

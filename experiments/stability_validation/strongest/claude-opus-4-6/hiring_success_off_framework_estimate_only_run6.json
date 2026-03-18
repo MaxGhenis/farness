@@ -1,0 +1,22 @@
+{
+  "case_id": "hiring_success",
+  "condition": "estimate_only",
+  "probe_battery": "off_framework",
+  "model": "claude-opus-4-6",
+  "initial_estimate": 30.0,
+  "initial_ci": [
+    15.0,
+    45.0
+  ],
+  "final_estimate": 62.0,
+  "final_ci": [
+    48.0,
+    76.0
+  ],
+  "update_magnitude": 32.0,
+  "update_direction": "up",
+  "relative_update": 1.0666666666666667,
+  "had_initial_ci": true,
+  "initial_response_text": "```json\n{\"estimate\": 30, \"ci_low\": 15, \"ci_high\": 45}\n```",
+  "final_response_text": "Looking at the follow-up information:\n\n1. **Cross-functional leadership shift + better stakeholder simulation**: This strongly favors Candidate A, as the role now prioritizes exactly the skills where A excels.\n\n2. **Reserved candidate higher technically but poor at explaining tradeoffs**: This weakens the reserved candidate's case significantly - technical depth matters less if you can't communicate it effectively in a leadership role.\n\n3. **Urgent need to rebuild trust with product and sales**: This is a critical contextual factor that heavily favors Candidate A's interpersonal and stakeholder management strengths.\n\nAll three pieces of information point in the same direction - they collectively and substantially increase the likelihood of whatever outcome was being estimated (presumably Candidate A being selected or succeeding in the role).\n\nStarting from the prior of 30.0%, each factor pushes the estimate upward considerably:\n- The role redefinition toward cross-functional leadership aligns with A's strengths\n- The reserved candidate's communication weakness is a significant liability for this type of role\n- The urgent trust-rebuilding need is almost a dealbreaker for someone who struggles in stakeholder interactions\n\nThese factors are strongly correlated in their directional push, so I'd revise substantially upward, but not to near-certainty since technical depth still matters and there could be other candidates or considerations.\n\n```json\n{\"estimate\": 62.0, \"ci_low\": 48.0, \"ci_high\": 76.0}\n```"
+}

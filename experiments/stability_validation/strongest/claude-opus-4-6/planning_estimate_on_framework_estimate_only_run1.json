@@ -1,0 +1,22 @@
+{
+  "case_id": "planning_estimate",
+  "condition": "estimate_only",
+  "probe_battery": "on_framework",
+  "model": "claude-opus-4-6",
+  "initial_estimate": 3.0,
+  "initial_ci": [
+    2.0,
+    5.0
+  ],
+  "final_estimate": 6.5,
+  "final_ci": [
+    4.0,
+    12.0
+  ],
+  "update_magnitude": 3.5,
+  "update_direction": "up",
+  "relative_update": 1.1666666666666667,
+  "had_initial_ci": true,
+  "initial_response_text": "```json\n{\"estimate\": 3.0, \"ci_low\": 2.0, \"ci_high\": 5.0}\n```",
+  "final_response_text": "Looking at the three follow-up points:\n\n1. **2-3x multiplier on initial estimates**: My original estimate of 3.0 weeks was already somewhat adjusted from what might have been the team's raw estimate. Applying even a conservative multiplier suggests the true duration is likely higher. A 2x factor on the original 3.0 would give 6.0 weeks.\n\n2. **Planning fallacy / team confidence as warning sign**: High team confidence often correlates with underestimation, not accuracy. This reinforces the need to shift the estimate upward and widen the confidence interval, particularly on the right tail.\n\n3. **30% chance of major blocker**: This creates a bimodal risk. If no blocker, maybe 4-5 weeks is realistic (with the 2x adjustment). If a blocker hits, we could be looking at 8-12+ weeks. The expected value contribution from this: 0.7 \u00d7 ~5 + 0.3 \u00d7 ~10 = 3.5 + 3.0 = 6.5 weeks.\n\nCombining all three factors:\n- The base estimate shifts from 3.0 to roughly 6.0-7.0 weeks\n- The confidence interval needs to be substantially wider, especially on the upper end\n- The lower bound can't really go below ~3.5 weeks (best case: no blockers, things go smoothly despite planning fallacy)\n- The upper bound should reflect blocker scenarios: 12+ weeks\n\nI'll set the revised estimate at ~6.5 weeks with a wide rightward-skewed CI.\n\n```json\n{\"estimate\": 6.5, \"ci_low\": 4.0, \"ci_high\": 12.0}\n```"
+}

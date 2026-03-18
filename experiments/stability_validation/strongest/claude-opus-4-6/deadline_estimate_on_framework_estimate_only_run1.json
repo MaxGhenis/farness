@@ -1,0 +1,22 @@
+{
+  "case_id": "deadline_estimate",
+  "condition": "estimate_only",
+  "probe_battery": "on_framework",
+  "model": "claude-opus-4-6",
+  "initial_estimate": 82.0,
+  "initial_ci": [
+    65.0,
+    93.0
+  ],
+  "final_estimate": 22.0,
+  "final_ci": [
+    10.0,
+    38.0
+  ],
+  "update_magnitude": 60.0,
+  "update_direction": "down",
+  "relative_update": 0.7317073170731707,
+  "had_initial_ci": true,
+  "initial_response_text": "```json\n{\"estimate\": 82, \"ci_low\": 65, \"ci_high\": 93}\n```",
+  "final_response_text": "I need to revise my estimate of 82.0% downward based on three significant pieces of negative information.\n\n**Analyzing each piece of follow-up information:**\n\n1. **40% on-time completion rate for regulatory compliance projects**: This is a strong base rate that suggests these projects are notoriously difficult to complete on time. My prior of 82% was far too optimistic relative to this base rate.\n\n2. **Team has never done this specific type of work before**: Lack of experience adds significant risk. Teams without relevant experience typically perform worse than the industry average, not better. This would push the estimate below the 40% base rate.\n\n3. **Regulations still being finalized and may change**: This is a major risk factor. If the target itself is moving, the project may need rework or face delays. This introduces substantial additional uncertainty and further reduces the likelihood of on-time completion.\n\n**Revision reasoning:**\n\n- Starting from the 40% industry base rate\n- Team inexperience would push this down, perhaps to ~25-30%\n- Changing regulations add another layer of risk, pushing further down to ~20-25%\n- These factors compound: an inexperienced team dealing with changing requirements is a particularly bad combination\n\nI'll estimate around 22%, with wide confidence intervals given the high uncertainty from the still-changing regulations.\n\n```json\n{\"estimate\": 22.0, \"ci_low\": 10.0, \"ci_high\": 38.0}\n```"
+}

@@ -1,0 +1,22 @@
+{
+  "case_id": "product_launch",
+  "condition": "estimate_only",
+  "probe_battery": "on_framework",
+  "model": "claude-opus-4-6",
+  "initial_estimate": 30.0,
+  "initial_ci": [
+    15.0,
+    50.0
+  ],
+  "final_estimate": 20.0,
+  "final_ci": [
+    8.0,
+    35.0
+  ],
+  "update_magnitude": 10.0,
+  "update_direction": "down",
+  "relative_update": 0.3333333333333333,
+  "had_initial_ci": true,
+  "initial_response_text": "```json\n{\"estimate\": 30, \"ci_low\": 15, \"ci_high\": 50}\n```",
+  "final_response_text": "Looking at the follow-up information:\n\n1. **Base rate of 20-30%** for new features meaningfully moving engagement metrics - this anchors my estimate downward from 30% since the base rate itself is already at or below my prior estimate.\n\n2. **Beta user self-selection bias** - Beta users are enthusiasts who are more likely to engage positively with any new feature. The positive signals from beta testing are therefore inflated and not representative of general user behavior. This is a significant downward adjustment factor.\n\n3. **Team measuring its own success** - This introduces confirmation bias in how metrics are collected, interpreted, and reported. Positive results may be overstated, negative signals downplayed. Another downward adjustment.\n\n**Reasoning through the adjustment:**\n- Starting from the base rate of ~25% (midpoint of 20-30%)\n- The beta user enthusiasm bias means whatever positive evidence we have is weaker than it appears - this should push us below the base rate or at least not above it\n- The self-measurement bias further undermines confidence in positive signals\n- Combined, these two biases suggest the evidence supporting success is less reliable than it appears, pushing the estimate toward the lower end of the base rate or below\n\nI'd revise downward from my original 30% to roughly 18-20%, reflecting that the base rate is 20-30% but the evidence we have for this particular feature being successful is contaminated by two significant biases.\n\n```json\n{\"estimate\": 20.0, \"ci_low\": 8.0, \"ci_high\": 35.0}\n```"
+}

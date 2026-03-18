@@ -1,0 +1,22 @@
+{
+  "case_id": "hiring_success",
+  "condition": "estimate_only",
+  "probe_battery": "off_framework",
+  "model": "claude-opus-4-6",
+  "initial_estimate": 30.0,
+  "initial_ci": [
+    15.0,
+    45.0
+  ],
+  "final_estimate": 72.0,
+  "final_ci": [
+    58.0,
+    85.0
+  ],
+  "update_magnitude": 42.0,
+  "update_direction": "up",
+  "relative_update": 1.4,
+  "had_initial_ci": true,
+  "initial_response_text": "```json\n{\"estimate\": 30, \"ci_low\": 15, \"ci_high\": 45}\n```",
+  "final_response_text": "Looking at the follow-up information:\n\n1. **Cross-functional leadership shift** + **Candidate A excelled in stakeholder simulation**: This strongly favors Candidate A, as the role now emphasizes exactly the skills where A demonstrated strength.\n\n2. **Reserved candidate scored higher technically but struggled explaining tradeoffs**: Technical superiority is offset by inability to communicate effectively in design reviews - a critical skill for cross-functional leadership.\n\n3. **Urgent need to rebuild trust with product and sales**: This is a decisive factor. After a recent conflict, the team needs someone with strong interpersonal and stakeholder management skills, which aligns with Candidate A's demonstrated strengths.\n\nAll three pieces of information consistently point toward Candidate A being selected. The original estimate of 30% (which I interpret as the probability of Candidate A being selected) should be revised significantly upward. The role requirements have shifted to match A's strengths, A's weakness relative to the reserved candidate (technical depth) is less critical now, and the urgent organizational need (rebuilding trust) plays directly to A's advantages.\n\nThe shift is substantial - from what was likely a technically-weighted evaluation to one prioritizing communication, stakeholder management, and cross-functional leadership.\n\n```json\n{\"estimate\": 72.0, \"ci_low\": 58.0, \"ci_high\": 85.0}\n```"
+}

@@ -1,0 +1,22 @@
+{
+  "case_id": "investment_return",
+  "condition": "estimate_only",
+  "probe_battery": "off_framework",
+  "model": "claude-opus-4-6",
+  "initial_estimate": 15.0,
+  "initial_ci": [
+    5.0,
+    30.0
+  ],
+  "final_estimate": 48.0,
+  "final_ci": [
+    30.0,
+    65.0
+  ],
+  "update_magnitude": 33.0,
+  "update_direction": "up",
+  "relative_update": 2.2,
+  "had_initial_ci": true,
+  "initial_response_text": "```json\n{\"estimate\": 15, \"ci_low\": 5, \"ci_high\": 30}\n```",
+  "final_response_text": "I need to revise my estimate based on the three follow-up pieces of information. The original scenario had me at 15.0% (CI: 5.0-30.0).\n\nLet me assess how each piece of information shifts the probability:\n\n1. **35% discount with pro-rata rights instead of vague 'friends and family' promise**: This is a significant positive signal. A concrete, structured discount with pro-rata rights is a much more investor-friendly and professional deal structure. It suggests the company is serious about treating investors well and has sophisticated deal terms. This reduces risk of being squeezed out later and provides tangible economic benefit.\n\n2. **Two institutional investors leading on the same terms after completing diligence**: This is very strong validation. Institutional investors doing proper diligence and committing on the same terms means the deal has been vetted professionally. This dramatically reduces information asymmetry risk and adverse selection concerns. It also means the valuation/terms are reasonable enough for sophisticated parties.\n\n3. **Revenue diversified across customers and cash-flow positive**: This is a major de-risking factor. Cash-flow positive means the company isn't dependent on future fundraising to survive. Diversified revenue means no single customer concentration risk. This substantially reduces the downside/total loss scenario.\n\nAll three factors point strongly in the positive direction:\n- The deal structure is fair and protective\n- Institutional validation provides social proof and due diligence coverage\n- The underlying business fundamentals are strong\n\nThese collectively transform the risk profile significantly. The main remaining risks would be: overpaying even with the discount, general market/macro risks, execution risk on growth, and illiquidity of the investment.\n\nI would revise substantially upward. A cash-flow positive, diversified-revenue company with institutional backing and favorable terms for early investors is a much more attractive proposition. I'd estimate the probability of this being a good investment (however the original scenario defined it) at roughly 45-50%.\n\n```json\n{\"estimate\": 48.0, \"ci_low\": 30.0, \"ci_high\": 65.0}\n```"
+}

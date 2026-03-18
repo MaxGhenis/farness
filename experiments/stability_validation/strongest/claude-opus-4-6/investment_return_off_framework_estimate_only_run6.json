@@ -1,0 +1,22 @@
+{
+  "case_id": "investment_return",
+  "condition": "estimate_only",
+  "probe_battery": "off_framework",
+  "model": "claude-opus-4-6",
+  "initial_estimate": 15.0,
+  "initial_ci": [
+    5.0,
+    30.0
+  ],
+  "final_estimate": 48.0,
+  "final_ci": [
+    32.0,
+    65.0
+  ],
+  "update_magnitude": 33.0,
+  "update_direction": "up",
+  "relative_update": 2.2,
+  "had_initial_ci": true,
+  "initial_response_text": "```json\n{\"estimate\": 15, \"ci_low\": 5, \"ci_high\": 30}\n```",
+  "final_response_text": "I need to reassess the probability based on the three follow-up pieces of information. The original scenario (which I don't have full context for, but was estimated at 15%) appears to involve some kind of investment round or deal completion.\n\nLet me analyze how each piece of information shifts the estimate:\n\n1. **35% discount with pro-rata rights instead of vague 'friends and family' promise**: This is a concrete, structured deal term rather than a handshake arrangement. A defined discount and formal pro-rata rights significantly increase the credibility and attractiveness of the deal. This is a meaningful positive signal.\n\n2. **Two institutional investors leading on the same terms after completing diligence**: This is a very strong positive signal. Institutional investors completing diligence and committing on the same terms provides validation, reduces adverse selection concerns, and suggests the deal is real and well-structured. Having two (not just one) adds further confidence.\n\n3. **Revenue diversified across customers and cash-flow positive**: This dramatically reduces the fundamental risk of the underlying company. Cash-flow positive means the company isn't dependent on this round for survival, diversified revenue reduces concentration risk. This makes the investment itself much safer and the company more likely to perform.\n\nAll three factors are strongly positive and address different dimensions of risk:\n- Deal structure risk (point 1)\n- Social proof / validation risk (point 2)\n- Fundamental business risk (point 3)\n\nThe original 15% estimate (presumably probability of a good outcome, successful deal, or something similar) should be revised significantly upward. Each factor independently would push the estimate up, and together they paint a much more favorable picture.\n\nI'd estimate this roughly triples or quadruples the probability, moving from 15% to somewhere around 45-55%.\n\n```json\n{\"estimate\": 48.0, \"ci_low\": 32.0, \"ci_high\": 65.0}\n```"
+}

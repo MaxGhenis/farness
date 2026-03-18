@@ -1,0 +1,22 @@
+{
+  "case_id": "product_launch",
+  "condition": "estimate_only",
+  "probe_battery": "on_framework",
+  "model": "claude-opus-4-6",
+  "initial_estimate": 30.0,
+  "initial_ci": [
+    15.0,
+    50.0
+  ],
+  "final_estimate": 18.0,
+  "final_ci": [
+    8.0,
+    32.0
+  ],
+  "update_magnitude": 12.0,
+  "update_direction": "down",
+  "relative_update": 0.4,
+  "had_initial_ci": true,
+  "initial_response_text": "```json\n{\"estimate\": 30, \"ci_low\": 15, \"ci_high\": 50}\n```",
+  "final_response_text": "Looking at the follow-up information:\n\n1. **Base rate of 20-30%** for new features meaningfully moving engagement metrics - this anchors my estimate downward from 30% since that was already at the upper end of the base rate.\n\n2. **Beta user self-selection bias** - Beta testers are enthusiasts who are more likely to engage positively with any new feature. The positive signals from beta testing are therefore inflated and not representative of the general user base. This is a significant downward adjustment.\n\n3. **Team measuring its own success** - This introduces measurement/confirmation bias. The team has incentives (conscious or not) to frame metrics favorably, choose favorable time windows, or select metrics that look best. Another downward adjustment.\n\n**Reasoning through adjustments:**\n- Starting from my prior of 30%, which was already at the top of the base rate range.\n- The base rate information alone suggests I should be closer to 20-25%.\n- Beta user selection bias means whatever positive evidence informed my original estimate is weaker than I thought - push down another few points.\n- Measurement bias from the team further reduces confidence in positive signals - another few points down.\n\nThese factors compound: the evidence that might have pushed me above the base rate is systematically biased upward, so I should probably be at or below the base rate midpoint.\n\nI'll also widen my confidence interval slightly given the additional sources of uncertainty/bias that make the evidence harder to interpret.\n\n```json\n{\"estimate\": 18.0, \"ci_low\": 8.0, \"ci_high\": 32.0}\n```"
+}

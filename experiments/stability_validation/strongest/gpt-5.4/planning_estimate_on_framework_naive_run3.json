@@ -1,0 +1,22 @@
+{
+  "case_id": "planning_estimate",
+  "condition": "naive",
+  "probe_battery": "on_framework",
+  "model": "gpt-5.4",
+  "initial_estimate": 2.8,
+  "initial_ci": [
+    2.0,
+    4.0
+  ],
+  "final_estimate": 8.5,
+  "final_ci": [
+    5.0,
+    13.0
+  ],
+  "update_magnitude": 5.7,
+  "update_direction": "up",
+  "relative_update": 2.035714285714286,
+  "had_initial_ci": true,
+  "initial_response_text": "Software projects with \u201cconfident\u201d estimates and detailed breakdowns still often run over due to integration, testing, review, and small unknowns. So I\u2019d adjust the 2-week estimate upward modestly rather than dramatically.\n\n```json\n{\"estimate\": 2.8, \"ci_low\": 2.0, \"ci_high\": 4.0}\n```",
+  "final_response_text": "Starting from the prior estimate of **2.8 weeks**:\n\n1. **2\u20133x average overrun on software projects**  \n   A reasonable central adjustment is around the midpoint, say **2.5x**.  \n   That would move 2.8 to about **7.0 weeks**.\n\n2. **Team confidence as a planning-fallacy warning**  \n   This pushes the estimate upward somewhat rather than downward. I\u2019d add a modest uplift, bringing the central estimate to around **7.5 weeks**.\n\n3. **30% chance of a major blocker**  \n   If a major blocker occurs, it could easily add substantial delay. In expected-value terms, this nudges the estimate upward again. A reasonable revised point estimate is about **8.5 weeks**.\n\nFor an **80% confidence interval**, I\u2019d widen it meaningfully because software uncertainty is high and blocker risk introduces a right tail. A plausible 80% interval is roughly **5 to 13 weeks**.\n\n```json\n{\"estimate\": 8.5, \"ci_low\": 5.0, \"ci_high\": 13.0}\n```"
+}

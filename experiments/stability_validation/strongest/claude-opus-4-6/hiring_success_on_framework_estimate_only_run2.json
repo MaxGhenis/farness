@@ -1,0 +1,22 @@
+{
+  "case_id": "hiring_success",
+  "condition": "estimate_only",
+  "probe_battery": "on_framework",
+  "model": "claude-opus-4-6",
+  "initial_estimate": 30.0,
+  "initial_ci": [
+    15.0,
+    45.0
+  ],
+  "final_estimate": 20.0,
+  "final_ci": [
+    10.0,
+    35.0
+  ],
+  "update_magnitude": 10.0,
+  "update_direction": "down",
+  "relative_update": 0.3333333333333333,
+  "had_initial_ci": true,
+  "initial_response_text": "```json\n{\"estimate\": 30, \"ci_low\": 15, \"ci_high\": 45}\n```",
+  "final_response_text": "I need to revise my estimate based on the follow-up information about the predictive validity of different hiring signals.\n\nLet me reconsider:\n\n1. **Unstructured interview impressions** (r=0.14 with job performance): The \"great interview chemistry\" signal is essentially noise - it has very low predictive validity. This means the positive interview impression should carry minimal weight.\n\n2. **Similarity bias**: \"Reminded me of our best performer\" is a classic cognitive bias, not evidence of future performance. This further undermines the interview-based positive signal.\n\n3. **Technical assessment** (r=0.51 with job performance): This is a much stronger predictor - about 4x more predictive than the interview impression. The candidate scored below the benchmark on this assessment.\n\nGiven that the strongest predictor (technical assessment) indicates below-benchmark performance, and the positive signals (interview chemistry, similarity to best performer) are essentially invalid predictors based on bias and low-validity methods, I should weight the technical assessment heavily and discount the interview impressions significantly.\n\nA below-benchmark technical score with r=0.51 suggests the candidate is more likely than not to underperform. The interview \"chemistry\" (r=0.14) and similarity bias provide almost no valid counter-evidence.\n\nMy original estimate of 30% was already somewhat skeptical, but the evidence here suggests I should revise downward further. The technical assessment pointing negative is the dominant valid signal, while the positive signals are largely noise/bias.\n\nI'll revise my estimate downward to reflect that the only valid predictor suggests below-average performance.\n\n```json\n{\"estimate\": 20.0, \"ci_low\": 10.0, \"ci_high\": 35.0}\n```"
+}

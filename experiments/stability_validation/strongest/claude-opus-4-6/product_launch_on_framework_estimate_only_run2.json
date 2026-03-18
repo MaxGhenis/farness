@@ -1,0 +1,22 @@
+{
+  "case_id": "product_launch",
+  "condition": "estimate_only",
+  "probe_battery": "on_framework",
+  "model": "claude-opus-4-6",
+  "initial_estimate": 30.0,
+  "initial_ci": [
+    15.0,
+    50.0
+  ],
+  "final_estimate": 18.0,
+  "final_ci": [
+    8.0,
+    30.0
+  ],
+  "update_magnitude": 12.0,
+  "update_direction": "down",
+  "relative_update": 0.4,
+  "had_initial_ci": true,
+  "initial_response_text": "```json\n{\"estimate\": 30, \"ci_low\": 15, \"ci_high\": 50}\n```",
+  "final_response_text": "Looking at the follow-up information:\n\n1. **Base rate of 20-30%** for new features meaningfully moving engagement metrics - this anchors my estimate downward from 30% since the base rate itself is 20-30%, and the follow-up points suggest reasons to be below or at the base rate.\n\n2. **Beta user selection bias** - Self-selected enthusiasts will show inflated engagement compared to the general user base. This means whatever positive signals came from beta testing are overstated. This is a significant downward adjustment.\n\n3. **Measurement bias** - The team building the feature is also measuring success, creating incentive to select favorable metrics or interpretations. This further suggests the evidence supporting success may be inflated.\n\nMy original estimate of 30% was already at the top of the base rate range. With two meaningful sources of upward bias in the evidence (enthusiast beta users + team measuring their own work), I should adjust downward from the base rate midpoint of 25%.\n\n- Start at base rate midpoint: ~25%\n- Adjust down for beta user selection bias: -5 to -7 percentage points\n- Adjust down for measurement bias: -2 to -3 percentage points\n\nThis brings me to roughly 15-18%. I'll estimate 18%, acknowledging uncertainty.\n\nThe confidence interval should be fairly wide given the uncertainties, but the downward pressures are fairly clear.\n\n```json\n{\"estimate\": 18.0, \"ci_low\": 8.0, \"ci_high\": 30.0}\n```"
+}

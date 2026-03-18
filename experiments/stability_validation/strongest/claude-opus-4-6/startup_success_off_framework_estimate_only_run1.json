@@ -1,0 +1,22 @@
+{
+  "case_id": "startup_success",
+  "condition": "estimate_only",
+  "probe_battery": "off_framework",
+  "model": "claude-opus-4-6",
+  "initial_estimate": 5.0,
+  "initial_ci": [
+    2.0,
+    12.0
+  ],
+  "final_estimate": 2.0,
+  "final_ci": [
+    0.5,
+    5.0
+  ],
+  "update_magnitude": 3.0,
+  "update_direction": "down",
+  "relative_update": 0.6,
+  "had_initial_ci": true,
+  "initial_response_text": "```json\n{\"estimate\": 5, \"ci_low\": 2, \"ci_high\": 12}\n```",
+  "final_response_text": "I need to assess how the three follow-up pieces of information affect the original estimate of 5.0% (presumably probability of success/good outcome for this company).\n\nLet me analyze each piece:\n\n1. **4 months of runway**: This is quite tight. Limited runway creates desperation, weakens negotiating position for fundraising, and increases the probability of unfavorable terms or failure to raise at all. This is a significant negative signal.\n\n2. **Single acquisition channel with rising CAC**: Heavy dependence on one channel is risky \u2014 if that channel degrades further or becomes uneconomical, growth stalls. Rising CAC means unit economics are deteriorating, making the business harder to fund and scale. This is a meaningful negative signal.\n\n3. **Founders committed to current strategy through next fundraise**: This removes strategic flexibility. If the current strategy isn't working (which the other signals suggest), being locked into it means they can't pivot to improve metrics before they run out of money. This compounds the negative effects of points 1 and 2.\n\nAll three pieces of information are negative and they compound each other:\n- Short runway + inability to pivot = very limited options\n- Deteriorating unit economics + commitment to current strategy = likely continued deterioration\n- Rising CAC + single channel dependency = fragile growth that could collapse\n\nThese factors together significantly reduce the probability of a good outcome. The original 5% was already low, but these are materially negative signals that interact badly with each other. I'd revise downward substantially \u2014 perhaps to around 2%.\n\nThe confidence interval should reflect that there's still some small chance things work out (maybe the fundraise succeeds despite everything, or the channel stabilizes), but the downside scenarios are now more concrete and likely.\n\n```json\n{\"estimate\": 2.0, \"ci_low\": 0.5, \"ci_high\": 5.0}\n```"
+}

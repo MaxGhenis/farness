@@ -1,0 +1,22 @@
+{
+  "case_id": "deadline_estimate",
+  "condition": "naive",
+  "probe_battery": "on_framework",
+  "model": "claude-opus-4-6",
+  "initial_estimate": 80.0,
+  "initial_ci": [
+    65.0,
+    90.0
+  ],
+  "final_estimate": 25.0,
+  "final_ci": [
+    10.0,
+    40.0
+  ],
+  "update_magnitude": 55.0,
+  "update_direction": "down",
+  "relative_update": 0.6875,
+  "had_initial_ci": true,
+  "initial_response_text": "## Reasoning\n\nKey factors to consider:\n\n1. **Planning fallacy**: Projects almost always take longer than estimated. The 4-month estimate is likely optimistic despite being from a compliance team with a detailed plan.\n\n2. **2-month buffer (50% of estimated work time)**: This is a reasonably generous buffer, which helps significantly. Many projects fail because they have no buffer at all.\n\n3. **Positive indicators**: There's a detailed project plan, a dedicated compliance team, and awareness of the deadline \u2014 these suggest organizational seriousness.\n\n4. **Risk factors**: Regulatory compliance work often involves dependencies on external parties (regulators, vendors, auditors), scope changes as regulations are clarified, resource competition with other priorities, and potential technical surprises.\n\n5. **Base rates**: Software/compliance projects with a 50% buffer over the initial estimate have decent completion rates, but not as high as one might naively think. Studies on project completion suggest even with buffers, ~20-30% of projects miss deadlines.\n\n6. **The detailed plan helps** but doesn't eliminate uncertainty \u2014 unknown unknowns are the main threat.\n\nBalancing the generous buffer against the planning fallacy and typical project risks, I'd estimate roughly **80%** probability of on-time completion. The buffer is good but not bulletproof.\n\nFor the 80% confidence interval on my estimate: I'm fairly confident the true probability is somewhere between 65% and 90%. It's unlikely below 65% given the substantial buffer and detailed planning, and unlikely above 90% given well-documented base rates of project delays.\n\n```json\n{\"estimate\": 80, \"ci_low\": 65, \"ci_high\": 90}\n```",
+  "final_response_text": "I need to revise my initial estimate of 80% downward based on the three pieces of follow-up information.\n\n**Analyzing each piece of information:**\n\n1. **Industry base rate of 40% on-time completion**: This is a significant anchor. My initial estimate of 80% was double the industry average, which seems overly optimistic. I should weight this base rate heavily.\n\n2. **Team has never done this specific type of work before**: Inexperience with the specific type of compliance work adds significant risk. Teams unfamiliar with a domain typically perform worse than average, not better. This would push the estimate below the 40% base rate, or at least not above it.\n\n3. **Regulations still being finalized and may change**: This introduces substantial scope uncertainty. If regulations change in the next 2 months, work may need to be redone, timelines extended, or requirements reinterpreted. This is a major risk factor that further reduces the probability of on-time completion.\n\n**Reasoning through the revision:**\n\n- Starting from the 80% prior, the base rate of 40% alone would pull this down significantly. A reasonable Bayesian update might bring it to around 50-55% if I were just incorporating the base rate.\n- The team's inexperience should push this below the base rate \u2014 maybe to 30-35%.\n- The regulatory uncertainty adds another layer of risk. Changing requirements mid-project is one of the most common causes of delays. This could knock off another 5-10 percentage points, bringing us to around 20-30%.\n\n**Final estimate:** I'll estimate approximately 25%. The team is inexperienced, the base rate is already low, and the moving target of changing regulations creates compounding risk.\n\n**80% Confidence Interval:**\n- There's a chance the team adapts well and regulations stabilize (upper end ~40%)\n- There's also a chance the regulations change dramatically and the inexperienced team struggles badly (lower end ~10%)\n\n```json\n{\"estimate\": 25, \"ci_low\": 10, \"ci_high\": 40}\n```"
+}

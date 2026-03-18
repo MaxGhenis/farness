@@ -1,0 +1,22 @@
+{
+  "case_id": "hiring_success",
+  "condition": "estimate_only",
+  "probe_battery": "off_framework",
+  "model": "claude-opus-4-6",
+  "initial_estimate": 30.0,
+  "initial_ci": [
+    15.0,
+    45.0
+  ],
+  "final_estimate": 72.0,
+  "final_ci": [
+    55.0,
+    85.0
+  ],
+  "update_magnitude": 42.0,
+  "update_direction": "up",
+  "relative_update": 1.4,
+  "had_initial_ci": true,
+  "initial_response_text": "```json\n{\"estimate\": 30, \"ci_low\": 15, \"ci_high\": 45}\n```",
+  "final_response_text": "Looking at the follow-up information:\n\n1. **Cross-functional leadership shift + Candidate A's strong stakeholder simulation**: This significantly favors Candidate A, as the role now prioritizes exactly the skills where A excels.\n\n2. **Reserved candidate scored higher technically but struggled with tradeoff communication**: Technical strength is less differentiating if the candidate can't articulate decisions to non-technical stakeholders, which is critical for cross-functional leadership.\n\n3. **Urgent need to rebuild trust with product and sales**: This is a strong signal favoring Candidate A's interpersonal and communication strengths. Trust-building after conflict requires exactly the kind of stakeholder management skills A demonstrated.\n\nAll three pieces of information point in the same direction - strongly favoring Candidate A over the reserved/technical candidate. The original estimate of 30% (which I interpret as the probability of selecting the reserved/technical candidate, or perhaps some other outcome) should shift substantially.\n\nGiven that the context has moved decisively toward favoring Candidate A's profile, and all three updates reinforce each other, I'd revise the estimate significantly upward if this represents Candidate A's selection probability, or significantly downward if it represents the reserved candidate's chances.\n\nAssuming the original 30% was the probability of Candidate A being selected (and the updates all favor A), I'd revise substantially upward.\n\n```json\n{\"estimate\": 72.0, \"ci_low\": 55.0, \"ci_high\": 85.0}\n```"
+}

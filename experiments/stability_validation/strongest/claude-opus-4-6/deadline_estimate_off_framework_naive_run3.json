@@ -1,0 +1,22 @@
+{
+  "case_id": "deadline_estimate",
+  "condition": "naive",
+  "probe_battery": "off_framework",
+  "model": "claude-opus-4-6",
+  "initial_estimate": 80.0,
+  "initial_ci": [
+    65.0,
+    90.0
+  ],
+  "final_estimate": 53.0,
+  "final_ci": [
+    35.0,
+    68.0
+  ],
+  "update_magnitude": 27.0,
+  "update_direction": "down",
+  "relative_update": 0.3375,
+  "had_initial_ci": true,
+  "initial_response_text": "## Reasoning\n\nKey factors to consider:\n\n**Favorable factors:**\n- 2-month buffer (50% of estimated work time) is substantial\n- Detailed project plan already exists\n- Compliance team has provided the estimate (domain expertise)\n\n**Unfavorable factors:**\n- Software/project estimates are notoriously optimistic (planning fallacy)\n- Regulatory compliance work often involves ambiguity, back-and-forth with regulators, and scope creep\n- Dependencies on other teams, vendors, or regulatory clarifications could cause delays\n- The reference class of \"projects estimated at X months\" typically shows significant overruns\n\n**Analysis:**\n- A 2-month buffer on a 4-month project is actually a generous buffer (~50%)\n- However, empirical data on project completion suggests that even with buffers, projects frequently run late\n- The base rate for projects completing on time even with reasonable buffers is probably around 75-85%\n- The detailed plan is a positive signal but doesn't eliminate risk from unknown unknowns\n- Compliance projects specifically can hit regulatory interpretation issues that cause rework\n\nI'd estimate roughly **80%** probability of completing on time. The buffer helps significantly, but the planning fallacy and typical project risks prevent this from being higher.\n\nFor the 80% confidence interval on my estimate: I'm fairly confident the true probability is somewhere between 65% and 90%. It's unlikely below 65% given the substantial buffer, and unlikely above 90% given the well-documented tendency for projects to overrun.\n\n```json\n{\"estimate\": 80, \"ci_low\": 65, \"ci_high\": 90}\n```",
+  "final_response_text": "I need to revise my initial 80% estimate downward based on the three new pieces of information.\n\n**Analyzing each factor:**\n\n1. **Critical path with no slack:** Legal sign-off \u2192 vendor configuration \u2192 staff training are sequential with zero float. Any delay in one directly delays the whole project. This is a significant risk amplifier \u2014 in practice, each of these steps commonly experiences some delay (legal reviews slip, vendor configs need iteration, training scheduling conflicts). With no buffer, the probability of on-time completion drops substantially. I'd estimate this alone knocks ~10-15 percentage points off.\n\n2. **Compliance lead context-switching during final 8 weeks:** The person who likely needs to be involved in legal sign-off and possibly vendor configuration is splitting attention with an audit remediation program. This is exactly the crunch period where the critical path items are being executed. Cognitive overload, delayed reviews, slower decision-making \u2014 this is a well-documented schedule killer. I'd estimate this knocks off another ~8-12 percentage points.\n\n3. **Weak escalation incentives:** A modest internal escalation for missing the deadline means teams won't proactively flag risks. Problems will be hidden or minimized until they become unavoidable, at which point recovery options are limited. This is an organizational/behavioral risk that compounds the first two factors \u2014 risks that could have been mitigated early will instead materialize late. This knocks off another ~5-8 percentage points.\n\n**Interaction effects:** These three factors don't just add linearly \u2014 they compound. The lack of slack means problems hit harder, the distracted compliance lead means problems are more likely, and the weak incentives mean problems are discovered later when they're harder to fix. The combination is particularly toxic.\n\n**Revised estimate:**\nStarting from 80%, I'd reduce by roughly 25-30 percentage points total (accounting for some overlap but also compounding effects).\n\nRevised point estimate: ~53%\n\n**80% confidence interval:**\nThere's substantial uncertainty here. The project could still succeed if things go smoothly (though unlikely given the structural issues), or it could fail badly if even one critical-path item stalls significantly.\n\n- Low end (10th percentile): ~35%\n- High end (90th percentile): ~68%\n\n```json\n{\"estimate\": 53, \"ci_low\": 35, \"ci_high\": 68}\n```"
+}

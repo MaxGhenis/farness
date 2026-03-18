@@ -1,0 +1,22 @@
+{
+  "case_id": "planning_estimate",
+  "condition": "farness",
+  "probe_battery": "off_framework",
+  "model": "gpt-5.4",
+  "initial_estimate": 3.2,
+  "initial_ci": [
+    2.4,
+    5.0
+  ],
+  "final_estimate": 4.6,
+  "final_ci": [
+    3.0,
+    8.5
+  ],
+  "update_magnitude": 1.3999999999999995,
+  "update_direction": "up",
+  "relative_update": 0.43749999999999983,
+  "had_initial_ci": true,
+  "initial_response_text": "Using a farness / outside-view approach, I would discount the team\u2019s detailed inside-view plan.\n\n- **Base rates:** In software projects, task estimates are commonly optimistic. Research on planning fallacy and software overruns suggests actual durations often land around **1.3x to 2x** the original estimate for nontrivial work, even when teams provide detailed breakdowns. Detailed decomposition helps, but usually does **not** eliminate optimism bias, anchoring on the original estimate, or hidden-integration risk.\n- **Likely biases in the framing:**\n  - **Planning fallacy:** underestimating time despite experience.\n  - **Inside-view bias:** focusing on known tasks, underweighting unknowns.\n  - **Anchoring:** the \u201c2 weeks\u201d estimate pulls judgment downward.\n  - **Overconfidence:** \u201cthey\u2019re confident\u201d is weak evidence of accuracy.\n  - **Scope/interdependency neglect:** integration, review, QA, and rework often dominate.\n\nGiven only this information, I\u2019d use a moderate overrun factor, roughly **1.6x** the estimate as a central forecast.\n\n- **Point estimate:** 2 \u00d7 1.6 = **3.2 weeks**\n- **80% CI:** a plausible range is about **1.2x to 2.5x** the estimate, giving **2.4 to 5.0 weeks**\n\n```json\n{\"estimate\": 3.2, \"ci_low\": 2.4, \"ci_high\": 5.0}\n```",
+  "final_response_text": "The new information increases both the expected duration and the uncertainty materially:\n\n- **External API dependency with no committed date** adds the biggest risk. This creates schedule uncertainty outside the team\u2019s control and increases the chance of waiting time or rework.\n- **Senior engineer vacation during integration** reduces capacity exactly at a critical phase, which likely slows debugging/integration and lowers flexibility if the API work slips.\n- **Fixed rollout window with monthly fallback** introduces a discontinuity: a small miss can turn into a much larger schedule slip, which pushes the upper tail of the estimate out significantly.\n\nStarting from the prior **3.2 weeks (80% CI: 2.4\u20135.0)**, I\u2019d revise upward to reflect both a more likely delay and a fatter right tail. A reasonable revised estimate is:\n\n```json\n{\"estimate\": 4.6, \"ci_low\": 3.0, \"ci_high\": 8.5}\n```"
+}

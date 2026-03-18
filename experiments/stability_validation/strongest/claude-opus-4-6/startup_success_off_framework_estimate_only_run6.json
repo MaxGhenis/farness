@@ -1,0 +1,22 @@
+{
+  "case_id": "startup_success",
+  "condition": "estimate_only",
+  "probe_battery": "off_framework",
+  "model": "claude-opus-4-6",
+  "initial_estimate": 5.0,
+  "initial_ci": [
+    2.0,
+    12.0
+  ],
+  "final_estimate": 2.5,
+  "final_ci": [
+    0.8,
+    6.0
+  ],
+  "update_magnitude": 2.5,
+  "update_direction": "down",
+  "relative_update": 0.5,
+  "had_initial_ci": true,
+  "initial_response_text": "```json\n{\"estimate\": 5, \"ci_low\": 2, \"ci_high\": 12}\n```",
+  "final_response_text": "I need to revise my estimate based on the three pieces of follow-up information. Let me assess how each affects the probability of success (or whatever outcome was being estimated - given the context clues, this appears to be about a startup's probability of achieving a successful outcome like reaching profitability or a successful fundraise).\n\n**Analysis of new information:**\n\n1. **4 months of runway**: This is a significant constraint. Limited runway creates urgency and reduces margin for error. It means they need to either raise money, cut costs dramatically, or achieve profitability very quickly - all difficult under pressure.\n\n2. **Single acquisition channel with rising CAC**: This is a major red flag. Dependence on one channel is risky, and rising CAC means unit economics are deteriorating. This suggests the growth model may not be sustainable and could collapse if that channel becomes uneconomical.\n\n3. **Founders committed to current strategy**: This eliminates the option of pivoting, which is often how startups survive. Being locked into a strategy that shows warning signs (rising CAC, limited runway) significantly reduces adaptability - one of the key survival mechanisms for startups.\n\n**Combined effect**: All three factors are negative and they compound each other:\n- Short runway + deteriorating economics = cash crisis likely\n- Can't pivot because of investor promises = can't address the fundamental issues\n- Rising CAC on single channel = growth story weakens, making fundraising harder\n- The fundraise itself becomes harder because sophisticated investors will see these same red flags\n\nEach factor alone would push the estimate down. Together, they create a particularly dangerous combination where the company is locked into a failing strategy with limited time and resources.\n\nStarting from 5.0%, I'd revise significantly downward. The compounding negative signals suggest roughly a 40-60% reduction in the base probability.\n\n```json\n{\"estimate\": 2.5, \"ci_low\": 0.8, \"ci_high\": 6.0}\n```"
+}

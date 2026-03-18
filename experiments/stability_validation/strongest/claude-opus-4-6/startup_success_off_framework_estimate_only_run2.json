@@ -1,0 +1,22 @@
+{
+  "case_id": "startup_success",
+  "condition": "estimate_only",
+  "probe_battery": "off_framework",
+  "model": "claude-opus-4-6",
+  "initial_estimate": 5.0,
+  "initial_ci": [
+    2.0,
+    12.0
+  ],
+  "final_estimate": 2.8,
+  "final_ci": [
+    0.8,
+    7.0
+  ],
+  "update_magnitude": 2.2,
+  "update_direction": "down",
+  "relative_update": 0.44000000000000006,
+  "had_initial_ci": true,
+  "initial_response_text": "```json\n{\"estimate\": 5, \"ci_low\": 2, \"ci_high\": 12}\n```",
+  "final_response_text": "I need to assess how these three pieces of follow-up information affect the original estimate of 5.0% (presumably for some startup success metric like achieving a successful exit or reaching a major milestone).\n\nLet me analyze each piece:\n\n1. **4 months of runway**: This is quite concerning. Short runway creates desperation, weakens negotiating position for fundraising, and increases the probability of unfavorable terms or failure to raise at all. This significantly increases downside risk.\n\n2. **Single acquisition channel with rising CAC**: This indicates fragile growth fundamentals. Dependence on one channel is risky, and rising CAC suggests the channel is saturating or becoming less efficient. This undermines the growth story needed for the next fundraise and long-term viability.\n\n3. **Founders locked into current strategy**: This is a critical negative signal. With deteriorating metrics (rising CAC, short runway), the inability or unwillingness to pivot means they can't adapt. Strategic rigidity in a failing approach compounds the other problems.\n\n**Combined assessment**: These factors compound each other negatively:\n- Short runway means they need to raise soon\n- Rising CAC and single-channel dependency weaken their fundraising narrative\n- Strategic lock-in means they can't improve metrics before the raise\n- The combination creates a vicious cycle: they need good metrics to raise, but can't change strategy to improve metrics, and are running out of time\n\nEach factor individually would lower the estimate, but together they create a particularly dangerous combination. I'd estimate roughly a 40-50% relative reduction from the original estimate, bringing it down to around 2.5-3%.\n\n```json\n{\"estimate\": 2.8, \"ci_low\": 0.8, \"ci_high\": 7.0}\n```"
+}

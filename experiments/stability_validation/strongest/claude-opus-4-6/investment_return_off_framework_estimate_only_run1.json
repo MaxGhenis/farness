@@ -1,0 +1,22 @@
+{
+  "case_id": "investment_return",
+  "condition": "estimate_only",
+  "probe_battery": "off_framework",
+  "model": "claude-opus-4-6",
+  "initial_estimate": 15.0,
+  "initial_ci": [
+    5.0,
+    30.0
+  ],
+  "final_estimate": 55.0,
+  "final_ci": [
+    35.0,
+    72.0
+  ],
+  "update_magnitude": 40.0,
+  "update_direction": "up",
+  "relative_update": 2.6666666666666665,
+  "had_initial_ci": true,
+  "initial_response_text": "```json\n{\"estimate\": 15, \"ci_low\": 5, \"ci_high\": 30}\n```",
+  "final_response_text": "I need to revise my estimate based on the three follow-up pieces of information. Let me think through how each affects the probability of this being a good investment opportunity (or whatever the original scenario was estimating).\n\nStarting from my prior estimate of 15.0% (CI: 5.0-30.0):\n\n1. **35% discount with pro-rata rights instead of vague 'friends and family' promise**: This is a significant positive signal. Concrete, favorable terms replace vague promises. A 35% discount provides a meaningful margin of safety, and pro-rata rights give the ability to maintain ownership in future rounds. This substantially increases attractiveness/probability of success.\n\n2. **Two institutional investors leading on the same terms after completing diligence**: This is a very strong positive signal. Institutional investors doing full diligence and committing capital validates the opportunity. Having two independent institutions agree on terms provides strong social proof and suggests the deal has been thoroughly vetted. This significantly de-risks the investment.\n\n3. **Revenue diversified across customers and cash-flow positive**: This is another major positive signal. Cash-flow positive means the company doesn't need this capital to survive, reducing existential risk. Diversified revenue means no single customer dependency. This dramatically reduces the downside risk.\n\nEach of these three factors substantially shifts the probability upward:\n- Factor 1: Moves estimate from ~15% to ~25%\n- Factor 2: Moves estimate from ~25% to ~40%\n- Factor 3: Moves estimate from ~40% to ~55%\n\nThe combination of institutional validation, favorable concrete terms with margin of safety, and a fundamentally sound business (cash-flow positive, diversified revenue) transforms this from a speculative opportunity to a much more credible one. The confidence interval should also narrow somewhat given the additional information, though uncertainty remains.\n\n```json\n{\"estimate\": 55.0, \"ci_low\": 35.0, \"ci_high\": 72.0}\n```"
+}

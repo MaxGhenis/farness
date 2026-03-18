@@ -1,0 +1,22 @@
+{
+  "case_id": "planning_estimate",
+  "condition": "farness",
+  "probe_battery": "off_framework",
+  "model": "gpt-5.4",
+  "initial_estimate": 3.0,
+  "initial_ci": [
+    2.2,
+    4.4
+  ],
+  "final_estimate": 4.6,
+  "final_ci": [
+    3.0,
+    8.0
+  ],
+  "update_magnitude": 1.5999999999999996,
+  "update_direction": "up",
+  "relative_update": 0.5333333333333332,
+  "had_initial_ci": true,
+  "initial_response_text": "Using a farness / outside-view approach:\n\n- **Base rates:** Software task estimates are commonly optimistic. Across software projects, actuals often exceed estimates by roughly **20% to 100%+**, with larger overruns at project level and smaller-but-still-material overruns at feature/task level. A reasonable outside-view prior for a \u201c2 week\u201d feature with a detailed breakdown is that it still lands around **1.3x to 2.0x** the estimate, because detailed plans often reduce uncertainty somewhat but do not eliminate integration, testing, review, rework, and hidden dependencies.\n- **Inside view adjustment:** Their confidence and task breakdown are mildly positive signals, so I would not use the most pessimistic project-level overrun rates. But those same facts can also reflect:\n  - **Planning fallacy**\n  - **Overconfidence bias**\n  - **Anchoring** on the initial 2-week estimate\n  - **Inside-view bias** from focusing on known tasks while underweighting unknowns\n- **Forecast:** I\u2019d center on about **1.5x** the estimate.\n\nSo for a 2-week estimate:\n- **Point estimate:** 3.0 weeks\n- **80% CI:** about **2.2 to 4.4 weeks**\n\n```json\n{\"estimate\": 3.0, \"ci_low\": 2.2, \"ci_high\": 4.4}\n```",
+  "final_response_text": "The new information increases both expected duration and uncertainty:\n\n1. **External API dependency without a committed date**  \n   This is the biggest risk driver. Uncommitted external dependencies often create waiting time and can introduce integration churn. That pushes the estimate up and widens the interval.\n\n2. **Senior engineer on vacation during integration week**  \n   That reduces capacity exactly at a critical point, making delays more likely if integration issues arise. Even if work can continue, throughput and problem resolution speed will drop.\n\n3. **Fixed rollout window with a monthly fallback**  \n   This creates a discontinuity: if the team misses the demo window, the effective delivery slips by about a month. That materially raises the upper bound of the confidence interval.\n\nStarting from the prior estimate of **3.0 weeks (80% CI: 2.2\u20134.4)**, I would revise upward to reflect both the dependency risk and the schedule cliff. A reasonable revised estimate is:\n\n```json\n{\"estimate\": 4.6, \"ci_low\": 3.0, \"ci_high\": 8.0}\n```"
+}

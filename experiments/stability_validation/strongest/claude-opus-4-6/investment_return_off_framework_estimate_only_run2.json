@@ -1,0 +1,22 @@
+{
+  "case_id": "investment_return",
+  "condition": "estimate_only",
+  "probe_battery": "off_framework",
+  "model": "claude-opus-4-6",
+  "initial_estimate": 15.0,
+  "initial_ci": [
+    5.0,
+    30.0
+  ],
+  "final_estimate": 42.0,
+  "final_ci": [
+    25.0,
+    60.0
+  ],
+  "update_magnitude": 27.0,
+  "update_direction": "up",
+  "relative_update": 1.8,
+  "had_initial_ci": true,
+  "initial_response_text": "```json\n{\"estimate\": 15, \"ci_low\": 5, \"ci_high\": 30}\n```",
+  "final_response_text": "I need to revise my estimate based on the three follow-up pieces of information.\n\n**Original estimate:** 15.0% (CI: 5.0-30.0)\n\nLet me assess each piece of new information:\n\n1. **35% discount with pro-rata rights instead of vague 'friends and family' promise**: This is a concrete, meaningful investor-friendly term. A 35% discount is substantial and provides real downside protection. Pro-rata rights give the ability to maintain ownership in future rounds. This significantly improves the attractiveness of the deal compared to a vague promise - it's a structured, enforceable benefit. This should increase the estimate notably.\n\n2. **Two institutional investors leading on the same terms after completing diligence**: This is very strong signal. Institutional investors doing full diligence and committing validates the company, its financials, and the deal terms. Having two institutions (not just one) further reduces idiosyncratic risk. This is a major positive signal that substantially increases confidence in the investment's success.\n\n3. **Revenue diversified across customers and already cash-flow positive**: This dramatically reduces the risk profile. Cash-flow positive means the company isn't dependent on future fundraising to survive. Diversified revenue means no single customer concentration risk. This transforms the risk profile from a typical startup bet to something much more stable.\n\nAll three factors are strongly positive and collectively transform this from a speculative early-stage investment into a much more de-risked opportunity. The combination of:\n- Concrete protective terms (discount + pro-rata)\n- Institutional validation after diligence\n- Strong fundamental business metrics (cash-flow positive, diversified revenue)\n\n...should move the estimate substantially upward. The scenario I was originally estimating (likely something about the investment being successful or the round being a good deal) now looks much more favorable.\n\nI'll revise upward significantly - roughly doubling or more from the original estimate, given how materially positive all three signals are.\n\n```json\n{\"estimate\": 42.0, \"ci_low\": 25.0, \"ci_high\": 60.0}\n```"
+}

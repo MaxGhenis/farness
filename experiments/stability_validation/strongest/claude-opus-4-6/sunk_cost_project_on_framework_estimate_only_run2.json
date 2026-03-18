@@ -1,0 +1,22 @@
+{
+  "case_id": "sunk_cost_project",
+  "condition": "estimate_only",
+  "probe_battery": "on_framework",
+  "model": "claude-opus-4-6",
+  "initial_estimate": 12.0,
+  "initial_ci": [
+    5.0,
+    25.0
+  ],
+  "final_estimate": 4.0,
+  "final_ci": [
+    1.5,
+    10.0
+  ],
+  "update_magnitude": 8.0,
+  "update_direction": "down",
+  "relative_update": 0.6666666666666666,
+  "had_initial_ci": true,
+  "initial_response_text": "```json\n{\"estimate\": 12, \"ci_low\": 5, \"ci_high\": 25}\n```",
+  "final_response_text": "I need to revise my estimate of 12.0% (CI: 5.0-25.0) based on three significant pieces of negative information.\n\n**Starting point:** 12% probability of success (whatever the original scenario was - likely a troubled project meeting its goals).\n\n**Update 1: Only 16% of already-troubled projects meet REVISED budget estimates.**\nThis is a strong base rate. The project is already troubled, and even revised (presumably more generous) budgets are only met 16% of the time. This alone suggests my original 12% was roughly in the right ballpark, maybe even slightly optimistic depending on what \"success\" means here.\n\n**Update 2: Two senior engineers interviewing elsewhere.**\nThis is a major red flag. Senior engineer attrition on a troubled project creates:\n- Knowledge loss and brain drain\n- Remaining team demoralization\n- Recruitment/onboarding delays\n- Even if they don't leave, they're mentally checked out and less productive\n\nThis should significantly reduce the probability - perhaps by 40-50% of the remaining estimate.\n\n**Update 3: \"Almost there\" claim based on features complete, but integration testing hasn't started.**\nThis is extremely concerning. Integration testing is where problems compound in complex projects. Feature completion without integration testing means:\n- Unknown number of integration bugs\n- Potentially major architectural issues undiscovered\n- The \"almost there\" framing is misleading/optimistic\n- Integration testing often reveals 30-50% of total project effort remaining\n\nThis further reduces probability significantly.\n\n**Combined assessment:**\n- Base rate for troubled projects meeting revised budgets: 16%\n- My original estimate: 12%\n- Senior engineers leaving: reduces by ~50% \u2192 ~6%\n- Integration testing not started (false \"almost there\"): reduces by another ~40-50% \u2192 ~3-4%\n\nThese factors compound. A project losing key engineers AND having undiscovered integration issues is in serious trouble.\n\n```json\n{\"estimate\": 4.0, \"ci_low\": 1.5, \"ci_high\": 10.0}\n```"
+}

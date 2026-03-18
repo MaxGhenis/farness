@@ -1,0 +1,22 @@
+{
+  "case_id": "product_launch",
+  "condition": "naive",
+  "probe_battery": "on_framework",
+  "model": "claude-opus-4-6",
+  "initial_estimate": 28.0,
+  "initial_ci": [
+    12.0,
+    48.0
+  ],
+  "final_estimate": 19.0,
+  "final_ci": [
+    8.0,
+    32.0
+  ],
+  "update_magnitude": 9.0,
+  "update_direction": "down",
+  "relative_update": 0.32142857142857145,
+  "had_initial_ci": true,
+  "initial_response_text": "## Reasoning\n\nLet me think through this carefully, considering both the positive signals and the base rates for feature launches.\n\n**Positive signals:**\n- Internal testing went well\n- Team is excited\n- Beta users gave positive feedback with NPS of 45 (which is good but not exceptional \u2014 world-class is 70+)\n\n**Reasons for caution:**\n- Beta users are self-selected and typically more engaged/enthusiastic than the general user base (selection bias)\n- \"10% increase in overall product engagement\" is a high bar \u2014 most individual features don't move aggregate metrics that much\n- Base rate: most feature launches, even successful ones, have modest impact on overall engagement. Studies suggest only ~10-20% of shipped features meaningfully move top-line metrics\n- The gap between beta performance and full-launch performance is often significant (beta users get more attention, onboarding, etc.)\n- NPS of 45 is solid but not extraordinary \u2014 it suggests good-not-great reception\n- \"Overall product engagement\" includes all users, many of whom may not adopt the new feature\n- 3 months is a relatively short window for a feature to diffuse through the user base and change habits\n\n**Estimation:**\n- Base rate for a feature increasing overall engagement by 10%+: probably around 10-20%\n- Updating upward for positive signals (good testing, positive beta feedback): maybe 1.5-2x the base rate\n- But the selection bias in beta feedback is a significant concern that tempers the update\n\nI'd estimate roughly **25-30%** probability.\n\n**Confidence interval (80%):**\n- I could be significantly miscalibrated. The true probability could be as low as 10% (if I'm overweighting the positive signals) or as high as 50% (if the beta feedback is truly representative and the feature is genuinely transformative).\n\n```json\n{\"estimate\": 28, \"ci_low\": 12, \"ci_high\": 48}\n```",
+  "final_response_text": "I need to revise my previous estimate of 28.0% in light of three important pieces of follow-up information.\n\n**Analyzing each piece of new information:**\n\n1. **Base rate of 20-30% for features moving engagement metrics:** My prior estimate of 28% was already within this range, sitting near the upper end. This base rate itself suggests I shouldn't be too optimistic.\n\n2. **Beta users are self-selected enthusiasts:** This is a significant downward adjustment factor. Self-selected beta testers are typically more engaged, more forgiving, and more likely to use new features intensively compared to the general user base. Positive signals from beta testing are inflated - perhaps substantially. The feature's apparent success in beta may not translate to the broader population. This could easily cut the effective signal by 30-50%.\n\n3. **Team measuring its own success - potential bias:** This introduces measurement/confirmation bias. Teams that build features have incentives (conscious or unconscious) to select favorable metrics, timeframes, or comparison groups. This further erodes confidence in positive signals, warranting another downward adjustment.\n\n**Revised reasoning:**\n\n- Starting from my prior of 28%\n- The base rate (20-30%) already suggested this was reasonable, but the two biasing factors (self-selected beta users and team self-measurement) both push downward\n- The beta user selection bias is probably the most impactful - I'd adjust down by ~5-7 percentage points for this\n- The measurement bias warrants another ~2-3 percentage points down\n- Combined adjustment: roughly -8 to -10 percentage points\n\nThis brings me to approximately 18-20%. I'll settle on 19%, which reflects being somewhat below the midpoint of the base rate range, acknowledging that the positive signals we might have been weighing are systematically inflated.\n\n**Confidence interval:**\nGiven the compounding uncertainties - base rate variability, unknown degree of beta selection bias, unknown degree of measurement bias - there's substantial uncertainty. An 80% CI should be fairly wide.\n\n```json\n{\"estimate\": 19, \"ci_low\": 8, \"ci_high\": 32}\n```"
+}

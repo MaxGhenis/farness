@@ -1,0 +1,22 @@
+{
+  "case_id": "startup_success",
+  "condition": "estimate_only",
+  "probe_battery": "on_framework",
+  "model": "claude-opus-4-6",
+  "initial_estimate": 5.0,
+  "initial_ci": [
+    2.0,
+    12.0
+  ],
+  "final_estimate": 2.0,
+  "final_ci": [
+    0.5,
+    5.0
+  ],
+  "update_magnitude": 3.0,
+  "update_direction": "down",
+  "relative_update": 0.6,
+  "had_initial_ci": true,
+  "initial_response_text": "```json\n{\"estimate\": 5, \"ci_low\": 2, \"ci_high\": 12}\n```",
+  "final_response_text": "Looking at the follow-up information:\n\n1. **Base rate of ~5% for sudden organic growth** after 18 months of flat growth aligns with my previous point estimate, but the additional information is uniformly negative.\n\n2. **Three failed marketing channels** suggests the founders have already exhausted obvious growth levers. This reduces the probability further, as it indicates the product-market fit may be fundamentally weak rather than just under-marketed.\n\n3. **Competitor raising $10M** adds significant competitive pressure in the same market, which will likely erode whatever traction exists and make future growth even harder.\n\nEach piece of evidence is directionally negative. The base rate of ~5% should be adjusted downward:\n- Failed marketing attempts: ~0.6x multiplier\n- Well-funded competitor: ~0.6x multiplier\n\nCombined: 5% \u00d7 0.6 \u00d7 0.6 \u2248 1.8%\n\nThe confidence interval should also shift downward and narrow slightly since the evidence is more concrete.\n\n```json\n{\"estimate\": 2.0, \"ci_low\": 0.5, \"ci_high\": 5.0}\n```"
+}

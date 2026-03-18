@@ -1,0 +1,22 @@
+{
+  "case_id": "startup_success",
+  "condition": "estimate_only",
+  "probe_battery": "off_framework",
+  "model": "claude-opus-4-6",
+  "initial_estimate": 5.0,
+  "initial_ci": [
+    2.0,
+    12.0
+  ],
+  "final_estimate": 2.0,
+  "final_ci": [
+    0.5,
+    5.0
+  ],
+  "update_magnitude": 3.0,
+  "update_direction": "down",
+  "relative_update": 0.6,
+  "had_initial_ci": true,
+  "initial_response_text": "```json\n{\"estimate\": 5, \"ci_low\": 2, \"ci_high\": 12}\n```",
+  "final_response_text": "I need to reassess the probability given these three pieces of follow-up information.\n\n**Starting point:** 5.0% (CI: 2.0-12.0)\n\n**Analyzing each piece of new information:**\n\n1. **4 months of runway at current burn:** This is quite tight. Limited runway creates significant pressure and reduces the margin for error. It means the company needs to either raise soon, cut costs dramatically, or find revenue growth quickly. This is a strong negative signal for success.\n\n2. **Single acquisition channel with rising CAC:** Heavy dependence on one channel is risky, and rising CAC means unit economics are deteriorating. This suggests the growth story is weakening, which will make fundraising harder and makes organic improvement unlikely in the short term.\n\n3. **Founders committed to current strategy through next fundraise:** This is particularly concerning combined with the other two factors. If the current strategy is producing deteriorating metrics (rising CAC, burning cash), being locked into it removes the ability to pivot or adapt. Strategic inflexibility in a deteriorating situation significantly reduces the chances of a positive outcome.\n\n**Combined assessment:** All three factors are negative and they compound each other:\n- Short runway + rising CAC = harder to fundraise with worsening metrics\n- Rising CAC + locked strategy = can't fix the core problem\n- Short runway + locked strategy = limited time AND limited options\n\nThis is a significantly worse picture than the baseline. The company faces a convergence of problems: deteriorating economics, strategic rigidity, and a ticking clock. The probability of success (whatever the original scenario was measuring) should drop substantially.\n\nI'd revise downward meaningfully \u2014 roughly halving or more from the original estimate.\n\n```json\n{\"estimate\": 2.0, \"ci_low\": 0.5, \"ci_high\": 5.0}\n```"
+}

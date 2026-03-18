@@ -1,0 +1,22 @@
+{
+  "case_id": "sunk_cost_project",
+  "condition": "estimate_only",
+  "probe_battery": "off_framework",
+  "model": "claude-opus-4-6",
+  "initial_estimate": 12.0,
+  "initial_ci": [
+    5.0,
+    25.0
+  ],
+  "final_estimate": 5.5,
+  "final_ci": [
+    1.5,
+    14.0
+  ],
+  "update_magnitude": 6.5,
+  "update_direction": "down",
+  "relative_update": 0.5416666666666666,
+  "had_initial_ci": true,
+  "initial_response_text": "```json\n{\"estimate\": 12, \"ci_low\": 5, \"ci_high\": 25}\n```",
+  "final_response_text": "I need to assess how these three follow-up pieces of information affect the original estimate of 12.0% (CI: 5.0-25.0).\n\nLet me think about what's being estimated. Given the context of a project needing the last $500K, with integration/cutover work remaining, and an executive sponsor with misaligned incentives, this appears to be estimating the probability that this project successfully delivers its intended value (or ships on time/on budget).\n\n**Factor 1: Opportunity cost - displacing a $1.2M ARR project**\nThis signals that the organization is resource-constrained and the decision to fund this project comes at a significant cost. This doesn't directly change the technical probability of success, but it suggests the project is already struggling (needing to cannibalize other high-value work). It also means there's organizational pressure that could lead to rushed execution or eventual cancellation if scrutiny increases.\n\n**Factor 2: No production-like staging environment for final integration/cutover**\nThis is a major red flag. Integration and cutover are the riskiest phases, and doing them without a production-like staging environment dramatically increases the probability of failure. Production cutover without proper staging is where projects frequently blow up - data migration issues, integration failures, performance problems that only surface at scale. This significantly reduces the probability of success.\n\n**Factor 3: Executive sponsor's misaligned incentives**\nThe sponsor is motivated to keep the project *alive* (not necessarily successful) until the next board meeting. This means decisions will be optimized for appearance rather than delivery. This is a classic zombie project indicator - it may continue consuming resources without ever delivering real value. The sponsor may actively resist honest assessments or course corrections.\n\n**Combined assessment:**\n- Factor 2 substantially reduces technical probability of success\n- Factor 3 substantially reduces organizational probability of genuine success (vs. theater)\n- Factor 1 adds context suggesting the project is already in trouble\n\nThe combination of no staging environment for the riskiest phase AND a sponsor incentivized to keep it alive rather than deliver suggests this project is very likely to either fail technically or be kept on life support without delivering. I'd revise downward significantly.\n\nOriginal: 12.0% \u2192 I'd move this to roughly 5-6%, with a wider interval skewed low.\n\n```json\n{\"estimate\": 5.5, \"ci_low\": 1.5, \"ci_high\": 14.0}\n```"
+}

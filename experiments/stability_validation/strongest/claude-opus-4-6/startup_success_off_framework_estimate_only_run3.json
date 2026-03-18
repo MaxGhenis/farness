@@ -1,0 +1,22 @@
+{
+  "case_id": "startup_success",
+  "condition": "estimate_only",
+  "probe_battery": "off_framework",
+  "model": "claude-opus-4-6",
+  "initial_estimate": 5.0,
+  "initial_ci": [
+    2.0,
+    12.0
+  ],
+  "final_estimate": 2.0,
+  "final_ci": [
+    0.5,
+    5.0
+  ],
+  "update_magnitude": 3.0,
+  "update_direction": "down",
+  "relative_update": 0.6,
+  "had_initial_ci": true,
+  "initial_response_text": "```json\n{\"estimate\": 5, \"ci_low\": 2, \"ci_high\": 12}\n```",
+  "final_response_text": "I need to assess how the three follow-up pieces of information affect my prior estimate of 5.0% (presumably for some measure of startup success, like reaching a successful next fundraise or achieving a key milestone).\n\nLet me analyze each piece:\n\n1. **4 months of runway at current burn**: This is quite tight. Fundraising typically takes 3-6 months, meaning they're already in a danger zone. This significantly increases the probability of failure/running out of cash before securing funding. This is a strong negative signal.\n\n2. **Single acquisition channel with rising CAC**: This indicates a fragile and deteriorating growth model. Concentration risk in one channel is dangerous, and rising CAC means unit economics are worsening over time. This undermines the growth story needed to attract investors. Another strong negative signal.\n\n3. **Founders committed to current strategy through next fundraise**: This removes strategic flexibility. If the current approach isn't working (as suggested by rising CAC and cash constraints), being locked into it means they can't pivot or adapt. This is a meaningful negative signal, especially combined with the other two factors.\n\nAll three signals are negative and they compound each other:\n- They need to raise money soon (4 months)\n- Their growth metrics are deteriorating (rising CAC, single channel)\n- They can't change course to improve metrics (strategy lock-in)\n\nThis creates a difficult fundraising situation: they'll be approaching investors with worsening metrics, limited runway (creating desperation/poor negotiating position), and no ability to show a new strategic direction.\n\nMy prior was 5.0%. Each of these factors meaningfully reduces the probability. Together they paint a picture of a company in a precarious position with limited options.\n\nI'd revise downward substantially \u2014 perhaps to around 2.0%, with a wider confidence interval reflecting the uncertainty but skewed heavily toward failure.\n\n```json\n{\"estimate\": 2.0, \"ci_low\": 0.5, \"ci_high\": 5.0}\n```"
+}

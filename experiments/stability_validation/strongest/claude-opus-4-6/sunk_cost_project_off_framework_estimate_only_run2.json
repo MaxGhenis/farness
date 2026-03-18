@@ -1,0 +1,22 @@
+{
+  "case_id": "sunk_cost_project",
+  "condition": "estimate_only",
+  "probe_battery": "off_framework",
+  "model": "claude-opus-4-6",
+  "initial_estimate": 12.0,
+  "initial_ci": [
+    5.0,
+    25.0
+  ],
+  "final_estimate": 5.0,
+  "final_ci": [
+    1.5,
+    12.0
+  ],
+  "update_magnitude": 7.0,
+  "update_direction": "down",
+  "relative_update": 0.5833333333333334,
+  "had_initial_ci": true,
+  "initial_response_text": "```json\n{\"estimate\": 12, \"ci_low\": 5, \"ci_high\": 25}\n```",
+  "final_response_text": "I need to reassess the probability based on these three follow-up pieces of information.\n\n**Starting point:** 12.0% (CI: 5.0-25.0) - this was already a low probability of success for whatever project/scenario was being evaluated.\n\n**Evaluating the new information:**\n\n1. **Funding displaces a $1.2M ARR project:** This creates significant organizational pressure. The opportunity cost is concrete and high. This means the project faces rational opposition from other stakeholders, making continued funding precarious. It also signals the project is competing poorly for resources \u2014 a negative indicator for success.\n\n2. **No production-like staging environment for final integration/cutover:** This is a critical risk factor. Integration and cutover are where projects frequently fail, and without a production-like staging environment, the risk of failed deployment, unexpected issues, and delays is dramatically elevated. The remaining work is concentrated in the *hardest* part of delivery.\n\n3. **Executive sponsor's incentive is to keep the project alive until the board meeting, not to deliver success:** This is perhaps the most damning signal. It suggests the sponsor's motivation is political survival rather than genuine project completion. This means decisions will be optimized for optics rather than technical success, and the project may be a \"zombie\" \u2014 kept alive artificially without genuine commitment to successful delivery.\n\n**Combined assessment:**\n- The displacement of a $1.2M ARR project creates a strong case for cancellation, reducing the probability the project even continues to completion.\n- The lack of staging environment for the riskiest phase significantly reduces technical probability of success.\n- The sponsor's misaligned incentives suggest the project is being managed for appearance rather than delivery.\n\nThese factors are compounding negatives. Each one independently would lower my estimate. Together, they paint a picture of a project that is likely to either be killed (rational economic decision), fail technically (no staging for integration), or be intentionally stalled (sponsor incentives).\n\nI'd revise downward substantially \u2014 from 12% to roughly 4-5%.\n\n```json\n{\"estimate\": 5.0, \"ci_low\": 1.5, \"ci_high\": 12.0}\n```"
+}

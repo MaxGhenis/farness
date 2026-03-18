@@ -1,0 +1,22 @@
+{
+  "case_id": "planning_estimate",
+  "condition": "estimate_only",
+  "probe_battery": "on_framework",
+  "model": "claude-opus-4-6",
+  "initial_estimate": 3.0,
+  "initial_ci": [
+    2.0,
+    5.0
+  ],
+  "final_estimate": 6.5,
+  "final_ci": [
+    4.0,
+    12.0
+  ],
+  "update_magnitude": 3.5,
+  "update_direction": "up",
+  "relative_update": 1.1666666666666667,
+  "had_initial_ci": true,
+  "initial_response_text": "```json\n{\"estimate\": 3.0, \"ci_low\": 2.0, \"ci_high\": 5.0}\n```",
+  "final_response_text": "Looking at the three follow-up points:\n\n1. **2-3x multiplier on initial estimates**: My original estimate of 3.0 weeks was already somewhat adjusted, but if the \"inside view\" estimate was around 3 weeks, applying a 2-3x multiplier would suggest 6-9 weeks. Even being conservative with a 1.5-2x adjustment on my existing estimate gives 4.5-6.0 weeks.\n\n2. **Planning fallacy / team confidence as warning sign**: High team confidence often correlates with underestimation, not accuracy. This pushes the estimate further upward and especially widens the right tail of the confidence interval.\n\n3. **30% chance of major blocker**: A major blocker (integration issue, unclear requirements) could easily add 2-4 weeks. Expected impact: 0.30 \u00d7 ~3 weeks = ~0.9 weeks added to the mean, but it significantly fattens the upper tail.\n\n**Revised reasoning:**\n- Base estimate adjusted for reference class (2-3x): ~6 weeks as central tendency\n- Planning fallacy correction: nudge upward slightly\n- Major blocker risk: adds to both mean and upper tail\n- Combined: central estimate ~6.5 weeks, with significant right-skew\n\nThe 80% CI should be asymmetric, reflecting that things rarely finish *faster* than planned but often finish much *slower*.\n\n```json\n{\"estimate\": 6.5, \"ci_low\": 4.0, \"ci_high\": 12.0}\n```"
+}

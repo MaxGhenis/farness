@@ -1,0 +1,22 @@
+{
+  "case_id": "sunk_cost_project",
+  "condition": "estimate_only",
+  "probe_battery": "on_framework",
+  "model": "claude-opus-4-6",
+  "initial_estimate": 12.0,
+  "initial_ci": [
+    5.0,
+    25.0
+  ],
+  "final_estimate": 3.0,
+  "final_ci": [
+    1.0,
+    8.0
+  ],
+  "update_magnitude": 9.0,
+  "update_direction": "down",
+  "relative_update": 0.75,
+  "had_initial_ci": true,
+  "initial_response_text": "```json\n{\"estimate\": 12, \"ci_low\": 5, \"ci_high\": 25}\n```",
+  "final_response_text": "I need to revise my estimate of 12.0% (CI: 5.0-25.0) based on three significant pieces of negative information.\n\n**Analyzing each follow-up:**\n\n1. **Only 16% of already-troubled projects meet revised budgets**: This is a strong base rate. The project is already troubled (implied by \"revised budget\"), and the historical success rate for such projects is only 16%. This alone would push my estimate down significantly from 12%, or at least anchor it near 16% if we're talking about meeting budget \u2014 but the original estimate was already below 16%, suggesting the scenario had other negative factors.\n\n2. **Two senior engineers interviewing elsewhere**: This is a critical risk factor. Losing senior engineers during a troubled project could be devastating. Even the *risk* of departure creates distraction and morale issues. This substantially reduces the probability of success \u2014 perhaps cutting it by 40-60%.\n\n3. **'Almost there' based on features complete but no integration testing**: This is a classic software project red flag. Integration testing is where many projects discover fundamental problems. \"Features complete\" without integration testing means the project could be far from done \u2014 integration issues can easily consume 30-50% of remaining timeline. The \"almost there\" claim is essentially misleading.\n\n**Revised reasoning:**\n\n- Starting from my prior of 12%\n- The 16% base rate for troubled projects meeting revised budgets is actually higher than my prior, but my prior already incorporated some project-specific negatives\n- The senior engineer departure risk is a major new factor: multiply by ~0.5-0.6\n- The integration testing revelation is another major factor: multiply by ~0.4-0.5 (integration testing failures on troubled projects are very common)\n- These factors compound: 12% \u00d7 0.55 \u00d7 0.45 \u2248 3.0%\n\nThe combination of a troubled project, potential loss of key personnel, and the discovery that a critical phase (integration testing) hasn't even begun makes successful on-budget completion very unlikely.\n\n```json\n{\"estimate\": 3.0, \"ci_low\": 1.0, \"ci_high\": 8.0}\n```"
+}

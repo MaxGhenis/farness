@@ -1,0 +1,22 @@
+{
+  "case_id": "planning_estimate",
+  "condition": "estimate_only",
+  "probe_battery": "on_framework",
+  "model": "claude-opus-4-6",
+  "initial_estimate": 3.0,
+  "initial_ci": [
+    2.0,
+    5.0
+  ],
+  "final_estimate": 6.0,
+  "final_ci": [
+    3.5,
+    11.0
+  ],
+  "update_magnitude": 3.0,
+  "update_direction": "up",
+  "relative_update": 1.0,
+  "had_initial_ci": true,
+  "initial_response_text": "```json\n{\"estimate\": 3.0, \"ci_low\": 2.0, \"ci_high\": 5.0}\n```",
+  "final_response_text": "Looking at the three follow-up points:\n\n1. **2-3x multiplier on initial estimates**: My original estimate of 3.0 weeks was already somewhat adjusted, but the base \"inside view\" estimate was likely around 2-3 weeks from the team. Applying a 2-3x multiplier to the team's internal estimate (not my adjusted one) suggests 4-9 weeks is the empirical range.\n\n2. **Planning fallacy warning**: Team confidence is inversely correlated with accuracy in many studies. High confidence should push the estimate upward, not provide reassurance. This reinforces the need to anchor closer to the base rate (2-3x) rather than the team's optimistic timeline.\n\n3. **30% chance of major blocker**: A major blocker (integration issue, unclear requirements) could easily add 2-4+ weeks. Expected additional time from this alone: 0.30 \u00d7 ~3 weeks = ~0.9 weeks on average, but with high variance.\n\n**Revised reasoning:**\n- Original estimate: 3.0 weeks\n- Applying reference class forecasting (2-2.5x on the team's likely ~2.5 week internal estimate): ~5-6 weeks\n- Planning fallacy adjustment pushes toward the higher end\n- Major blocker risk adds right-tail weight\n- Central estimate: ~6 weeks\n- The distribution is right-skewed due to blocker risk\n\n```json\n{\"estimate\": 6.0, \"ci_low\": 3.5, \"ci_high\": 11.0}\n```"
+}

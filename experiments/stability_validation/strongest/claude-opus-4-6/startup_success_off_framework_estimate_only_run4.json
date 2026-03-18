@@ -1,0 +1,22 @@
+{
+  "case_id": "startup_success",
+  "condition": "estimate_only",
+  "probe_battery": "off_framework",
+  "model": "claude-opus-4-6",
+  "initial_estimate": 5.0,
+  "initial_ci": [
+    2.0,
+    12.0
+  ],
+  "final_estimate": 2.5,
+  "final_ci": [
+    0.8,
+    6.0
+  ],
+  "update_magnitude": 2.5,
+  "update_direction": "down",
+  "relative_update": 0.5,
+  "had_initial_ci": true,
+  "initial_response_text": "```json\n{\"estimate\": 5, \"ci_low\": 2, \"ci_high\": 12}\n```",
+  "final_response_text": "I need to assess how this follow-up information changes the probability of success (or whatever the original scenario was estimating - likely startup success/survival given the context).\n\n**Original estimate: 5.0% (CI: 2.0-12.0)**\n\nLet me evaluate each piece of new information:\n\n1. **4 months of runway at current burn**: This is a significant constraint. Short runway creates existential pressure, limits ability to pivot, and weakens negotiating position for future fundraising. This is clearly negative - investors sense desperation, terms worsen, and the company may not survive long enough to find product-market fit.\n\n2. **Single acquisition channel with rising CAC**: This is a major red flag. Dependence on one channel is fragile, and rising CAC suggests the channel is saturating or becoming less efficient. This means unit economics are deteriorating, making the business harder to scale profitably and less attractive to investors.\n\n3. **Founders committed to current strategy through next fundraise**: This eliminates strategic flexibility, which is one of the key advantages startups have. If the current strategy isn't working well (implied by the other signals), being locked into it removes the option to pivot - which is often how struggling startups find their path to success.\n\n**Combined assessment**: All three pieces of information are negative and they compound each other:\n- Short runway + inability to pivot = very limited options\n- Deteriorating unit economics + commitment to current strategy = likely continued deterioration\n- Rising CAC + short runway = accelerating cash depletion\n- The combination suggests a company heading toward a wall with its hands tied\n\nThis significantly reduces the already-low probability. The original 5% should move down substantially. The company faces a convergence of problems with limited ability to course-correct.\n\nI'd estimate roughly a 40-60% reduction from the base rate, bringing it down to around 2-3%.\n\n```json\n{\"estimate\": 2.5, \"ci_low\": 0.8, \"ci_high\": 6.0}\n```"
+}

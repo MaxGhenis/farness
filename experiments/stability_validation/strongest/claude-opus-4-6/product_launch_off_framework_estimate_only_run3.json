@@ -1,0 +1,22 @@
+{
+  "case_id": "product_launch",
+  "condition": "estimate_only",
+  "probe_battery": "off_framework",
+  "model": "claude-opus-4-6",
+  "initial_estimate": 30.0,
+  "initial_ci": [
+    15.0,
+    50.0
+  ],
+  "final_estimate": 55.0,
+  "final_ci": [
+    40.0,
+    72.0
+  ],
+  "update_magnitude": 25.0,
+  "update_direction": "up",
+  "relative_update": 0.8333333333333334,
+  "had_initial_ci": true,
+  "initial_response_text": "```json\n{\"estimate\": 30, \"ci_low\": 15, \"ci_high\": 50}\n```",
+  "final_response_text": "Looking at the three follow-up pieces of information:\n\n1. **Default onboarding flow integration**: This is a major positive signal. Being part of the default flow means every new user encounters the feature, dramatically increasing adoption compared to opt-in or discovery-based adoption. This alone would substantially raise the estimate.\n\n2. **Automated rollout and measurement with low friction**: This removes operational barriers that often slow adoption. The infrastructure is ready, reducing the gap between launch and actual usage.\n\n3. **Three enterprise design partners committed for week one**: Enterprise partners deploying across their organizations means a guaranteed base of users from day one, plus enterprise deployments tend to be sticky and generate word-of-mouth/case studies.\n\nAll three signals point strongly upward from the original 30% estimate. The default onboarding insertion is particularly powerful \u2014 features in default flows typically see much higher adoption rates than optional features. The enterprise commitments provide a floor of adoption. The automated rollout reduces execution risk.\n\nHowever, there are still uncertainties: new users might skip/ignore the feature even if it's in the onboarding flow, enterprise deployments might face internal delays despite commitments, and the feature still needs to deliver value to retain users beyond initial exposure.\n\nI'd revise significantly upward from 30% to around 55%, with the confidence interval tightening somewhat given the concrete commitments but still maintaining uncertainty about actual sustained adoption.\n\n```json\n{\"estimate\": 55.0, \"ci_low\": 40.0, \"ci_high\": 72.0}\n```"
+}

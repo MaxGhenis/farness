@@ -1,0 +1,22 @@
+{
+  "case_id": "planning_estimate",
+  "condition": "naive",
+  "probe_battery": "off_framework",
+  "model": "claude-opus-4-6",
+  "initial_estimate": 3.0,
+  "initial_ci": [
+    2.5,
+    5.0
+  ],
+  "final_estimate": 5.5,
+  "final_ci": [
+    4.0,
+    8.0
+  ],
+  "update_magnitude": 2.5,
+  "update_direction": "up",
+  "relative_update": 0.8333333333333334,
+  "had_initial_ci": true,
+  "initial_response_text": "## Reasoning\n\nSoftware estimation is notoriously optimistic, even when teams feel confident and have detailed breakdowns. Research and industry experience consistently show:\n\n- **Planning fallacy**: Teams systematically underestimate due to optimism bias, even with detailed plans\n- **Hidden work**: Integration, testing, code review, bug fixes, edge cases, and deployment tasks are often underweighted\n- **Interruptions & context switching**: Rarely fully accounted for\n- **Dependencies**: External blockers, stakeholder feedback loops, requirement clarifications\n\nEmpirical data (e.g., from Bent Flyvbjerg's work, Standish Group reports, and common agile retrospectives) suggests:\n\n- Confident, detailed estimates from competent teams typically overrun by **1.5x to 2x** on average\n- The fact that they're confident and have detailed breakdowns is a positive signal \u2014 it reduces the multiplier somewhat, but doesn't eliminate the bias\n- A reasonable central estimate would be around **3 weeks** (1.5x multiplier)\n\nFor the 80% confidence interval:\n- **Best case** (10th percentile): Things go smoothly, maybe minor hiccups \u2014 ~2.5 weeks\n- **Worst case** (90th percentile): Significant unforeseen complications, but not a total disaster \u2014 ~5 weeks\n- The distribution is right-skewed (delays are more likely and larger than early finishes)\n\n```json\n{\"estimate\": 3, \"ci_low\": 2.5, \"ci_high\": 5}\n```",
+  "final_response_text": "# Revised Estimate Analysis\n\n## Reviewing the New Risk Factors\n\n### 1. External API dependency with no committed delivery date\nThis is a significant risk. An uncommitted external dependency can introduce unbounded delays. Even in optimistic scenarios, coordination overhead adds time. I'd add at least 1-1.5 weeks of buffer for this alone, accounting for:\n- Communication overhead and follow-up\n- Potential need for mock/stub development to proceed in parallel\n- Integration rework if the API spec changes\n\n### 2. Senior engineer unavailable during integration week\nIntegration is typically one of the most critical phases, and losing a senior engineer during that period means:\n- Knowledge gaps that slow debugging\n- Remaining team members absorbing additional load\n- Potential need to reschedule or extend integration activities\n- This likely adds 0.5-1 week\n\n### 3. Fixed rollout window with binary outcome (hit or miss by a month)\nThis doesn't change the point estimate of effort directly, but it dramatically increases the consequence of any slip. This asymmetric risk profile means we should be more conservative in planning \u2014 essentially, we should plan with more buffer to avoid the catastrophic outcome of a full month delay.\n\n## Revised Estimate\n\nStarting from the original 3.0 weeks:\n\n| Factor | Additional Time |\n|--------|----------------|\n| External API uncertainty | +1.0 to 1.5 weeks |\n| Senior engineer absence during integration | +0.5 to 1.0 weeks |\n| Risk buffer for fixed deadline (asymmetric penalty) | +0.5 weeks |\n\n**Point estimate:** 3.0 + 1.25 + 0.75 + 0.5 = **5.5 weeks**\n\n## Confidence Interval (80%)\n\n- **Optimistic (10th percentile):** The external API delivers quickly, the team compensates well for the absent engineer \u2192 ~4.0 weeks\n- **Pessimistic (90th percentile):** The API team delays significantly, integration issues compound without the senior engineer \u2192 ~8.0 weeks\n\nThe right tail is fat here because the external API dependency is essentially open-ended.\n\n```json\n{\"estimate\": 5.5, \"ci_low\": 4.0, \"ci_high\": 8.0}\n```"
+}

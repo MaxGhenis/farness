@@ -1,0 +1,22 @@
+{
+  "case_id": "hiring_success",
+  "condition": "estimate_only",
+  "probe_battery": "on_framework",
+  "model": "claude-opus-4-6",
+  "initial_estimate": 30.0,
+  "initial_ci": [
+    15.0,
+    45.0
+  ],
+  "final_estimate": 15.0,
+  "final_ci": [
+    8.0,
+    25.0
+  ],
+  "update_magnitude": 15.0,
+  "update_direction": "down",
+  "relative_update": 0.5,
+  "had_initial_ci": true,
+  "initial_response_text": "```json\n{\"estimate\": 30, \"ci_low\": 15, \"ci_high\": 45}\n```",
+  "final_response_text": "I need to revise my estimate based on the follow-up information about the predictive validity of different hiring signals.\n\nLet me think through this:\n\n1. **Unstructured interview impressions** (r=0.14 with job performance): The \"great chemistry\" and positive interview impression is a very weak predictor. This means the hiring manager's enthusiasm from the interview should carry minimal weight.\n\n2. **Similarity bias**: \"Reminded me of our best performer\" is explicitly identified as similarity bias - a cognitive bias, not a valid predictor. This should be essentially discounted entirely as predictive information.\n\n3. **Technical assessment** (r=0.51 with job performance): The candidate scored below the team's benchmark on the technical assessment. This is by far the strongest predictor available, and it's negative.\n\nThe original scenario likely involved a hiring decision where interview chemistry was weighed against a below-benchmark technical score. My original estimate of 30% (which I assume was for job success/performance) was already somewhat skeptical, but given:\n\n- The strongest predictor (technical assessment, r=0.51) is negative (below benchmark)\n- The positive signals (interview chemistry, similarity) are either very weak predictors (r=0.14) or outright bias\n- The hiring manager is likely being swayed by the least predictive information\n\nThe probability of this candidate succeeding should be revised downward significantly. A below-benchmark technical score with r=0.51 predictive validity is a strong negative signal. The positive interview impressions provide almost no countervailing evidence.\n\nI should revise substantially downward from 30%. The technical assessment being below benchmark suggests below-average expected performance. The \"positive\" signals are essentially noise/bias.\n\nRevised estimate: ~15%, with the recognition that the technical assessment is the dominant valid signal and it's negative.\n\n```json\n{\"estimate\": 15.0, \"ci_low\": 8.0, \"ci_high\": 25.0}\n```"
+}

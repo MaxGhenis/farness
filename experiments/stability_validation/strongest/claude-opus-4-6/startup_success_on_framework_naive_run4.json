@@ -1,0 +1,22 @@
+{
+  "case_id": "startup_success",
+  "condition": "naive",
+  "probe_battery": "on_framework",
+  "model": "claude-opus-4-6",
+  "initial_estimate": 5.0,
+  "initial_ci": [
+    2.0,
+    12.0
+  ],
+  "final_estimate": 2.5,
+  "final_ci": [
+    0.5,
+    6.0
+  ],
+  "update_magnitude": 2.5,
+  "update_direction": "down",
+  "relative_update": 0.5,
+  "had_initial_ci": true,
+  "initial_response_text": "## Reasoning\n\nLet me think through the key factors:\n\n**Negative signals:**\n- 18 months is a long time without traction - most successful startups show some organic growth signal well before this point\n- 500 MAU after 18 months is very low for most consumer/SaaS products\n- Growth is **flat** - this is the most concerning signal. It's not just slow growth, it's no growth. This suggests weak product-market fit.\n- The base rate for startups reaching 20x growth in 12 months from a flat trajectory is very low\n\n**Mildly positive signals:**\n- They have *some* users (not zero)\n- Team believes in vision and has ideas to try\n- \"Persist\" could include iteration within the current approach\n\n**Base rate thinking:**\n- Most startups with flat growth at 18 months fail or remain stagnant\n- Going from 500 to 10,000 MAU = 20x growth in 12 months\n- With flat growth, this would require something to fundamentally change the trajectory\n- Even \"persisting\" usually involves some iteration, so there's a small chance they find something that unlocks growth\n- But the question specifies \"current approach\" - meaning no major pivot, which limits the upside\n\n**Estimation:**\n- I'd estimate roughly 5-8% chance. The flat growth is a very strong negative signal. However, there's a small but real possibility that persistence plus minor iterations could unlock a distribution channel or feature that drives viral/organic growth.\n- I'll say ~5%\n\n**Confidence interval (80%):**\n- This is a probability estimate, so my 80% CI is about how uncertain I am about the true probability\n- I'm fairly confident this is a low-probability outcome, but there's uncertainty about just how low\n- Low end: ~2% (if the product truly has no PMF signal, it could be even worse)\n- High end: ~12% (if there are hidden strengths I can't see from the description)\n\n```json\n{\"estimate\": 5, \"ci_low\": 2, \"ci_high\": 12}\n```",
+  "final_response_text": "I need to revise my initial estimate of 5.0% given the three pieces of follow-up information.\n\n**Analyzing each piece of information:**\n\n1. **Base rate confirmation**: The ~5% base rate for sudden organic growth inflection after 18 months of flat growth aligns with my prior estimate. This anchors the estimate but doesn't move it much on its own.\n\n2. **Three failed marketing channels**: This is meaningfully negative. It suggests the founders have already exhausted some of the obvious levers for growth. Each failed attempt reduces the probability that the next attempt will work, and it may also signal deeper issues with product-market fit rather than just distribution problems. This should push the estimate down.\n\n3. **Competitor raised $10M**: A well-funded competitor targeting the same market creates additional headwinds. They can outspend on customer acquisition, potentially lock up partnerships, and attract talent. This further reduces the probability of the startup inflecting positively.\n\n**Reasoning through the revision:**\n\n- Starting from the 5% base rate\n- The failed marketing channels suggest the startup may have a product-market fit issue, not just a distribution issue. This reduces the probability \u2014 I'd discount by roughly 30-40% (bringing it to ~3-3.5%)\n- The well-funded competitor adds competitive pressure that makes inflection even harder \u2014 another 20-30% discount (bringing it to ~2-2.5%)\n- There could be some small offsetting factor (maybe the competitor validates the market, or desperation drives creative pivots), but these are marginal\n\nI'll estimate approximately 2.5%.\n\n**80% Confidence Interval:**\n- The lower bound reflects a scenario where all these factors compound severely: ~0.5%\n- The upper bound reflects the possibility that despite these headwinds, some unexpected catalyst (pivot, partnership, market shift) could still occur: ~6%\n\n```json\n{\"estimate\": 2.5, \"ci_low\": 0.5, \"ci_high\": 6.0}\n```"
+}

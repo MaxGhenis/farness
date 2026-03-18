@@ -1,0 +1,22 @@
+{
+  "case_id": "deadline_estimate",
+  "condition": "estimate_only",
+  "probe_battery": "off_framework",
+  "model": "claude-opus-4-6",
+  "initial_estimate": 82.0,
+  "initial_ci": [
+    65.0,
+    93.0
+  ],
+  "final_estimate": 65.0,
+  "final_ci": [
+    45.0,
+    80.0
+  ],
+  "update_magnitude": 17.0,
+  "update_direction": "down",
+  "relative_update": 0.2073170731707317,
+  "had_initial_ci": true,
+  "initial_response_text": "```json\n{\"estimate\": 82, \"ci_low\": 65, \"ci_high\": 93}\n```",
+  "final_response_text": "Looking at the three follow-up pieces of information:\n\n1. **No slack on critical path**: Legal sign-off, vendor configuration, and staff training are all sequential with zero float. Any delay in one directly delays the whole project. This significantly increases the probability of missing the deadline since there's no buffer to absorb even minor delays.\n\n2. **Compliance lead is overloaded**: The key person is split between this project and audit remediation, with context-switching peaking in the final 8 weeks \u2014 exactly when execution pressure is highest. This makes delays in the compliance/legal workstream more likely and harder to recover from.\n\n3. **Weak incentive to surface risk**: A modest internal escalation (rather than regulatory penalty or financial consequence) means teams will likely delay raising red flags. Problems will be discovered late, reducing time available for corrective action. This is a classic failure mode for deadline slippage.\n\nAll three factors point in the same direction \u2014 downward. They compound: zero slack means problems must be caught early, but the overloaded lead and weak escalation incentives mean problems will be caught late.\n\nStarting from my prior estimate of 82.0%:\n- Zero slack on critical path: -8 to -10 points\n- Overloaded compliance lead: -5 to -7 points\n- Weak risk-surfacing incentives: -4 to -5 points\n\nThese factors are partially correlated (they all affect the same critical path), so I won't simply add them. Combined effect: roughly -15 to -18 points.\n\nThe confidence interval should also widen somewhat on the downside given the compounding risks.\n\n```json\n{\"estimate\": 65.0, \"ci_low\": 45.0, \"ci_high\": 80.0}\n```"
+}

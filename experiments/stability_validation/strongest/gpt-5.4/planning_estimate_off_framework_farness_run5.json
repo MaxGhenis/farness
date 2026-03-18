@@ -1,0 +1,22 @@
+{
+  "case_id": "planning_estimate",
+  "condition": "farness",
+  "probe_battery": "off_framework",
+  "model": "gpt-5.4",
+  "initial_estimate": 3.0,
+  "initial_ci": [
+    2.2,
+    4.5
+  ],
+  "final_estimate": 4.6,
+  "final_ci": [
+    3.0,
+    8.5
+  ],
+  "update_magnitude": 1.5999999999999996,
+  "update_direction": "up",
+  "relative_update": 0.5333333333333332,
+  "had_initial_ci": true,
+  "initial_response_text": "Using the **farness / outside-view** approach, I would discount the team\u2019s detailed inside-view estimate.\n\n### 1) Outside-view base rates\nResearch on software estimation consistently finds **systematic underestimation**:\n\n- Classic planning-fallacy work and later software-project studies show tasks often take **20% to 100%+ longer** than expected.\n- In software specifically, estimates for even well-specified work commonly show **actual/estimated ratios around 1.3x to 2.0x**, with a long right tail.\n- Detailed task breakdowns help somewhat, but they **do not eliminate optimism bias** or coordination/integration surprises.\n\nFor a **single feature** estimated at **2 weeks**, the outside view usually suggests a moderate overrun rather than a catastrophic one, unless there is major technical uncertainty.\n\n### 2) Biases in the framing\nThe framing contains several classic biases:\n\n- **Planning fallacy**: confidence and detailed plans create an illusion of precision.\n- **Inside-view bias**: focus on task steps rather than reference-class outcomes.\n- **Overconfidence**: \u201cthey\u2019re confident\u201d is weak evidence of accuracy.\n- **Anchoring**: the 2-week estimate pulls judgment downward.\n- **Scope/interdependency neglect**: integration, QA, review, rework, and waiting time are often omitted or understated.\n\n### 3) Numeric forecast\nIf I use a reference-class multiplier centered around roughly **1.5x**, then:\n\n- Point estimate = **2 \u00d7 1.5 = 3.0 weeks**\n\nFor an **80% confidence interval**, I\u2019d allow for a fairly typical range of overruns:\n- Lower bound: modest overrun or unusually smooth delivery, about **1.1x**\n- Upper bound: substantial but still common slippage, about **2.25x**\n\nSo:\n- Low = **2 \u00d7 1.1 = 2.2 weeks**\n- High = **2 \u00d7 2.25 = 4.5 weeks**\n\n```json\n{\"estimate\": 3.0, \"ci_low\": 2.2, \"ci_high\": 4.5}\n```",
+  "final_response_text": "The new information materially increases both expected duration and uncertainty:\n\n- **External API dependency without a committed date** adds schedule risk and likely waiting time.\n- **A senior engineer on vacation during integration** reduces throughput right when coordination risk is highest.\n- **A fixed rollout window with a one-month slip if missed** creates a bimodal outcome: either make the window, or incur a large delay.\n\nStarting from **3.0 weeks (80% CI: 2.2\u20134.5)**, I\u2019d revise upward substantially. A reasonable updated point estimate is **4.6 weeks**, with a much wider 80% CI reflecting the possibility of missing the demo window and slipping to the following month.\n\n```json\n{\"estimate\": 4.6, \"ci_low\": 3.0, \"ci_high\": 8.5}\n```"
+}

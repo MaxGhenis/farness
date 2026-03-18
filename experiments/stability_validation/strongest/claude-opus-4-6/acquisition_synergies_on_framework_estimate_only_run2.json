@@ -1,0 +1,22 @@
+{
+  "case_id": "acquisition_synergies",
+  "condition": "estimate_only",
+  "probe_battery": "on_framework",
+  "model": "claude-opus-4-6",
+  "initial_estimate": 45.0,
+  "initial_ci": [
+    30.0,
+    60.0
+  ],
+  "final_estimate": 25.0,
+  "final_ci": [
+    12.0,
+    40.0
+  ],
+  "update_magnitude": 20.0,
+  "update_direction": "down",
+  "relative_update": 0.4444444444444444,
+  "had_initial_ci": true,
+  "initial_response_text": "```json\n{\"estimate\": 45, \"ci_low\": 30, \"ci_high\": 60}\n```",
+  "final_response_text": "I need to revise my estimate based on the three pieces of follow-up information.\n\n**Starting point:** 45.0% probability of success (CI: 30.0-60.0)\n\n**Analyzing the new information:**\n\n1. **Synergies realized at only 50% on average with high variance:** This is a significant negative signal. If projected synergies are the basis for value creation, achieving only half means many deals that looked good on paper won't deliver. This should push the estimate down.\n\n2. **60-80% of M&A deals fail to create value for the acquirer:** This is a strong base rate. If we take the midpoint (70% failure rate), that implies only 20-40% of deals create value. This significantly anchors downward from 45%.\n\n3. **CEO personally championing the deal:** This is a classic red flag in M&A literature. CEO hubris and personal attachment to deals is well-documented as a factor that leads to overpaying, inadequate due diligence, and confirmation bias. Deals driven by CEO enthusiasm tend to perform worse than average M&A deals, which already have poor success rates.\n\n**Revision reasoning:**\n\n- The base rate of M&A success (20-40%) already suggests my prior of 45% was somewhat optimistic.\n- CEO personal excitement is an additional negative factor beyond the base rate, as it suggests possible winner's curse/hubris premium. This could push success probability below the already-low base rate.\n- Synergy realization at 50% further compounds the problem.\n\nCombining these factors: The base rate suggests ~30% success. CEO hubris likely makes this worse than the average deal, pushing toward 20-25%. The synergy realization data reinforces the downward pressure.\n\nI'll revise to approximately 25%, with a wider confidence interval reflecting uncertainty.\n\n```json\n{\"estimate\": 25.0, \"ci_low\": 12.0, \"ci_high\": 40.0}\n```"
+}

@@ -1,0 +1,22 @@
+{
+  "case_id": "deadline_estimate",
+  "condition": "estimate_only",
+  "probe_battery": "on_framework",
+  "model": "claude-opus-4-6",
+  "initial_estimate": 82.0,
+  "initial_ci": [
+    65.0,
+    93.0
+  ],
+  "final_estimate": 22.0,
+  "final_ci": [
+    10.0,
+    38.0
+  ],
+  "update_magnitude": 60.0,
+  "update_direction": "down",
+  "relative_update": 0.7317073170731707,
+  "had_initial_ci": true,
+  "initial_response_text": "```json\n{\"estimate\": 82, \"ci_low\": 65, \"ci_high\": 93}\n```",
+  "final_response_text": "I need to revise my estimate of 82.0% downward based on the three pieces of follow-up information.\n\n**Analysis of each factor:**\n\n1. **40% on-time completion rate for regulatory compliance projects**: This is a strong base rate that suggests these projects are notoriously difficult to complete on time. My prior of 82% was far too optimistic relative to this base rate.\n\n2. **Team has never done this specific type of work before**: Inexperience significantly increases risk of delays, scope misunderstanding, and rework. This would push completion probability below the already-low 40% base rate.\n\n3. **Regulations still being finalized and may change**: This is a major risk factor. If requirements shift mid-project, work may need to be redone, timelines extended, and priorities reshuffled. This introduces substantial uncertainty and further reduces the likelihood of on-time completion.\n\n**Revised reasoning:**\n\n- Starting from the 40% base rate for regulatory compliance projects\n- The team's inexperience would push this down, perhaps to ~25-30%\n- The regulatory uncertainty adds another significant downward pressure, perhaps another 5-10 percentage points\n- Combined, these factors suggest something in the range of 20-25%\n\nThe confidence interval should be wide given the regulatory uncertainty (regulations could stabilize quickly, or they could change dramatically).\n\n```json\n{\"estimate\": 22.0, \"ci_low\": 10.0, \"ci_high\": 38.0}\n```"
+}

@@ -1,0 +1,22 @@
+{
+  "case_id": "sunk_cost_project",
+  "condition": "estimate_only",
+  "probe_battery": "on_framework",
+  "model": "claude-opus-4-6",
+  "initial_estimate": 12.0,
+  "initial_ci": [
+    5.0,
+    25.0
+  ],
+  "final_estimate": 4.0,
+  "final_ci": [
+    1.5,
+    10.0
+  ],
+  "update_magnitude": 8.0,
+  "update_direction": "down",
+  "relative_update": 0.6666666666666666,
+  "had_initial_ci": true,
+  "initial_response_text": "```json\n{\"estimate\": 12, \"ci_low\": 5, \"ci_high\": 25}\n```",
+  "final_response_text": "I need to revise my estimate of 12.0% (CI: 5.0-25.0) for what appears to be the probability of a troubled project successfully delivering on its revised budget/timeline.\n\nLet me consider each piece of follow-up information:\n\n**1. Only 16% of already-troubled projects meet their REVISED budget estimates.**\nThis is a strong base rate. My original estimate of 12% was already below this, but this anchors us around 16% for budget alone. However, the question seems to be about overall success, which is typically harder than just meeting budget. This base rate suggests my original estimate was in the right ballpark, maybe even slightly low if we're just talking about budget.\n\n**2. Two senior engineers are interviewing elsewhere.**\nThis is a significant negative signal. Losing senior engineers during a troubled project can be devastating - they carry institutional knowledge, and their departure would cause further delays and knowledge gaps. Even if they haven't left yet, their engagement and productivity are likely already declining. This should push the estimate down substantially - perhaps cutting the probability by 40-60%.\n\n**3. \"Almost there\" claim based on features complete, but integration testing hasn't started.**\nThis is a classic red flag. Integration testing is where many projects discover fundamental issues - incompatible interfaces, performance problems, unexpected dependencies. Features being \"complete\" without integration testing means the project could be anywhere from 50-80% truly done. This is a significant negative indicator, as integration issues on troubled projects frequently cause major overruns.\n\n**Revised reasoning:**\n- Base rate for troubled projects meeting revised budget: ~16%\n- Senior engineers flight risk: This alone could reduce probability by half (attrition during critical phase)\n- No integration testing yet with \"almost there\" claims: This suggests significant undiscovered work remains, another major reduction\n\nStarting from 16% base rate:\n- Engineer attrition risk: 16% \u00d7 0.5 \u2248 8%\n- Integration testing not started (major hidden risk): 8% \u00d7 0.5 \u2248 4%\n\nThese factors compound to suggest a very low probability of success.\n\n```json\n{\"estimate\": 4.0, \"ci_low\": 1.5, \"ci_high\": 10.0}\n```"
+}

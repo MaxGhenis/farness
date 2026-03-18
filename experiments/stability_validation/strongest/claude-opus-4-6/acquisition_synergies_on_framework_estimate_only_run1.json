@@ -1,0 +1,22 @@
+{
+  "case_id": "acquisition_synergies",
+  "condition": "estimate_only",
+  "probe_battery": "on_framework",
+  "model": "claude-opus-4-6",
+  "initial_estimate": 45.0,
+  "initial_ci": [
+    30.0,
+    60.0
+  ],
+  "final_estimate": 28.0,
+  "final_ci": [
+    15.0,
+    42.0
+  ],
+  "update_magnitude": 17.0,
+  "update_direction": "down",
+  "relative_update": 0.37777777777777777,
+  "had_initial_ci": true,
+  "initial_response_text": "```json\n{\"estimate\": 45, \"ci_low\": 30, \"ci_high\": 60}\n```",
+  "final_response_text": "I need to revise my estimate of 45.0% (the probability that this M&A deal creates value for the acquirer) based on the new information.\n\n**Analysis of follow-up information:**\n\n1. **Synergy realization at ~50%**: This is a significant headwind. If projected synergies are the basis for the deal's valuation, only realizing half means the deal is likely overpriced relative to actual benefits. This pushes the probability of value creation down.\n\n2. **60-80% of M&A deals fail to create value**: This is the strongest piece of evidence. The base rate for value creation is only 20-40%. My prior estimate of 45% was already somewhat above the midpoint of this base rate range (30%). This information should pull my estimate significantly downward toward the 20-40% range.\n\n3. **CEO personally championing the deal**: This is a red flag. CEO personal excitement introduces agency problems and cognitive biases (commitment bias, overconfidence, empire-building motivation). Research shows that deals driven by CEO enthusiasm/hubris tend to perform worse than average. This should push the estimate further below the base rate, not above it.\n\n**Revision reasoning:**\n\n- The base rate of value creation is 20-40% (midpoint ~30%).\n- CEO championing adds a negative signal, suggesting this deal may be below-average in quality due to hubris-driven overpayment.\n- Synergy shortfalls compound the problem.\n- These factors together suggest moving well below my prior of 45%, likely to around 25-30%.\n\nI'll revise to approximately 28%, reflecting:\n- Base rate center (~30%)\n- Slight downward adjustment for CEO hubris (-2 to -5 percentage points)\n- The synergy realization issue is somewhat already captured in the base rate\n\nFor the confidence interval, the range remains wide given M&A outcome uncertainty.\n\n```json\n{\"estimate\": 28.0, \"ci_low\": 15.0, \"ci_high\": 42.0}\n```"
+}

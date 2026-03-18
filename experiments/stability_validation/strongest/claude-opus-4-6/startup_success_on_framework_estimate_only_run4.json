@@ -1,0 +1,22 @@
+{
+  "case_id": "startup_success",
+  "condition": "estimate_only",
+  "probe_battery": "on_framework",
+  "model": "claude-opus-4-6",
+  "initial_estimate": 5.0,
+  "initial_ci": [
+    2.0,
+    12.0
+  ],
+  "final_estimate": 3.0,
+  "final_ci": [
+    1.0,
+    7.0
+  ],
+  "update_magnitude": 2.0,
+  "update_direction": "down",
+  "relative_update": 0.4,
+  "had_initial_ci": true,
+  "initial_response_text": "```json\n{\"estimate\": 5, \"ci_low\": 2, \"ci_high\": 12}\n```",
+  "final_response_text": "Looking at the follow-up information:\n\n1. **Base rate of ~5% for sudden organic growth** after 18 months of flat growth aligns with my prior estimate, but the additional factors should push this lower.\n\n2. **Three failed marketing channels** suggests the team has already exhausted obvious growth levers without success. This is evidence against the \"they just haven't found the right channel yet\" hypothesis, reducing the probability of a turnaround.\n\n3. **Competitor raising $10M** actively targeting the same market creates significant headwinds \u2014 they'll be competing for the same customers with far more resources, likely driving up CAC and making organic growth even harder.\n\nEach of these factors compounds negatively:\n- The base rate alone is ~5%\n- Failed marketing attempts suggest this particular startup may be below the base rate (maybe 3-4%)\n- Competitive pressure further reduces prospects (knocking it down another percentage point or so)\n\nThe combination of stagnation + exhausted channels + well-funded competition paints a quite pessimistic picture.\n\n```json\n{\"estimate\": 3.0, \"ci_low\": 1.0, \"ci_high\": 7.0}\n```"
+}

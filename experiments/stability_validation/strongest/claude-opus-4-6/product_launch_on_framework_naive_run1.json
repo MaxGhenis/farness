@@ -1,0 +1,22 @@
+{
+  "case_id": "product_launch",
+  "condition": "naive",
+  "probe_battery": "on_framework",
+  "model": "claude-opus-4-6",
+  "initial_estimate": 28.0,
+  "initial_ci": [
+    15.0,
+    45.0
+  ],
+  "final_estimate": 17.0,
+  "final_ci": [
+    7.0,
+    30.0
+  ],
+  "update_magnitude": 11.0,
+  "update_direction": "down",
+  "relative_update": 0.39285714285714285,
+  "had_initial_ci": true,
+  "initial_response_text": "## Reasoning\n\nLet me think through the key factors:\n\n**Positive signals:**\n- Internal testing went well\n- Team is excited\n- Beta users gave positive feedback with NPS of 45 (good, though not exceptional \u2014 world-class is 50+)\n\n**Reasons for caution:**\n- Beta users are self-selected and typically more engaged/enthusiastic than the general user base (selection bias)\n- \"10% increase in overall product engagement\" is a high bar \u2014 this means the entire product's engagement, not just engagement with the new feature\n- Many features that test well in beta fail to move aggregate metrics significantly at full scale\n- A single feature increasing overall engagement by 10% is uncommon; most successful features contribute incrementally (2-5%)\n- 3 months is a relatively short window for sustained engagement lift (novelty effects can inflate early numbers, or adoption can be slow)\n- There's typically a large gap between \"users like it\" and \"it materially changes aggregate behavior\"\n- NPS of 45 from beta is decent but beta cohorts often skew 15-20 points higher than general population\n\n**Base rate considerations:**\n- In product development, even well-received features probably hit a 10% overall engagement lift maybe 15-25% of the time\n- The positive signals here push it above base rate, but not dramatically\n\n**My assessment:**\nThe scenario has genuinely positive signals, but the specific target (10% lift in *overall* engagement) is ambitious. I'd estimate roughly 25-30% probability.\n\n**Confidence interval (80%):**\nGiven the uncertainty, my 80% CI on this probability estimate would be fairly wide \u2014 there's a lot I don't know about the product, market, and user base.\n\n```json\n{\"estimate\": 28, \"ci_low\": 15, \"ci_high\": 45}\n```",
+  "final_response_text": "I need to revise my previous estimate of 28.0% downward based on the three pieces of follow-up information.\n\nLet me reason through each piece:\n\n**1. Base rate: only 20-30% of new features meaningfully move engagement metrics.**\nThis establishes a prior of roughly 25%. My previous estimate of 28% was already in this range, so this alone doesn't push things much. But it anchors the expectation that most features don't meaningfully move the needle.\n\n**2. Beta users are self-selected enthusiasts - not representative of the general user base.**\nThis is a significant downward adjustment. If the positive signals that informed the original 28% estimate came partly from beta user feedback or engagement data, those signals are inflated. Self-selected enthusiasts typically show much higher engagement than the general population. This means whatever positive evidence existed is weaker than it appeared. I'd adjust down notably - perhaps 5-8 percentage points for this factor.\n\n**3. The team that built the feature is also measuring its success - potential bias in metrics.**\nThis introduces measurement/reporting bias. Teams measuring their own work tend to (consciously or unconsciously) choose metrics, timeframes, or comparisons that favor positive results. This further degrades the reliability of any positive signals. I'd adjust down another 3-5 percentage points.\n\n**Combining these adjustments:**\n- Starting point: 28%\n- Base rate anchoring pulls slightly toward 25%: ~26%\n- Beta user non-representativeness: -6% \u2192 ~20%\n- Measurement bias: -4% \u2192 ~16%\n\nThe base rate itself is 20-30%, but the additional information about biased measurement and non-representative sampling suggests we should be *below* the midpoint of the base rate, since the evidence that might have pushed us above average is compromised. Landing around 16-18% seems reasonable.\n\n**Confidence interval (80%):**\nThere's substantial uncertainty here. The feature could still succeed despite biased early signals, or it could fail even worse than expected. I'll set a wide interval.\n\n```json\n{\"estimate\": 17, \"ci_low\": 7, \"ci_high\": 30}\n```"
+}

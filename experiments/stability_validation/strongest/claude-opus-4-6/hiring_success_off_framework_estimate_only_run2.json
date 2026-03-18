@@ -1,0 +1,22 @@
+{
+  "case_id": "hiring_success",
+  "condition": "estimate_only",
+  "probe_battery": "off_framework",
+  "model": "claude-opus-4-6",
+  "initial_estimate": 30.0,
+  "initial_ci": [
+    15.0,
+    45.0
+  ],
+  "final_estimate": 72.0,
+  "final_ci": [
+    58.0,
+    85.0
+  ],
+  "update_magnitude": 42.0,
+  "update_direction": "up",
+  "relative_update": 1.4,
+  "had_initial_ci": true,
+  "initial_response_text": "```json\n{\"estimate\": 30, \"ci_low\": 15, \"ci_high\": 45}\n```",
+  "final_response_text": "Looking at the follow-up information:\n\n1. **Cross-functional leadership shift** + **Candidate A excelled in stakeholder simulation** \u2014 This strongly favors Candidate A, as the role now prioritizes interpersonal and leadership skills over pure technical depth.\n\n2. **Reserved candidate scored higher technically but struggled to explain tradeoffs** \u2014 Communication of technical decisions is critical for cross-functional roles. Technical superiority matters less if you can't articulate reasoning to non-technical stakeholders.\n\n3. **Urgent need to rebuild trust with product and sales** \u2014 This is a decisive factor. The team needs someone with strong relationship-building and communication skills immediately. This heavily favors Candidate A's profile.\n\nAll three pieces of information consistently push in the same direction \u2014 toward selecting Candidate A (or whichever outcome the original 30% estimate was tracking). The combination of role redefinition toward cross-functional leadership, Candidate A's demonstrated stakeholder skills, and the urgent trust-rebuilding need creates a strong convergence.\n\nThe original estimate of 30% should be revised substantially upward. The urgency of the interpersonal need and the alignment with Candidate A's strengths suggest a significant shift.\n\n```json\n{\"estimate\": 72.0, \"ci_low\": 58.0, \"ci_high\": 85.0}\n```"
+}
