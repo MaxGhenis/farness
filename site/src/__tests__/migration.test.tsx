@@ -65,9 +65,9 @@ describe("Next.js migration", () => {
 
     it("renders research proof section", () => {
       render(<HomePage />);
-      expect(screen.getByText("Pre-emptive rigor")).toBeInTheDocument();
+      expect(screen.getByText("Stability-under-probing")).toBeInTheDocument();
       expect(screen.getByText("11")).toBeInTheDocument();
-      expect(screen.getByText("35-63%")).toBeInTheDocument();
+      expect(screen.getByText("2")).toBeInTheDocument();
     });
 
     it("renders instrument modules", () => {
@@ -84,6 +84,7 @@ describe("Next.js migration", () => {
     it("renders installation section", () => {
       render(<HomePage />);
       expect(screen.getByText("Install in seconds")).toBeInTheDocument();
+      expect(screen.getByText("Codex and other agents")).toBeInTheDocument();
     });
 
     it("renders closing CTA", () => {

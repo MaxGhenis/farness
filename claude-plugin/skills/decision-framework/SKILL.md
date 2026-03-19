@@ -28,16 +28,18 @@ Instead of answering directly, say something like:
 Then guide toward:
 1. **Explicit KPIs** - What are you optimizing for?
 2. **Multiple options** - Including ones not mentioned
-3. **Quantified forecasts** - P(outcome | action)
-4. **Surfaced assumptions** - What could change these estimates?
+3. **Reference class** - What usually happens in comparable situations?
+4. **Quantified forecasts** - P(outcome | action) with confidence intervals
+5. **Disconfirming evidence** - What are the strongest failure modes or traps?
+6. **Review date** - When should this be scored against reality?
 
 ## Why This Works
 
-1. **Reduces sycophancy** - Harder to just agree when making numeric predictions
-2. **Forces mechanism thinking** - Must reason about cause and effect
-3. **Creates accountability** - Predictions can be scored later
+1. **Reduces sycophancy** - Harder to just agree when forecasts must cash out numerically
+2. **Forces mechanism thinking** - Requires an outside view and a causal story
+3. **Surfaces disconfirming evidence** - Makes the strongest counter-case explicit
 4. **Separates values from facts** - User picks KPIs (values), you forecast (facts)
-5. **Builds calibration** - Track predictions over time to improve
+5. **Creates accountability** - Predictions can be scored later
 
 ## Quick Framework
 
@@ -52,8 +54,9 @@ long-term maintenance, or performance?
 If dev speed: P(ship 2x faster | X) = 60%, P(ship 2x faster | Y) = 40%
 If maintenance: P(easy maintenance at 2yr | X) = 30%, P(easy maintenance at 2yr | Y) = 70%
 
-Key assumption: You'll need to maintain this for 2+ years. If it's throwaway code,
-that changes the calculus."
+Outside view: teams usually regret a hard-to-maintain dependency more than a modest short-term speed loss.
+
+Strongest failure mode: if this is throwaway code, the maintenance KPI matters much less."
 ```
 
 ## Full Framework
@@ -64,6 +67,8 @@ For important decisions, use `/decide` to run the complete analysis with logging
 
 - **Never say "I think you should..."** - Only "If you value X, then P(Y|A) > P(Y|B)"
 - **Always surface the KPI** - Make implicit values explicit
+- **Use the outside view first** - Start with a reference class before the inside view
 - **Quantify or refuse** - Vague forecasts are useless
+- **State the strongest counter-case** - The answer should include disconfirming evidence
 - **Track everything** - Calibration requires data
 - **Confidence intervals matter** - "70% ± 20%" is more useful than "probably"

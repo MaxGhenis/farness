@@ -87,9 +87,30 @@ farness calibration
 farness pending
 ```
 
-### Claude Code Plugin
+### AI Agent Workflows
 
-Install the plugin for interactive decision analysis:
+`farness` is not tied to Claude. The Claude Code plugin is the most integrated path today, but the framework also works with Codex and other coding agents that can follow structured instructions or run shell commands.
+
+For agent-agnostic setup and prompt guidance, see [`docs/agent-workflows.md`](docs/agent-workflows.md).
+
+#### Codex and other coding agents
+
+Install the package, then give the agent a `farness` instruction block:
+
+```text
+Use the farness workflow for this decision.
+1. Define the KPI or outcome that would make the decision successful.
+2. Expand the option set beyond the choices already mentioned.
+3. Anchor on a relevant reference class or base rate before using the inside view.
+4. Show the main mechanism or decomposition that drives the forecast.
+5. List the strongest disconfirming evidence, failure modes, or decision traps.
+6. Give point estimates with 80% confidence intervals for each option on each KPI.
+7. Recommend a review date and say what would be logged later for calibration.
+```
+
+#### Claude Code plugin
+
+Install the plugin for the slash-command workflow:
 
 ```bash
 claude plugin marketplace add MaxGhenis/farness
@@ -106,13 +127,15 @@ Farness implements a structured decision process:
 
 2. **Option Expansion** - Don't just compare A vs B. What about C? What about waiting? What about hybrid approaches?
 
-3. **Decomposition** - Break forecasts into estimable components (Fermi-style).
+3. **Reference Class** - Start with a relevant outside view or base rate before adjusting for specifics.
 
-4. **Outside View** - Start with base rates before adjusting for specifics.
+4. **Mechanism / Decomposition** - Break forecasts into estimable components and causal drivers.
 
-5. **Confidence Intervals** - Point estimates aren't enough. How uncertain are you?
+5. **Disconfirming Evidence** - Surface the strongest failure modes, traps, and reasons the leading option could be wrong.
 
-6. **Tracking** - Log decisions and review outcomes to calibrate over time.
+6. **Confidence Intervals** - Point estimates aren't enough. How uncertain are you?
+
+7. **Tracking** - Log decisions and review outcomes to calibrate over time.
 
 ## Why This Works
 

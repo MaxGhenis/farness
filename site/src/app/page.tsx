@@ -30,8 +30,9 @@ function Hero() {
 
           <p className="text-[1.05rem] text-[#415463] max-w-[520px] mb-8 leading-[1.65] animate-[fade-up_0.8s_ease-out_0.12s_both]">
             <span className="[font-family:var(--font-editorial)] italic">farness</span>{" "}
-            is a Claude Code plugin that turns ambiguous reasoning into structured
-            forecasts — with probabilities, confidence intervals, and bias checks.
+            is a decision framework for Codex, Claude Code, and other agents that
+            turns ambiguous reasoning into structured forecasts — with explicit
+            outcomes, confidence intervals, and decision checks.
           </p>
 
           <div className="flex gap-4 flex-wrap animate-[fade-up_0.8s_ease-out_0.24s_both] max-[480px]:flex-col max-[480px]:items-start">
@@ -39,7 +40,7 @@ function Hero() {
               href="https://github.com/MaxGhenis/farness#installation"
               className="inline-flex items-center gap-2 py-[0.75em] px-6 [font-family:var(--font-display)] text-[0.88rem] font-semibold no-underline rounded-lg cursor-pointer transition-all duration-200 hover:no-underline hover:translate-y-[-1px] bg-[#14202B] text-[#FCFDFE] shadow-[0_2px_8px_rgba(20,32,43,0.12)]"
             >
-              Install the plugin
+              Get started
             </a>
             <Link
               href="/paper"
@@ -200,7 +201,7 @@ function HowItWorks() {
     {
       num: "01",
       title: "Intercept",
-      description: "Detect decision-language in AI coding flow. When the model encounters 'Should I...?' patterns, farness activates before an opinion can form.",
+      description: "Catch decision-language before the model hardens into advice. When a prompt sounds like 'Should we...?' or 'Which is better?', farness reframes it as a forecastable choice.",
     },
     {
       num: "02",
@@ -210,7 +211,7 @@ function HowItWorks() {
     {
       num: "03",
       title: "Anchor",
-      description: "Produce numeric forecasts with confidence intervals, base rates from comparable situations, cognitive bias identification, and a review date for accountability.",
+      description: "Produce numeric forecasts with confidence intervals, reference classes from comparable situations, disconfirming evidence, and a review date for accountability.",
     },
   ];
 
@@ -328,7 +329,7 @@ function ResearchProof() {
             Research
           </span>
           <h2 className="[font-family:var(--font-display)] text-[clamp(1.8rem,3.5vw,2.6rem)] font-medium leading-[1.08] tracking-[-0.03em] text-[#14202B]">
-            Pre-emptive rigor
+            Stability-under-probing
           </h2>
         </div>
 
@@ -343,23 +344,26 @@ function ResearchProof() {
           />
 
           <div className="relative grid grid-cols-3 gap-8 mb-10 max-md:grid-cols-1 max-md:gap-4">
-            <StatBlock value="11" label="scenarios tested" accent="#356C99" />
-            <StatBlock value="35-63%" label="more stable under challenge" accent="#A94E80" />
-            <StatBlock value="-0.30 to -0.35" label="Cohen's d (stability)" accent="#5E7A8D" />
+            <StatBlock value="11" label="study 1 scenarios" accent="#356C99" />
+            <StatBlock value="2" label="studies in the paper" accent="#A94E80" />
+            <StatBlock value="8" label="held-out validation cases" accent="#5E7A8D" />
           </div>
 
           <div className="relative text-[0.9rem] text-[#415463] leading-[1.65] max-w-[680px] mx-auto">
             <p className="mb-4">
-              Tested across Claude Opus 4.6 and GPT-5.2, framework-guided responses show
-              significantly more stability under probing — not because they are
-              stubborn, but because they have already incorporated the considerations
-              that probing would surface.
+              The paper introduces stability-under-probing as a way to evaluate
+              decision prompts without waiting for outcomes. In Study 1, farness
+              looked more prepared for the shared probe battery on Claude Opus 4.6
+              and GPT-5.4.
             </p>
             <p className="mb-4">
-              Chain-of-thought alone does not help. Structure does.
+              Study 2 then added held-out probes and showed the broader claim weakens
+              sharply off-framework. That makes the paper a methods result first,
+              not proof that farness is universally superior.
             </p>
             <p className="mb-6">
-              Naive responses converge toward where the framework started.
+              The useful claim is narrower and better: structured decision prompts
+              can be tested empirically, and farness is one case study.
             </p>
           </div>
 
@@ -422,8 +426,8 @@ function InstrumentModules() {
       description: "What usually happens in comparable situations. The outside view as empirical anchor.",
     },
     {
-      title: "Bias identification",
-      description: "Which cognitive biases are likely distorting this specific decision.",
+      title: "Disconfirming evidence",
+      description: "What counter-evidence, failure modes, or decision traps could make the leading option wrong.",
     },
     {
       title: "Review date",
@@ -482,32 +486,78 @@ function WhyItMatters() {
 /* ── Installation ── */
 
 function Installation() {
+  const workflows = [
+    {
+      title: "Codex and other agents",
+      description:
+        "Use the framework in Codex, Cursor, Windsurf, or any agent that can follow structured instructions.",
+      code: `Use the farness workflow:
+1. Define KPIs and horizon
+2. Expand options
+3. Anchor on a reference class
+4. Show the mechanism
+5. List disconfirming evidence
+6. Give 80% confidence intervals
+7. Set a review date`,
+    },
+    {
+      title: "Claude Code",
+      description:
+        "Install the plugin if you want the slash-command workflow and built-in skill trigger.",
+      code: `$ claude plugin marketplace add MaxGhenis/farness
+$ claude plugin install farness@maxghenis-plugins`,
+    },
+    {
+      title: "CLI and Python",
+      description:
+        "Use the package directly to log decisions, inspect them later, and score outcomes for calibration.",
+      code: `$ pip install farness
+$ farness new "Should we rewrite the auth layer?"`,
+    },
+  ];
+
   return (
     <section className="py-[clamp(88px,12vw,140px)] px-8 max-md:px-4 bg-[#F7FAFC]">
-      <div className="max-w-[680px] mx-auto text-center">
+      <div className="max-w-[1100px] mx-auto text-center">
         <span className="[font-family:var(--font-mono)] text-[0.68rem] tracking-[0.12em] uppercase text-[#A94E80] block mb-4 font-medium">
-          Built for Claude Code
+          Works across agents
         </span>
         <h2 className="[font-family:var(--font-display)] text-[clamp(1.8rem,3.5vw,2.6rem)] font-medium leading-[1.08] tracking-[-0.03em] text-[#14202B] mb-8">
           Install in seconds
         </h2>
 
-        <div
-          className="rounded-2xl p-6 mb-6 text-left"
-          style={{
-            background: "linear-gradient(180deg, #172633 0%, #0F1A24 100%)",
-            border: "1px solid #2B3D4B",
-          }}
-        >
-          <code className="[font-family:var(--font-mono)] text-[0.82rem] text-[#E8F0F5] leading-[2]">
-            <span className="text-[#9DB1BF]">$</span> pip install farness<br />
-            <span className="text-[#9DB1BF]">$</span> farness new &quot;Should we rewrite the auth layer?&quot;
-          </code>
-        </div>
-
-        <p className="text-[0.9rem] text-[#415463] mb-8 leading-[1.65]">
-          Works as a Claude Code plugin, Python library, or CLI tool. Open source.
+        <p className="text-[0.9rem] text-[#415463] mb-8 leading-[1.65] max-w-[760px] mx-auto">
+          Farness is not tied to one model vendor. Claude Code is the most integrated
+          path today, but the framework also works with Codex and any agent that can
+          follow a structured prompt.
         </p>
+
+        <div className="grid grid-cols-3 gap-4 mb-8 max-md:grid-cols-1">
+          {workflows.map((workflow) => (
+            <div
+              key={workflow.title}
+              className="rounded-2xl p-5 text-left bg-white border border-[#D9E4EC]"
+            >
+              <div className="[font-family:var(--font-display)] text-[1rem] font-semibold text-[#14202B] mb-2">
+                {workflow.title}
+              </div>
+              <p className="text-[0.82rem] text-[#415463] leading-[1.55] mb-4">
+                {workflow.description}
+              </p>
+              <div
+                className="rounded-xl p-4"
+                style={{
+                  background: "linear-gradient(180deg, #172633 0%, #0F1A24 100%)",
+                  border: "1px solid #2B3D4B",
+                }}
+              >
+                <pre className="[font-family:var(--font-mono)] text-[0.74rem] text-[#E8F0F5] leading-[1.7] whitespace-pre-wrap m-0">
+                  {workflow.code}
+                </pre>
+              </div>
+            </div>
+          ))}
+        </div>
 
         <div className="flex gap-4 justify-center flex-wrap">
           <a
@@ -524,6 +574,12 @@ function Installation() {
             className="inline-flex items-center gap-2 py-[0.75em] px-6 [font-family:var(--font-display)] text-[0.88rem] font-medium no-underline rounded-lg cursor-pointer transition-all duration-200 hover:no-underline bg-white text-[#415463] border border-[#BED0DB] hover:border-[#A94E80] hover:text-[#14202B]"
           >
             <span className="[font-family:var(--font-mono)] text-[0.82rem]">pip install farness</span>
+          </a>
+          <a
+            href="https://github.com/MaxGhenis/farness/blob/main/docs/agent-workflows.md"
+            className="inline-flex items-center gap-2 py-[0.75em] px-6 [font-family:var(--font-display)] text-[0.88rem] font-medium no-underline rounded-lg cursor-pointer transition-all duration-200 hover:no-underline bg-white text-[#415463] border border-[#BED0DB] hover:border-[#A94E80] hover:text-[#14202B]"
+          >
+            Agent workflows
           </a>
         </div>
       </div>
@@ -543,7 +599,7 @@ function ClosingSection() {
         href="https://github.com/MaxGhenis/farness#installation"
         className="inline-flex items-center gap-2 py-[0.75em] px-6 [font-family:var(--font-display)] text-[0.88rem] font-semibold no-underline rounded-lg cursor-pointer transition-all duration-200 hover:no-underline hover:translate-y-[-1px] bg-[#A94E80] text-white shadow-[0_2px_8px_rgba(169,78,128,0.18)]"
       >
-        Install the plugin
+        Start with farness
       </a>
     </section>
   );
