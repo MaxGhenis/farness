@@ -4,19 +4,19 @@ import "./globals.css";
 export const metadata: Metadata = {
   title: "Farness — Decision Optics for AI",
   description:
-    "When AI asks 'Should I...?' farness turns it into a forecast. A Claude Code plugin for pre-emptive rigor.",
+    "When AI asks 'Should I...?' farness turns it into a forecast. A decision framework for Codex, Claude Code, and other agents.",
   openGraph: {
     type: "website",
     title: "Farness — Decision Optics for AI",
     description:
-      "A Claude Code plugin that intercepts ambiguous decision questions and reframes them with explicit KPIs, numeric forecasts, base rates, bias checks, and review dates.",
+      "A decision framework that intercepts ambiguous decision questions and reframes them with explicit KPIs, numeric forecasts, reference classes, disconfirming evidence, and review dates.",
     url: "https://farness.ai",
   },
   twitter: {
     card: "summary",
     title: "Farness — Decision Optics for AI",
     description:
-      "When AI asks 'Should I...?' farness turns it into a forecast.",
+      "When AI asks 'Should I...?' farness turns it into a forecast for Codex, Claude Code, and other agents.",
   },
 };
 
