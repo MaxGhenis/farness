@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "farness"
-version = "0.1.0"
+version = "0.2.0"
 description = "Forecasting as a harness for decision-making"
 readme = "README.md"
 license = "MIT"
@@ -28,7 +28,8 @@ farness = "farness.cli:main"
 farness-mcp = "farness.mcp_server:main"
 
 [project.urls]
-Homepage = "https://github.com/MaxGhenis/farness"
+Homepage = "https://farness.ai"
+Documentation = "https://farness.ai/docs"
 Repository = "https://github.com/MaxGhenis/farness"
 Issues = "https://github.com/MaxGhenis/farness/issues"
 

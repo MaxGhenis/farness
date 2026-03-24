@@ -203,7 +203,7 @@ The package is automatically published to PyPI when a new release is created on 
 
 **To publish a new version:**
 1. Update version in `pyproject.toml`
-2. Create a new release on GitHub with a tag (e.g., `v0.1.1`)
+2. Create a new release on GitHub with a tag (e.g., `v0.2.0`)
 3. The GitHub Actions workflow will automatically build and publish to PyPI
 
 **Manual publishing:**
