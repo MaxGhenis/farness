@@ -23,6 +23,9 @@ jobs:
     steps:
       - uses: actions/checkout@v5
 
+      - name: Configure GitHub Pages
+        uses: actions/configure-pages@v5
+
       - name: Set up Python
         uses: actions/setup-python@v6
         with:
@@ -48,10 +51,24 @@ jobs:
         run: bun run build
         working-directory: site
 
+      - name: Archive Pages artifact
+        run: |
+          tar \
+            --dereference --hard-dereference \
+            --directory site/out \
+            -cvf "$RUNNER_TEMP/github-pages.tar" \
+            --exclude=.git \
+            --exclude=.github \
+            --exclude=".[^/]*" \
+            .
+
       - name: Upload artifact
-        uses: actions/upload-pages-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
-          path: site/out
+          name: github-pages
+          path: ${{ runner.temp }}/github-pages.tar
+          retention-days: 1
+          if-no-files-found: error
 
   deploy:
     environment:
