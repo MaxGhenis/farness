@@ -151,7 +151,7 @@ describe("Next.js migration", () => {
       expect(
         screen.getByText("Use farness with Codex, Claude Code, or the local CLI."),
       ).toBeInTheDocument();
-      expect(screen.getByText("Clone the repo and choose a path")).toBeInTheDocument();
+      expect(screen.getByText("Install the package and choose a path")).toBeInTheDocument();
       expect(screen.getAllByText(/\$farness/).length).toBeGreaterThan(0);
     });
 

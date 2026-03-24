@@ -5,6 +5,7 @@ import sys
 from datetime import datetime, timedelta
 
 from farness import Decision, DecisionStore, CalibrationTracker
+from farness.skills import install_skill
 
 
 def main():
@@ -42,7 +43,33 @@ def main():
     score_parser = subparsers.add_parser("score", help="Score a decision's outcomes")
     score_parser.add_argument("id", nargs="?", help="Decision ID (or prefix)")
 
+    install_skill_parser = subparsers.add_parser(
+        "install-skill", help="Install the packaged Codex or Claude skill"
+    )
+    install_skill_parser.add_argument(
+        "agent", choices=["codex", "claude"], help="Agent skill to install"
+    )
+    install_skill_parser.add_argument(
+        "--target",
+        help="Optional target skill directory. Defaults to ~/.codex/skills/farness or ~/.claude/skills/farness.",
+    )
+    install_skill_parser.add_argument(
+        "--force", action="store_true", help="Overwrite an existing skill with different contents"
+    )
+
     args = parser.parse_args()
+
+    if args.command == "install-skill":
+        try:
+            skill_path = install_skill(args.agent, args.target, args.force)
+        except FileExistsError as exc:
+            print(str(exc))
+            sys.exit(1)
+
+        print(f"Installed {args.agent} skill at {skill_path}")
+        print("Restart the agent so it picks up the new skill.")
+        return
+
     store = DecisionStore()
 
     if args.command == "list":

@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "farness"
-version = "0.2.0"
+version = "0.2.1"
 description = "Forecasting as a harness for decision-making"
 readme = "README.md"
 license = "MIT"
@@ -55,6 +55,12 @@ dev = [
 
 [tool.setuptools.packages.find]
 include = ["farness*"]
+
+[tool.setuptools.package-data]
+farness = [
+    "assets/skills/codex/SKILL.md",
+    "assets/skills/claude/SKILL.md",
+]
 
 [tool.black]
 line-length = 88

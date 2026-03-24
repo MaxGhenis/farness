@@ -100,7 +100,7 @@ export default function DocsPage() {
           </div>
         </header>
 
-        <Section kicker="Install" title="Clone the repo and choose a path">
+        <Section kicker="Install" title="Install the package and choose a path">
           <div id="install" className="grid grid-cols-3 gap-6 max-md:grid-cols-1">
             <div className="space-y-4">
               <h3 className="[font-family:var(--font-display)] text-[1.2rem] font-semibold text-[#14202B]">
@@ -110,11 +110,10 @@ export default function DocsPage() {
                 This gives Codex native tools, access to stored decisions, and a
                 reusable `$farness` skill.
               </p>
-              <CodeBlock>{`git clone https://github.com/MaxGhenis/farness.git
-cd farness
-python -m pip install -e '.[mcp]'
-codex mcp add farness -- uv run --project /path/to/farness --extra mcp farness-mcp
-ln -s /path/to/farness/skills/farness ~/.codex/skills/farness
+              <CodeBlock>{`python -m pip install 'farness[mcp]'
+PYTHON_BIN=$(python -c 'import sys; print(sys.executable)')
+codex mcp add farness -- "$PYTHON_BIN" -m farness.mcp_server
+farness install-skill codex
 # restart Codex, then use $farness`}</CodeBlock>
             </div>
 
@@ -126,12 +125,10 @@ ln -s /path/to/farness/skills/farness ~/.codex/skills/farness
                 This gives Claude Code the same local MCP-backed workflow as Codex,
                 but through Claude skills instead of the Codex skill format.
               </p>
-              <CodeBlock>{`git clone https://github.com/MaxGhenis/farness.git
-cd farness
-python -m pip install -e '.[mcp]'
-claude mcp add farness -- uv run --project /path/to/farness --extra mcp farness-mcp
-mkdir -p ~/.claude/skills
-ln -s /path/to/farness/.claude/skills/farness ~/.claude/skills/farness
+              <CodeBlock>{`python -m pip install 'farness[mcp]'
+PYTHON_BIN=$(python -c 'import sys; print(sys.executable)')
+claude mcp add --scope user farness -- "$PYTHON_BIN" -m farness.mcp_server
+farness install-skill claude
 # restart Claude Code`}</CodeBlock>
             </div>
 
@@ -143,9 +140,7 @@ ln -s /path/to/farness/.claude/skills/farness ~/.claude/skills/farness
                 This path creates and scores decisions locally. No LLM API key is
                 required for these commands.
               </p>
-              <CodeBlock>{`git clone https://github.com/MaxGhenis/farness.git
-cd farness
-python -m pip install -e .
+              <CodeBlock>{`python -m pip install farness
 farness new "Should we rewrite the auth layer?"
 farness list
 farness calibration`}</CodeBlock>

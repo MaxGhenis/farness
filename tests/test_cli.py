@@ -78,3 +78,50 @@ class TestShowWithPrefix:
 
         output = capsys.readouterr().out
         assert "Test decision for show" in output
+
+
+class TestInstallSkillCommand:
+    """Tests for the packaged skill installer."""
+
+    def test_install_skill_writes_codex_skill(self, tmp_path, capsys):
+        """farness install-skill codex should create a SKILL.md file."""
+        target = tmp_path / "codex-skill"
+
+        with patch("sys.argv", ["farness", "install-skill", "codex", "--target", str(target)]):
+            main()
+
+        skill_path = target / "SKILL.md"
+        assert skill_path.exists()
+        assert "Use this skill to turn vague decisions into forecastable choices." in skill_path.read_text()
+        output = capsys.readouterr().out
+        assert str(skill_path) in output
+
+    def test_install_skill_refuses_overwrite_without_force(self, tmp_path, capsys):
+        """install-skill should fail rather than overwrite different contents by default."""
+        target = tmp_path / "claude-skill"
+        target.mkdir(parents=True)
+        (target / "SKILL.md").write_text("different")
+
+        with patch(
+            "sys.argv", ["farness", "install-skill", "claude", "--target", str(target)]
+        ):
+            with pytest.raises(SystemExit):
+                main()
+
+        output = capsys.readouterr().out
+        assert "--force" in output
+
+    def test_install_skill_force_overwrites(self, tmp_path):
+        """install-skill --force should replace a different existing skill."""
+        target = tmp_path / "claude-skill"
+        target.mkdir(parents=True)
+        skill_path = target / "SKILL.md"
+        skill_path.write_text("different")
+
+        with patch(
+            "sys.argv",
+            ["farness", "install-skill", "claude", "--target", str(target), "--force"],
+        ):
+            main()
+
+        assert "Prefer the local `farness` MCP server" in skill_path.read_text()

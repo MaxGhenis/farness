@@ -38,5 +38,3 @@ If the `farness` MCP server is not connected, add it with:
 ```bash
 claude mcp add --scope user farness -- python -m farness.mcp_server
 ```
-
-If this skill is not installed yet, run `farness install-skill claude`.

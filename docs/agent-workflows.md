@@ -28,25 +28,26 @@ This works well in tools like Codex because they already have the two things `fa
 Minimal workflow:
 
 ```bash
-python -m pip install -e /path/to/farness
+python -m pip install farness
 farness new "Should we rewrite the auth layer?" --context "3 incidents this quarter; CTO prefers Rust; team is strongest in Node."
 ```
 
 Then ask the agent to use the core instruction above and to read or update the decision in `~/.farness/decisions.jsonl`.
 
-If you want Codex to pick this workflow up as a native skill, the repo now includes:
+If you want Codex to pick this workflow up as a native skill, install the packaged skill:
 
-- [`skills/farness/SKILL.md`](../skills/farness/SKILL.md)
-- [`skills/farness/agents/openai.yaml`](../skills/farness/agents/openai.yaml)
+```bash
+farness install-skill codex
+```
 
-Install it into Codex by symlinking or copying the skill into `$CODEX_HOME/skills` (default `~/.codex/skills`), then restart Codex.
+Then restart Codex.
 
 ## MCP server
 
-If you want a native tool surface instead of prompt copy-paste, `farness` now ships an MCP server. The current MCP path is source-first:
+If you want a native tool surface instead of prompt copy-paste, `farness` ships an MCP server:
 
 ```bash
-python -m pip install -e '/path/to/farness[mcp]'
+python -m pip install 'farness[mcp]'
 farness-mcp
 ```
 
@@ -69,7 +70,8 @@ The default transport is `stdio`, which is the right default for editor and agen
 To register the local server in Codex:
 
 ```bash
-codex mcp add farness -- uv run --project /path/to/farness --extra mcp farness-mcp
+PYTHON_BIN=$(python -c 'import sys; print(sys.executable)')
+codex mcp add farness -- "$PYTHON_BIN" -m farness.mcp_server
 ```
 
 ## Claude Code
@@ -77,10 +79,10 @@ codex mcp add farness -- uv run --project /path/to/farness --extra mcp farness-m
 Claude Code can use the same local MCP server and a local skill wrapper:
 
 ```bash
-python -m pip install -e '/path/to/farness[mcp]'
-claude mcp add farness -- uv run --project /path/to/farness --extra mcp farness-mcp
-mkdir -p ~/.claude/skills
-ln -s /path/to/farness/.claude/skills/farness ~/.claude/skills/farness
+python -m pip install 'farness[mcp]'
+PYTHON_BIN=$(python -c 'import sys; print(sys.executable)')
+claude mcp add --scope user farness -- "$PYTHON_BIN" -m farness.mcp_server
+farness install-skill claude
 ```
 
 This gives Claude Code a local skill plus the `farness` MCP tools/resources/prompts.

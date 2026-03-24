@@ -494,26 +494,28 @@ function Installation() {
     {
       title: "Codex",
       description:
-        "Source-first path: run the MCP server from the repo, install the skill, then use $farness when a decision prompt shows up.",
-      code: `$ git clone https://github.com/MaxGhenis/farness.git
-$ codex mcp add farness -- uv run --project /path/to/farness --extra mcp farness-mcp
-$ ln -s /path/to/farness/skills/farness ~/.codex/skills/farness
+        "Install the package, register the local MCP server with the same Python interpreter, then install the packaged skill.",
+      code: `$ python -m pip install 'farness[mcp]'
+$ PYTHON_BIN=$(python -c 'import sys; print(sys.executable)')
+$ codex mcp add farness -- "$PYTHON_BIN" -m farness.mcp_server
+$ farness install-skill codex
 $ # restart Codex, then use $farness`,
     },
     {
       title: "Claude Code",
       description:
-        "Use the same local MCP server plus a Claude skill. The plugin is still available if you prefer slash-command UX.",
-      code: `$ claude mcp add farness -- uv run --project /path/to/farness --extra mcp farness-mcp
-$ mkdir -p ~/.claude/skills
-$ ln -s /path/to/farness/.claude/skills/farness ~/.claude/skills/farness
+        "Use the same local MCP server plus a packaged Claude skill. The plugin is still available if you prefer slash-command UX.",
+      code: `$ python -m pip install 'farness[mcp]'
+$ PYTHON_BIN=$(python -c 'import sys; print(sys.executable)')
+$ claude mcp add --scope user farness -- "$PYTHON_BIN" -m farness.mcp_server
+$ farness install-skill claude
 $ # restart Claude Code`,
     },
     {
       title: "CLI / Python",
       description:
         "Local decision log and calibration tool. No LLM API key required unless you run separate experiment code against external models.",
-      code: `$ python -m pip install -e /path/to/farness
+      code: `$ python -m pip install farness
 $ farness new "Should we rewrite the auth layer?"
 $ farness calibration`,
     },
