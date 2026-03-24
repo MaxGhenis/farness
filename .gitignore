@@ -25,5 +25,8 @@ htmlcov/
 paper/_book/
 site/public/paper/
 
+# Local skill eval workspaces
+claude-plugin/skills/decision-framework-workspace/
+
 # OS
 .DS_Store
