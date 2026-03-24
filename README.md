@@ -202,27 +202,23 @@ python3 -m farness.experiments stability --strongest-validation --model gpt-5.2 
 
 ### Publishing to PyPI
 
-The package is automatically published to PyPI when a new release is created on GitHub.
+The package is published to PyPI from GitHub Releases using PyPI Trusted Publishing.
 
 **Setup (one-time):**
-1. Add `PYPI_API_TOKEN` secret to the GitHub repository
-   - Go to repository Settings > Secrets and variables > Actions
-   - Add a new repository secret named `PYPI_API_TOKEN`
-   - Value should be your PyPI API token (starts with `pypi-`)
+1. In PyPI, open the `farness` project publishing settings:
+   - `https://pypi.org/manage/project/farness/settings/publishing/`
+2. Add a GitHub Actions trusted publisher with:
+   - Owner: `MaxGhenis`
+   - Repository name: `farness`
+   - Workflow name: `publish.yml`
+   - Environment name: leave blank unless you later add a GitHub environment
 
 **To publish a new version:**
 1. Update version in `pyproject.toml`
 2. Create a new release on GitHub with a tag (e.g., `v0.2.0`)
 3. The GitHub Actions workflow will automatically build and publish to PyPI
 
-**Manual publishing:**
-```bash
-# Build the package
-python -m build
-
-# Upload to PyPI
-twine upload dist/* --username __token__ --password $PYPI_API_TOKEN
-```
+The repo no longer needs a stored `PYPI_API_TOKEN` once Trusted Publishing is configured.
 
 ## License
 
