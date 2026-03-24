@@ -35,22 +35,22 @@ Issues = "https://github.com/MaxGhenis/farness/issues"
 
 [project.optional-dependencies]
 experiments = [
-    "numpy>=1.24",
-    "scipy>=1.10",
-    "anthropic>=0.18",
-    "openai>=1.0",
-    "pandas>=2.0",
-    "statsmodels>=0.14",
-    "matplotlib>=3.7",
+    "numpy>=2.2.6",
+    "scipy>=1.15.3",
+    "anthropic>=0.86.0",
+    "openai>=2.29.0",
+    "pandas>=2.3.3",
+    "statsmodels>=0.14.6",
+    "matplotlib>=3.10.8",
 ]
 mcp = [
     "mcp[cli]>=1.26.0",
 ]
 dev = [
-    "pytest>=7.0",
-    "pytest-cov>=4.0",
-    "black>=23.0",
-    "ruff>=0.1.0",
+    "pytest>=9.0.2",
+    "pytest-cov>=7.1.0",
+    "black>=26.3.1",
+    "ruff>=0.15.7",
 ]
 
 [tool.setuptools.packages.find]
