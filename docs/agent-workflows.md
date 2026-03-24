@@ -34,6 +34,13 @@ farness new "Should we rewrite the auth layer?" --context "3 incidents this quar
 
 Then ask the agent to use the core instruction above and to read or update the decision in `~/.farness/decisions.jsonl`.
 
+If you want Codex to pick this workflow up as a native skill, the repo now includes:
+
+- [`skills/farness/SKILL.md`](../skills/farness/SKILL.md)
+- [`skills/farness/agents/openai.yaml`](../skills/farness/agents/openai.yaml)
+
+Install it into Codex by symlinking or copying the skill into `$CODEX_HOME/skills` (default `~/.codex/skills`), then restart Codex.
+
 ## MCP server
 
 If you want a native tool surface instead of prompt copy-paste, `farness` now ships an MCP server:
@@ -58,6 +65,12 @@ farness-mcp --store /path/to/decisions.jsonl
 ```
 
 The default transport is `stdio`, which is the right default for editor and agent integrations.
+
+To register the local server in Codex:
+
+```bash
+codex mcp add farness -- uv run --project /path/to/farness --extra mcp farness-mcp
+```
 
 ## Claude Code
 

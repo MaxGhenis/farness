@@ -1,0 +1,13 @@
+interface:
+  display_name: "Farness"
+  short_description: "Turn decisions into tracked forecasts with MCP-backed structure"
+  default_prompt: "Use $farness to turn this decision into explicit KPIs, options, forecasts, and a review date, then persist it with the farness MCP tools."
+
+dependencies:
+  tools:
+    - type: "mcp"
+      value: "farness"
+      description: "Local farness MCP server"
+
+policy:
+  allow_implicit_invocation: true

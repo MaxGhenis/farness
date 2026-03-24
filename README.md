@@ -119,6 +119,14 @@ farness-mcp
 
 It exposes tools for creating, listing, retrieving, saving, and scoring decisions, plus resources/prompts for the farness workflow.
 
+To register it in Codex as a local MCP server:
+
+```bash
+codex mcp add farness -- uv run --project /path/to/farness --extra mcp farness-mcp
+```
+
+To install the Codex skill, copy or symlink [`skills/farness`](skills/farness) into `$CODEX_HOME/skills` (default `~/.codex/skills`) and restart Codex.
+
 #### Claude Code plugin
 
 Install the plugin for the slash-command workflow:
