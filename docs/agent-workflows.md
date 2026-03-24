@@ -28,7 +28,7 @@ This works well in tools like Codex because they already have the two things `fa
 Minimal workflow:
 
 ```bash
-pip install farness
+python -m pip install -e /path/to/farness
 farness new "Should we rewrite the auth layer?" --context "3 incidents this quarter; CTO prefers Rust; team is strongest in Node."
 ```
 
@@ -43,10 +43,10 @@ Install it into Codex by symlinking or copying the skill into `$CODEX_HOME/skill
 
 ## MCP server
 
-If you want a native tool surface instead of prompt copy-paste, `farness` now ships an MCP server:
+If you want a native tool surface instead of prompt copy-paste, `farness` now ships an MCP server. The current MCP path is source-first:
 
 ```bash
-pip install 'farness[mcp]'
+python -m pip install -e '/path/to/farness[mcp]'
 farness-mcp
 ```
 
@@ -85,7 +85,7 @@ Then run `/farness:decide` for the full structured workflow.
 
 ## Python and CLI
 
-If you do not want any agent integration, `farness` still works as a local decision log and calibration tool.
+If you do not want any agent integration, `farness` still works as a local decision log and calibration tool. The CLI does not call an LLM and does not need an API key.
 
 Useful commands:
 

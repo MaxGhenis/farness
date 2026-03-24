@@ -494,8 +494,8 @@ function Installation() {
     {
       title: "Codex",
       description:
-        "Native path: register the local MCP server, install the skill, then use $farness when a decision prompt shows up.",
-      code: `$ pip install 'farness[mcp]'
+        "Source-first path: run the MCP server from the repo, install the skill, then use $farness when a decision prompt shows up.",
+      code: `$ git clone https://github.com/MaxGhenis/farness.git
 $ codex mcp add farness -- uv run --project /path/to/farness --extra mcp farness-mcp
 $ ln -s /path/to/farness/skills/farness ~/.codex/skills/farness
 $ # restart Codex, then use $farness`,
@@ -510,8 +510,8 @@ $ claude plugin install farness@maxghenis-plugins`,
     {
       title: "CLI / Python",
       description:
-        "Use the package directly to log decisions, inspect them later, and score outcomes for calibration.",
-      code: `$ pip install farness
+        "Local decision log and calibration tool. No LLM API key required unless you run separate experiment code against external models.",
+      code: `$ python -m pip install -e /path/to/farness
 $ farness new "Should we rewrite the auth layer?"
 $ farness calibration`,
     },
@@ -530,8 +530,9 @@ $ farness calibration`,
         <p className="text-[0.9rem] text-[#415463] mb-8 leading-[1.65] max-w-[760px] mx-auto">
           Farness now has a concrete Codex path: a local MCP server for persistence,
           a native skill for triggering, and the same forecast structure used in the
-          paper. Claude Code keeps the plugin workflow, and the CLI remains the
-          lowest-friction fallback.
+          paper. Today that path is source-first. Claude Code keeps the plugin
+          workflow, and the CLI is a local store and calibration surface, not an LLM
+          client.
         </p>
 
         <div className="grid grid-cols-3 gap-4 mb-8 max-md:grid-cols-1">
@@ -572,10 +573,10 @@ $ farness calibration`,
             View on GitHub
           </a>
           <a
-            href="https://pypi.org/project/farness/"
+            href="https://github.com/MaxGhenis/farness#installation"
             className="inline-flex items-center gap-2 py-[0.75em] px-6 [font-family:var(--font-display)] text-[0.88rem] font-medium no-underline rounded-lg cursor-pointer transition-all duration-200 hover:no-underline bg-white text-[#415463] border border-[#BED0DB] hover:border-[#A94E80] hover:text-[#14202B]"
           >
-            <span className="[font-family:var(--font-mono)] text-[0.82rem]">pip install farness</span>
+            <span className="[font-family:var(--font-mono)] text-[0.82rem]">source install guide</span>
           </a>
           <a
             href="https://github.com/MaxGhenis/farness/blob/main/docs/agent-workflows.md"

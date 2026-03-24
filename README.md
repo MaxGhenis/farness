@@ -11,7 +11,7 @@ Instead of asking "Is X good?" or "Should I do Y?", farness helps you:
 ## Installation
 
 ```bash
-pip install farness
+python -m pip install -e /path/to/farness
 ```
 
 ## Quick Start
@@ -95,7 +95,16 @@ For agent-agnostic setup and prompt guidance, see [`docs/agent-workflows.md`](do
 
 #### Codex and other coding agents
 
-Install the package, then give the agent a `farness` instruction block:
+The CLI is a local decision store and calibration tool. It does not call an LLM or require an API key by itself.
+
+To use the current repo version from source:
+
+```bash
+python -m pip install -e /path/to/farness
+farness new "Should we rewrite the auth layer?" --context "3 incidents this quarter; CTO prefers Rust; team is strongest in Node."
+```
+
+Then give the agent a `farness` instruction block:
 
 ```text
 Use the farness workflow for this decision.
@@ -110,10 +119,10 @@ Use the farness workflow for this decision.
 
 #### MCP server
 
-If you want a native tool interface instead of prompt copy-paste, run the MCP server:
+If you want a native tool interface instead of prompt copy-paste, run the MCP server from the repo:
 
 ```bash
-pip install 'farness[mcp]'
+python -m pip install -e '/path/to/farness[mcp]'
 farness-mcp
 ```
 
