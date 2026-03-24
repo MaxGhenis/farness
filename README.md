@@ -136,16 +136,25 @@ codex mcp add farness -- uv run --project /path/to/farness --extra mcp farness-m
 
 To install the Codex skill, copy or symlink [`skills/farness`](skills/farness) into `$CODEX_HOME/skills` (default `~/.codex/skills`) and restart Codex.
 
-#### Claude Code plugin
+#### Claude Code local skill + MCP
 
-Install the plugin for the slash-command workflow:
+Claude Code can use the same local MCP server and a local skill wrapper:
+
+```bash
+python -m pip install -e '/path/to/farness[mcp]'
+claude mcp add farness -- uv run --project /path/to/farness --extra mcp farness-mcp
+mkdir -p ~/.claude/skills
+ln -s /path/to/farness/.claude/skills/farness ~/.claude/skills/farness
+```
+
+The plugin path still works if you prefer the slash-command workflow:
 
 ```bash
 claude plugin marketplace add MaxGhenis/farness
 claude plugin install farness@maxghenis-plugins
 ```
 
-Then use `/farness:decide` to run a structured decision analysis.
+Then either use the local `farness` skill or `/farness:decide` if you installed the plugin.
 
 ## The Framework
 

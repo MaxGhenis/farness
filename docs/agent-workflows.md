@@ -74,14 +74,25 @@ codex mcp add farness -- uv run --project /path/to/farness --extra mcp farness-m
 
 ## Claude Code
 
-For Claude Code, you can use the plugin:
+Claude Code can use the same local MCP server and a local skill wrapper:
+
+```bash
+python -m pip install -e '/path/to/farness[mcp]'
+claude mcp add farness -- uv run --project /path/to/farness --extra mcp farness-mcp
+mkdir -p ~/.claude/skills
+ln -s /path/to/farness/.claude/skills/farness ~/.claude/skills/farness
+```
+
+This gives Claude Code a local skill plus the `farness` MCP tools/resources/prompts.
+
+The plugin path is still available if you prefer slash commands:
 
 ```bash
 claude plugin marketplace add MaxGhenis/farness
 claude plugin install farness@maxghenis-plugins
 ```
 
-Then run `/farness:decide` for the full structured workflow.
+Then either use the local skill or run `/farness:decide` for the plugin flow.
 
 ## Python and CLI
 

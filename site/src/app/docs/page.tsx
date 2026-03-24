@@ -120,7 +120,24 @@ ln -s /path/to/farness/skills/farness ~/.codex/skills/farness
 
             <div className="space-y-4">
               <h3 className="[font-family:var(--font-display)] text-[1.2rem] font-semibold text-[#14202B]">
-                2. Local CLI / Python
+                2. Claude Code local skill
+              </h3>
+              <p className="text-[0.92rem] text-[#415463] leading-[1.65]">
+                This gives Claude Code the same local MCP-backed workflow as Codex,
+                but through Claude skills instead of the Codex skill format.
+              </p>
+              <CodeBlock>{`git clone https://github.com/MaxGhenis/farness.git
+cd farness
+python -m pip install -e '.[mcp]'
+claude mcp add farness -- uv run --project /path/to/farness --extra mcp farness-mcp
+mkdir -p ~/.claude/skills
+ln -s /path/to/farness/.claude/skills/farness ~/.claude/skills/farness
+# restart Claude Code`}</CodeBlock>
+            </div>
+
+            <div className="space-y-4">
+              <h3 className="[font-family:var(--font-display)] text-[1.2rem] font-semibold text-[#14202B]">
+                3. Local CLI / Python
               </h3>
               <p className="text-[0.92rem] text-[#415463] leading-[1.65]">
                 This path creates and scores decisions locally. No LLM API key is
@@ -133,19 +150,22 @@ farness new "Should we rewrite the auth layer?"
 farness list
 farness calibration`}</CodeBlock>
             </div>
+          </div>
 
-            <div className="space-y-4">
-              <h3 className="[font-family:var(--font-display)] text-[1.2rem] font-semibold text-[#14202B]">
-                3. Claude Code plugin
-              </h3>
-              <p className="text-[0.92rem] text-[#415463] leading-[1.65]">
-                Use this if you want the plugin slash command instead of the Codex
-                skill + MCP flow.
-              </p>
-              <CodeBlock>{`claude plugin marketplace add MaxGhenis/farness
+          <div className="mt-8 rounded-2xl bg-white border border-[#D9E4EC] p-6">
+            <div className="[font-family:var(--font-mono)] text-[0.7rem] uppercase tracking-[0.08em] text-[#5E7A8D] mb-2">
+              Optional
+            </div>
+            <div className="[font-family:var(--font-display)] text-[1.05rem] font-semibold text-[#14202B] mb-2">
+              Claude plugin path
+            </div>
+            <p className="text-[0.9rem] text-[#415463] leading-[1.65] mb-4">
+              If you prefer the older plugin flow instead of local Claude skills, it
+              still works:
+            </p>
+            <CodeBlock>{`claude plugin marketplace add MaxGhenis/farness
 claude plugin install farness@maxghenis-plugins
 # then use /farness:decide`}</CodeBlock>
-            </div>
           </div>
         </Section>
 

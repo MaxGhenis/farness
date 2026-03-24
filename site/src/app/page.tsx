@@ -503,9 +503,11 @@ $ # restart Codex, then use $farness`,
     {
       title: "Claude Code",
       description:
-        "Install the plugin if you want the slash-command workflow and built-in skill trigger.",
-      code: `$ claude plugin marketplace add MaxGhenis/farness
-$ claude plugin install farness@maxghenis-plugins`,
+        "Use the same local MCP server plus a Claude skill. The plugin is still available if you prefer slash-command UX.",
+      code: `$ claude mcp add farness -- uv run --project /path/to/farness --extra mcp farness-mcp
+$ mkdir -p ~/.claude/skills
+$ ln -s /path/to/farness/.claude/skills/farness ~/.claude/skills/farness
+$ # restart Claude Code`,
     },
     {
       title: "CLI / Python",
