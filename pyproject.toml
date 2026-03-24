@@ -25,6 +25,7 @@ dependencies = []
 
 [project.scripts]
 farness = "farness.cli:main"
+farness-mcp = "farness.mcp_server:main"
 
 [project.urls]
 Homepage = "https://github.com/MaxGhenis/farness"
@@ -40,6 +41,9 @@ experiments = [
     "pandas>=2.0",
     "statsmodels>=0.14",
     "matplotlib>=3.7",
+]
+mcp = [
+    "mcp[cli]>=1.26.0",
 ]
 dev = [
     "pytest>=7.0",

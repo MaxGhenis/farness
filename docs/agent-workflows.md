@@ -34,6 +34,31 @@ farness new "Should we rewrite the auth layer?" --context "3 incidents this quar
 
 Then ask the agent to use the core instruction above and to read or update the decision in `~/.farness/decisions.jsonl`.
 
+## MCP server
+
+If you want a native tool surface instead of prompt copy-paste, `farness` now ships an MCP server:
+
+```bash
+pip install 'farness[mcp]'
+farness-mcp
+```
+
+The server exposes:
+
+- tools for creating, listing, retrieving, scoring, and saving structured decision analyses
+- resources for the framework, stored decisions, pending reviews, and calibration summary
+- prompts for analyzing, reviewing, and scoring stored decisions
+
+Optional configuration:
+
+```bash
+FARNESS_STORE_PATH=/path/to/decisions.jsonl farness-mcp
+# or
+farness-mcp --store /path/to/decisions.jsonl
+```
+
+The default transport is `stdio`, which is the right default for editor and agent integrations.
+
 ## Claude Code
 
 For Claude Code, you can use the plugin:

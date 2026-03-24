@@ -108,6 +108,17 @@ Use the farness workflow for this decision.
 7. Recommend a review date and say what would be logged later for calibration.
 ```
 
+#### MCP server
+
+If you want a native tool interface instead of prompt copy-paste, run the MCP server:
+
+```bash
+pip install 'farness[mcp]'
+farness-mcp
+```
+
+It exposes tools for creating, listing, retrieving, saving, and scoring decisions, plus resources/prompts for the farness workflow.
+
 #### Claude Code plugin
 
 Install the plugin for the slash-command workflow:
