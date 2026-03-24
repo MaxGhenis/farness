@@ -24,20 +24,24 @@ function Hero() {
       <div className="relative z-10 max-w-[1200px] mx-auto grid grid-cols-2 gap-12 items-start max-md:grid-cols-1 max-md:gap-8">
         {/* LEFT — headline, subhead, CTAs */}
         <div className="animate-[fade-up_0.8s_ease-out]">
+          <div className="[font-family:var(--font-mono)] text-[0.72rem] tracking-[0.12em] uppercase text-[#A94E80] mb-5">
+            Decision framework for agents
+          </div>
           <h1 className="[font-family:var(--font-display)] text-[clamp(2rem,4vw,3rem)] font-medium leading-[1.12] tracking-[-0.03em] mb-6 text-[#14202B]">
-            What if your AI&rsquo;s advice came with a forecast?
+            Make your agent forecast the decision.
           </h1>
 
           <p className="text-[1.05rem] text-[#415463] max-w-[520px] mb-8 leading-[1.65] animate-[fade-up_0.8s_ease-out_0.12s_both]">
             <span className="[font-family:var(--font-editorial)] italic">farness</span>{" "}
-            is a decision framework for Codex, Claude Code, and other agents that
-            turns ambiguous reasoning into structured forecasts — with explicit
-            outcomes, confidence intervals, and decision checks.
+            gives Codex, Claude Code, and other agents a common decision workflow.
+            In Codex it now runs as a native skill with a local MCP server, so the
+            output is explicit KPIs, reference classes, confidence intervals,
+            disconfirming evidence, and review dates.
           </p>
 
           <div className="flex gap-4 flex-wrap animate-[fade-up_0.8s_ease-out_0.24s_both] max-[480px]:flex-col max-[480px]:items-start">
             <a
-              href="https://github.com/MaxGhenis/farness#installation"
+              href="#install"
               className="inline-flex items-center gap-2 py-[0.75em] px-6 [font-family:var(--font-display)] text-[0.88rem] font-semibold no-underline rounded-lg cursor-pointer transition-all duration-200 hover:no-underline hover:translate-y-[-1px] bg-[#14202B] text-[#FCFDFE] shadow-[0_2px_8px_rgba(20,32,43,0.12)]"
             >
               Get started
@@ -107,11 +111,11 @@ function ForecastArtifact() {
         </div>
 
         <div className="mb-4">
-          <span className="text-[#6B8494] text-[0.7rem]">Biases:</span>
+          <span className="text-[#6B8494] text-[0.7rem]">Disconfirming evidence:</span>
           <div className="mt-2 flex gap-2 flex-wrap">
-            <BiasTag>novelty bias</BiasTag>
-            <BiasTag>sunk-cost pressure</BiasTag>
-            <BiasTag>availability from recent outage</BiasTag>
+            <EvidenceTag>ops fixes may solve this faster</EvidenceTag>
+            <EvidenceTag>rewrite could slip roadmap delivery</EvidenceTag>
+            <EvidenceTag>recent outage may overweight urgency</EvidenceTag>
           </div>
         </div>
 
@@ -163,7 +167,7 @@ function ForecastBar({
   );
 }
 
-function BiasTag({ children }: { children: React.ReactNode }) {
+function EvidenceTag({ children }: { children: React.ReactNode }) {
   return (
     <span
       className="text-[0.7rem] rounded-full py-[5px] px-[10px]"
@@ -305,7 +309,7 @@ function ExampleTransformation() {
                 <span className="text-[#F3B562]">Base rate:</span> 22%
               </div>
               <div className="mb-2">
-                <span className="text-[#E7A6C8]">Biases:</span> complexity bias, IKEA effect
+                <span className="text-[#E7A6C8]">Disconfirming evidence:</span> migration drag, auth edge cases
               </div>
               <div>
                 <span className="text-[#7FB2DA]">Review:</span> 2026-06-15
@@ -488,17 +492,13 @@ function WhyItMatters() {
 function Installation() {
   const workflows = [
     {
-      title: "Codex and other agents",
+      title: "Codex",
       description:
-        "Use the framework in Codex, Cursor, Windsurf, or any agent that can follow structured instructions.",
-      code: `Use the farness workflow:
-1. Define KPIs and horizon
-2. Expand options
-3. Anchor on a reference class
-4. Show the mechanism
-5. List disconfirming evidence
-6. Give 80% confidence intervals
-7. Set a review date`,
+        "Native path: register the local MCP server, install the skill, then use $farness when a decision prompt shows up.",
+      code: `$ pip install 'farness[mcp]'
+$ codex mcp add farness -- uv run --project /path/to/farness --extra mcp farness-mcp
+$ ln -s /path/to/farness/skills/farness ~/.codex/skills/farness
+$ # restart Codex, then use $farness`,
     },
     {
       title: "Claude Code",
@@ -508,28 +508,30 @@ function Installation() {
 $ claude plugin install farness@maxghenis-plugins`,
     },
     {
-      title: "CLI and Python",
+      title: "CLI / Python",
       description:
         "Use the package directly to log decisions, inspect them later, and score outcomes for calibration.",
       code: `$ pip install farness
-$ farness new "Should we rewrite the auth layer?"`,
+$ farness new "Should we rewrite the auth layer?"
+$ farness calibration`,
     },
   ];
 
   return (
-    <section className="py-[clamp(88px,12vw,140px)] px-8 max-md:px-4 bg-[#F7FAFC]">
+    <section id="install" className="py-[clamp(88px,12vw,140px)] px-8 max-md:px-4 bg-[#F7FAFC]">
       <div className="max-w-[1100px] mx-auto text-center">
         <span className="[font-family:var(--font-mono)] text-[0.68rem] tracking-[0.12em] uppercase text-[#A94E80] block mb-4 font-medium">
-          Works across agents
+          Agent integrations
         </span>
         <h2 className="[font-family:var(--font-display)] text-[clamp(1.8rem,3.5vw,2.6rem)] font-medium leading-[1.08] tracking-[-0.03em] text-[#14202B] mb-8">
-          Install in seconds
+          Use it natively or from the CLI
         </h2>
 
         <p className="text-[0.9rem] text-[#415463] mb-8 leading-[1.65] max-w-[760px] mx-auto">
-          Farness is not tied to one model vendor. Claude Code is the most integrated
-          path today, but the framework also works with Codex and any agent that can
-          follow a structured prompt.
+          Farness now has a concrete Codex path: a local MCP server for persistence,
+          a native skill for triggering, and the same forecast structure used in the
+          paper. Claude Code keeps the plugin workflow, and the CLI remains the
+          lowest-friction fallback.
         </p>
 
         <div className="grid grid-cols-3 gap-4 mb-8 max-md:grid-cols-1">

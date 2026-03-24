@@ -4,19 +4,19 @@ import "./globals.css";
 export const metadata: Metadata = {
   title: "Farness — Decision Optics for AI",
   description:
-    "When AI asks 'Should I...?' farness turns it into a forecast. A decision framework for Codex, Claude Code, and other agents.",
+    "Make your agent forecast the decision. A decision framework for Codex, Claude Code, and other agents, with native skill and MCP support.",
   openGraph: {
     type: "website",
     title: "Farness — Decision Optics for AI",
     description:
-      "A decision framework that intercepts ambiguous decision questions and reframes them with explicit KPIs, numeric forecasts, reference classes, disconfirming evidence, and review dates.",
+      "A decision framework for Codex, Claude Code, and other agents with native skill and MCP support, plus explicit KPIs, numeric forecasts, reference classes, disconfirming evidence, and review dates.",
     url: "https://farness.ai",
   },
   twitter: {
     card: "summary",
     title: "Farness — Decision Optics for AI",
     description:
-      "When AI asks 'Should I...?' farness turns it into a forecast for Codex, Claude Code, and other agents.",
+      "Make your agent forecast the decision with native Codex skill and MCP support, plus Claude Code and CLI workflows.",
   },
 };
 

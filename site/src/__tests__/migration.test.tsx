@@ -44,7 +44,7 @@ describe("Next.js migration", () => {
     it("renders hero subhead with farness mention", () => {
       render(<HomePage />);
       expect(
-        screen.getByText(/turns ambiguous reasoning into structured forecasts/),
+        screen.getByText(/native skill with a local MCP server/),
       ).toBeInTheDocument();
     });
 
@@ -83,8 +83,9 @@ describe("Next.js migration", () => {
 
     it("renders installation section", () => {
       render(<HomePage />);
-      expect(screen.getByText("Install in seconds")).toBeInTheDocument();
-      expect(screen.getByText("Codex and other agents")).toBeInTheDocument();
+      expect(screen.getByText("Use it natively or from the CLI")).toBeInTheDocument();
+      expect(screen.getByText("Codex")).toBeInTheDocument();
+      expect(screen.getAllByText(/\$farness/).length).toBeGreaterThan(0);
     });
 
     it("renders closing CTA", () => {
