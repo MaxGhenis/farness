@@ -237,7 +237,8 @@ def build_server(store_path: str | None = None):
         from pydantic import BaseModel, Field
     except ImportError as exc:  # pragma: no cover - exercised by installation, not tests
         raise RuntimeError(
-            "MCP support is not installed. Install with `pip install 'farness[mcp]'`."
+            "MCP support is not installed. Install the repo with MCP extras, "
+            "for example `python -m pip install -e '/path/to/farness[mcp]'`."
         ) from exc
 
     resolved_store_path = _resolve_store_path(store_path)
@@ -277,7 +278,6 @@ def build_server(store_path: str | None = None):
             "Use farness to structure decisions as KPIs, options, forecasts, "
             "reference classes, disconfirming evidence, and review dates."
         ),
-        dependencies=["farness[mcp]"],
     )
 
     def _store() -> DecisionStore:
