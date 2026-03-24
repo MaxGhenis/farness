@@ -63,7 +63,7 @@ Do not use it for:
 If the `farness` MCP server is not connected, tell the user to add it with:
 
 ```bash
-codex mcp add farness -- python -m farness.mcp_server
+farness setup codex
 ```
 
 Then continue with the same workflow once the server is available.

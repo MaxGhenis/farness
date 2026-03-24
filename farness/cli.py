@@ -2,9 +2,10 @@
 
 import argparse
 import sys
-from datetime import datetime, timedelta
+from datetime import datetime
 
 from farness import Decision, DecisionStore, CalibrationTracker
+from farness.agent_setup import setup_agent
 from farness.skills import install_skill
 
 
@@ -51,10 +52,41 @@ def main():
     )
     install_skill_parser.add_argument(
         "--target",
-        help="Optional target skill directory. Defaults to ~/.codex/skills/farness or ~/.claude/skills/farness.",
+        help=(
+            "Optional target skill directory. Defaults to "
+            "~/.codex/skills/farness or ~/.claude/skills/farness."
+        ),
     )
     install_skill_parser.add_argument(
-        "--force", action="store_true", help="Overwrite an existing skill with different contents"
+        "--force",
+        action="store_true",
+        help="Overwrite an existing skill with different contents",
+    )
+
+    setup_parser = subparsers.add_parser(
+        "setup", help="Install the skill and configure MCP for Codex or Claude"
+    )
+    setup_parser.add_argument(
+        "agent", choices=["codex", "claude"], help="Agent to configure"
+    )
+    setup_parser.add_argument(
+        "--target",
+        help=(
+            "Optional target skill directory. Defaults to "
+            "~/.codex/skills/farness or ~/.claude/skills/farness."
+        ),
+    )
+    setup_parser.add_argument(
+        "--force-skill",
+        action="store_true",
+        help="Overwrite an existing skill with different contents",
+    )
+    setup_parser.add_argument(
+        "--python-bin",
+        help=(
+            "Override the Python interpreter used for MCP registration. "
+            "Defaults to the current interpreter."
+        ),
     )
 
     args = parser.parse_args()
@@ -68,6 +100,32 @@ def main():
 
         print(f"Installed {args.agent} skill at {skill_path}")
         print("Restart the agent so it picks up the new skill.")
+        return
+
+    if args.command == "setup":
+        try:
+            result = setup_agent(
+                args.agent,
+                target_dir=args.target,
+                force_skill=args.force_skill,
+                python_bin=args.python_bin,
+            )
+        except RuntimeError as exc:
+            print(str(exc))
+            sys.exit(1)
+
+        print(f"Installed {args.agent} skill at {result.skill_path}")
+        if result.mcp_already_configured:
+            print(
+                f"MCP server `{result.mcp_server_name}` is already configured "
+                f"in {result.agent_cli}."
+            )
+        else:
+            print(
+                f"Configured MCP server `{result.mcp_server_name}` in "
+                f"{result.agent_cli} using {result.python_bin}."
+            )
+        print("Restart the agent so it picks up the new skill and MCP server.")
         return
 
     store = DecisionStore()
@@ -84,7 +142,11 @@ def main():
             print(f"All decisions ({len(decisions)}):\n")
 
         for d in decisions:
-            status = "✓ scored" if d.scored_at else ("⏳ pending" if d.chosen_option else "○ open")
+            status = (
+                "✓ scored"
+                if d.scored_at
+                else ("⏳ pending" if d.chosen_option else "○ open")
+            )
             print(f"  [{d.id[:8]}] {d.question[:50]} ({status})")
 
     elif args.command == "new":
@@ -120,7 +182,9 @@ def main():
                 print(f"\n  {o.name}: {o.description}")
                 for kpi_name, f in o.forecasts.items():
                     ci_low, ci_high = f.confidence_interval
-                    print(f"    {kpi_name}: {f.point_estimate} ({ci_low}-{ci_high} @ {f.confidence_level:.0%})")
+                    print(
+                        f"    {kpi_name}: {f.point_estimate} ({ci_low}-{ci_high} @ {f.confidence_level:.0%})"
+                    )
 
         if d.chosen_option:
             print(f"\nChosen: {d.chosen_option}")
@@ -139,15 +203,15 @@ def main():
         print(f"Decisions scored: {summary['n_decisions']}")
         print(f"Forecasts scored: {summary['n_forecasts']}")
 
-        if summary['coverage'] is not None:
+        if summary["coverage"] is not None:
             print(f"\nCoverage: {summary['coverage']:.1%}")
             print(f"Expected: {summary['expected_coverage']:.1%}")
             print(f"\n{summary['interpretation']}")
 
-        if summary['mean_absolute_error'] is not None:
+        if summary["mean_absolute_error"] is not None:
             print(f"\nMean absolute error: {summary['mean_absolute_error']:.2f}")
 
-        if summary['mean_relative_error'] is not None:
+        if summary["mean_relative_error"] is not None:
             print(f"Mean relative error: {summary['mean_relative_error']:.1%}")
 
     elif args.command == "pending":
@@ -157,7 +221,9 @@ def main():
         else:
             print(f"{len(pending)} decision(s) ready for review:\n")
             for d in pending:
-                days_past = (datetime.now() - d.review_date).days if d.review_date else 0
+                days_past = (
+                    (datetime.now() - d.review_date).days if d.review_date else 0
+                )
                 print(f"  [{d.id[:8]}] {d.question[:50]}")
                 print(f"           Review was {days_past} days ago")
 
@@ -229,7 +295,9 @@ def main():
                 f = chosen.forecasts[kpi.name]
                 ci_low, ci_high = f.confidence_interval
                 unit = f" {kpi.unit}" if kpi.unit else ""
-                print(f"  {kpi.name}: {f.point_estimate}{unit} ({ci_low}-{ci_high} @ {f.confidence_level:.0%})")
+                print(
+                    f"  {kpi.name}: {f.point_estimate}{unit} ({ci_low}-{ci_high} @ {f.confidence_level:.0%})"
+                )
 
         # Gather actual outcomes
         print(f"\nEnter actual outcomes:")
@@ -269,12 +337,16 @@ def main():
             ci_low, ci_high = f.confidence_interval
             in_ci = "✓" if ci_low <= actual <= ci_high else "✗"
             error = actual - f.point_estimate
-            print(f"  {kpi_name}: predicted {f.point_estimate}, actual {actual} (error: {error:+.2f}) {in_ci}")
+            print(
+                f"  {kpi_name}: predicted {f.point_estimate}, actual {actual} (error: {error:+.2f}) {in_ci}"
+            )
 
         # Show updated calibration
         tracker = CalibrationTracker(store.list_all())
         if tracker.scores:
-            print(f"\nCalibration: {tracker.coverage:.0%} coverage ({tracker.expected_coverage:.0%} expected)")
+            print(
+                f"\nCalibration: {tracker.coverage:.0%} coverage ({tracker.expected_coverage:.0%} expected)"
+            )
 
     else:
         parser.print_help()

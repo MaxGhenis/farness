@@ -1,14 +1,13 @@
-"""Tests for CLI commands."""
-
-import pytest
 import tempfile
 from pathlib import Path
+from types import SimpleNamespace
 from unittest.mock import patch
-import sys
 
-from farness.framework import Decision, KPI, Option, Forecast
-from farness.storage import DecisionStore
+import pytest
+
 from farness.cli import main
+from farness.framework import Decision
+from farness.storage import DecisionStore
 
 
 @pytest.fixture
@@ -87,17 +86,22 @@ class TestInstallSkillCommand:
         """farness install-skill codex should create a SKILL.md file."""
         target = tmp_path / "codex-skill"
 
-        with patch("sys.argv", ["farness", "install-skill", "codex", "--target", str(target)]):
+        with patch(
+            "sys.argv", ["farness", "install-skill", "codex", "--target", str(target)]
+        ):
             main()
 
         skill_path = target / "SKILL.md"
         assert skill_path.exists()
-        assert "Use this skill to turn vague decisions into forecastable choices." in skill_path.read_text()
+        assert (
+            "Use this skill to turn vague decisions into forecastable choices."
+            in skill_path.read_text()
+        )
         output = capsys.readouterr().out
         assert str(skill_path) in output
 
     def test_install_skill_refuses_overwrite_without_force(self, tmp_path, capsys):
-        """install-skill should fail rather than overwrite different contents by default."""
+        """install-skill should fail rather than overwrite different contents."""
         target = tmp_path / "claude-skill"
         target.mkdir(parents=True)
         (target / "SKILL.md").write_text("different")
@@ -125,3 +129,49 @@ class TestInstallSkillCommand:
             main()
 
         assert "Prefer the local `farness` MCP server" in skill_path.read_text()
+
+
+class TestSetupCommand:
+    """Tests for the one-command agent setup flow."""
+
+    def test_setup_prints_success(self, capsys):
+        result = SimpleNamespace(
+            skill_path="/tmp/skill/SKILL.md",
+            mcp_server_name="farness",
+            mcp_already_configured=False,
+            agent_cli="codex",
+            python_bin="/tmp/python",
+        )
+
+        with patch("farness.cli.setup_agent", return_value=result):
+            with patch("sys.argv", ["farness", "setup", "codex"]):
+                main()
+
+        output = capsys.readouterr().out
+        assert "Installed codex skill at /tmp/skill/SKILL.md" in output
+        assert "Configured MCP server `farness` in codex using /tmp/python." in output
+
+    def test_setup_reports_existing_server(self, capsys):
+        result = SimpleNamespace(
+            skill_path="/tmp/skill/SKILL.md",
+            mcp_server_name="farness",
+            mcp_already_configured=True,
+            agent_cli="claude",
+            python_bin="/tmp/python",
+        )
+
+        with patch("farness.cli.setup_agent", return_value=result):
+            with patch("sys.argv", ["farness", "setup", "claude"]):
+                main()
+
+        output = capsys.readouterr().out
+        assert "MCP server `farness` is already configured in claude." in output
+
+    def test_setup_exits_on_runtime_error(self, capsys):
+        with patch("farness.cli.setup_agent", side_effect=RuntimeError("boom")):
+            with patch("sys.argv", ["farness", "setup", "codex"]):
+                with pytest.raises(SystemExit):
+                    main()
+
+        output = capsys.readouterr().out
+        assert "boom" in output

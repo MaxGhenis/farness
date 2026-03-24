@@ -494,21 +494,17 @@ function Installation() {
     {
       title: "Codex",
       description:
-        "Install the package, register the local MCP server with the same Python interpreter, then install the packaged skill.",
+        "Install the package, run one setup command, then use $farness when a decision prompt shows up.",
       code: `$ python -m pip install 'farness[mcp]'
-$ PYTHON_BIN=$(python -c 'import sys; print(sys.executable)')
-$ codex mcp add farness -- "$PYTHON_BIN" -m farness.mcp_server
-$ farness install-skill codex
+$ farness setup codex
 $ # restart Codex, then use $farness`,
     },
     {
       title: "Claude Code",
       description:
-        "Use the same local MCP server plus a packaged Claude skill. The plugin is still available if you prefer slash-command UX.",
+        "Use the same single-command setup flow for Claude. The plugin is still available if you prefer slash-command UX.",
       code: `$ python -m pip install 'farness[mcp]'
-$ PYTHON_BIN=$(python -c 'import sys; print(sys.executable)')
-$ claude mcp add --scope user farness -- "$PYTHON_BIN" -m farness.mcp_server
-$ farness install-skill claude
+$ farness setup claude
 $ # restart Claude Code`,
     },
     {

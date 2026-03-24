@@ -131,17 +131,10 @@ It exposes tools for creating, listing, retrieving, saving, and scoring decision
 To register it in Codex as a local MCP server:
 
 ```bash
-PYTHON_BIN=$(python -c 'import sys; print(sys.executable)')
-codex mcp add farness -- "$PYTHON_BIN" -m farness.mcp_server
+farness setup codex
 ```
 
-To install the packaged Codex skill:
-
-```bash
-farness install-skill codex
-```
-
-Then restart Codex.
+This installs the packaged Codex skill and registers the MCP server with the same Python interpreter that launched `farness`.
 
 #### Claude Code local skill + MCP
 
@@ -149,10 +142,10 @@ Claude Code can use the same local MCP server and a local skill wrapper:
 
 ```bash
 python -m pip install 'farness[mcp]'
-PYTHON_BIN=$(python -c 'import sys; print(sys.executable)')
-claude mcp add --scope user farness -- "$PYTHON_BIN" -m farness.mcp_server
-farness install-skill claude
+farness setup claude
 ```
+
+This installs the packaged Claude skill and registers the MCP server in user scope.
 
 The plugin path still works if you prefer the slash-command workflow:
 

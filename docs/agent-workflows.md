@@ -37,7 +37,8 @@ Then ask the agent to use the core instruction above and to read or update the d
 If you want Codex to pick this workflow up as a native skill, install the packaged skill:
 
 ```bash
-farness install-skill codex
+python -m pip install 'farness[mcp]'
+farness setup codex
 ```
 
 Then restart Codex.
@@ -70,8 +71,7 @@ The default transport is `stdio`, which is the right default for editor and agen
 To register the local server in Codex:
 
 ```bash
-PYTHON_BIN=$(python -c 'import sys; print(sys.executable)')
-codex mcp add farness -- "$PYTHON_BIN" -m farness.mcp_server
+farness setup codex
 ```
 
 ## Claude Code
@@ -80,9 +80,7 @@ Claude Code can use the same local MCP server and a local skill wrapper:
 
 ```bash
 python -m pip install 'farness[mcp]'
-PYTHON_BIN=$(python -c 'import sys; print(sys.executable)')
-claude mcp add --scope user farness -- "$PYTHON_BIN" -m farness.mcp_server
-farness install-skill claude
+farness setup claude
 ```
 
 This gives Claude Code a local skill plus the `farness` MCP tools/resources/prompts.

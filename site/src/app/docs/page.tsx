@@ -54,10 +54,9 @@ export default function DocsPage() {
             Use farness with Codex, Claude Code, or the local CLI.
           </h1>
           <p className="text-[1.02rem] text-[#415463] leading-[1.7] max-w-[760px] mb-8">
-            The current install story is source-first. The repo contains the most
-            complete version: CLI, MCP server, Codex skill, paper assets, and the
-            Claude Code plugin files. The CLI itself is local-only and does not call
-            an LLM or require an API key.
+            The install story is package-first. The PyPI package now includes the
+            CLI, MCP server, and packaged Codex and Claude skills. The CLI itself is
+            local-only and does not call an LLM or require an API key.
           </p>
 
           <div className="grid grid-cols-3 gap-4 max-md:grid-cols-1">
@@ -111,9 +110,7 @@ export default function DocsPage() {
                 reusable `$farness` skill.
               </p>
               <CodeBlock>{`python -m pip install 'farness[mcp]'
-PYTHON_BIN=$(python -c 'import sys; print(sys.executable)')
-codex mcp add farness -- "$PYTHON_BIN" -m farness.mcp_server
-farness install-skill codex
+farness setup codex
 # restart Codex, then use $farness`}</CodeBlock>
             </div>
 
@@ -126,9 +123,7 @@ farness install-skill codex
                 but through Claude skills instead of the Codex skill format.
               </p>
               <CodeBlock>{`python -m pip install 'farness[mcp]'
-PYTHON_BIN=$(python -c 'import sys; print(sys.executable)')
-claude mcp add --scope user farness -- "$PYTHON_BIN" -m farness.mcp_server
-farness install-skill claude
+farness setup claude
 # restart Claude Code`}</CodeBlock>
             </div>
 
@@ -194,6 +189,20 @@ claude plugin install farness@maxghenis-plugins
               </div>
             ))}
           </div>
+        </Section>
+
+        <Section kicker="Quickstart" title="Two commands, then restart the client">
+          <div className="grid grid-cols-2 gap-6 max-md:grid-cols-1">
+            <CodeBlock>{`python -m pip install 'farness[mcp]'
+farness setup codex`}</CodeBlock>
+            <CodeBlock>{`python -m pip install 'farness[mcp]'
+farness setup claude`}</CodeBlock>
+          </div>
+          <p className="mt-5 text-[0.92rem] text-[#415463] leading-[1.7] max-w-[760px]">
+            `farness setup` installs the packaged skill and registers the local MCP
+            server with the same Python interpreter that launched `farness`. The last
+            step is just restarting Codex or Claude Code.
+          </p>
         </Section>
 
         <Section kicker="Workflow" title="What to expect from the framework">
