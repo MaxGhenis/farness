@@ -2,14 +2,10 @@
 
 from __future__ import annotations
 
+import os
 from importlib import resources
 from pathlib import Path
 
-
-DEFAULT_SKILL_DIRS = {
-    "codex": Path.home() / ".codex" / "skills" / "farness",
-    "claude": Path.home() / ".claude" / "skills" / "farness",
-}
 
 SKILL_RESOURCE_PATHS = {
     "codex": ("assets", "skills", "codex", "SKILL.md"),
@@ -19,10 +15,16 @@ SKILL_RESOURCE_PATHS = {
 
 def default_skill_dir(agent: str) -> Path:
     """Return the default installation directory for an agent skill."""
-    try:
-        return DEFAULT_SKILL_DIRS[agent]
-    except KeyError as exc:
-        raise ValueError(f"Unsupported agent: {agent}") from exc
+    if agent == "codex":
+        codex_home = os.environ.get("CODEX_HOME")
+        if codex_home:
+            return Path(codex_home).expanduser() / "skills" / "farness"
+        return Path.home() / ".codex" / "skills" / "farness"
+
+    if agent == "claude":
+        return Path.home() / ".claude" / "skills" / "farness"
+
+    raise ValueError(f"Unsupported agent: {agent}")
 
 
 def load_skill_text(agent: str) -> str:

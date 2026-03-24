@@ -39,6 +39,7 @@ If you want Codex to pick this workflow up as a native skill, install the packag
 ```bash
 python -m pip install 'farness[mcp]'
 farness setup codex
+farness doctor codex
 ```
 
 Then restart Codex.
@@ -81,6 +82,7 @@ Claude Code can use the same local MCP server and a local skill wrapper:
 ```bash
 python -m pip install 'farness[mcp]'
 farness setup claude
+farness doctor claude
 ```
 
 This gives Claude Code a local skill plus the `farness` MCP tools/resources/prompts.

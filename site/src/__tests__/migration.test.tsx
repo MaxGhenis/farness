@@ -153,6 +153,7 @@ describe("Next.js migration", () => {
       ).toBeInTheDocument();
       expect(screen.getByText("Install the package and choose a path")).toBeInTheDocument();
       expect(screen.getAllByText(/farness setup codex/).length).toBeGreaterThan(0);
+      expect(screen.getAllByText(/farness doctor codex/).length).toBeGreaterThan(0);
       expect(screen.getAllByText(/\$farness/).length).toBeGreaterThan(0);
     });
 

@@ -528,11 +528,10 @@ $ farness calibration`,
         </h2>
 
         <p className="text-[0.9rem] text-[#415463] mb-8 leading-[1.65] max-w-[760px] mx-auto">
-          Farness now has a concrete Codex path: a local MCP server for persistence,
-          a native skill for triggering, and the same forecast structure used in the
-          paper. Today that path is source-first. Claude Code keeps the plugin
-          workflow, and the CLI is a local store and calibration surface, not an LLM
-          client.
+          Farness now has a package-first agent path: a local MCP server for
+          persistence, packaged skills for Codex and Claude Code, and the same
+          forecast structure used in the paper. The Claude plugin remains optional,
+          and the CLI is a local store and calibration surface, not an LLM client.
         </p>
 
         <div className="grid grid-cols-3 gap-4 mb-8 max-md:grid-cols-1">

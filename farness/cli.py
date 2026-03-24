@@ -5,7 +5,7 @@ import sys
 from datetime import datetime
 
 from farness import Decision, DecisionStore, CalibrationTracker
-from farness.agent_setup import setup_agent
+from farness.agent_setup import inspect_agent_setup, setup_agent
 from farness.skills import install_skill
 
 
@@ -54,7 +54,8 @@ def main():
         "--target",
         help=(
             "Optional target skill directory. Defaults to "
-            "~/.codex/skills/farness or ~/.claude/skills/farness."
+            "$CODEX_HOME/skills/farness (or ~/.codex/skills/farness) for Codex, "
+            "or ~/.claude/skills/farness for Claude."
         ),
     )
     install_skill_parser.add_argument(
@@ -73,7 +74,8 @@ def main():
         "--target",
         help=(
             "Optional target skill directory. Defaults to "
-            "~/.codex/skills/farness or ~/.claude/skills/farness."
+            "$CODEX_HOME/skills/farness (or ~/.codex/skills/farness) for Codex, "
+            "or ~/.claude/skills/farness for Claude."
         ),
     )
     setup_parser.add_argument(
@@ -85,6 +87,28 @@ def main():
         "--python-bin",
         help=(
             "Override the Python interpreter used for MCP registration. "
+            "Defaults to the current interpreter."
+        ),
+    )
+
+    doctor_parser = subparsers.add_parser(
+        "doctor", help="Check local Codex or Claude skill and MCP setup"
+    )
+    doctor_parser.add_argument(
+        "agent", choices=["codex", "claude"], help="Agent to inspect"
+    )
+    doctor_parser.add_argument(
+        "--target",
+        help=(
+            "Optional target skill directory. Defaults to "
+            "$CODEX_HOME/skills/farness (or ~/.codex/skills/farness) for Codex, "
+            "or ~/.claude/skills/farness for Claude."
+        ),
+    )
+    doctor_parser.add_argument(
+        "--python-bin",
+        help=(
+            "Override the Python interpreter shown in the manual MCP command. "
             "Defaults to the current interpreter."
         ),
     )
@@ -126,6 +150,41 @@ def main():
                 f"{result.agent_cli} using {result.python_bin}."
             )
         print("Restart the agent so it picks up the new skill and MCP server.")
+        return
+
+    if args.command == "doctor":
+        result = inspect_agent_setup(
+            args.agent,
+            target_dir=args.target,
+            python_bin=args.python_bin,
+        )
+
+        print(f"Agent: {args.agent}")
+        print(f"Skill path: {result.skill_path}")
+        print(f"Skill installed: {'yes' if result.skill_installed else 'no'}")
+        print(f"CLI found: {result.cli_path or 'no'}")
+        print(
+            f"MCP server `{result.mcp_server_name}` configured: "
+            f"{'yes' if result.mcp_configured else 'no'}"
+        )
+
+        if result.skill_installed and result.mcp_configured:
+            print("Status: ready. Restart the agent if it was already open.")
+            return
+
+        print("Recommended next step:")
+        if not result.skill_installed and not result.mcp_configured and result.cli_path:
+            print(f"  farness setup {args.agent}")
+        elif not result.skill_installed:
+            print(f"  farness install-skill {args.agent}")
+            if result.cli_path is None:
+                print(f"  Then install the {args.agent} CLI and run:")
+                print(f"  {result.manual_command}")
+        elif result.cli_path is None:
+            print(f"  Install the {args.agent} CLI and run:")
+            print(f"  {result.manual_command}")
+        elif not result.mcp_configured:
+            print(f"  {result.manual_command}")
         return
 
     store = DecisionStore()

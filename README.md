@@ -132,6 +132,7 @@ To register it in Codex as a local MCP server:
 
 ```bash
 farness setup codex
+farness doctor codex
 ```
 
 This installs the packaged Codex skill and registers the MCP server with the same Python interpreter that launched `farness`.
@@ -143,6 +144,7 @@ Claude Code can use the same local MCP server and a local skill wrapper:
 ```bash
 python -m pip install 'farness[mcp]'
 farness setup claude
+farness doctor claude
 ```
 
 This installs the packaged Claude skill and registers the MCP server in user scope.

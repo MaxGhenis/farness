@@ -175,8 +175,8 @@ claude plugin install farness@maxghenis-plugins
                 "Tells Codex when to use the MCP tools and what the farness workflow should produce.",
               ],
               [
-                "Claude plugin",
-                "Provides Claude-specific trigger and slash-command UX around the same decision framework.",
+                "Claude skill",
+                "Tells Claude Code when to use the same local MCP server. The older plugin path stays optional.",
               ],
             ].map(([title, description]) => (
               <div key={title} className="rounded-2xl bg-white border border-[#D9E4EC] p-6">
@@ -202,6 +202,15 @@ farness setup claude`}</CodeBlock>
             `farness setup` installs the packaged skill and registers the local MCP
             server with the same Python interpreter that launched `farness`. The last
             step is just restarting Codex or Claude Code.
+          </p>
+          <div className="mt-6 grid grid-cols-2 gap-6 max-md:grid-cols-1">
+            <CodeBlock>{`farness doctor codex`}</CodeBlock>
+            <CodeBlock>{`farness doctor claude`}</CodeBlock>
+          </div>
+          <p className="mt-5 text-[0.92rem] text-[#415463] leading-[1.7] max-w-[760px]">
+            `farness doctor` checks three things: whether the packaged skill is
+            installed, whether the agent CLI is on `PATH`, and whether the local MCP
+            server is already registered.
           </p>
         </Section>
 

@@ -7,6 +7,7 @@ import pytest
 
 from farness.cli import main
 from farness.framework import Decision
+from farness.skills import default_skill_dir
 from farness.storage import DecisionStore
 
 
@@ -130,6 +131,14 @@ class TestInstallSkillCommand:
 
         assert "Prefer the local `farness` MCP server" in skill_path.read_text()
 
+    def test_codex_default_skill_dir_respects_codex_home(self, monkeypatch, tmp_path):
+        """Default Codex install path should use CODEX_HOME when it is set."""
+        monkeypatch.setenv("CODEX_HOME", str(tmp_path / "codex-home"))
+
+        skill_dir = default_skill_dir("codex")
+
+        assert skill_dir == tmp_path / "codex-home" / "skills" / "farness"
+
 
 class TestSetupCommand:
     """Tests for the one-command agent setup flow."""
@@ -175,3 +184,46 @@ class TestSetupCommand:
 
         output = capsys.readouterr().out
         assert "boom" in output
+
+
+class TestDoctorCommand:
+    """Tests for the agent doctor command."""
+
+    def test_doctor_reports_ready_status(self, capsys):
+        result = SimpleNamespace(
+            agent_cli="codex",
+            cli_path="/usr/local/bin/codex",
+            skill_path="/tmp/skill/SKILL.md",
+            skill_installed=True,
+            mcp_server_name="farness",
+            mcp_configured=True,
+            manual_command="codex mcp add farness -- /tmp/python -m farness.mcp_server",
+        )
+
+        with patch("farness.cli.inspect_agent_setup", return_value=result):
+            with patch("sys.argv", ["farness", "doctor", "codex"]):
+                main()
+
+        output = capsys.readouterr().out
+        assert "Skill installed: yes" in output
+        assert "configured: yes" in output
+        assert "Status: ready" in output
+
+    def test_doctor_recommends_setup_when_missing(self, capsys):
+        result = SimpleNamespace(
+            agent_cli="claude",
+            cli_path="/usr/local/bin/claude",
+            skill_path="/tmp/skill/SKILL.md",
+            skill_installed=False,
+            mcp_server_name="farness",
+            mcp_configured=False,
+            manual_command="claude mcp add --scope user farness -- /tmp/python -m farness.mcp_server",
+        )
+
+        with patch("farness.cli.inspect_agent_setup", return_value=result):
+            with patch("sys.argv", ["farness", "doctor", "claude"]):
+                main()
+
+        output = capsys.readouterr().out
+        assert "Recommended next step:" in output
+        assert "farness setup claude" in output
