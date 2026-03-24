@@ -1,7 +1,11 @@
 import Link from "next/link";
 import { FarnessLogoMark } from "./FarnessLogo";
 
-export function Header({ activePage }: { activePage?: "thesis" | "paper" }) {
+export function Header({
+  activePage,
+}: {
+  activePage?: "docs" | "thesis" | "paper";
+}) {
   return (
     <header
       className="sticky top-0 z-100 w-full backdrop-blur-[16px] border-b"
@@ -20,6 +24,17 @@ export function Header({ activePage }: { activePage?: "thesis" | "paper" }) {
           <span>farness</span>
         </Link>
         <nav className="flex gap-7 items-center max-md:gap-4">
+          <Link
+            href="/docs"
+            className={`[font-family:var(--font-body)] text-[0.82rem] font-normal no-underline transition-colors duration-200 hover:no-underline ${
+              activePage === "docs"
+                ? "text-[#A94E80]"
+                : "text-[var(--theme-text-muted)]"
+            }`}
+            style={activePage !== "docs" ? { color: "var(--theme-text-muted)" } : undefined}
+          >
+            Docs
+          </Link>
           <Link
             href="/thesis"
             className={`[font-family:var(--font-body)] text-[0.82rem] font-normal no-underline transition-colors duration-200 hover:no-underline ${
@@ -53,7 +68,7 @@ export function Header({ activePage }: { activePage?: "thesis" | "paper" }) {
             </svg>
           </a>
           <a
-            href="https://github.com/MaxGhenis/farness#installation"
+            href="/docs#install"
             className="[font-family:var(--font-body)] text-[0.78rem] font-semibold no-underline transition-all duration-200 py-[0.35em] px-[1em] rounded-lg bg-[#14202B] text-[#FCFDFE] hover:no-underline hover:translate-y-[-1px]"
           >
             Install

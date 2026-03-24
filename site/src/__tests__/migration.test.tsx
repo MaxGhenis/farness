@@ -20,6 +20,7 @@ vi.mock("next/link", () => ({
 
 // Import components after mocks are set up
 import HomePage from "../app/page";
+import DocsPage from "../app/docs/page";
 import ThesisPage from "../app/thesis/page";
 
 
@@ -140,12 +141,33 @@ describe("Next.js migration", () => {
     });
   });
 
+  describe("Docs page", () => {
+    it("renders without crashing", () => {
+      render(<DocsPage />);
+    });
+
+    it("renders docs title and install guidance", () => {
+      render(<DocsPage />);
+      expect(
+        screen.getByText("Use farness with Codex, Claude Code, or the local CLI."),
+      ).toBeInTheDocument();
+      expect(screen.getByText("Clone the repo and choose a path")).toBeInTheDocument();
+      expect(screen.getAllByText(/\$farness/).length).toBeGreaterThan(0);
+    });
+
+    it("explains that the CLI does not need an API key", () => {
+      render(<DocsPage />);
+      expect(screen.getByText(/No LLM API key is/)).toBeInTheDocument();
+    });
+  });
+
   // Paper page is now rendered by Quarto (not a React component)
 
   describe("shared Header component", () => {
     it("renders nav links on all pages", () => {
       render(<HomePage />);
       expect(screen.getAllByText("GitHub").length).toBeGreaterThan(0);
+      expect(screen.getAllByText("Docs").length).toBeGreaterThan(0);
     });
 
     it("renders install button", () => {

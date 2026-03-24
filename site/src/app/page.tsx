@@ -41,7 +41,7 @@ function Hero() {
 
           <div className="flex gap-4 flex-wrap animate-[fade-up_0.8s_ease-out_0.24s_both] max-[480px]:flex-col max-[480px]:items-start">
             <a
-              href="#install"
+              href="/docs#install"
               className="inline-flex items-center gap-2 py-[0.75em] px-6 [font-family:var(--font-display)] text-[0.88rem] font-semibold no-underline rounded-lg cursor-pointer transition-all duration-200 hover:no-underline hover:translate-y-[-1px] bg-[#14202B] text-[#FCFDFE] shadow-[0_2px_8px_rgba(20,32,43,0.12)]"
             >
               Get started
@@ -573,10 +573,10 @@ $ farness calibration`,
             View on GitHub
           </a>
           <a
-            href="https://github.com/MaxGhenis/farness#installation"
+            href="/docs"
             className="inline-flex items-center gap-2 py-[0.75em] px-6 [font-family:var(--font-display)] text-[0.88rem] font-medium no-underline rounded-lg cursor-pointer transition-all duration-200 hover:no-underline bg-white text-[#415463] border border-[#BED0DB] hover:border-[#A94E80] hover:text-[#14202B]"
           >
-            <span className="[font-family:var(--font-mono)] text-[0.82rem]">source install guide</span>
+            <span className="[font-family:var(--font-mono)] text-[0.82rem]">open docs</span>
           </a>
           <a
             href="https://github.com/MaxGhenis/farness/blob/main/docs/agent-workflows.md"
@@ -599,7 +599,7 @@ function ClosingSection() {
         See further before you decide.
       </h2>
       <a
-        href="https://github.com/MaxGhenis/farness#installation"
+        href="/docs#install"
         className="inline-flex items-center gap-2 py-[0.75em] px-6 [font-family:var(--font-display)] text-[0.88rem] font-semibold no-underline rounded-lg cursor-pointer transition-all duration-200 hover:no-underline hover:translate-y-[-1px] bg-[#A94E80] text-white shadow-[0_2px_8px_rgba(169,78,128,0.18)]"
       >
         Start with farness
@@ -617,6 +617,9 @@ function Footer() {
       <div className="flex gap-6 justify-center text-[0.78rem] [font-family:var(--font-mono)]">
         <a href="https://github.com/MaxGhenis/farness" className="text-[#6B7C89] no-underline hover:text-[#14202B] transition-colors">
           GitHub
+        </a>
+        <a href="/docs" className="text-[#6B7C89] no-underline hover:text-[#14202B] transition-colors">
+          Docs
         </a>
         <a href="/paper" className="text-[#6B7C89] no-underline hover:text-[#14202B] transition-colors">
           Research
