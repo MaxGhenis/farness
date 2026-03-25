@@ -5,7 +5,7 @@ import sys
 from datetime import datetime
 
 from farness import Decision, DecisionStore, CalibrationTracker
-from farness.agent_setup import inspect_agent_setup, setup_agent
+from farness.agent_setup import inspect_agent_setup, remove_agent_setup, repair_agent_setup, setup_agent
 from farness.skills import install_skill
 
 
@@ -64,6 +64,26 @@ def main():
         help="Overwrite an existing skill with different contents",
     )
 
+    uninstall_parser = subparsers.add_parser(
+        "uninstall", help="Remove the packaged skill and MCP setup for Codex or Claude"
+    )
+    uninstall_parser.add_argument(
+        "agent", choices=["codex", "claude"], help="Agent to remove"
+    )
+    uninstall_parser.add_argument(
+        "--target",
+        help=(
+            "Optional target skill directory. Defaults to "
+            "$CODEX_HOME/skills/farness (or ~/.codex/skills/farness) for Codex, "
+            "or ~/.claude/skills/farness for Claude."
+        ),
+    )
+    uninstall_parser.add_argument(
+        "--keep-mcp",
+        action="store_true",
+        help="Remove the local skill only and leave the MCP server registration intact",
+    )
+
     setup_parser = subparsers.add_parser(
         "setup", help="Install the skill and configure MCP for Codex or Claude"
     )
@@ -112,6 +132,11 @@ def main():
             "Defaults to the current interpreter."
         ),
     )
+    doctor_parser.add_argument(
+        "--fix",
+        action="store_true",
+        help="Repair a missing or modified skill and register MCP if the agent CLI is available",
+    )
 
     args = parser.parse_args()
 
@@ -124,6 +149,35 @@ def main():
 
         print(f"Installed {args.agent} skill at {skill_path}")
         print("Restart the agent so it picks up the new skill.")
+        return
+
+    if args.command == "uninstall":
+        try:
+            result = remove_agent_setup(
+                args.agent,
+                target_dir=args.target,
+                remove_mcp=not args.keep_mcp,
+            )
+        except RuntimeError as exc:
+            print(str(exc))
+            sys.exit(1)
+
+        if result.skill_removed:
+            print(f"Removed {args.agent} skill at {result.skill_path}")
+        else:
+            print(f"No {args.agent} skill found at {result.skill_path}")
+
+        if args.keep_mcp:
+            print(f"Left MCP server `{result.mcp_server_name}` configured.")
+        elif result.mcp_removed:
+            print(f"Removed MCP server `{result.mcp_server_name}` from {result.agent_cli}.")
+        elif result.cli_path is None:
+            print(
+                f"Could not verify MCP removal because the `{result.agent_cli}` CLI "
+                "was not found on PATH."
+            )
+        else:
+            print(f"No MCP server `{result.mcp_server_name}` was configured in {result.agent_cli}.")
         return
 
     if args.command == "setup":
@@ -153,6 +207,24 @@ def main():
         return
 
     if args.command == "doctor":
+        if args.fix:
+            try:
+                repaired = repair_agent_setup(
+                    args.agent,
+                    target_dir=args.target,
+                    python_bin=args.python_bin,
+                )
+            except RuntimeError as exc:
+                print(str(exc))
+                sys.exit(1)
+
+            print(f"Applied fixes for {args.agent}:")
+            print(f"  Skill: {repaired.skill_action}")
+            if repaired.mcp_action == "skipped":
+                print(f"  MCP: skipped ({repaired.agent_cli} CLI not found)")
+            else:
+                print(f"  MCP: {repaired.mcp_action}")
+
         result = inspect_agent_setup(
             args.agent,
             target_dir=args.target,
@@ -161,25 +233,27 @@ def main():
 
         print(f"Agent: {args.agent}")
         print(f"Skill path: {result.skill_path}")
-        print(f"Skill installed: {'yes' if result.skill_installed else 'no'}")
+        print(f"Skill status: {result.skill_state}")
         print(f"CLI found: {result.cli_path or 'no'}")
         print(
             f"MCP server `{result.mcp_server_name}` configured: "
             f"{'yes' if result.mcp_configured else 'no'}"
         )
 
-        if result.skill_installed and result.mcp_configured:
+        if result.skill_state == "installed" and result.mcp_configured:
             print("Status: ready. Restart the agent if it was already open.")
             return
 
         print("Recommended next step:")
-        if not result.skill_installed and not result.mcp_configured and result.cli_path:
+        if result.skill_state == "missing" and not result.mcp_configured and result.cli_path:
             print(f"  farness setup {args.agent}")
-        elif not result.skill_installed:
+        elif result.skill_state == "missing":
             print(f"  farness install-skill {args.agent}")
             if result.cli_path is None:
                 print(f"  Then install the {args.agent} CLI and run:")
                 print(f"  {result.manual_command}")
+        elif result.skill_state == "modified":
+            print(f"  farness doctor {args.agent} --fix")
         elif result.cli_path is None:
             print(f"  Install the {args.agent} CLI and run:")
             print(f"  {result.manual_command}")

@@ -186,6 +186,46 @@ class TestSetupCommand:
         assert "boom" in output
 
 
+class TestUninstallCommand:
+    """Tests for the uninstall command."""
+
+    def test_uninstall_reports_removed_skill_and_mcp(self, capsys):
+        result = SimpleNamespace(
+            agent_cli="codex",
+            cli_path="/usr/local/bin/codex",
+            skill_path="/tmp/skill/SKILL.md",
+            skill_removed=True,
+            mcp_server_name="farness",
+            mcp_removed=True,
+        )
+
+        with patch("farness.cli.remove_agent_setup", return_value=result):
+            with patch("sys.argv", ["farness", "uninstall", "codex"]):
+                main()
+
+        output = capsys.readouterr().out
+        assert "Removed codex skill at /tmp/skill/SKILL.md" in output
+        assert "Removed MCP server `farness` from codex." in output
+
+    def test_uninstall_keep_mcp_reports_retained_server(self, capsys):
+        result = SimpleNamespace(
+            agent_cli="claude",
+            cli_path="/usr/local/bin/claude",
+            skill_path="/tmp/skill/SKILL.md",
+            skill_removed=False,
+            mcp_server_name="farness",
+            mcp_removed=False,
+        )
+
+        with patch("farness.cli.remove_agent_setup", return_value=result):
+            with patch("sys.argv", ["farness", "uninstall", "claude", "--keep-mcp"]):
+                main()
+
+        output = capsys.readouterr().out
+        assert "No claude skill found" in output
+        assert "Left MCP server `farness` configured." in output
+
+
 class TestDoctorCommand:
     """Tests for the agent doctor command."""
 
@@ -194,6 +234,7 @@ class TestDoctorCommand:
             agent_cli="codex",
             cli_path="/usr/local/bin/codex",
             skill_path="/tmp/skill/SKILL.md",
+            skill_state="installed",
             skill_installed=True,
             mcp_server_name="farness",
             mcp_configured=True,
@@ -205,7 +246,7 @@ class TestDoctorCommand:
                 main()
 
         output = capsys.readouterr().out
-        assert "Skill installed: yes" in output
+        assert "Skill status: installed" in output
         assert "configured: yes" in output
         assert "Status: ready" in output
 
@@ -214,6 +255,7 @@ class TestDoctorCommand:
             agent_cli="claude",
             cli_path="/usr/local/bin/claude",
             skill_path="/tmp/skill/SKILL.md",
+            skill_state="missing",
             skill_installed=False,
             mcp_server_name="farness",
             mcp_configured=False,
@@ -227,3 +269,34 @@ class TestDoctorCommand:
         output = capsys.readouterr().out
         assert "Recommended next step:" in output
         assert "farness setup claude" in output
+
+    def test_doctor_fix_reports_actions(self, capsys):
+        repaired = SimpleNamespace(
+            agent_cli="codex",
+            cli_path="/usr/local/bin/codex",
+            skill_path="/tmp/skill/SKILL.md",
+            skill_action="updated",
+            mcp_server_name="farness",
+            mcp_action="configured",
+            python_bin="/tmp/python",
+        )
+        result = SimpleNamespace(
+            agent_cli="codex",
+            cli_path="/usr/local/bin/codex",
+            skill_path="/tmp/skill/SKILL.md",
+            skill_state="installed",
+            skill_installed=True,
+            mcp_server_name="farness",
+            mcp_configured=True,
+            manual_command="codex mcp add farness -- /tmp/python -m farness.mcp_server",
+        )
+
+        with patch("farness.cli.repair_agent_setup", return_value=repaired):
+            with patch("farness.cli.inspect_agent_setup", return_value=result):
+                with patch("sys.argv", ["farness", "doctor", "codex", "--fix"]):
+                    main()
+
+        output = capsys.readouterr().out
+        assert "Applied fixes for codex:" in output
+        assert "Skill: updated" in output
+        assert "MCP: configured" in output
