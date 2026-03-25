@@ -214,6 +214,35 @@ farness setup claude`}</CodeBlock>
           </p>
         </Section>
 
+        <Section kicker="Repair" title="Fix drifted installs or reset cleanly">
+          <div className="grid grid-cols-2 gap-6 max-md:grid-cols-1">
+            <div className="space-y-4">
+              <h3 className="[font-family:var(--font-display)] text-[1.2rem] font-semibold text-[#14202B]">
+                Repair in place
+              </h3>
+              <p className="text-[0.92rem] text-[#415463] leading-[1.65]">
+                If the skill file drifted, the agent CLI moved, or MCP setup only
+                half-worked, let `doctor` repair what it can.
+              </p>
+              <CodeBlock>{`farness doctor codex --fix
+farness doctor claude --fix`}</CodeBlock>
+            </div>
+            <div className="space-y-4">
+              <h3 className="[font-family:var(--font-display)] text-[1.2rem] font-semibold text-[#14202B]">
+                Reset from scratch
+              </h3>
+              <p className="text-[0.92rem] text-[#415463] leading-[1.65]">
+                Remove the local skill and MCP registration, then run setup again.
+              </p>
+              <CodeBlock>{`farness uninstall codex
+farness setup codex
+
+farness uninstall claude
+farness setup claude`}</CodeBlock>
+            </div>
+          </div>
+        </Section>
+
         <Section kicker="Workflow" title="What to expect from the framework">
           <div className="grid grid-cols-2 gap-8 max-md:grid-cols-1">
             <div className="space-y-4">
@@ -238,6 +267,47 @@ Base rate: 27% of similar infra rewrites produce >40% reliability gains
 Forecast (rewrite now): 58% [42, 71]
 Disconfirming evidence: ops fixes may solve this faster
 Review date: 2026-06-15`}</CodeBlock>
+          </div>
+        </Section>
+
+        <Section kicker="Examples" title="Three concrete ways to use it">
+          <div className="grid grid-cols-3 gap-4 max-md:grid-cols-1">
+            {[
+              {
+                title: "Architecture",
+                body: "Should we rewrite the auth layer now or harden the existing service first?",
+                code: `KPI: critical_auth_incidents / 90d
+Options: rewrite now | defer 60d | harden existing
+Forecast: rewrite now 58% [42, 71]
+Base rate: 27%`,
+              },
+              {
+                title: "Product",
+                body: "Should we launch the new onboarding flow this sprint or hold for one more iteration?",
+                code: `KPI: activated_users / signup cohort
+Options: ship now | hold 2 weeks | A/B limited rollout
+Forecast: limited rollout 64% [49, 77]
+Disconfirming evidence: sample size may be too small`,
+              },
+              {
+                title: "Hiring",
+                body: "Should we hire a generalist engineer now or wait for a more specialized infra candidate?",
+                code: `KPI: roadmap throughput / quarter
+Options: hire generalist | wait for specialist | contractor bridge
+Forecast: contractor bridge 51% [38, 63]
+Review date: 2026-09-01`,
+              },
+            ].map((example) => (
+              <div key={example.title} className="rounded-2xl bg-white border border-[#D9E4EC] p-6">
+                <div className="[font-family:var(--font-display)] text-[1rem] font-semibold text-[#14202B] mb-2">
+                  {example.title}
+                </div>
+                <p className="text-[0.9rem] leading-[1.6] text-[#415463] mb-4">
+                  {example.body}
+                </p>
+                <CodeBlock>{example.code}</CodeBlock>
+              </div>
+            ))}
           </div>
         </Section>
 
@@ -270,6 +340,34 @@ Review date: 2026-06-15`}</CodeBlock>
                 like `OPENAI_API_KEY` or `ANTHROPIC_API_KEY`.
               </p>
             </div>
+          </div>
+        </Section>
+
+        <Section kicker="Troubleshooting" title="The common failure cases">
+          <div className="grid grid-cols-3 gap-4 max-md:grid-cols-1">
+            {[
+              {
+                title: "Skill installed, not triggering",
+                body: "Run `farness doctor codex` or `farness doctor claude`, then restart the client. Skills are loaded at startup.",
+              },
+              {
+                title: "Agent CLI not found",
+                body: "Install the `codex` or `claude` CLI first, then rerun `farness doctor --fix` to register MCP with the right interpreter.",
+              },
+              {
+                title: "Want a clean reset",
+                body: "Use `farness uninstall codex` or `farness uninstall claude`, then rerun `farness setup ...` instead of editing config by hand.",
+              },
+            ].map((item) => (
+              <div key={item.title} className="rounded-2xl bg-white border border-[#D9E4EC] p-6">
+                <div className="[font-family:var(--font-display)] text-[1rem] font-semibold text-[#14202B] mb-2">
+                  {item.title}
+                </div>
+                <p className="text-[0.9rem] leading-[1.6] text-[#415463] m-0">
+                  {item.body}
+                </p>
+              </div>
+            ))}
           </div>
         </Section>
 

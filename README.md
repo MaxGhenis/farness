@@ -11,12 +11,40 @@ Instead of asking "Is X good?" or "Should I do Y?", farness helps you:
 ## Installation
 
 ```bash
-python -m pip install -e /path/to/farness
+python -m pip install 'farness[mcp]'
 ```
 
 ## Quick Start
 
-### As a Python package
+### Codex
+
+```bash
+farness setup codex
+farness doctor codex
+```
+
+Then restart Codex and use `$farness` when a decision prompt appears.
+
+### Claude Code
+
+```bash
+farness setup claude
+farness doctor claude
+```
+
+Then restart Claude Code.
+
+### Local CLI
+
+```bash
+farness new "Should we rewrite the auth layer?" --context "3 incidents this quarter"
+farness list
+farness calibration
+```
+
+The CLI is local-only and does not call an LLM or require an API key.
+
+### Python package
 
 ```python
 from farness import Decision, KPI, Option, Forecast, DecisionStore
@@ -74,17 +102,10 @@ store.save(decision)
 ### Command Line
 
 ```bash
-# List decisions
-farness list
-
-# Show a specific decision
+farness new "Should we launch now?"
 farness show abc123
-
-# Check calibration
-farness calibration
-
-# See what needs review
 farness pending
+farness calibration
 ```
 
 ### AI Agent Workflows
@@ -95,26 +116,18 @@ For agent-agnostic setup and prompt guidance, see [`docs/agent-workflows.md`](do
 
 #### Codex and other coding agents
 
-The CLI is a local decision store and calibration tool. It does not call an LLM or require an API key by itself.
+The default builder path is package-first:
 
-To use the current repo version from source:
+```bash
+python -m pip install 'farness[mcp]'
+farness setup codex
+farness doctor codex
+```
+
+For source installs during development:
 
 ```bash
 python -m pip install -e /path/to/farness
-farness new "Should we rewrite the auth layer?" --context "3 incidents this quarter; CTO prefers Rust; team is strongest in Node."
-```
-
-Then give the agent a `farness` instruction block:
-
-```text
-Use the farness workflow for this decision.
-1. Define the KPI or outcome that would make the decision successful.
-2. Expand the option set beyond the choices already mentioned.
-3. Anchor on a relevant reference class or base rate before using the inside view.
-4. Show the main mechanism or decomposition that drives the forecast.
-5. List the strongest disconfirming evidence, failure modes, or decision traps.
-6. Give point estimates with 80% confidence intervals for each option on each KPI.
-7. Recommend a review date and say what would be logged later for calibration.
 ```
 
 #### MCP server
@@ -158,6 +171,29 @@ claude plugin install farness@maxghenis-plugins
 
 Then either use the local `farness` skill or `/farness:decide` if you installed the plugin.
 
+#### Repair and reset
+
+If setup drifted or a skill was modified locally:
+
+```bash
+farness doctor codex --fix
+farness doctor claude --fix
+```
+
+If you want to remove the local integration and start over:
+
+```bash
+farness uninstall codex
+farness setup codex
+```
+
+or:
+
+```bash
+farness uninstall claude
+farness setup claude
+```
+
 ## The Framework
 
 Farness implements a structured decision process:
@@ -191,6 +227,8 @@ git clone https://github.com/MaxGhenis/farness
 cd farness
 pip install -e ".[dev,experiments]"
 pytest
+python -m build
+python scripts/smoke_packaged_install.py dist/*.whl
 ```
 
 Paper build:

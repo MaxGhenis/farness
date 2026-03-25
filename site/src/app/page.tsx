@@ -532,6 +532,7 @@ $ farness calibration`,
           persistence, packaged skills for Codex and Claude Code, and the same
           forecast structure used in the paper. The Claude plugin remains optional,
           and the CLI is a local store and calibration surface, not an LLM client.
+          If setup drifts, `farness doctor --fix` repairs the local integration.
         </p>
 
         <div className="grid grid-cols-3 gap-4 mb-8 max-md:grid-cols-1">

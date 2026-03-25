@@ -44,6 +44,12 @@ farness doctor codex
 
 Then restart Codex.
 
+If the skill drifted or setup only half-worked:
+
+```bash
+farness doctor codex --fix
+```
+
 ## MCP server
 
 If you want a native tool surface instead of prompt copy-paste, `farness` ships an MCP server:
@@ -87,6 +93,12 @@ farness doctor claude
 
 This gives Claude Code a local skill plus the `farness` MCP tools/resources/prompts.
 
+If the skill drifted or setup only half-worked:
+
+```bash
+farness doctor claude --fix
+```
+
 The plugin path is still available if you prefer slash commands:
 
 ```bash
@@ -108,6 +120,13 @@ farness list
 farness show <id>
 farness pending
 farness calibration
+```
+
+If you want to fully reset a local integration:
+
+```bash
+farness uninstall codex
+farness uninstall claude
 ```
 
 ## Recommended prompt shape
