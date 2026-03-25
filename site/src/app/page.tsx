@@ -311,7 +311,7 @@ function WorkflowDemo() {
           </div>
         </div>
 
-        <DemoVideo caption="Generated from the current package-first Codex workflow so the visible commands stay aligned with the shipped setup path." />
+        <DemoVideo caption="Rendered from a real Codex session using the local farness skill and MCP server, then exported as a clean 4K terminal demo." />
       </div>
     </section>
   );

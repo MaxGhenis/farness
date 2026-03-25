@@ -228,7 +228,7 @@ farness setup claude`}</CodeBlock>
 farness setup codex
 farness doctor codex`}</CodeBlock>
             </div>
-            <DemoVideo caption="The video preview is generated from the repo’s current workflow asset, so the site demo can be regenerated whenever the shipped commands change." />
+            <DemoVideo caption="Rendered from a real Codex session using the local farness skill and MCP server, then exported as a clean 4K terminal demo." />
           </div>
         </Section>
 
