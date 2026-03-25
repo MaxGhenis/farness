@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { Header } from "@/components/Header";
+import { DemoVideo } from "@/components/DemoVideo";
 
 function CodeBlock({ children }: { children: React.ReactNode }) {
   return (
@@ -212,6 +213,23 @@ farness setup claude`}</CodeBlock>
             installed, whether the agent CLI is on `PATH`, and whether the local MCP
             server is already registered.
           </p>
+        </Section>
+
+        <Section kicker="Walkthrough" title="See the packaged flow before you install">
+          <div className="grid grid-cols-[320px_minmax(0,1fr)] gap-8 items-start max-md:grid-cols-1">
+            <div>
+              <p className="text-[0.94rem] text-[#415463] leading-[1.7] mb-5">
+                This is the actual package-first Codex path from the docs: install,
+                run setup, use
+                <span className="[font-family:var(--font-mono)]"> $farness </span>
+                in Codex, then confirm the decision landed in the local store.
+              </p>
+              <CodeBlock>{`python -m pip install 'farness[mcp]'
+farness setup codex
+farness doctor codex`}</CodeBlock>
+            </div>
+            <DemoVideo caption="The video preview is generated from the repo’s current workflow asset, so the site demo can be regenerated whenever the shipped commands change." />
+          </div>
         </Section>
 
         <Section kicker="Repair" title="Fix drifted installs or reset cleanly">

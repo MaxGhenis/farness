@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { Header } from "@/components/Header";
+import { DemoVideo } from "@/components/DemoVideo";
 
 /* ── Hero ── */
 
@@ -249,6 +250,68 @@ function HowItWorks() {
             </div>
           ))}
         </div>
+      </div>
+    </section>
+  );
+}
+
+/* ── Workflow Demo ── */
+
+function WorkflowDemo() {
+  const steps = [
+    "python -m pip install 'farness[mcp]'",
+    "farness setup codex",
+    "$farness inside Codex, then review the saved decision locally",
+  ];
+
+  return (
+    <section className="py-[clamp(88px,12vw,136px)] px-8 max-md:px-4 bg-[#F7FAFC]">
+      <div className="max-w-[1200px] mx-auto grid grid-cols-[360px_minmax(0,1fr)] gap-10 items-start max-md:grid-cols-1 max-md:gap-8">
+        <div>
+          <span className="[font-family:var(--font-mono)] text-[0.68rem] tracking-[0.12em] uppercase text-[#A94E80] block mb-4 font-medium">
+            Workflow demo
+          </span>
+          <h2 className="[font-family:var(--font-display)] text-[clamp(1.8rem,3.5vw,2.6rem)] font-medium leading-[1.08] tracking-[-0.03em] text-[#14202B] mb-5">
+            Watch the packaged path end to end
+          </h2>
+          <p className="text-[0.94rem] text-[#415463] leading-[1.7] mb-6">
+            The clip below shows the current Codex path exactly the way the docs
+            describe it: install the package, register the local MCP server, use
+            <span className="[font-family:var(--font-mono)]"> $farness </span>
+            in Codex, then pull the decision back out of the local store.
+          </p>
+          <div className="space-y-3 mb-6">
+            {steps.map((step, index) => (
+              <div
+                key={step}
+                className="flex items-start gap-3 text-[0.84rem] leading-[1.55] text-[#415463]"
+              >
+                <div className="mt-[0.15rem] h-6 min-w-6 rounded-full bg-[#F6E7F0] text-[#A94E80] [font-family:var(--font-mono)] text-[0.7rem] flex items-center justify-center">
+                  {index + 1}
+                </div>
+                <div className="[font-family:var(--font-mono)] text-[#14202B]">
+                  {step}
+                </div>
+              </div>
+            ))}
+          </div>
+          <div className="flex gap-3 flex-wrap">
+            <a
+              href="/docs#install"
+              className="inline-flex items-center gap-2 py-[0.72em] px-5 [font-family:var(--font-display)] text-[0.88rem] font-medium no-underline rounded-lg bg-[#14202B] text-[#FCFDFE] hover:no-underline hover:translate-y-[-1px] transition-all duration-200"
+            >
+              Open install docs
+            </a>
+            <a
+              href="https://github.com/MaxGhenis/farness"
+              className="inline-flex items-center gap-2 py-[0.72em] px-5 [font-family:var(--font-display)] text-[0.88rem] font-medium no-underline rounded-lg bg-white text-[#415463] border border-[#BED0DB] hover:no-underline hover:border-[#A94E80] hover:text-[#14202B] transition-all duration-200"
+            >
+              View source
+            </a>
+          </div>
+        </div>
+
+        <DemoVideo caption="Generated from the current package-first Codex workflow so the visible commands stay aligned with the shipped setup path." />
       </div>
     </section>
   );
@@ -643,6 +706,7 @@ export default function HomePage() {
       <Header />
       <Hero />
       <HowItWorks />
+      <WorkflowDemo />
       <HorizonDivider />
       <ExampleTransformation />
       <ResearchProof />

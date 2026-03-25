@@ -229,6 +229,7 @@ pip install -e ".[dev,experiments]"
 pytest
 python -m build
 python scripts/smoke_packaged_install.py dist/*.whl
+python scripts/generate_demo_video.py
 ```
 
 Paper build:

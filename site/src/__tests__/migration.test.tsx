@@ -57,6 +57,14 @@ describe("Next.js migration", () => {
       expect(screen.getByText("Anchor")).toBeInTheDocument();
     });
 
+    it("renders workflow demo section", () => {
+      render(<HomePage />);
+      expect(screen.getByText("Watch the packaged path end to end")).toBeInTheDocument();
+      expect(
+        screen.getAllByLabelText("End-to-end farness workflow demo for Codex").length,
+      ).toBeGreaterThan(0);
+    });
+
     it("renders forecast artifact", () => {
       render(<HomePage />);
       expect(
@@ -68,7 +76,7 @@ describe("Next.js migration", () => {
       render(<HomePage />);
       expect(screen.getByText("Stability-under-probing")).toBeInTheDocument();
       expect(screen.getByText("11")).toBeInTheDocument();
-      expect(screen.getByText("2")).toBeInTheDocument();
+      expect(screen.getAllByText("2").length).toBeGreaterThan(0);
     });
 
     it("renders instrument modules", () => {
@@ -154,6 +162,7 @@ describe("Next.js migration", () => {
       expect(screen.getByText("Install the package and choose a path")).toBeInTheDocument();
       expect(screen.getAllByText(/farness setup codex/).length).toBeGreaterThan(0);
       expect(screen.getAllByText(/farness doctor codex/).length).toBeGreaterThan(0);
+      expect(screen.getByText("See the packaged flow before you install")).toBeInTheDocument();
       expect(screen.getByText("Fix drifted installs or reset cleanly")).toBeInTheDocument();
       expect(screen.getAllByText(/\$farness/).length).toBeGreaterThan(0);
     });
