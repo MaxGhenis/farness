@@ -1,8 +1,10 @@
 """Command-line interface for farness."""
 
 import argparse
+import os
 import sys
 from datetime import datetime
+from pathlib import Path
 
 from farness import Decision, DecisionStore, CalibrationTracker
 from farness.agent_setup import inspect_agent_setup, remove_agent_setup, repair_agent_setup, setup_agent
@@ -13,6 +15,13 @@ def main():
     parser = argparse.ArgumentParser(
         prog="farness",
         description="Forecasting as a harness for decision-making",
+    )
+    parser.add_argument(
+        "--store",
+        help=(
+            "Optional path to the farness JSONL store. Defaults to "
+            "$FARNESS_STORE_PATH or ~/.farness/decisions.jsonl."
+        ),
     )
     subparsers = parser.add_subparsers(dest="command", help="Commands")
 
@@ -261,7 +270,8 @@ def main():
             print(f"  {result.manual_command}")
         return
 
-    store = DecisionStore()
+    store_path = args.store or os.environ.get("FARNESS_STORE_PATH")
+    store = DecisionStore(Path(store_path).expanduser()) if store_path else DecisionStore()
 
     if args.command == "list":
         if args.pending:

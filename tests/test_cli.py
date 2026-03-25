@@ -62,6 +62,19 @@ class TestNewCommand:
             with pytest.raises(SystemExit):
                 main()
 
+    def test_new_respects_farness_store_env(self, monkeypatch, tmp_path):
+        """CLI commands should honor FARNESS_STORE_PATH when set."""
+        store_path = tmp_path / "env-store.jsonl"
+        monkeypatch.setenv("FARNESS_STORE_PATH", str(store_path))
+
+        with patch("sys.argv", ["farness", "new", "Env-backed decision"]):
+            main()
+
+        store = DecisionStore(store_path)
+        decisions = store.list_all()
+        assert len(decisions) == 1
+        assert decisions[0].question == "Env-backed decision"
+
 
 class TestShowWithPrefix:
     """Tests for prefix matching in show command."""

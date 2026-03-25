@@ -125,13 +125,26 @@ def _build_kpis(kpis: list[Any]) -> list[KPI]:
     """Convert structured KPI inputs into framework objects."""
     built: list[KPI] = []
     for kpi in kpis:
+        if isinstance(kpi, str):
+            try:
+                kpi = json.loads(kpi)
+            except json.JSONDecodeError as exc:
+                raise ValueError(f"Invalid KPI JSON: {kpi}") from exc
+        elif hasattr(kpi, "model_dump"):
+            kpi = kpi.model_dump()
+        elif hasattr(kpi, "__dict__") and not isinstance(kpi, dict):
+            kpi = vars(kpi)
+
+        if not isinstance(kpi, dict):
+            raise ValueError(f"Unsupported KPI input: {type(kpi).__name__}")
+
         built.append(
             KPI(
-                name=kpi.name,
-                description=kpi.description,
-                unit=kpi.unit,
-                target=kpi.target,
-                weight=kpi.weight,
+                name=kpi["name"],
+                description=kpi["description"],
+                unit=kpi.get("unit"),
+                target=kpi.get("target"),
+                weight=kpi.get("weight", 1.0),
             )
         )
     return built
@@ -141,23 +154,49 @@ def _build_options(options: list[Any]) -> list[Option]:
     """Convert structured option inputs into framework objects."""
     built: list[Option] = []
     for option in options:
+        if isinstance(option, str):
+            try:
+                option = json.loads(option)
+            except json.JSONDecodeError as exc:
+                raise ValueError(f"Invalid option JSON: {option}") from exc
+        elif hasattr(option, "model_dump"):
+            option = option.model_dump()
+        elif hasattr(option, "__dict__") and not isinstance(option, dict):
+            option = vars(option)
+
+        if not isinstance(option, dict):
+            raise ValueError(f"Unsupported option input: {type(option).__name__}")
+
         forecasts = {}
-        for forecast in option.forecasts:
-            forecasts[forecast.kpi_name] = Forecast(
-                point_estimate=forecast.point_estimate,
-                confidence_interval=(forecast.ci_low, forecast.ci_high),
-                confidence_level=forecast.confidence_level,
-                reasoning=forecast.reasoning,
-                assumptions=list(forecast.assumptions),
-                components=dict(forecast.components),
-                base_rate=forecast.base_rate,
-                base_rate_source=forecast.base_rate_source,
-                inside_view_adjustment=forecast.inside_view_adjustment,
+        for forecast in option.get("forecasts", []):
+            if isinstance(forecast, str):
+                try:
+                    forecast = json.loads(forecast)
+                except json.JSONDecodeError as exc:
+                    raise ValueError(f"Invalid forecast JSON: {forecast}") from exc
+            elif hasattr(forecast, "model_dump"):
+                forecast = forecast.model_dump()
+            elif hasattr(forecast, "__dict__") and not isinstance(forecast, dict):
+                forecast = vars(forecast)
+
+            if not isinstance(forecast, dict):
+                raise ValueError(f"Unsupported forecast input: {type(forecast).__name__}")
+
+            forecasts[forecast["kpi_name"]] = Forecast(
+                point_estimate=forecast["point_estimate"],
+                confidence_interval=(forecast["ci_low"], forecast["ci_high"]),
+                confidence_level=forecast.get("confidence_level", 0.8),
+                reasoning=forecast.get("reasoning", ""),
+                assumptions=list(forecast.get("assumptions", [])),
+                components=dict(forecast.get("components", {})),
+                base_rate=forecast.get("base_rate"),
+                base_rate_source=forecast.get("base_rate_source"),
+                inside_view_adjustment=forecast.get("inside_view_adjustment"),
             )
         built.append(
             Option(
-                name=option.name,
-                description=option.description,
+                name=option["name"],
+                description=option.get("description", ""),
                 forecasts=forecasts,
             )
         )
@@ -329,13 +368,17 @@ def build_server(store_path: str | None = None):
 
     @server.tool(
         title="Save decision analysis",
-        description="Persist KPIs, options, forecasts, chosen option, and review date for a decision.",
+        description=(
+            "Persist KPIs, options, forecasts, chosen option, and review date for a decision. "
+            "Pass `kpis` as structured objects with name/description/unit/target/weight, "
+            "and `options` as structured objects with name/description plus forecast objects."
+        ),
         structured_output=True,
     )
     def save_analysis(
         decision_id: str,
-        kpis: list[KPIInput],
-        options: list[OptionInput],
+        kpis: list[KPIInput | str],
+        options: list[OptionInput | str],
         chosen_option: str | None = None,
         review_date: str | None = None,
         reflections: str = "",
@@ -457,7 +500,11 @@ def build_server(store_path: str | None = None):
             "5. strongest disconfirming evidence\n"
             "6. numeric forecasts with 80% confidence intervals for each option on each KPI\n"
             "7. a proposed review date\n\n"
-            "After analysis, call `save_analysis` to persist the structured result."
+            "After analysis, call `save_analysis` to persist the structured result. "
+            "Pass `kpis` as objects with `name`, `description`, optional `unit`/`target`, "
+            "and `weight`. Pass `options` as objects with `name`, `description`, and "
+            "`forecasts`, where each forecast includes `kpi_name`, `point_estimate`, "
+            "`ci_low`, `ci_high`, and optional rationale fields."
         )
 
     @server.prompt(
@@ -475,7 +522,8 @@ def build_server(store_path: str | None = None):
             "- the KPIs are still the right ones,\n"
             "- any review date should move,\n"
             "- new disconfirming evidence should materially change the forecast.\n\n"
-            "If the structure or forecast changes, call `save_analysis` with the revised state."
+            "If the structure or forecast changes, call `save_analysis` with the revised "
+            "structured state: KPI objects plus option objects containing forecast objects."
         )
 
     @server.prompt(

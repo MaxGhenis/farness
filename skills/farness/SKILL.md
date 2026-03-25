@@ -47,6 +47,11 @@ Do not use it for:
    - numeric forecasts with 80% confidence intervals
    - review date
 4. Persist the result with `save_analysis`.
+   - `kpis` must be a list of objects shaped like:
+     `{"name": "...", "description": "...", "unit": "%|$|days|...", "target": 80, "weight": 1.0}`
+   - `options` must be a list of objects shaped like:
+     `{"name": "...", "description": "...", "forecasts": [{"kpi_name": "...", "point_estimate": 75, "ci_low": 60, "ci_high": 86, "confidence_level": 0.8, "reasoning": "...", "assumptions": ["..."], "base_rate": 68, "base_rate_source": "...", "inside_view_adjustment": "..."}]}`
+   - Do not pass KPI or option names as bare strings.
 5. If the user is revisiting the decision, use `get_decision` and `review_decision`.
 6. If outcomes are now known, call `score_decision` to update calibration.
 

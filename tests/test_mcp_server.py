@@ -144,3 +144,39 @@ def test_save_decision_analysis_rejects_unknown_choice():
             assert "Chosen option" in str(exc)
         else:  # pragma: no cover
             raise AssertionError("Expected ValueError for unknown chosen option")
+
+
+def test_save_decision_analysis_accepts_json_string_inputs():
+    with TemporaryDirectory() as tmpdir:
+        store_path = Path(tmpdir) / "decisions.jsonl"
+        store = DecisionStore(store_path)
+        decision = Decision(question="Should we rewrite the auth layer?")
+        store.save(decision)
+
+        payload = save_decision_analysis(
+            decision_id=decision.id,
+            kpis=[
+                (
+                    '{"name":"security_incidents","description":"Critical auth incidents over '
+                    'the next 90 days.","unit":"count","target":0,"weight":1.0}'
+                )
+            ],
+            options=[
+                (
+                    '{"name":"rewrite","description":"Rewrite now.",'
+                    '"forecasts":[{"kpi_name":"security_incidents","point_estimate":1.0,'
+                    '"ci_low":0.0,"ci_high":2.0,"confidence_level":0.8,'
+                    '"reasoning":"Outside view plus team context.","assumptions":["team remains stable"],'
+                    '"components":{"baseline":2.0},"base_rate":2.0,"base_rate_source":"internal history",'
+                    '"inside_view_adjustment":"recent hardening work"}]}'
+                )
+            ],
+            chosen_option="rewrite",
+            store_path=str(store_path),
+        )
+
+        saved = store.get(decision.id)
+        assert saved is not None
+        assert saved.chosen_option == "rewrite"
+        assert saved.options[0].forecasts["security_incidents"].base_rate == 2.0
+        assert payload["chosen_option"] == "rewrite"
