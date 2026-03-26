@@ -22,6 +22,20 @@ class TestKPI:
         assert kpi.target == 8.0
         assert kpi.weight == 2.0
 
+    def test_kpi_with_resolution_metadata(self):
+        resolution_date = datetime(2026, 6, 30)
+        kpi = KPI(
+            name="launch_on_time",
+            description="Whether Q2 launch ships by June 30.",
+            outcome_type="binary",
+            resolution_date=resolution_date,
+            resolution_rule="1 if shipped by 2026-06-30, else 0.",
+            data_source="Release changelog",
+        )
+        assert kpi.outcome_type == "binary"
+        assert kpi.resolution_date == resolution_date
+        assert kpi.is_explicitly_resolvable() is True
+
 
 class TestForecast:
     def test_basic_forecast(self):
@@ -325,7 +339,17 @@ class TestDecision:
             question="Test decision",
             context="Some context",
             kpis=[
-                KPI(name="kpi1", description="First KPI", unit="$", target=100, weight=2.0),
+                KPI(
+                    name="kpi1",
+                    description="First KPI",
+                    unit="$",
+                    target=100,
+                    weight=2.0,
+                    outcome_type="currency",
+                    resolution_date=datetime(2026, 6, 30),
+                    resolution_rule="Use booked revenue in the finance dashboard on 2026-06-30.",
+                    data_source="Finance dashboard",
+                ),
             ],
             options=[
                 Option(
@@ -361,6 +385,10 @@ class TestDecision:
         assert len(restored.kpis) == 1
         assert restored.kpis[0].name == "kpi1"
         assert restored.kpis[0].weight == 2.0
+        assert restored.kpis[0].outcome_type == "currency"
+        assert restored.kpis[0].resolution_date == datetime(2026, 6, 30)
+        assert restored.kpis[0].resolution_rule == "Use booked revenue in the finance dashboard on 2026-06-30."
+        assert restored.kpis[0].data_source == "Finance dashboard"
         assert len(restored.options) == 1
         assert restored.options[0].name == "Option A"
         assert restored.options[0].forecasts["kpi1"].point_estimate == 50

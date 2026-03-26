@@ -2,8 +2,10 @@
 
 from dataclasses import dataclass, field
 from datetime import datetime
-from typing import Optional
+from typing import Literal, Optional
 from uuid import uuid4
+
+OutcomeType = Literal["binary", "count", "continuous", "percent", "currency", "score"]
 
 
 @dataclass
@@ -15,6 +17,18 @@ class KPI:
     unit: Optional[str] = None  # e.g., "$", "%", "days"
     target: Optional[float] = None  # What counts as success?
     weight: float = 1.0  # Relative importance (for multi-KPI decisions)
+    outcome_type: Optional[OutcomeType] = None  # numeric outcome shape for later scoring
+    resolution_date: Optional[datetime] = None  # when the KPI should resolve
+    resolution_rule: Optional[str] = None  # how to tell whether it resolved
+    data_source: Optional[str] = None  # where the realized value will come from
+
+    def is_explicitly_resolvable(self) -> bool:
+        """Return whether this KPI has enough metadata to be scored later."""
+        return (
+            self.outcome_type is not None
+            and self.resolution_date is not None
+            and bool(self.resolution_rule)
+        )
 
 
 @dataclass
@@ -154,8 +168,19 @@ class Decision:
             "question": self.question,
             "context": self.context,
             "kpis": [
-                {"name": k.name, "description": k.description, "unit": k.unit,
-                 "target": k.target, "weight": k.weight}
+                {
+                    "name": k.name,
+                    "description": k.description,
+                    "unit": k.unit,
+                    "target": k.target,
+                    "weight": k.weight,
+                    "outcome_type": k.outcome_type,
+                    "resolution_date": (
+                        k.resolution_date.isoformat() if k.resolution_date else None
+                    ),
+                    "resolution_rule": k.resolution_rule,
+                    "data_source": k.data_source,
+                }
                 for k in self.kpis
             ],
             "options": [
@@ -215,6 +240,14 @@ class Decision:
                 unit=k.get("unit"),
                 target=k.get("target"),
                 weight=k.get("weight", 1.0),
+                outcome_type=k.get("outcome_type"),
+                resolution_date=(
+                    datetime.fromisoformat(k["resolution_date"])
+                    if k.get("resolution_date")
+                    else None
+                ),
+                resolution_rule=k.get("resolution_rule"),
+                data_source=k.get("data_source"),
             )
             for k in data.get("kpis", [])
         ]

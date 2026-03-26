@@ -46,6 +46,10 @@ def _kpi(**overrides):
         "unit": "count",
         "target": 0.0,
         "weight": 1.0,
+        "outcome_type": "count",
+        "resolution_date": "2026-06-30",
+        "resolution_rule": "Count Sev1 auth incidents tagged auth between 2026-04-01 and 2026-06-30.",
+        "data_source": "Sentry auth dashboard",
     }
     base.update(overrides)
     return SimpleNamespace(**base)
@@ -89,6 +93,11 @@ def test_save_decision_analysis_persists_structured_analysis():
         assert saved.review_date is not None
         assert saved.review_date.isoformat() == "2026-06-15T00:00:00"
         assert len(saved.kpis) == 1
+        assert saved.kpis[0].outcome_type == "count"
+        assert saved.kpis[0].resolution_date is not None
+        assert saved.kpis[0].resolution_date.isoformat() == "2026-06-30T00:00:00"
+        assert "Sev1 auth incidents" in saved.kpis[0].resolution_rule
+        assert saved.kpis[0].data_source == "Sentry auth dashboard"
         assert len(saved.options) == 2
         assert saved.options[0].forecasts["security_incidents"].base_rate == 2.0
         assert payload["chosen_option"] == "rewrite"
@@ -158,7 +167,9 @@ def test_save_decision_analysis_accepts_json_string_inputs():
             kpis=[
                 (
                     '{"name":"security_incidents","description":"Critical auth incidents over '
-                    'the next 90 days.","unit":"count","target":0,"weight":1.0}'
+                    'the next 90 days.","unit":"count","target":0,"weight":1.0,'
+                    '"outcome_type":"count","resolution_date":"2026-06-30",'
+                    '"resolution_rule":"Count Sev1 auth incidents in Sentry.","data_source":"Sentry"}'
                 )
             ],
             options=[
@@ -178,5 +189,8 @@ def test_save_decision_analysis_accepts_json_string_inputs():
         saved = store.get(decision.id)
         assert saved is not None
         assert saved.chosen_option == "rewrite"
+        assert saved.kpis[0].outcome_type == "count"
+        assert saved.kpis[0].resolution_rule == "Count Sev1 auth incidents in Sentry."
+        assert saved.kpis[0].data_source == "Sentry"
         assert saved.options[0].forecasts["security_incidents"].base_rate == 2.0
         assert payload["chosen_option"] == "rewrite"

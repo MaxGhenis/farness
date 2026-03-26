@@ -52,6 +52,7 @@ def _decision_summary(decision: Decision) -> dict[str, Any]:
         "scored_at": decision.scored_at.isoformat() if decision.scored_at else None,
         "pending_review": pending_review,
         "kpi_count": len(decision.kpis),
+        "resolvable_kpi_count": sum(1 for kpi in decision.kpis if kpi.is_explicitly_resolvable()),
         "option_count": len(decision.options),
     }
 
@@ -85,6 +86,14 @@ def _decision_markdown(decision: Decision) -> str:
             lines.append(
                 f"- **{kpi.name}**{unit}: {kpi.description} [weight {kpi.weight}{target}]"
             )
+            if kpi.outcome_type:
+                lines.append(f"  - outcome type: {kpi.outcome_type}")
+            if kpi.resolution_date:
+                lines.append(f"  - resolution date: {kpi.resolution_date.isoformat()}")
+            if kpi.resolution_rule:
+                lines.append(f"  - resolution rule: {kpi.resolution_rule}")
+            if kpi.data_source:
+                lines.append(f"  - data source: {kpi.data_source}")
     if decision.options:
         lines.extend(["", "## Options", ""])
         for option in decision.options:
@@ -145,6 +154,10 @@ def _build_kpis(kpis: list[Any]) -> list[KPI]:
                 unit=kpi.get("unit"),
                 target=kpi.get("target"),
                 weight=kpi.get("weight", 1.0),
+                outcome_type=kpi.get("outcome_type"),
+                resolution_date=_parse_datetime(kpi.get("resolution_date")),
+                resolution_rule=kpi.get("resolution_rule"),
+                data_source=kpi.get("data_source"),
             )
         )
     return built
@@ -288,6 +301,24 @@ def build_server(store_path: str | None = None):
         unit: str | None = Field(default=None, description="Optional unit like %, $, or days")
         target: float | None = Field(default=None, description="Optional success target")
         weight: float = Field(default=1.0, description="Relative importance weight")
+        outcome_type: (
+            Literal["binary", "count", "continuous", "percent", "currency", "score"] | None
+        ) = Field(
+            default=None,
+            description="Numeric outcome shape used later for scoring and calibration",
+        )
+        resolution_date: str | None = Field(
+            default=None,
+            description="When this KPI should resolve, as ISO date or datetime",
+        )
+        resolution_rule: str | None = Field(
+            default=None,
+            description="Concrete rule for how the realized KPI value will be determined",
+        )
+        data_source: str | None = Field(
+            default=None,
+            description="System, report, or dataset that will supply the realized value",
+        )
 
     class ForecastInput(BaseModel):
         kpi_name: str = Field(description="Name of the KPI this forecast belongs to")
@@ -315,7 +346,7 @@ def build_server(store_path: str | None = None):
         "farness",
         instructions=(
             "Use farness to structure decisions as KPIs, options, forecasts, "
-            "reference classes, disconfirming evidence, and review dates."
+            "reference classes, disconfirming evidence, review dates, and resolvable KPI metadata."
         ),
     )
 
@@ -370,7 +401,8 @@ def build_server(store_path: str | None = None):
         title="Save decision analysis",
         description=(
             "Persist KPIs, options, forecasts, chosen option, and review date for a decision. "
-            "Pass `kpis` as structured objects with name/description/unit/target/weight, "
+            "Pass `kpis` as structured objects with name/description/unit/target/weight plus "
+            "outcome_type/resolution_date/resolution_rule/data_source, "
             "and `options` as structured objects with name/description plus forecast objects."
         ),
         structured_output=True,
@@ -433,7 +465,8 @@ def build_server(store_path: str | None = None):
         """Static overview of the framework."""
         return (
             "# Farness\n\n"
-            "1. Define the KPI or outcome that would make the decision successful.\n"
+            "1. Define one or two KPIs that are later scoreable: include outcome type, "
+            "resolution rule, resolution date, and data source.\n"
             "2. Expand the option set beyond the choices already mentioned.\n"
             "3. Anchor on a relevant reference class or base rate before the inside view.\n"
             "4. Show the main mechanism or decomposition that drives the forecast.\n"
@@ -493,7 +526,7 @@ def build_server(store_path: str | None = None):
             "Use the farness workflow for this stored decision.\n\n"
             f"Decision record:\n{json.dumps(decision, indent=2)}\n\n"
             "Produce:\n"
-            "1. explicit KPIs\n"
+            "1. explicit KPIs with outcome type, resolution rule, resolution date, and data source\n"
             "2. expanded options\n"
             "3. reference class / base rate\n"
             "4. mechanism or decomposition\n"
@@ -502,6 +535,7 @@ def build_server(store_path: str | None = None):
             "7. a proposed review date\n\n"
             "After analysis, call `save_analysis` to persist the structured result. "
             "Pass `kpis` as objects with `name`, `description`, optional `unit`/`target`, "
+            "`outcome_type`, `resolution_date`, `resolution_rule`, `data_source`, "
             "and `weight`. Pass `options` as objects with `name`, `description`, and "
             "`forecasts`, where each forecast includes `kpi_name`, `point_estimate`, "
             "`ci_low`, `ci_high`, and optional rationale fields."
@@ -520,6 +554,7 @@ def build_server(store_path: str | None = None):
             "Check whether:\n"
             "- the chosen option still makes sense,\n"
             "- the KPIs are still the right ones,\n"
+            "- each KPI still has a clear resolution rule and data source,\n"
             "- any review date should move,\n"
             "- new disconfirming evidence should materially change the forecast.\n\n"
             "If the structure or forecast changes, call `save_analysis` with the revised "

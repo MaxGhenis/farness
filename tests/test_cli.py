@@ -1,4 +1,5 @@
 import tempfile
+from datetime import datetime
 from pathlib import Path
 from types import SimpleNamespace
 from unittest.mock import patch
@@ -6,7 +7,7 @@ from unittest.mock import patch
 import pytest
 
 from farness.cli import main
-from farness.framework import Decision
+from farness.framework import Decision, KPI
 from farness.skills import default_skill_dir
 from farness.storage import DecisionStore
 
@@ -91,6 +92,32 @@ class TestShowWithPrefix:
 
         output = capsys.readouterr().out
         assert "Test decision for show" in output
+
+    def test_show_prints_kpi_resolution_metadata(self, temp_store, capsys):
+        d = Decision(
+            question="Test decision for resolvable KPI",
+            kpis=[
+                KPI(
+                    name="launch_on_time",
+                    description="Whether Q2 launch ships by June 30.",
+                    outcome_type="binary",
+                    resolution_date=datetime(2026, 6, 30),
+                    resolution_rule="1 if shipped by 2026-06-30, else 0.",
+                    data_source="Release changelog",
+                )
+            ],
+        )
+        temp_store.save(d)
+
+        with patch("farness.cli.DecisionStore", return_value=temp_store):
+            with patch("sys.argv", ["farness", "show", d.id[:8]]):
+                main()
+
+        output = capsys.readouterr().out
+        assert "outcome type: binary" in output
+        assert "resolution date: 2026-06-30" in output
+        assert "resolution rule: 1 if shipped by 2026-06-30, else 0." in output
+        assert "data source: Release changelog" in output
 
 
 class TestInstallSkillCommand:

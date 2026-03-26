@@ -2,7 +2,7 @@
 
 __version__ = "0.2.4"
 
-from farness.framework import Decision, KPI, Option, Forecast
+from farness.framework import Decision, KPI, Option, Forecast, OutcomeType
 from farness.storage import DecisionStore
 from farness.calibration import CalibrationTracker
 
@@ -11,6 +11,7 @@ __all__ = [
     "KPI",
     "Option",
     "Forecast",
+    "OutcomeType",
     "DecisionStore",
     "CalibrationTracker",
 ]

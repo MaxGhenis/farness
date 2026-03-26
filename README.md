@@ -5,7 +5,7 @@
 Instead of asking "Is X good?" or "Should I do Y?", farness helps you:
 1. Define what success looks like (KPIs)
 2. Expand your options (including ones you didn't consider)
-3. Make explicit forecasts (with confidence intervals)
+3. Make explicit forecasts (with confidence intervals and resolution rules)
 4. Track outcomes to improve calibration over time
 
 ## Installation
@@ -55,7 +55,14 @@ decision = Decision(
     question="Should I take the new job offer?",
     kpis=[
         KPI(name="income", description="Total comp after 2 years", unit="$"),
-        KPI(name="satisfaction", description="Job satisfaction 1-10"),
+        KPI(
+            name="satisfaction",
+            description="Job satisfaction 1-10",
+            outcome_type="score",
+            resolution_date=datetime.now() + timedelta(days=365),
+            resolution_rule="Ask for a 1-10 retrospective self-rating 12 months after starting.",
+            data_source="Follow-up self-review",
+        ),
     ],
     options=[
         Option(
@@ -199,6 +206,7 @@ farness setup claude
 Farness implements a structured decision process:
 
 1. **KPI Definition** - What outcomes actually matter? Make them measurable.
+   Add outcome type, resolution date, resolution rule, and data source when possible.
 
 2. **Option Expansion** - Don't just compare A vs B. What about C? What about waiting? What about hybrid approaches?
 

@@ -317,7 +317,26 @@ def main():
         if d.kpis:
             print(f"\nKPIs:")
             for k in d.kpis:
-                print(f"  - {k.name}: {k.description}")
+                unit = f" ({k.unit})" if k.unit else ""
+                print(f"  - {k.name}{unit}: {k.description}")
+                if k.target is not None or k.weight != 1.0:
+                    details = []
+                    if k.target is not None:
+                        details.append(f"target {k.target}")
+                    if k.weight != 1.0:
+                        details.append(f"weight {k.weight:g}")
+                    print(f"      {', '.join(details)}")
+                if k.outcome_type:
+                    print(f"      outcome type: {k.outcome_type}")
+                if k.resolution_date:
+                    print(
+                        "      resolution date: "
+                        f"{k.resolution_date.strftime('%Y-%m-%d')}"
+                    )
+                if k.resolution_rule:
+                    print(f"      resolution rule: {k.resolution_rule}")
+                if k.data_source:
+                    print(f"      data source: {k.data_source}")
 
         if d.options:
             print(f"\nOptions:")
@@ -441,6 +460,15 @@ def main():
                 print(
                     f"  {kpi.name}: {f.point_estimate}{unit} ({ci_low}-{ci_high} @ {f.confidence_level:.0%})"
                 )
+                if kpi.resolution_date:
+                    print(
+                        "    resolves: "
+                        f"{kpi.resolution_date.strftime('%Y-%m-%d')}"
+                    )
+                if kpi.resolution_rule:
+                    print(f"    rule: {kpi.resolution_rule}")
+                if kpi.data_source:
+                    print(f"    data source: {kpi.data_source}")
 
         # Gather actual outcomes
         print(f"\nEnter actual outcomes:")
