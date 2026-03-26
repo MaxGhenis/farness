@@ -20,8 +20,8 @@ from PIL import ImageFont
 
 ROOT = Path(__file__).resolve().parents[1]
 OUT_DIR = ROOT / "site" / "public" / "demo"
-VIDEO_PATH = OUT_DIR / "farness-demo-v2.mp4"
-POSTER_PATH = OUT_DIR / "farness-demo-v2-poster.png"
+VIDEO_PATH = OUT_DIR / "farness-demo.mp4"
+POSTER_PATH = OUT_DIR / "farness-demo-poster.png"
 
 WIDTH = 3840
 HEIGHT = 2160

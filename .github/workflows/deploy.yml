@@ -7,6 +7,7 @@ on:
 
 env:
   FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: "true"
+  NEXT_PUBLIC_SITE_ASSET_REV: ${{ github.sha }}
 
 permissions:
   contents: read

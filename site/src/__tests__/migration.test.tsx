@@ -45,7 +45,7 @@ describe("Next.js migration", () => {
     it("renders hero subhead with farness mention", () => {
       render(<HomePage />);
       expect(
-        screen.getByText(/native skill with a local MCP server/),
+        screen.getByText(/demands a forecast: a KPI, a confidence interval/),
       ).toBeInTheDocument();
     });
 
@@ -106,7 +106,7 @@ describe("Next.js migration", () => {
 
     it("renders footer", () => {
       render(<HomePage />);
-      expect(screen.getByText("Clarity at distance.")).toBeInTheDocument();
+      expect(screen.getByText("GitHub")).toBeInTheDocument();
     });
   });
 

@@ -3,6 +3,10 @@ export function DemoVideo({
 }: {
   caption?: string;
 }) {
+  const assetRev = process.env.NEXT_PUBLIC_SITE_ASSET_REV || "dev";
+  const videoSrc = `/demo/farness-demo.mp4?v=${assetRev}`;
+  const posterSrc = `/demo/farness-demo-poster.png?v=${assetRev}`;
+
   return (
     <figure className="m-0">
       <div className="rounded-[28px] overflow-hidden border border-[#D9E4EC] bg-white shadow-[0_20px_50px_rgba(20,32,43,0.12)]">
@@ -13,11 +17,11 @@ export function DemoVideo({
           loop
           muted
           playsInline
-          poster="/demo/farness-demo-v2-poster.png"
+          poster={posterSrc}
           preload="metadata"
           aria-label="End-to-end farness workflow demo for Codex"
         >
-          <source src="/demo/farness-demo-v2.mp4" type="video/mp4" />
+          <source src={videoSrc} type="video/mp4" />
         </video>
       </div>
       <figcaption className="mt-4 space-y-3">
@@ -28,7 +32,7 @@ export function DemoVideo({
         ) : null}
         <div className="flex flex-wrap gap-x-5 gap-y-2 text-[0.8rem] [font-family:var(--font-mono)]">
           <a
-            href="/demo/farness-demo-v2.mp4"
+            href={videoSrc}
             target="_blank"
             rel="noreferrer"
             className="text-[#415463] underline decoration-[#BED0DB] underline-offset-4 hover:text-[#14202B] hover:decoration-[#14202B]"
@@ -36,7 +40,7 @@ export function DemoVideo({
             Open 4K MP4
           </a>
           <a
-            href="/demo/farness-demo-v2-poster.png"
+            href={posterSrc}
             target="_blank"
             rel="noreferrer"
             className="text-[#415463] underline decoration-[#BED0DB] underline-offset-4 hover:text-[#14202B] hover:decoration-[#14202B]"
