@@ -346,7 +346,8 @@ def build_server(store_path: str | None = None):
         "farness",
         instructions=(
             "Use farness to structure decisions as KPIs, options, forecasts, "
-            "reference classes, disconfirming evidence, review dates, and resolvable KPI metadata."
+            "reference classes, disconfirming evidence, review dates, and resolvable KPI metadata. "
+            "In the first answer, show the forecast summary and explain how it drives the recommendation."
         ),
     )
 
@@ -471,8 +472,9 @@ def build_server(store_path: str | None = None):
             "3. Anchor on a relevant reference class or base rate before the inside view.\n"
             "4. Show the main mechanism or decomposition that drives the forecast.\n"
             "5. List the strongest disconfirming evidence, failure modes, or decision traps.\n"
-            "6. Give point estimates with 80% confidence intervals for each option on each KPI.\n"
-            "7. Recommend a review date and log the decision for later calibration.\n"
+            "6. Give point estimates with 80% confidence intervals for each option on each KPI, "
+            "and show them in a compact summary table.\n"
+            "7. Recommend a review date, then explain which forecast differences drove the prioritization.\n"
         )
 
     @server.resource(
@@ -532,7 +534,10 @@ def build_server(store_path: str | None = None):
             "4. mechanism or decomposition\n"
             "5. strongest disconfirming evidence\n"
             "6. numeric forecasts with 80% confidence intervals for each option on each KPI\n"
-            "7. a proposed review date\n\n"
+            "7. a compact forecast summary table or bullet matrix in the first answer\n"
+            "8. a proposed review date\n\n"
+            "Before you finish, explicitly state how the forecast differences drove the recommendation "
+            "or prioritization.\n\n"
             "After analysis, call `save_analysis` to persist the structured result. "
             "Pass `kpis` as objects with `name`, `description`, optional `unit`/`target`, "
             "`outcome_type`, `resolution_date`, `resolution_rule`, `data_source`, "
@@ -557,6 +562,8 @@ def build_server(store_path: str | None = None):
             "- each KPI still has a clear resolution rule and data source,\n"
             "- any review date should move,\n"
             "- new disconfirming evidence should materially change the forecast.\n\n"
+            "In the first answer, show the updated forecast summary and explain how it changes "
+            "the prioritization, if at all.\n\n"
             "If the structure or forecast changes, call `save_analysis` with the revised "
             "structured state: KPI objects plus option objects containing forecast objects."
         )

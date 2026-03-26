@@ -46,6 +46,7 @@ Do not use it for:
    - mechanism or decomposition
    - disconfirming evidence
    - numeric forecasts with 80% confidence intervals
+   - a compact forecast summary table
    - review date
 4. Persist the result with `save_analysis`.
    - `kpis` must be a list of objects shaped like:
@@ -59,6 +60,8 @@ Do not use it for:
 ## Working Rules
 
 - Do not give a vague recommendation before the KPIs and forecasts are explicit.
+- In the first answer, show the forecast results without waiting to be asked again. Include a compact table or bullet summary of each option on the decisive KPIs.
+- After the forecast summary, explain how those forecast differences drive the recommendation or prioritization.
 - Prefer KPIs that can actually resolve later; avoid labels like `fit` or `quality` unless the resolution rule makes them numeric and scoreable.
 - Keep the option set broader than the user's first framing.
 - Treat disconfirming evidence as first-class, not a footnote.
