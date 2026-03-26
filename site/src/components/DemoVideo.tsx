@@ -13,11 +13,11 @@ export function DemoVideo({
           loop
           muted
           playsInline
-          poster="/demo/farness-demo-poster.png"
+          poster="/demo/farness-demo-v2-poster.png"
           preload="metadata"
           aria-label="End-to-end farness workflow demo for Codex"
         >
-          <source src="/demo/farness-demo.mp4" type="video/mp4" />
+          <source src="/demo/farness-demo-v2.mp4" type="video/mp4" />
         </video>
       </div>
       <figcaption className="mt-4 space-y-3">
@@ -28,7 +28,7 @@ export function DemoVideo({
         ) : null}
         <div className="flex flex-wrap gap-x-5 gap-y-2 text-[0.8rem] [font-family:var(--font-mono)]">
           <a
-            href="/demo/farness-demo.mp4"
+            href="/demo/farness-demo-v2.mp4"
             target="_blank"
             rel="noreferrer"
             className="text-[#415463] underline decoration-[#BED0DB] underline-offset-4 hover:text-[#14202B] hover:decoration-[#14202B]"
@@ -36,7 +36,7 @@ export function DemoVideo({
             Open 4K MP4
           </a>
           <a
-            href="/demo/farness-demo-poster.png"
+            href="/demo/farness-demo-v2-poster.png"
             target="_blank"
             rel="noreferrer"
             className="text-[#415463] underline decoration-[#BED0DB] underline-offset-4 hover:text-[#14202B] hover:decoration-[#14202B]"

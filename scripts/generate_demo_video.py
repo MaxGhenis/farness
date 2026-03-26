@@ -20,8 +20,8 @@ from PIL import ImageFont
 
 ROOT = Path(__file__).resolve().parents[1]
 OUT_DIR = ROOT / "site" / "public" / "demo"
-VIDEO_PATH = OUT_DIR / "farness-demo.mp4"
-POSTER_PATH = OUT_DIR / "farness-demo-poster.png"
+VIDEO_PATH = OUT_DIR / "farness-demo-v2.mp4"
+POSTER_PATH = OUT_DIR / "farness-demo-v2-poster.png"
 
 WIDTH = 3840
 HEIGHT = 2160
@@ -136,8 +136,18 @@ def first_match(lines: list[str], predicate) -> str | None:
     return None
 
 
-def format_percent(value: float) -> str:
-    return f"{round(value * 100):.0f}%"
+def format_forecast_value(kpi_name: str, value: float) -> str:
+    lower_name = kpi_name.lower()
+    percent_like = any(
+        token in lower_name for token in ("prob", "probability", "chance", "confidence", "fit")
+    )
+    if 0 <= value <= 1:
+        return f"{round(value * 100):.0f}%"
+    if percent_like and 0 <= value <= 100:
+        return f"{round(value):.0f}%"
+    if abs(value - round(value)) < 0.05:
+        return f"{round(value):.0f}"
+    return f"{value:.1f}".rstrip("0").rstrip(".")
 
 
 def summarize_codex_output(prompt: str, decision: dict[str, object]) -> list[str]:
@@ -150,8 +160,8 @@ def summarize_codex_output(prompt: str, decision: dict[str, object]) -> list[str
     for kpi_name, forecast in forecasts.items():
         low, high = forecast["confidence_interval"]
         forecast_lines.append(
-            f"{kpi_name}: {format_percent(forecast['point_estimate'])} "
-            f"[{format_percent(low)}, {format_percent(high)}]"
+            f"{kpi_name}: {format_forecast_value(kpi_name, forecast['point_estimate'])} "
+            f"[{format_forecast_value(kpi_name, low)}, {format_forecast_value(kpi_name, high)}]"
         )
 
     question = prompt.split("Analyze this decision: ", 1)[1].split(" Context:", 1)[0].strip()
