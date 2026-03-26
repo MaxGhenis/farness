@@ -20,11 +20,31 @@ export function DemoVideo({
           <source src="/demo/farness-demo.mp4" type="video/mp4" />
         </video>
       </div>
-      {caption ? (
-        <figcaption className="mt-4 text-[0.82rem] text-[#6B7C89] leading-[1.6]">
-          {caption}
-        </figcaption>
-      ) : null}
+      <figcaption className="mt-4 space-y-3">
+        {caption ? (
+          <p className="m-0 text-[0.82rem] text-[#6B7C89] leading-[1.6]">
+            {caption}
+          </p>
+        ) : null}
+        <div className="flex flex-wrap gap-x-5 gap-y-2 text-[0.8rem] [font-family:var(--font-mono)]">
+          <a
+            href="/demo/farness-demo.mp4"
+            target="_blank"
+            rel="noreferrer"
+            className="text-[#415463] underline decoration-[#BED0DB] underline-offset-4 hover:text-[#14202B] hover:decoration-[#14202B]"
+          >
+            Open 4K MP4
+          </a>
+          <a
+            href="/demo/farness-demo-poster.png"
+            target="_blank"
+            rel="noreferrer"
+            className="text-[#415463] underline decoration-[#BED0DB] underline-offset-4 hover:text-[#14202B] hover:decoration-[#14202B]"
+          >
+            Open poster
+          </a>
+        </div>
+      </figcaption>
     </figure>
   );
 }

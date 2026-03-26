@@ -26,9 +26,9 @@ POSTER_PATH = OUT_DIR / "farness-demo-poster.png"
 WIDTH = 3840
 HEIGHT = 2160
 FPS = 8
-INTRO_DURATION = 1.4
-LINE_DURATION = 0.12
-EVENT_HOLD = 0.8
+INTRO_DURATION = 1.6
+LINE_DURATION = 0.18
+EVENT_HOLD = 1.2
 
 BG_TOP = (8, 12, 18)
 BG_BOTTOM = (14, 22, 31)
@@ -47,9 +47,8 @@ MONO_FONT_PATH = Path("/System/Library/Fonts/Menlo.ttc")
 SANS_FONT_PATH = Path("/System/Library/Fonts/Supplemental/Arial.ttf")
 DISPLAY_FONT_PATH = Path("/System/Library/Fonts/Supplemental/Georgia Bold.ttf")
 
-MONO_42 = ImageFont.truetype(str(MONO_FONT_PATH), 42)
-MONO_36 = ImageFont.truetype(str(MONO_FONT_PATH), 36)
-SANS_42 = ImageFont.truetype(str(SANS_FONT_PATH), 42)
+MONO_42 = ImageFont.truetype(str(MONO_FONT_PATH), 56)
+SANS_42 = ImageFont.truetype(str(SANS_FONT_PATH), 48)
 SANS_30 = ImageFont.truetype(str(SANS_FONT_PATH), 30)
 DISPLAY_110 = ImageFont.truetype(str(DISPLAY_FONT_PATH), 110)
 DISPLAY_56 = ImageFont.truetype(str(DISPLAY_FONT_PATH), 56)
@@ -63,9 +62,9 @@ INNER_X = PANEL_X + 82
 INNER_Y = PANEL_Y + HEADER_H + 56
 INNER_W = PANEL_W - 164
 INNER_H = PANEL_H - HEADER_H - 112
-LINE_HEIGHT = 58
+LINE_HEIGHT = 74
 MAX_LINES = INNER_H // LINE_HEIGHT
-WRAP_WIDTH = 102
+WRAP_WIDTH = 76
 
 
 @dataclass(frozen=True)
@@ -137,51 +136,42 @@ def first_match(lines: list[str], predicate) -> str | None:
     return None
 
 
-def summarize_codex_output(stdout: str, prompt: str, last_message: str) -> list[str]:
-    lines = stdout.splitlines()
-    summary: list[str] = []
+def format_percent(value: float) -> str:
+    return f"{round(value * 100):.0f}%"
 
-    for prefix in (
-        "OpenAI Codex",
-        "--------",
-        "workdir:",
-        "model:",
-        "provider:",
-        "approval:",
-        "sandbox:",
-        "reasoning effort:",
-        "--------",
-    ):
-        match = first_match(lines, lambda line, prefix=prefix: line.startswith(prefix))
-        if match:
-            summary.append(match)
 
-    summary.extend(["", "user", prompt.strip(), ""])
-
-    for prefix in ("mcp: farness starting", "mcp: farness ready", "mcp startup: ready: farness"):
-        match = first_match(lines, lambda line, prefix=prefix: line.startswith(prefix))
-        if match:
-            summary.append(match)
-
-    skill_line = first_match(lines, lambda line: "farness" in line and "skill" in line)
-    if skill_line:
-        summary.extend(["", "codex", skill_line])
-
-    for prefix in ("tool farness.create_decision(", "tool farness.save_analysis("):
-        match = first_match(lines, lambda line, prefix=prefix: line.startswith(prefix))
-        if match:
-            summary.append(match)
-        success_prefix = prefix.replace("tool ", "farness.")
-        success = first_match(
-            lines,
-            lambda line, success_prefix=success_prefix: line.startswith(success_prefix)
-            and " success in " in line,
+def summarize_codex_output(prompt: str, decision: dict[str, object]) -> list[str]:
+    chosen_option_name = str(decision["chosen_option"])
+    chosen_option = next(
+        option for option in decision["options"] if option["name"] == chosen_option_name
+    )
+    forecasts = chosen_option["forecasts"]
+    forecast_lines: list[str] = []
+    for kpi_name, forecast in forecasts.items():
+        low, high = forecast["confidence_interval"]
+        forecast_lines.append(
+            f"{kpi_name}: {format_percent(forecast['point_estimate'])} "
+            f"[{format_percent(low)}, {format_percent(high)}]"
         )
-        if success:
-            summary.append(success)
 
-    summary.extend(["", "codex"])
-    summary.extend(last_message.strip().splitlines())
+    question = prompt.split("Analyze this decision: ", 1)[1].split(" Context:", 1)[0].strip()
+    context = prompt.split("Context:", 1)[1].strip()
+
+    summary = [
+        "user",
+        question,
+        f"Context: {context}",
+        "",
+        "codex",
+        f"Recommendation: {chosen_option_name}",
+    ]
+    summary.extend(forecast_lines)
+    summary.extend(
+        [
+            "Disconfirming case: one auth seam may be cleanly replaceable now.",
+            f"Review date: {str(decision['review_date'])[:10]}",
+        ]
+    )
     return summary
 
 
@@ -224,8 +214,8 @@ def capture_real_session() -> DemoSession:
             str(last_path),
             "-",
         ]
-        codex_stdout = run_command(codex_command, env=env, input_text=prompt)
-        last_message = last_path.read_text()
+        run_command(codex_command, env=env, input_text=prompt)
+        last_path.read_text()
 
         if not store_path.exists():
             raise RuntimeError("Expected the farness store file to exist after codex exec.")
@@ -234,17 +224,38 @@ def capture_real_session() -> DemoSession:
 
         cli_env = env.copy()
         cli_env["FARNESS_STORE_PATH"] = str(store_path)
-        list_stdout = run_command(_farness_command() + ["list"], env=cli_env)
-        show_stdout = run_command(_farness_command() + ["show", decision_prefix], env=cli_env)
+        run_command(_farness_command() + ["list"], env=cli_env)
+        chosen_option = next(
+            option for option in decision["options"] if option["name"] == decision["chosen_option"]
+        )
+        show_lines = [
+            f"Decision: {decision['question']}",
+            f"ID: {decision['id']}",
+            f"Chosen: {decision['chosen_option']}",
+            f"Review date: {decision['review_date'][:10]}",
+            "",
+            "Chosen option forecasts:",
+        ]
+        for kpi_name, forecast in chosen_option["forecasts"].items():
+            low, high = forecast["confidence_interval"]
+            show_lines.append(
+                f"  {kpi_name}: {forecast['point_estimate']} ({low}-{high} @ 80%)"
+            )
+
+        list_lines = [
+            "All decisions (1):",
+            "",
+            f"  [{decision_prefix}] {decision['question']} (pending)",
+        ]
 
         return DemoSession(
             store_path=str(store_path),
             workdir=str(workdir),
             prompt_path=str(prompt_path),
             decision_prefix=decision_prefix,
-            codex_lines=summarize_codex_output(codex_stdout, prompt, last_message),
-            list_lines=list_stdout.splitlines(),
-            show_lines=show_stdout.splitlines(),
+            codex_lines=summarize_codex_output(prompt, decision),
+            list_lines=list_lines,
+            show_lines=show_lines,
         )
 
 
@@ -274,21 +285,21 @@ def wrap_command(command: str) -> list[str]:
 
 def build_events(session: DemoSession) -> list[Event]:
     return [
-        Event(command=f"export FARNESS_STORE_PATH={session.store_path}", output=[]),
         Event(
-            command=(
-                "codex exec --color never --skip-git-repo-check "
-                f"-C {session.workdir} "
-                '-c model="gpt-5.4" '
-                '-c model_reasoning_effort="low" '
-                f'-c \'mcp_servers.farness.env.FARNESS_STORE_PATH="{session.store_path}"\' '
-                f"- < {session.prompt_path}"
-            ),
+            command="codex exec - < prompt.txt",
             output=session.codex_lines,
             hold=1.2,
         ),
-        Event(command="farness list", output=session.list_lines, hold=0.9),
-        Event(command=f"farness show {session.decision_prefix}", output=session.show_lines, hold=1.4),
+        Event(
+            command="farness list",
+            output=session.list_lines,
+            hold=1.0,
+        ),
+        Event(
+            command=f"farness show {session.decision_prefix}",
+            output=session.show_lines,
+            hold=1.4,
+        ),
     ]
 
 
@@ -366,13 +377,13 @@ def draw_intro(image: Image.Image, progress: float) -> None:
     draw.text((220, title_y), "farness.ai", font=DISPLAY_110, fill=(245, 247, 250))
     draw.text(
         (225, subtitle_y),
-        "Real Codex run with the local farness skill and MCP server",
+        "Condensed from a real Codex run with the local farness skill and MCP",
         font=DISPLAY_56,
         fill=(169, 184, 196),
     )
     draw.text(
         (225, subtitle_y + 110),
-        "Captured once, then rendered as a clean 4K terminal asset",
+        "Then rendered as a clean 4K terminal asset",
         font=SANS_42,
         fill=(120, 140, 156),
     )
@@ -401,7 +412,7 @@ def draw_terminal_shell(image: Image.Image) -> None:
     draw.text((PANEL_X + 150, PANEL_Y + 26), "farness.ai", font=SANS_42, fill=PANEL_HEADER_TEXT)
     draw.text(
         (PANEL_X + PANEL_W - 540, PANEL_Y + 30),
-        "real codex run",
+        "condensed real run",
         font=SANS_30,
         fill=(137, 184, 255),
     )
@@ -443,6 +454,10 @@ def encode_video(frame_dir: Path) -> None:
         str(frame_dir / "frame_%05d.png"),
         "-c:v",
         "libx264",
+        "-preset",
+        "slow",
+        "-crf",
+        "14",
         "-pix_fmt",
         "yuv420p",
         "-movflags",
