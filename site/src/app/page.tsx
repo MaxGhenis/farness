@@ -29,15 +29,14 @@ function Hero() {
             Decision framework for agents
           </div>
           <h1 className="[font-family:var(--font-display)] text-[clamp(2rem,4vw,3rem)] font-medium leading-[1.12] tracking-[-0.03em] mb-6 text-[#14202B]">
-            Make your agent forecast the decision.
+            Arm your agent&rsquo;s decisions with forecasting.
           </h1>
 
           <p className="text-[1.05rem] text-[#415463] max-w-[520px] mb-8 leading-[1.65] animate-[fade-up_0.8s_ease-out_0.12s_both]">
             <span className="[font-family:var(--font-editorial)] italic">farness</span>{" "}
-            gives Codex, Claude Code, and other agents a common decision workflow.
-            In Codex it now runs as a native skill with a local MCP server, so the
-            output is explicit KPIs, reference classes, confidence intervals,
-            disconfirming evidence, and review dates.
+            intercepts agent decisions and demands a forecast: a KPI, a confidence
+            interval, a base rate, disconfirming evidence, and a review date.
+            Works with Codex, Claude Code, and any agent that speaks MCP.
           </p>
 
           <div className="flex gap-4 flex-wrap animate-[fade-up_0.8s_ease-out_0.24s_both] max-[480px]:flex-col max-[480px]:items-start">
@@ -674,9 +673,6 @@ function ClosingSection() {
 function Footer() {
   return (
     <footer className="py-16 px-8 text-center bg-[#F7FAFC] border-t border-[#D9E4EC]">
-      <p className="[font-family:var(--font-editorial)] text-[1rem] text-[#6B7C89] italic mb-6">
-        Clarity at distance.
-      </p>
       <div className="flex gap-6 justify-center text-[0.78rem] [font-family:var(--font-mono)]">
         <a href="https://github.com/MaxGhenis/farness" className="text-[#6B7C89] no-underline hover:text-[#14202B] transition-colors">
           GitHub
