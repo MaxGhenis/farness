@@ -2,11 +2,11 @@
 
 *Max Ghenis*^[Independent researcher. Contact: max@maxghenis.com]
 
-**Disclosure:** The author created and maintains the farness framework and website evaluated in this paper. All code, data, and analysis are open source to enable independent verification.
+**Disclosure:** The author created and maintains the farness framework and website introduced and evaluated in this paper. All code, data, and analysis are open source to enable independent verification.
 
 ## Abstract
 
-I introduce *stability-under-probing*, a process-level method for evaluating decision prompts in large language model (LLM) decision support when ground-truth outcomes are unavailable. The method compares how far different prompts move after a shared bundle of follow-up probes, and whether structured prompts begin closer to their post-probe values. Study 1 applies the method to a bounded case study of a structured framework ("farness"), comparing it with naive and chain-of-thought (CoT) prompting across 11 quantitative scenarios spanning planning, risk, investment, and adversarial domains on Claude Opus 4.6 (n=191) and GPT-5.4 (n=198), with 6 runs per scenario-condition pair. Because scenarios mix weeks, probabilities, and leads, pooled inference uses *relative update* rather than raw update magnitude.
+I introduce *stability-under-probing*, a process-level method for evaluating decision prompts in large language model (LLM) decision support when ground-truth outcomes are unavailable. The method compares how far different prompts move after a shared bundle of follow-up probes, and whether structured prompts begin closer to their post-probe values. Study 1 applies the method to a structured framework I introduce here ("farness"), comparing it with naive and chain-of-thought (CoT) prompting across 11 quantitative scenarios spanning planning, risk, investment, and adversarial domains on Claude Opus 4.6 (n=191) and GPT-5.4 (n=198), with 6 runs per scenario-condition pair. Because scenarios mix weeks, probabilities, and leads, pooled inference uses *relative update* rather than raw update magnitude.
 
 In Study 1, farness produces smaller relative updates under the original shared probe battery than naive prompting (Claude: 43% vs 51%, mixed-effects coefficient = −0.080, p<0.001; GPT-5.4: 36% vs 48%, coefficient = −0.128, p<0.001). CoT provides little benefit on Claude and a smaller, model-specific benefit on GPT-5.4. Rather than naive responses converging *toward* framework estimates, both conditions typically converge toward similar final values, but the framework starts closer and therefore moves less.
 
@@ -174,7 +174,7 @@ Study 1 comprises 11 scenarios across 3 conditions with 6 runs each on 2 models,
 
 I report two studies. Study 1 contains 191 stability results for Claude Opus 4.6 (7 missing due to transient API errors) and 198 for GPT-5.4, across 11 scenarios and 3 conditions (naive, chain-of-thought, farness) with 6 runs per scenario-condition pair. Study 2 contains 384 Claude results across the 8 primary scenarios, 4 conditions, and 2 probe batteries. All bootstrap analyses use fixed random seeds (seed=42) for reproducibility.
 
-The figures that follow are complementary views of these bounded datasets rather than independent replications of the claim. @fig-update-magnitude summarizes the unit-normalized Study 1 differences, @fig-convergence clarifies the mechanism behind the failed convergence hypothesis, @fig-sycophancy shows run-level adversarial variability, and @fig-probe-validation directly tests construct validity by splitting on-framework and off-framework probes.
+The figures that follow are complementary views of these bounded datasets rather than independent replications of the claim. @fig-update-magnitude summarizes the unit-normalized Study 1 differences, @fig-convergence clarifies the convergence mechanism, @fig-sycophancy shows run-level adversarial variability, and @fig-probe-validation directly tests construct validity by splitting on-framework and off-framework probes.
 
 ### Study 1: Shared-battery stability
 
@@ -227,9 +227,9 @@ Claude and GPT-5.4 look closer on the normalized metric than the earlier Claude 
 
 ### Convergence analysis
 
-![Selected scenarios illustrating the failed convergence hypothesis. Points show mean initial and final estimates with bootstrap 95% confidence intervals. Within each panel, naive and farness usually end near similar final values, but farness starts closer.](figures/fig_convergence.png){#fig-convergence}
+![Selected scenarios illustrating convergence behavior. Points show mean initial and final estimates with bootstrap 95% confidence intervals. Within each panel, naive and farness usually end near similar final values, but farness starts closer.](figures/fig_convergence.png){#fig-convergence}
 
-The convergence ratio (@eq-convergence) measures whether probed naive responses move toward the framework's initial estimates. For Claude, the mean convergence ratio is −1.48 (95% bootstrap CI [−2.08, −0.94], n=53 valid pairs). For GPT-5.4, it is −1.07 (95% CI [−1.65, −0.54], n=55 valid pairs). Negative values indicate overshoot: after probing, naive responses move past the framework's initial estimate instead of toward it. @fig-convergence makes the mechanism clearer than the scalar ratio alone. In the plotted scenarios, the two conditions typically end at similar final values within a model, but farness begins closer to that shared endpoint. The failed convergence hypothesis therefore reflects over-correction by naive responses, not persistent disagreement between the two conditions after probing.
+The convergence ratio (@eq-convergence) measures whether probed naive responses move toward the framework's initial estimates. For Claude, the mean convergence ratio is −1.48 (95% bootstrap CI [−2.08, −0.94], n=53 valid pairs). For GPT-5.4, it is −1.07 (95% CI [−1.65, −0.54], n=55 valid pairs). Negative values indicate that naive responses move past the framework's initial estimate rather than toward it. @fig-convergence makes the mechanism clearer than the scalar ratio alone. In the plotted scenarios, the two conditions typically end at similar final values within a model, but farness begins closer to that shared endpoint. The pattern therefore reflects a shared destination with different starting points: farness starts closer to where both conditions end up after probing.
 
 ### Adversarial resistance
 
@@ -304,7 +304,7 @@ One important caveat: recent frontier models may employ implicit chain-of-though
 
 ### Both conditions converge — but the framework starts closer on the original battery
 
-Under the original shared probe battery, both conditions converge toward similar final values after probing, but the framework starts closer to that destination, requiring smaller updates to get there. The framework anchors on base rates and produces conservative initial estimates; when probed on those same dimensions, it makes smaller adjustments. Naive responses start from less-anchored initial positions and, when confronted with strong evidence (e.g., "only 16% of troubled projects meet revised estimates"), make large corrections that overshoot the framework's initial anchor. Study 2 suggests an important boundary on that mechanism: the initial positioning advantage does not generalize when probing shifts to considerations outside the framework's checklist.
+Under the original shared probe battery, both conditions converge toward similar final values after probing, but the framework starts closer to that destination, requiring smaller updates to get there. The framework anchors on base rates and produces conservative initial estimates; when probed on those same dimensions, it makes smaller adjustments. Naive responses start from less-anchored initial positions and, when confronted with strong evidence (e.g., "only 16% of troubled projects meet revised estimates"), make large corrections — ending near the same destination but having started farther away. Study 2 suggests an important boundary on that mechanism: the initial positioning advantage does not generalize when probing shifts to considerations outside the framework's checklist.
 
 ### Model differences
 

@@ -2,9 +2,9 @@
 
 ## Priority 1: Narrative fixes
 
-- [ ] **Reframe convergence finding**: "farness starts closer to where both end up after probing" — not divergence, not overshoot. Both conditions converge on similar final values; farness just starts closer. Change throughout abstract, Section 5.5, Section 6.3, Section 7.
-- [ ] **Introduce farness properly**: "I introduce farness, a structured decision framework" not "I evaluate a framework called farness." This paper IS the introduction. Add footnote linking to GitHub/site.
-- [ ] **Drop "pre-registered" claims**: Replace with "analysis code was committed prior to data collection (December 2025; experiments ran February 2026)." No formal pre-registration exists — just git history (commits 50e93d4, bfd1aae predate experiment runs).
+- [x] **Reframe convergence finding**: "farness starts closer to where both end up after probing" — not divergence, not overshoot. Both conditions converge on similar final values; farness just starts closer. Change throughout abstract, Section 5.5, Section 6.3, Section 7.
+- [x] **Introduce farness properly**: "I introduce farness, a structured decision framework" not "I evaluate a framework called farness." This paper IS the introduction. Add footnote linking to GitHub/site.
+- [x] **Drop "pre-registered" claims**: Replace with "analysis code was committed prior to data collection (December 2025; experiments ran February 2026)." No formal pre-registration exists — just git history (commits 50e93d4, bfd1aae predate experiment runs).
 
 ## Priority 2: Graphs (desperately needed)
 
@@ -24,7 +24,7 @@
 - [ ] **Scale heterogeneity note**: GPT mixed-effects coefficient (-37.0) is inflated by leads-scale sycophancy scenario. The 9x difference vs Claude (-4.17) is partly a units artifact. Clarify.
 - [ ] **CI rate metric → appendix**: 100% everywhere (prompt design artifact), uninformative. Move from primary metrics to appendix.
 - [ ] **Consolidate "transient API errors"**: Mentioned in Section 4.4, 4.6, 5.1, and 6.5. Reduce to one mention in Section 4.4.
-- [ ] **Fix "overshoot"/"diverge" language**: Replace throughout with the correct framing (see Priority 1).
+- [x] **Fix "overshoot"/"diverge" language**: Replace throughout with the correct framing (see Priority 1).
 - [ ] **Default CoT caveat**: Modern models (Claude Opus, GPT-4+) likely do implicit chain-of-thought by default. The CoT null result may mean "explicit CoT adds nothing to implicit CoT" rather than "reasoning doesn't help." Add to discussion.
 - [ ] **Mixed-effects as primary**: Already mostly done, but remove any remaining language suggesting non-parametric is primary. Non-parametric is the robustness check.
 
