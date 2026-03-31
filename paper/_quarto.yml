@@ -15,6 +15,7 @@ format:
     theme: [cosmo, farness-theme.scss]
     toc: false
     number-sections: false
+    title-block-style: none
     favicon: /favicon.svg
 
 repo-url: https://github.com/MaxGhenis/farness
