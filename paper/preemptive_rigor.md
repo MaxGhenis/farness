@@ -1,3 +1,5 @@
+# Stability-under-probing: A process-level evaluation method for
+decision prompts in LLMs
 
 
 # Stability-under-probing: A process-level evaluation method for decision prompts in LLMs
@@ -5,8 +7,8 @@
 *Max Ghenis*[^1]
 
 **Disclosure:** The author created and maintains the farness framework
-and website evaluated in this paper. All code, data, and analysis are
-open source to enable independent verification.
+and website introduced and evaluated in this paper. All code, data, and
+analysis are open source to enable independent verification.
 
 ## Abstract
 
@@ -15,13 +17,13 @@ evaluating decision prompts in large language model (LLM) decision
 support when ground-truth outcomes are unavailable. The method compares
 how far different prompts move after a shared bundle of follow-up
 probes, and whether structured prompts begin closer to their post-probe
-values. Study 1 applies the method to a bounded case study of a
-structured framework (“farness”), comparing it with naive and
-chain-of-thought (CoT) prompting across 11 quantitative scenarios
-spanning planning, risk, investment, and adversarial domains on Claude
-Opus 4.6 (n=191) and GPT-5.4 (n=198), with 6 runs per scenario-condition
-pair. Because scenarios mix weeks, probabilities, and leads, pooled
-inference uses *relative update* rather than raw update magnitude.
+values. Study 1 applies the method to a structured framework I introduce
+here (“farness”), comparing it with naive and chain-of-thought (CoT)
+prompting across 11 quantitative scenarios spanning planning, risk,
+investment, and adversarial domains on Claude Opus 4.6 (n=191) and
+GPT-5.4 (n=198), with 6 runs per scenario-condition pair. Because
+scenarios mix weeks, probabilities, and leads, pooled inference uses
+*relative update* rather than raw update magnitude.
 
 In Study 1, farness produces smaller relative updates under the original
 shared probe battery than naive prompting (Claude: 43% vs 51%,
@@ -449,7 +451,7 @@ datasets rather than independent replications of the claim.
 <a href="#fig-update-magnitude" class="quarto-xref">Figure 2</a>
 summarizes the unit-normalized Study 1 differences,
 <a href="#fig-convergence" class="quarto-xref">Figure 3</a> clarifies
-the mechanism behind the failed convergence hypothesis,
+the convergence mechanism,
 <a href="#fig-sycophancy" class="quarto-xref">Figure 4</a> shows
 run-level adversarial variability, and
 <a href="#fig-probe-validation" class="quarto-xref">Figure 6</a>
@@ -578,10 +580,10 @@ generations than the absolute scale of updating.
 
 ![](figures/fig_convergence.png)
 
-Figure 3: Selected scenarios illustrating the failed convergence
-hypothesis. Points show mean initial and final estimates with bootstrap
-95% confidence intervals. Within each panel, naive and farness usually
-end near similar final values, but farness starts closer.
+Figure 3: Selected scenarios illustrating convergence behavior. Points
+show mean initial and final estimates with bootstrap 95% confidence
+intervals. Within each panel, naive and farness usually end near similar
+final values, but farness starts closer.
 
 </div>
 
@@ -591,15 +593,14 @@ whether probed naive responses move toward the framework’s initial
 estimates. For Claude, the mean convergence ratio is −1.48 (95%
 bootstrap CI \[−2.08, −0.94\], n=53 valid pairs). For GPT-5.4, it is
 −1.07 (95% CI \[−1.65, −0.54\], n=55 valid pairs). Negative values
-indicate overshoot: after probing, naive responses move past the
-framework’s initial estimate instead of toward it.
+indicate that naive responses move past the framework’s initial estimate
+rather than toward it.
 <a href="#fig-convergence" class="quarto-xref">Figure 3</a> makes the
 mechanism clearer than the scalar ratio alone. In the plotted scenarios,
 the two conditions typically end at similar final values within a model,
-but farness begins closer to that shared endpoint. The failed
-convergence hypothesis therefore reflects over-correction by naive
-responses, not persistent disagreement between the two conditions after
-probing.
+but farness begins closer to that shared endpoint. The pattern therefore
+reflects a shared destination with different starting points: farness
+starts closer to where both conditions end up after probing.
 
 ### Adversarial resistance
 
@@ -845,10 +846,11 @@ anchors on base rates and produces conservative initial estimates; when
 probed on those same dimensions, it makes smaller adjustments. Naive
 responses start from less-anchored initial positions and, when
 confronted with strong evidence (e.g., “only 16% of troubled projects
-meet revised estimates”), make large corrections that overshoot the
-framework’s initial anchor. Study 2 suggests an important boundary on
-that mechanism: the initial positioning advantage does not generalize
-when probing shifts to considerations outside the framework’s checklist.
+meet revised estimates”), make large corrections — ending near the same
+destination but having started farther away. Study 2 suggests an
+important boundary on that mechanism: the initial positioning advantage
+does not generalize when probing shifts to considerations outside the
+framework’s checklist.
 
 ### Model differences
 
