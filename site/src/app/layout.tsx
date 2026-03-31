@@ -11,12 +11,22 @@ export const metadata: Metadata = {
     description:
       "A decision framework for Codex, Claude Code, and other agents with native skill and MCP support, plus explicit KPIs, numeric forecasts, reference classes, disconfirming evidence, and review dates.",
     url: "https://farness.ai",
+    siteName: "farness",
+    images: [
+      {
+        url: "https://farness.ai/og-image.png",
+        width: 1200,
+        height: 630,
+        alt: "Farness — a decision framework that turns agent recommendations into explicit forecasts with KPIs, confidence intervals, and review dates",
+      },
+    ],
   },
   twitter: {
-    card: "summary",
+    card: "summary_large_image",
     title: "Farness — Decision Optics for AI",
     description:
       "Make your agent forecast the decision with native Codex skill and MCP support, plus Claude Code and CLI workflows.",
+    images: ["https://farness.ai/og-image.png"],
   },
 };
 
