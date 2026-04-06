@@ -21,8 +21,17 @@ from farness.experiments.stability_runner import (
     print_experiment_summary,
 )
 from farness.experiments.llm import model_short_name
+from farness.experiments.decision_usefulness import (
+    DECISION_USEFULNESS_CONDITIONS,
+    get_decision_usefulness_case,
+    get_decision_usefulness_cases,
+    run_decision_usefulness_experiment,
+    run_decision_usefulness_judging,
+    print_decision_usefulness_summary,
+    default_output_dir_for_model as default_decision_usefulness_output_dir,
+)
 
-ALL_CONDITIONS = ["naive", "estimate_only", "format_control", "cot", "farness"]
+ALL_CONDITIONS = ["naive", "estimate_only", "format_control", "forecast_only", "cot", "farness"]
 ALL_PROBE_BATTERIES = ["on_framework", "off_framework"]
 
 
@@ -222,6 +231,65 @@ def main():
         help="Model to use as judge (default: cross-model judging)",
     )
 
+    # Decision-usefulness experiment
+    usefulness_parser = subparsers.add_parser(
+        "decision-usefulness",
+        help="Run decision-usefulness generation and/or pairwise judging",
+    )
+    usefulness_parser.add_argument(
+        "--output-dir",
+        type=Path,
+        default=None,
+        help="Output directory (default: experiments/decision_usefulness/{model})",
+    )
+    usefulness_parser.add_argument(
+        "--runs",
+        type=int,
+        default=3,
+        help="Runs per condition",
+    )
+    usefulness_parser.add_argument(
+        "--start-run",
+        type=int,
+        default=1,
+        help="Starting run number",
+    )
+    usefulness_parser.add_argument(
+        "--case",
+        type=str,
+        help="Run only a specific decision-usefulness case by ID",
+    )
+    usefulness_parser.add_argument(
+        "--list",
+        action="store_true",
+        help="List available decision-usefulness cases",
+    )
+    usefulness_parser.add_argument(
+        "--judge",
+        action="store_true",
+        help="Run pairwise LLM judging after generation",
+    )
+    usefulness_parser.add_argument(
+        "--judge-only",
+        action="store_true",
+        help="Run pairwise LLM judging on existing outputs without generating new artifacts",
+    )
+    usefulness_parser.add_argument(
+        "--judge-model",
+        type=str,
+        default=None,
+        help="Model to use as judge (default: cross-family held-out judging)",
+    )
+    usefulness_parser.add_argument(
+        "--representations",
+        type=str,
+        nargs="+",
+        choices=["raw", "normalized"],
+        default=None,
+        help="Representations to judge (default: raw normalized)",
+    )
+    _add_model_args(usefulness_parser)
+
     args = parser.parse_args()
 
     if args.command == "generate":
@@ -395,6 +463,59 @@ def main():
             stability_dir=args.stability_dir,
             judge_model=args.judge_model,
         )
+
+    elif args.command == "decision-usefulness":
+        if args.list:
+            print("Available decision-usefulness cases:\n")
+            for case in get_decision_usefulness_cases():
+                print(f"  {case.id}")
+                print(f"    {case.name} ({case.domain})")
+                print()
+            return 0
+
+        if args.case:
+            case = get_decision_usefulness_case(args.case)
+            if not case:
+                print(f"Case not found: {args.case}")
+                return 1
+            cases = [case]
+        else:
+            cases = get_decision_usefulness_cases()
+
+        model = args.model
+        conditions = args.conditions or list(DECISION_USEFULNESS_CONDITIONS)
+        output_dir = args.output_dir or default_decision_usefulness_output_dir(model)
+
+        if not args.judge_only:
+            print(
+                f"Running decision-usefulness generation: {len(cases)} cases, "
+                f"{args.runs} runs/condition"
+            )
+            print(f"  Model: {model}")
+            print(f"  Conditions: {conditions}")
+            print(f"  Output: {output_dir}")
+            run_decision_usefulness_experiment(
+                cases=cases,
+                conditions=conditions,
+                runs_per_condition=args.runs,
+                model=model,
+                start_run=args.start_run,
+                output_dir=output_dir,
+                verbose=True,
+            )
+            print(f"\nArtifacts saved to {output_dir}")
+
+        if args.judge or args.judge_only:
+            print(f"\nRunning decision-usefulness judging from {output_dir}")
+            utility_results, omission_results = run_decision_usefulness_judging(
+                output_dir=output_dir,
+                cases=cases,
+                representations=args.representations,
+                judge_model=args.judge_model,
+                verbose=True,
+            )
+            print_decision_usefulness_summary(utility_results, omission_results)
+            print(f"\nJudge outputs saved to {output_dir}")
 
     else:
         parser.print_help()
