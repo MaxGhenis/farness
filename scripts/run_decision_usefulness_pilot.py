@@ -19,7 +19,6 @@ from farness.experiments.decision_usefulness import (
     DECISION_USEFULNESS_CONDITIONS,
     PRIMARY_PAIRWISE_COMPARISONS,
     REPRESENTATIONS,
-    default_output_dir_for_model,
     get_decision_usefulness_case,
     print_decision_usefulness_summary,
     run_decision_usefulness_experiment,
@@ -78,7 +77,7 @@ def parse_args() -> argparse.Namespace:
         nargs="+",
         choices=REPRESENTATIONS,
         default=REPRESENTATIONS,
-        help="Representations to judge (default: raw normalized)",
+        help="Representations to judge (default: decision_memo raw normalized)",
     )
     parser.add_argument(
         "--output-base",

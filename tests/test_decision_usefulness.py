@@ -74,6 +74,12 @@ Review date:
     assert "Decision question:" in normalized
     assert "Outside-view evidence:" in normalized
 
+    memo = du.build_decision_memo(response_text=response, normalized_sections=sections)
+    assert "Recommended option:" in memo
+    assert "Patch incrementally now" in memo
+    assert "Main alternative:" in memo
+    assert "Quantitative support:" in memo
+
 
 def test_normalize_decision_analysis_defaults_missing_fields():
     """Missing sections should be marked explicitly."""
@@ -85,6 +91,26 @@ def test_normalize_decision_analysis_defaults_missing_fields():
     assert sections["forecast_summary"] == "Not provided"
     assert sections["outside_view"] == "Not provided"
     assert "Not provided" in normalized
+
+
+def test_ensure_artifact_representations_backfills_decision_memo():
+    """Older saved artifacts should gain the memo representation on load."""
+    artifact = du.DecisionUsefulnessArtifact(
+        case_id="auth_rewrite",
+        condition="naive",
+        model="gpt-5.4",
+        run_number=1,
+        prompt="p",
+        response_text="Recommendation: Wait.\n\nBecause the timing is uncertain.",
+        timestamp="2026-04-10T10:00:00",
+        duration_seconds=1.0,
+        normalized_sections={},
+        normalized_representation="",
+    )
+    patched = du._ensure_artifact_representations(artifact, "Should we launch?")
+    assert patched.normalized_representation
+    assert patched.decision_memo_representation
+    assert "Recommended option:" in patched.decision_memo_representation
 
 
 def test_judge_pairwise_decision_usefulness_maps_winner(monkeypatch):
@@ -155,6 +181,80 @@ def test_judge_pairwise_decision_usefulness_maps_winner(monkeypatch):
     assert result.winner_condition == result.left_condition
     assert result.confidence == 81
     assert result.scores_a["kpi_clarity"] == 5
+
+
+def test_judge_pairwise_decision_usefulness_uses_neutral_prompt_for_decision_memo(monkeypatch):
+    """Decision-memo judging should use the neutral writeup prompt."""
+    case = du.get_decision_usefulness_case("auth_rewrite")
+    assert case is not None
+
+    artifact_a = du.DecisionUsefulnessArtifact(
+        case_id=case.id,
+        condition="forecast_only",
+        model="gpt-5.4",
+        run_number=1,
+        prompt="p1",
+        response_text="Recommendation: Patch incrementally.",
+        timestamp="2026-04-06T10:00:00",
+        duration_seconds=1.0,
+        normalized_sections={"recommendation": "Patch incrementally.", "options": "Rewrite now\nPatch incrementally", "forecast_summary": "Patch incrementally: 72%", "disconfirming_evidence": "May entrench complexity", "review_plan": "Reassess after next incident"},
+        normalized_representation="Recommendation:\nPatch incrementally.",
+        decision_memo_representation="Recommended option:\nPatch incrementally.",
+    )
+    artifact_b = du.DecisionUsefulnessArtifact(
+        case_id=case.id,
+        condition="naive",
+        model="gpt-5.4",
+        run_number=1,
+        prompt="p2",
+        response_text="Recommendation: Rewrite now.",
+        timestamp="2026-04-06T10:00:01",
+        duration_seconds=1.2,
+        normalized_sections={"recommendation": "Rewrite now."},
+        normalized_representation="Recommendation:\nRewrite now.",
+        decision_memo_representation="Recommended option:\nRewrite now.",
+    )
+
+    prompts = []
+
+    def fake_call_llm(prompt, model, temperature, max_tokens):
+        prompts.append(prompt)
+        return (
+            """{
+  "scores_a": {
+    "action_guidance": 5,
+    "comparative_reasoning": 4,
+    "uncertainty_handling": 4,
+    "quantitative_support": 5,
+    "overall_usefulness": 5
+  },
+  "scores_b": {
+    "action_guidance": 2,
+    "comparative_reasoning": 2,
+    "uncertainty_handling": 2,
+    "quantitative_support": 1,
+    "overall_usefulness": 2
+  },
+  "overall_winner": "A",
+  "confidence": 76,
+  "rationale": "A is more decision-useful."
+}""",
+            0.2,
+        )
+
+    monkeypatch.setattr(du, "call_llm", fake_call_llm)
+    result = du.judge_pairwise_decision_usefulness(
+        case=case,
+        artifact_a=artifact_a,
+        artifact_b=artifact_b,
+        representation="decision_memo",
+    )
+
+    assert prompts
+    assert "## Writeup A" in prompts[0]
+    assert "Action guidance" in prompts[0]
+    assert result.confidence == 76
+    assert result.scores_a["action_guidance"] == 5
 
 
 def test_summarize_decision_usefulness_judging_counts_wins():

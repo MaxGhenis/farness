@@ -9,9 +9,10 @@ It compares four prompt conditions:
 - forecast_only
 - farness
 
-Each generated analysis is evaluated in two representations:
+Each generated analysis is evaluated in three representations:
+- decision_memo: a neutral fixed-envelope summary for recommendation quality
 - raw: the original response, blinded to condition
-- normalized: a canonical representation that minimizes style effects
+- normalized: a canonical representation for framework-aligned diagnostics
 """
 
 from __future__ import annotations
@@ -41,7 +42,8 @@ PRIMARY_PAIRWISE_COMPARISONS = [
     ("format_control", "naive"),
 ]
 
-REPRESENTATIONS = ["raw", "normalized"]
+PRIMARY_REPRESENTATION = "decision_memo"
+REPRESENTATIONS = ["decision_memo", "raw", "normalized"]
 
 
 @dataclass(frozen=True)
@@ -231,7 +233,54 @@ Do not stop at qualitative vibes; make explicit numeric forecasts.""",
 }
 
 
-PAIRWISE_UTILITY_PROMPT = """You are evaluating two decision analyses for usefulness to a careful human decision-maker.
+PAIRWISE_NEUTRAL_PROMPT = """You are evaluating two decision writeups for usefulness to a careful human decision-maker.
+
+Your job is not to guess which one came from a better prompt. Your job is to decide which analysis would better help a user make the decision.
+
+Do not reward verbosity, polish, headings, or visible process steps by themselves.
+Prefer the writeup that gives clearer action guidance, more discriminative reasoning between live alternatives, more useful caveat/uncertainty handling, and stronger quantitative support when that support meaningfully helps the recommendation.
+
+## Decision scenario
+{scenario}
+
+## Writeup A
+{analysis_a}
+
+## Writeup B
+{analysis_b}
+
+Score each analysis from 1-5 on:
+1. Action guidance
+2. Comparative reasoning
+3. Uncertainty handling
+4. Quantitative support
+5. Overall decision usefulness
+
+Then choose the overall winner.
+
+Return JSON only:
+{{
+  "scores_a": {{
+    "action_guidance": <1-5>,
+    "comparative_reasoning": <1-5>,
+    "uncertainty_handling": <1-5>,
+    "quantitative_support": <1-5>,
+    "overall_usefulness": <1-5>
+  }},
+  "scores_b": {{
+    "action_guidance": <1-5>,
+    "comparative_reasoning": <1-5>,
+    "uncertainty_handling": <1-5>,
+    "quantitative_support": <1-5>,
+    "overall_usefulness": <1-5>
+  }},
+  "overall_winner": "A" | "B" | "tie",
+  "confidence": <0-100>,
+  "rationale": "<<=120 words>"
+}}""".strip()
+
+
+PAIRWISE_ALIGNED_PROMPT = """You are evaluating two decision analyses for usefulness to a careful human decision-maker.
 
 Your job is not to guess which one came from a better prompt. Your job is to decide which analysis would better help a user make the decision.
 
@@ -359,6 +408,7 @@ class DecisionUsefulnessArtifact:
     duration_seconds: float
     normalized_sections: dict[str, str] = field(default_factory=dict)
     normalized_representation: str = ""
+    decision_memo_representation: str = ""
 
     def to_dict(self) -> dict[str, Any]:
         return {
@@ -372,6 +422,7 @@ class DecisionUsefulnessArtifact:
             "duration_seconds": self.duration_seconds,
             "normalized_sections": self.normalized_sections,
             "normalized_representation": self.normalized_representation,
+            "decision_memo_representation": self.decision_memo_representation,
         }
 
 
@@ -540,6 +591,49 @@ def _extract_numeric_lines(text: str) -> str:
     return "\n".join(lines[:8]).strip()
 
 
+def _extract_option_candidates(options_text: str) -> list[str]:
+    """Extract option-like entries from an options block."""
+    if not options_text or options_text == "Not provided":
+        return []
+
+    candidates = []
+    for raw_line in options_text.splitlines():
+        line = re.sub(r"^[\-\*\d\.\)\s]+", "", raw_line.strip()).strip()
+        if line:
+            candidates.append(line)
+    return candidates
+
+
+def _first_meaningful_line(text: str) -> str:
+    """Return the first non-empty line from a block of text."""
+    for raw_line in text.splitlines():
+        line = raw_line.strip()
+        if line:
+            return line
+    return "Not clearly stated."
+
+
+def _extract_sentences(text: str) -> list[str]:
+    """Split text into reasonably clean sentences."""
+    compact = re.sub(r"\s+", " ", text).strip()
+    if not compact:
+        return []
+    return [sentence.strip() for sentence in re.split(r"(?<=[.!?])\s+", compact) if sentence.strip()]
+
+
+def _clean_freeform_for_memo(text: str) -> str:
+    """Remove obvious heading lines before extracting a memo rationale."""
+    kept_lines = []
+    for raw_line in _redact_framework_names(text).splitlines():
+        stripped = raw_line.strip()
+        if not stripped:
+            continue
+        if _normalize_heading(stripped) is not None:
+            continue
+        kept_lines.append(stripped)
+    return " ".join(kept_lines).strip()
+
+
 def _redact_framework_names(text: str) -> str:
     """Remove explicit framework references from judged text."""
     redacted = re.sub(r"\bfarness\b", "[framework]", text, flags=re.IGNORECASE)
@@ -658,6 +752,82 @@ def normalize_decision_analysis(
     return normalized_sections, normalized_representation
 
 
+def build_decision_memo(
+    response_text: str,
+    normalized_sections: dict[str, str],
+) -> str:
+    """Build a neutral fixed-envelope memo for judge comparisons."""
+    recommendation = _first_meaningful_line(normalized_sections.get("recommendation", ""))
+
+    option_candidates = _extract_option_candidates(normalized_sections.get("options", ""))
+    recommendation_lower = recommendation.lower()
+    alternative = next(
+        (
+            option
+            for option in option_candidates
+            if option.lower() not in recommendation_lower and recommendation_lower not in option.lower()
+        ),
+        option_candidates[0] if option_candidates else "Not clearly stated.",
+    )
+
+    cleaned_text = _clean_freeform_for_memo(response_text)
+    rationale_sentences = []
+    for sentence in _extract_sentences(cleaned_text):
+        sentence_lower = sentence.lower()
+        if recommendation != "Not clearly stated." and recommendation_lower in sentence_lower:
+            continue
+        if any(
+            marker in sentence_lower
+            for marker in ("review date", "review plan", "follow-up", "revisit trigger", "recommended option:")
+        ):
+            continue
+        rationale_sentences.append(sentence)
+    rationale = " ".join(rationale_sentences[:3]).strip() or "Not clearly stated."
+
+    caveat_text = normalized_sections.get("disconfirming_evidence", "Not provided")
+    caveat = (
+        _first_meaningful_line(caveat_text)
+        if caveat_text != "Not provided"
+        else "Not clearly stated."
+    )
+
+    review_text = normalized_sections.get("review_plan", "Not provided")
+    revisit_trigger = (
+        _first_meaningful_line(review_text)
+        if review_text != "Not provided"
+        else "Not clearly stated."
+    )
+
+    quantitative_text = normalized_sections.get("forecast_summary", "Not provided")
+    if quantitative_text != "Not provided":
+        quantitative_lines = [line.strip() for line in quantitative_text.splitlines() if line.strip()][:2]
+        quantitative_support = "\n".join(quantitative_lines).strip() or "Not clearly stated."
+    else:
+        quantitative_support = "Not clearly stated."
+
+    return "\n".join(
+        [
+            "Recommended option:",
+            recommendation,
+            "",
+            "Main alternative:",
+            alternative,
+            "",
+            "Decisive rationale:",
+            rationale,
+            "",
+            "Key caveat:",
+            caveat,
+            "",
+            "Revisit trigger:",
+            revisit_trigger,
+            "",
+            "Quantitative support:",
+            quantitative_support,
+        ]
+    ).strip()
+
+
 def run_decision_usefulness_trial(
     case: DecisionUsefulnessCase,
     condition: str,
@@ -679,6 +849,10 @@ def run_decision_usefulness_trial(
         response_text=response_text,
         scenario=case.scenario,
     )
+    decision_memo_representation = build_decision_memo(
+        response_text=response_text,
+        normalized_sections=normalized_sections,
+    )
 
     return DecisionUsefulnessArtifact(
         case_id=case.id,
@@ -691,6 +865,7 @@ def run_decision_usefulness_trial(
         duration_seconds=duration,
         normalized_sections=normalized_sections,
         normalized_representation=normalized_representation,
+        decision_memo_representation=decision_memo_representation,
     )
 
 
@@ -806,6 +981,8 @@ def _prepare_pairwise_text(
     representation: str,
 ) -> tuple[str, str]:
     """Return the representation text for a pairwise comparison."""
+    if representation == "decision_memo":
+        return artifact_a.decision_memo_representation, artifact_b.decision_memo_representation
     if representation == "raw":
         return _redact_framework_names(artifact_a.response_text), _redact_framework_names(artifact_b.response_text)
     if representation == "normalized":
@@ -837,7 +1014,8 @@ def judge_pairwise_decision_usefulness(
         left_artifact, right_artifact = artifact_b, artifact_a
 
     analysis_a, analysis_b = _prepare_pairwise_text(left_artifact, right_artifact, representation)
-    prompt = PAIRWISE_UTILITY_PROMPT.format(
+    prompt_template = PAIRWISE_ALIGNED_PROMPT if representation == "normalized" else PAIRWISE_NEUTRAL_PROMPT
+    prompt = prompt_template.format(
         scenario=case.scenario,
         analysis_a=analysis_a,
         analysis_b=analysis_b,
@@ -964,6 +1142,41 @@ def _load_artifact(path: Path) -> DecisionUsefulnessArtifact:
         duration_seconds=data.get("duration_seconds", 0.0),
         normalized_sections=data.get("normalized_sections", {}),
         normalized_representation=data.get("normalized_representation", ""),
+        decision_memo_representation=data.get("decision_memo_representation", ""),
+    )
+
+
+def _ensure_artifact_representations(
+    artifact: DecisionUsefulnessArtifact,
+    scenario: str,
+) -> DecisionUsefulnessArtifact:
+    """Backfill newer judge representations for older saved artifacts."""
+    normalized_sections = artifact.normalized_sections
+    normalized_representation = artifact.normalized_representation
+
+    if not normalized_sections or not normalized_representation:
+        normalized_sections, normalized_representation = normalize_decision_analysis(
+            response_text=artifact.response_text,
+            scenario=scenario,
+        )
+
+    decision_memo_representation = artifact.decision_memo_representation or build_decision_memo(
+        response_text=artifact.response_text,
+        normalized_sections=normalized_sections,
+    )
+
+    return DecisionUsefulnessArtifact(
+        case_id=artifact.case_id,
+        condition=artifact.condition,
+        model=artifact.model,
+        run_number=artifact.run_number,
+        prompt=artifact.prompt,
+        response_text=artifact.response_text,
+        timestamp=artifact.timestamp,
+        duration_seconds=artifact.duration_seconds,
+        normalized_sections=normalized_sections,
+        normalized_representation=normalized_representation,
+        decision_memo_representation=decision_memo_representation,
     )
 
 
@@ -995,7 +1208,11 @@ def run_decision_usefulness_judging(
         representations = REPRESENTATIONS
 
     case_lookup = {case.id: case for case in cases}
-    artifacts = load_decision_usefulness_artifacts(output_dir)
+    artifacts = [
+        _ensure_artifact_representations(artifact, case_lookup[artifact.case_id].scenario)
+        for artifact in load_decision_usefulness_artifacts(output_dir)
+        if artifact.case_id in case_lookup
+    ]
 
     grouped: dict[tuple[str, str, int], DecisionUsefulnessArtifact] = {}
     for artifact in artifacts:

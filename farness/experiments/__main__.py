@@ -23,6 +23,7 @@ from farness.experiments.stability_runner import (
 from farness.experiments.llm import model_short_name
 from farness.experiments.decision_usefulness import (
     DECISION_USEFULNESS_CONDITIONS,
+    REPRESENTATIONS,
     get_decision_usefulness_case,
     get_decision_usefulness_cases,
     run_decision_usefulness_experiment,
@@ -284,9 +285,9 @@ def main():
         "--representations",
         type=str,
         nargs="+",
-        choices=["raw", "normalized"],
+        choices=REPRESENTATIONS,
         default=None,
-        help="Representations to judge (default: raw normalized)",
+        help="Representations to judge (default: decision_memo raw normalized)",
     )
     _add_model_args(usefulness_parser)
 
