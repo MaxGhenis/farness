@@ -23,6 +23,7 @@ from farness.experiments.stability_runner import (
 from farness.experiments.llm import model_short_name
 from farness.experiments.decision_usefulness import (
     DECISION_USEFULNESS_CONDITIONS,
+    JUDGE_TASKS,
     REPRESENTATIONS,
     get_decision_usefulness_case,
     get_decision_usefulness_cases,
@@ -289,6 +290,14 @@ def main():
         default=None,
         help="Representations to judge (default: decision_memo raw normalized)",
     )
+    usefulness_parser.add_argument(
+        "--judge-tasks",
+        type=str,
+        nargs="+",
+        choices=JUDGE_TASKS,
+        default=None,
+        help="Judge tasks to run (default: utility omission critique_survival)",
+    )
     _add_model_args(usefulness_parser)
 
     args = parser.parse_args()
@@ -512,6 +521,7 @@ def main():
                 output_dir=output_dir,
                 cases=cases,
                 representations=args.representations,
+                judge_tasks=args.judge_tasks,
                 judge_model=args.judge_model,
                 verbose=True,
             )

@@ -1,5 +1,7 @@
 """Tests for decision-usefulness experiment utilities."""
 
+import json
+
 from farness.experiments import decision_usefulness as du
 
 
@@ -412,3 +414,62 @@ def test_summarize_decision_usefulness_judging_counts_wins():
         summary["critique_survival"]["normalized"]["farness_vs_forecast_only"]["less_undermined"]["farness"]
         == 1
     )
+
+
+def test_run_decision_usefulness_judging_can_select_critique_only(tmp_path, monkeypatch):
+    """Judging should support backfilling critique-survival without rerunning other tasks."""
+    case = du.get_decision_usefulness_case("auth_rewrite")
+    assert case is not None
+
+    for condition, recommendation in (
+        ("farness", "Patch incrementally."),
+        ("naive", "Rewrite now."),
+    ):
+        artifact = du.DecisionUsefulnessArtifact(
+            case_id=case.id,
+            condition=condition,
+            model="gpt-5.4",
+            run_number=1,
+            prompt="p",
+            response_text=f"Recommendation: {recommendation}",
+            timestamp="2026-04-06T10:00:00",
+            duration_seconds=1.0,
+            normalized_sections={"recommendation": recommendation},
+            normalized_representation=f"Recommendation:\n{recommendation}",
+            decision_memo_representation=f"Recommended option:\n{recommendation}",
+        )
+        with open(tmp_path / f"{case.id}_{condition}_run1.json", "w") as fh:
+            json.dump(artifact.to_dict(), fh)
+
+    calls = []
+
+    def fake_call_llm(prompt, model, temperature, max_tokens):
+        calls.append(prompt)
+        return (
+            """{
+  "most_damaging_critique_a": "Execution fragility.",
+  "most_damaging_critique_b": "Opportunity cost.",
+  "less_undermined_analysis": "A",
+  "confidence": 70,
+  "rationale": "A survives better."
+}""",
+            0.1,
+        )
+
+    monkeypatch.setattr(du, "call_llm", fake_call_llm)
+    utility_results, omission_results, critique_results = du.run_decision_usefulness_judging(
+        output_dir=tmp_path,
+        cases=[case],
+        comparisons=[("farness", "naive")],
+        representations=["decision_memo"],
+        judge_tasks=["critique_survival"],
+        verbose=False,
+    )
+
+    assert not utility_results
+    assert not omission_results
+    assert len(critique_results) == 1
+    assert len(calls) == 1
+    assert list(tmp_path.glob("judge_critique_*.json"))
+    assert not list(tmp_path.glob("judge_utility_*.json"))
+    assert not list(tmp_path.glob("judge_omission_*.json"))

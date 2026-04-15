@@ -44,6 +44,7 @@ PRIMARY_PAIRWISE_COMPARISONS = [
 
 PRIMARY_REPRESENTATION = "decision_memo"
 REPRESENTATIONS = ["decision_memo", "raw", "normalized"]
+JUDGE_TASKS = ["utility", "omission", "critique_survival"]
 
 
 @dataclass(frozen=True)
@@ -1335,6 +1336,7 @@ def run_decision_usefulness_judging(
     cases: Optional[list[DecisionUsefulnessCase]] = None,
     comparisons: Optional[list[tuple[str, str]]] = None,
     representations: Optional[list[str]] = None,
+    judge_tasks: Optional[list[str]] = None,
     judge_model: Optional[str] = None,
     verbose: bool = True,
 ) -> tuple[
@@ -1350,6 +1352,11 @@ def run_decision_usefulness_judging(
         comparisons = PRIMARY_PAIRWISE_COMPARISONS
     if representations is None:
         representations = REPRESENTATIONS
+    if judge_tasks is None:
+        judge_tasks = JUDGE_TASKS
+    unsupported_tasks = sorted(set(judge_tasks) - set(JUDGE_TASKS))
+    if unsupported_tasks:
+        raise ValueError(f"Unsupported judge task(s): {unsupported_tasks}")
 
     case_lookup = {case.id: case for case in cases}
     artifacts = [
@@ -1385,51 +1392,56 @@ def run_decision_usefulness_judging(
                         print(
                             f"judge {case.id}/run{run_number} {left_condition} vs {right_condition} ({representation})"
                         )
-                    utility_result = judge_pairwise_decision_usefulness(
-                        case=case_lookup[case.id],
-                        artifact_a=left_artifact,
-                        artifact_b=right_artifact,
-                        judge_model=judge_model,
-                        representation=representation,
-                    )
-                    omission_result = judge_pairwise_omissions(
-                        case=case_lookup[case.id],
-                        artifact_a=left_artifact,
-                        artifact_b=right_artifact,
-                        judge_model=judge_model,
-                        representation=representation,
-                    )
-                    critique_result = judge_pairwise_critique_survival(
-                        case=case_lookup[case.id],
-                        artifact_a=left_artifact,
-                        artifact_b=right_artifact,
-                        judge_model=judge_model,
-                        representation=representation,
-                    )
-                    utility_results.append(utility_result)
-                    omission_results.append(omission_result)
-                    critique_results.append(critique_result)
+                    if "utility" in judge_tasks:
+                        utility_result = judge_pairwise_decision_usefulness(
+                            case=case_lookup[case.id],
+                            artifact_a=left_artifact,
+                            artifact_b=right_artifact,
+                            judge_model=judge_model,
+                            representation=representation,
+                        )
+                        utility_results.append(utility_result)
 
-                    utility_path = output_dir / (
-                        "judge_utility_"
-                        f"{case.id}_{left_condition}_vs_{right_condition}_run{run_number}_{representation}.json"
-                    )
-                    with open(utility_path, "w") as fh:
-                        json.dump(utility_result.to_dict(), fh, indent=2)
+                        utility_path = output_dir / (
+                            "judge_utility_"
+                            f"{case.id}_{left_condition}_vs_{right_condition}_run{run_number}_{representation}.json"
+                        )
+                        with open(utility_path, "w") as fh:
+                            json.dump(utility_result.to_dict(), fh, indent=2)
 
-                    omission_path = output_dir / (
-                        "judge_omission_"
-                        f"{case.id}_{left_condition}_vs_{right_condition}_run{run_number}_{representation}.json"
-                    )
-                    with open(omission_path, "w") as fh:
-                        json.dump(omission_result.to_dict(), fh, indent=2)
+                    if "omission" in judge_tasks:
+                        omission_result = judge_pairwise_omissions(
+                            case=case_lookup[case.id],
+                            artifact_a=left_artifact,
+                            artifact_b=right_artifact,
+                            judge_model=judge_model,
+                            representation=representation,
+                        )
+                        omission_results.append(omission_result)
 
-                    critique_path = output_dir / (
-                        "judge_critique_"
-                        f"{case.id}_{left_condition}_vs_{right_condition}_run{run_number}_{representation}.json"
-                    )
-                    with open(critique_path, "w") as fh:
-                        json.dump(critique_result.to_dict(), fh, indent=2)
+                        omission_path = output_dir / (
+                            "judge_omission_"
+                            f"{case.id}_{left_condition}_vs_{right_condition}_run{run_number}_{representation}.json"
+                        )
+                        with open(omission_path, "w") as fh:
+                            json.dump(omission_result.to_dict(), fh, indent=2)
+
+                    if "critique_survival" in judge_tasks:
+                        critique_result = judge_pairwise_critique_survival(
+                            case=case_lookup[case.id],
+                            artifact_a=left_artifact,
+                            artifact_b=right_artifact,
+                            judge_model=judge_model,
+                            representation=representation,
+                        )
+                        critique_results.append(critique_result)
+
+                        critique_path = output_dir / (
+                            "judge_critique_"
+                            f"{case.id}_{left_condition}_vs_{right_condition}_run{run_number}_{representation}.json"
+                        )
+                        with open(critique_path, "w") as fh:
+                            json.dump(critique_result.to_dict(), fh, indent=2)
 
     summary = summarize_decision_usefulness_judging(
         utility_results,
@@ -1540,29 +1552,32 @@ def print_decision_usefulness_summary(
     print("DECISION-USEFULNESS JUDGING SUMMARY")
     print("============================================================")
     for representation in REPRESENTATIONS:
-        print(f"\n[{representation}] utility")
-        for comparison, data in summary["utility"][representation].items():
-            wins = ", ".join(f"{cond}={count}" for cond, count in sorted(data["wins"].items()))
-            print(
-                f"  {comparison}: n={data['n']} mean_conf={data['mean_confidence']} wins({wins})"
-            )
-        print(f"\n[{representation}] omission")
-        for comparison, data in summary["omission"][representation].items():
-            flagged = ", ".join(
-                f"{cond}={count}" for cond, count in sorted(data["flagged_more_serious"].items())
-            )
-            print(
-                f"  {comparison}: n={data['n']} mean_conf={data['mean_confidence']} flagged({flagged})"
-            )
-        print(f"\n[{representation}] critique survival")
-        for comparison, data in summary["critique_survival"][representation].items():
-            less_undermined = ", ".join(
-                f"{cond}={count}" for cond, count in sorted(data["less_undermined"].items())
-            )
-            print(
-                f"  {comparison}: n={data['n']} mean_conf={data['mean_confidence']} "
-                f"less_undermined({less_undermined})"
-            )
+        if summary["utility"][representation]:
+            print(f"\n[{representation}] utility")
+            for comparison, data in summary["utility"][representation].items():
+                wins = ", ".join(f"{cond}={count}" for cond, count in sorted(data["wins"].items()))
+                print(
+                    f"  {comparison}: n={data['n']} mean_conf={data['mean_confidence']} wins({wins})"
+                )
+        if summary["omission"][representation]:
+            print(f"\n[{representation}] omission")
+            for comparison, data in summary["omission"][representation].items():
+                flagged = ", ".join(
+                    f"{cond}={count}" for cond, count in sorted(data["flagged_more_serious"].items())
+                )
+                print(
+                    f"  {comparison}: n={data['n']} mean_conf={data['mean_confidence']} flagged({flagged})"
+                )
+        if summary["critique_survival"][representation]:
+            print(f"\n[{representation}] critique survival")
+            for comparison, data in summary["critique_survival"][representation].items():
+                less_undermined = ", ".join(
+                    f"{cond}={count}" for cond, count in sorted(data["less_undermined"].items())
+                )
+                print(
+                    f"  {comparison}: n={data['n']} mean_conf={data['mean_confidence']} "
+                    f"less_undermined({less_undermined})"
+                )
 
 
 def default_output_dir_for_model(model: str) -> Path:

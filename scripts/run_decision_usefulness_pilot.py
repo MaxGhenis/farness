@@ -17,6 +17,7 @@ if str(ROOT) not in sys.path:
 
 from farness.experiments.decision_usefulness import (
     DECISION_USEFULNESS_CONDITIONS,
+    JUDGE_TASKS,
     PRIMARY_PAIRWISE_COMPARISONS,
     REPRESENTATIONS,
     get_decision_usefulness_case,
@@ -92,6 +93,13 @@ def parse_args() -> argparse.Namespace:
         help="Optional fixed judge model (default: held-out cross-family judge)",
     )
     parser.add_argument(
+        "--judge-tasks",
+        nargs="+",
+        choices=JUDGE_TASKS,
+        default=JUDGE_TASKS,
+        help="Judge tasks to run (default: utility omission critique_survival)",
+    )
+    parser.add_argument(
         "--generate-only",
         action="store_true",
         help="Generate artifacts only; skip pairwise judging",
@@ -121,7 +129,7 @@ def main() -> None:
 
     generation_count_per_model = len(cases) * len(args.conditions) * args.runs
     comparison_count_per_case_run = len(PRIMARY_PAIRWISE_COMPARISONS)
-    judge_tasks_per_pair = 3
+    judge_tasks_per_pair = len(args.judge_tasks)
     judge_calls_per_case_run = (
         comparison_count_per_case_run * len(args.representations) * judge_tasks_per_pair
     )
@@ -132,6 +140,7 @@ def main() -> None:
     print(f"  Case IDs: {', '.join(case.id for case in cases)}")
     print(f"  Conditions: {', '.join(args.conditions)}")
     print(f"  Representations: {', '.join(args.representations)}")
+    print(f"  Judge tasks: {', '.join(args.judge_tasks)}")
     print(f"  Runs per condition: {args.runs}")
     print(f"  Generated analyses per model: {generation_count_per_model}")
     print(f"  Judge calls per model: {judge_calls_per_model}")
@@ -157,6 +166,7 @@ def main() -> None:
                 output_dir=output_dir,
                 cases=cases,
                 representations=args.representations,
+                judge_tasks=args.judge_tasks,
                 judge_model=args.judge_model,
                 verbose=True,
             )
@@ -170,6 +180,7 @@ def main() -> None:
                 "pilot_case_ids": [case.id for case in cases],
                 "conditions": args.conditions,
                 "representations": args.representations,
+                "judge_tasks": args.judge_tasks,
                 "runs_per_condition": args.runs,
                 "judge_model_override": args.judge_model,
                 "model": model,
