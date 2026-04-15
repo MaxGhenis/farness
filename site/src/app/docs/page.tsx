@@ -300,9 +300,10 @@ Review date: 2026-06-15`}</CodeBlock>
               <p className="text-[0.94rem] text-[#415463] leading-[1.7]">
                 For public policy questions, use it to turn a live debate into a
                 falsifiable forecast with explicit resolution criteria before anyone
-                posts or seeds a market. The Waymo/DC example pairs a permission
-                market with conditional aggregate 2027 safety markets for DC
-                traffic fatalities and serious injuries.
+                posts or seeds a market. The Waymo/DC example uses an existing
+                Manifold public-service market as the gate, then drafts
+                conditional aggregate 2027 safety markets for DC traffic
+                fatalities and serious injuries.
               </p>
             </div>
             <CodeBlock>{`farness market-draft \\
