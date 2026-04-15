@@ -152,6 +152,8 @@ def test_waymo_example_uses_aggregate_safety_outcomes():
     assert not any("Waymo vehicle be involved" in question for question in questions)
     assert all(len(question) <= 120 for question in questions)
     assert pack["external_gate_market"]["url"].endswith("/waymo-serves-the-general-public-in")
+    assert pack["external_gate_market"]["embed_id"] == "2805EAudc2"
+    assert pack["external_gate_market"]["embed_label"] == "/Bayesian/waymo-serves-the-general-public-in"
 
     safety_markets = [
         market
@@ -166,6 +168,12 @@ def test_waymo_example_uses_aggregate_safety_outcomes():
     assert all("Resolve N/A" in market["resolution_rule"] for market in safety_markets)
     assert all(
         "Waymo serves the general public in Washington, D.C. before 2027?"
+        in market["description_markdown"]
+        for market in safety_markets
+    )
+    assert all("## Trigger market" in market["description_markdown"] for market in safety_markets)
+    assert all(
+        "\n\n@/Bayesian/waymo-serves-the-general-public-in\n\n"
         in market["description_markdown"]
         for market in safety_markets
     )
