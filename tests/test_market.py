@@ -142,3 +142,22 @@ def test_market_draft_cli_for_decision_writes_file(tmp_path, capsys):
     pack = json.loads(Path(output_path).read_text())
     assert pack["source"] == f"decision:{decision.id}"
     assert pack["markets"][0]["initial_probability"] == 55
+
+
+def test_waymo_example_uses_aggregate_safety_outcomes():
+    example_path = Path(__file__).resolve().parents[1] / "examples" / "waymo_dc_market_pack.json"
+    pack = json.loads(example_path.read_text())
+    questions = [market["question"] for market in pack["markets"]]
+
+    assert not any("Waymo vehicle be involved" in question for question in questions)
+
+    safety_markets = [
+        market
+        for market in pack["markets"]
+        if "traffic fatalities" in market["question"]
+        or "serious injuries" in market["question"]
+    ]
+
+    assert len(safety_markets) == 4
+    assert all(market["outcome_type"] == "PSEUDO_NUMERIC" for market in safety_markets)
+    assert all("Resolve N/A" in market["resolution_rule"] for market in safety_markets)

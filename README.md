@@ -141,8 +141,9 @@ farness market-draft abc123 --output market-pack.json
 
 An example Waymo/DC draft pack lives at
 [`examples/waymo_dc_market_pack.json`](examples/waymo_dc_market_pack.json). It
-includes a permission market plus conditional 2027 safety markets that resolve
-N/A when their permission condition is false.
+includes a permission market plus conditional aggregate 2027 safety markets for
+DC traffic fatalities and serious injuries. These resolve N/A when their
+permission condition is false.
 
 ### AI Agent Workflows
 
