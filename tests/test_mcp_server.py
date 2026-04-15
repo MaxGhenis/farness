@@ -7,7 +7,12 @@ from tempfile import TemporaryDirectory
 from types import SimpleNamespace
 
 from farness.framework import Decision
-from farness.mcp_server import _parse_datetime, save_decision_analysis, score_decision_outcomes
+from farness.mcp_server import (
+    _parse_datetime,
+    draft_market_pack_for_input,
+    save_decision_analysis,
+    score_decision_outcomes,
+)
 from farness.storage import DecisionStore
 
 
@@ -132,6 +137,25 @@ def test_score_decision_outcomes_updates_calibration():
         assert scored.scored_at is not None
         assert result["calibration"]["n_decisions"] == 1
         assert result["calibration"]["n_forecasts"] == 1
+
+
+def test_draft_market_pack_for_standalone_question():
+    pack = draft_market_pack_for_input(
+        "Will Waymo be legally permitted to offer driverless paid rides in DC by 2026-12-31?",
+        initial_probability=52,
+        resolution_date="2026-12-31",
+        resolution_rule="Resolve using official DC permissions.",
+        sources=[
+            {
+                "title": "Waymo DC announcement",
+                "url": "https://waymo.com/blog/2025/03/next-stop-for-waymo-one-washingtondc/",
+            }
+        ],
+    )
+
+    assert pack["source"] == "standalone-question"
+    assert pack["markets"][0]["manifold_payload"]["initialProb"] == 52
+    assert "Waymo DC announcement" in pack["markets"][0]["description_markdown"]
 
 
 def test_save_decision_analysis_rejects_unknown_choice():

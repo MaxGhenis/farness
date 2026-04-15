@@ -56,6 +56,10 @@ Do not use it for:
    - Do not pass KPI or option names as bare strings.
 5. If the user is revisiting the decision, use `get_decision` and `review_decision`.
 6. If outcomes are now known, call `score_decision` to update calibration.
+7. If the user wants to externalize a forecast into a prediction market, draft it first:
+   - Use `farness market-draft <decision-id> --output market-pack.json` for stored decisions.
+   - Use `farness market-draft "<forecast question>" --initial-prob <1-99> --resolution-date YYYY-MM-DD --output market-pack.json` for standalone policy questions.
+   - Treat market drafts as review artifacts only; do not create markets or place bets unless the user explicitly asks.
 
 ## Working Rules
 

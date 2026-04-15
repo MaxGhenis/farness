@@ -1,0 +1,57 @@
+{
+  "title": "Waymo DC forecast market drafts",
+  "source": "waymo-dc-test-case",
+  "generated_at": "2026-04-15T00:00:00",
+  "provider": "manifold",
+  "warning": "Draft only. No market has been created and no bet has been placed.",
+  "markets": [
+    {
+      "question": "Will Waymo be legally permitted to offer fully driverless paid robotaxi rides in Washington, DC by 2026-12-31?",
+      "outcome_type": "BINARY",
+      "description_markdown": "## Context\nWaymo says Waymo One is planned for Washington, DC in 2026, but also says it still needs policymakers to formalize regulations for operation without a human behind the wheel. Existing DC law establishes an autonomous vehicle testing program and requires DDOT approval for changes such as moving from an in-vehicle test operator to no test operator physically present. Axios reported in July 2025 that Waymo vehicles in DC were being tested with a specialist behind the wheel and that a Council bill would be needed before driverless testing and public rides.\n\n## Resolution\nResolve YES if, by 2026-12-31, DC law, regulation, DDOT permit approval, or another official DC government action legally permits Waymo to offer fully driverless paid ride-hailing service to public riders in Washington, DC with no human driver or test operator physically present in the vehicle. Resolve NO otherwise. Testing-only permission without paid public rides does not count.\n\nResolution date target: 2026-12-31\n\n## Sources\n- [Waymo: Next stop for Waymo One: Washington, D.C.](https://waymo.com/blog/2025/03/next-stop-for-waymo-one-washingtondc/)\n- [DC Law 23-156: Autonomous Vehicles Testing Program Amendment Act of 2020](https://code.dccouncil.gov/us/dc/council/laws/23-156)\n- [Axios: New D.C. Council bill would allow Waymo to begin robotaxi service](https://www.axios.com/local/washington-dc/2025/07/16/driverless-cars-dc-bill-waymo-robotaxis)\n\n## Seed forecast\n- Point estimate: 52\n- Rationale: Waymo publicly targeted DC riders in 2026 and has strong incentive to secure approval, but DC policy approval and public-service authorization remain live gating items.\n\n_Drafted by farness. Review wording and resolution criteria before posting._",
+      "close_date": "2026-12-31",
+      "visibility": "unlisted",
+      "initial_probability": 52,
+      "min_value": null,
+      "max_value": null,
+      "initial_value": null,
+      "is_log_scale": false,
+      "tags": ["waymo", "dc", "autonomous-vehicles", "policy"],
+      "resolution_date": "2026-12-31",
+      "resolution_rule": "Resolve YES if, by 2026-12-31, DC law, regulation, DDOT permit approval, or another official DC government action legally permits Waymo to offer fully driverless paid ride-hailing service to public riders in Washington, DC with no human driver or test operator physically present in the vehicle. Resolve NO otherwise. Testing-only permission without paid public rides does not count.",
+      "sources": [
+        {
+          "title": "Waymo: Next stop for Waymo One: Washington, D.C.",
+          "url": "https://waymo.com/blog/2025/03/next-stop-for-waymo-one-washingtondc/"
+        },
+        {
+          "title": "DC Law 23-156: Autonomous Vehicles Testing Program Amendment Act of 2020",
+          "url": "https://code.dccouncil.gov/us/dc/council/laws/23-156"
+        },
+        {
+          "title": "Axios: New D.C. Council bill would allow Waymo to begin robotaxi service",
+          "url": "https://www.axios.com/local/washington-dc/2025/07/16/driverless-cars-dc-bill-waymo-robotaxis"
+        }
+      ],
+      "source_forecast": {
+        "point_estimate": 52,
+        "ci_low": null,
+        "ci_high": null,
+        "confidence_level": 0.8,
+        "rationale": "Waymo publicly targeted DC riders in 2026 and has strong incentive to secure approval, but DC policy approval and public-service authorization remain live gating items."
+      },
+      "notes": [
+        "Draft only; review with local DC policy context before posting.",
+        "Initial probability is a seed forecast, not a market consensus."
+      ],
+      "manifold_payload": {
+        "outcomeType": "BINARY",
+        "question": "Will Waymo be legally permitted to offer fully driverless paid robotaxi rides in Washington, DC by 2026-12-31?",
+        "descriptionMarkdown": "## Context\nWaymo says Waymo One is planned for Washington, DC in 2026, but also says it still needs policymakers to formalize regulations for operation without a human behind the wheel. Existing DC law establishes an autonomous vehicle testing program and requires DDOT approval for changes such as moving from an in-vehicle test operator to no test operator physically present. Axios reported in July 2025 that Waymo vehicles in DC were being tested with a specialist behind the wheel and that a Council bill would be needed before driverless testing and public rides.\n\n## Resolution\nResolve YES if, by 2026-12-31, DC law, regulation, DDOT permit approval, or another official DC government action legally permits Waymo to offer fully driverless paid ride-hailing service to public riders in Washington, DC with no human driver or test operator physically present in the vehicle. Resolve NO otherwise. Testing-only permission without paid public rides does not count.\n\nResolution date target: 2026-12-31\n\n## Sources\n- [Waymo: Next stop for Waymo One: Washington, D.C.](https://waymo.com/blog/2025/03/next-stop-for-waymo-one-washingtondc/)\n- [DC Law 23-156: Autonomous Vehicles Testing Program Amendment Act of 2020](https://code.dccouncil.gov/us/dc/council/laws/23-156)\n- [Axios: New D.C. Council bill would allow Waymo to begin robotaxi service](https://www.axios.com/local/washington-dc/2025/07/16/driverless-cars-dc-bill-waymo-robotaxis)\n\n## Seed forecast\n- Point estimate: 52\n- Rationale: Waymo publicly targeted DC riders in 2026 and has strong incentive to secure approval, but DC policy approval and public-service authorization remain live gating items.\n\n_Drafted by farness. Review wording and resolution criteria before posting._",
+        "closeTime": 1798693200000,
+        "visibility": "unlisted",
+        "initialProb": 52
+      }
+    }
+  ]
+}

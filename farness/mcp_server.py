@@ -9,6 +9,12 @@ from typing import Any, Literal
 
 from farness import CalibrationTracker, DecisionStore
 from farness.framework import Decision, Forecast, KPI, Option
+from farness.market import (
+    MarketSource,
+    draft_binary_policy_market,
+    draft_markets_for_decision,
+    market_pack_to_dict,
+)
 
 
 def _resolve_store_path(store_path: str | None = None) -> Path | None:
@@ -282,6 +288,73 @@ def score_decision_outcomes(
     }
 
 
+def _build_market_sources(sources: list[Any]) -> list[MarketSource]:
+    """Convert structured source inputs into market source objects."""
+    built: list[MarketSource] = []
+    for source in sources:
+        if isinstance(source, str):
+            try:
+                source = json.loads(source)
+            except json.JSONDecodeError as exc:
+                raise ValueError(f"Invalid source JSON: {source}") from exc
+        elif hasattr(source, "model_dump"):
+            source = source.model_dump()
+        elif hasattr(source, "__dict__") and not isinstance(source, dict):
+            source = vars(source)
+
+        if not isinstance(source, dict):
+            raise ValueError(f"Unsupported source input: {type(source).__name__}")
+        built.append(MarketSource(title=source["title"], url=source["url"]))
+    return built
+
+
+def draft_market_pack_for_input(
+    id_or_question: str,
+    context: str = "",
+    initial_probability: int | None = None,
+    resolution_date: str | None = None,
+    close_date: str | None = None,
+    resolution_rule: str = "",
+    visibility: Literal["public", "unlisted"] = "unlisted",
+    sources: list[Any] | None = None,
+    tags: list[str] | None = None,
+    store_path: str | None = None,
+) -> dict[str, Any]:
+    """Draft Manifold-ready markets for a stored decision or standalone question."""
+    store = _get_store(store_path)
+    decision = store.get(id_or_question)
+    tags = tags or []
+
+    if decision:
+        drafts = draft_markets_for_decision(
+            decision,
+            visibility=visibility,
+            tags=tags,
+        )
+        return market_pack_to_dict(
+            drafts,
+            title=f"Market drafts for {decision.question}",
+            source=f"decision:{decision.id}",
+        )
+
+    draft = draft_binary_policy_market(
+        id_or_question,
+        context=context,
+        initial_probability=initial_probability,
+        close_date=_parse_datetime(close_date),
+        resolution_date=_parse_datetime(resolution_date),
+        resolution_rule=resolution_rule,
+        visibility=visibility,
+        sources=_build_market_sources(sources or []),
+        tags=tags,
+    )
+    return market_pack_to_dict(
+        [draft],
+        title=f"Market draft: {id_or_question}",
+        source="standalone-question",
+    )
+
+
 def build_server(store_path: str | None = None):
     """Create the configured FastMCP server instance."""
     try:
@@ -341,6 +414,10 @@ def build_server(store_path: str | None = None):
         forecasts: list[ForecastInput] = Field(
             description="Forecasts for each KPI under this option"
         )
+
+    class MarketSourceInput(BaseModel):
+        title: str = Field(description="Source title")
+        url: str = Field(description="Source URL")
 
     server = FastMCP(
         "farness",
@@ -455,6 +532,39 @@ def build_server(store_path: str | None = None):
     def get_calibration_summary() -> dict[str, Any]:
         """Return summary calibration metrics."""
         return _calibration_payload(_store())
+
+    @server.tool(
+        title="Draft forecast market pack",
+        description=(
+            "Draft Manifold-ready forecast market JSON for a stored farness decision "
+            "or standalone policy question. This never creates markets or places bets."
+        ),
+        structured_output=True,
+    )
+    def draft_market_pack(
+        id_or_question: str,
+        context: str = "",
+        initial_probability: int | None = None,
+        resolution_date: str | None = None,
+        close_date: str | None = None,
+        resolution_rule: str = "",
+        visibility: Literal["public", "unlisted"] = "unlisted",
+        sources: list[MarketSourceInput | str] | None = None,
+        tags: list[str] | None = None,
+    ) -> dict[str, Any]:
+        """Draft a market pack without posting to Manifold."""
+        return draft_market_pack_for_input(
+            id_or_question=id_or_question,
+            context=context,
+            initial_probability=initial_probability,
+            resolution_date=resolution_date,
+            close_date=close_date,
+            resolution_rule=resolution_rule,
+            visibility=visibility,
+            sources=sources or [],
+            tags=tags or [],
+            store_path=str(resolved_store_path) if resolved_store_path else None,
+        )
 
     @server.resource(
         "farness://framework",

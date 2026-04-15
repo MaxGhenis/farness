@@ -1,6 +1,7 @@
 """Command-line interface for farness."""
 
 import argparse
+import json
 import os
 import sys
 from datetime import datetime
@@ -8,6 +9,12 @@ from pathlib import Path
 
 from farness import Decision, DecisionStore, CalibrationTracker
 from farness.agent_setup import inspect_agent_setup, remove_agent_setup, repair_agent_setup, setup_agent
+from farness.market import (
+    MarketSource,
+    draft_binary_policy_market,
+    draft_markets_for_decision,
+    market_pack_to_dict,
+)
 from farness.skills import install_skill
 
 
@@ -52,6 +59,60 @@ def main():
     # Score a decision
     score_parser = subparsers.add_parser("score", help="Score a decision's outcomes")
     score_parser.add_argument("id", nargs="?", help="Decision ID (or prefix)")
+
+    market_parser = subparsers.add_parser(
+        "market-draft",
+        help="Draft Manifold-ready forecast markets without posting or betting",
+    )
+    market_parser.add_argument(
+        "id_or_question",
+        help="Decision ID/prefix from the local store, or a standalone forecast question",
+    )
+    market_parser.add_argument(
+        "--context",
+        default="",
+        help="Additional context for standalone policy-question drafts",
+    )
+    market_parser.add_argument(
+        "--initial-prob",
+        type=int,
+        help="Initial probability for standalone binary markets, from 1 to 99",
+    )
+    market_parser.add_argument(
+        "--resolution-date",
+        help="Resolution date for standalone drafts, YYYY-MM-DD",
+    )
+    market_parser.add_argument(
+        "--close-date",
+        help="Close date for standalone drafts, YYYY-MM-DD",
+    )
+    market_parser.add_argument(
+        "--resolution-rule",
+        default="",
+        help="Resolution rule for standalone drafts",
+    )
+    market_parser.add_argument(
+        "--source",
+        action="append",
+        default=[],
+        help="Source as 'Title|URL'. Can be passed multiple times.",
+    )
+    market_parser.add_argument(
+        "--tag",
+        action="append",
+        default=[],
+        help="Draft tag/topic. Can be passed multiple times.",
+    )
+    market_parser.add_argument(
+        "--visibility",
+        choices=["public", "unlisted"],
+        default="unlisted",
+        help="Manifold visibility for draft payloads (default: unlisted)",
+    )
+    market_parser.add_argument(
+        "--output",
+        help="Write the market pack JSON to a file instead of stdout",
+    )
 
     install_skill_parser = subparsers.add_parser(
         "install-skill", help="Install the packaged Codex or Claude skill"
@@ -297,6 +358,57 @@ def main():
         store.save(decision)
         print(f"Created decision [{decision.id[:8]}]: {decision.question}")
 
+    elif args.command == "market-draft":
+        decision = store.get(args.id_or_question)
+        if decision:
+            drafts = draft_markets_for_decision(
+                decision,
+                visibility=args.visibility,
+                tags=args.tag,
+            )
+            if not drafts:
+                print(
+                    f"Decision [{decision.id[:8]}] has no option forecasts to turn into markets."
+                )
+                sys.exit(1)
+            pack = market_pack_to_dict(
+                drafts,
+                title=f"Market drafts for {decision.question}",
+                source=f"decision:{decision.id}",
+            )
+        else:
+            try:
+                sources = [_parse_market_source(source) for source in args.source]
+            except ValueError as exc:
+                print(str(exc))
+                sys.exit(1)
+            draft = draft_binary_policy_market(
+                args.id_or_question,
+                context=args.context,
+                initial_probability=args.initial_prob,
+                close_date=_parse_optional_date(args.close_date),
+                resolution_date=_parse_optional_date(args.resolution_date),
+                resolution_rule=args.resolution_rule,
+                visibility=args.visibility,
+                sources=sources,
+                tags=args.tag,
+            )
+            pack = market_pack_to_dict(
+                [draft],
+                title=f"Market draft: {args.id_or_question}",
+                source="standalone-question",
+            )
+
+        if args.output:
+            output_path = Path(args.output).expanduser()
+            output_path.parent.mkdir(parents=True, exist_ok=True)
+            with open(output_path, "w") as fh:
+                json.dump(pack, fh, indent=2)
+                fh.write("\n")
+            print(f"Wrote {len(pack['markets'])} market draft(s) to {output_path}")
+        else:
+            print(json.dumps(pack, indent=2))
+
     elif args.command == "show":
         d = store.get(args.id)
         if not d:
@@ -521,6 +633,28 @@ def main():
 
     else:
         parser.print_help()
+
+
+def _parse_optional_date(value: str | None) -> datetime | None:
+    """Parse a CLI date value in YYYY-MM-DD form."""
+    if not value:
+        return None
+    try:
+        return datetime.fromisoformat(value)
+    except ValueError:
+        raise SystemExit(f"Invalid date: {value}. Use YYYY-MM-DD.")
+
+
+def _parse_market_source(value: str) -> MarketSource:
+    """Parse a source argument of the form 'Title|URL'."""
+    if "|" not in value:
+        raise ValueError("Sources must be passed as 'Title|URL'.")
+    title, url = value.split("|", 1)
+    title = title.strip()
+    url = url.strip()
+    if not title or not url:
+        raise ValueError("Sources must include both a title and URL.")
+    return MarketSource(title=title, url=url)
 
 
 if __name__ == "__main__":

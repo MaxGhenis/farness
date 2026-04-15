@@ -30,6 +30,10 @@ Prefer the local `farness` MCP server when it is connected.
      `{"name": "...", "description": "...", "forecasts": [{"kpi_name": "...", "point_estimate": 75, "ci_low": 60, "ci_high": 86, "confidence_level": 0.8, "reasoning": "...", "assumptions": ["..."], "base_rate": 68, "base_rate_source": "...", "inside_view_adjustment": "..."}]}`
    - Do not pass KPI or option names as bare strings.
 5. If outcomes are known, call `score_decision`.
+6. If the user wants to externalize a forecast into a prediction market, draft it first:
+   - Use `farness market-draft <decision-id> --output market-pack.json` for stored decisions.
+   - Use `farness market-draft "<forecast question>" --initial-prob <1-99> --resolution-date YYYY-MM-DD --output market-pack.json` for standalone policy questions.
+   - Treat market drafts as review artifacts only; do not create markets or place bets unless the user explicitly asks.
 
 ## Working Rules
 

@@ -288,6 +288,33 @@ Review date: 2026-06-15`}</CodeBlock>
           </div>
         </Section>
 
+        <Section kicker="Markets" title="Draft forecast markets from decisions">
+          <div className="grid grid-cols-2 gap-8 max-md:grid-cols-1">
+            <div className="space-y-4">
+              <p className="text-[0.94rem] text-[#415463] leading-[1.7]">
+                `farness market-draft` turns a stored decision forecast or a
+                standalone policy question into Manifold-ready JSON. It is
+                intentionally draft-only: it does not create a market, place a bet,
+                or require a Manifold API key.
+              </p>
+              <p className="text-[0.94rem] text-[#415463] leading-[1.7]">
+                For public policy questions, use it to turn a live debate into a
+                falsifiable forecast with explicit resolution criteria before anyone
+                posts or seeds a market.
+              </p>
+            </div>
+            <CodeBlock>{`farness market-draft \\
+  "Will Waymo be legally permitted to offer fully driverless paid robotaxi rides in Washington, DC by 2026-12-31?" \\
+  --initial-prob 52 \\
+  --resolution-date 2026-12-31 \\
+  --visibility unlisted \\
+  --output waymo-dc-market-pack.json
+
+# From a stored decision with forecasts:
+farness market-draft abc123 --output market-pack.json`}</CodeBlock>
+          </div>
+        </Section>
+
         <Section kicker="Examples" title="Three concrete ways to use it">
           <div className="grid grid-cols-3 gap-4 max-md:grid-cols-1">
             {[

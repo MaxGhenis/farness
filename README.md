@@ -115,6 +115,33 @@ farness pending
 farness calibration
 ```
 
+### Forecast Market Drafts
+
+`farness` can turn a stored decision forecast or standalone policy question into
+Manifold-ready market drafts. This is draft-only: it does not create a market,
+place a bet, or require a Manifold API key.
+
+```bash
+farness market-draft "Will Waymo be legally permitted to offer fully driverless paid robotaxi rides in Washington, DC by 2026-12-31?" \
+  --initial-prob 52 \
+  --resolution-date 2026-12-31 \
+  --resolution-rule "Resolve YES if official DC law, regulation, or permit approval allows Waymo to offer fully driverless paid public rides in DC by 2026-12-31." \
+  --source "Waymo DC announcement|https://waymo.com/blog/2025/03/next-stop-for-waymo-one-washingtondc/" \
+  --source "DC AV testing law|https://code.dccouncil.gov/us/dc/council/laws/23-156" \
+  --tag waymo \
+  --tag dc \
+  --output waymo-dc-market-pack.json
+```
+
+For a stored decision with options and forecasts:
+
+```bash
+farness market-draft abc123 --output market-pack.json
+```
+
+An example Waymo/DC draft pack lives at
+[`examples/waymo_dc_market_pack.json`](examples/waymo_dc_market_pack.json).
+
 ### AI Agent Workflows
 
 `farness` is not tied to Claude. The Claude Code plugin is the most integrated path today, but the framework also works with Codex and other coding agents that can follow structured instructions or run shell commands.
