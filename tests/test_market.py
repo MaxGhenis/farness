@@ -150,13 +150,14 @@ def test_waymo_example_uses_aggregate_safety_outcomes():
     questions = [market["question"] for market in pack["markets"]]
 
     assert not any("Waymo vehicle be involved" in question for question in questions)
+    assert all(len(question) <= 120 for question in questions)
     assert pack["external_gate_market"]["url"].endswith("/waymo-serves-the-general-public-in")
 
     safety_markets = [
         market
         for market in pack["markets"]
         if "traffic fatalities" in market["question"]
-        or "serious injuries" in market["question"]
+        or "serious traffic-crash injuries" in market["question"]
     ]
 
     assert len(safety_markets) == 4
@@ -168,3 +169,4 @@ def test_waymo_example_uses_aggregate_safety_outcomes():
         in market["description_markdown"]
         for market in safety_markets
     )
+    assert all("Drafted by farness" not in market["description_markdown"] for market in safety_markets)
