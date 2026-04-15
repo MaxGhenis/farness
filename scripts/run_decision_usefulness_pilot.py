@@ -121,7 +121,10 @@ def main() -> None:
 
     generation_count_per_model = len(cases) * len(args.conditions) * args.runs
     comparison_count_per_case_run = len(PRIMARY_PAIRWISE_COMPARISONS)
-    judge_calls_per_case_run = comparison_count_per_case_run * len(args.representations) * 2
+    judge_tasks_per_pair = 3
+    judge_calls_per_case_run = (
+        comparison_count_per_case_run * len(args.representations) * judge_tasks_per_pair
+    )
     judge_calls_per_model = len(cases) * args.runs * judge_calls_per_case_run
 
     print("Decision-usefulness medium pilot")
@@ -150,14 +153,18 @@ def main() -> None:
             )
 
         if not args.generate_only:
-            utility_results, omission_results = run_decision_usefulness_judging(
+            utility_results, omission_results, critique_results = run_decision_usefulness_judging(
                 output_dir=output_dir,
                 cases=cases,
                 representations=args.representations,
                 judge_model=args.judge_model,
                 verbose=True,
             )
-            print_decision_usefulness_summary(utility_results, omission_results)
+            print_decision_usefulness_summary(
+                utility_results,
+                omission_results,
+                critique_results,
+            )
 
             pilot_metadata = {
                 "pilot_case_ids": [case.id for case in cases],

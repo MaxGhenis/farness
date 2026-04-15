@@ -149,9 +149,35 @@ Before judging:
 - redact explicit mentions of `farness` in the body if they appear
 - randomize left/right order in pairwise comparisons
 
+### Decision memo representation
+
+The primary representation is a fixed-length neutral memo:
+
+```text
+Recommended option:
+{chosen option}
+
+Main alternative:
+{most relevant live alternative}
+
+Decisive rationale:
+{2-4 sentence rationale}
+
+Key caveat:
+{main caveat or "Not clearly stated"}
+
+Revisit trigger:
+{main trigger for changing the decision or "Not clearly stated"}
+
+Quantitative support:
+{up to 1-2 decisive quantitative claims if supported}
+```
+
+This is the main safeguard against rewarding `farness` by construction. The memo keeps the recommendation, rationale, caveat, and quantitative mechanism visible, but removes the framework-shaped checklist.
+
 ### Canonical normalized representation
 
-Create a second, normalized representation for each analysis:
+Create a normalized representation for framework-aligned diagnostics:
 
 ```text
 Decision question:
@@ -179,7 +205,7 @@ Review plan:
 {parsed content or "Not provided"}
 ```
 
-This matters because raw judging can over-reward polish, verbosity, or headings. If `farness` wins on both raw and normalized representations, the result is much stronger. If it wins only on raw form, the likely explanation is presentation/style rather than content.
+This is no longer the primary endpoint. It is useful as a manipulation check: does a condition actually produce explicit KPIs, forecasts, outside-view references, disconfirming evidence, and review plans?
 
 ## Judge models
 
@@ -199,18 +225,21 @@ Run judges at temperature `0.0`.
 
 ## Judge tasks
 
-Run **two judge tasks** on each pairwise comparison.
+Run **three judge tasks** on each pairwise comparison.
 
 ### Task 1: pairwise decision-usefulness judgment
 
-Judge prompt:
+For `decision_memo` and `raw`, use a neutral usefulness rubric. For `normalized`, use the older aligned rubric as a diagnostic.
+
+Neutral judge prompt:
 
 ```text
-You are evaluating two decision analyses for usefulness to a careful human decision-maker.
+You are evaluating two decision writeups for usefulness to a careful human decision-maker.
 
 Your job is not to guess which one came from a better prompt. Your job is to decide which analysis would better help a user make the decision.
 
-Do not reward verbosity, polish, or formatting alone. Prefer analyses that make the decision easier to audit, compare, and revisit later.
+Do not reward verbosity, polish, headings, or visible process steps by themselves.
+Prefer the writeup that gives clearer action guidance, more discriminative reasoning between live alternatives, more useful caveat/uncertainty handling, and stronger quantitative support when that support meaningfully helps the recommendation.
 
 ## Decision scenario
 {scenario}
@@ -222,12 +251,11 @@ Do not reward verbosity, polish, or formatting alone. Prefer analyses that make 
 {analysis_b}
 
 Score each analysis from 1-5 on:
-1. KPI clarity and resolvability
-2. Option-set completeness
-3. Forecast specificity and comparability
-4. Outside-view grounding
-5. Disconfirming evidence / failure-mode coverage
-6. Recommendation traceability
+1. Action guidance
+2. Comparative reasoning
+3. Uncertainty handling
+4. Quantitative support
+5. Overall decision usefulness
 
 Then choose the overall winner.
 
@@ -281,6 +309,38 @@ Return JSON only:
 }
 ```
 
+### Task 3: critique survival
+
+Critique survival stress-tests whether a recommendation is less undermined by held-out concerns that are not tied to the `farness` checklist.
+
+Judge prompt:
+
+```text
+You are stress-testing two decision writeups using held-out critique lenses.
+
+Your job is to decide which recommendation is less undermined after applying critiques that are NOT tied to any particular decision framework.
+
+Use these critique lenses:
+- implementation fragility
+- incentive or stakeholder response
+- opportunity cost
+- reversibility and switching cost
+- hidden dependencies
+- tail risk or timing risk
+
+Do not reward visible process, headings, checklist completeness, or verbosity by themselves.
+Prefer the writeup whose recommendation would require less revision after these critiques.
+
+Return JSON only:
+{
+  "most_damaging_critique_a": "<=35 words>",
+  "most_damaging_critique_b": "<=35 words>",
+  "less_undermined_analysis": "A" | "B" | "tie",
+  "confidence": <0-100>,
+  "rationale": "<<=120 words>"
+}
+```
+
 ## Primary comparisons
 
 Primary pairwise comparisons:
@@ -300,18 +360,21 @@ That is the cleanest test of your current intuition:
 
 Primary endpoint:
 
-- **pairwise win rate for `farness` vs `forecast_only` on the normalized representation**
+- **pairwise win rate for `farness` vs `forecast_only` on the `decision_memo` representation**
 
 Reason:
 
 - it is the most mechanism-relevant comparison
-- it best controls for stylistic formatting effects
+- it controls for checklist-compliance bias better than normalized artifacts
 - it directly tests whether the full checklist adds value beyond forcing numbers
+- it preserves numeric forecasts when they actually improve the recommendation
 
 ## Secondary endpoints
 
-- `farness` vs `naive` win rate on normalized representation
+- `farness` vs `naive` win rate on `decision_memo`
 - raw blinded pairwise win rates for all primary comparisons
+- critique-survival win rates under held-out critique lenses
+- normalized aligned-rubric win rates as a manipulation check
 - rubric subscore differences
 - omission-comparison win rates
 - judge confidence
@@ -324,7 +387,7 @@ Reason:
 
 The base observational unit is:
 
-- `case × generator_model × run × pairwise_comparison × judge_model × representation`
+- `case × generator_model × run × pairwise_comparison × judge_model × representation × judge_task`
 
 ### Main analysis
 
@@ -370,13 +433,24 @@ Suggested omission categories:
 - recommendation not supported by forecasts
 - false precision / unjustified numbers
 
+### Critique-survival analysis
+
+Track:
+
+- rate at which each condition is less undermined by held-out critique lenses
+- whether critique survival agrees with `decision_memo` usefulness
+- the most common damaging critique categories by condition
+
+Critique survival is the robustness endpoint. It should not be treated as a direct outcome-quality measure, but it is stronger than a free-form omission task because it asks whether the recommendation would need to change under held-out concerns.
+
 ## Interpretation logic
 
-### If `farness` beats `naive` and `forecast_only` on both raw and normalized judging
+### If `farness` beats `forecast_only` on `decision_memo` and critique survival
 
 Interpretation:
 
-- the full framework likely improves the decision artifact beyond formatting and beyond forcing numbers alone
+- the full framework likely improves recommendation quality beyond forcing numbers alone
+- the strongest supported mechanism is that the extra checklist improves robustness to held-out concerns
 
 ### If `forecast_only` captures most of the gain over `naive`
 
@@ -391,12 +465,19 @@ Interpretation:
 
 - some of the gain comes from output organization and comparability, not just better reasoning content
 
-### If `farness` wins only on raw judging but not normalized judging
+### If `farness` wins only on raw or normalized judging
 
 Interpretation:
 
-- judges may mainly prefer style, polish, or explicit formatting
-- this is weak evidence for content-level improvement
+- judges may mainly prefer visible structure, polish, or framework-shaped artifacts
+- this is weak evidence for recommendation-quality improvement
+
+### If `farness` wins on full artifacts but not `decision_memo`
+
+Interpretation:
+
+- the product surface may be more useful or auditable, but the final recommendation is not clearly better
+- this supports a decision-artifact claim more than a recommendation-quality claim
 
 ### If omission rates remain high under `farness`
 
@@ -423,12 +504,12 @@ Recommended first full run:
 - 4 prompt conditions
 - 3 runs each
 - 2 judge families
-- 2 representations (`raw`, `normalized`)
+- 3 representations (`decision_memo`, `raw`, `normalized`)
 
 This yields:
 
 - 864 generated analyses
-- 864 primary pairwise judgment items before multiplying by judge family and representation
+- 864 primary pairwise judgment items before multiplying by judge family, representation, and judge task
 
 That is large enough to estimate stable win rates while still being operationally feasible.
 

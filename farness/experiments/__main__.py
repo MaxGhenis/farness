@@ -508,14 +508,18 @@ def main():
 
         if args.judge or args.judge_only:
             print(f"\nRunning decision-usefulness judging from {output_dir}")
-            utility_results, omission_results = run_decision_usefulness_judging(
+            utility_results, omission_results, critique_results = run_decision_usefulness_judging(
                 output_dir=output_dir,
                 cases=cases,
                 representations=args.representations,
                 judge_model=args.judge_model,
                 verbose=True,
             )
-            print_decision_usefulness_summary(utility_results, omission_results)
+            print_decision_usefulness_summary(
+                utility_results,
+                omission_results,
+                critique_results,
+            )
             print(f"\nJudge outputs saved to {output_dir}")
 
     else:

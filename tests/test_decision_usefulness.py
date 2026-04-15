@@ -257,6 +257,69 @@ def test_judge_pairwise_decision_usefulness_uses_neutral_prompt_for_decision_mem
     assert result.scores_a["action_guidance"] == 5
 
 
+def test_judge_pairwise_critique_survival_maps_less_undermined(monkeypatch):
+    """Critique-survival judging should use held-out critique lenses."""
+    case = du.get_decision_usefulness_case("auth_rewrite")
+    assert case is not None
+
+    artifact_a = du.DecisionUsefulnessArtifact(
+        case_id=case.id,
+        condition="farness",
+        model="gpt-5.4",
+        run_number=1,
+        prompt="p1",
+        response_text="Recommendation: Patch incrementally.",
+        timestamp="2026-04-06T10:00:00",
+        duration_seconds=1.0,
+        normalized_sections={},
+        normalized_representation="Recommendation:\nPatch incrementally.",
+        decision_memo_representation="Recommended option:\nPatch incrementally.",
+    )
+    artifact_b = du.DecisionUsefulnessArtifact(
+        case_id=case.id,
+        condition="forecast_only",
+        model="gpt-5.4",
+        run_number=1,
+        prompt="p2",
+        response_text="Recommendation: Rewrite now.",
+        timestamp="2026-04-06T10:00:01",
+        duration_seconds=1.2,
+        normalized_sections={},
+        normalized_representation="Recommendation:\nRewrite now.",
+        decision_memo_representation="Recommended option:\nRewrite now.",
+    )
+
+    prompts = []
+
+    def fake_call_llm(prompt, model, temperature, max_tokens):
+        prompts.append(prompt)
+        return (
+            """{
+  "most_damaging_critique_a": "Execution could still drift without owner accountability.",
+  "most_damaging_critique_b": "Rewrite creates timing and implementation fragility.",
+  "less_undermined_analysis": "A",
+  "confidence": 84,
+  "rationale": "A survives opportunity-cost and fragility critiques better."
+}""",
+            0.2,
+        )
+
+    monkeypatch.setattr(du, "call_llm", fake_call_llm)
+    result = du.judge_pairwise_critique_survival(
+        case=case,
+        artifact_a=artifact_a,
+        artifact_b=artifact_b,
+        representation="decision_memo",
+    )
+
+    assert prompts
+    assert "implementation fragility" in prompts[0]
+    assert "opportunity cost" in prompts[0]
+    assert result.less_undermined_condition in {"farness", "forecast_only"}
+    assert result.confidence == 84
+    assert "fragility" in result.most_damaging_critique_b
+
+
 def test_summarize_decision_usefulness_judging_counts_wins():
     """Summary should group wins by comparison and representation."""
     utility_results = [
@@ -314,11 +377,38 @@ def test_summarize_decision_usefulness_judging_counts_wins():
             largest_missing_consideration_b="review plan",
         ),
     ]
+    critique_results = [
+        du.PairwiseCritiqueSurvivalJudgeResult(
+            case_id="auth_rewrite",
+            source_model="gpt-5.4",
+            judge_model="claude-opus-4-6",
+            run_number=1,
+            comparison="farness_vs_forecast_only",
+            representation="normalized",
+            condition_a="farness",
+            condition_b="forecast_only",
+            left_condition="farness",
+            right_condition="forecast_only",
+            less_undermined_condition="farness",
+            confidence=75,
+            rationale="",
+            most_damaging_critique_a="timing",
+            most_damaging_critique_b="fragility",
+        ),
+    ]
 
-    summary = du.summarize_decision_usefulness_judging(utility_results, omission_results)
+    summary = du.summarize_decision_usefulness_judging(
+        utility_results,
+        omission_results,
+        critique_results,
+    )
     assert summary["utility"]["normalized"]["farness_vs_forecast_only"]["wins"]["farness"] == 1
     assert summary["utility"]["normalized"]["farness_vs_forecast_only"]["wins"]["forecast_only"] == 1
     assert (
         summary["omission"]["normalized"]["farness_vs_forecast_only"]["flagged_more_serious"]["forecast_only"]
+        == 1
+    )
+    assert (
+        summary["critique_survival"]["normalized"]["farness_vs_forecast_only"]["less_undermined"]["farness"]
         == 1
     )

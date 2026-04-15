@@ -350,6 +350,40 @@ Return JSON only:
 }}""".strip()
 
 
+PAIRWISE_CRITIQUE_SURVIVAL_PROMPT = """You are stress-testing two decision writeups using held-out critique lenses.
+
+Your job is to decide which recommendation is less undermined after applying critiques that are NOT tied to any particular decision framework.
+
+Use these critique lenses:
+- implementation fragility
+- incentive or stakeholder response
+- opportunity cost
+- reversibility and switching cost
+- hidden dependencies
+- tail risk or timing risk
+
+Do not reward visible process, headings, checklist completeness, or verbosity by themselves.
+Prefer the writeup whose recommendation would require less revision after these critiques.
+
+## Decision scenario
+{scenario}
+
+## Writeup A
+{analysis_a}
+
+## Writeup B
+{analysis_b}
+
+Return JSON only:
+{{
+  "most_damaging_critique_a": "<=35 words>",
+  "most_damaging_critique_b": "<=35 words>",
+  "less_undermined_analysis": "A" | "B" | "tie",
+  "confidence": <0-100>,
+  "rationale": "<<=120 words>"
+}}""".strip()
+
+
 SECTION_ALIASES = {
     "kpis": (
         "kpis",
@@ -506,6 +540,48 @@ class PairwiseOmissionJudgeResult:
             "rationale": self.rationale,
             "largest_missing_consideration_a": self.largest_missing_consideration_a,
             "largest_missing_consideration_b": self.largest_missing_consideration_b,
+            "raw_judge_response": self.raw_judge_response,
+        }
+
+
+@dataclass
+class PairwiseCritiqueSurvivalJudgeResult:
+    """Pairwise held-out critique-survival judgment for a comparison."""
+
+    case_id: str
+    source_model: str
+    judge_model: str
+    run_number: int
+    comparison: str
+    representation: str
+    condition_a: str
+    condition_b: str
+    left_condition: str
+    right_condition: str
+    less_undermined_condition: str
+    confidence: int
+    rationale: str
+    most_damaging_critique_a: str
+    most_damaging_critique_b: str
+    raw_judge_response: str = ""
+
+    def to_dict(self) -> dict[str, Any]:
+        return {
+            "case_id": self.case_id,
+            "source_model": self.source_model,
+            "judge_model": self.judge_model,
+            "run_number": self.run_number,
+            "comparison": self.comparison,
+            "representation": self.representation,
+            "condition_a": self.condition_a,
+            "condition_b": self.condition_b,
+            "left_condition": self.left_condition,
+            "right_condition": self.right_condition,
+            "less_undermined_condition": self.less_undermined_condition,
+            "confidence": self.confidence,
+            "rationale": self.rationale,
+            "most_damaging_critique_a": self.most_damaging_critique_a,
+            "most_damaging_critique_b": self.most_damaging_critique_b,
             "raw_judge_response": self.raw_judge_response,
         }
 
@@ -1127,6 +1203,70 @@ def judge_pairwise_omissions(
     )
 
 
+def judge_pairwise_critique_survival(
+    case: DecisionUsefulnessCase,
+    artifact_a: DecisionUsefulnessArtifact,
+    artifact_b: DecisionUsefulnessArtifact,
+    judge_model: Optional[str] = None,
+    representation: str = "decision_memo",
+) -> PairwiseCritiqueSurvivalJudgeResult:
+    """Judge which recommendation is less undermined by held-out critiques."""
+    jm = _pick_judge_model(artifact_a.model, judge_model)
+    comparison = f"{artifact_a.condition}_vs_{artifact_b.condition}"
+    use_original_order = _deterministic_ordering(
+        case_id=case.id,
+        run_number=artifact_a.run_number,
+        comparison=f"{comparison}|critique_survival",
+        representation=representation,
+        judge_model=jm,
+    )
+
+    if use_original_order:
+        left_artifact, right_artifact = artifact_a, artifact_b
+    else:
+        left_artifact, right_artifact = artifact_b, artifact_a
+
+    analysis_a, analysis_b = _prepare_pairwise_text(left_artifact, right_artifact, representation)
+    prompt = PAIRWISE_CRITIQUE_SURVIVAL_PROMPT.format(
+        scenario=case.scenario,
+        analysis_a=analysis_a,
+        analysis_b=analysis_b,
+    )
+    raw_judge_response, _ = call_llm(
+        prompt,
+        model=jm,
+        temperature=0.0,
+        max_tokens=1200,
+    )
+    payload = _extract_first_json_object(raw_judge_response)
+    less_undermined_raw = str(payload.get("less_undermined_analysis", "tie")).strip().upper()
+    if less_undermined_raw == "A":
+        less_undermined_condition = left_artifact.condition
+    elif less_undermined_raw == "B":
+        less_undermined_condition = right_artifact.condition
+    else:
+        less_undermined_condition = "tie"
+
+    return PairwiseCritiqueSurvivalJudgeResult(
+        case_id=case.id,
+        source_model=artifact_a.model,
+        judge_model=jm,
+        run_number=artifact_a.run_number,
+        comparison=comparison,
+        representation=representation,
+        condition_a=artifact_a.condition,
+        condition_b=artifact_b.condition,
+        left_condition=left_artifact.condition,
+        right_condition=right_artifact.condition,
+        less_undermined_condition=less_undermined_condition,
+        confidence=int(payload.get("confidence", 0) or 0),
+        rationale=str(payload.get("rationale", "")),
+        most_damaging_critique_a=str(payload.get("most_damaging_critique_a", "")),
+        most_damaging_critique_b=str(payload.get("most_damaging_critique_b", "")),
+        raw_judge_response=raw_judge_response,
+    )
+
+
 def _load_artifact(path: Path) -> DecisionUsefulnessArtifact:
     """Load a generated artifact from disk."""
     with open(path) as fh:
@@ -1197,7 +1337,11 @@ def run_decision_usefulness_judging(
     representations: Optional[list[str]] = None,
     judge_model: Optional[str] = None,
     verbose: bool = True,
-) -> tuple[list[PairwiseUtilityJudgeResult], list[PairwiseOmissionJudgeResult]]:
+) -> tuple[
+    list[PairwiseUtilityJudgeResult],
+    list[PairwiseOmissionJudgeResult],
+    list[PairwiseCritiqueSurvivalJudgeResult],
+]:
     """Run pairwise judging over saved artifacts."""
     output_dir = Path(output_dir)
     if cases is None:
@@ -1220,6 +1364,7 @@ def run_decision_usefulness_judging(
 
     utility_results: list[PairwiseUtilityJudgeResult] = []
     omission_results: list[PairwiseOmissionJudgeResult] = []
+    critique_results: list[PairwiseCritiqueSurvivalJudgeResult] = []
 
     for case in cases:
         run_numbers = sorted(
@@ -1254,8 +1399,16 @@ def run_decision_usefulness_judging(
                         judge_model=judge_model,
                         representation=representation,
                     )
+                    critique_result = judge_pairwise_critique_survival(
+                        case=case_lookup[case.id],
+                        artifact_a=left_artifact,
+                        artifact_b=right_artifact,
+                        judge_model=judge_model,
+                        representation=representation,
+                    )
                     utility_results.append(utility_result)
                     omission_results.append(omission_result)
+                    critique_results.append(critique_result)
 
                     utility_path = output_dir / (
                         "judge_utility_"
@@ -1271,28 +1424,46 @@ def run_decision_usefulness_judging(
                     with open(omission_path, "w") as fh:
                         json.dump(omission_result.to_dict(), fh, indent=2)
 
-    summary = summarize_decision_usefulness_judging(utility_results, omission_results)
+                    critique_path = output_dir / (
+                        "judge_critique_"
+                        f"{case.id}_{left_condition}_vs_{right_condition}_run{run_number}_{representation}.json"
+                    )
+                    with open(critique_path, "w") as fh:
+                        json.dump(critique_result.to_dict(), fh, indent=2)
+
+    summary = summarize_decision_usefulness_judging(
+        utility_results,
+        omission_results,
+        critique_results,
+    )
     with open(output_dir / "judge_summary.json", "w") as fh:
         json.dump(summary, fh, indent=2)
 
-    return utility_results, omission_results
+    return utility_results, omission_results, critique_results
 
 
 def summarize_decision_usefulness_judging(
     utility_results: list[PairwiseUtilityJudgeResult],
     omission_results: list[PairwiseOmissionJudgeResult],
+    critique_results: Optional[list[PairwiseCritiqueSurvivalJudgeResult]] = None,
 ) -> dict[str, Any]:
     """Summarize pairwise judging results."""
+    if critique_results is None:
+        critique_results = []
+
     summary: dict[str, Any] = {
         "utility": {},
         "omission": {},
+        "critique_survival": {},
     }
 
     for representation in REPRESENTATIONS:
         rep_utility = [result for result in utility_results if result.representation == representation]
         rep_omission = [result for result in omission_results if result.representation == representation]
+        rep_critique = [result for result in critique_results if result.representation == representation]
         summary["utility"][representation] = {}
         summary["omission"][representation] = {}
+        summary["critique_survival"][representation] = {}
 
         comparisons = sorted({result.comparison for result in rep_utility})
         for comparison in comparisons:
@@ -1332,15 +1503,39 @@ def summarize_decision_usefulness_judging(
                 else None,
             }
 
+        critique_comparisons = sorted({result.comparison for result in rep_critique})
+        for comparison in critique_comparisons:
+            comp_critique = [result for result in rep_critique if result.comparison == comparison]
+            less_undermined: dict[str, int] = {}
+            for result in comp_critique:
+                less_undermined[result.less_undermined_condition] = (
+                    less_undermined.get(result.less_undermined_condition, 0) + 1
+                )
+            summary["critique_survival"][representation][comparison] = {
+                "n": len(comp_critique),
+                "less_undermined": less_undermined,
+                "mean_confidence": round(
+                    sum(result.confidence for result in comp_critique) / len(comp_critique),
+                    2,
+                )
+                if comp_critique
+                else None,
+            }
+
     return summary
 
 
 def print_decision_usefulness_summary(
     utility_results: list[PairwiseUtilityJudgeResult],
     omission_results: list[PairwiseOmissionJudgeResult],
+    critique_results: Optional[list[PairwiseCritiqueSurvivalJudgeResult]] = None,
 ) -> None:
     """Print a concise summary for CLI use."""
-    summary = summarize_decision_usefulness_judging(utility_results, omission_results)
+    summary = summarize_decision_usefulness_judging(
+        utility_results,
+        omission_results,
+        critique_results,
+    )
     print("\n============================================================")
     print("DECISION-USEFULNESS JUDGING SUMMARY")
     print("============================================================")
@@ -1358,6 +1553,15 @@ def print_decision_usefulness_summary(
             )
             print(
                 f"  {comparison}: n={data['n']} mean_conf={data['mean_confidence']} flagged({flagged})"
+            )
+        print(f"\n[{representation}] critique survival")
+        for comparison, data in summary["critique_survival"][representation].items():
+            less_undermined = ", ".join(
+                f"{cond}={count}" for cond, count in sorted(data["less_undermined"].items())
+            )
+            print(
+                f"  {comparison}: n={data['n']} mean_conf={data['mean_confidence']} "
+                f"less_undermined({less_undermined})"
             )
 
 
