@@ -248,6 +248,10 @@ def draft_market_for_option_kpi(
     resolution_rule = kpi.resolution_rule or (
         "Resolve according to the data source named in the market description."
     )
+    conditional_resolution_rule = (
+        f"Resolve N/A if `{option_name}` is not chosen or the condition is otherwise false. "
+        f"If the condition is true: {resolution_rule}"
+    )
     context = (
         f"Original farness decision: {decision.question}\n\n"
         f"Condition: if `{option_name}` is chosen or implemented.\n\n"
@@ -267,7 +271,7 @@ def draft_market_for_option_kpi(
             outcome_type="BINARY",
             description_markdown=_description_markdown(
                 context=context,
-                resolution_rule=resolution_rule,
+                resolution_rule=conditional_resolution_rule,
                 resolution_date=resolution_date,
                 forecast=_source_forecast_from_forecast(forecast),
             ),
@@ -276,7 +280,7 @@ def draft_market_for_option_kpi(
             initial_probability=point,
             tags=tags,
             resolution_date=resolution_date,
-            resolution_rule=resolution_rule,
+            resolution_rule=conditional_resolution_rule,
             source_forecast=_source_forecast_from_forecast(forecast),
             notes=["Drafted from a stored farness forecast."],
         )
@@ -292,7 +296,7 @@ def draft_market_for_option_kpi(
         outcome_type="PSEUDO_NUMERIC",
         description_markdown=_description_markdown(
             context=context,
-            resolution_rule=resolution_rule,
+            resolution_rule=conditional_resolution_rule,
             resolution_date=resolution_date,
             forecast=_source_forecast_from_forecast(forecast),
         ),
@@ -303,7 +307,7 @@ def draft_market_for_option_kpi(
         initial_value=forecast.point_estimate,
         tags=tags,
         resolution_date=resolution_date,
-        resolution_rule=resolution_rule,
+        resolution_rule=conditional_resolution_rule,
         source_forecast=_source_forecast_from_forecast(forecast),
         notes=["Drafted from a stored farness forecast."],
     )
@@ -403,4 +407,3 @@ def slugify_market_filename(text: str) -> str:
     """Return a filesystem-safe slug for market draft packs."""
     slug = re.sub(r"[^a-zA-Z0-9]+", "-", text.lower()).strip("-")
     return slug or "market-draft"
-

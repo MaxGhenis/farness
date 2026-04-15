@@ -1,5 +1,5 @@
 {
-  "title": "Waymo DC forecast market drafts",
+  "title": "Waymo DC permission and 2027 safety market drafts",
   "source": "waymo-dc-test-case",
   "generated_at": "2026-04-15T00:00:00",
   "provider": "manifold",
@@ -8,7 +8,7 @@
     {
       "question": "Will Waymo be legally permitted to offer fully driverless paid robotaxi rides in Washington, DC by 2026-12-31?",
       "outcome_type": "BINARY",
-      "description_markdown": "## Context\nWaymo says Waymo One is planned for Washington, DC in 2026, but also says it still needs policymakers to formalize regulations for operation without a human behind the wheel. Existing DC law establishes an autonomous vehicle testing program and requires DDOT approval for changes such as moving from an in-vehicle test operator to no test operator physically present. Axios reported in July 2025 that Waymo vehicles in DC were being tested with a specialist behind the wheel and that a Council bill would be needed before driverless testing and public rides.\n\n## Resolution\nResolve YES if, by 2026-12-31, DC law, regulation, DDOT permit approval, or another official DC government action legally permits Waymo to offer fully driverless paid ride-hailing service to public riders in Washington, DC with no human driver or test operator physically present in the vehicle. Resolve NO otherwise. Testing-only permission without paid public rides does not count.\n\nResolution date target: 2026-12-31\n\n## Sources\n- [Waymo: Next stop for Waymo One: Washington, D.C.](https://waymo.com/blog/2025/03/next-stop-for-waymo-one-washingtondc/)\n- [DC Law 23-156: Autonomous Vehicles Testing Program Amendment Act of 2020](https://code.dccouncil.gov/us/dc/council/laws/23-156)\n- [Axios: New D.C. Council bill would allow Waymo to begin robotaxi service](https://www.axios.com/local/washington-dc/2025/07/16/driverless-cars-dc-bill-waymo-robotaxis)\n\n## Seed forecast\n- Point estimate: 52\n- Rationale: Waymo publicly targeted DC riders in 2026 and has strong incentive to secure approval, but DC policy approval and public-service authorization remain live gating items.\n\n_Drafted by farness. Review wording and resolution criteria before posting._",
+      "description_markdown": "## Context\nWaymo says Waymo One is planned for Washington, DC in 2026, but also says policymakers still need to formalize regulations for operation without a human behind the wheel. Existing DC law establishes an autonomous vehicle testing program and requires DDOT approval for changes such as moving from an in-vehicle test operator to no test operator physically present. A related Manifold market already asks whether Washington DC will be a Waymo service city by June 30, 2026; this draft is narrower because it asks about legal permission for fully driverless paid public rides.\n\n## Resolution\nResolve YES if, by 2026-12-31, DC law, regulation, DDOT permit approval, or another official DC government action legally permits Waymo to offer fully driverless paid ride-hailing service to public riders in Washington, DC with no human driver or test operator physically present in the vehicle. Resolve NO otherwise. Testing-only permission without paid public rides does not count.\n\nResolution date target: 2026-12-31\n\n## Sources\n- [Waymo: Next stop for Waymo One: Washington, D.C.](https://waymo.com/blog/2025/03/next-stop-for-waymo-one-washingtondc/)\n- [DC Law 23-156: Autonomous Vehicles Testing Program Amendment Act of 2020](https://code.dccouncil.gov/us/dc/council/laws/23-156)\n- [Axios: New D.C. Council bill would allow Waymo to begin robotaxi service](https://www.axios.com/local/washington-dc/2025/07/16/driverless-cars-dc-bill-waymo-robotaxis)\n- [Manifold: Which new cities will Waymo serve by June 30?](https://manifold.markets/Bayesian/which-new-cities-will-waymo-serve-b)\n\n## Seed forecast\n- Point estimate: 52\n- Rationale: Waymo publicly targeted DC riders in 2026 and has strong incentive to secure approval, but DC policy approval and public-service authorization remain live gating items.\n\n_Drafted by farness. Review wording and resolution criteria before posting._",
       "close_date": "2026-12-31",
       "visibility": "unlisted",
       "initial_probability": 52,
@@ -31,6 +31,10 @@
         {
           "title": "Axios: New D.C. Council bill would allow Waymo to begin robotaxi service",
           "url": "https://www.axios.com/local/washington-dc/2025/07/16/driverless-cars-dc-bill-waymo-robotaxis"
+        },
+        {
+          "title": "Manifold: Which new cities will Waymo serve by June 30?",
+          "url": "https://manifold.markets/Bayesian/which-new-cities-will-waymo-serve-b"
         }
       ],
       "source_forecast": {
@@ -47,10 +51,96 @@
       "manifold_payload": {
         "outcomeType": "BINARY",
         "question": "Will Waymo be legally permitted to offer fully driverless paid robotaxi rides in Washington, DC by 2026-12-31?",
-        "descriptionMarkdown": "## Context\nWaymo says Waymo One is planned for Washington, DC in 2026, but also says it still needs policymakers to formalize regulations for operation without a human behind the wheel. Existing DC law establishes an autonomous vehicle testing program and requires DDOT approval for changes such as moving from an in-vehicle test operator to no test operator physically present. Axios reported in July 2025 that Waymo vehicles in DC were being tested with a specialist behind the wheel and that a Council bill would be needed before driverless testing and public rides.\n\n## Resolution\nResolve YES if, by 2026-12-31, DC law, regulation, DDOT permit approval, or another official DC government action legally permits Waymo to offer fully driverless paid ride-hailing service to public riders in Washington, DC with no human driver or test operator physically present in the vehicle. Resolve NO otherwise. Testing-only permission without paid public rides does not count.\n\nResolution date target: 2026-12-31\n\n## Sources\n- [Waymo: Next stop for Waymo One: Washington, D.C.](https://waymo.com/blog/2025/03/next-stop-for-waymo-one-washingtondc/)\n- [DC Law 23-156: Autonomous Vehicles Testing Program Amendment Act of 2020](https://code.dccouncil.gov/us/dc/council/laws/23-156)\n- [Axios: New D.C. Council bill would allow Waymo to begin robotaxi service](https://www.axios.com/local/washington-dc/2025/07/16/driverless-cars-dc-bill-waymo-robotaxis)\n\n## Seed forecast\n- Point estimate: 52\n- Rationale: Waymo publicly targeted DC riders in 2026 and has strong incentive to secure approval, but DC policy approval and public-service authorization remain live gating items.\n\n_Drafted by farness. Review wording and resolution criteria before posting._",
+        "descriptionMarkdown": "## Context\nWaymo says Waymo One is planned for Washington, DC in 2026, but also says policymakers still need to formalize regulations for operation without a human behind the wheel. Existing DC law establishes an autonomous vehicle testing program and requires DDOT approval for changes such as moving from an in-vehicle test operator to no test operator physically present. A related Manifold market already asks whether Washington DC will be a Waymo service city by June 30, 2026; this draft is narrower because it asks about legal permission for fully driverless paid public rides.\n\n## Resolution\nResolve YES if, by 2026-12-31, DC law, regulation, DDOT permit approval, or another official DC government action legally permits Waymo to offer fully driverless paid ride-hailing service to public riders in Washington, DC with no human driver or test operator physically present in the vehicle. Resolve NO otherwise. Testing-only permission without paid public rides does not count.\n\nResolution date target: 2026-12-31\n\n## Sources\n- [Waymo: Next stop for Waymo One: Washington, D.C.](https://waymo.com/blog/2025/03/next-stop-for-waymo-one-washingtondc/)\n- [DC Law 23-156: Autonomous Vehicles Testing Program Amendment Act of 2020](https://code.dccouncil.gov/us/dc/council/laws/23-156)\n- [Axios: New D.C. Council bill would allow Waymo to begin robotaxi service](https://www.axios.com/local/washington-dc/2025/07/16/driverless-cars-dc-bill-waymo-robotaxis)\n- [Manifold: Which new cities will Waymo serve by June 30?](https://manifold.markets/Bayesian/which-new-cities-will-waymo-serve-b)\n\n## Seed forecast\n- Point estimate: 52\n- Rationale: Waymo publicly targeted DC riders in 2026 and has strong incentive to secure approval, but DC policy approval and public-service authorization remain live gating items.\n\n_Drafted by farness. Review wording and resolution criteria before posting._",
         "closeTime": 1798693200000,
         "visibility": "unlisted",
         "initialProb": 52
+      }
+    },
+    {
+      "question": "If Waymo is legally permitted to offer fully driverless paid robotaxi rides in Washington, DC by 2026-12-31, will a Waymo vehicle be involved in any DC police-reported injury crash during 2027?",
+      "outcome_type": "BINARY",
+      "description_markdown": "## Context\nThis is a conditional safety market. It is meant to separate the policy-permission question from a 2027 public-safety outcome.\n\n## Resolution\nResolve N/A if Waymo is not legally permitted to offer fully driverless paid public robotaxi rides in Washington, DC by 2026-12-31. If the condition is true, resolve YES if any DC police-reported crash during calendar year 2027 both involves a Waymo vehicle and records at least one injury. Resolve NO if no such crash is recorded.\n\nResolution date target: 2027-12-31\n\n## Sources\n- [Waymo: Next stop for Waymo One: Washington, D.C.](https://waymo.com/blog/2025/03/next-stop-for-waymo-one-washingtondc/)\n- [DC crash data portal](https://opendata.dc.gov/)\n\n## Seed forecast\n- Point estimate: 24\n- Rationale: Permission would imply more Waymo vehicle exposure in DC, increasing the chance of at least one reported injury crash even if per-mile risk is low.\n\n_Drafted by farness. Review wording and resolution criteria before posting._",
+      "close_date": "2027-12-31",
+      "visibility": "unlisted",
+      "initial_probability": 24,
+      "min_value": null,
+      "max_value": null,
+      "initial_value": null,
+      "is_log_scale": false,
+      "tags": ["waymo", "dc", "autonomous-vehicles", "safety"],
+      "resolution_date": "2027-12-31",
+      "resolution_rule": "Resolve N/A if Waymo is not legally permitted to offer fully driverless paid public robotaxi rides in Washington, DC by 2026-12-31. If the condition is true, resolve YES if any DC police-reported crash during calendar year 2027 both involves a Waymo vehicle and records at least one injury. Resolve NO if no such crash is recorded.",
+      "sources": [
+        {
+          "title": "Waymo: Next stop for Waymo One: Washington, D.C.",
+          "url": "https://waymo.com/blog/2025/03/next-stop-for-waymo-one-washingtondc/"
+        },
+        {
+          "title": "DC crash data portal",
+          "url": "https://opendata.dc.gov/"
+        }
+      ],
+      "source_forecast": {
+        "point_estimate": 24,
+        "ci_low": null,
+        "ci_high": null,
+        "confidence_level": 0.8,
+        "rationale": "Permission would imply more Waymo vehicle exposure in DC, increasing the chance of at least one reported injury crash even if per-mile risk is low."
+      },
+      "notes": [
+        "Safety outcome is exposure-sensitive; consider adding a vehicle-miles market if reliable DC Waymo VMT data becomes available."
+      ],
+      "manifold_payload": {
+        "outcomeType": "BINARY",
+        "question": "If Waymo is legally permitted to offer fully driverless paid robotaxi rides in Washington, DC by 2026-12-31, will a Waymo vehicle be involved in any DC police-reported injury crash during 2027?",
+        "descriptionMarkdown": "## Context\nThis is a conditional safety market. It is meant to separate the policy-permission question from a 2027 public-safety outcome.\n\n## Resolution\nResolve N/A if Waymo is not legally permitted to offer fully driverless paid public robotaxi rides in Washington, DC by 2026-12-31. If the condition is true, resolve YES if any DC police-reported crash during calendar year 2027 both involves a Waymo vehicle and records at least one injury. Resolve NO if no such crash is recorded.\n\nResolution date target: 2027-12-31\n\n## Sources\n- [Waymo: Next stop for Waymo One: Washington, D.C.](https://waymo.com/blog/2025/03/next-stop-for-waymo-one-washingtondc/)\n- [DC crash data portal](https://opendata.dc.gov/)\n\n## Seed forecast\n- Point estimate: 24\n- Rationale: Permission would imply more Waymo vehicle exposure in DC, increasing the chance of at least one reported injury crash even if per-mile risk is low.\n\n_Drafted by farness. Review wording and resolution criteria before posting._",
+        "closeTime": 1830229200000,
+        "visibility": "unlisted",
+        "initialProb": 24
+      }
+    },
+    {
+      "question": "If Waymo is not legally permitted to offer fully driverless paid robotaxi rides in Washington, DC by 2026-12-31, will a Waymo vehicle be involved in any DC police-reported injury crash during 2027?",
+      "outcome_type": "BINARY",
+      "description_markdown": "## Context\nThis is the lower-exposure counterpart to the conditional safety market above. It captures risk from any continued testing, mapping, manual driving, or other Waymo vehicle activity in DC if paid fully driverless public service is not permitted by the end of 2026.\n\n## Resolution\nResolve N/A if Waymo is legally permitted to offer fully driverless paid public robotaxi rides in Washington, DC by 2026-12-31. If the condition is true, resolve YES if any DC police-reported crash during calendar year 2027 both involves a Waymo vehicle and records at least one injury. Resolve NO if no such crash is recorded.\n\nResolution date target: 2027-12-31\n\n## Sources\n- [Waymo: Next stop for Waymo One: Washington, D.C.](https://waymo.com/blog/2025/03/next-stop-for-waymo-one-washingtondc/)\n- [DC crash data portal](https://opendata.dc.gov/)\n\n## Seed forecast\n- Point estimate: 8\n- Rationale: If paid driverless service is not permitted, Waymo exposure in DC should be much lower, but some testing or manually driven activity could still occur.\n\n_Drafted by farness. Review wording and resolution criteria before posting._",
+      "close_date": "2027-12-31",
+      "visibility": "unlisted",
+      "initial_probability": 8,
+      "min_value": null,
+      "max_value": null,
+      "initial_value": null,
+      "is_log_scale": false,
+      "tags": ["waymo", "dc", "autonomous-vehicles", "safety"],
+      "resolution_date": "2027-12-31",
+      "resolution_rule": "Resolve N/A if Waymo is legally permitted to offer fully driverless paid public robotaxi rides in Washington, DC by 2026-12-31. If the condition is true, resolve YES if any DC police-reported crash during calendar year 2027 both involves a Waymo vehicle and records at least one injury. Resolve NO if no such crash is recorded.",
+      "sources": [
+        {
+          "title": "Waymo: Next stop for Waymo One: Washington, D.C.",
+          "url": "https://waymo.com/blog/2025/03/next-stop-for-waymo-one-washingtondc/"
+        },
+        {
+          "title": "DC crash data portal",
+          "url": "https://opendata.dc.gov/"
+        }
+      ],
+      "source_forecast": {
+        "point_estimate": 8,
+        "ci_low": null,
+        "ci_high": null,
+        "confidence_level": 0.8,
+        "rationale": "If paid driverless service is not permitted, Waymo exposure in DC should be much lower, but some testing or manually driven activity could still occur."
+      },
+      "notes": [
+        "This is exposure-sensitive and may resolve mostly on low activity rather than per-mile safety."
+      ],
+      "manifold_payload": {
+        "outcomeType": "BINARY",
+        "question": "If Waymo is not legally permitted to offer fully driverless paid robotaxi rides in Washington, DC by 2026-12-31, will a Waymo vehicle be involved in any DC police-reported injury crash during 2027?",
+        "descriptionMarkdown": "## Context\nThis is the lower-exposure counterpart to the conditional safety market above. It captures risk from any continued testing, mapping, manual driving, or other Waymo vehicle activity in DC if paid fully driverless public service is not permitted by the end of 2026.\n\n## Resolution\nResolve N/A if Waymo is legally permitted to offer fully driverless paid public robotaxi rides in Washington, DC by 2026-12-31. If the condition is true, resolve YES if any DC police-reported crash during calendar year 2027 both involves a Waymo vehicle and records at least one injury. Resolve NO if no such crash is recorded.\n\nResolution date target: 2027-12-31\n\n## Sources\n- [Waymo: Next stop for Waymo One: Washington, D.C.](https://waymo.com/blog/2025/03/next-stop-for-waymo-one-washingtondc/)\n- [DC crash data portal](https://opendata.dc.gov/)\n\n## Seed forecast\n- Point estimate: 8\n- Rationale: If paid driverless service is not permitted, Waymo exposure in DC should be much lower, but some testing or manually driven activity could still occur.\n\n_Drafted by farness. Review wording and resolution criteria before posting._",
+        "closeTime": 1830229200000,
+        "visibility": "unlisted",
+        "initialProb": 8
       }
     }
   ]

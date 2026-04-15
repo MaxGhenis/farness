@@ -300,7 +300,9 @@ Review date: 2026-06-15`}</CodeBlock>
               <p className="text-[0.94rem] text-[#415463] leading-[1.7]">
                 For public policy questions, use it to turn a live debate into a
                 falsifiable forecast with explicit resolution criteria before anyone
-                posts or seeds a market.
+                posts or seeds a market. The Waymo/DC example pairs a permission
+                market with conditional 2027 safety markets that resolve N/A when
+                their permission condition is false.
               </p>
             </div>
             <CodeBlock>{`farness market-draft \\

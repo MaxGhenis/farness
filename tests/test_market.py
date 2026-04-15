@@ -71,6 +71,7 @@ def test_draft_markets_for_decision_creates_option_kpi_markets():
     draft = drafts[0]
     assert "Pass AV framework" in draft.question
     assert draft.initial_probability == 65
+    assert "Resolve N/A if `Pass AV framework`" in draft.resolution_rule
     assert draft.to_manifold_payload()["initialProb"] == 65
 
 
