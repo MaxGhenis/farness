@@ -68,12 +68,12 @@ export default function VisionPage() {
           <section>
             <h2>What AI&apos;s job actually is</h2>
             <p>
-              Yoshua Bengio&apos;s &ldquo;Scientist AI&rdquo; agenda gets about
-              eighty percent of the way: AI should be a Bayesian inference
-              engine that produces causal and probabilistic answers, not an
-              actor. But he frames non-agency as a <em>safety</em> proposal — a
-              way to dodge agentic risk. We propose something stronger and more
-              operational: forecasting isn&apos;t a safer mode for AI, it&apos;s{" "}
+              Yoshua Bengio&apos;s &ldquo;Scientist AI&rdquo; agenda points in
+              the same direction: AI as a Bayesian inference engine that
+              produces causal and probabilistic answers, not an actor. But he
+              frames non-agency as a <em>safety</em> proposal — a way to dodge
+              agentic risk. We propose something stronger and more operational:
+              forecasting isn&apos;t a safer mode for AI, it&apos;s{" "}
               <em>the job description</em>.
             </p>
             <p>
@@ -258,11 +258,11 @@ export default function VisionPage() {
                 ground-truth set of government statistics) and{" "}
                 <strong>MICROPLEX</strong> (the calibrated synthetic
                 micro-data file that preserves joint distributions and
-                demographic structure while preserving privacy). MICROPLEX is
-                the only path to training-scale population data that
-                preserves heterogeneity without leaking real individuals —
-                which means it is the only substrate on which
-                calibration-native AI can be trained at scale.
+                demographic structure while preserving privacy). MICROPLEX
+                gives us training-scale population data that preserves
+                heterogeneity without leaking real individuals, which makes
+                it a load-bearing substrate for training calibration-native
+                AI at scale.
               </li>
               <li>
                 <strong>The market venue</strong> — initially on Manifold (MIT
@@ -391,11 +391,12 @@ export default function VisionPage() {
               somewhere; the integration does not.
             </p>
             <p>
-              The point of comparison: CBO and JCT produce one number per
-              scenario, six months late, with no uncertainty quantification.
-              Policy futures produce continuously updated probability
-              distributions, transparent, calibrated, open, and scored against
-              reality on every publication.
+              The point of comparison: CBO and JCT scores are mostly point
+              estimates, often produced months after a bill is introduced,
+              and rarely surfaced with explicit uncertainty bounds at the
+              line-item level. Policy futures produce continuously updated
+              probability distributions, transparent, calibrated, open, and
+              scored against reality on every publication.
             </p>
           </section>
 
@@ -423,12 +424,12 @@ export default function VisionPage() {
             </p>
             <p>
               When the time comes, the regulated path becomes a build-it
-              project, not a partner-with-someone project. Forking Manifold and
-              pursuing CFTC approval as the world&apos;s first open-source
-              Designated Contract Market is itself a category-defining move that
-              attracts the right talent and capital. Closed-source competitors
-              (Kalshi, FiscalNote, Polymarket) keep their lanes. We do not need
-              theirs.
+              project, not a partner-with-someone project. Forking Manifold
+              and pursuing CFTC approval as an open-source Designated
+              Contract Market is itself a category-defining move that attracts
+              the right talent and capital. Closed-source competitors
+              (Kalshi, FiscalNote, Polymarket) keep their lanes. We do not
+              need theirs.
             </p>
           </section>
 
@@ -475,8 +476,10 @@ export default function VisionPage() {
               <li>
                 <strong>Hierarchical uncertainty propagation.</strong>{" "}
                 Architectural mechanism for uncertainty to flow through
-                reasoning steps, not just exist at outputs. Bayesian neural
-                networks at scale, finally cracked.
+                reasoning steps, not just exist at outputs. This is the hard
+                open problem that the research program tries to make real
+                progress on — analogous to the long-standing Bayesian neural
+                network agenda, scaled to foundation-model regimes.
               </li>
               <li>
                 <strong>Tool-orchestration as a first-class capability.</strong>{" "}
@@ -499,11 +502,12 @@ export default function VisionPage() {
               </li>
             </ul>
             <p>
-              No frontier lab is doing this as a first-class research program.
-              They cannot — their product economics require confident
-              assistants, and the market they serve wants helpful answers, not
-              calibrated ones. We can ship a model that says &ldquo;I don&apos;t
-              know, and here is the shape of my uncertainty&rdquo; because
+              We know of no frontier lab pursuing this as a first-class
+              research program. The incentives push the other direction —
+              users of chat assistants reward confident, helpful answers, and
+              RLHF pipelines optimize against calibrated uncertainty as a
+              result. We can ship a model that says &ldquo;I don&apos;t know,
+              and here is the shape of my uncertainty&rdquo; because
               uncertainty <em>is</em> the product.
             </p>
           </section>
@@ -712,9 +716,10 @@ export default function VisionPage() {
               <strong>Simulation engine becomes production infrastructure.</strong>{" "}
               Markets quote continuously; simulations need to produce updated
               priors fast enough to follow policy news. PolicyEngine&apos;s
-              current research-grade cadence is the wrong order of magnitude.
-              Production-grade microsim is an engineering hard requirement, not
-              a nice-to-have.
+              current architecture is tuned for research-quality batch
+              analysis; market-grade continuous quoting will require
+              production engineering investment we haven&apos;t yet made.
+              Hard requirement, not a nice-to-have.
             </p>
             <p>
               <strong>Political sensitivity of policy markets is real.</strong>{" "}
