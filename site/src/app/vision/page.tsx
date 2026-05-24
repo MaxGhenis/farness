@@ -655,7 +655,7 @@ export default function VisionPage() {
             <ul>
               <li>
                 <strong>Forecasting-as-harness</strong> — the alignment thesis.
-                The contraction <em>farness</em> = <em>fo</em>recasting{" "}
+                The contraction <em>farness</em> = <em>f</em>orecasting{" "}
                 <em>a</em>s ha<em>rness</em> encodes it.
               </li>
               <li>
