@@ -601,9 +601,10 @@ export default function VisionPage() {
           <section>
             <h2>Where this lands organizationally</h2>
             <p>
-              Three legally independent organizations, technically integrated as
-              one stack. Each open-source, each with its own governance and
-              funding.
+              Three legally independent organizations — Axiom and Farness as
+              the new core, PolicyEngine as the adjacent partner — technically
+              integrated as one stack. Each open-source, each with its own
+              governance and funding.
             </p>
             <ul>
               <li>
