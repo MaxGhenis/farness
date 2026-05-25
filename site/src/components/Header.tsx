@@ -4,7 +4,7 @@ import { FarnessLogoMark } from "./FarnessLogo";
 export function Header({
   activePage,
 }: {
-  activePage?: "docs" | "thesis" | "paper";
+  activePage?: "docs" | "thesis" | "paper" | "markets";
 }) {
   return (
     <header
@@ -45,6 +45,17 @@ export function Header({
             style={activePage !== "thesis" ? { color: "var(--theme-text-muted)" } : undefined}
           >
             Thesis
+          </Link>
+          <Link
+            href="/markets"
+            className={`[font-family:var(--font-body)] text-[0.82rem] font-normal no-underline transition-colors duration-200 hover:no-underline ${
+              activePage === "markets"
+                ? "text-[#A94E80]"
+                : "text-[var(--theme-text-muted)]"
+            }`}
+            style={activePage !== "markets" ? { color: "var(--theme-text-muted)" } : undefined}
+          >
+            Markets
           </Link>
           <a
             href="/paper"
