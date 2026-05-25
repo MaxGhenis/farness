@@ -28,6 +28,16 @@ export async function generateMetadata({
   return {
     title: `${m.title} — Farness markets`,
     description: m.question,
+    robots: {
+      index: false,
+      follow: false,
+      nocache: true,
+      googleBot: {
+        index: false,
+        follow: false,
+        noimageindex: true,
+      },
+    },
   };
 }
 

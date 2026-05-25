@@ -6,6 +6,16 @@ export const metadata: Metadata = {
   title: "Policy futures — Farness",
   description:
     "Prediction markets on every cell of government statistics, every Axiom-encoded policy parameter, and outcomes conditional on policy states. Quoted by the Farness simulation engine.",
+  robots: {
+    index: false,
+    follow: false,
+    nocache: true,
+    googleBot: {
+      index: false,
+      follow: false,
+      noimageindex: true,
+    },
+  },
 };
 
 export default function MarketsPage() {
