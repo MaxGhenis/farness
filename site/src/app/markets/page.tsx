@@ -5,7 +5,7 @@ import { MarketsBrowser } from "@/components/MarketsBrowser";
 export const metadata: Metadata = {
   title: "Policy futures — Farness",
   description:
-    "Prediction markets on every cell of government statistics, every Axiom-encoded policy parameter, and outcomes conditional on policy states. Quoted by the Farness simulation engine.",
+    "Prediction markets on every cell of government statistics, every Axiom-encoded policy parameter, and outcomes conditional on policy states. Quoted by Farness analyst agents calling the PolicyEngine microsim.",
   robots: {
     index: false,
     follow: false,
@@ -35,9 +35,9 @@ export default function MarketsPage() {
             <strong>ARCH cells</strong> on published government statistics,{" "}
             <strong>policy state markets</strong> on Axiom-encoded parameters,
             and <strong>conditional markets</strong> on outcomes given policy
-            states. Each quote is seeded by the Farness simulation engine, with
-            calibrated uncertainty and an audit trail of the tool calls
-            behind it.
+            states. Each quote is seeded by a Farness analyst agent calling
+            the PolicyEngine microsim, with calibrated uncertainty and an
+            audit trail of the tool calls behind it.
           </p>
         </section>
         <MarketsBrowser />
@@ -50,7 +50,7 @@ export default function MarketsPage() {
           </p>
           <p className="text-[0.92rem] leading-[1.65] text-[var(--theme-text)]">
             Every market is opened by the Farness analyst agent, which
-            decomposes the question, calls the simulation engine against
+            decomposes the question, calls the PolicyEngine microsim against
             scenarios drawn from Axiom-encoded statutes and MICROPLEX synthetic
             populations, integrates external baselines (CBO, FOMC SEP,
             JCT, BLS, Census), and produces a calibrated distribution. The

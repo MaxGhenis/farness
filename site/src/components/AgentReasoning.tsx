@@ -234,7 +234,7 @@ function RenderedStep({
       );
     }
     case "tool": {
-      const tool = step.tool ?? "farness.simulate";
+      const tool = step.tool ?? "policyengine.simulate";
       return (
         <div className="my-3">
           <div
@@ -269,7 +269,7 @@ function RenderedStep({
               style={{ borderColor: "var(--color-ink-border)" }}
             >
               <Spinner />
-              <span>simulating against MICROPLEX population…</span>
+              <span>running PolicyEngine microsim against MICROPLEX population…</span>
             </div>
           ) : null}
         </div>

@@ -4,7 +4,7 @@
 //
 // The reasoning is illustrative — numbers and tool-call results are
 // constructed to demonstrate the integrated stack (Axiom-encoded law,
-// farness microsim, ARCH cells) rather than to be live forecasts.
+// PolicyEngine microsim, ARCH cells) rather than to be live forecasts.
 
 export type MarketType = "arch" | "policy" | "conditional";
 
@@ -19,10 +19,10 @@ export type ReasoningStep =
   | { kind: "heading"; text: string }
   | { kind: "text"; text: string }
   | {
-      kind: "tool"; // call to farness simulation engine or data lookup
+      kind: "tool"; // call to PolicyEngine microsim or other data lookup
       call: string;
       result: string;
-      tool?: string; // optional tool name override; defaults to farness.simulate
+      tool?: string; // optional tool name override; defaults to policyengine.simulate
     }
   | { kind: "math"; text: string } // styled equation/weighting line
   | { kind: "forecast"; point: number; ciLow: number; ciHigh: number };
@@ -85,20 +85,20 @@ export const MARKETS: Market[] = [
         kind: "text",
         text: "The SPM child poverty rate for 2027 is dominated by the configuration of refundable credits under whatever tax regime is in force, plus the labor market. The CTC is the single largest policy lever — it directly raised the CTC sensitivity of SPM child poverty by roughly 4 percentage points during the 2021 expansion. The 2027 reading depends critically on how TCJA-extension legislation resolves.",
       },
-      { kind: "heading", text: "Running the simulation engine" },
+      { kind: "heading", text: "Running the PolicyEngine microsim" },
       {
         kind: "tool",
-        call: 'farness.simulate({ scenario: "current_law_scheduled", year: 2027, output: "spm_child_poverty_rate", population: "microplex.us.2027" })',
+        call: 'policyengine.simulate({ scenario: "current_law_scheduled", year: 2027, output: "spm_child_poverty_rate", population: "microplex.us.2027" })',
         result: '{ point: 13.1, ci80: [12.2, 14.0], drivers: ["CTC reverts to $1,000 / child", "EITC expansions sunset", "CTC phase-in unchanged"] }',
       },
       {
         kind: "tool",
-        call: 'farness.simulate({ scenario: "tcja_extended_full", year: 2027, output: "spm_child_poverty_rate", population: "microplex.us.2027" })',
+        call: 'policyengine.simulate({ scenario: "tcja_extended_full", year: 2027, output: "spm_child_poverty_rate", population: "microplex.us.2027" })',
         result: '{ point: 11.4, ci80: [10.5, 12.4], drivers: ["CTC remains $2,000 / child", "$1,700 refundable portion preserved", "EITC parameters unchanged"] }',
       },
       {
         kind: "tool",
-        call: 'farness.simulate({ scenario: "tcja_extended_partial", year: 2027, output: "spm_child_poverty_rate", population: "microplex.us.2027" })',
+        call: 'policyengine.simulate({ scenario: "tcja_extended_partial", year: 2027, output: "spm_child_poverty_rate", population: "microplex.us.2027" })',
         result: '{ point: 12.2, ci80: [11.3, 13.1], drivers: ["CTC at $1,500 / child", "refundability cap retained", "EITC reverts"] }',
       },
       { kind: "heading", text: "Macro and external inputs" },
@@ -167,12 +167,12 @@ export const MARKETS: Market[] = [
       { kind: "heading", text: "Calling structural and reduced-form models" },
       {
         kind: "tool",
-        call: 'farness.simulate({ scenario: "baseline_macro", year: 2026, output: "unemployment_rate_monthly", month: 12, model: "structural_var" })',
+        call: 'policyengine.simulate({ scenario: "baseline_macro", year: 2026, output: "unemployment_rate_monthly", month: 12, model: "structural_var" })',
         result: "{ point: 4.31, ci80: [3.92, 4.74] }",
       },
       {
         kind: "tool",
-        call: 'farness.simulate({ scenario: "baseline_macro", year: 2026, output: "unemployment_rate_monthly", month: 12, model: "reduced_form_phillips" })',
+        call: 'policyengine.simulate({ scenario: "baseline_macro", year: 2026, output: "unemployment_rate_monthly", month: 12, model: "reduced_form_phillips" })',
         result: "{ point: 4.27, ci80: [3.95, 4.61] }",
       },
       { kind: "heading", text: "External baselines" },
@@ -239,13 +239,13 @@ export const MARKETS: Market[] = [
       { kind: "heading", text: "Component decomposition" },
       {
         kind: "tool",
-        call: 'farness.simulate({ scenario: "baseline_macro", year: 2026, output: "cpi_components", decomposition: true })',
+        call: 'policyengine.simulate({ scenario: "baseline_macro", year: 2026, output: "cpi_components", decomposition: true })',
         result:
           "{ shelter: 3.4, services_ex_shelter: 3.1, core_goods: 0.8, food: 2.5, energy: 1.9, weighted_total: 2.62 }",
       },
       {
         kind: "tool",
-        call: 'farness.simulate({ scenario: "tariff_passthrough_central", year: 2026, output: "cpi_u_annual" })',
+        call: 'policyengine.simulate({ scenario: "tariff_passthrough_central", year: 2026, output: "cpi_u_annual" })',
         result: "{ point: 2.63, ci80: [2.18, 3.15] }",
       },
       { kind: "heading", text: "Cross-checks" },
@@ -311,12 +311,12 @@ export const MARKETS: Market[] = [
       { kind: "heading", text: "Decomposed simulation" },
       {
         kind: "tool",
-        call: 'farness.simulate({ scenario: "baseline_macro", year: 2026, output: "median_household_income_real", source: "asec" })',
+        call: 'policyengine.simulate({ scenario: "baseline_macro", year: 2026, output: "median_household_income_real", source: "asec" })',
         result: "{ point: 81230, ci80: [79140, 83370] }",
       },
       {
         kind: "tool",
-        call: 'farness.simulate({ scenario: "baseline_macro", year: 2026, output: "real_wage_growth", deciles: true })',
+        call: 'policyengine.simulate({ scenario: "baseline_macro", year: 2026, output: "real_wage_growth", deciles: true })',
         result: "{ p10: 0.4, p25: 0.6, p50: 0.8, p75: 0.9, p90: 1.0 }",
       },
       { kind: "heading", text: "External anchors" },
@@ -372,12 +372,12 @@ export const MARKETS: Market[] = [
       { kind: "heading", text: "Microsim under each legislative path" },
       {
         kind: "tool",
-        call: 'farness.simulate({ scenario: "current_law_scheduled", year: 2027, output: "individual_income_tax_receipts_fy", policy_year: 2026 })',
+        call: 'policyengine.simulate({ scenario: "current_law_scheduled", year: 2027, output: "individual_income_tax_receipts_fy", policy_year: 2026 })',
         result: '{ point: 2810, ci80: [2640, 2980], note: "assumes TCJA expires end-2025 → TY2026 under post-TCJA brackets" }',
       },
       {
         kind: "tool",
-        call: 'farness.simulate({ scenario: "tcja_extended_full", year: 2027, output: "individual_income_tax_receipts_fy", policy_year: 2026 })',
+        call: 'policyengine.simulate({ scenario: "tcja_extended_full", year: 2027, output: "individual_income_tax_receipts_fy", policy_year: 2026 })',
         result: '{ point: 2680, ci80: [2520, 2840], note: "TCJA-permanent brackets, $24K standard deduction, SALT cap" }',
       },
       {
@@ -441,12 +441,12 @@ export const MARKETS: Market[] = [
       { kind: "heading", text: "Structural model + nowcast blend" },
       {
         kind: "tool",
-        call: 'farness.simulate({ scenario: "baseline_macro", year: 2026, output: "real_gdp_q4q4", model: "structural_neoclassical" })',
+        call: 'policyengine.simulate({ scenario: "baseline_macro", year: 2026, output: "real_gdp_q4q4", model: "structural_neoclassical" })',
         result: "{ point: 1.86, ci80: [1.05, 2.69] }",
       },
       {
         kind: "tool",
-        call: 'farness.simulate({ scenario: "baseline_macro", year: 2026, output: "real_gdp_q4q4", model: "bayesian_var" })',
+        call: 'policyengine.simulate({ scenario: "baseline_macro", year: 2026, output: "real_gdp_q4q4", model: "bayesian_var" })',
         result: "{ point: 1.92, ci80: [0.85, 2.99] }",
       },
       {
@@ -508,12 +508,12 @@ export const MARKETS: Market[] = [
       { kind: "heading", text: "Policy-state branches" },
       {
         kind: "tool",
-        call: 'farness.simulate({ scenario: "ept_expired", year: 2026, output: "uninsured_rate_under_65" })',
+        call: 'policyengine.simulate({ scenario: "ept_expired", year: 2026, output: "uninsured_rate_under_65" })',
         result: "{ point: 10.4, ci80: [9.5, 11.4], drivers: [\"~3.8M coverage loss\", \"net of churn into ESI/Medicaid\"] }",
       },
       {
         kind: "tool",
-        call: 'farness.simulate({ scenario: "ept_extended", year: 2026, output: "uninsured_rate_under_65" })',
+        call: 'policyengine.simulate({ scenario: "ept_extended", year: 2026, output: "uninsured_rate_under_65" })',
         result: "{ point: 9.0, ci80: [8.2, 9.9] }",
       },
       {
@@ -572,7 +572,7 @@ export const MARKETS: Market[] = [
       { kind: "heading", text: "Decomposition" },
       {
         kind: "tool",
-        call: 'farness.simulate({ scenario: "baseline_demographics", year: 2026, output: "lfpr_decomposition_dec" })',
+        call: 'policyengine.simulate({ scenario: "baseline_demographics", year: 2026, output: "lfpr_decomposition_dec" })',
         result: "{ prime_age_25_54: 83.6, age_55_plus: 38.2, aggregate: 62.42, aging_drag_yoy: -0.13 }",
       },
       {
@@ -788,7 +788,7 @@ export const MARKETS: Market[] = [
       { kind: "heading", text: "Microsim revenue impact" },
       {
         kind: "tool",
-        call: 'farness.simulate({ scenario: "salt_cap_22k_joint", year: 2027, output: "iit_revenue_delta_vs_no_cap_billions" })',
+        call: 'policyengine.simulate({ scenario: "salt_cap_22k_joint", year: 2027, output: "iit_revenue_delta_vs_no_cap_billions" })',
         result: '{ point: -88, ci80: [-110, -68] }',
       },
       { kind: "heading", text: "Probability weighting" },
@@ -850,7 +850,7 @@ export const MARKETS: Market[] = [
       },
       {
         kind: "tool",
-        call: 'farness.simulate({ scenario: "snap_inflation_only", year: "FY2027", output: "max_allotment_hh4_48states" })',
+        call: 'policyengine.simulate({ scenario: "snap_inflation_only", year: "FY2027", output: "max_allotment_hh4_48states" })',
         result: '{ point: 1010, ci80: [992, 1029] }',
       },
       { kind: "heading", text: "Farm Bill scenarios" },
@@ -918,12 +918,12 @@ export const MARKETS: Market[] = [
       { kind: "heading", text: "Microsim under the conditioning policy" },
       {
         kind: "tool",
-        call: 'farness.simulate({ scenario: "tcja_extended_full", year: 2028, output: "spm_child_poverty_rate", population: "microplex.us.2028" })',
+        call: 'policyengine.simulate({ scenario: "tcja_extended_full", year: 2028, output: "spm_child_poverty_rate", population: "microplex.us.2028" })',
         result: "{ point: 11.3, ci80: [10.4, 12.3] }",
       },
       {
         kind: "tool",
-        call: 'farness.simulate({ scenario: "tcja_extended_full", year: 2028, output: "spm_child_poverty_rate", population: "microplex.us.2028", macro: "cbo_baseline_2028" })',
+        call: 'policyengine.simulate({ scenario: "tcja_extended_full", year: 2028, output: "spm_child_poverty_rate", population: "microplex.us.2028", macro: "cbo_baseline_2028" })',
         result: "{ point: 11.5, ci80: [10.3, 12.7] }",
       },
       { kind: "heading", text: "Compounding effects" },
@@ -933,7 +933,7 @@ export const MARKETS: Market[] = [
       },
       {
         kind: "tool",
-        call: 'farness.simulate({ scenario: "tcja_extended_full", year: 2028, output: "spm_child_poverty_rate", population: "microplex.us.2028", takeup_adjustment: "trend" })',
+        call: 'policyengine.simulate({ scenario: "tcja_extended_full", year: 2028, output: "spm_child_poverty_rate", population: "microplex.us.2028", takeup_adjustment: "trend" })',
         result: "{ point: 11.4, ci80: [10.3, 12.5] }",
       },
       { kind: "heading", text: "Residual uncertainty" },
@@ -984,7 +984,7 @@ export const MARKETS: Market[] = [
       { kind: "heading", text: "Microsim under no-cap" },
       {
         kind: "tool",
-        call: 'farness.simulate({ scenario: "no_salt_cap_with_tcja_extended", year: 2028, output: "individual_income_tax_receipts_fy", policy_year: 2027 })',
+        call: 'policyengine.simulate({ scenario: "no_salt_cap_with_tcja_extended", year: 2028, output: "individual_income_tax_receipts_fy", policy_year: 2027 })',
         result: '{ point: 2785, ci80: [2620, 2960], static_revenue_loss_vs_10k_cap: -98 }',
       },
       {
@@ -1000,7 +1000,7 @@ export const MARKETS: Market[] = [
       },
       {
         kind: "tool",
-        call: 'farness.simulate({ scenario: "no_salt_cap_with_tcja_extended", year: 2028, output: "individual_income_tax_receipts_fy", behavioral: "central" })',
+        call: 'policyengine.simulate({ scenario: "no_salt_cap_with_tcja_extended", year: 2028, output: "individual_income_tax_receipts_fy", behavioral: "central" })',
         result: '{ point: 2790, ci80: [2630, 2960] }',
       },
       { kind: "heading", text: "Forecast" },
@@ -1049,7 +1049,7 @@ export const MARKETS: Market[] = [
       { kind: "heading", text: "Microsim equilibrium" },
       {
         kind: "tool",
-        call: 'farness.simulate({ scenario: "ept_expired_persistent", year: 2028, output: "uninsured_rate_under_65", model: "demand_aces" })',
+        call: 'policyengine.simulate({ scenario: "ept_expired_persistent", year: 2028, output: "uninsured_rate_under_65", model: "demand_aces" })',
         result: '{ point: 11.2, ci80: [10.3, 12.2], coverage_loss_marketplace: -3.4M, medicaid_reabsorption: +0.8M, esi_pickup: +0.2M }',
       },
       {
@@ -1065,7 +1065,7 @@ export const MARKETS: Market[] = [
       },
       {
         kind: "tool",
-        call: 'farness.simulate({ scenario: "ept_expired_persistent", year: 2028, output: "uninsured_rate_under_65", model: "demand_aces", insurer_exit: "central" })',
+        call: 'policyengine.simulate({ scenario: "ept_expired_persistent", year: 2028, output: "uninsured_rate_under_65", model: "demand_aces", insurer_exit: "central" })',
         result: '{ point: 11.3, ci80: [10.2, 12.4] }',
       },
       { kind: "heading", text: "Forecast" },

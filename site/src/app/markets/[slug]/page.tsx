@@ -206,7 +206,7 @@ export default async function MarketDetailPage({
             <AgentReasoning steps={market.reasoning} unit={market.unit} />
             <p className="mt-3 text-[0.76rem] leading-[1.55] text-[var(--theme-text-dim)]">
               The agent decomposes the question, queries Axiom-encoded statutes,
-              calls the Farness microsim against MICROPLEX synthetic
+              calls the PolicyEngine microsim against MICROPLEX synthetic
               populations, integrates external baselines, and emits a
               calibrated forecast with full audit trail. Stream replays the
               reasoning trace; in production the same trace is generated live
