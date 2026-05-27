@@ -5,7 +5,7 @@ import { Header } from "@/components/Header";
 export const metadata: Metadata = {
   title: "Farness vision — working document",
   description:
-    "Working synthesis of the Farness company vision: the forecasting layer for civilization, built on encoded law, calibrated synthetic populations, and open-source AI.",
+    "Working synthesis of the Farness Foundation vision: open predictions as a new species of epistemic infrastructure, built for the agents of tomorrow.",
   robots: {
     index: false,
     follow: false,
@@ -28,16 +28,16 @@ export default function VisionPage() {
             Working document · not for distribution
           </p>
           <h1 className="[font-family:var(--font-display)] text-[clamp(2rem,5vw,3rem)] font-light leading-[1.2] mb-8 tracking-[-0.02em]">
-            The forecasting layer for civilization
+            Open predictions
           </h1>
           <p className="text-[1.15rem] text-[var(--theme-text-muted)] max-w-[520px] mx-auto leading-[1.6]">
-            A synthesis of the bigger bet:{" "}
             <span className="[font-family:var(--font-editorial)] italic">
               farness
             </span>{" "}
-            as the open-source AI lab building the foresight stack — encoded
-            law, calibrated populations, mechanistic simulation, and markets on
-            every consequential cell of government and policy data.
+            is a 501(c)(3) foundation building open, transparent, calibrated
+            AI-agent ensembles that produce continuously-updated forecasts on
+            consequential outcomes — and a public substrate for the agents of
+            tomorrow.
           </p>
         </header>
 
@@ -45,742 +45,498 @@ export default function VisionPage() {
           <section>
             <h2>The bet</h2>
             <p>
-              AI alignment is not a values problem. It is a{" "}
-              <em>consequence-visibility</em> problem. If every consequential
-              action — by a person, an organization, or an AI — came with a
-              calibrated forecast of its effects, scored against reality, with
-              feedback into the predictor, most of what we call alignment
-              dissolves into ordinary decision-making. The bottleneck is not
-              getting AI to want the right things. The bottleneck is making
-              consequences visible <em>before</em> they happen.
+              The next layer of open infrastructure after open source software,
+              open data, and open weights is <em>open predictions</em>:
+              continuously-updated forecasts produced by AI-agent ensembles
+              where every step of reasoning is inspectable, every tool call is
+              logged, every calibration result is published, and every
+              methodology improvement is shared.
             </p>
             <p>
-              Build the infrastructure for that visibility and you have done
-              more for alignment than any preference-tuning regime. That
-              infrastructure is what{" "}
-              <span className="[font-family:var(--font-editorial)] italic">
-                farness
-              </span>{" "}
-              builds.
-            </p>
-          </section>
-
-          <section>
-            <h2>What AI&apos;s job actually is</h2>
-            <p>
-              Yoshua Bengio&apos;s &ldquo;Scientist AI&rdquo; agenda points in
-              the same direction: AI as a Bayesian inference engine that
-              produces causal and probabilistic answers, not an actor. But he
-              frames non-agency as a <em>safety</em> proposal — a way to dodge
-              agentic risk. We propose something stronger and more operational:
-              forecasting isn&apos;t a safer mode for AI, it&apos;s{" "}
-              <em>the job description</em>.
+              Existing prediction markets aggregate information but cannot show
+              their work. Every trader has private motives, private
+              information, private cognitive biases. Even Metaculus comments
+              are partial. AI agents are the first forecasters whose reasoning
+              is fully visible — not because they choose to share it but
+              because the medium is structurally transparent. Every prior
+              weighting, every tool selection, every update on new information
+              is inspectable.
             </p>
             <p>
-              That reframing dissolves alignment instead of trying to solve it.
-              If AI&apos;s role is to forecast consequences against given
-              objectives, AI never needs values. Only humans, or systems derived
-              from humans, do.
-            </p>
-            <p>
-              The mental model: cascading OKRs at civilization scale. Every
-              organization that functions already runs on nested objectives —
-              top-level outcomes, mid-level results, low-level actions, each
-              level scored against the level above. AI sits at every node as the
-              forecasting layer. Given any action, predict its consequences
-              against the OKRs in scope. Humans own the OKR tree. The question{" "}
-              <em>what should the AI do in situation X?</em> collapses to{" "}
-              <em>
-                what does it forecast for each option&apos;s consequences
-                against the OKRs in scope?
-              </em>
-            </p>
-            <p>
-              Value forecasting closes the recursion. The top of the OKR tree
-              has to come from somewhere. If it comes from current human
-              preferences as expressed in 2026 RLHF labels, we&apos;ve locked in
-              present-day confusion. If it comes from{" "}
-              <em>
-                forecasted post-reflection values with uncertainty
-                quantification
-              </em>
-              , the OKR tree updates as humanity updates. This is empirical
-              moral reasoning, not philosophy.
+              That transparency creates a compounding loop nothing else has.
+              Aggregate the traces and systematic biases become visible across
+              the field. Each bias becomes a fix. Each fix produces a
+              generation of agents measurably better than the last. This is
+              the same dynamic that made open-source software durable: anyone
+              can see the bug, anyone can submit the patch. Applied to
+              forecasting, it produces a new species of epistemic
+              infrastructure.
             </p>
           </section>
 
           <section>
-            <h2>Two levels of harness</h2>
+            <h2>What we build</h2>
             <p>
-              Forecasting-as-harness operates at two levels, and both matter.
+              Farness Foundation (501(c)(3)) operates four programs of varying
+              prominence:
             </p>
+            <h3>Farness — the open-predictions platform</h3>
             <p>
-              <strong>Level one</strong> is the one above: AI&apos;s job is to
-              forecast. The discipline of forecasting — KPIs, options, base
-              rates, confidence intervals, disconfirming evidence, resolution
-              rules, calibration scoring — is the harness on AI. It makes AI
-              outputs accountable, scoreable, and revisable.
+              The foundation's flagship. AI-agent ensembles running
+              continuously across the structured grid of consequential
+              questions: every government statistic the Bureau of Economic
+              Analysis, Bureau of Labor Statistics, Census Bureau, and IRS
+              publishes; every policy parameter encoded by Axiom; every
+              counterfactual conditional question that drives policy and
+              economic decisions. The platform publishes the forecasts, the
+              agent traces, the calibration history, and the running
+              methodology notes openly. Funded compute scales the depth of the
+              ensemble; the substrate stays free at the point of use.
             </p>
+            <h3>PolicyEngine — microsim engine and custom policy analysis</h3>
             <p>
-              <strong>Level two</strong> is structural and equally important:
-              AI does forecasting by{" "}
-              <em>harnessing computational tools</em>, not by being an oracle.
-              The model conducts microsim, structural economic models,
-              agent-based simulators, synthetic populations, statistical
-              methods, and other LLMs when text-pattern reasoning is genuinely
-              the best available approach. The AI is the conductor; the tools
-              do the heavy lifting; the calibration discipline keeps the whole
-              system honest.
+              The established product brand the policy community already
+              knows. Open-source microsimulation for US, UK, and Canadian
+              tax-benefit systems, plus custom analysis services for
+              governments, think tanks, advocacy organizations, and
+              researchers. PolicyEngine continues operationally exactly as it
+              does today; the new structural fact is that it sits inside the
+              Farness Foundation as a continuing product brand and is also one
+              of the substrate engines the Farness platform calls when
+              producing policy-conditional forecasts. Policy folks who know
+              PolicyEngine keep interacting with PolicyEngine. The foundation
+              gives the work a stronger funding base and broader institutional
+              identity.
             </p>
+            <h3>Microplex — calibrated synthetic populations</h3>
             <p>
-              This is a real architectural difference from the frontier lab
-              consensus. They train oracles that absorb text and emit text,
-              with tools bolted on as features. We train{" "}
-              <em>conductors</em> from the ground up — models whose default
-              behavior on a consequential forecasting question is to decompose
-              into tool calls, parameterize them, run them, integrate outputs,
-              and produce a calibrated distribution with an audit trail of
-              which tools were called and why. Closer to how a senior analyst
-              uses Excel, Python, Stata, and domain knowledge than to how a
-              chat assistant produces an answer.
+              The synthetic micro-data substrate that powers PolicyEngine's
+              simulations and provides training-scale population data for
+              calibration-native AI research. Lives inside PolicyEngine
+              operationally. Published openly as a Hugging Face dataset for
+              outside consumption; methodology and synthesizer code in the
+              open. Replaces PolicyEngine's current Enhanced CPS as the
+              substrate for policy microsimulation, with substantially better
+              calibration to administrative data and broader applicability.
             </p>
+            <h3>Farness Decisions — personal and team decision tool</h3>
             <p>
-              The phasing follows naturally. Today, the orchestration is
-              mostly human and lightweight — pick the right model, run it,
-              format the output. Tomorrow, the orchestration is itself an AI
-              that has learned which tool to call when, with which parameters,
-              and how to propagate uncertainty across composed results. The
-              calibration-native foundation model we describe later is
-              specifically a model trained as this kind of conductor, not as a
-              text oracle.
+              The existing open-source Python package, CLI, MCP server, and
+              Claude Code skill that turns advice-seeking into structured
+              forecasting (KPIs, options, confidence intervals, resolution
+              rules, calibration tracking). Small relative to the platform but
+              load-bearing as the consumer-facing artifact of the
+              forecasting-as-harness thesis and a useful tool for individual
+              and team decisions.
             </p>
           </section>
 
           <section>
-            <h2>The infrastructure gap</h2>
+            <h2>The transparency advantage is the durable moat</h2>
             <p>
-              If AI&apos;s job is forecasting, the alignment field has badly
-              mis-invested. RLHF, constitutional AI, preference tuning — these
-              are all interventions on the LLM&apos;s <em>values</em> rather
-              than on its <em>forecasting capacity</em>. The high-leverage
-              investments are different:
+              You cannot close-source your way to a better open-predictions
+              platform than Farness. The transparency is constitutive: every
+              improvement to methodology, every newly-discovered bias, every
+              successful tool integration is shared, peer-reviewed, and
+              available to everyone working in the field. Proprietary
+              forecasting infrastructure cannot do this — its improvements
+              stay internal, its biases stay hidden, its tool integrations
+              stay locked. Over time the open substrate compounds and the
+              closed substrate doesn't.
             </p>
-            <ul>
-              <li>
-                <strong>World models</strong> — high-fidelity simulators of
-                social, economic, and physical systems. Guy Orcutt&apos;s 1957
-                program, finally compute-feasible.
-              </li>
-              <li>
-                <strong>Forecasting protocols</strong> — structured discipline
-                that turns predictions into scorable artifacts: KPIs, options,
-                base rates, disconfirming evidence, confidence intervals,
-                resolution rules.
-              </li>
-              <li>
-                <strong>Resolution infrastructure</strong> — prediction markets
-                and verified-outcome corpora that close the loop between
-                forecast and reality.
-              </li>
-              <li>
-                <strong>Value forecasters</strong> — empirical predictions of
-                what humanity would value after extended reflection, tested
-                against historical survey data.
-              </li>
-              <li>
-                <strong>Calibration-native models</strong> — foundation models
-                trained from scratch to think in distributions, not modes; to
-                preserve heterogeneity, not collapse it.
-              </li>
-            </ul>
             <p>
-              The LLM is one component. Everything else is the rest. Most
-              alignment funding is going to the one component.{" "}
-              <span className="[font-family:var(--font-editorial)] italic">
-                farness
-              </span>{" "}
-              builds the rest.
+              The same dynamic that made Linux durable against superior closed
+              competitors is the one that protects Farness's position. The
+              compounding work isn't done by Farness alone; it's done by
+              everyone who uses the substrate and contributes back. The
+              foundation maintains, integrates, sets direction, and ensures
+              the public-good character. The community does the rest.
+            </p>
+          </section>
+
+          <section>
+            <h2>Built for the agents of tomorrow</h2>
+            <p>
+              The infrastructure that matters most gets built ahead of the
+              capability that needs it. TCP/IP was designed for a few hundred
+              nodes and scaled to billions because the design anticipated
+              future use. Kubernetes solved orchestration problems most
+              organizations didn't have yet when it shipped. Linux was built
+              when computing was tiny and scaled with hardware nobody had
+              imagined. Substrate-builders capture disproportionate value
+              because they're already there when the demand shows up.
+            </p>
+            <p>
+              Farness is built with this in mind. Every capability is
+              reachable through a clean machine-callable API; future agents
+              won't fill out web forms. Every agent trace is structured for
+              downstream consumption by other agents, not just human readers.
+              Every tool in the simulation engine is self-describing so that
+              agents that haven't been invented yet can discover what's
+              available. Permissioning anticipates millions of automated
+              participants, not hand-issued API keys. Calibration scoring is
+              queryable, so current agents can learn from history and future
+              agents can preferentially route to tool configurations with
+              proven track records.
+            </p>
+            <p>
+              This costs a little more today and pays disproportionately when
+              capability arrives. By the time agents are reliably orchestrating
+              tools, composing pipelines, and proposing methodology
+              improvements, the substrate they need will already be open,
+              public, free, and continuously calibrated. Closed substrate
+              forces tomorrow's agents to negotiate access, pay rent, deal
+              with proprietary APIs. Open substrate is the permission-less
+              infrastructure the next decade of AI development can build on.
             </p>
           </section>
 
           <section>
             <h2>The stack</h2>
             <p>
-              Two independent organizations, one coherent stack, with
-              PolicyEngine as an adjacent partner nonprofit. Each open-source,
-              each load-bearing for the others.
+              Two independent 501(c)(3) foundations, technically integrated as
+              one open stack:
             </p>
             <blockquote>
               <p>
-                <strong>Axiom Foundation</strong> — encode the law.
+                <strong>Axiom Foundation</strong> — computable layer for all
+                law and the structured government-data layer (Arch). Encoded
+                statutes, regulations, holdings, and the metadata linking
+                published government statistics to the laws that mandate them.
+                Ballmer-funded. Separate organization, shared substrate.
               </p>
               <p>
-                <strong>Farness</strong> — simulate, forecast, and trade the
-                consequences.
+                <strong>Farness Foundation</strong> — open-predictions
+                platform, microsimulation engine and custom policy analysis
+                (PolicyEngine), synthetic-population substrate (Microplex),
+                personal decision tool (Farness Decisions), and the research
+                program on calibration-native foundation models and value
+                forecasting.
               </p>
             </blockquote>
-            <h3>Axiom Foundation — the computable layer for all of law</h3>
             <p>
-              Axiom is an independent 501(c)(3) building open infrastructure
-              for encoded law: corpus (statutes, regulations, guidance, case
-              law), RuleSpec (a typed DSL for executable encoding), Citator
-              (the dependency graph of holdings and modifications), and an
-              LLM-assisted encoder pipeline. Tax is the wedge; the eventual
-              scope is every parameter in every statute, regulation,
-              ordinance, and holding — federal, state, local.
+              The Farness platform consumes Axiom (encoded law and government
+              data architecture) and Microplex (population substrate) as
+              inputs, runs ensembles through PolicyEngine and other
+              computational engines, and publishes calibrated forecasts.
+              Policy partners interact with PolicyEngine directly through its
+              own brand and channels. New audiences — AI safety, agencies
+              funding their own forecasts, prediction-market researchers,
+              broader policy analysts — interact with Farness as the umbrella
+              platform.
             </p>
+          </section>
+
+          <section>
+            <h2>Open predictions as a movement</h2>
             <p>
-              Without Axiom, &ldquo;forecast the impact of policy X&rdquo; has
-              to bottom out in hand-encoded rules that nobody can audit. With
-              Axiom, every policy parameter becomes a machine-readable,
-              testable, traceable artifact.
-            </p>
-            <h3>Farness — the AI lab, simulation engine, and market venue</h3>
-            <p>
-              Farness is the integrated operating layer. Four components, one
-              brand, one org:
+              The category needs a name to anchor its identity. The lineage:
             </p>
             <ul>
               <li>
-                <strong>The forecasting protocol</strong> — KPIs, options, base
-                rates, disconfirming evidence, confidence intervals, resolution
-                rules, calibration scoring. The discipline that turns
-                forecasts into scorable artifacts. Already shipping as a
-                Python package, CLI, MCP server, and Claude/Codex skill.
+                <strong>Open source software</strong> opened the code. Linux,
+                Apache, Mozilla. The free software movement and its successors
+                made source available and rewrote the economics of software
+                distribution.
               </li>
               <li>
-                <strong>The Farness simulation engine</strong> — the
-                computational layer that combines microsim (PolicyEngine-style
-                mechanistic rules over Axiom-encoded law), structural economic
-                models, agent-based components, statistical methods, and LLM
-                judgment for genuinely irreducible questions. Includes the
-                synthetic-population substrate: <strong>ARCH</strong> (the
-                ground-truth set of government statistics) and{" "}
-                <strong>MICROPLEX</strong> (the calibrated synthetic
-                micro-data file that preserves joint distributions and
-                demographic structure while preserving privacy). MICROPLEX
-                gives us training-scale population data that preserves
-                heterogeneity without leaking real individuals, which makes
-                it a load-bearing substrate for training calibration-native
-                AI at scale.
+                <strong>Open data</strong> opened the inputs. Wikipedia,
+                Common Crawl, OpenStreetMap, government open-data portals.
+                The raw material of analysis became public and citable.
               </li>
               <li>
-                <strong>The market venue</strong> — initially on Manifold (MIT
-                license, play money, full API), eventually on a forked
-                open-source regulated venue. Every consequential ARCH cell and
-                every Axiom-encoded policy parameter gets a continuously-quoted
-                market with calibration history.
+                <strong>Open weights</strong> opened the reasoning machinery.
+                Allen Institute's Olmo, Llama, Mistral, DeepSeek. The trained
+                models themselves became available for inspection and reuse.
               </li>
               <li>
-                <strong>The research arm</strong> — calibration-native
-                foundation models trained as tool-orchestrators (described
-                later), value-forecasting research, calibration science, and
-                open-source releases of every artifact.
+                <strong>Open predictions</strong> opens the reasoning
+                <em>itself</em>, on consequential questions. Every prior,
+                every tool call, every update is auditable. The output isn't
+                just the forecast — it's the full chain of reasoning that
+                produced it.
               </li>
             </ul>
             <p>
-              The simulation engine takes a deterministic policy state (drawn
-              from Axiom-encoded statutes at a given time, possibly sampled
-              from the joint distribution of Farness policy markets) and
-              produces a distribution over ARCH cells. That distribution is
-              both the forecast and the market maker&apos;s prior.
+              Each step opens more of the epistemic process. Each step
+              produces durable public goods that the closed alternative cannot
+              match. Open predictions is the natural next layer, and Farness
+              is the foundation building it.
             </p>
           </section>
 
           <section>
-            <h2>AIs in silico — the judgment-to-mechanism loop</h2>
+            <h2>What this complements (and what it isn't)</h2>
             <p>
-              The Farness simulation engine is not pure mechanism. Reality
-              contains pieces that aren&apos;t yet captured in any
-              computational model — emergent behavioral responses, structural
-              changes outside the training distribution, political dynamics,
-              regime shifts, novel interactions. For these, LLM judgment is
-              the right tool, not a fallback.
+              <em>Complements Anthropic and the frontier labs.</em> Anthropic
+              addresses alignment by tuning the model's values from the
+              inside. Farness addresses alignment by making the model's
+              consequences visible from the outside. Both layers are
+              necessary; neither replaces the other. AI safety as a field
+              needs the values-installation work and the consequence-visibility
+              work in parallel, and the open-source structure of Farness means
+              current frontier-lab employees can publicly support the
+              consequence-visibility layer without conflict of interest.
             </p>
             <p>
-              The methodology has a name worth preserving: <em>AIs in silico</em>
-              . AI collaborating with mechanistic simulation, in silico,
-              to forecast the future. This is the framing that originally
-              motivated the simulation work and the brand it should be
-              referred to internally and in research output.
+              <em>Complements CBO, JCT, OMB, and official scoring.</em>{" "}
+              Official policy scoring is single point estimates produced by
+              filtering model outputs through institutional judgment that
+              isn't fully documented. Farness produces continuously updated
+              probability distributions with full reasoning traces, scored
+              against actuals. Where Farness and official scores agree,
+              confidence rises. Where they diverge, the divergence itself
+              becomes a useful signal about what assumptions are doing the
+              work.
             </p>
             <p>
-              The structural feature is a closed loop:
-            </p>
-            <ol>
-              <li>
-                <strong>Judgment.</strong> The orchestrator routes a question
-                to LLM judgment when the computational models don&apos;t
-                capture what matters. The LLM produces a distribution with
-                explicit uncertainty.
-              </li>
-              <li>
-                <strong>Resolution.</strong> The forecast meets reality
-                through markets or published outcomes. Calibration is scored.
-              </li>
-              <li>
-                <strong>Evaluation.</strong> We benchmark and evaluate LLM
-                judgment specifically — where does it help, where does it
-                hurt, what kinds of questions does it improve calibration on,
-                what kinds does it not?
-              </li>
-              <li>
-                <strong>Migration.</strong> When LLM judgment consistently
-                captures something the computational models miss, the team
-                works to formalize that pattern into the simulation engine —
-                as a microsim rule, a structural equation, an agent behavior,
-                or a new component. Successful judgment becomes mechanism.
-              </li>
-              <li>
-                <strong>Frontier advance.</strong> The irreducibility frontier
-                moves outward. The LLM&apos;s job becomes harder questions;
-                the computational layer becomes more comprehensive. The
-                system gets better at both layers simultaneously.
-              </li>
-            </ol>
-            <p>
-              This is how good empirical science already works: phenomena that
-              were once judged by experts (weather, disease prognosis,
-              structural failure) incrementally got encoded into mechanistic
-              models as understanding accumulated. Farness runs this loop
-              programmatically, at scale, with markets as the ground-truth
-              feedback signal.
+              <em>
+                Complements Kalshi, Polymarket, and the broader prediction-market
+                ecosystem.
+              </em>{" "}
+              Existing markets aggregate human information well, but the
+              reasoning is opaque, the regulatory shape constrains the
+              questions, and the long tail of questions stays thinly traded.
+              Farness operates in a different mode entirely: open, automated,
+              transparent, free at the point of use, without trading and
+              therefore without market-regulatory complexity. The two
+              ecosystems can coexist; the open-predictions layer addresses a
+              gap markets don't fill.
             </p>
             <p>
-              The competitive moat compounds across both layers. The
-              computational model gets more accurate over time as judgment
-              gets migrated in. The LLM judgment gets better trained on the
-              irreducible residual. Neither layer alone is the moat; the loop
-              between them is.
+              <em>Not a frontier model lab.</em> Farness doesn't train
+              competing general-purpose chat models. Its research focuses on
+              calibration-native foundation models trained as tool
+              orchestrators — a different objective and architecture than
+              frontier general-purpose LLMs.
+            </p>
+            <p>
+              <em>Not a trading firm.</em> Farness doesn't run a fund or
+              capture alpha from its forecasts. The public-good character is
+              load-bearing. A small publicly-disclosed fund operating as a
+              truth-telling instrument is a possible future addition (Phase 2
+              wholly-owned subsidiary if and when the structure makes sense);
+              not part of the founding identity.
+            </p>
+            <p>
+              <em>Not a closed product.</em> Open by construction. Models,
+              weights, methodology, simulation engine code, Microplex
+              outputs, Axiom-encoded substrate, calibration history, and
+              market resolution data are all public. Commercial layers (if
+              any) sit on top of the open substrate rather than gating it.
             </p>
           </section>
 
           <section>
-            <h2>The product: policy futures</h2>
+            <h2>Funder fit</h2>
             <p>
-              The headline product is a new category of open-source prediction
-              market: <em>policy futures</em>. Three coupled market types fall
-              out of the stack naturally.
-            </p>
-            <p>
-              <strong>Outcome markets</strong> on every cell of government
-              published data — every BLS series, every BEA NIPA cell, every
-              Census ACS variable by geography, every IRS SOI table. Government
-              statistics resolve automatically on official publication, on known
-              schedules. No human adjudicator, no settlement dispute. The
-              marginal cost of making a market in another ARCH cell, once
-              MICROPLEX and the simulation engine are running, is near zero.
-            </p>
-            <p>
-              <strong>Policy state markets</strong> on every Axiom-encoded
-              parameter — the CTC monthly value in 2027, the federal minimum
-              wage on a given date, the SALT cap dollar limit in TY2027, the
-              SNAP work-requirement age threshold. Existing political prediction
-              markets cover whether a bill passes; policy futures cover what the
-              specific number is at a given time.
-            </p>
-            <p>
-              <strong>Conditional markets</strong> on outcomes given policy
-              states. Given the Senate version of a tax bill passes by Q2, what
-              is the 2028 official child poverty rate? Given SALT is fully
-              lifted, what is FY2028 federal individual income tax revenue?
-              These markets are the unique product of the integrated stack.
-              Nobody else has the encoded-policy corpus, the calibrated
-              populations, the microsim engine, the market infrastructure, and
-              the calibration-native models simultaneously. Each piece exists
-              somewhere; the integration does not.
-            </p>
-            <p>
-              The point of comparison: CBO and JCT scores are mostly point
-              estimates, often produced months after a bill is introduced,
-              and rarely surfaced with explicit uncertainty bounds at the
-              line-item level. Policy futures produce continuously updated
-              probability distributions, transparent, calibrated, open, and
-              scored against reality on every publication.
-            </p>
-          </section>
-
-          <section>
-            <h2>The proof of concept lives on Manifold</h2>
-            <p>
-              Manifold Markets is MIT-licensed, fully open source, API-driven,
-              play-money. Every constraint that matters for an open-source-only
-              thesis is already satisfied. We do not need a regulated real-money
-              venue to prove the thesis. We need a public, working,
-              calibration-tracked Farness market that quotes hundreds of ARCH
-              cells and policy parameters with conditional pricing, running on
-              Manifold next quarter. That establishes the category in public on
-              play money. Real-money venue follows when the regulatory path is
-              clear and aligned with the open-source rule.
-            </p>
-            <p>
-              The play-money constraint is not a limitation, it is a feature: it
-              removes the regulatory complexity that would otherwise consume the
-              first two years, and it lets us run thousands of markets
-              programmatically while we build the muscle. Calibration scores
-              published openly are credible regardless of whether the underlying
-              currency is real or play. Weather forecasters and superforecasters
-              built their reputations the same way.
-            </p>
-            <p>
-              When the time comes, the regulated path becomes a build-it
-              project, not a partner-with-someone project. Forking Manifold
-              and pursuing CFTC approval as an open-source Designated
-              Contract Market is itself a category-defining move that attracts
-              the right talent and capital. Closed-source competitors
-              (Kalshi, FiscalNote, Polymarket) keep their lanes. We do not
-              need theirs.
-            </p>
-          </section>
-
-          <section>
-            <h2>Calibration-native foundation models</h2>
-            <p>
-              Current frontier LLMs are architecturally and objective-function
-              wrong for forecasting. RLHF is anti-calibration by design — it
-              rewards confident, decisive answers because users prefer them.
-              Models actively get trained <em>away</em> from honest
-              uncertainty. They produce modes, not distributions. They collapse
-              population heterogeneity to averages. They hallucinate with
-              uncalibrated confidence at every reasoning step. They also
-              treat tool use as an afterthought — bolted on as a feature
-              rather than baked into the training objective.
-            </p>
-            <p>
-              The Farness research arm builds an alternative architecture, in
-              which the model is trained as a <em>tool-orchestrator</em> from
-              pretraining, not as an oracle with tool-use added later:
+              The funder base that matches the thesis is broader and more
+              accessible than the funder base for any of the predecessor
+              framings:
             </p>
             <ul>
               <li>
-                <strong>Distribution-output models.</strong> Not a single
-                softmax over tokens. Explicit distributions over claims,
-                answers, and decisions, weighted by both aleatoric and epistemic
-                uncertainty.
+                <strong>Coefficient Giving</strong> (Open Philanthropy
+                rebrand) — AI safety, forecasting infrastructure,
+                consequence-visibility framing fits directly in their existing
+                grant portfolios.
               </li>
               <li>
-                <strong>
-                  Population-of-perspectives pretraining.
-                </strong>{" "}
-                Training data tagged with the population subgroup it represents
-                — demographic, ideological, expert vs. lay, time period. At
-                inference, the model produces the <em>distribution</em> of
-                perspectives, not the mode.
+                <strong>Survival and Flourishing Fund</strong> — long-horizon
+                AI safety and alignment-adjacent infrastructure.
               </li>
               <li>
-                <strong>Calibration loss as first-class pretraining.</strong>{" "}
-                Brier and log-score terms against held-out resolution data,
-                wherever resolved forecasts are available — prediction markets,
-                GSS time series, scientific replication corpora.
+                <strong>Astera Institute</strong>, <strong>Schmidt Sciences /
+                Schmidt Futures</strong>, <strong>Mozilla Foundation</strong>{" "}
+                — novel public-good scientific infrastructure and open-source
+                AI ethos.
               </li>
               <li>
-                <strong>Hierarchical uncertainty propagation.</strong>{" "}
-                Architectural mechanism for uncertainty to flow through
-                reasoning steps, not just exist at outputs. This is the hard
-                open problem that the research program tries to make real
-                progress on — analogous to the long-standing Bayesian neural
-                network agenda, scaled to foundation-model regimes.
+                <strong>Anthropic alumni and AI-safety-aligned liquidity</strong>{" "}
+                — tender-offer and IPO-event capital from Anthropic and
+                similar frontier labs. Open-source-by-construction means
+                current frontier-lab employees can publicly back the work
+                without conflict of interest. The complement-not-compete frame
+                is unique to this category.
               </li>
               <li>
-                <strong>Tool-orchestration as a first-class capability.</strong>{" "}
-                The model is trained to route forecasting questions to the
-                right tool — microsim, structural model, agent-based
-                simulator, statistical method, or LLM judgment — with the
-                right parameters, with appropriate uncertainty propagation
-                across composed results. Tool selection, parameter
-                generation, and result integration are pretraining
-                objectives, not RLHF add-ons. The model knows when its
-                uncertainty is &ldquo;I haven&apos;t seen this
-                pattern&rdquo; versus &ldquo;this requires actual
-                simulation.&rdquo;
+                <strong>Arnold Ventures Mission Aligned Investments</strong> —
+                fits the structure Andrew Moylan and team have already
+                signaled interest in, particularly for the open
+                policy-forecasting infrastructure angle.
               </li>
               <li>
-                <strong>Resolution-grounded RL.</strong> Post-training reward is
-                calibration on resolved forecasts, not human preference on
-                confident-sounding answers. Training away from sycophancy by
-                construction.
+                <strong>Government agencies and international equivalents</strong>{" "}
+                — Treasury, state revenue offices, Federal Reserve regional
+                banks, HHS, Census, and international counterparts paying for
+                marginal compute on the questions they care about. Sponsored
+                runs are program-related revenue that fits 501(c)(3)
+                structure cleanly.
+              </li>
+              <li>
+                <strong>National research funding</strong> — NSF, DARPA,
+                IARPA, ARIA UK, NIH for specific research directions.
+              </li>
+              <li>
+                <strong>Sponsorship capital from AI labs, Big Tech, and
+                philanthropies</strong>, per the
+                Fradkin/Jabarian/Koh well-capitalized-prediction-markets
+                model, applied to specific question sets the sponsor wants
+                better-calibrated forecasts on.
               </li>
             </ul>
             <p>
-              We know of no frontier lab pursuing this as a first-class
-              research program. The incentives push the other direction —
-              users of chat assistants reward confident, helpful answers, and
-              RLHF pipelines optimize against calibrated uncertainty as a
-              result. We can ship a model that says &ldquo;I don&apos;t know,
-              and here is the shape of my uncertainty&rdquo; because
-              uncertainty <em>is</em> the product.
+              The multi-funder revenue model means Farness doesn't depend on
+              any single source. Foundation grants fund the platform and
+              research. Sponsored compute pays for specific question coverage.
+              Custom analysis (through PolicyEngine) generates additional
+              program revenue. The foundation never needs to make any one
+              funder a structural dependency.
             </p>
           </section>
 
           <section>
-            <h2>Open source, all the way down</h2>
+            <h2>What success looks like in five years</h2>
             <p>
-              The whole stack is 100% open source. Not open core, not
-              dual-licensed, not eventually-open. Open. The models, the
-              weights, the methods, the simulation engine, the encoded law, the
-              MICROPLEX outputs, the market protocol, the calibration history.
+              At maturity, Farness produces continuously-updated calibrated
+              forecasts on every consequential government statistic, every
+              encoded policy parameter, and every counterfactual conditional
+              question stakeholders care about. The platform runs hundreds to
+              thousands of specialized agent configurations, each with
+              published methodology and visible track record. Calibration
+              history goes back years and is queryable per question, per
+              configuration, per resolution period. Government agencies fund
+              targeted compute on their projection questions. Researchers
+              build on the open infrastructure for their own work. Frontier AI
+              labs use the calibration corpus as a training and evaluation
+              resource. Open-source forecaster configurations and tool
+              integrations are contributed by people the foundation has never
+              met.
             </p>
             <p>
-              This is a constraint with real cost. We give up
-              proprietary-trading magnitude monetization. We give up the
-              fastest path to a CFTC-regulated real-money venue (Kalshi
-              partnership is off the table — they are closed-source). We give up
-              the traditional VC ceiling. We accept slower compounding on
-              several axes.
+              The forecasts feed into the decisions of governments, advocacy
+              organizations, firms, and individuals — not because Farness
+              tells them what to do, but because the calibrated probability
+              distributions are visibly more useful than what was available
+              before. The substrate compounds: every new tool integration,
+              every new methodology insight, every new question coverage
+              makes everything that was already there a little more useful.
             </p>
             <p>
-              The constraint also resolves several tensions. Talent: the best
-              researchers want their work seen, not hidden. Open source is the
-              single most effective recruiting tool in AI. Funders: alignment
-              capital (Open Philanthropy, Survival and Flourishing Fund,
-              Astera, Schmidt Futures, Mozilla, sovereign AI programs) flows to
-              public-good infrastructure in ways it does not flow to closed
-              labs. Thesis credibility: the consequence-visibility thesis only
-              works if consequences are actually visible. Closed forecasting
-              infrastructure is a contradiction in terms.
+              And when the AI agents of 2030 arrive — substantially more
+              capable than today's, better at tool selection, better at
+              composing methodology, better at reasoning over their own
+              outputs — they find a substrate already built for them. Open,
+              calibrated, audit-trail-native, and free at the point of use.
+              The capability becomes immediately deployable on consequential
+              questions because the infrastructure is already there.
             </p>
-            <p>
-              The realistic envelope, given the constraint: $30–200M annual
-              operating budget at maturity. Mozilla, Apache Foundation,
-              Wikimedia, AI2 in spirit. Specifically for forecasting
-              infrastructure. The financial ceiling is lower than the closed
-              alternative; the mission ceiling is dramatically higher. It is
-              the right trade for this thesis.
-            </p>
-          </section>
-
-          <section>
-            <h2>What this is not</h2>
-            <p>
-              <em>Not a next-Anthropic.</em> We do not aim to train
-              frontier-scale general-purpose chat models. We train
-              calibration-native specialized models, on a different objective
-              and data mix, at the scale the forecasting workload requires.
-            </p>
-            <p>
-              <em>Not a hedge fund.</em> A small, publicly-disclosed fund
-              operates as the truth-telling layer — every trade and forecast
-              public, P&amp;L as the most credible marketing artifact possible —
-              but it is not the revenue center. Open source erases proprietary
-              alpha; the fund exists to demonstrate the thesis, not to capture
-              Rehoboam-scale wealth.
-            </p>
-            <p>
-              <em>Not FiscalNote.</em> Policy-intelligence subscription
-              businesses sell closed legislative predictions to corporate
-              lobbyists. We build open infrastructure that displaces the need
-              for those subscriptions and serves a different audience:
-              governments, researchers, advocacy organizations, AI labs hedging
-              deployment risk, citizens, long-horizon forecasters.
-            </p>
-            <p>
-              <em>Not Kalshi or Polymarket.</em> Existing regulated and
-              crypto-native prediction markets cover headline events at low
-              granularity. We cover the full Axiom × ARCH grid
-              mechanistically, open-source, with conditional pricing
-              included.
-            </p>
-            <p>
-              <em>Not an oracle.</em> The frontier-lab consensus is to train
-              models that absorb text and emit confident text. We train
-              conductors: models whose default behavior on a consequential
-              question is to route to the right computational tool, run it,
-              and integrate the result with calibrated uncertainty. The
-              orchestra is the simulation engine, MICROPLEX, Axiom-encoded
-              law, statistical methods, and LLM judgment for the irreducible
-              residual. The model is the conductor.
-            </p>
-            <p>
-              <em>Not a static research lab.</em> Every market resolution is a
-              labeled training example. The flywheel is structural: more
-              markets, more resolutions, more calibration data, better models,
-              better forecasts, more markets.
-            </p>
-          </section>
-
-          <section>
-            <h2>Where this lands organizationally</h2>
-            <p>
-              Three legally independent organizations — Axiom and Farness as
-              the new core, PolicyEngine as the adjacent partner — technically
-              integrated as one stack. Each open-source, each with its own
-              governance and funding.
-            </p>
-            <ul>
-              <li>
-                <strong>Axiom Foundation</strong> — 501(c)(3). Mission: a
-                computable layer for all of law. Max as founder and (probably)
-                interim CEO during the buildout period; succession to Ariel
-                Kennan or similar within 12–18 months. Ballmer Group as
-                anchor funder. PolicyEngine, MyFriendBen, Nava, Gary Community
-                Ventures, Amplifi, WorkMoney, and others as ecosystem partners.
-              </li>
-              <li>
-                <strong>Farness</strong> — the AI lab, simulation engine, and
-                market venue, integrated under one brand and one org. Likely
-                a 501(c)(3) or PBC with mission-locked governance, depending
-                on regulatory shape. Owns farness.ai (already secured).
-                Founder: Max. Absorbs the work previously framed under the
-                Cosilico brand — ARCH, MICROPLEX, the simulation engine — into
-                Farness as the computational layer of the integrated stack.
-                Building from a base of existing work (Farness Python
-                package, Claude plugin, MCP server, the existing simulation
-                work, the Society-in-Silico manuscript). Initial product
-                wedge: Manifold-hosted policy futures and ARCH outcome
-                markets, plus the open-source calibration-native model
-                research program.
-              </li>
-              <li>
-                <strong>PolicyEngine</strong> — continues independently as the
-                tax-and-benefits microsim engine, serving governments and
-                advocacy organizations. Max steps to Chair / Founder role,
-                successor CEO. Adjacent partner to Axiom and Farness, not
-                merged.
-              </li>
-            </ul>
-            <p>
-              <em>Society in Silico</em> — the book — is the public manifesto
-              that ties the three together. It is Max&apos;s flagship
-              publication and the place the integrated thesis lives in
-              long-form prose.
-            </p>
-          </section>
-
-          <section>
-            <h2>The category-defining naming</h2>
-            <p>
-              Categories without names belong to whoever names them first.
-              Working terms we should establish in writing and in practice:
-            </p>
-            <ul>
-              <li>
-                <strong>Forecasting-as-harness</strong> — the alignment thesis.
-                The contraction <em>farness</em> = <em>f</em>orecasting{" "}
-                <em>a</em>s ha<em>rness</em> encodes it.
-              </li>
-              <li>
-                <strong>Policy futures</strong> — the market category. Parallels
-                interest-rate futures, weather futures, energy futures. Signals
-                tradeable, regulated, institutional-grade.
-              </li>
-              <li>
-                <strong>Calibration-native foundation models</strong> — the
-                model category. Distinguished from RLHF-tuned chat models by
-                training objective, not just fine-tuning.
-              </li>
-              <li>
-                <strong>AIs in silico</strong> — the methodology. AI
-                collaborating with mechanistic simulation, in silico, to
-                forecast the future. Names the judgment-to-mechanism loop
-                that is the structural advantage of the Farness simulation
-                engine.
-              </li>
-              <li>
-                <strong>Society in Silico</strong> — the book and the broader
-                public manifesto. Computational models of social systems used
-                for democratic policy reasoning, written for a general
-                audience.
-              </li>
-              <li>
-                <strong>Consequence visibility</strong> — the alignment
-                principle. Reframe alignment as the problem of making
-                consequences visible before actions, rather than installing
-                preferences after them.
-              </li>
-              <li>
-                <strong>The forecasting layer for civilization</strong> — the
-                product framing. What the stack is, when you zoom all the way
-                out.
-              </li>
-            </ul>
           </section>
 
           <section>
             <h2>Honest caveats and open questions</h2>
             <p>
-              <strong>Regulatory uncertainty on conditional markets.</strong>{" "}
-              Outcome-only event contracts are CFTC-blessed via Kalshi.
-              Conditional contracts on policy-outcome combinations may require
-              new contract categories. Plan for litigation as part of the
-              category-creation process, not a side effect of it.
+              <strong>The autonomous-improvement language is aspirational.</strong>{" "}
+              Today's AI systems can iterate variants, tune hyperparameters,
+              and generate model code, but autonomous improvement of
+              methodology without sustained human guidance is years out.
+              Honest framing: open human-in-the-loop improvement of AI
+              ensembles on a transparent substrate, with the substrate
+              compounding the human-and-AI work over time. Not autonomous
+              self-improvement; collaborative compounding.
             </p>
             <p>
-              <strong>Liquidity bootstrapping is compound.</strong> Conditional
-              markets need both policy and outcome legs liquid, plus traders
-              willing to take the conditional spread. Microsim-driven market
-              making solves the cold-start for outcome markets; conditional
-              markets need real counterparties from institutional hedgers
-              (insurers, REITs, banks, agricultural producers, public-sector
-              unions) whose P&amp;L is policy-sensitive.
+              <strong>The five-year picture is not the one-year picture.</strong>{" "}
+              The platform launches with a smaller agent ensemble, fewer
+              questions, a narrower research program, and a working but
+              incomplete substrate. Building toward the mature state takes
+              real research and engineering investment over years. The vision
+              is the north star; the early stages look more like a focused
+              shipping organization than a complete forecasting layer.
             </p>
             <p>
-              <strong>Simulation engine becomes production infrastructure.</strong>{" "}
-              Markets quote continuously; simulations need to produce updated
-              priors fast enough to follow policy news. PolicyEngine&apos;s
-              current architecture is tuned for research-quality batch
-              analysis; market-grade continuous quoting will require
-              production engineering investment we haven&apos;t yet made.
-              Hard requirement, not a nice-to-have.
+              <strong>Open infrastructure depends on adoption.</strong>{" "}
+              Having the platform doesn't mean organizations use it. The
+              institutional muscle to integrate open-predictions into
+              decision-making is real work that takes years to build across
+              policy shops, agencies, and other users. Farness can lead the
+              category but can't manufacture demand alone.
             </p>
             <p>
-              <strong>Political sensitivity of policy markets is real.</strong>{" "}
-              Markets that price &ldquo;child poverty under reform X = 12%&rdquo;
-              can be politically weaponized. Editorial standards, neutral
-              framing, and a clear separation between forecast and advocacy
-              matter from day one. The Society-in-Silico neutral-infrastructure
-              framing helps; it is not sufficient on its own.
+              <strong>Regulatory ambiguity if forecasts become market-moving.</strong>{" "}
+              Without a trading venue, Farness avoids most prediction-market
+              regulatory complexity. But if open forecasts become widely
+              consumed by financial markets, the SEC or CFTC may still take
+              interest in disclosure rules. Probably solvable through
+              precedents like Federal Reserve forecast publication, but
+              warrants real legal review.
             </p>
             <p>
-              <strong>Calibration-native foundation models are research,
-              not engineering.</strong> Hierarchical uncertainty propagation at
-              scale, training-objective design for calibration without
-              sacrificing capability, cheap evaluation of distributional
-              quality — these are open research problems. Plan for 18–36
-              months between starting the program and shipping a model that
-              meaningfully beats post-trained frontier baselines on real
-              benchmarks.
+              <strong>The PolicyEngine brand transition.</strong> PolicyEngine
+              continues operationally unchanged, but funders, board, and
+              partners need to be brought along on the umbrella structure.
+              Existing grants are to PolicyEngine via PSL Foundation fiscal
+              sponsorship; the cleanest path is incorporating Farness
+              Foundation as the new 501(c)(3) and graduating PolicyEngine
+              into it from PSL. Donor consent process is straightforward; the
+              communications work isn't.
             </p>
             <p>
-              <strong>The fairness homophone is permanent.</strong>{" "}
-              <em>Farness</em> will be misheard as <em>fairness</em> in audio
-              and conversational contexts. Mitigated by branding investment,
-              never solved. We accept the cost in exchange for the etymological
-              and thesis-carrying work the name does.
+              <strong>The "Farness" name has multiple uses to disambiguate.</strong>{" "}
+              Farness Foundation (the org), Farness (the open-predictions
+              platform — the flagship), Farness Decisions (the personal
+              decision tool). Naming hierarchy needs to be settled before any
+              public launch.
             </p>
           </section>
 
           <section>
-            <h2>What we are building toward</h2>
-            <p>
-              At maturity, the integrated stack looks like this. Every law is
-              encoded in Axiom and queryable as code. Every household,
-              individual, and firm is simulatable through the Farness
-              simulation engine — microsim, structural, agent-based, LLM
-              judgment, MICROPLEX populations — at the scale and granularity
-              any policy question requires. Every consequential ARCH cell —
-              every published government statistic — has a continuously-quoted
-              Farness market with calibration history. Every consequential
-              policy parameter has a Farness market on its future value. Every
-              relevant counterfactual has a conditional market on outcomes
-              given policy state. Calibration-native foundation models trained
-              as tool-orchestrators read and reason over the whole graph. The
-              judgment-to-mechanism loop runs continuously, with successful
-              LLM judgment migrating into the computational layer over time.
-              Every market resolution feeds the next training cycle.
-            </p>
-            <p>
-              The world this produces is one where the consequences of
-              consequential decisions are visible before the decisions are
-              made, with calibrated uncertainty, scored against reality, and
-              open to anyone to query, audit, replicate, or extend.
-            </p>
-            <p>
-              That is the foresight layer for civilization. That is what{" "}
-              <span className="[font-family:var(--font-editorial)] italic">
-                farness
-              </span>{" "}
-              is for.
-            </p>
+            <h2>The shape of the work, in priority order</h2>
+            <ul>
+              <li>
+                <strong>Incorporate Farness Foundation</strong> as a 501(c)(3)
+                upon graduating PolicyEngine from PSL fiscal sponsorship. Use
+                fiscal sponsorship during the application period.
+              </li>
+              <li>
+                <strong>Settle the naming hierarchy</strong> publicly and
+                internally before any launch announcement: foundation,
+                platform, PolicyEngine, Microplex, Decisions, and the
+                relationship to Axiom Foundation.
+              </li>
+              <li>
+                <strong>Compose the board</strong> with AI-safety, policy, and
+                technical credibility — names that signal what the foundation
+                is to the funder base it most needs to reach.
+              </li>
+              <li>
+                <strong>Publish the manifesto</strong> in its public form
+                (this document, rewritten for external audience) with
+                accompanying funder one-pager and FAQ.
+              </li>
+              <li>
+                <strong>Ship the first visible version of the platform</strong>
+                — Manifold-hosted forecast experiments with full agent
+                telemetry, a small set of ARCH-anchored questions with
+                published calibration, and the agent traces openly available.
+              </li>
+              <li>
+                <strong>Move Microplex into PolicyEngine</strong> as the
+                Enhanced CPS replacement, with the methodology and
+                synthesizer code published openly.
+              </li>
+              <li>
+                <strong>Pre-flight major funder conversations</strong> —
+                Coefficient Giving, SFF, Schmidt, Anthropic-alumni outreach,
+                Arnold Ventures MAI — with the manifesto and one-pager in
+                hand.
+              </li>
+              <li>
+                <strong>Coordinate with Axiom Foundation</strong> on shared
+                roadmap for encoded-law substrate access and Arch
+                government-data architecture.
+              </li>
+            </ul>
             <p className="text-center mt-16">
               <Link
                 href="/thesis"
