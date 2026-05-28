@@ -3713,6 +3713,246 @@ export const MARKETS: Market[] = [
     ],
   },
 
+  {
+    slug: "ctc-refundable-amount-ty2027",
+    type: "policy",
+    title: "Refundable CTC amount, TY2027",
+    question:
+      "What will the maximum refundable portion of the federal Child Tax Credit be per qualifying child in tax year 2027?",
+    unit: "usd",
+    pointEstimate: 1800,
+    ciLow: 1000,
+    ciHigh: 2500,
+    confidence: 0.8,
+    resolutionDate: "2027-12-31",
+    resolutionSource: "Internal Revenue Code section 24 and IRS instructions",
+    resolutionRule:
+      "Resolves to the maximum refundable federal Child Tax Credit amount per qualifying child for TY2027, using IRC section 24 and the first IRS Form 1040 instructions or inflation-adjusted tax parameter release that identifies the refundable amount.",
+    policyParameter: "irc.24.refundable_amount_per_child.2027",
+    historicalContext: [
+      { label: "TY2021", value: 3000 },
+      { label: "TY2022", value: 1500 },
+      { label: "TY2024", value: 1700 },
+      { label: "TY2025e", value: 1700 },
+    ],
+    drivers: [
+      "TCJA extension package",
+      "Refundability politics",
+      "Inflation indexation",
+      "Budget score of low-income family provisions",
+    ],
+    reasoning: [
+      { kind: "heading", text: "Separating amount from eligibility" },
+      {
+        kind: "text",
+        text: "The maximum refundable CTC amount is the policy parameter that drives outlays and child-poverty effects for low-income families. It is distinct from the headline maximum credit because families with low earnings can be limited by the refundable cap and phase-in.",
+      },
+      { kind: "heading", text: "Law branches" },
+      {
+        kind: "tool",
+        tool: "axiom.query",
+        call: 'axiom.query({ statute: "IRC.24", parameter: "refundable_amount_per_child", year: 2027, branch: "post_sunset_current_law" })',
+        result:
+          '{ value: 1000, note: "credit reverts and refundable structure narrows under scheduled law" }',
+      },
+      {
+        kind: "tool",
+        tool: "axiom.query",
+        call: 'axiom.query({ statute: "IRC.24", parameter: "refundable_amount_per_child", year: 2027, branch: "tcja_extended_indexed" })',
+        result:
+          '{ value: 1800, note: "current refundable amount retained and indexed" }',
+      },
+      {
+        kind: "tool",
+        call: 'policyengine.simulate({ reform: "ctc_refundable_amount_1800", year: 2027, output: ["ctc_outlays", "spm_child_poverty_rate"], unit: "billions" })',
+        result:
+          '{ outlays: 64.0, child_poverty_rate: 11.6, sensitivity: "about $5B per additional $100 refundable cap near the phase-in margin" }',
+      },
+      { kind: "heading", text: "Forecast" },
+      {
+        kind: "math",
+        text: "P(indexed current cap) = 0.55; P($1,000 reversion) = 0.20; P(larger refundable expansion) = 0.20; P(other) = 0.05.",
+      },
+      {
+        kind: "text",
+        text: "The modal outcome is retaining the current refundable design with indexation. The lower tail remains real because the scheduled-law branch is a discrete cliff; the upper tail reflects a child-credit compromise that expands refundability without restoring the full 2021 policy.",
+      },
+      { kind: "forecast", point: 1800, ciLow: 1000, ciHigh: 2500 },
+    ],
+  },
+
+  {
+    slug: "eitc-max-credit-three-children-ty2027",
+    type: "policy",
+    title: "Maximum EITC, 3+ children, TY2027",
+    question:
+      "What will the maximum federal Earned Income Tax Credit be for tax units with three or more qualifying children in tax year 2027?",
+    unit: "usd",
+    pointEstimate: 8500,
+    ciLow: 8050,
+    ciHigh: 9100,
+    confidence: 0.8,
+    resolutionDate: "2026-10-31",
+    resolutionSource: "IRS inflation-adjusted tax parameters",
+    resolutionRule:
+      "Resolves to the maximum EITC for taxpayers with three or more qualifying children for TY2027, using the IRS annual inflation-adjusted tax parameter release or equivalent official IRS table.",
+    policyParameter: "irc.32.max_credit.three_or_more_children.2027",
+    historicalContext: [
+      { label: "TY2021", value: 6728 },
+      { label: "TY2023", value: 7430 },
+      { label: "TY2025e", value: 8046 },
+      { label: "TY2026e", value: 8260 },
+    ],
+    drivers: [
+      "CPI-U chained tax indexation",
+      "Low-income tax package changes",
+      "Interaction with childless-worker EITC politics",
+    ],
+    reasoning: [
+      { kind: "heading", text: "Parameter target" },
+      {
+        kind: "text",
+        text: "This cell forecasts a core EITC schedule parameter. The baseline is mostly mechanical indexation, but it is worth tracking because small parameter changes cascade into EITC outlays, marginal tax rates, and poverty forecasts.",
+      },
+      {
+        kind: "tool",
+        tool: "irs.lookup",
+        call: 'irs.lookup({ table: "inflation_adjusted_tax_parameters", parameter: "eitc_max_credit_3plus_children", years: [2021, 2026] })',
+        result:
+          "{ ty2021: 6728, ty2023: 7430, ty2025_estimate: 8046, ty2026_estimate: 8260 }",
+      },
+      {
+        kind: "tool",
+        tool: "axiom.query",
+        call: 'axiom.query({ statute: "IRC.32", parameter: "max_credit_3plus_children", year: 2027, branch: "indexed_current_law" })',
+        result:
+          '{ formula: "prior_year_amount indexed by chained CPI-U", projected_value: 8500 }',
+      },
+      {
+        kind: "tool",
+        call: 'policyengine.simulate({ policy: "current_law", year: 2027, output: "eitc_outlays", perturbation: "max_credit_3plus_children_plus_100" })',
+        result:
+          '{ marginal_outlay_per_100: 0.9, note: "billions of dollars before take-up calibration" }',
+      },
+      { kind: "heading", text: "Forecast" },
+      {
+        kind: "text",
+        text: "The central estimate follows inflation indexation from the TY2026 estimate. The upper tail allows for a family-credit package that modestly raises EITC parameters; the lower tail is mainly lower CPI and rounding, not repeal.",
+      },
+      { kind: "forecast", point: 8500, ciLow: 8050, ciHigh: 9100 },
+    ],
+  },
+
+  {
+    slug: "snap-average-benefit-per-person-fy2027",
+    type: "arch",
+    title: "SNAP average benefit per person, FY2027",
+    question:
+      "What will the average monthly SNAP benefit per person be in fiscal year 2027?",
+    unit: "usd_monthly",
+    pointEstimate: 232,
+    ciLow: 216,
+    ciHigh: 252,
+    confidence: 0.8,
+    resolutionDate: "2028-03-31",
+    resolutionSource: "USDA FNS SNAP Data Tables",
+    resolutionRule:
+      "Resolves to average monthly SNAP benefits per person for FY2027, in nominal dollars, using the first USDA FNS national SNAP annual table that reports benefits per person for all months of fiscal year 2027.",
+    archCell: "usda.fns.snap.average_benefit_per_person.fy2027",
+    historicalContext: [
+      { label: "FY2019", value: 130 },
+      { label: "FY2021", value: 230 },
+      { label: "FY2023", value: 213 },
+      { label: "FY2024", value: 211 },
+    ],
+    drivers: [
+      "Thrifty Food Plan indexation",
+      "Net income distribution among recipients",
+      "Household-size mix",
+      "Farm Bill benefit formula changes",
+    ],
+    reasoning: [
+      { kind: "heading", text: "Benefit intensity target" },
+      {
+        kind: "text",
+        text: "SNAP caseload and total outlays are already separate cells. Average monthly benefit per person isolates the benefit-formula and income-composition channel, which is the piece PolicyEngine can forecast from household resources.",
+      },
+      {
+        kind: "tool",
+        tool: "fns.lookup",
+        call: 'fns.lookup({ program: "SNAP", series: "average_monthly_benefit_per_person", fiscal_years: [2019, 2024] })',
+        result:
+          '{ fy2019: 130, fy2021: 230, fy2023: 213, fy2024: 211, emergency_allotments: "ended" }',
+      },
+      {
+        kind: "tool",
+        call: 'policyengine.simulate({ program: "snap", year: 2027, output: "monthly_benefit_per_person", map_to: "person", benefit_formula: "fy2027_indexed" })',
+        result:
+          '{ point: 231, ci80: [218, 249], drivers: ["max allotment", "net income", "household size"] }',
+      },
+      {
+        kind: "math",
+        text: "Total benefits / person-months cross-check: $128B / (46M persons x 12) = $232/mo.",
+      },
+      { kind: "forecast", point: 232, ciLow: 216, ciHigh: 252 },
+    ],
+  },
+
+  {
+    slug: "ptc-average-subsidy-per-enrollee-fy2027",
+    type: "arch",
+    title: "ACA PTC average subsidy per enrollee, FY2027",
+    question:
+      "What will the average monthly ACA premium tax credit subsidy per subsidized marketplace enrollee be in fiscal year 2027?",
+    unit: "usd_monthly",
+    pointEstimate: 690,
+    ciLow: 560,
+    ciHigh: 860,
+    confidence: 0.8,
+    resolutionDate: "2028-06-30",
+    resolutionSource: "CMS marketplace and Treasury outlay tables",
+    resolutionRule:
+      "Resolves to average monthly premium tax credit subsidy per subsidized marketplace enrollee for FY2027, computed from official CMS enrollment and Treasury/CMS PTC outlay tables when both are available.",
+    archCell: "cms.marketplace.ptc.average_subsidy_per_enrollee.fy2027",
+    historicalContext: [
+      { label: "FY2020", value: 520 },
+      { label: "FY2022", value: 575 },
+      { label: "FY2024", value: 650 },
+      { label: "FY2026e", value: 720 },
+    ],
+    drivers: [
+      "Enhanced PTC extension status",
+      "Benchmark silver premiums",
+      "Income mix of remaining enrollees",
+      "Plan switching and silver loading",
+    ],
+    reasoning: [
+      { kind: "heading", text: "Why average subsidy matters" },
+      {
+        kind: "text",
+        text: "PTC outlays can fall because enrollment falls or because the subsidy per enrollee falls. This cell isolates the per-enrollee subsidy, which is the clean target for modeling premium growth and subsidy formula changes.",
+      },
+      {
+        kind: "tool",
+        tool: "cms.lookup",
+        call: 'cms.lookup({ program: "marketplace", series: ["subsidized_enrollment", "average_aptc"], years: [2020, 2026] })',
+        result:
+          "{ fy2020: 520, fy2022: 575, fy2024: 650, fy2026_estimate: 720 }",
+      },
+      {
+        kind: "tool",
+        call: 'policyengine.simulate({ program: "aca_ptc", year: 2027, output: "average_monthly_subsidy_per_subsidized_enrollee", policy: "enhanced_ptc_expires" })',
+        result:
+          '{ point: 680, ci80: [560, 840], drivers: ["premium growth", "income mix", "subsidy cliff"] }',
+      },
+      {
+        kind: "text",
+        text: "If enhanced subsidies expire, lower-subsidy marginal enrollees leave first, mechanically raising average subsidy among those who remain. That composition effect offsets part of the statutory subsidy reduction.",
+      },
+      { kind: "forecast", point: 690, ciLow: 560, ciHigh: 860 },
+    ],
+  },
+
   // ─── Conditional forecast cells ──────────────────────────────────────────
   {
     slug: "child-poverty-2028-given-tcja-extended-q2-2026",

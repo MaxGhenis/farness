@@ -241,7 +241,7 @@ function ForecastPrototype() {
                 Live API paths
               </dt>
               <dd className="text-[var(--theme-text)]">
-                CPI-U and two CTC cells stream when api.farness.ai is available.
+                CPI-U and two CTC cells stream through api.farness.ai.
               </dd>
             </div>
             <div>
