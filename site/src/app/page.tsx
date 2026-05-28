@@ -227,11 +227,33 @@ function ForecastPrototype() {
           <p className="[font-family:var(--font-mono)] text-[0.62rem] uppercase tracking-[0.15em] text-[var(--theme-text-dim)] mb-3">
             Prototype status
           </p>
-          <p className="text-[0.9rem] leading-[1.6] text-[var(--theme-text)]">
-            This is a public prototype. The catalog, routes, and forecast pages
-            are live; many reasoning traces are static fallbacks while the live
-            agent API comes online.
-          </p>
+          <dl className="space-y-3 text-[0.85rem] leading-[1.5]">
+            <div>
+              <dt className="[font-family:var(--font-mono)] text-[0.58rem] uppercase tracking-[0.12em] text-[var(--color-horizon-700)]">
+                Live product
+              </dt>
+              <dd className="text-[var(--theme-text)]">
+                Catalog, filters, routes, forecast pages, resolution rules.
+              </dd>
+            </div>
+            <div>
+              <dt className="[font-family:var(--font-mono)] text-[0.58rem] uppercase tracking-[0.12em] text-[var(--color-horizon-700)]">
+                Live API paths
+              </dt>
+              <dd className="text-[var(--theme-text)]">
+                CPI-U and two CTC cells stream when api.farness.ai is available.
+              </dd>
+            </div>
+            <div>
+              <dt className="[font-family:var(--font-mono)] text-[0.58rem] uppercase tracking-[0.12em] text-[var(--theme-text-dim)]">
+                Static mock traces
+              </dt>
+              <dd className="text-[var(--theme-text)]">
+                Most analyst reasoning and seeded estimates are prewritten
+                prototype content.
+              </dd>
+            </div>
+          </dl>
         </div>
       </section>
       <MarketsBrowser />

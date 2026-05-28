@@ -49,6 +49,7 @@ describe("Next.js migration", () => {
         ),
       ).toBeInTheDocument();
       expect(screen.getByText("Prototype status")).toBeInTheDocument();
+      expect(screen.getByText("Static mock traces")).toBeInTheDocument();
     });
 
     it("renders hero subhead with farness mention", () => {

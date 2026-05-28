@@ -1,5 +1,11 @@
 import Link from "next/link";
-import { type Market, TYPE_LABEL, formatValue } from "@/data/markets";
+import {
+  type Market,
+  TYPE_LABEL,
+  formatValue,
+  getForecastRuntimeKind,
+  getForecastRuntimeLabel,
+} from "@/data/markets";
 import { ForecastViz } from "./ForecastViz";
 
 const typeBadgeClass: Record<Market["type"], string> = {
@@ -15,6 +21,7 @@ interface MarketCardProps {
 
 export function MarketCard({ market }: MarketCardProps) {
   const resolutionLabel = formatResolutionLabel(market.resolutionDate);
+  const runtimeKind = getForecastRuntimeKind(market.slug);
   return (
     <Link
       href={`/forecasts/${market.slug}`}
@@ -25,11 +32,22 @@ export function MarketCard({ market }: MarketCardProps) {
       }}
     >
       <div className="flex items-start justify-between gap-3">
-        <span
-          className={`inline-block rounded-full border px-2 py-[2px] [font-family:var(--font-mono)] text-[0.6rem] uppercase tracking-[0.1em] ${typeBadgeClass[market.type]}`}
-        >
-          {TYPE_LABEL[market.type]}
-        </span>
+        <div className="flex flex-wrap gap-2">
+          <span
+            className={`inline-block rounded-full border px-2 py-[2px] [font-family:var(--font-mono)] text-[0.6rem] uppercase tracking-[0.1em] ${typeBadgeClass[market.type]}`}
+          >
+            {TYPE_LABEL[market.type]}
+          </span>
+          <span
+            className={`inline-block rounded-full border px-2 py-[2px] [font-family:var(--font-mono)] text-[0.6rem] uppercase tracking-[0.1em] ${
+              runtimeKind === "live-api"
+                ? "border-[var(--color-horizon-300)] bg-[var(--color-horizon-50)] text-[var(--color-horizon-700)]"
+                : "border-[var(--theme-border)] bg-[var(--theme-bg-surface)] text-[var(--theme-text-dim)]"
+            }`}
+          >
+            {getForecastRuntimeLabel(market.slug)}
+          </span>
+        </div>
         <span className="[font-family:var(--font-mono)] text-[0.62rem] text-[var(--theme-text-dim)]">
           resolves {resolutionLabel}
         </span>

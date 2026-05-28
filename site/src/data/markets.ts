@@ -55,6 +55,24 @@ export interface Market {
   reasoning: ReasoningStep[];
 }
 
+export type ForecastRuntimeKind = "live-api" | "static-mock";
+
+export const LIVE_FORECAST_SLUGS = new Set([
+  "cpi-u-annual-2026",
+  "ctc-expansion-cost-ty2026",
+  "ctc-current-law-outlays-ty2026",
+]);
+
+export function getForecastRuntimeKind(slug: string): ForecastRuntimeKind {
+  return LIVE_FORECAST_SLUGS.has(slug) ? "live-api" : "static-mock";
+}
+
+export function getForecastRuntimeLabel(slug: string): string {
+  return getForecastRuntimeKind(slug) === "live-api"
+    ? "Live API path"
+    : "Static mock trace";
+}
+
 export const MARKETS: Market[] = [
   // ─── Government data cells ───────────────────────────────────────────────
   {

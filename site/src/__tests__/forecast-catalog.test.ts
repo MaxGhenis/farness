@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { MARKETS } from "@/data/markets";
+import { LIVE_FORECAST_SLUGS, MARKETS } from "@/data/markets";
 
 describe("forecast catalog", () => {
   it("has unique slugs", () => {
@@ -28,6 +28,13 @@ describe("forecast catalog", () => {
     for (const forecast of MARKETS) {
       expect(forecast.title).not.toMatch(/\bmarkets?\b/i);
       expect(forecast.question).not.toMatch(/\bmarkets?\b/i);
+    }
+  });
+
+  it("only marks known forecast cells as live API paths", () => {
+    const slugs = new Set(MARKETS.map((forecast) => forecast.slug));
+    for (const slug of LIVE_FORECAST_SLUGS) {
+      expect(slugs.has(slug)).toBe(true);
     }
   });
 });
