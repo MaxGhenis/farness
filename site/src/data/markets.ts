@@ -58,6 +58,7 @@ export interface Market {
 export type ForecastRuntimeKind = "live-api" | "static-mock";
 
 export const LIVE_FORECAST_SLUGS = new Set([
+  "spm-child-poverty-2025",
   "cpi-u-annual-2026",
   "ctc-expansion-cost-ty2026",
   "ctc-current-law-outlays-ty2026",

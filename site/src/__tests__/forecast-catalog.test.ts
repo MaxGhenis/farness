@@ -41,6 +41,7 @@ describe("forecast catalog", () => {
   it("prioritizes near-term 2025 Census release targets", () => {
     const slugs = new Set(MARKETS.map((forecast) => forecast.slug));
     expect(slugs.has("spm-child-poverty-2025")).toBe(true);
+    expect(LIVE_FORECAST_SLUGS.has("spm-child-poverty-2025")).toBe(true);
     expect(slugs.has("spm-poverty-rate-2025")).toBe(true);
     expect(slugs.has("official-poverty-rate-2025")).toBe(true);
     expect(slugs.has("median-household-income-2025")).toBe(true);

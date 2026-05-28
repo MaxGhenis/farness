@@ -1,6 +1,7 @@
 import { generateObject } from "ai";
 import { z } from "zod";
 import type { CpiDataset } from "@/lib/bls";
+import type { SpmChildPovertyDataset } from "@/lib/census";
 import type { CtcExpansionDataset } from "@/lib/policyengine";
 
 const ForecastSchema = z.object({
@@ -20,6 +21,16 @@ const CtcExpansionForecastSchema = z.object({
   publicTrace: z.array(z.string().min(20).max(700)).min(3).max(7),
   assumptions: z.array(z.string().min(8).max(240)).min(2).max(6),
   dataCaveats: z.array(z.string().min(8).max(240)).min(1).max(5),
+  drivers: z.array(z.string().min(4).max(90)).min(2).max(5),
+});
+
+const SpmChildPovertyForecastSchema = z.object({
+  pointEstimate: z.number().min(0).max(30),
+  ciLow: z.number().min(0).max(30),
+  ciHigh: z.number().min(0).max(35),
+  publicTrace: z.array(z.string().min(20).max(700)).min(3).max(7),
+  assumptions: z.array(z.string().min(8).max(240)).min(2).max(6),
+  dataCaveats: z.array(z.string().min(8).max(260)).min(1).max(5),
   drivers: z.array(z.string().min(4).max(90)).min(2).max(5),
 });
 
@@ -47,6 +58,20 @@ export interface CtcExpansionForecast {
   dataCaveats: string[];
   drivers: string[];
   source: "ai_gateway" | "calibration_fallback";
+  model?: string;
+  generatedAt: string;
+}
+
+export interface SpmChildPovertyForecast {
+  pointEstimate: number;
+  ciLow: number;
+  ciHigh: number;
+  confidence: 0.8;
+  publicTrace: string[];
+  assumptions: string[];
+  dataCaveats: string[];
+  drivers: string[];
+  source: "ai_gateway" | "census_calibration_fallback";
   model?: string;
   generatedAt: string;
 }
@@ -151,6 +176,54 @@ export async function generateCtcExpansionForecast(
   }
 }
 
+export async function generateSpmChildPovertyForecast(
+  dataset: SpmChildPovertyDataset,
+): Promise<SpmChildPovertyForecast> {
+  if (!shouldTryGateway()) {
+    return fallbackSpmChildPovertyForecast(
+      dataset,
+      "AI Gateway credentials are not configured.",
+    );
+  }
+
+  const model = process.env.FARNESS_AI_MODEL ?? "anthropic/claude-sonnet-4.6";
+
+  try {
+    const result = await generateObject({
+      model,
+      schema: SpmChildPovertyForecastSchema,
+      temperature: 0.2,
+      system:
+        "You are a Farness public forecasting agent. Forecast in percentage points. Use public, audit-ready reasoning only. Treat Census history and PolicyEngine current-law inputs as explicit model inputs, not as ground truth, and describe calibration adjustments without hidden chain-of-thought.",
+      prompt: [
+        "Forecast this public prediction cell:",
+        dataset.summary.question,
+        "",
+        "Target: the Census-published Supplemental Poverty Measure child poverty rate for calendar-year 2025, expected in the September 2026 income and poverty release.",
+        "Use the live Census page evidence, historical SPM child-poverty series, PolicyEngine current-law policy check, and calibration prior below. Return an 80% confidence interval in percentage points.",
+        "If the PolicyEngine check or Census page fetch is unavailable, explicitly widen or qualify uncertainty instead of pretending the data path is complete.",
+        "",
+        JSON.stringify(dataset.summary, null, 2),
+      ].join("\n"),
+    });
+
+    return normalizeSpmPercentForecast({
+      ...result.object,
+      confidence: 0.8,
+      source: "ai_gateway",
+      model,
+      generatedAt: new Date().toISOString(),
+    });
+  } catch (error) {
+    return fallbackSpmChildPovertyForecast(
+      dataset,
+      error instanceof Error
+        ? `AI Gateway call failed: ${error.message}`
+        : "AI Gateway call failed.",
+    );
+  }
+}
+
 function fallbackForecast(dataset: CpiDataset, reason: string): CpiForecast {
   const { summary } = dataset;
   const carryForward = summary.carryForwardAnnualAverageInflationPct;
@@ -202,6 +275,46 @@ function fallbackForecast(dataset: CpiDataset, reason: string): CpiForecast {
   });
 }
 
+function fallbackSpmChildPovertyForecast(
+  dataset: SpmChildPovertyDataset,
+  reason: string,
+): SpmChildPovertyForecast {
+  const { summary } = dataset;
+  const policy =
+    summary.currentLawPolicy.status === "ok"
+      ? `PolicyEngine current-law policy ${summary.currentLawPolicy.id} (${summary.currentLawPolicy.label}) was verified live.`
+      : `PolicyEngine current-law policy ${summary.currentLawPolicy.id} was unavailable: ${summary.currentLawPolicy.error}`;
+
+  return normalizeSpmPercentForecast({
+    pointEstimate: summary.calibratedPointEstimatePct,
+    ciLow: summary.calibratedCiLowPct,
+    ciHigh: summary.calibratedCiHighPct,
+    confidence: 0.8,
+    publicTrace: [
+      `Census release evidence was fetched from the income/poverty schedule and SPM tables pages; the target is the calendar-year ${summary.targetYear} SPM child poverty rate expected in ${summary.expectedRelease}.`,
+      `The recent Census history seed is ${summary.latestHistoricalChildPovertyRatePct.toFixed(1)}% in ${summary.latestHistoricalYear}, with a ${summary.postExpansionAveragePct.toFixed(1)}% average over 2022-2024 after the expanded-CTC year.`,
+      `${policy} The calibration fallback blends that current-law prior with recent SPM history and carries this run because ${reason}`,
+    ],
+    assumptions: [
+      "Calendar-year 2025 policy is closer to the 2022-2024 current-law regime than to the 2021 expanded Child Tax Credit regime.",
+      "Labor-market and real-earnings conditions keep the central estimate near, but slightly below, the latest published child SPM rate.",
+      "ASEC sampling error and SPM expense adjustments justify an asymmetric interval around the point estimate.",
+    ],
+    dataCaveats: [
+      ...summary.caveats,
+      reason,
+    ],
+    drivers: [
+      "Current-law CTC and EITC parameters",
+      "Employment and earnings",
+      "Housing and medical expense adjustments",
+      "SNAP and other in-kind resources",
+    ],
+    source: "census_calibration_fallback",
+    generatedAt: new Date().toISOString(),
+  });
+}
+
 function fallbackCtcExpansionForecast(
   dataset: CtcExpansionDataset,
   reason: string,
@@ -241,6 +354,30 @@ function fallbackCtcExpansionForecast(
     source: "calibration_fallback",
     generatedAt: new Date().toISOString(),
   });
+}
+
+function normalizeSpmPercentForecast(
+  forecast: Omit<SpmChildPovertyForecast, "confidence"> & {
+    confidence: 0.8;
+  },
+) {
+  const pointEstimate = round(clamp(forecast.pointEstimate, 0, 30), 1);
+  const ciLow = round(
+    clamp(Math.min(forecast.ciLow, pointEstimate - 0.1), 0, 30),
+    1,
+  );
+  const ciHigh = round(
+    clamp(Math.max(forecast.ciHigh, pointEstimate + 0.1), 0, 35),
+    1,
+  );
+
+  return {
+    ...forecast,
+    pointEstimate,
+    ciLow,
+    ciHigh,
+    confidence: 0.8 as const,
+  };
 }
 
 function shouldTryGateway() {

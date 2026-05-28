@@ -17,7 +17,11 @@ interface RuntimeForecast {
   ciLow: number;
   ciHigh: number;
   confidence: 0.8;
-  source?: "ai_gateway" | "deterministic_fallback" | "calibration_fallback";
+  source?:
+    | "ai_gateway"
+    | "deterministic_fallback"
+    | "calibration_fallback"
+    | "census_calibration_fallback";
   model?: string;
   generatedAt?: string;
   drivers?: string[];
@@ -642,6 +646,9 @@ function forecastSourceLabel(
   if (forecast?.source === "calibration_fallback") {
     return "live PolicyEngine data · calibration fallback";
   }
+  if (forecast?.source === "census_calibration_fallback") {
+    return "live Census + PolicyEngine inputs · calibration fallback";
+  }
   if (mode === "fallback") return "static mock · live API unavailable";
   return statusLabel;
 }
@@ -699,6 +706,9 @@ function traceStatus(
 }
 
 function liveModeDescription(slug: string) {
+  if (slug === "spm-child-poverty-2025") {
+    return "Live mode checks public Census release/SPM pages, verifies the PolicyEngine current-law policy, applies an explicit child-poverty calibration prior, and calls the forecast model when AI Gateway credentials are available. If the API fails, the page replays the static trace.";
+  }
   if (slug === "ctc-expansion-cost-ty2026") {
     return "Live mode queries the PolicyEngine policy and economy APIs, applies an explicit calibration prior, and calls the forecast model when AI Gateway credentials are available. If the API fails, the page replays the static trace.";
   }

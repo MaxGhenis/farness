@@ -8,8 +8,19 @@ import {
 } from "@/lib/bls";
 import { optionsResponse } from "@/lib/cors";
 import {
+  fetchSpmChildPovertyDataset,
+  formatSpmChildPovertySummary,
+  policySnapshotFromPolicy,
+  serializeSpmCalibrationToolResult,
+  serializeSpmChildPovertyToolResult,
+  SPM_CHILD_POVERTY_2025_SLUG,
+  SPM_TARGET_YEAR,
+  unavailablePolicySnapshot,
+} from "@/lib/census";
+import {
   generateCpiForecast,
   generateCtcExpansionForecast,
+  generateSpmChildPovertyForecast,
 } from "@/lib/forecast";
 import {
   CTC_3000_FULLY_REFUNDABLE_POLICY_ID,
@@ -55,10 +66,169 @@ export async function GET(
     });
   }
 
+  if (slug === SPM_CHILD_POVERTY_2025_SLUG) {
+    return createSseResponse(request, async (send) => {
+      await streamSpmChildPovertyForecast(send);
+    });
+  }
+
   return Response.json(
     { error: `No live forecaster is configured for ${slug}.` },
     { status: 404 },
   );
+}
+
+async function streamSpmChildPovertyForecast(send: SendEvent) {
+  await sendStep(send, {
+    kind: "heading",
+    text: "Identifying the question",
+  });
+  await sendStep(send, {
+    kind: "text",
+    text: "This stream forecasts the calendar-year 2025 Supplemental Poverty Measure child poverty rate that Census is expected to publish in the September 2026 income and poverty release. The live run checks public Census pages, verifies the PolicyEngine current-law policy, and applies an explicit calibration fallback before the forecast step.",
+  });
+
+  const policyCall = `policyengine.policy.get({ id: ${CURRENT_LAW_POLICY_ID} })`;
+  send("status", {
+    state: "tool_running",
+    label: "Querying PolicyEngine current law",
+  });
+  send("tool_start", {
+    tool: "policyengine.policy",
+    call: policyCall,
+  });
+
+  const currentLawPolicy = await fetchPolicy(CURRENT_LAW_POLICY_ID)
+    .then((policy) => {
+      send("tool_result", {
+        tool: "policyengine.policy",
+        call: policyCall,
+        result: serializePolicyToolResult(policy),
+      });
+      return policySnapshotFromPolicy(policy);
+    })
+    .catch((error: unknown) => {
+      const snapshot = unavailablePolicySnapshot(
+        CURRENT_LAW_POLICY_ID,
+        error,
+      );
+      send("tool_result", {
+        tool: "policyengine.policy",
+        call: policyCall,
+        result: JSON.stringify(snapshot, null, 2),
+      });
+      return snapshot;
+    });
+
+  const censusCall = [
+    `census.releaseSchedule({ survey: "CPS ASEC", targetYear: ${SPM_TARGET_YEAR}, measure: "SPM child poverty" })`,
+    'census.spm.history({ population: "children_under_18", years: [2021, 2024] })',
+  ].join("\n");
+  send("status", {
+    state: "tool_running",
+    label: "Querying Census public pages",
+  });
+  send("tool_start", {
+    tool: "census.lookup",
+    call: censusCall,
+  });
+
+  const dataset = await fetchSpmChildPovertyDataset({ currentLawPolicy });
+
+  send("tool_result", {
+    tool: "census.lookup",
+    call: censusCall,
+    result: serializeSpmChildPovertyToolResult(dataset),
+  });
+  await pause(180);
+
+  await sendStep(send, {
+    kind: "heading",
+    text: "Census and current-law read",
+  });
+  await sendStep(send, {
+    kind: "text",
+    text: formatSpmChildPovertySummary(dataset.summary),
+  });
+
+  const calibrationCall =
+    'farness.calibration.lookup({ domain: "poverty_forecasts", outcome: "spm_child_poverty_rate", targetYear: 2025 })';
+  send("status", {
+    state: "tool_running",
+    label: "Looking up SPM calibration prior",
+  });
+  send("tool_start", {
+    tool: "farness.calibration",
+    call: calibrationCall,
+  });
+  send("tool_result", {
+    tool: "farness.calibration",
+    call: calibrationCall,
+    result: serializeSpmCalibrationToolResult(dataset),
+  });
+
+  await sendStep(send, {
+    kind: "heading",
+    text: "Calibration adjustment",
+  });
+  await sendStep(send, {
+    kind: "math",
+    text: [
+      "point = ",
+      `${dataset.summary.calibration.policyEngineWeight.toFixed(2)} × ${dataset.summary.policyEnginePriorPct.toFixed(1)}% + `,
+      `${dataset.summary.calibration.postExpansionHistoryWeight.toFixed(2)} × ${dataset.summary.postExpansionAveragePct.toFixed(1)}% + `,
+      `${dataset.summary.calibration.latestPublishedWeight.toFixed(2)} × ${dataset.summary.latestHistoricalChildPovertyRatePct.toFixed(1)}% `,
+      `${dataset.summary.calibration.macroAdjustmentPct >= 0 ? "+" : "-"} ${Math.abs(dataset.summary.calibration.macroAdjustmentPct).toFixed(2)}pp = `,
+      `${dataset.summary.calibratedPointEstimatePct.toFixed(1)}%`,
+    ].join(""),
+  });
+  await sendStep(send, {
+    kind: "text",
+    text: "The adjustment layer is deliberately explicit: PolicyEngine supplies law and population structure, Census supplies the resolution target and recent history, and the forecast optimizes for accuracy against the eventual Census publication rather than copying either input mechanically.",
+  });
+
+  send("status", {
+    state: "model_running",
+    label: "Generating calibrated forecast",
+  });
+  await sendStep(send, {
+    kind: "heading",
+    text: "Forecast model",
+  });
+
+  const forecast = await generateSpmChildPovertyForecast(dataset);
+  for (const trace of forecast.publicTrace) {
+    await sendStep(send, {
+      kind: "text",
+      text: trace,
+    });
+  }
+
+  if (forecast.assumptions.length > 0) {
+    await sendStep(send, {
+      kind: "heading",
+      text: "Assumptions and caveats",
+    });
+    await sendStep(send, {
+      kind: "text",
+      text: [
+        ...forecast.assumptions.map(
+          (assumption) => `Assumption: ${assumption}`,
+        ),
+        ...forecast.dataCaveats.map((caveat) => `Caveat: ${caveat}`),
+      ].join(" "),
+    });
+  }
+
+  send("forecast", forecast);
+  send("status", {
+    state: "complete",
+    label:
+      forecast.source === "ai_gateway"
+        ? "AI Gateway forecast complete"
+        : "Calibration fallback complete",
+  });
+  send("done", { ok: true });
 }
 
 async function streamCpiForecast(send: SendEvent) {
