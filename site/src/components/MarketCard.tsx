@@ -1,17 +1,12 @@
 import Link from "next/link";
-import {
-  type Market,
-  TYPE_LABEL,
-  formatValue,
-} from "@/data/markets";
+import { type Market, TYPE_LABEL, formatValue } from "@/data/markets";
 import { ForecastViz } from "./ForecastViz";
 
 const typeBadgeClass: Record<Market["type"], string> = {
   arch: "bg-[var(--color-mist-100)] text-[var(--color-horizon-700)] border-[var(--color-mist-200)]",
   policy:
     "bg-[var(--color-accent-subtle)] text-[var(--color-rose-700)] border-[var(--color-rose-100)]",
-  conditional:
-    "bg-[#FFF4DD] text-[#7A5C20] border-[#F2DCAF]",
+  conditional: "bg-[#FFF4DD] text-[#7A5C20] border-[#F2DCAF]",
 };
 
 interface MarketCardProps {
@@ -22,7 +17,7 @@ export function MarketCard({ market }: MarketCardProps) {
   const resolutionLabel = formatResolutionLabel(market.resolutionDate);
   return (
     <Link
-      href={`/markets/${market.slug}`}
+      href={`/forecasts/${market.slug}`}
       className="group flex flex-col gap-4 rounded-xl border bg-[var(--theme-bg-elevated)] p-6 no-underline transition-all duration-200 hover:no-underline hover:translate-y-[-2px] hover:shadow-md"
       style={{
         borderColor: "var(--theme-border)",

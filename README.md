@@ -115,14 +115,14 @@ farness pending
 farness calibration
 ```
 
-### Forecast Market Drafts
+### Forecast Question Drafts
 
 `farness` can turn a stored decision forecast or standalone policy question into
-Manifold-ready market drafts. This is draft-only: it does not create a market,
-place a bet, or require a Manifold API key.
+Manifold-ready forecast question drafts. This is draft-only: it does not publish
+questions, place a bet, or require a Manifold API key.
 
 ```bash
-farness market-draft "Will Waymo be legally permitted to offer fully driverless paid robotaxi rides in Washington, DC by 2026-12-31?" \
+farness forecast-draft "Will Waymo be legally permitted to offer fully driverless paid robotaxi rides in Washington, DC by 2026-12-31?" \
   --initial-prob 52 \
   --resolution-date 2026-12-31 \
   --resolution-rule "Resolve YES if official DC law, regulation, or permit approval allows Waymo to offer fully driverless paid public rides in DC by 2026-12-31." \
@@ -130,20 +130,20 @@ farness market-draft "Will Waymo be legally permitted to offer fully driverless 
   --source "DC AV testing law|https://code.dccouncil.gov/us/dc/council/laws/23-156" \
   --tag waymo \
   --tag dc \
-  --output waymo-dc-market-pack.json
+  --output waymo-dc-forecast-pack.json
 ```
 
 For a stored decision with options and forecasts:
 
 ```bash
-farness market-draft abc123 --output market-pack.json
+farness forecast-draft abc123 --output forecast-pack.json
 ```
 
 An example Waymo/DC draft pack lives at
 [`examples/waymo_dc_market_pack.json`](examples/waymo_dc_market_pack.json). It
-uses an existing Manifold public-service market as the gate, then drafts
-conditional aggregate 2027 safety markets for DC traffic fatalities and serious
-injuries. These resolve N/A when the linked gate market resolves the opposite
+uses an existing Manifold public-service question as the gate, then drafts
+conditional aggregate 2027 safety forecasts for DC traffic fatalities and serious
+injuries. These resolve N/A when the linked gate question resolves the opposite
 way.
 
 ### AI Agent Workflows

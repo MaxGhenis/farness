@@ -55,9 +55,9 @@ export default function DocsPage() {
             Use farness with Codex, Claude Code, or the local CLI.
           </h1>
           <p className="text-[1.02rem] text-[#415463] leading-[1.7] max-w-[760px] mb-8">
-            The install story is package-first. The PyPI package now includes the
-            CLI, MCP server, and packaged Codex and Claude skills. The CLI itself is
-            local-only and does not call an LLM or require an API key.
+            The install story is package-first. The PyPI package now includes
+            the CLI, MCP server, and packaged Codex and Claude skills. The CLI
+            itself is local-only and does not call an LLM or require an API key.
           </p>
 
           <div className="grid grid-cols-3 gap-4 max-md:grid-cols-1">
@@ -69,8 +69,8 @@ export default function DocsPage() {
                 Codex + MCP
               </div>
               <p className="text-[0.88rem] leading-[1.6] text-[#415463] m-0">
-                Best path if you want native tools, persistent decisions, and the
-                `$farness` trigger.
+                Best path if you want native tools, persistent decisions, and
+                the `$farness` trigger.
               </p>
             </div>
             <div className="rounded-2xl bg-white border border-[#D9E4EC] p-5">
@@ -81,8 +81,8 @@ export default function DocsPage() {
                 CLI / Python
               </div>
               <p className="text-[0.88rem] leading-[1.6] text-[#415463] m-0">
-                Use this if you want a decision log and calibration loop without any
-                agent integration.
+                Use this if you want a decision log and calibration loop without
+                any agent integration.
               </p>
             </div>
             <div className="rounded-2xl bg-white border border-[#D9E4EC] p-5">
@@ -93,15 +93,18 @@ export default function DocsPage() {
                 Claude Code
               </div>
               <p className="text-[0.88rem] leading-[1.6] text-[#415463] m-0">
-                Use the plugin if you want the slash-command flow and Claude-specific
-                integration.
+                Use the plugin if you want the slash-command flow and
+                Claude-specific integration.
               </p>
             </div>
           </div>
         </header>
 
         <Section kicker="Install" title="Install the package and choose a path">
-          <div id="install" className="grid grid-cols-3 gap-6 max-md:grid-cols-1">
+          <div
+            id="install"
+            className="grid grid-cols-3 gap-6 max-md:grid-cols-1"
+          >
             <div className="space-y-4">
               <h3 className="[font-family:var(--font-display)] text-[1.2rem] font-semibold text-[#14202B]">
                 1. Codex with MCP
@@ -120,8 +123,9 @@ farness setup codex
                 2. Claude Code local skill
               </h3>
               <p className="text-[0.92rem] text-[#415463] leading-[1.65]">
-                This gives Claude Code the same local MCP-backed workflow as Codex,
-                but through Claude skills instead of the Codex skill format.
+                This gives Claude Code the same local MCP-backed workflow as
+                Codex, but through Claude skills instead of the Codex skill
+                format.
               </p>
               <CodeBlock>{`python -m pip install 'farness[mcp]'
 farness setup claude
@@ -133,8 +137,8 @@ farness setup claude
                 3. Local CLI / Python
               </h3>
               <p className="text-[0.92rem] text-[#415463] leading-[1.65]">
-                This path creates and scores decisions locally. No LLM API key is
-                required for these commands.
+                This path creates and scores decisions locally. No LLM API key
+                is required for these commands.
               </p>
               <CodeBlock>{`python -m pip install farness
 farness new "Should we rewrite the auth layer?"
@@ -151,8 +155,8 @@ farness calibration`}</CodeBlock>
               Claude plugin path
             </div>
             <p className="text-[0.9rem] text-[#415463] leading-[1.65] mb-4">
-              If you prefer the older plugin flow instead of local Claude skills, it
-              still works:
+              If you prefer the older plugin flow instead of local Claude
+              skills, it still works:
             </p>
             <CodeBlock>{`claude plugin marketplace add MaxGhenis/farness
 claude plugin install farness@maxghenis-plugins
@@ -180,7 +184,10 @@ claude plugin install farness@maxghenis-plugins
                 "Tells Claude Code when to use the same local MCP server. The older plugin path stays optional.",
               ],
             ].map(([title, description]) => (
-              <div key={title} className="rounded-2xl bg-white border border-[#D9E4EC] p-6">
+              <div
+                key={title}
+                className="rounded-2xl bg-white border border-[#D9E4EC] p-6"
+              >
                 <div className="[font-family:var(--font-mono)] text-[0.72rem] tracking-[0.04em] text-[#A94E80] mb-3">
                   {title}
                 </div>
@@ -192,7 +199,10 @@ claude plugin install farness@maxghenis-plugins
           </div>
         </Section>
 
-        <Section kicker="Quickstart" title="Two commands, then restart the client">
+        <Section
+          kicker="Quickstart"
+          title="Two commands, then restart the client"
+        >
           <div className="grid grid-cols-2 gap-6 max-md:grid-cols-1">
             <CodeBlock>{`python -m pip install 'farness[mcp]'
 farness setup codex`}</CodeBlock>
@@ -200,9 +210,9 @@ farness setup codex`}</CodeBlock>
 farness setup claude`}</CodeBlock>
           </div>
           <p className="mt-5 text-[0.92rem] text-[#415463] leading-[1.7] max-w-[760px]">
-            `farness setup` installs the packaged skill and registers the local MCP
-            server with the same Python interpreter that launched `farness`. The last
-            step is just restarting Codex or Claude Code.
+            `farness setup` installs the packaged skill and registers the local
+            MCP server with the same Python interpreter that launched `farness`.
+            The last step is just restarting Codex or Claude Code.
           </p>
           <div className="mt-6 grid grid-cols-2 gap-6 max-md:grid-cols-1">
             <CodeBlock>{`farness doctor codex`}</CodeBlock>
@@ -210,18 +220,24 @@ farness setup claude`}</CodeBlock>
           </div>
           <p className="mt-5 text-[0.92rem] text-[#415463] leading-[1.7] max-w-[760px]">
             `farness doctor` checks three things: whether the packaged skill is
-            installed, whether the agent CLI is on `PATH`, and whether the local MCP
-            server is already registered.
+            installed, whether the agent CLI is on `PATH`, and whether the local
+            MCP server is already registered.
           </p>
         </Section>
 
-        <Section kicker="Walkthrough" title="See the packaged flow before you install">
+        <Section
+          kicker="Walkthrough"
+          title="See the packaged flow before you install"
+        >
           <div className="grid grid-cols-[320px_minmax(0,1fr)] gap-8 items-start max-md:grid-cols-1">
             <div>
               <p className="text-[0.94rem] text-[#415463] leading-[1.7] mb-5">
-                This is the actual package-first Codex path from the docs: install,
-                run setup, use
-                <span className="[font-family:var(--font-mono)]"> $farness </span>
+                This is the actual package-first Codex path from the docs:
+                install, run setup, use
+                <span className="[font-family:var(--font-mono)]">
+                  {" "}
+                  $farness{" "}
+                </span>
                 in Codex, then confirm the decision landed in the local store.
               </p>
               <CodeBlock>{`python -m pip install 'farness[mcp]'
@@ -239,8 +255,8 @@ farness doctor codex`}</CodeBlock>
                 Repair in place
               </h3>
               <p className="text-[0.92rem] text-[#415463] leading-[1.65]">
-                If the skill file drifted, the agent CLI moved, or MCP setup only
-                half-worked, let `doctor` repair what it can.
+                If the skill file drifted, the agent CLI moved, or MCP setup
+                only half-worked, let `doctor` repair what it can.
               </p>
               <CodeBlock>{`farness doctor codex --fix
 farness doctor claude --fix`}</CodeBlock>
@@ -250,7 +266,8 @@ farness doctor claude --fix`}</CodeBlock>
                 Reset from scratch
               </h3>
               <p className="text-[0.92rem] text-[#415463] leading-[1.65]">
-                Remove the local skill and MCP registration, then run setup again.
+                Remove the local skill and MCP registration, then run setup
+                again.
               </p>
               <CodeBlock>{`farness uninstall codex
 farness setup codex
@@ -288,33 +305,33 @@ Review date: 2026-06-15`}</CodeBlock>
           </div>
         </Section>
 
-        <Section kicker="Markets" title="Draft forecast markets from decisions">
+        <Section kicker="Forecasts" title="Draft public forecast questions">
           <div className="grid grid-cols-2 gap-8 max-md:grid-cols-1">
             <div className="space-y-4">
               <p className="text-[0.94rem] text-[#415463] leading-[1.7]">
-                `farness market-draft` turns a stored decision forecast or a
+                `farness forecast-draft` turns a stored decision forecast or a
                 standalone policy question into Manifold-ready JSON. It is
-                intentionally draft-only: it does not create a market, place a bet,
-                or require a Manifold API key.
+                intentionally draft-only: it does not publish anything, place a
+                bet, or require a Manifold API key.
               </p>
               <p className="text-[0.94rem] text-[#415463] leading-[1.7]">
                 For public policy questions, use it to turn a live debate into a
-                falsifiable forecast with explicit resolution criteria before anyone
-                posts or seeds a market. The Waymo/DC example uses an existing
-                Manifold public-service market as the gate, then drafts
-                conditional aggregate 2027 safety markets for DC traffic
-                fatalities and serious injuries.
+                falsifiable forecast with explicit resolution criteria before
+                anyone posts a public question. The Waymo/DC example uses an
+                existing Manifold public-service question as the gate, then
+                drafts conditional aggregate 2027 safety forecasts for DC
+                traffic fatalities and serious injuries.
               </p>
             </div>
-            <CodeBlock>{`farness market-draft \\
+            <CodeBlock>{`farness forecast-draft \\
   "Will Waymo be legally permitted to offer fully driverless paid robotaxi rides in Washington, DC by 2026-12-31?" \\
   --initial-prob 52 \\
   --resolution-date 2026-12-31 \\
   --visibility unlisted \\
-  --output waymo-dc-market-pack.json
+  --output waymo-dc-forecast-pack.json
 
 # From a stored decision with forecasts:
-farness market-draft abc123 --output market-pack.json`}</CodeBlock>
+farness forecast-draft abc123 --output forecast-pack.json`}</CodeBlock>
           </div>
         </Section>
 
@@ -346,7 +363,10 @@ Forecast: contractor bridge 51% [38, 63]
 Review date: 2026-09-01`,
               },
             ].map((example) => (
-              <div key={example.title} className="rounded-2xl bg-white border border-[#D9E4EC] p-6">
+              <div
+                key={example.title}
+                className="rounded-2xl bg-white border border-[#D9E4EC] p-6"
+              >
                 <div className="[font-family:var(--font-display)] text-[1rem] font-semibold text-[#14202B] mb-2">
                   {example.title}
                 </div>
@@ -366,8 +386,8 @@ Review date: 2026-09-01`,
                 CLI
               </div>
               <p className="text-[0.9rem] leading-[1.6] text-[#415463] m-0">
-                No model credentials required. The CLI reads and writes local decision
-                records only.
+                No model credentials required. The CLI reads and writes local
+                decision records only.
               </p>
             </div>
             <div className="rounded-2xl bg-white border border-[#D9E4EC] p-6">
@@ -375,8 +395,8 @@ Review date: 2026-09-01`,
                 MCP + skills
               </div>
               <p className="text-[0.9rem] leading-[1.6] text-[#415463] m-0">
-                No separate farness API key. Your agent client uses its own normal
-                model credentials.
+                No separate farness API key. Your agent client uses its own
+                normal model credentials.
               </p>
             </div>
             <div className="rounded-2xl bg-white border border-[#D9E4EC] p-6">
@@ -384,8 +404,8 @@ Review date: 2026-09-01`,
                 Experiments
               </div>
               <p className="text-[0.9rem] leading-[1.6] text-[#415463] m-0">
-                The experiment runners do call external models and need provider keys
-                like `OPENAI_API_KEY` or `ANTHROPIC_API_KEY`.
+                The experiment runners do call external models and need provider
+                keys like `OPENAI_API_KEY` or `ANTHROPIC_API_KEY`.
               </p>
             </div>
           </div>
@@ -407,7 +427,10 @@ Review date: 2026-09-01`,
                 body: "Use `farness uninstall codex` or `farness uninstall claude`, then rerun `farness setup ...` instead of editing config by hand.",
               },
             ].map((item) => (
-              <div key={item.title} className="rounded-2xl bg-white border border-[#D9E4EC] p-6">
+              <div
+                key={item.title}
+                className="rounded-2xl bg-white border border-[#D9E4EC] p-6"
+              >
                 <div className="[font-family:var(--font-display)] text-[1rem] font-semibold text-[#14202B] mb-2">
                   {item.title}
                 </div>

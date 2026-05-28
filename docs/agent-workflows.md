@@ -122,18 +122,18 @@ farness pending
 farness calibration
 ```
 
-To draft forecast markets from a standalone policy question or a stored decision:
+To draft forecast questions from a standalone policy question or a stored decision:
 
 ```bash
-farness market-draft "Will Waymo be legally permitted to offer fully driverless paid robotaxi rides in Washington, DC by 2026-12-31?" \
+farness forecast-draft "Will Waymo be legally permitted to offer fully driverless paid robotaxi rides in Washington, DC by 2026-12-31?" \
   --initial-prob 52 \
   --resolution-date 2026-12-31 \
-  --output waymo-dc-market-pack.json
+  --output waymo-dc-forecast-pack.json
 
-farness market-draft <decision-id> --output market-pack.json
+farness forecast-draft <decision-id> --output forecast-pack.json
 ```
 
-This only writes Manifold-ready JSON. It does not create markets, seed markets,
+This only writes Manifold-ready JSON. It does not publish questions, create Manifold entries,
 place bets, or require a Manifold API key.
 
 If you want to fully reset a local integration:

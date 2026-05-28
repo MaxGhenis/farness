@@ -2,14 +2,14 @@ import type { Metadata } from "next";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "Farness — Decision Optics for AI",
+  title: "Farness — Open Forecast Prototype",
   description:
-    "Make your agent forecast the decision. A decision framework for Codex, Claude Code, and other agents, with native skill and MCP support.",
+    "Open forecast cells for public policy, tax, benefit, poverty, and government data, with agent reasoning traces and calibrated uncertainty.",
   openGraph: {
     type: "website",
-    title: "Farness — Decision Optics for AI",
+    title: "Farness — Open Forecast Prototype",
     description:
-      "A decision framework for Codex, Claude Code, and other agents with native skill and MCP support, plus explicit KPIs, numeric forecasts, reference classes, disconfirming evidence, and review dates.",
+      "Open forecast cells for public policy, tax, benefit, poverty, and government data, with agent reasoning traces and calibrated uncertainty.",
     url: "https://farness.ai",
     siteName: "farness",
     images: [
@@ -17,15 +17,15 @@ export const metadata: Metadata = {
         url: "https://farness.ai/og-image.png",
         width: 1200,
         height: 630,
-        alt: "Farness — a decision framework that turns agent recommendations into explicit forecasts with KPIs, confidence intervals, and review dates",
+        alt: "Farness — open forecast prototype for public policy and government data",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Farness — Decision Optics for AI",
+    title: "Farness — Open Forecast Prototype",
     description:
-      "Make your agent forecast the decision with native Codex skill and MCP support, plus Claude Code and CLI workflows.",
+      "Open forecast cells for public policy, tax, benefit, poverty, and government data.",
     images: ["https://farness.ai/og-image.png"],
   },
 };

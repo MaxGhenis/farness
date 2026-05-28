@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { Header } from "@/components/Header";
 import { DemoVideo } from "@/components/DemoVideo";
+import { MarketsBrowser } from "@/components/MarketsBrowser";
 
 /* ── Hero ── */
 
@@ -33,10 +34,13 @@ function Hero() {
           </h1>
 
           <p className="text-[1.05rem] text-[#415463] max-w-[520px] mb-8 leading-[1.65] animate-[fade-up_0.8s_ease-out_0.12s_both]">
-            <span className="[font-family:var(--font-editorial)] italic">farness</span>{" "}
-            intercepts agent decisions and demands a forecast: a KPI, a confidence
-            interval, a base rate, disconfirming evidence, and a review date.
-            Works with Codex, Claude Code, and any agent that speaks MCP.
+            <span className="[font-family:var(--font-editorial)] italic">
+              farness
+            </span>{" "}
+            intercepts agent decisions and demands a forecast: a KPI, a
+            confidence interval, a base rate, disconfirming evidence, and a
+            review date. Works with Codex, Claude Code, and any agent that
+            speaks MCP.
           </p>
 
           <div className="flex gap-4 flex-wrap animate-[fade-up_0.8s_ease-out_0.24s_both] max-[480px]:flex-col max-[480px]:items-start">
@@ -79,19 +83,24 @@ function ForecastArtifact() {
       <div className="[font-family:var(--font-mono)] text-[0.78rem] leading-[1.7] text-[#9DB1BF]">
         <div className="mb-4">
           <span className="text-[#6B8494] text-[0.7rem]">Decision prompt:</span>
-          <div className="text-[#E8F0F5] mt-1">Should we rewrite the auth layer now?</div>
+          <div className="text-[#E8F0F5] mt-1">
+            Should we rewrite the auth layer now?
+          </div>
         </div>
 
         <div className="mb-4">
           <span className="text-[#6B8494] text-[0.7rem]">Reframed as:</span>
           <div className="text-[#7FB2DA] mt-1">
-            P(critical auth incidents decrease by &gt;40% in 90 days | rewrite now)
+            P(critical auth incidents decrease by &gt;40% in 90 days | rewrite
+            now)
           </div>
         </div>
 
         <div className="mb-4">
           <span className="text-[#6B8494] text-[0.7rem]">KPI:</span>
-          <div className="text-[#E8F0F5] mt-1">critical_auth_incidents / 90d</div>
+          <div className="text-[#E8F0F5] mt-1">
+            critical_auth_incidents / 90d
+          </div>
         </div>
 
         <div className="mb-4">
@@ -106,12 +115,16 @@ function ForecastArtifact() {
           <span className="text-[#6B8494] text-[0.7rem]">Base rate:</span>
           <div className="mt-1">
             <span className="text-[#F3B562]">27%</span>
-            <span className="text-[#9DB1BF] ml-2">similar infra rewrites yielding material reliability gains</span>
+            <span className="text-[#9DB1BF] ml-2">
+              similar infra rewrites yielding material reliability gains
+            </span>
           </div>
         </div>
 
         <div className="mb-4">
-          <span className="text-[#6B8494] text-[0.7rem]">Disconfirming evidence:</span>
+          <span className="text-[#6B8494] text-[0.7rem]">
+            Disconfirming evidence:
+          </span>
           <div className="mt-2 flex gap-2 flex-wrap">
             <EvidenceTag>ops fixes may solve this faster</EvidenceTag>
             <EvidenceTag>rewrite could slip roadmap delivery</EvidenceTag>
@@ -141,7 +154,9 @@ function ForecastBar({
 }) {
   return (
     <div className="flex items-center gap-3">
-      <span className="text-[#E8F0F5] w-[100px] text-right max-md:w-[80px] text-[0.75rem]">{label}:</span>
+      <span className="text-[#E8F0F5] w-[100px] text-right max-md:w-[80px] text-[0.75rem]">
+        {label}:
+      </span>
       <div className="flex-1 relative h-5 rounded-full overflow-hidden bg-[rgba(255,255,255,0.04)]">
         {/* Confidence interval fill */}
         <div
@@ -157,7 +172,10 @@ function ForecastBar({
         {/* Point estimate */}
         <div
           className="absolute top-1/2 -translate-y-1/2 w-2 h-2 rounded-full bg-[#E8F0F5]"
-          style={{ left: `${value}%`, boxShadow: "0 0 8px rgba(127, 178, 218, 0.6)" }}
+          style={{
+            left: `${value}%`,
+            boxShadow: "0 0 8px rgba(127, 178, 218, 0.6)",
+          }}
         />
       </div>
       <span className="text-[#7FB2DA] w-[80px] text-[0.75rem] max-md:w-[65px]">
@@ -179,6 +197,45 @@ function EvidenceTag({ children }: { children: React.ReactNode }) {
     >
       {children}
     </span>
+  );
+}
+
+/* ── Forecast Prototype ── */
+
+function ForecastPrototype() {
+  return (
+    <main className="mx-auto max-w-[1200px] px-8 pb-24 pt-12 max-md:px-5">
+      <section className="mb-12 grid grid-cols-[minmax(0,760px)_minmax(240px,1fr)] gap-10 max-lg:grid-cols-1">
+        <div>
+          <p className="[font-family:var(--font-mono)] text-[0.62rem] uppercase tracking-[0.15em] text-[var(--color-accent)] mb-3">
+            Policy futures · prototype
+          </p>
+          <h1 className="[font-family:var(--font-display)] text-[clamp(2rem,4.5vw,3.1rem)] font-light leading-[1.08] tracking-[-0.02em] text-[var(--theme-text)] mb-5">
+            Forecasts on every consequential cell of government data
+          </h1>
+          <p className="text-[1.05rem] leading-[1.65] text-[var(--theme-text-muted)]">
+            Farness analyst agents forecast published government statistics,
+            Axiom-encoded policy parameters, and outcomes conditional on policy
+            states. Each cell carries a calibrated interval and an audit trail
+            of the reasoning behind it.
+          </p>
+        </div>
+        <div
+          className="self-start rounded-xl border bg-[var(--theme-bg-surface)] p-5"
+          style={{ borderColor: "var(--theme-border)" }}
+        >
+          <p className="[font-family:var(--font-mono)] text-[0.62rem] uppercase tracking-[0.15em] text-[var(--theme-text-dim)] mb-3">
+            Prototype status
+          </p>
+          <p className="text-[0.9rem] leading-[1.6] text-[var(--theme-text)]">
+            The catalog is live, public, and changing quickly. Forecast streams
+            show the agent’s reasoning path and fall back to static traces while
+            the live API is being hardened.
+          </p>
+        </div>
+      </section>
+      <MarketsBrowser />
+    </main>
   );
 }
 
@@ -205,17 +262,20 @@ function HowItWorks() {
     {
       num: "01",
       title: "Intercept",
-      description: "Catch decision-language before the model hardens into advice. When a prompt sounds like 'Should we...?' or 'Which is better?', farness reframes it as a forecastable choice.",
+      description:
+        "Catch decision-language before the model hardens into advice. When a prompt sounds like 'Should we...?' or 'Which is better?', farness reframes it as a forecastable choice.",
     },
     {
       num: "02",
       title: "Reframe",
-      description: "Convert vague 'Should I?' into explicit, measurable outcome questions. Define the KPIs that would actually tell you whether the decision was good.",
+      description:
+        "Convert vague 'Should I?' into explicit, measurable outcome questions. Define the KPIs that would actually tell you whether the decision was good.",
     },
     {
       num: "03",
       title: "Anchor",
-      description: "Produce numeric forecasts with confidence intervals, reference classes from comparable situations, disconfirming evidence, and a review date for accountability.",
+      description:
+        "Produce numeric forecasts with confidence intervals, reference classes from comparable situations, disconfirming evidence, and a review date for accountability.",
     },
   ];
 
@@ -359,7 +419,8 @@ function ExampleTransformation() {
                 <span className="text-[#7FB2DA]">KPI:</span> bug_rate / 30d
               </div>
               <div className="mb-2">
-                <span className="text-[#7FB2DA]">Event:</span> &gt;25% bug reduction
+                <span className="text-[#7FB2DA]">Event:</span> &gt;25% bug
+                reduction
               </div>
               <div className="mb-2">
                 <span className="text-[#7FB2DA]">Horizon:</span> 90 days
@@ -371,7 +432,8 @@ function ExampleTransformation() {
                 <span className="text-[#F3B562]">Base rate:</span> 22%
               </div>
               <div className="mb-2">
-                <span className="text-[#E7A6C8]">Disconfirming evidence:</span> migration drag, auth edge cases
+                <span className="text-[#E7A6C8]">Disconfirming evidence:</span>{" "}
+                migration drag, auth edge cases
               </div>
               <div>
                 <span className="text-[#7FB2DA]">Review:</span> 2026-06-15
@@ -404,32 +466,41 @@ function ResearchProof() {
           <div
             className="absolute inset-0 rounded-2xl opacity-[0.04] pointer-events-none"
             style={{
-              backgroundImage: "linear-gradient(rgba(20,32,43,1) 1px, transparent 1px), linear-gradient(90deg, rgba(20,32,43,1) 1px, transparent 1px)",
+              backgroundImage:
+                "linear-gradient(rgba(20,32,43,1) 1px, transparent 1px), linear-gradient(90deg, rgba(20,32,43,1) 1px, transparent 1px)",
               backgroundSize: "40px 40px",
             }}
           />
 
           <div className="relative grid grid-cols-3 gap-8 mb-10 max-md:grid-cols-1 max-md:gap-4">
             <StatBlock value="11" label="study 1 scenarios" accent="#356C99" />
-            <StatBlock value="2" label="studies in the paper" accent="#A94E80" />
-            <StatBlock value="8" label="held-out validation cases" accent="#5E7A8D" />
+            <StatBlock
+              value="2"
+              label="studies in the paper"
+              accent="#A94E80"
+            />
+            <StatBlock
+              value="8"
+              label="held-out validation cases"
+              accent="#5E7A8D"
+            />
           </div>
 
           <div className="relative text-[0.9rem] text-[#415463] leading-[1.65] max-w-[680px] mx-auto">
             <p className="mb-4">
               The paper introduces stability-under-probing as a way to evaluate
               decision prompts without waiting for outcomes. In Study 1, farness
-              looked more prepared for the shared probe battery on Claude Opus 4.6
-              and GPT-5.4.
+              looked more prepared for the shared probe battery on Claude Opus
+              4.6 and GPT-5.4.
             </p>
             <p className="mb-4">
-              Study 2 then added held-out probes and showed the broader claim weakens
-              sharply off-framework. That makes the paper a methods result first,
-              not proof that farness is universally superior.
+              Study 2 then added held-out probes and showed the broader claim
+              weakens sharply off-framework. That makes the paper a methods
+              result first, not proof that farness is universally superior.
             </p>
             <p className="mb-6">
-              The useful claim is narrower and better: structured decision prompts
-              can be tested empirically, and farness is one case study.
+              The useful claim is narrower and better: structured decision
+              prompts can be tested empirically, and farness is one case study.
             </p>
           </div>
 
@@ -477,27 +548,33 @@ function InstrumentModules() {
   const modules = [
     {
       title: "KPI",
-      description: "What outcome actually matters. Defined before the analysis, not after.",
+      description:
+        "What outcome actually matters. Defined before the analysis, not after.",
     },
     {
       title: "Forecast",
-      description: "Numeric probability for each option. Not opinions — predictions you can score.",
+      description:
+        "Numeric probability for each option. Not opinions — predictions you can score.",
     },
     {
       title: "Confidence interval",
-      description: "The honest range around the estimate. Calibrated uncertainty, not false precision.",
+      description:
+        "The honest range around the estimate. Calibrated uncertainty, not false precision.",
     },
     {
       title: "Base rate",
-      description: "What usually happens in comparable situations. The outside view as empirical anchor.",
+      description:
+        "What usually happens in comparable situations. The outside view as empirical anchor.",
     },
     {
       title: "Disconfirming evidence",
-      description: "What counter-evidence, failure modes, or decision traps could make the leading option wrong.",
+      description:
+        "What counter-evidence, failure modes, or decision traps could make the leading option wrong.",
     },
     {
       title: "Review date",
-      description: "When to check the forecast against reality. Accountability built in.",
+      description:
+        "When to check the forecast against reality. Accountability built in.",
     },
   ];
 
@@ -580,7 +657,10 @@ $ farness calibration`,
   ];
 
   return (
-    <section id="install" className="py-[clamp(88px,12vw,140px)] px-8 max-md:px-4 bg-[#F7FAFC]">
+    <section
+      id="install"
+      className="py-[clamp(88px,12vw,140px)] px-8 max-md:px-4 bg-[#F7FAFC]"
+    >
       <div className="max-w-[1100px] mx-auto text-center">
         <span className="[font-family:var(--font-mono)] text-[0.68rem] tracking-[0.12em] uppercase text-[#A94E80] block mb-4 font-medium">
           Agent integrations
@@ -592,9 +672,10 @@ $ farness calibration`,
         <p className="text-[0.9rem] text-[#415463] mb-8 leading-[1.65] max-w-[760px] mx-auto">
           Farness now has a package-first agent path: a local MCP server for
           persistence, packaged skills for Codex and Claude Code, and the same
-          forecast structure used in the paper. The Claude plugin remains optional,
-          and the CLI is a local store and calibration surface, not an LLM client.
-          If setup drifts, `farness doctor --fix` repairs the local integration.
+          forecast structure used in the paper. The Claude plugin remains
+          optional, and the CLI is a local store and calibration surface, not an
+          LLM client. If setup drifts, `farness doctor --fix` repairs the local
+          integration.
         </p>
 
         <div className="grid grid-cols-3 gap-4 mb-8 max-md:grid-cols-1">
@@ -612,7 +693,8 @@ $ farness calibration`,
               <div
                 className="rounded-xl p-4"
                 style={{
-                  background: "linear-gradient(180deg, #172633 0%, #0F1A24 100%)",
+                  background:
+                    "linear-gradient(180deg, #172633 0%, #0F1A24 100%)",
                   border: "1px solid #2B3D4B",
                 }}
               >
@@ -638,7 +720,9 @@ $ farness calibration`,
             href="/docs"
             className="inline-flex items-center gap-2 py-[0.75em] px-6 [font-family:var(--font-display)] text-[0.88rem] font-medium no-underline rounded-lg cursor-pointer transition-all duration-200 hover:no-underline bg-white text-[#415463] border border-[#BED0DB] hover:border-[#A94E80] hover:text-[#14202B]"
           >
-            <span className="[font-family:var(--font-mono)] text-[0.82rem]">open docs</span>
+            <span className="[font-family:var(--font-mono)] text-[0.82rem]">
+              open docs
+            </span>
           </a>
           <a
             href="https://github.com/MaxGhenis/farness/blob/main/docs/agent-workflows.md"
@@ -674,21 +758,39 @@ function Footer() {
   return (
     <footer className="py-16 px-8 text-center bg-[#F7FAFC] border-t border-[#D9E4EC]">
       <div className="flex gap-6 justify-center text-[0.78rem] [font-family:var(--font-mono)]">
-        <a href="https://github.com/MaxGhenis/farness" className="text-[#6B7C89] no-underline hover:text-[#14202B] transition-colors">
+        <a
+          href="https://github.com/MaxGhenis/farness"
+          className="text-[#6B7C89] no-underline hover:text-[#14202B] transition-colors"
+        >
           GitHub
         </a>
-        <a href="/docs" className="text-[#6B7C89] no-underline hover:text-[#14202B] transition-colors">
+        <a
+          href="/docs"
+          className="text-[#6B7C89] no-underline hover:text-[#14202B] transition-colors"
+        >
           Docs
         </a>
-        <a href="/paper" className="text-[#6B7C89] no-underline hover:text-[#14202B] transition-colors">
+        <a
+          href="/paper"
+          className="text-[#6B7C89] no-underline hover:text-[#14202B] transition-colors"
+        >
           Research
         </a>
-        <a href="/thesis" className="text-[#6B7C89] no-underline hover:text-[#14202B] transition-colors">
+        <a
+          href="/thesis"
+          className="text-[#6B7C89] no-underline hover:text-[#14202B] transition-colors"
+        >
           Thesis
         </a>
       </div>
       <p className="mt-6 text-[0.75rem] text-[#94A3AF]">
-        Built by <a href="https://maxghenis.com" className="text-[#6B7C89] no-underline hover:text-[#14202B] transition-colors">Max Ghenis</a>
+        Built by{" "}
+        <a
+          href="https://maxghenis.com"
+          className="text-[#6B7C89] no-underline hover:text-[#14202B] transition-colors"
+        >
+          Max Ghenis
+        </a>
       </p>
     </footer>
   );
@@ -699,7 +801,8 @@ function Footer() {
 export default function HomePage() {
   return (
     <div className="bg-[#F7FAFC] text-[#14202B] min-h-screen grain-overlay">
-      <Header />
+      <Header activePage="forecasts" />
+      <ForecastPrototype />
       <Hero />
       <HowItWorks />
       <WorkflowDemo />

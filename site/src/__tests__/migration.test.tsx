@@ -23,7 +23,6 @@ import HomePage from "../app/page";
 import DocsPage from "../app/docs/page";
 import ThesisPage from "../app/thesis/page";
 
-
 describe("Next.js migration", () => {
   describe("Homepage", () => {
     it("renders without crashing", () => {
@@ -42,6 +41,16 @@ describe("Next.js migration", () => {
       expect(matches.length).toBeGreaterThan(0);
     });
 
+    it("opens on the forecast prototype", () => {
+      render(<HomePage />);
+      expect(
+        screen.getByText(
+          "Forecasts on every consequential cell of government data",
+        ),
+      ).toBeInTheDocument();
+      expect(screen.getByText("Prototype status")).toBeInTheDocument();
+    });
+
     it("renders hero subhead with farness mention", () => {
       render(<HomePage />);
       expect(
@@ -51,7 +60,9 @@ describe("Next.js migration", () => {
 
     it("renders how it works section", () => {
       render(<HomePage />);
-      expect(screen.getByText("From intuition to instrument")).toBeInTheDocument();
+      expect(
+        screen.getByText("From intuition to instrument"),
+      ).toBeInTheDocument();
       expect(screen.getByText("Intercept")).toBeInTheDocument();
       expect(screen.getByText("Reframe")).toBeInTheDocument();
       expect(screen.getByText("Anchor")).toBeInTheDocument();
@@ -59,9 +70,12 @@ describe("Next.js migration", () => {
 
     it("renders workflow demo section", () => {
       render(<HomePage />);
-      expect(screen.getByText("Watch the packaged path end to end")).toBeInTheDocument();
       expect(
-        screen.getAllByLabelText("End-to-end farness workflow demo for Codex").length,
+        screen.getByText("Watch the packaged path end to end"),
+      ).toBeInTheDocument();
+      expect(
+        screen.getAllByLabelText("End-to-end farness workflow demo for Codex")
+          .length,
       ).toBeGreaterThan(0);
     });
 
@@ -75,7 +89,7 @@ describe("Next.js migration", () => {
     it("renders research proof section", () => {
       render(<HomePage />);
       expect(screen.getByText("Stability-under-probing")).toBeInTheDocument();
-      expect(screen.getByText("11")).toBeInTheDocument();
+      expect(screen.getAllByText("11").length).toBeGreaterThan(0);
       expect(screen.getAllByText("2").length).toBeGreaterThan(0);
     });
 
@@ -92,7 +106,9 @@ describe("Next.js migration", () => {
 
     it("renders installation section", () => {
       render(<HomePage />);
-      expect(screen.getByText("Use it natively or from the CLI")).toBeInTheDocument();
+      expect(
+        screen.getByText("Use it natively or from the CLI"),
+      ).toBeInTheDocument();
       expect(screen.getByText("Codex")).toBeInTheDocument();
       expect(screen.getAllByText(/\$farness/).length).toBeGreaterThan(0);
     });
@@ -157,14 +173,28 @@ describe("Next.js migration", () => {
     it("renders docs title and install guidance", () => {
       render(<DocsPage />);
       expect(
-        screen.getByText("Use farness with Codex, Claude Code, or the local CLI."),
+        screen.getByText(
+          "Use farness with Codex, Claude Code, or the local CLI.",
+        ),
       ).toBeInTheDocument();
-      expect(screen.getByText("Install the package and choose a path")).toBeInTheDocument();
-      expect(screen.getAllByText(/farness setup codex/).length).toBeGreaterThan(0);
-      expect(screen.getAllByText(/farness doctor codex/).length).toBeGreaterThan(0);
-      expect(screen.getByText("See the packaged flow before you install")).toBeInTheDocument();
-      expect(screen.getByText("Fix drifted installs or reset cleanly")).toBeInTheDocument();
-      expect(screen.getByText("Draft forecast markets from decisions")).toBeInTheDocument();
+      expect(
+        screen.getByText("Install the package and choose a path"),
+      ).toBeInTheDocument();
+      expect(screen.getAllByText(/farness setup codex/).length).toBeGreaterThan(
+        0,
+      );
+      expect(
+        screen.getAllByText(/farness doctor codex/).length,
+      ).toBeGreaterThan(0);
+      expect(
+        screen.getByText("See the packaged flow before you install"),
+      ).toBeInTheDocument();
+      expect(
+        screen.getByText("Fix drifted installs or reset cleanly"),
+      ).toBeInTheDocument();
+      expect(
+        screen.getByText("Draft public forecast questions"),
+      ).toBeInTheDocument();
       expect(screen.getAllByText(/\$farness/).length).toBeGreaterThan(0);
     });
 
@@ -186,6 +216,11 @@ describe("Next.js migration", () => {
     it("renders install button", () => {
       render(<HomePage />);
       expect(screen.getByText("Install")).toBeInTheDocument();
+    });
+
+    it("flags the site as a prototype", () => {
+      render(<HomePage />);
+      expect(screen.getByLabelText("Prototype build")).toBeInTheDocument();
     });
 
     it("uses Tailwind classes (no old CSS module class names)", () => {

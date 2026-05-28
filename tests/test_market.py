@@ -95,6 +95,26 @@ def test_market_draft_cli_for_standalone_question_outputs_json(capsys):
     assert pack["markets"][0]["manifold_payload"]["initialProb"] == 52
 
 
+def test_forecast_draft_cli_alias_outputs_json(capsys):
+    with patch(
+        "sys.argv",
+        [
+            "farness",
+            "forecast-draft",
+            "Will Waymo be legally permitted to offer driverless paid robotaxi rides in DC by 2026-12-31?",
+            "--initial-prob",
+            "52",
+            "--resolution-date",
+            "2026-12-31",
+        ],
+    ):
+        main()
+
+    pack = json.loads(capsys.readouterr().out)
+    assert pack["warning"].startswith("Draft only")
+    assert pack["markets"][0]["manifold_payload"]["initialProb"] == 52
+
+
 def test_market_draft_cli_for_decision_writes_file(tmp_path, capsys):
     store_path = tmp_path / "decisions.jsonl"
     store = DecisionStore(store_path)

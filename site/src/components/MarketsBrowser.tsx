@@ -13,16 +13,33 @@ import { MarketCard } from "./MarketCard";
 type Filter = "all" | MarketType;
 
 const FILTERS: { key: Filter; label: string; description: string }[] = [
-  { key: "all", label: "All markets", description: "All three market types." },
-  { key: "arch", label: TYPE_LABEL.arch + " cells", description: TYPE_DESCRIPTION.arch },
-  { key: "policy", label: TYPE_LABEL.policy + " parameters", description: TYPE_DESCRIPTION.policy },
-  { key: "conditional", label: TYPE_LABEL.conditional, description: TYPE_DESCRIPTION.conditional },
+  {
+    key: "all",
+    label: "All forecasts",
+    description: "All three forecast types.",
+  },
+  {
+    key: "arch",
+    label: TYPE_LABEL.arch + " cells",
+    description: TYPE_DESCRIPTION.arch,
+  },
+  {
+    key: "policy",
+    label: TYPE_LABEL.policy + " parameters",
+    description: TYPE_DESCRIPTION.policy,
+  },
+  {
+    key: "conditional",
+    label: TYPE_LABEL.conditional,
+    description: TYPE_DESCRIPTION.conditional,
+  },
 ];
 
 export function MarketsBrowser() {
   const [filter, setFilter] = useState<Filter>("all");
   const filtered = useMemo(
-    () => (filter === "all" ? MARKETS : MARKETS.filter((m) => m.type === filter)),
+    () =>
+      filter === "all" ? MARKETS : MARKETS.filter((m) => m.type === filter),
     [filter],
   );
   const description =

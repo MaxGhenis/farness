@@ -5,7 +5,7 @@ import { Header } from "@/components/Header";
 export const metadata: Metadata = {
   title: "Farness vision — working document",
   description:
-    "Working synthesis of the Farness Foundation vision: open predictions as a new species of epistemic infrastructure, built for the agents of tomorrow.",
+    "Working synthesis of the Farness Foundation vision: we build open AI forecasters that publish, explain, and score predictions on consequential outcomes.",
   robots: {
     index: false,
     follow: false,
@@ -34,10 +34,9 @@ export default function VisionPage() {
             <span className="[font-family:var(--font-editorial)] italic">
               farness
             </span>{" "}
-            is a 501(c)(3) foundation building open, transparent, calibrated
-            AI-agent ensembles that produce continuously-updated forecasts on
-            consequential outcomes — and a public substrate for the agents of
-            tomorrow.
+            builds open AI forecasters. We make them predict consequential
+            outcomes, show their work, call public tools, publish calibrated
+            uncertainty, and score every forecast against reality.
           </p>
         </header>
 
@@ -45,31 +44,25 @@ export default function VisionPage() {
           <section>
             <h2>The bet</h2>
             <p>
-              The next layer of open infrastructure after open source software,
-              open data, and open weights is <em>open predictions</em>:
-              continuously-updated forecasts produced by AI-agent ensembles
-              where every step of reasoning is inspectable, every tool call is
-              logged, every calibration result is published, and every
-              methodology improvement is shared.
+              Open source software opened code. Open data opened the inputs.
+              Open weights opened the reasoning machinery. We open the
+              predictions: continuously-updated forecasts from AI systems whose
+              tool calls, assumptions, uncertainty, calibration, and later
+              outcomes are public.
             </p>
             <p>
-              Existing prediction markets aggregate information but cannot show
-              their work. Every trader has private motives, private
-              information, private cognitive biases. Even Metaculus comments
-              are partial. AI agents are the first forecasters whose reasoning
-              is fully visible — not because they choose to share it but
-              because the medium is structurally transparent. Every prior
-              weighting, every tool selection, every update on new information
-              is inspectable.
+              We use forecasting as an alignment pressure. A system that must
+              predict public facts before they happen has to track reality,
+              expose uncertainty, use evidence, and learn from misses. When the
+              trace is open, the public can inspect the model's evidence and the
+              model can learn from the public record of its own errors.
             </p>
             <p>
-              That transparency creates a compounding loop nothing else has.
-              Aggregate the traces and systematic biases become visible across
-              the field. Each bias becomes a fix. Each fix produces a
-              generation of agents measurably better than the last. This is
-              the same dynamic that made open-source software durable: anyone
-              can see the bug, anyone can submit the patch. Applied to
-              forecasting, it produces a new species of epistemic
+              The traces create a compounding loop. Aggregate them and
+              systematic biases become visible. Score the forecasts and weak
+              methods lose credibility. Publish the fixes and the next
+              generation of forecasters starts from a better baseline. Applied
+              to prediction, the open-source dynamic becomes epistemic
               infrastructure.
             </p>
           </section>
@@ -77,80 +70,67 @@ export default function VisionPage() {
           <section>
             <h2>What we build</h2>
             <p>
-              Farness Foundation (501(c)(3)) operates four programs of varying
-              prominence:
+              Farness Foundation builds four connected pieces of public-good
+              forecasting infrastructure:
             </p>
-            <h3>Farness — the open-predictions platform</h3>
+            <h3>We run open forecasters on consequential questions</h3>
             <p>
-              The foundation's flagship. AI-agent ensembles running
-              continuously across the structured grid of consequential
-              questions: every government statistic the Bureau of Economic
-              Analysis, Bureau of Labor Statistics, Census Bureau, and IRS
-              publishes; every policy parameter encoded by Axiom; every
-              counterfactual conditional question that drives policy and
-              economic decisions. The platform publishes the forecasts, the
-              agent traces, the calibration history, and the running
-              methodology notes openly. Funded compute scales the depth of the
-              ensemble; the substrate stays free at the point of use.
+              We run AI-agent ensembles across the structured grid of
+              consequential questions: government statistics from BEA, BLS,
+              Census, and IRS; policy parameters encoded by Axiom; and
+              counterfactual questions that drive policy and economic decisions.
+              We publish the forecasts, the traces, the calibration history, and
+              the running methodology notes openly. Funded compute scales the
+              depth of the ensemble; the substrate stays free at the point of
+              use.
             </p>
-            <h3>PolicyEngine — microsim engine and custom policy analysis</h3>
+            <h3>We simulate policy with inspectable models</h3>
             <p>
-              The established product brand the policy community already
-              knows. Open-source microsimulation for US, UK, and Canadian
-              tax-benefit systems, plus custom analysis services for
-              governments, think tanks, advocacy organizations, and
-              researchers. PolicyEngine continues operationally exactly as it
-              does today; the new structural fact is that it sits inside the
-              Farness Foundation as a continuing product brand and is also one
-              of the substrate engines the Farness platform calls when
-              producing policy-conditional forecasts. Policy folks who know
-              PolicyEngine keep interacting with PolicyEngine. The foundation
-              gives the work a stronger funding base and broader institutional
-              identity.
+              We maintain PolicyEngine as open-source microsimulation for US,
+              UK, and Canadian tax-benefit systems. Governments, think tanks,
+              advocacy organizations, and researchers use it for custom policy
+              analysis. Farness forecasters call PolicyEngine when they need
+              policy-conditional distributions, and PolicyEngine keeps serving
+              the policy community through the brand and workflows people
+              already know.
             </p>
-            <h3>Microplex — calibrated synthetic populations</h3>
+            <h3>We build calibrated synthetic populations</h3>
             <p>
-              The synthetic micro-data substrate that powers PolicyEngine's
-              simulations and provides training-scale population data for
-              calibration-native AI research. Lives inside PolicyEngine
-              operationally. Published openly as a Hugging Face dataset for
-              outside consumption; methodology and synthesizer code in the
-              open. Replaces PolicyEngine's current Enhanced CPS as the
-              substrate for policy microsimulation, with substantially better
-              calibration to administrative data and broader applicability.
+              We build Microplex as the synthetic micro-data substrate for
+              PolicyEngine simulations and calibration-native AI research. We
+              publish the population data, methodology, and synthesizer code
+              openly. Microplex replaces PolicyEngine's Enhanced CPS substrate
+              with data calibrated more tightly to administrative benchmarks and
+              useful beyond tax-benefit microsimulation.
             </p>
-            <h3>Farness Decisions — personal and team decision tool</h3>
+            <h3>We make everyday agent advice forecastable</h3>
             <p>
-              The existing open-source Python package, CLI, MCP server, and
-              Claude Code skill that turns advice-seeking into structured
-              forecasting (KPIs, options, confidence intervals, resolution
-              rules, calibration tracking). Small relative to the platform but
-              load-bearing as the consumer-facing artifact of the
-              forecasting-as-harness thesis and a useful tool for individual
-              and team decisions.
+              We maintain the open-source Farness Decisions package, CLI, MCP
+              server, and agent skills. They turn advice-seeking into explicit
+              forecasts with KPIs, options, confidence intervals, resolution
+              rules, and calibration tracking. This keeps the same discipline
+              available for individual decisions, team decisions, and public
+              policy forecasts.
             </p>
           </section>
 
           <section>
             <h2>The transparency advantage is the durable moat</h2>
             <p>
-              You cannot close-source your way to a better open-predictions
-              platform than Farness. The transparency is constitutive: every
-              improvement to methodology, every newly-discovered bias, every
-              successful tool integration is shared, peer-reviewed, and
-              available to everyone working in the field. Proprietary
-              forecasting infrastructure cannot do this — its improvements
-              stay internal, its biases stay hidden, its tool integrations
-              stay locked. Over time the open substrate compounds and the
-              closed substrate doesn't.
+              We make transparency the core mechanism. Every methodology
+              improvement, newly-discovered bias, and successful tool
+              integration becomes shared infrastructure. Researchers can inspect
+              the trace, reproduce the forecast, challenge the assumptions, and
+              contribute a better method. Each improvement raises the baseline
+              for everyone who builds on the substrate.
             </p>
             <p>
-              The same dynamic that made Linux durable against superior closed
-              competitors is the one that protects Farness's position. The
-              compounding work isn't done by Farness alone; it's done by
-              everyone who uses the substrate and contributes back. The
-              foundation maintains, integrates, sets direction, and ensures
-              the public-good character. The community does the rest.
+              The same dynamic that made Linux durable protects Farness's
+              position. The compounding work happens across the whole community
+              of users and contributors. The foundation maintains the core
+              infrastructure, integrates the best contributions, sets direction,
+              and protects the public-good character. The community expands the
+              surface area faster than any single organization could.
             </p>
           </section>
 
@@ -159,35 +139,33 @@ export default function VisionPage() {
             <p>
               The infrastructure that matters most gets built ahead of the
               capability that needs it. TCP/IP was designed for a few hundred
-              nodes and scaled to billions because the design anticipated
-              future use. Kubernetes solved orchestration problems most
-              organizations didn't have yet when it shipped. Linux was built
-              when computing was tiny and scaled with hardware nobody had
-              imagined. Substrate-builders capture disproportionate value
-              because they're already there when the demand shows up.
+              nodes and scaled to billions because the design anticipated future
+              use. Kubernetes solved orchestration problems most organizations
+              had not yet reached when it shipped. Linux was built when
+              computing was tiny and scaled with hardware nobody had imagined.
+              Substrate-builders capture disproportionate value because they are
+              already there when the demand shows up.
             </p>
             <p>
-              Farness is built with this in mind. Every capability is
-              reachable through a clean machine-callable API; future agents
-              won't fill out web forms. Every agent trace is structured for
-              downstream consumption by other agents, not just human readers.
-              Every tool in the simulation engine is self-describing so that
-              agents that haven't been invented yet can discover what's
-              available. Permissioning anticipates millions of automated
-              participants, not hand-issued API keys. Calibration scoring is
-              queryable, so current agents can learn from history and future
-              agents can preferentially route to tool configurations with
-              proven track records.
+              Farness is built with this in mind. Every capability is reachable
+              through a clean machine-callable API; future agents will call
+              tools directly. Every agent trace is structured for downstream
+              consumption by other agents and human readers. Every tool in the
+              simulation engine is self-describing so that agents that have not
+              been invented yet can discover what is available. Permissioning
+              anticipates millions of automated participants through scoped
+              automated access. Calibration scoring is queryable, so current
+              agents can learn from history and future agents can preferentially
+              route to tool configurations with proven track records.
             </p>
             <p>
               This costs a little more today and pays disproportionately when
               capability arrives. By the time agents are reliably orchestrating
               tools, composing pipelines, and proposing methodology
               improvements, the substrate they need will already be open,
-              public, free, and continuously calibrated. Closed substrate
-              forces tomorrow's agents to negotiate access, pay rent, deal
-              with proprietary APIs. Open substrate is the permission-less
-              infrastructure the next decade of AI development can build on.
+              public, free, and continuously calibrated. Open substrate gives
+              tomorrow's agents permission-less infrastructure the next decade
+              of AI development can build on.
             </p>
           </section>
 
@@ -199,15 +177,15 @@ export default function VisionPage() {
             </p>
             <blockquote>
               <p>
-                <strong>Axiom Foundation</strong> — computable layer for all
-                law and the structured government-data layer (Arch). Encoded
+                <strong>Axiom Foundation</strong> — computable layer for all law
+                and the structured government-data layer (Arch). Encoded
                 statutes, regulations, holdings, and the metadata linking
                 published government statistics to the laws that mandate them.
                 Ballmer-funded. Separate organization, shared substrate.
               </p>
               <p>
-                <strong>Farness Foundation</strong> — open-predictions
-                platform, microsimulation engine and custom policy analysis
+                <strong>Farness Foundation</strong> — open-predictions platform,
+                microsimulation engine and custom policy analysis
                 (PolicyEngine), synthetic-population substrate (Microplex),
                 personal decision tool (Farness Decisions), and the research
                 program on calibration-native foundation models and value
@@ -216,14 +194,13 @@ export default function VisionPage() {
             </blockquote>
             <p>
               The Farness platform consumes Axiom (encoded law and government
-              data architecture) and Microplex (population substrate) as
-              inputs, runs ensembles through PolicyEngine and other
-              computational engines, and publishes calibrated forecasts.
-              Policy partners interact with PolicyEngine directly through its
-              own brand and channels. New audiences — AI safety, agencies
-              funding their own forecasts, prediction-market researchers,
-              broader policy analysts — interact with Farness as the umbrella
-              platform.
+              data architecture) and Microplex (population substrate) as inputs,
+              runs ensembles through PolicyEngine and other computational
+              engines, and publishes calibrated forecasts. Policy partners
+              interact with PolicyEngine directly through its own brand and
+              channels. New audiences — AI safety, agencies funding their own
+              forecasts, prediction-market researchers, broader policy analysts
+              — interact with Farness as the umbrella platform.
             </p>
           </section>
 
@@ -240,9 +217,9 @@ export default function VisionPage() {
                 distribution.
               </li>
               <li>
-                <strong>Open data</strong> opened the inputs. Wikipedia,
-                Common Crawl, OpenStreetMap, government open-data portals.
-                The raw material of analysis became public and citable.
+                <strong>Open data</strong> opened the inputs. Wikipedia, Common
+                Crawl, OpenStreetMap, government open-data portals. The raw
+                material of analysis became public and citable.
               </li>
               <li>
                 <strong>Open weights</strong> opened the reasoning machinery.
@@ -251,79 +228,43 @@ export default function VisionPage() {
               </li>
               <li>
                 <strong>Open predictions</strong> opens the reasoning
-                <em>itself</em>, on consequential questions. Every prior,
-                every tool call, every update is auditable. The output isn't
-                just the forecast — it's the full chain of reasoning that
-                produced it.
+                <em>itself</em>, on consequential questions. Every prior, every
+                tool call, every update is auditable. The output includes the
+                forecast and the full chain of reasoning that produced it.
               </li>
             </ul>
             <p>
-              Each step opens more of the epistemic process. Each step
-              produces durable public goods that the closed alternative cannot
-              match. Open predictions is the natural next layer, and Farness
-              is the foundation building it.
+              Each step opens more of the epistemic process. Each step produces
+              durable public goods and gives the next generation of builders
+              more to start from. Open predictions is the natural next layer,
+              and Farness is the foundation building it.
             </p>
           </section>
 
           <section>
-            <h2>What this complements (and what it isn't)</h2>
+            <h2>We align AI by making it predict</h2>
             <p>
-              <em>Complements Anthropic and the frontier labs.</em> Anthropic
-              addresses alignment by tuning the model's values from the
-              inside. Farness addresses alignment by making the model's
-              consequences visible from the outside. Both layers are
-              necessary; neither replaces the other. AI safety as a field
-              needs the values-installation work and the consequence-visibility
-              work in parallel, and the open-source structure of Farness means
-              current frontier-lab employees can publicly support the
-              consequence-visibility layer without conflict of interest.
+              We give AI systems a narrow job with a hard feedback loop: predict
+              consequential outcomes before they happen, explain the evidence
+              behind the prediction, quantify uncertainty, and accept a public
+              score when reality arrives. That objective pushes models toward
+              truth-tracking behavior because calibration, evidence use, and
+              humility become measurable product requirements.
             </p>
             <p>
-              <em>Complements CBO, JCT, OMB, and official scoring.</em>{" "}
-              Official policy scoring is single point estimates produced by
-              filtering model outputs through institutional judgment that
-              isn't fully documented. Farness produces continuously updated
-              probability distributions with full reasoning traces, scored
-              against actuals. Where Farness and official scores agree,
-              confidence rises. Where they diverge, the divergence itself
-              becomes a useful signal about what assumptions are doing the
-              work.
+              We use the strongest available models as forecasters today. We
+              connect them to public data, Axiom-encoded law, PolicyEngine
+              simulations, Microplex populations, and explicit calibration
+              records. We evaluate which model-tool-method combinations predict
+              best. We publish the traces so other researchers can reproduce,
+              criticize, and improve the methods.
             </p>
             <p>
-              <em>
-                Complements Kalshi, Polymarket, and the broader prediction-market
-                ecosystem.
-              </em>{" "}
-              Existing markets aggregate human information well, but the
-              reasoning is opaque, the regulatory shape constrains the
-              questions, and the long tail of questions stays thinly traded.
-              Farness operates in a different mode entirely: open, automated,
-              transparent, free at the point of use, without trading and
-              therefore without market-regulatory complexity. The two
-              ecosystems can coexist; the open-predictions layer addresses a
-              gap markets don't fill.
-            </p>
-            <p>
-              <em>Not a frontier model lab.</em> Farness doesn't train
-              competing general-purpose chat models. Its research focuses on
-              calibration-native foundation models trained as tool
-              orchestrators — a different objective and architecture than
-              frontier general-purpose LLMs.
-            </p>
-            <p>
-              <em>Not a trading firm.</em> Farness doesn't run a fund or
-              capture alpha from its forecasts. The public-good character is
-              load-bearing. A small publicly-disclosed fund operating as a
-              truth-telling instrument is a possible future addition (Phase 2
-              wholly-owned subsidiary if and when the structure makes sense);
-              not part of the founding identity.
-            </p>
-            <p>
-              <em>Not a closed product.</em> Open by construction. Models,
-              weights, methodology, simulation engine code, Microplex
-              outputs, Axiom-encoded substrate, calibration history, and
-              market resolution data are all public. Commercial layers (if
-              any) sit on top of the open substrate rather than gating it.
+              As the corpus grows, we train and evaluate prediction-native
+              systems: agents that select tools, decompose questions, maintain
+              uncertainty, update on evidence, and learn from scored outcomes.
+              The lab advances by making forecasts useful in the world and by
+              making the full learning loop open.
             </p>
           </section>
 
@@ -336,62 +277,65 @@ export default function VisionPage() {
             </p>
             <ul>
               <li>
-                <strong>Coefficient Giving</strong> (Open Philanthropy
-                rebrand) — AI safety, forecasting infrastructure,
-                consequence-visibility framing fits directly in their existing
-                grant portfolios.
+                <strong>Coefficient Giving</strong> (Open Philanthropy rebrand)
+                — AI safety, forecasting infrastructure, consequence-visibility
+                framing fits directly in their existing grant portfolios.
               </li>
               <li>
-                <strong>Survival and Flourishing Fund</strong> — long-horizon
-                AI safety and alignment-adjacent infrastructure.
+                <strong>Survival and Flourishing Fund</strong> — long-horizon AI
+                safety and alignment-adjacent infrastructure.
               </li>
               <li>
-                <strong>Astera Institute</strong>, <strong>Schmidt Sciences /
-                Schmidt Futures</strong>, <strong>Mozilla Foundation</strong>{" "}
-                — novel public-good scientific infrastructure and open-source
-                AI ethos.
+                <strong>Astera Institute</strong>,{" "}
+                <strong>Schmidt Sciences / Schmidt Futures</strong>,{" "}
+                <strong>Mozilla Foundation</strong> — novel public-good
+                scientific infrastructure and open-source AI ethos.
               </li>
               <li>
-                <strong>Anthropic alumni and AI-safety-aligned liquidity</strong>{" "}
-                — tender-offer and IPO-event capital from Anthropic and
-                similar frontier labs. Open-source-by-construction means
-                current frontier-lab employees can publicly back the work
-                without conflict of interest. The complement-not-compete frame
-                is unique to this category.
+                <strong>
+                  Anthropic alumni and AI-safety-aligned liquidity
+                </strong>{" "}
+                — tender-offer and IPO-event capital from Anthropic and similar
+                frontier labs. Open-source-by-construction means current
+                frontier-lab employees can publicly back the work without
+                conflict of interest. The complement-not-compete frame is unique
+                to this category.
               </li>
               <li>
                 <strong>Arnold Ventures Mission Aligned Investments</strong> —
-                fits the structure Andrew Moylan and team have already
-                signaled interest in, particularly for the open
-                policy-forecasting infrastructure angle.
+                fits the structure Andrew Moylan and team have already signaled
+                interest in, particularly for the open policy-forecasting
+                infrastructure angle.
               </li>
               <li>
-                <strong>Government agencies and international equivalents</strong>{" "}
+                <strong>
+                  Government agencies and international equivalents
+                </strong>{" "}
                 — Treasury, state revenue offices, Federal Reserve regional
                 banks, HHS, Census, and international counterparts paying for
                 marginal compute on the questions they care about. Sponsored
-                runs are program-related revenue that fits 501(c)(3)
-                structure cleanly.
+                runs are program-related revenue that fits 501(c)(3) structure
+                cleanly.
               </li>
               <li>
-                <strong>National research funding</strong> — NSF, DARPA,
-                IARPA, ARIA UK, NIH for specific research directions.
+                <strong>National research funding</strong> — NSF, DARPA, IARPA,
+                ARIA UK, NIH for specific research directions.
               </li>
               <li>
-                <strong>Sponsorship capital from AI labs, Big Tech, and
-                philanthropies</strong>, per the
-                Fradkin/Jabarian/Koh well-capitalized-prediction-markets
-                model, applied to specific question sets the sponsor wants
-                better-calibrated forecasts on.
+                <strong>
+                  Sponsorship capital from AI labs, Big Tech, and philanthropies
+                </strong>
+                , per the Fradkin/Jabarian/Koh
+                well-capitalized-prediction-markets model, applied to specific
+                question sets the sponsor wants better-calibrated forecasts on.
               </li>
             </ul>
             <p>
-              The multi-funder revenue model means Farness doesn't depend on
-              any single source. Foundation grants fund the platform and
-              research. Sponsored compute pays for specific question coverage.
-              Custom analysis (through PolicyEngine) generates additional
-              program revenue. The foundation never needs to make any one
-              funder a structural dependency.
+              Farness funds the work through multiple channels. Foundation
+              grants fund the platform and research. Sponsored compute pays for
+              specific question coverage. Custom analysis through PolicyEngine
+              generates additional program revenue. The revenue mix keeps the
+              foundation institutionally independent.
             </p>
           </section>
 
@@ -402,91 +346,95 @@ export default function VisionPage() {
               forecasts on every consequential government statistic, every
               encoded policy parameter, and every counterfactual conditional
               question stakeholders care about. The platform runs hundreds to
-              thousands of specialized agent configurations, each with
-              published methodology and visible track record. Calibration
-              history goes back years and is queryable per question, per
-              configuration, per resolution period. Government agencies fund
-              targeted compute on their projection questions. Researchers
-              build on the open infrastructure for their own work. Frontier AI
-              labs use the calibration corpus as a training and evaluation
-              resource. Open-source forecaster configurations and tool
-              integrations are contributed by people the foundation has never
-              met.
+              thousands of specialized agent configurations, each with published
+              methodology and visible track record. Calibration history goes
+              back years and is queryable per question, per configuration, per
+              resolution period. Government agencies fund targeted compute on
+              their projection questions. Researchers build on the open
+              infrastructure for their own work. Frontier AI labs use the
+              calibration corpus as a training and evaluation resource.
+              Open-source forecaster configurations and tool integrations are
+              contributed by people the foundation has never met.
             </p>
             <p>
               The forecasts feed into the decisions of governments, advocacy
-              organizations, firms, and individuals — not because Farness
-              tells them what to do, but because the calibrated probability
-              distributions are visibly more useful than what was available
-              before. The substrate compounds: every new tool integration,
-              every new methodology insight, every new question coverage
-              makes everything that was already there a little more useful.
+              organizations, firms, and individuals because calibrated
+              probability distributions with visible evidence improve the
+              decisions those institutions already make. The substrate
+              compounds: every new tool integration, every new methodology
+              insight, and every new question coverage makes everything that was
+              already there more useful.
             </p>
             <p>
-              And when the AI agents of 2030 arrive — substantially more
-              capable than today's, better at tool selection, better at
-              composing methodology, better at reasoning over their own
-              outputs — they find a substrate already built for them. Open,
-              calibrated, audit-trail-native, and free at the point of use.
-              The capability becomes immediately deployable on consequential
-              questions because the infrastructure is already there.
+              And when the AI agents of 2030 arrive — substantially more capable
+              than today's, better at tool selection, better at composing
+              methodology, better at reasoning over their own outputs — they
+              find a substrate already built for them. Open, calibrated,
+              audit-trail-native, and free at the point of use. The capability
+              becomes immediately deployable on consequential questions because
+              the infrastructure is already there.
             </p>
           </section>
 
           <section>
             <h2>Honest caveats and open questions</h2>
             <p>
-              <strong>The autonomous-improvement language is aspirational.</strong>{" "}
-              Today's AI systems can iterate variants, tune hyperparameters,
-              and generate model code, but autonomous improvement of
-              methodology without sustained human guidance is years out.
-              Honest framing: open human-in-the-loop improvement of AI
-              ensembles on a transparent substrate, with the substrate
-              compounding the human-and-AI work over time. Not autonomous
-              self-improvement; collaborative compounding.
+              <strong>
+                The autonomous-improvement language is aspirational.
+              </strong>{" "}
+              Today's AI systems can iterate variants, tune hyperparameters, and
+              generate model code, but autonomous improvement of methodology
+              without sustained human guidance is years out. Honest framing:
+              open human-in-the-loop improvement of AI ensembles on a
+              transparent substrate, with the substrate compounding the
+              human-and-AI work over time. We build collaborative compounding
+              before autonomous self-improvement.
             </p>
             <p>
-              <strong>The five-year picture is not the one-year picture.</strong>{" "}
-              The platform launches with a smaller agent ensemble, fewer
-              questions, a narrower research program, and a working but
-              incomplete substrate. Building toward the mature state takes
-              real research and engineering investment over years. The vision
-              is the north star; the early stages look more like a focused
-              shipping organization than a complete forecasting layer.
+              <strong>The one-year launch starts narrower.</strong> The platform
+              launches with a smaller agent ensemble, fewer questions, a
+              narrower research program, and a working but incomplete substrate.
+              Building toward the mature state takes real research and
+              engineering investment over years. The vision is the north star;
+              the early stages look more like a focused shipping organization
+              than a complete forecasting layer.
             </p>
             <p>
               <strong>Open infrastructure depends on adoption.</strong>{" "}
-              Having the platform doesn't mean organizations use it. The
-              institutional muscle to integrate open-predictions into
-              decision-making is real work that takes years to build across
-              policy shops, agencies, and other users. Farness can lead the
-              category but can't manufacture demand alone.
+              Organizations need workflows that integrate open predictions into
+              real decisions. Building that institutional muscle across policy
+              shops, agencies, and other users takes years. Farness can lead the
+              category and still has to earn adoption one workflow at a time.
             </p>
             <p>
-              <strong>Regulatory ambiguity if forecasts become market-moving.</strong>{" "}
-              Without a trading venue, Farness avoids most prediction-market
-              regulatory complexity. But if open forecasts become widely
-              consumed by financial markets, the SEC or CFTC may still take
-              interest in disclosure rules. Probably solvable through
-              precedents like Federal Reserve forecast publication, but
-              warrants real legal review.
+              <strong>
+                Regulatory ambiguity if forecasts become market-moving.
+              </strong>{" "}
+              Farness publishes forecasts rather than trades, which avoids most
+              prediction-market regulatory complexity. If open forecasts become
+              widely consumed by financial markets, the SEC or CFTC may still
+              take interest in disclosure rules. Probably solvable through
+              precedents like Federal Reserve forecast publication, but warrants
+              real legal review.
             </p>
             <p>
               <strong>The PolicyEngine brand transition.</strong> PolicyEngine
               continues operationally unchanged, but funders, board, and
               partners need to be brought along on the umbrella structure.
               Existing grants are to PolicyEngine via PSL Foundation fiscal
-              sponsorship; the cleanest path is incorporating Farness
-              Foundation as the new 501(c)(3) and graduating PolicyEngine
-              into it from PSL. Donor consent process is straightforward; the
-              communications work isn't.
+              sponsorship; the cleanest path is incorporating Farness Foundation
+              as the new 501(c)(3) and graduating PolicyEngine into it from PSL.
+              Donor consent process is straightforward; the communications work
+              requires care.
             </p>
             <p>
-              <strong>The "Farness" name has multiple uses to disambiguate.</strong>{" "}
+              <strong>
+                The "Farness" name has multiple uses to disambiguate.
+              </strong>{" "}
               Farness Foundation (the org), Farness (the open-predictions
-              platform — the flagship), Farness Decisions (the personal
-              decision tool). Naming hierarchy needs to be settled before any
-              public launch.
+              platform — the flagship), Farness Decisions (the personal decision
+              tool). Naming hierarchy needs to be settled before any public
+              launch.
             </p>
           </section>
 
@@ -500,36 +448,35 @@ export default function VisionPage() {
               </li>
               <li>
                 <strong>Settle the naming hierarchy</strong> publicly and
-                internally before any launch announcement: foundation,
-                platform, PolicyEngine, Microplex, Decisions, and the
-                relationship to Axiom Foundation.
+                internally before any launch announcement: foundation, platform,
+                PolicyEngine, Microplex, Decisions, and the relationship to
+                Axiom Foundation.
               </li>
               <li>
                 <strong>Compose the board</strong> with AI-safety, policy, and
-                technical credibility — names that signal what the foundation
-                is to the funder base it most needs to reach.
+                technical credibility — names that signal what the foundation is
+                to the funder base it most needs to reach.
               </li>
               <li>
-                <strong>Publish the manifesto</strong> in its public form
-                (this document, rewritten for external audience) with
-                accompanying funder one-pager and FAQ.
+                <strong>Publish the manifesto</strong> in its public form (this
+                document, rewritten for external audience) with accompanying
+                funder one-pager and FAQ.
               </li>
               <li>
-                <strong>Ship the first visible version of the platform</strong>
-                — Manifold-hosted forecast experiments with full agent
-                telemetry, a small set of ARCH-anchored questions with
-                published calibration, and the agent traces openly available.
+                <strong>Ship the first visible version of the platform</strong>—
+                Manifold-hosted forecast experiments with full agent telemetry,
+                a small set of ARCH-anchored questions with published
+                calibration, and the agent traces openly available.
               </li>
               <li>
                 <strong>Move Microplex into PolicyEngine</strong> as the
-                Enhanced CPS replacement, with the methodology and
-                synthesizer code published openly.
+                Enhanced CPS replacement, with the methodology and synthesizer
+                code published openly.
               </li>
               <li>
                 <strong>Pre-flight major funder conversations</strong> —
                 Coefficient Giving, SFF, Schmidt, Anthropic-alumni outreach,
-                Arnold Ventures MAI — with the manifesto and one-pager in
-                hand.
+                Arnold Ventures MAI — with the manifesto and one-pager in hand.
               </li>
               <li>
                 <strong>Coordinate with Axiom Foundation</strong> on shared
@@ -550,9 +497,8 @@ export default function VisionPage() {
 
         <footer className="text-center py-24 mt-16 border-t border-[var(--theme-border)] text-[var(--theme-text-muted)] text-[0.85rem]">
           <p>
-            Working synthesis by{" "}
-            <a href="https://maxghenis.com">Max Ghenis</a>. Living document.
-            Not for distribution.
+            Working synthesis by <a href="https://maxghenis.com">Max Ghenis</a>.
+            Living document. Not for distribution.
           </p>
         </footer>
       </article>

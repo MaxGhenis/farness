@@ -61,8 +61,9 @@ def main():
     score_parser.add_argument("id", nargs="?", help="Decision ID (or prefix)")
 
     market_parser = subparsers.add_parser(
-        "market-draft",
-        help="Draft Manifold-ready forecast markets without posting or betting",
+        "forecast-draft",
+        aliases=["market-draft"],
+        help="Draft Manifold-ready forecast questions without posting or betting",
     )
     market_parser.add_argument(
         "id_or_question",
@@ -358,7 +359,7 @@ def main():
         store.save(decision)
         print(f"Created decision [{decision.id[:8]}]: {decision.question}")
 
-    elif args.command == "market-draft":
+    elif args.command in {"market-draft", "forecast-draft"}:
         decision = store.get(args.id_or_question)
         if decision:
             drafts = draft_markets_for_decision(
@@ -368,12 +369,12 @@ def main():
             )
             if not drafts:
                 print(
-                    f"Decision [{decision.id[:8]}] has no option forecasts to turn into markets."
+                    f"Decision [{decision.id[:8]}] has no option forecasts to turn into draft questions."
                 )
                 sys.exit(1)
             pack = market_pack_to_dict(
                 drafts,
-                title=f"Market drafts for {decision.question}",
+                title=f"Forecast drafts for {decision.question}",
                 source=f"decision:{decision.id}",
             )
         else:
@@ -395,7 +396,7 @@ def main():
             )
             pack = market_pack_to_dict(
                 [draft],
-                title=f"Market draft: {args.id_or_question}",
+                title=f"Forecast draft: {args.id_or_question}",
                 source="standalone-question",
             )
 
@@ -405,7 +406,7 @@ def main():
             with open(output_path, "w") as fh:
                 json.dump(pack, fh, indent=2)
                 fh.write("\n")
-            print(f"Wrote {len(pack['markets'])} market draft(s) to {output_path}")
+            print(f"Wrote {len(pack['markets'])} forecast draft(s) to {output_path}")
         else:
             print(json.dumps(pack, indent=2))
 
