@@ -77,12 +77,11 @@ export default function VisionPage() {
             <p>
               We run AI-agent ensembles across the structured grid of
               consequential questions: government statistics from BEA, BLS,
-              Census, and IRS; policy parameters encoded by Axiom; and
-              counterfactual questions that drive policy and economic decisions.
-              We publish the forecasts, the traces, the calibration history, and
-              the running methodology notes openly. Funded compute scales the
-              depth of the ensemble; the substrate stays free at the point of
-              use.
+              Census, and IRS; law-encoded policy parameters; and counterfactual
+              questions that drive policy and economic decisions. We publish the
+              forecasts, the traces, the calibration history, and the running
+              methodology notes openly. Funded compute scales the depth of the
+              ensemble; the substrate stays free at the point of use.
             </p>
             <h3>We simulate policy with inspectable models</h3>
             <p>
@@ -177,11 +176,10 @@ export default function VisionPage() {
             </p>
             <blockquote>
               <p>
-                <strong>Axiom Foundation</strong> — computable layer for all law
-                and the structured government-data layer (Arch). Encoded
-                statutes, regulations, holdings, and the metadata linking
-                published government statistics to the laws that mandate them.
-                Ballmer-funded. Separate organization, shared substrate.
+                <strong>Encoded-law substrate</strong> — computable statutes,
+                regulations, holdings, and metadata linking published government
+                statistics to the laws that mandate them. Separate organization,
+                shared substrate.
               </p>
               <p>
                 <strong>Farness Foundation</strong> — open-predictions platform,
@@ -193,14 +191,14 @@ export default function VisionPage() {
               </p>
             </blockquote>
             <p>
-              The Farness platform consumes Axiom (encoded law and government
-              data architecture) and Microplex (population substrate) as inputs,
-              runs ensembles through PolicyEngine and other computational
-              engines, and publishes calibrated forecasts. Policy partners
-              interact with PolicyEngine directly through its own brand and
-              channels. New audiences — AI safety, agencies funding their own
-              forecasts, prediction-market researchers, broader policy analysts
-              — interact with Farness as the umbrella platform.
+              The Farness platform consumes encoded law, government data
+              architecture, and Microplex population substrate as inputs, runs
+              ensembles through PolicyEngine and other computational engines,
+              and publishes calibrated forecasts. Policy partners interact with
+              PolicyEngine directly through its own brand and channels. New
+              audiences — AI safety, agencies funding their own forecasts,
+              prediction-market researchers, broader policy analysts — interact
+              with Farness as the umbrella platform.
             </p>
           </section>
 
@@ -253,7 +251,7 @@ export default function VisionPage() {
             </p>
             <p>
               We use the strongest available models as forecasters today. We
-              connect them to public data, Axiom-encoded law, PolicyEngine
+              connect them to public data, encoded law, PolicyEngine
               simulations, Microplex populations, and explicit calibration
               records. We evaluate which model-tool-method combinations predict
               best. We publish the traces so other researchers can reproduce,
@@ -449,8 +447,8 @@ export default function VisionPage() {
               <li>
                 <strong>Settle the naming hierarchy</strong> publicly and
                 internally before any launch announcement: foundation, platform,
-                PolicyEngine, Microplex, Decisions, and the relationship to
-                Axiom Foundation.
+                PolicyEngine, Microplex, Decisions, and the shared law/data
+                substrate.
               </li>
               <li>
                 <strong>Compose the board</strong> with AI-safety, policy, and
@@ -465,7 +463,7 @@ export default function VisionPage() {
               <li>
                 <strong>Ship the first visible version of the platform</strong>—
                 Manifold-hosted forecast experiments with full agent telemetry,
-                a small set of ARCH-anchored questions with published
+                a small set of government-data-anchored questions with published
                 calibration, and the agent traces openly available.
               </li>
               <li>
@@ -479,9 +477,8 @@ export default function VisionPage() {
                 Arnold Ventures MAI — with the manifesto and one-pager in hand.
               </li>
               <li>
-                <strong>Coordinate with Axiom Foundation</strong> on shared
-                roadmap for encoded-law substrate access and Arch
-                government-data architecture.
+                <strong>Coordinate the encoded-law substrate</strong> on shared
+                roadmap for law access and government-data architecture.
               </li>
             </ul>
             <p className="text-center mt-16">

@@ -3,8 +3,8 @@
 // that the AgentReasoning component plays back with simulated streaming.
 //
 // The reasoning is illustrative — numbers and tool-call results are
-// constructed to demonstrate the integrated stack (Axiom-encoded law,
-// PolicyEngine microsim, ARCH cells) rather than to be live forecasts.
+// constructed to demonstrate the integrated stack (encoded law,
+// PolicyEngine microsim, public data cells) rather than to be live forecasts.
 
 export type MarketType = "arch" | "policy" | "conditional";
 
@@ -49,14 +49,14 @@ export interface Market {
   resolutionRule: string;
   historicalContext: HistoricalPoint[];
   drivers: string[];
-  archCell?: string; // for ARCH forecast cells
+  archCell?: string; // for published public-data forecast cells
   policyParameter?: string; // for policy forecast cells
   conditionalOn?: string; // for conditional forecast cells
   reasoning: ReasoningStep[];
 }
 
 export const MARKETS: Market[] = [
-  // ─── ARCH cells ──────────────────────────────────────────────────────────
+  // ─── Government data cells ───────────────────────────────────────────────
   {
     slug: "spm-child-poverty-2027",
     type: "arch",
@@ -640,7 +640,7 @@ export const MARKETS: Market[] = [
         kind: "text",
         text: "Maximum is the headline parameter — refundability and phase-in are separate forecast cells. Current law: $2,000/child through TY2025, reverting to $1,000/child in TY2026 absent legislation. Any TCJA extension would lock at $2,000 (= $167/mo) or higher.",
       },
-      { kind: "heading", text: "Axiom-encoded policy paths" },
+      { kind: "heading", text: "Law-encoded policy paths" },
       {
         kind: "tool",
         tool: "axiom.query",
@@ -1019,7 +1019,7 @@ export const MARKETS: Market[] = [
         kind: "text",
         text: "This is a policy-state forecast: whether the post-TCJA higher standard deduction remains in force dominates the interval, with inflation indexing determining the exact value if extended.",
       },
-      { kind: "heading", text: "Axiom branches" },
+      { kind: "heading", text: "Statutory branches" },
       {
         kind: "tool",
         tool: "axiom.query",
@@ -1133,7 +1133,7 @@ export const MARKETS: Market[] = [
         kind: "text",
         text: "SALT cap is the highest-leverage knob in the TCJA-extension negotiation because the affected constituencies are concentrated in House districts with thin majorities. The TCJA cap sunsets after TY2025; current-law TY2026+ means no cap. Any extension package must affirmatively reimpose or modify the cap.",
       },
-      { kind: "heading", text: "Axiom-encoded scenarios" },
+      { kind: "heading", text: "Law-encoded scenarios" },
       {
         kind: "tool",
         tool: "axiom.query",
@@ -3989,13 +3989,13 @@ export function formatValueShort(value: number, unit: Unit): string {
 }
 
 export const TYPE_LABEL: Record<MarketType, string> = {
-  arch: "ARCH",
+  arch: "Government data",
   policy: "Policy",
   conditional: "Conditional",
 };
 
 export const TYPE_DESCRIPTION: Record<MarketType, string> = {
-  arch: "Forecast cell on a published government statistic.",
-  policy: "Forecast cell on an Axiom-encoded policy parameter.",
+  arch: "Forecast cell on a published government data point.",
+  policy: "Forecast cell on a law-encoded policy parameter.",
   conditional: "Outcome forecast conditional on a policy state.",
 };

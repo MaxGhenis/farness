@@ -215,7 +215,7 @@ function ForecastPrototype() {
           </h1>
           <p className="text-[1.05rem] leading-[1.65] text-[var(--theme-text-muted)]">
             Farness analyst agents forecast published government statistics,
-            Axiom-encoded policy parameters, and outcomes conditional on policy
+            law-encoded policy parameters, and outcomes conditional on policy
             states. Each cell carries a calibrated interval and an audit trail
             of the reasoning behind it.
           </p>
@@ -228,9 +228,9 @@ function ForecastPrototype() {
             Prototype status
           </p>
           <p className="text-[0.9rem] leading-[1.6] text-[var(--theme-text)]">
-            The catalog is live, public, and changing quickly. Forecast streams
-            show the agent’s reasoning path and fall back to static traces while
-            the live API is being hardened.
+            This is a public prototype. The catalog, routes, and forecast pages
+            are live; many reasoning traces are static fallbacks while the live
+            agent API comes online.
           </p>
         </div>
       </section>

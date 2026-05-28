@@ -241,7 +241,7 @@ export function MarketRuntime({ market }: MarketRuntimeProps) {
             {market.archCell && (
               <>
                 <dt className="[font-family:var(--font-mono)] text-[0.7rem] uppercase tracking-[0.1em] text-[var(--theme-text-dim)]">
-                  ARCH cell
+                  Data point
                 </dt>
                 <dd className="[font-family:var(--font-mono)] text-[0.78rem] text-[var(--color-horizon-700)]">
                   {market.archCell}
@@ -251,7 +251,7 @@ export function MarketRuntime({ market }: MarketRuntimeProps) {
             {market.policyParameter && (
               <>
                 <dt className="[font-family:var(--font-mono)] text-[0.7rem] uppercase tracking-[0.1em] text-[var(--theme-text-dim)]">
-                  Axiom param
+                  Policy parameter
                 </dt>
                 <dd className="[font-family:var(--font-mono)] text-[0.78rem] text-[var(--color-rose-700)]">
                   {market.policyParameter}
@@ -283,7 +283,7 @@ export function MarketRuntime({ market }: MarketRuntimeProps) {
         <p className="mt-3 text-[0.76rem] leading-[1.55] text-[var(--theme-text-dim)]">
           {supportsLive
             ? liveModeDescription(market.slug)
-            : "The agent decomposes the question, queries Axiom-encoded statutes, calls the PolicyEngine microsim against MICROPLEX synthetic populations, integrates external baselines, and emits a calibrated forecast with full audit trail. Stream replays the reasoning trace; in production the same trace is generated live against current data."}
+            : "The agent decomposes the question, queries law-encoded statutes, calls the PolicyEngine microsim against MICROPLEX synthetic populations, integrates external baselines, and emits a calibrated forecast with full audit trail. This prototype replays the reasoning trace; the same trace shape is generated live where the API is available."}
         </p>
       </section>
     </div>
