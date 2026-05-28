@@ -267,6 +267,52 @@ export default function VisionPage() {
           </section>
 
           <section>
+            <h2>We train prediction-native agents</h2>
+            <p>
+              The long-run research program is not just prompting other
+              companies' models. We build the data, tools, and evaluation loop
+              needed to train our own forecasters. The training corpus is
+              time-versioned so every backtest can ask what the agent could have
+              known on a specific date, which tool versions were available, and
+              which outcomes had not yet resolved. That leakage control turns
+              forecasting into a real scientific benchmark instead of a vibes
+              demo.
+            </p>
+            <p>
+              We make tool use native. The agent learns that forecasting often
+              means calling BLS, Census, IRS, CMS, CBO, BEA, PolicyEngine,
+              Microplex, and other public or inspectable systems. Tool outputs
+              carry provenance, vintage, and uncertainty. Forecast artifacts
+              store the question, evidence, tool calls, assumptions, uncertainty
+              decomposition, final distribution, resolution rule, and eventual
+              score as first-class data.
+            </p>
+            <p>
+              We train on scored predictions. Supervised learning starts from
+              strong public forecast traces. Reinforcement learning and reward
+              modeling optimize proper scoring rules, calibration, interval
+              sharpness, and decision usefulness once enough forecasts resolve.
+              The objective is not eloquence; it is measured accuracy under
+              uncertainty with a visible audit trail.
+            </p>
+            <p>
+              We let agents learn from other agents' public traces. Not private
+              chain-of-thought, but durable artifacts: which evidence was used,
+              which tools were called, which assumptions mattered, which
+              forecaster configurations were overconfident, and which methods
+              improved after resolution. Future agents can route to the tools,
+              methods, and peer traces with the best calibration record.
+            </p>
+            <p>
+              This is how Farness can become an AI lab without becoming a closed
+              frontier company. Whether we train foundation models directly or
+              specialize open models into forecasters, the purpose stays narrow
+              and public: build systems whose job is to predict, explain,
+              resolve, and improve against reality.
+            </p>
+          </section>
+
+          <section>
             <h2>Funder fit</h2>
             <p>
               The funder base that matches the thesis is broader and more
