@@ -113,41 +113,6 @@ export async function fetchCpiDataset(): Promise<CpiDataset> {
   };
 }
 
-export function serializeCpiToolResult(dataset: CpiDataset) {
-  const { observations, summary } = dataset;
-  return JSON.stringify(
-    {
-      seriesId: summary.seriesId,
-      latest: {
-        year: summary.latest.year,
-        month: summary.latest.periodName,
-        value: summary.latest.value,
-      },
-      annualAverages: summary.annualAverages.slice(-5),
-      targetYear: {
-        observedMonths: summary.targetYearMonths,
-        ytdAverage: round(summary.targetYtdAverage, 3),
-        ytdVsPriorObservedAveragePct: round(
-          summary.targetYtdVsPriorObservedAveragePct,
-          2,
-        ),
-        carryForwardAnnualAverageInflationPct: round(
-          summary.carryForwardAnnualAverageInflationPct,
-          2,
-        ),
-        recentAnnualizedPct: round(summary.recentAnnualizedPct, 2),
-      },
-      recentObservations: observations.slice(-8).map((point) => ({
-        date: `${point.year}-${String(point.month).padStart(2, "0")}`,
-        value: point.value,
-      })),
-      caveats: summary.caveats,
-    },
-    null,
-    2,
-  );
-}
-
 export function formatCpiSummary(summary: CpiSummary) {
   return [
     `Latest CPI-U observation is ${summary.latest.periodName} ${summary.latest.year} at ${summary.latest.value.toFixed(3)}.`,

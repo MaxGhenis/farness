@@ -19,9 +19,9 @@ const FILTERS: { key: Filter; label: string; description: string }[] = [
     description: "All three forecast types.",
   },
   {
-    key: "arch",
-    label: TYPE_LABEL.arch + " cells",
-    description: TYPE_DESCRIPTION.arch,
+    key: "data",
+    label: TYPE_LABEL.data + " cells",
+    description: TYPE_DESCRIPTION.data,
   },
   {
     key: "policy",

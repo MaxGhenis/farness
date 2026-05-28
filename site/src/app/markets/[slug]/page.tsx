@@ -41,7 +41,7 @@ export async function generateMetadata({
 }
 
 const typeBadgeClass: Record<Market["type"], string> = {
-  arch: "bg-[var(--color-mist-100)] text-[var(--color-horizon-700)] border-[var(--color-mist-200)]",
+  data: "bg-[var(--color-mist-100)] text-[var(--color-horizon-700)] border-[var(--color-mist-200)]",
   policy:
     "bg-[var(--color-accent-subtle)] text-[var(--color-rose-700)] border-[var(--color-rose-100)]",
   conditional: "bg-[#FFF4DD] text-[#7A5C20] border-[#F2DCAF]",

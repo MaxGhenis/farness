@@ -38,6 +38,14 @@ describe("forecast catalog", () => {
     }
   });
 
+  it("uses public data point terminology for government data forecasts", () => {
+    for (const forecast of MARKETS) {
+      if (forecast.type === "data") {
+        expect(forecast.dataPointId).toBeTruthy();
+      }
+    }
+  });
+
   it("prioritizes near-term 2025 Census release targets", () => {
     const slugs = new Set(MARKETS.map((forecast) => forecast.slug));
     expect(slugs.has("spm-child-poverty-2025")).toBe(true);

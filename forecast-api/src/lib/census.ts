@@ -159,28 +159,6 @@ export async function fetchSpmChildPovertyDataset({
   };
 }
 
-export function serializeSpmChildPovertyToolResult(
-  dataset: SpmChildPovertyDataset,
-) {
-  const { summary } = dataset;
-  return JSON.stringify(
-    {
-      censusReleaseSchedule: summary.releaseSchedule,
-      censusSpmTables: summary.spmTables,
-      historical: dataset.historical.map((point) => ({
-        year: point.year,
-        spmChildPovertyRatePct: point.childPovertyRatePct,
-        note: point.note,
-      })),
-      expectedRelease: summary.expectedRelease,
-      expectedReleaseRationale: summary.expectedReleaseRationale,
-      caveats: summary.caveats,
-    },
-    null,
-    2,
-  );
-}
-
 export function serializeSpmCalibrationToolResult(
   dataset: SpmChildPovertyDataset,
 ) {

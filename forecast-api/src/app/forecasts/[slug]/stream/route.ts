@@ -2,21 +2,22 @@ import {
   CPI_MARKET_SLUG,
   CPI_SERIES_ID,
   CPI_TARGET_YEAR,
-  fetchCpiDataset,
   formatCpiSummary,
-  serializeCpiToolResult,
 } from "@/lib/bls";
 import { optionsResponse } from "@/lib/cors";
 import {
-  fetchSpmChildPovertyDataset,
   formatSpmChildPovertySummary,
   policySnapshotFromPolicy,
   serializeSpmCalibrationToolResult,
-  serializeSpmChildPovertyToolResult,
   SPM_CHILD_POVERTY_2025_SLUG,
   SPM_TARGET_YEAR,
   unavailablePolicySnapshot,
 } from "@/lib/census";
+import {
+  DATA_POINT_IDS,
+  getDataPointSnapshot,
+  serializeDataPointSnapshot,
+} from "@/lib/data-points";
 import {
   generateCpiForecast,
   generateCtcExpansionForecast,
@@ -85,7 +86,7 @@ async function streamSpmChildPovertyForecast(send: SendEvent) {
   });
   await sendStep(send, {
     kind: "text",
-    text: "This stream forecasts the calendar-year 2025 Supplemental Poverty Measure child poverty rate that Census is expected to publish in the September 2026 income and poverty release. The live run checks public Census pages, verifies the PolicyEngine current-law policy, and applies an explicit calibration fallback before the forecast step.",
+    text: "This stream forecasts the calendar-year 2025 Supplemental Poverty Measure child poverty rate that Census is expected to publish in the September 2026 income and poverty release. The live run verifies the PolicyEngine current-law policy, runs the public data-point processor for the Census target, and applies an explicit calibration fallback before the forecast step.",
   });
 
   const policyCall = `policyengine.policy.get({ id: ${CURRENT_LAW_POLICY_ID} })`;
@@ -126,19 +127,23 @@ async function streamSpmChildPovertyForecast(send: SendEvent) {
   ].join("\n");
   send("status", {
     state: "tool_running",
-    label: "Querying Census public pages",
+    label: "Running public data-point processor",
   });
   send("tool_start", {
-    tool: "census.lookup",
+    tool: "data-point.processor",
     call: censusCall,
   });
 
-  const dataset = await fetchSpmChildPovertyDataset({ currentLawPolicy });
+  const dataPoint = await getDataPointSnapshot(
+    DATA_POINT_IDS.SPM_CHILD_POVERTY_RATE_2025,
+    { currentLawPolicy },
+  );
+  const dataset = dataPoint.dataset;
 
   send("tool_result", {
-    tool: "census.lookup",
+    tool: "data-point.processor",
     call: censusCall,
-    result: serializeSpmChildPovertyToolResult(dataset),
+    result: serializeDataPointSnapshot(dataPoint),
   });
   await pause(180);
 
@@ -247,19 +252,22 @@ async function streamCpiForecast(send: SendEvent) {
 
   send("status", {
     state: "tool_running",
-    label: "Querying BLS public API",
+    label: "Running public data-point processor",
   });
   send("tool_start", {
-    tool: "bls.lookup",
+    tool: "data-point.processor",
     call,
   });
 
-  const dataset = await fetchCpiDataset();
+  const dataPoint = await getDataPointSnapshot(
+    DATA_POINT_IDS.CPI_U_ANNUAL_PCT_CHANGE_2026,
+  );
+  const dataset = dataPoint.dataset;
 
   send("tool_result", {
-    tool: "bls.lookup",
+    tool: "data-point.processor",
     call,
-    result: serializeCpiToolResult(dataset),
+    result: serializeDataPointSnapshot(dataPoint),
   });
   await pause(180);
 

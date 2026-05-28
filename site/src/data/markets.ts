@@ -6,7 +6,7 @@
 // constructed to demonstrate the integrated stack (encoded law,
 // PolicyEngine microsim, public data cells) rather than to be live forecasts.
 
-export type MarketType = "arch" | "policy" | "conditional";
+export type MarketType = "data" | "policy" | "conditional";
 
 export type Unit =
   | "percent"
@@ -49,7 +49,7 @@ export interface Market {
   resolutionRule: string;
   historicalContext: HistoricalPoint[];
   drivers: string[];
-  archCell?: string; // for published public-data forecast cells
+  dataPointId?: string; // for published public-data forecast cells
   policyParameter?: string; // for policy forecast cells
   conditionalOn?: string; // for conditional forecast cells
   reasoning: ReasoningStep[];
@@ -78,7 +78,7 @@ export const MARKETS: Market[] = [
   // ─── Government data cells ───────────────────────────────────────────────
   {
     slug: "spm-child-poverty-2025",
-    type: "arch",
+    type: "data",
     title: "SPM child poverty rate, 2025",
     question:
       "What will the Supplemental Poverty Measure child poverty rate be for calendar year 2025 as published by the U.S. Census Bureau?",
@@ -91,7 +91,7 @@ export const MARKETS: Market[] = [
     resolutionSource: "U.S. Census Bureau, Poverty in the United States: 2025",
     resolutionRule:
       "Resolves to the official SPM child poverty rate (children under 18) for calendar year 2025 in the Census Poverty in the United States report, expected in September 2026. If Census publishes multiple SPM variants, this uses the main published SPM table.",
-    archCell: "census.spm.child_poverty_rate.2025",
+    dataPointId: "census.spm.child_poverty_rate.2025",
     historicalContext: [
       { label: "2021", value: 5.2 },
       { label: "2022", value: 12.4 },
@@ -135,7 +135,7 @@ export const MARKETS: Market[] = [
 
   {
     slug: "official-poverty-rate-2025",
-    type: "arch",
+    type: "data",
     title: "Official poverty rate, 2025",
     question:
       "What will the official U.S. poverty rate be for calendar year 2025 as published by the U.S. Census Bureau?",
@@ -148,7 +148,7 @@ export const MARKETS: Market[] = [
     resolutionSource: "U.S. Census Bureau, Poverty in the United States: 2025",
     resolutionRule:
       "Resolves to the official poverty rate for all people in calendar year 2025 in the Census Poverty in the United States report, expected in September 2026. This uses the official poverty measure, not the Supplemental Poverty Measure.",
-    archCell: "census.official_poverty_rate.2025",
+    dataPointId: "census.official_poverty_rate.2025",
     historicalContext: [
       { label: "2021", value: 11.6 },
       { label: "2022", value: 11.5 },
@@ -190,7 +190,7 @@ export const MARKETS: Market[] = [
 
   {
     slug: "median-household-income-2025",
-    type: "arch",
+    type: "data",
     title: "Median household income, 2025",
     question:
       "What will real median household income be for calendar year 2025 as published by the U.S. Census Bureau?",
@@ -203,7 +203,7 @@ export const MARKETS: Market[] = [
     resolutionSource: "U.S. Census Bureau, Income in the United States: 2025",
     resolutionRule:
       "Resolves to the real median household income for calendar year 2025 in the Census Income in the United States report, expected in September 2026, expressed in 2025 dollars or the headline real-dollar basis used by Census.",
-    archCell: "census.asec.median_household_income.2025",
+    dataPointId: "census.asec.median_household_income.2025",
     historicalContext: [
       { label: "2021", value: 76330 },
       { label: "2022", value: 77540 },
@@ -245,7 +245,7 @@ export const MARKETS: Market[] = [
 
   {
     slug: "spm-child-poverty-2027",
-    type: "arch",
+    type: "data",
     title: "SPM child poverty rate, 2027",
     question:
       "What will the Supplemental Poverty Measure child poverty rate be for calendar year 2027 as published by the U.S. Census Bureau?",
@@ -258,7 +258,7 @@ export const MARKETS: Market[] = [
     resolutionSource: "U.S. Census Bureau, SPM annual release",
     resolutionRule:
       "Resolves to the official SPM child poverty rate (children under 18) published in the Census Poverty in the United States report covering CY2027.",
-    archCell: "census.spm.child_poverty_rate.2027",
+    dataPointId: "census.spm.child_poverty_rate.2027",
     historicalContext: [
       { label: "2021", value: 5.2 },
       { label: "2022", value: 12.4 },
@@ -328,7 +328,7 @@ export const MARKETS: Market[] = [
 
   {
     slug: "unemployment-dec-2026",
-    type: "arch",
+    type: "data",
     title: "Unemployment rate, December 2026",
     question:
       "What will the seasonally-adjusted U.S. civilian unemployment rate be for December 2026 as published in the BLS Employment Situation release?",
@@ -341,7 +341,7 @@ export const MARKETS: Market[] = [
     resolutionSource: "BLS Employment Situation (CES/CPS)",
     resolutionRule:
       "Resolves to the first-print seasonally-adjusted U-3 unemployment rate for December 2026, released on the first Friday of January 2027 (subject to revision; first print is the resolution value).",
-    archCell: "bls.lns14000000.2026-12",
+    dataPointId: "bls.lns14000000.2026-12",
     historicalContext: [
       { label: "Dec 2022", value: 3.5 },
       { label: "Dec 2023", value: 3.7 },
@@ -400,7 +400,7 @@ export const MARKETS: Market[] = [
 
   {
     slug: "cpi-u-annual-2026",
-    type: "arch",
+    type: "data",
     title: "CPI-U annual average inflation, 2026",
     question:
       "What will the annual average percent change in CPI-U for calendar year 2026 (vs. 2025 annual average) be, as published by BLS?",
@@ -413,7 +413,7 @@ export const MARKETS: Market[] = [
     resolutionSource: "BLS CPI-U release",
     resolutionRule:
       "Resolves to the percent change in CPI-U annual average for 2026 over 2025 (BLS series CUUR0000SA0, annual average), first-published value.",
-    archCell: "bls.cpi.u.annual_pct_change.2026",
+    dataPointId: "bls.cpi.u.annual_pct_change.2026",
     historicalContext: [
       { label: "2022", value: 8.0 },
       { label: "2023", value: 4.1 },
@@ -472,7 +472,7 @@ export const MARKETS: Market[] = [
 
   {
     slug: "median-household-income-2026",
-    type: "arch",
+    type: "data",
     title: "Median household income, 2026",
     question:
       "What will the real (2026 dollars) median household income for the United States be in calendar year 2026, as published in the Census ASEC?",
@@ -485,7 +485,7 @@ export const MARKETS: Market[] = [
     resolutionSource: "Census ASEC (Current Population Survey)",
     resolutionRule:
       "Resolves to the real median household income for 2026 as published in the Census income report, expressed in 2026 dollars.",
-    archCell: "census.asec.median_household_income.2026",
+    dataPointId: "census.asec.median_household_income.2026",
     historicalContext: [
       { label: "2022", value: 77540 },
       { label: "2023", value: 80610 },
@@ -533,7 +533,7 @@ export const MARKETS: Market[] = [
 
   {
     slug: "irs-individual-income-tax-fy2027",
-    type: "arch",
+    type: "data",
     title: "Federal individual income tax revenue, FY2027",
     question:
       "What will total federal individual income tax revenue be for fiscal year 2027 in nominal dollars, as published in the Monthly Treasury Statement?",
@@ -547,7 +547,7 @@ export const MARKETS: Market[] = [
       "U.S. Treasury Monthly Statement (final September FY2027)",
     resolutionRule:
       "Resolves to total individual income tax receipts for FY2027 as reported in the Monthly Treasury Statement covering September 2027, in billions of nominal dollars.",
-    archCell: "treasury.mts.individual_income_tax.fy2027",
+    dataPointId: "treasury.mts.individual_income_tax.fy2027",
     historicalContext: [
       { label: "FY2023", value: 2176 },
       { label: "FY2024", value: 2426 },
@@ -605,7 +605,7 @@ export const MARKETS: Market[] = [
 
   {
     slug: "real-gdp-growth-2026",
-    type: "arch",
+    type: "data",
     title: "Real GDP growth, 2026 (Q4/Q4)",
     question:
       "What will real GDP growth be from Q4 2025 to Q4 2026 (year-over-year, fourth-quarter basis), as published by BEA?",
@@ -618,7 +618,7 @@ export const MARKETS: Market[] = [
     resolutionSource: "BEA GDP advance estimate (Q4 2026)",
     resolutionRule:
       "Resolves to the Q4/Q4 real GDP growth rate for 2026 as published in the BEA Q4 2026 advance estimate (late January 2027).",
-    archCell: "bea.gdpc1.q4q4.2026",
+    dataPointId: "bea.gdpc1.q4q4.2026",
     historicalContext: [
       { label: "2022", value: 0.6 },
       { label: "2023", value: 3.2 },
@@ -671,7 +671,7 @@ export const MARKETS: Market[] = [
 
   {
     slug: "uninsured-rate-2026",
-    type: "arch",
+    type: "data",
     title: "Uninsured rate (under 65), 2026",
     question:
       "What will the uninsured rate among the U.S. population under 65 be for calendar year 2026, as published in the Census ASEC?",
@@ -684,7 +684,7 @@ export const MARKETS: Market[] = [
     resolutionSource: "Census ASEC health insurance report",
     resolutionRule:
       "Resolves to the uninsured rate (any point during the year) for the population under 65 as published in the Census ASEC health insurance coverage report covering CY2026.",
-    archCell: "census.asec.uninsured_rate_under_65.2026",
+    dataPointId: "census.asec.uninsured_rate_under_65.2026",
     historicalContext: [
       { label: "2021", value: 9.6 },
       { label: "2022", value: 8.6 },
@@ -737,7 +737,7 @@ export const MARKETS: Market[] = [
 
   {
     slug: "labor-force-participation-dec-2026",
-    type: "arch",
+    type: "data",
     title: "Labor force participation rate, December 2026",
     question:
       "What will the seasonally-adjusted civilian labor force participation rate be for December 2026 as published in the BLS Employment Situation release?",
@@ -750,7 +750,7 @@ export const MARKETS: Market[] = [
     resolutionSource: "BLS Employment Situation",
     resolutionRule:
       "Resolves to the first-print seasonally-adjusted civilian labor force participation rate for December 2026 (BLS series LNS11300000).",
-    archCell: "bls.lns11300000.2026-12",
+    dataPointId: "bls.lns11300000.2026-12",
     historicalContext: [
       { label: "Dec 2022", value: 62.3 },
       { label: "Dec 2023", value: 62.5 },
@@ -1436,7 +1436,7 @@ export const MARKETS: Market[] = [
 
   {
     slug: "snap-benefit-outlays-fy2027",
-    type: "arch",
+    type: "data",
     title: "SNAP benefit outlays, FY2027",
     question:
       "What will federal SNAP benefit outlays be in fiscal year 2027, in nominal dollars?",
@@ -1449,7 +1449,7 @@ export const MARKETS: Market[] = [
     resolutionSource: "USDA FNS and Monthly Treasury Statement",
     resolutionRule:
       "Resolves to federal SNAP benefit outlays for FY2027, excluding administrative costs, in billions of nominal dollars, using the first official USDA FNS or Treasury fiscal-year table that identifies SNAP benefits.",
-    archCell: "usda.fns.snap.benefit_outlays.fy2027",
+    dataPointId: "usda.fns.snap.benefit_outlays.fy2027",
     historicalContext: [
       { label: "FY2021", value: 108 },
       { label: "FY2022", value: 119 },
@@ -1493,7 +1493,7 @@ export const MARKETS: Market[] = [
 
   {
     slug: "aca-premium-tax-credit-outlays-fy2027",
-    type: "arch",
+    type: "data",
     title: "ACA premium tax credit outlays, FY2027",
     question:
       "What will federal ACA premium tax credit outlays be in fiscal year 2027, in nominal dollars?",
@@ -1506,7 +1506,7 @@ export const MARKETS: Market[] = [
     resolutionSource: "Monthly Treasury Statement and CBO baseline tables",
     resolutionRule:
       "Resolves to federal outlays for refundable premium tax credits under the Affordable Care Act for FY2027, in billions of nominal dollars, using the first official Treasury or CBO table that separately identifies the credit.",
-    archCell: "treasury.mts.aca_premium_tax_credit_outlays.fy2027",
+    dataPointId: "treasury.mts.aca_premium_tax_credit_outlays.fy2027",
     historicalContext: [
       { label: "FY2021", value: 60 },
       { label: "FY2023", value: 82 },
@@ -1552,7 +1552,7 @@ export const MARKETS: Market[] = [
 
   {
     slug: "medicaid-chip-enrollment-dec-2027",
-    type: "arch",
+    type: "data",
     title: "Medicaid and CHIP enrollment, Dec 2027",
     question:
       "What will total Medicaid and CHIP enrollment be in December 2027, as reported by CMS?",
@@ -1565,7 +1565,7 @@ export const MARKETS: Market[] = [
     resolutionSource: "CMS Medicaid and CHIP enrollment reports",
     resolutionRule:
       "Resolves to total Medicaid and CHIP enrollment for December 2027 in the CMS monthly enrollment report, in millions of people, using the first report that includes all-state December data.",
-    archCell: "cms.medicaid_chip.enrollment.2027-12",
+    dataPointId: "cms.medicaid_chip.enrollment.2027-12",
     historicalContext: [
       { label: "Dec 2021", value: 87 },
       { label: "Dec 2022", value: 93 },
@@ -1609,7 +1609,7 @@ export const MARKETS: Market[] = [
 
   {
     slug: "spm-poverty-rate-2025",
-    type: "arch",
+    type: "data",
     title: "SPM poverty rate, 2025",
     question:
       "What will the overall Supplemental Poverty Measure poverty rate be for calendar year 2025 as published by the U.S. Census Bureau?",
@@ -1622,7 +1622,7 @@ export const MARKETS: Market[] = [
     resolutionSource: "U.S. Census Bureau, Poverty in the United States: 2025",
     resolutionRule:
       "Resolves to the official Supplemental Poverty Measure poverty rate for all people in calendar year 2025, as published in the Census Poverty in the United States report expected in September 2026.",
-    archCell: "census.spm.all_people_poverty_rate.2025",
+    dataPointId: "census.spm.all_people_poverty_rate.2025",
     historicalContext: [
       { label: "2021", value: 7.8 },
       { label: "2022", value: 12.4 },
@@ -1666,7 +1666,7 @@ export const MARKETS: Market[] = [
 
   {
     slug: "unemployment-insurance-outlays-fy2027",
-    type: "arch",
+    type: "data",
     title: "Unemployment insurance outlays, FY2027",
     question:
       "What will federal unemployment insurance benefit outlays be in fiscal year 2027, in nominal dollars?",
@@ -1679,7 +1679,7 @@ export const MARKETS: Market[] = [
     resolutionSource: "Monthly Treasury Statement and Department of Labor ETA",
     resolutionRule:
       "Resolves to federal unemployment insurance benefit outlays for FY2027, in billions of nominal dollars, using the first official Treasury or Department of Labor fiscal-year table that reports UI benefits.",
-    archCell: "treasury.mts.unemployment_insurance_outlays.fy2027",
+    dataPointId: "treasury.mts.unemployment_insurance_outlays.fy2027",
     historicalContext: [
       { label: "FY2020", value: 477 },
       { label: "FY2022", value: 36 },
@@ -1722,7 +1722,7 @@ export const MARKETS: Market[] = [
 
   {
     slug: "ssi-federal-payments-fy2027",
-    type: "arch",
+    type: "data",
     title: "SSI federal payments, FY2027",
     question:
       "What will federal Supplemental Security Income benefit payments be in fiscal year 2027, in nominal dollars?",
@@ -1736,7 +1736,7 @@ export const MARKETS: Market[] = [
       "Social Security Administration and Monthly Treasury Statement",
     resolutionRule:
       "Resolves to federal SSI benefit payments for FY2027, excluding state supplements, in billions of nominal dollars, using the first official SSA or Treasury fiscal-year table that reports SSI federal payments.",
-    archCell: "ssa.ssi.federal_payments.fy2027",
+    dataPointId: "ssa.ssi.federal_payments.fy2027",
     historicalContext: [
       { label: "FY2021", value: 57 },
       { label: "FY2023", value: 61 },
@@ -1779,7 +1779,7 @@ export const MARKETS: Market[] = [
 
   {
     slug: "medicaid-federal-outlays-fy2027",
-    type: "arch",
+    type: "data",
     title: "Federal Medicaid outlays, FY2027",
     question:
       "What will federal Medicaid outlays be in fiscal year 2027, in nominal dollars?",
@@ -1792,7 +1792,7 @@ export const MARKETS: Market[] = [
     resolutionSource: "Monthly Treasury Statement and CMS financial reports",
     resolutionRule:
       "Resolves to federal Medicaid outlays for FY2027, in billions of nominal dollars, using the first official Treasury or CMS fiscal-year table that reports federal Medicaid payments.",
-    archCell: "cms.medicaid.federal_outlays.fy2027",
+    dataPointId: "cms.medicaid.federal_outlays.fy2027",
     historicalContext: [
       { label: "FY2021", value: 521 },
       { label: "FY2023", value: 616 },
@@ -1835,7 +1835,7 @@ export const MARKETS: Market[] = [
 
   {
     slug: "ctc-recipient-children-ty2026",
-    type: "arch",
+    type: "data",
     title: "Children receiving the CTC, TY2026",
     question:
       "How many children will be claimed for the federal Child Tax Credit in tax year 2026?",
@@ -1848,7 +1848,7 @@ export const MARKETS: Market[] = [
     resolutionSource: "IRS Statistics of Income",
     resolutionRule:
       "Resolves to the number of qualifying children claimed for the federal Child Tax Credit for tax year 2026, in millions, using the first IRS Statistics of Income table that reports CTC child counts or the closest directly comparable official count.",
-    archCell: "irs.soi.ctc.qualifying_children.ty2026",
+    dataPointId: "irs.soi.ctc.qualifying_children.ty2026",
     historicalContext: [
       { label: "TY2019", value: 48 },
       { label: "TY2021", value: 61 },
@@ -1891,7 +1891,7 @@ export const MARKETS: Market[] = [
 
   {
     slug: "housing-choice-voucher-outlays-fy2027",
-    type: "arch",
+    type: "data",
     title: "Housing Choice Voucher outlays, FY2027",
     question:
       "What will federal Housing Choice Voucher program outlays be in fiscal year 2027, in nominal dollars?",
@@ -1905,7 +1905,7 @@ export const MARKETS: Market[] = [
       "HUD budget execution reports and Monthly Treasury Statement",
     resolutionRule:
       "Resolves to federal tenant-based rental assistance outlays for the Housing Choice Voucher program for FY2027, in billions of nominal dollars, using the first official HUD or Treasury table that separately identifies the program.",
-    archCell: "hud.hcv.outlays.fy2027",
+    dataPointId: "hud.hcv.outlays.fy2027",
     historicalContext: [
       { label: "FY2021", value: 23 },
       { label: "FY2023", value: 29 },
@@ -1948,7 +1948,7 @@ export const MARKETS: Market[] = [
 
   {
     slug: "payroll-tax-receipts-fy2027",
-    type: "arch",
+    type: "data",
     title: "Federal payroll tax receipts, FY2027",
     question:
       "What will total federal payroll tax receipts be in fiscal year 2027, in nominal dollars?",
@@ -1961,7 +1961,7 @@ export const MARKETS: Market[] = [
     resolutionSource: "U.S. Treasury Monthly Statement",
     resolutionRule:
       "Resolves to total federal social insurance and retirement receipts for FY2027, in billions of nominal dollars, as reported in the final September FY2027 Monthly Treasury Statement.",
-    archCell: "treasury.mts.social_insurance_receipts.fy2027",
+    dataPointId: "treasury.mts.social_insurance_receipts.fy2027",
     historicalContext: [
       { label: "FY2021", value: 1312 },
       { label: "FY2023", value: 1614 },
@@ -2004,7 +2004,7 @@ export const MARKETS: Market[] = [
 
   {
     slug: "oasdi-benefit-outlays-fy2027",
-    type: "arch",
+    type: "data",
     title: "Social Security OASDI benefit outlays, FY2027",
     question:
       "What will federal Old-Age, Survivors, and Disability Insurance benefit outlays be in fiscal year 2027, in nominal dollars?",
@@ -2018,7 +2018,7 @@ export const MARKETS: Market[] = [
       "Social Security Administration and Monthly Treasury Statement",
     resolutionRule:
       "Resolves to OASDI benefit payments for FY2027, in billions of nominal dollars, using the first official SSA or Treasury fiscal-year table that reports Old-Age, Survivors, and Disability Insurance benefits.",
-    archCell: "ssa.oasdi.benefit_outlays.fy2027",
+    dataPointId: "ssa.oasdi.benefit_outlays.fy2027",
     historicalContext: [
       { label: "FY2021", value: 1135 },
       { label: "FY2023", value: 1354 },
@@ -2119,7 +2119,7 @@ export const MARKETS: Market[] = [
 
   {
     slug: "wic-average-monthly-participation-fy2027",
-    type: "arch",
+    type: "data",
     title: "WIC average monthly participation, FY2027",
     question:
       "What will average monthly participation in WIC be in fiscal year 2027, as reported by USDA FNS?",
@@ -2132,7 +2132,7 @@ export const MARKETS: Market[] = [
     resolutionSource: "USDA Food and Nutrition Service WIC data tables",
     resolutionRule:
       "Resolves to average monthly WIC participation for FY2027, in millions of participants, using the first USDA FNS annual WIC participation and costs table that reports FY2027.",
-    archCell: "usda.fns.wic.average_monthly_participation.fy2027",
+    dataPointId: "usda.fns.wic.average_monthly_participation.fy2027",
     historicalContext: [
       { label: "FY2019", value: 6.4 },
       { label: "FY2021", value: 6.2 },
@@ -2175,7 +2175,7 @@ export const MARKETS: Market[] = [
 
   {
     slug: "national-school-lunch-participation-sy2026-27",
-    type: "arch",
+    type: "data",
     title: "National School Lunch participation, SY2026-27",
     question:
       "What will average daily participation in the National School Lunch Program be in school year 2026-27?",
@@ -2189,7 +2189,7 @@ export const MARKETS: Market[] = [
       "USDA Food and Nutrition Service child nutrition data tables",
     resolutionRule:
       "Resolves to average daily participation in the National School Lunch Program for school year 2026-27, in millions of students, using the first USDA FNS annual child nutrition table that reports the school-year total.",
-    archCell: "usda.fns.nslp.average_daily_participation.sy2026_27",
+    dataPointId: "usda.fns.nslp.average_daily_participation.sy2026_27",
     historicalContext: [
       { label: "SY2018-19", value: 29.6 },
       { label: "SY2021-22", value: 30.1 },
@@ -2232,7 +2232,7 @@ export const MARKETS: Market[] = [
 
   {
     slug: "aca-exchange-plan-selections-oep-2027",
-    type: "arch",
+    type: "data",
     title: "ACA exchange plan selections, OEP 2027",
     question:
       "How many Qualified Health Plans will be selected through ACA exchanges during the 2027 Open Enrollment Period?",
@@ -2245,7 +2245,7 @@ export const MARKETS: Market[] = [
     resolutionSource: "CMS Health Insurance Exchanges Open Enrollment report",
     resolutionRule:
       "Resolves to total Qualified Health Plan selections across HealthCare.gov and state-based exchanges during the 2027 Open Enrollment Period, in millions, using the first final CMS Open Enrollment report for plan year 2027.",
-    archCell: "cms.aca.exchange_qhp_selections.oep_2027",
+    dataPointId: "cms.aca.exchange_qhp_selections.oep_2027",
     historicalContext: [
       { label: "OEP 2023", value: 16.4 },
       { label: "OEP 2024", value: 21.4 },
@@ -2287,7 +2287,7 @@ export const MARKETS: Market[] = [
 
   {
     slug: "medicare-benefit-outlays-fy2027",
-    type: "arch",
+    type: "data",
     title: "Medicare benefit outlays, FY2027",
     question:
       "What will federal Medicare benefit outlays be in fiscal year 2027, in nominal dollars?",
@@ -2300,7 +2300,7 @@ export const MARKETS: Market[] = [
     resolutionSource: "Monthly Treasury Statement, CMS, or CBO baseline tables",
     resolutionRule:
       "Resolves to federal Medicare benefit outlays for FY2027, in billions of nominal dollars, using the first official Treasury, CMS, or CBO fiscal-year table that reports Medicare benefit payments.",
-    archCell: "cms.medicare.benefit_outlays.fy2027",
+    dataPointId: "cms.medicare.benefit_outlays.fy2027",
     historicalContext: [
       { label: "FY2021", value: 696 },
       { label: "FY2023", value: 839 },
@@ -2343,7 +2343,7 @@ export const MARKETS: Market[] = [
 
   {
     slug: "tanf-federal-outlays-fy2027",
-    type: "arch",
+    type: "data",
     title: "TANF federal outlays, FY2027",
     question:
       "What will federal Temporary Assistance for Needy Families outlays be in fiscal year 2027, in nominal dollars?",
@@ -2357,7 +2357,7 @@ export const MARKETS: Market[] = [
       "HHS ACF TANF financial data and Monthly Treasury Statement",
     resolutionRule:
       "Resolves to federal TANF outlays for FY2027, in billions of nominal dollars, using the first official HHS ACF or Treasury table that reports federal TANF fiscal-year spending.",
-    archCell: "acf.tanf.federal_outlays.fy2027",
+    dataPointId: "acf.tanf.federal_outlays.fy2027",
     historicalContext: [
       { label: "FY2019", value: 16.5 },
       { label: "FY2021", value: 17.0 },
@@ -2400,7 +2400,7 @@ export const MARKETS: Market[] = [
 
   {
     slug: "ccdf-outlays-fy2027",
-    type: "arch",
+    type: "data",
     title: "Child Care and Development Fund outlays, FY2027",
     question:
       "What will Child Care and Development Fund outlays be in fiscal year 2027, in nominal dollars?",
@@ -2413,7 +2413,7 @@ export const MARKETS: Market[] = [
     resolutionSource: "HHS ACF CCDF expenditure data",
     resolutionRule:
       "Resolves to total Child Care and Development Fund expenditures for FY2027, in billions of nominal dollars, using the first official ACF-696-based HHS ACF expenditure data release for FY2027.",
-    archCell: "acf.ccdf.outlays.fy2027",
+    dataPointId: "acf.ccdf.outlays.fy2027",
     historicalContext: [
       { label: "FY2019", value: 9.5 },
       { label: "FY2021", value: 13.0 },
@@ -2456,7 +2456,7 @@ export const MARKETS: Market[] = [
 
   {
     slug: "estate-gift-tax-receipts-fy2027",
-    type: "arch",
+    type: "data",
     title: "Estate and gift tax receipts, FY2027",
     question:
       "What will federal estate and gift tax receipts be in fiscal year 2027, in nominal dollars?",
@@ -2469,7 +2469,7 @@ export const MARKETS: Market[] = [
     resolutionSource: "U.S. Treasury Monthly Statement",
     resolutionRule:
       "Resolves to federal estate and gift tax receipts for FY2027, in billions of nominal dollars, as reported in the final September FY2027 Monthly Treasury Statement.",
-    archCell: "treasury.mts.estate_gift_tax_receipts.fy2027",
+    dataPointId: "treasury.mts.estate_gift_tax_receipts.fy2027",
     historicalContext: [
       { label: "FY2021", value: 27 },
       { label: "FY2023", value: 34 },
@@ -2511,7 +2511,7 @@ export const MARKETS: Market[] = [
 
   {
     slug: "eitc-claimant-returns-ty2027",
-    type: "arch",
+    type: "data",
     title: "EITC claimant returns, TY2027",
     question:
       "How many individual income tax returns will claim the Earned Income Tax Credit for tax year 2027?",
@@ -2524,7 +2524,7 @@ export const MARKETS: Market[] = [
     resolutionSource: "IRS Statistics of Income individual tax return data",
     resolutionRule:
       "Resolves to the number of TY2027 individual income tax returns claiming the Earned Income Tax Credit, in millions, using the first official IRS Statistics of Income table covering TY2027 individual returns.",
-    archCell: "irs.soi.eitc_claimant_returns.ty2027",
+    dataPointId: "irs.soi.eitc_claimant_returns.ty2027",
     historicalContext: [
       { label: "TY2019", value: 25.0 },
       { label: "TY2021", value: 27.5 },
@@ -2566,7 +2566,7 @@ export const MARKETS: Market[] = [
 
   {
     slug: "corporate-income-tax-receipts-fy2027",
-    type: "arch",
+    type: "data",
     title: "Corporate income tax receipts, FY2027",
     question:
       "How much will the federal government collect in corporation income tax receipts during fiscal year 2027?",
@@ -2579,7 +2579,7 @@ export const MARKETS: Market[] = [
     resolutionSource: "U.S. Treasury Monthly Statement",
     resolutionRule:
       "Resolves to total corporation income tax receipts for FY2027, in billions of nominal dollars, as reported in the final September FY2027 Monthly Treasury Statement.",
-    archCell: "treasury.mts.corporation_income_tax_receipts.fy2027",
+    dataPointId: "treasury.mts.corporation_income_tax_receipts.fy2027",
     historicalContext: [
       { label: "FY2021", value: 372 },
       { label: "FY2022", value: 425 },
@@ -2622,7 +2622,7 @@ export const MARKETS: Market[] = [
 
   {
     slug: "snap-average-monthly-participation-fy2027",
-    type: "arch",
+    type: "data",
     title: "SNAP average monthly participation, FY2027",
     question:
       "How many people will participate in SNAP in an average month of fiscal year 2027?",
@@ -2635,7 +2635,7 @@ export const MARKETS: Market[] = [
     resolutionSource: "USDA FNS SNAP Data Tables",
     resolutionRule:
       "Resolves to average monthly SNAP persons for FY2027, in millions, using the first USDA FNS national annual participation table that includes all months of fiscal year 2027.",
-    archCell: "fns.snap.average_monthly_persons.fy2027",
+    dataPointId: "fns.snap.average_monthly_persons.fy2027",
     historicalContext: [
       { label: "FY2021", value: 41.5 },
       { label: "FY2022", value: 41.2 },
@@ -2676,7 +2676,7 @@ export const MARKETS: Market[] = [
 
   {
     slug: "pell-grant-recipients-ay2027",
-    type: "arch",
+    type: "data",
     title: "Pell Grant recipients, award year 2027-28",
     question:
       "How many students will receive a Federal Pell Grant during award year 2027-28?",
@@ -2689,7 +2689,7 @@ export const MARKETS: Market[] = [
     resolutionSource: "U.S. Department of Education Pell Grant Program data",
     resolutionRule:
       "Resolves to unduplicated Federal Pell Grant recipients for award year 2027-28, in millions, using the first official Department of Education Pell Grant program data table or budget justification table with final award-year recipients.",
-    archCell: "ed.pell.recipients.award_year_2027",
+    dataPointId: "ed.pell.recipients.award_year_2027",
     historicalContext: [
       { label: "AY2020", value: 6.2 },
       { label: "AY2022", value: 6.1 },
@@ -2731,7 +2731,7 @@ export const MARKETS: Market[] = [
 
   {
     slug: "head-start-funded-enrollment-fy2027",
-    type: "arch",
+    type: "data",
     title: "Head Start funded enrollment, FY2027",
     question:
       "How many Head Start and Early Head Start funded enrollment slots will be authorized for fiscal year 2027?",
@@ -2744,7 +2744,7 @@ export const MARKETS: Market[] = [
     resolutionSource: "ACF Office of Head Start Program Information Report",
     resolutionRule:
       "Resolves to funded enrollment for Head Start and Early Head Start in FY2027, in millions of slots, using the first ACF Office of Head Start Program Information Report or annual fact sheet covering fiscal year 2027.",
-    archCell: "acf.head_start.funded_enrollment.fy2027",
+    dataPointId: "acf.head_start.funded_enrollment.fy2027",
     historicalContext: [
       { label: "FY2019", value: 0.89 },
       { label: "FY2021", value: 0.84 },
@@ -2786,7 +2786,7 @@ export const MARKETS: Market[] = [
 
   {
     slug: "tanf-average-monthly-families-fy2027",
-    type: "arch",
+    type: "data",
     title: "TANF average monthly families, FY2027",
     question:
       "How many families will receive TANF or SSP-MOE cash assistance in an average month of fiscal year 2027?",
@@ -2799,7 +2799,7 @@ export const MARKETS: Market[] = [
     resolutionSource: "ACF TANF caseload data",
     resolutionRule:
       "Resolves to the fiscal-year average number of families receiving TANF or Separate State Program Maintenance-of-Effort cash assistance in FY2027, in millions, using the first ACF TANF caseload table covering all FY2027 months.",
-    archCell: "acf.tanf.average_monthly_families.fy2027",
+    dataPointId: "acf.tanf.average_monthly_families.fy2027",
     historicalContext: [
       { label: "FY2019", value: 1.1 },
       { label: "FY2021", value: 0.87 },
@@ -2840,7 +2840,7 @@ export const MARKETS: Market[] = [
 
   {
     slug: "ccdf-average-monthly-children-served-fy2027",
-    type: "arch",
+    type: "data",
     title: "CCDF average monthly children served, FY2027",
     question:
       "How many children will receive Child Care and Development Fund subsidized child care in an average month of fiscal year 2027?",
@@ -2853,7 +2853,7 @@ export const MARKETS: Market[] = [
     resolutionSource: "ACF CCDF data tables",
     resolutionRule:
       "Resolves to the average monthly adjusted number of children served by CCDF in FY2027, in millions, using the first ACF-800/ACF-801 CCDF data table covering fiscal year 2027.",
-    archCell: "acf.ccdf.average_monthly_children_served.fy2027",
+    dataPointId: "acf.ccdf.average_monthly_children_served.fy2027",
     historicalContext: [
       { label: "FY2019", value: 1.35 },
       { label: "FY2021", value: 1.21 },
@@ -2895,7 +2895,7 @@ export const MARKETS: Market[] = [
 
   {
     slug: "liheap-households-assisted-fy2027",
-    type: "arch",
+    type: "data",
     title: "LIHEAP households assisted, FY2027",
     question:
       "How many households will receive Low Income Home Energy Assistance Program assistance during fiscal year 2027?",
@@ -2908,7 +2908,7 @@ export const MARKETS: Market[] = [
     resolutionSource: "ACF LIHEAP Household Report",
     resolutionRule:
       "Resolves to total households receiving at least one type of LIHEAP assistance for FY2027, in millions, using the first ACF LIHEAP Household Report or LIHEAP data warehouse release covering fiscal year 2027.",
-    archCell: "acf.liheap.households_assisted.fy2027",
+    dataPointId: "acf.liheap.households_assisted.fy2027",
     historicalContext: [
       { label: "FY2019", value: 5.2 },
       { label: "FY2021", value: 5.4 },
@@ -2950,7 +2950,7 @@ export const MARKETS: Market[] = [
 
   {
     slug: "school-breakfast-participation-sy2026-27",
-    type: "arch",
+    type: "data",
     title: "School Breakfast participation, SY2026-27",
     question:
       "How many children will participate in the School Breakfast Program on an average school day during school year 2026-27?",
@@ -2963,7 +2963,7 @@ export const MARKETS: Market[] = [
     resolutionSource: "USDA FNS Child Nutrition Tables",
     resolutionRule:
       "Resolves to average daily School Breakfast Program participation for school year 2026-27, in millions, using USDA FNS participation data with summer months excluded where FNS publishes a school-year table.",
-    archCell: "fns.sbp.average_daily_participation.sy2026_27",
+    dataPointId: "fns.sbp.average_daily_participation.sy2026_27",
     historicalContext: [
       { label: "FY2019", value: 14.7 },
       { label: "FY2022", value: 14.9 },
@@ -3004,7 +3004,7 @@ export const MARKETS: Market[] = [
 
   {
     slug: "ssi-recipients-dec-2027",
-    type: "arch",
+    type: "data",
     title: "SSI recipients, December 2027",
     question:
       "How many people will receive Supplemental Security Income in December 2027?",
@@ -3017,7 +3017,7 @@ export const MARKETS: Market[] = [
     resolutionSource: "SSA Monthly Statistical Snapshot",
     resolutionRule:
       "Resolves to total SSI recipients in December 2027, in millions, as reported in the Social Security Administration Monthly Statistical Snapshot or SSI Monthly Statistics release for December 2027.",
-    archCell: "ssa.ssi.recipients.2027-12",
+    dataPointId: "ssa.ssi.recipients.2027-12",
     historicalContext: [
       { label: "Dec 2021", value: 7.71 },
       { label: "Dec 2023", value: 7.47 },
@@ -3059,7 +3059,7 @@ export const MARKETS: Market[] = [
 
   {
     slug: "snap-average-monthly-households-fy2027",
-    type: "arch",
+    type: "data",
     title: "SNAP average monthly households, FY2027",
     question:
       "How many households will participate in SNAP in an average month of fiscal year 2027?",
@@ -3072,7 +3072,7 @@ export const MARKETS: Market[] = [
     resolutionSource: "USDA FNS SNAP Data Tables",
     resolutionRule:
       "Resolves to average monthly SNAP households for FY2027, in millions, using the first USDA FNS national annual participation table that includes all months of fiscal year 2027.",
-    archCell: "fns.snap.average_monthly_households.fy2027",
+    dataPointId: "fns.snap.average_monthly_households.fy2027",
     historicalContext: [
       { label: "FY2021", value: 21.7 },
       { label: "FY2022", value: 21.6 },
@@ -3113,7 +3113,7 @@ export const MARKETS: Market[] = [
 
   {
     slug: "medicaid-chip-child-enrollment-dec-2027",
-    type: "arch",
+    type: "data",
     title: "Medicaid and CHIP child enrollment, December 2027",
     question:
       "How many children will be enrolled in Medicaid or CHIP in December 2027?",
@@ -3126,7 +3126,7 @@ export const MARKETS: Market[] = [
     resolutionSource: "CMS Medicaid and CHIP monthly enrollment data",
     resolutionRule:
       "Resolves to Medicaid child and CHIP enrollment for December 2027, in millions, using the first CMS monthly Medicaid and CHIP enrollment report or data.Medicaid.gov release that reports the child-enrollment series for that month.",
-    archCell: "cms.medicaid_chip.child_enrollment.2027-12",
+    dataPointId: "cms.medicaid_chip.child_enrollment.2027-12",
     historicalContext: [
       { label: "Dec 2021", value: 40.0 },
       { label: "Sep 2024", value: 37.6 },
@@ -3168,7 +3168,7 @@ export const MARKETS: Market[] = [
 
   {
     slug: "housing-choice-voucher-households-leased-dec-2027",
-    type: "arch",
+    type: "data",
     title: "Housing Choice Voucher households leased, December 2027",
     question:
       "How many households will be leased under the Housing Choice Voucher program in December 2027?",
@@ -3181,7 +3181,7 @@ export const MARKETS: Market[] = [
     resolutionSource: "HUD Housing Choice Voucher Data Dashboard",
     resolutionRule:
       "Resolves to Housing Choice Voucher households leased for December 2027, in millions, using the HUD HCV Data Dashboard or the first official HUD utilization table that reports national leased households for that month.",
-    archCell: "hud.hcv.households_leased.2027-12",
+    dataPointId: "hud.hcv.households_leased.2027-12",
     historicalContext: [
       { label: "Dec 2019", value: 2.28 },
       { label: "Dec 2021", value: 2.32 },
@@ -3223,7 +3223,7 @@ export const MARKETS: Market[] = [
 
   {
     slug: "school-breakfast-federal-outlays-fy2027",
-    type: "arch",
+    type: "data",
     title: "School Breakfast federal outlays, FY2027",
     question:
       "How much will the federal government spend on the School Breakfast Program in fiscal year 2027?",
@@ -3236,7 +3236,7 @@ export const MARKETS: Market[] = [
     resolutionSource: "USDA FNS Child Nutrition Tables",
     resolutionRule:
       "Resolves to federal School Breakfast Program cost for FY2027, in billions of nominal dollars, using the first USDA FNS child nutrition program table that reports fiscal-year federal cost.",
-    archCell: "fns.sbp.federal_cost.fy2027",
+    dataPointId: "fns.sbp.federal_cost.fy2027",
     historicalContext: [
       { label: "FY2019", value: 4.5 },
       { label: "FY2022", value: 5.7 },
@@ -3277,7 +3277,7 @@ export const MARKETS: Market[] = [
 
   {
     slug: "child-support-distributed-collections-fy2027",
-    type: "arch",
+    type: "data",
     title: "Child support distributed collections, FY2027",
     question:
       "How much child support will state and tribal programs distribute during fiscal year 2027?",
@@ -3290,7 +3290,7 @@ export const MARKETS: Market[] = [
     resolutionSource: "ACF Office of Child Support Services annual report",
     resolutionRule:
       "Resolves to total distributed child support collections for FY2027, in billions of nominal dollars, using the first ACF Office of Child Support Services preliminary or annual report covering fiscal year 2027.",
-    archCell: "acf.ocss.distributed_collections.fy2027",
+    dataPointId: "acf.ocss.distributed_collections.fy2027",
     historicalContext: [
       { label: "FY2019", value: 28.8 },
       { label: "FY2021", value: 27.9 },
@@ -3332,7 +3332,7 @@ export const MARKETS: Market[] = [
 
   {
     slug: "pell-grant-outlays-fy2027",
-    type: "arch",
+    type: "data",
     title: "Federal Pell Grant outlays, FY2027",
     question:
       "How much will the federal government spend on Federal Pell Grants during fiscal year 2027?",
@@ -3346,7 +3346,7 @@ export const MARKETS: Market[] = [
       "U.S. Department of Education Federal Student Aid and budget data",
     resolutionRule:
       "Resolves to Federal Pell Grant program outlays or obligations for FY2027, in billions of nominal dollars, using the first official Department of Education Federal Student Aid annual report, budget justification, or Pell Grant program data table that reports fiscal-year spending.",
-    archCell: "ed.pell.outlays.fy2027",
+    dataPointId: "ed.pell.outlays.fy2027",
     historicalContext: [
       { label: "FY2019", value: 28.2 },
       { label: "FY2021", value: 26.0 },
@@ -3388,7 +3388,7 @@ export const MARKETS: Market[] = [
 
   {
     slug: "wic-federal-outlays-fy2027",
-    type: "arch",
+    type: "data",
     title: "WIC federal outlays, FY2027",
     question:
       "How much will the federal government spend on WIC during fiscal year 2027?",
@@ -3401,7 +3401,7 @@ export const MARKETS: Market[] = [
     resolutionSource: "USDA FNS WIC program participation and costs data",
     resolutionRule:
       "Resolves to total federal WIC program cost for FY2027, in billions of nominal dollars, using the first USDA FNS WIC participation and cost table that reports fiscal-year total cost.",
-    archCell: "usda.fns.wic.federal_cost.fy2027",
+    dataPointId: "usda.fns.wic.federal_cost.fy2027",
     historicalContext: [
       { label: "FY2019", value: 5.3 },
       { label: "FY2021", value: 5.0 },
@@ -3443,7 +3443,7 @@ export const MARKETS: Market[] = [
 
   {
     slug: "liheap-federal-funding-fy2027",
-    type: "arch",
+    type: "data",
     title: "LIHEAP federal funding, FY2027",
     question:
       "How much federal funding will be made available for LIHEAP during fiscal year 2027?",
@@ -3456,7 +3456,7 @@ export const MARKETS: Market[] = [
     resolutionSource: "ACF Office of Community Services LIHEAP funding tables",
     resolutionRule:
       "Resolves to total federal LIHEAP funding made available for FY2027, including regular block grant and contingency or supplemental funding, in billions of nominal dollars, using ACF Office of Community Services funding tables or LIHEAP Clearinghouse funding history.",
-    archCell: "acf.liheap.federal_funding.fy2027",
+    dataPointId: "acf.liheap.federal_funding.fy2027",
     historicalContext: [
       { label: "FY2019", value: 3.7 },
       { label: "FY2021", value: 8.3 },
@@ -3498,7 +3498,7 @@ export const MARKETS: Market[] = [
 
   {
     slug: "oasdi-beneficiaries-dec-2027",
-    type: "arch",
+    type: "data",
     title: "OASDI beneficiaries, December 2027",
     question:
       "How many people will receive Old-Age, Survivors, and Disability Insurance benefits in December 2027?",
@@ -3511,7 +3511,7 @@ export const MARKETS: Market[] = [
     resolutionSource: "SSA Monthly Statistical Snapshot",
     resolutionRule:
       "Resolves to total OASDI beneficiaries in current-payment status for December 2027, in millions, as reported in the Social Security Administration Monthly Statistical Snapshot or comparable SSA monthly beneficiary data.",
-    archCell: "ssa.oasdi.beneficiaries.2027-12",
+    dataPointId: "ssa.oasdi.beneficiaries.2027-12",
     historicalContext: [
       { label: "Dec 2021", value: 65.0 },
       { label: "Dec 2023", value: 67.1 },
@@ -3553,7 +3553,7 @@ export const MARKETS: Market[] = [
 
   {
     slug: "dependent-care-credit-claimant-returns-ty2026",
-    type: "arch",
+    type: "data",
     title: "Child and dependent care credit returns, TY2026",
     question:
       "How many individual income tax returns will claim the federal child and dependent care credit for tax year 2026?",
@@ -3566,7 +3566,7 @@ export const MARKETS: Market[] = [
     resolutionSource: "IRS Statistics of Income individual tax return data",
     resolutionRule:
       "Resolves to the number of TY2026 individual income tax returns claiming the federal child and dependent care credit, in millions, using the first official IRS Statistics of Income individual income tax table that reports this credit.",
-    archCell: "irs.soi.child_dependent_care_credit_returns.ty2026",
+    dataPointId: "irs.soi.child_dependent_care_credit_returns.ty2026",
     historicalContext: [
       { label: "TY2019", value: 6.3 },
       { label: "TY2020", value: 5.6 },
@@ -3608,7 +3608,7 @@ export const MARKETS: Market[] = [
 
   {
     slug: "premium-tax-credit-claimant-returns-ty2026",
-    type: "arch",
+    type: "data",
     title: "Premium tax credit claimant returns, TY2026",
     question:
       "How many individual income tax returns will claim the federal premium tax credit for tax year 2026?",
@@ -3621,7 +3621,7 @@ export const MARKETS: Market[] = [
     resolutionSource: "IRS Statistics of Income individual tax return data",
     resolutionRule:
       "Resolves to the number of TY2026 individual income tax returns claiming the premium tax credit or reconciling advance premium tax credits on Form 8962, in millions, using the first official IRS Statistics of Income table covering TY2026 individual returns.",
-    archCell: "irs.soi.premium_tax_credit_claimant_returns.ty2026",
+    dataPointId: "irs.soi.premium_tax_credit_claimant_returns.ty2026",
     historicalContext: [
       { label: "TY2019", value: 5.8 },
       { label: "TY2021", value: 8.9 },
@@ -3663,7 +3663,7 @@ export const MARKETS: Market[] = [
 
   {
     slug: "additional-child-tax-credit-claimant-returns-ty2026",
-    type: "arch",
+    type: "data",
     title: "Additional Child Tax Credit returns, TY2026",
     question:
       "How many individual income tax returns will claim the refundable Additional Child Tax Credit for tax year 2026?",
@@ -3676,7 +3676,7 @@ export const MARKETS: Market[] = [
     resolutionSource: "IRS Statistics of Income individual tax return data",
     resolutionRule:
       "Resolves to the number of TY2026 individual income tax returns claiming the refundable Additional Child Tax Credit, in millions, using the first official IRS Statistics of Income table covering TY2026 individual returns.",
-    archCell: "irs.soi.additional_child_tax_credit_returns.ty2026",
+    dataPointId: "irs.soi.additional_child_tax_credit_returns.ty2026",
     historicalContext: [
       { label: "TY2019", value: 17.6 },
       { label: "TY2021", value: 35.2 },
@@ -3718,7 +3718,7 @@ export const MARKETS: Market[] = [
 
   {
     slug: "charitable-contributions-deduction-ty2026",
-    type: "arch",
+    type: "data",
     title: "Itemized charitable contributions, TY2026",
     question:
       "How much will individual income tax filers deduct for charitable contributions on itemized returns for tax year 2026?",
@@ -3731,7 +3731,7 @@ export const MARKETS: Market[] = [
     resolutionSource: "IRS Statistics of Income individual tax return data",
     resolutionRule:
       "Resolves to total charitable contributions deducted on TY2026 itemized individual income tax returns, in billions of nominal dollars, using the first official IRS Statistics of Income Schedule A or itemized-deductions table covering TY2026.",
-    archCell: "irs.soi.itemized_charitable_contributions.ty2026",
+    dataPointId: "irs.soi.itemized_charitable_contributions.ty2026",
     historicalContext: [
       { label: "TY2019", value: 236 },
       { label: "TY2020", value: 258 },
@@ -3773,7 +3773,7 @@ export const MARKETS: Market[] = [
 
   {
     slug: "medicare-total-enrollment-dec-2027",
-    type: "arch",
+    type: "data",
     title: "Medicare total enrollment, December 2027",
     question: "How many people will be enrolled in Medicare in December 2027?",
     unit: "millions",
@@ -3785,7 +3785,7 @@ export const MARKETS: Market[] = [
     resolutionSource: "CMS Medicare Monthly Enrollment data",
     resolutionRule:
       "Resolves to total Medicare beneficiaries for December 2027, in millions, using the first CMS Medicare Monthly Enrollment dataset or Medicare Enrollment Report that includes national December 2027 enrollment.",
-    archCell: "cms.medicare.total_beneficiaries.2027-12",
+    dataPointId: "cms.medicare.total_beneficiaries.2027-12",
     historicalContext: [
       { label: "Dec 2021", value: 64.5 },
       { label: "Dec 2023", value: 66.7 },
@@ -3827,7 +3827,7 @@ export const MARKETS: Market[] = [
 
   {
     slug: "retired-worker-average-benefit-dec-2027",
-    type: "arch",
+    type: "data",
     title: "Retired-worker average benefit, December 2027",
     question:
       "What will the average monthly Social Security retired-worker benefit be in December 2027?",
@@ -3840,7 +3840,7 @@ export const MARKETS: Market[] = [
     resolutionSource: "SSA Monthly Statistical Snapshot",
     resolutionRule:
       "Resolves to the average monthly benefit for retired workers in current-payment status for December 2027, in nominal dollars, as reported in the Social Security Administration Monthly Statistical Snapshot.",
-    archCell: "ssa.oasdi.retired_worker_average_benefit.2027-12",
+    dataPointId: "ssa.oasdi.retired_worker_average_benefit.2027-12",
     historicalContext: [
       { label: "Dec 2021", value: 1658 },
       { label: "Dec 2023", value: 1848 },
@@ -4012,7 +4012,7 @@ export const MARKETS: Market[] = [
 
   {
     slug: "snap-average-benefit-per-person-fy2027",
-    type: "arch",
+    type: "data",
     title: "SNAP average benefit per person, FY2027",
     question:
       "What will the average monthly SNAP benefit per person be in fiscal year 2027?",
@@ -4025,7 +4025,7 @@ export const MARKETS: Market[] = [
     resolutionSource: "USDA FNS SNAP Data Tables",
     resolutionRule:
       "Resolves to average monthly SNAP benefits per person for FY2027, in nominal dollars, using the first USDA FNS national SNAP annual table that reports benefits per person for all months of fiscal year 2027.",
-    archCell: "usda.fns.snap.average_benefit_per_person.fy2027",
+    dataPointId: "usda.fns.snap.average_benefit_per_person.fy2027",
     historicalContext: [
       { label: "FY2019", value: 130 },
       { label: "FY2021", value: 230 },
@@ -4067,7 +4067,7 @@ export const MARKETS: Market[] = [
 
   {
     slug: "ptc-average-subsidy-per-enrollee-fy2027",
-    type: "arch",
+    type: "data",
     title: "ACA PTC average subsidy per enrollee, FY2027",
     question:
       "What will the average monthly ACA premium tax credit subsidy per subsidized marketplace enrollee be in fiscal year 2027?",
@@ -4080,7 +4080,7 @@ export const MARKETS: Market[] = [
     resolutionSource: "CMS marketplace and Treasury outlay tables",
     resolutionRule:
       "Resolves to average monthly premium tax credit subsidy per subsidized marketplace enrollee for FY2027, computed from official CMS enrollment and Treasury/CMS PTC outlay tables when both are available.",
-    archCell: "cms.marketplace.ptc.average_subsidy_per_enrollee.fy2027",
+    dataPointId: "cms.marketplace.ptc.average_subsidy_per_enrollee.fy2027",
     historicalContext: [
       { label: "FY2020", value: 520 },
       { label: "FY2022", value: 575 },
@@ -4138,7 +4138,7 @@ export const MARKETS: Market[] = [
       "Resolves to the official Census SPM child poverty rate for 2028, conditional on the event 'a TCJA extension package matching at least the House-passed framework on CTC and EITC is enacted by 2026-06-30.' If the conditioning event does not occur, the forecast cell is marked unresolved.",
     conditionalOn:
       "TCJA extension package matching House framework enacted by 2026-06-30",
-    archCell: "census.spm.child_poverty_rate.2028",
+    dataPointId: "census.spm.child_poverty_rate.2028",
     historicalContext: [
       { label: "2022", value: 12.4 },
       { label: "2023", value: 13.7 },
@@ -4204,7 +4204,7 @@ export const MARKETS: Market[] = [
       "Resolves to the official Census SPM child poverty rate for calendar year 2026, conditional on a materially equivalent $3,000 fully refundable CTC being in effect for TY2026. If the policy is not in effect, the forecast cell is marked unresolved.",
     conditionalOn:
       "$3,000 fully refundable Child Tax Credit in effect for tax year 2026",
-    archCell: "census.spm.child_poverty_rate.2026",
+    dataPointId: "census.spm.child_poverty_rate.2026",
     historicalContext: [
       { label: "2021", value: 5.2 },
       { label: "2022", value: 12.4 },
@@ -4266,7 +4266,7 @@ export const MARKETS: Market[] = [
       "Resolves to total individual income tax receipts for FY2028 as reported in the Monthly Treasury Statement covering September 2028, conditional on the SALT deduction cap under IRC §164(b)(6) being fully eliminated for TY2026 and later. If the cap is not fully eliminated, the forecast cell is marked unresolved.",
     conditionalOn:
       "IRC §164(b)(6) SALT cap fully eliminated for TY2026 and later",
-    archCell: "treasury.mts.individual_income_tax.fy2028",
+    dataPointId: "treasury.mts.individual_income_tax.fy2028",
     historicalContext: [
       { label: "FY2024", value: 2426 },
       { label: "FY2025e", value: 2520 },
@@ -4329,7 +4329,7 @@ export const MARKETS: Market[] = [
       "Resolves to the uninsured rate among people under 65 as reported by the Census ASEC for calendar year 2028, conditional on no restoration of the enhanced ACA premium tax credits (above the original ACA-baseline subsidies) through 2028. If subsidies are restored at any point, the forecast cell is marked unresolved.",
     conditionalOn:
       "Enhanced ACA premium tax credits remain expired through end of 2028",
-    archCell: "census.asec.uninsured_rate_under_65.2028",
+    dataPointId: "census.asec.uninsured_rate_under_65.2028",
     historicalContext: [
       { label: "2021", value: 9.6 },
       { label: "2022", value: 8.6 },
@@ -4414,13 +4414,13 @@ export function formatValueShort(value: number, unit: Unit): string {
 }
 
 export const TYPE_LABEL: Record<MarketType, string> = {
-  arch: "Government data",
+  data: "Government data",
   policy: "Policy",
   conditional: "Conditional",
 };
 
 export const TYPE_DESCRIPTION: Record<MarketType, string> = {
-  arch: "Forecast cell on a published government data point.",
+  data: "Forecast cell on a published government data point.",
   policy: "Forecast cell on a law-encoded policy parameter.",
   conditional: "Outcome forecast conditional on a policy state.",
 };

@@ -241,13 +241,13 @@ export function MarketRuntime({ market }: MarketRuntimeProps) {
             <dd className="leading-[1.55] text-[var(--theme-text)]">
               {market.resolutionRule}
             </dd>
-            {market.archCell && (
+            {market.dataPointId && (
               <>
                 <dt className="[font-family:var(--font-mono)] text-[0.7rem] uppercase tracking-[0.1em] text-[var(--theme-text-dim)]">
                   Data point
                 </dt>
                 <dd className="[font-family:var(--font-mono)] text-[0.78rem] text-[var(--color-horizon-700)]">
-                  {market.archCell}
+                  {market.dataPointId}
                 </dd>
               </>
             )}
