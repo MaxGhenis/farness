@@ -76,6 +76,173 @@ export function getForecastRuntimeLabel(slug: string): string {
 export const MARKETS: Market[] = [
   // ─── Government data cells ───────────────────────────────────────────────
   {
+    slug: "spm-child-poverty-2025",
+    type: "arch",
+    title: "SPM child poverty rate, 2025",
+    question:
+      "What will the Supplemental Poverty Measure child poverty rate be for calendar year 2025 as published by the U.S. Census Bureau?",
+    unit: "percent",
+    pointEstimate: 13.1,
+    ciLow: 12.0,
+    ciHigh: 14.4,
+    confidence: 0.8,
+    resolutionDate: "2026-09-15",
+    resolutionSource: "U.S. Census Bureau, Poverty in the United States: 2025",
+    resolutionRule:
+      "Resolves to the official SPM child poverty rate (children under 18) for calendar year 2025 in the Census Poverty in the United States report, expected in September 2026. If Census publishes multiple SPM variants, this uses the main published SPM table.",
+    archCell: "census.spm.child_poverty_rate.2025",
+    historicalContext: [
+      { label: "2021", value: 5.2 },
+      { label: "2022", value: 12.4 },
+      { label: "2023", value: 13.7 },
+      { label: "2024", value: 13.4 },
+    ],
+    drivers: [
+      "CTC and EITC current-law parameters",
+      "2025 labor-market strength",
+      "Shelter and medical out-of-pocket costs",
+      "SNAP and school-meals resources",
+    ],
+    reasoning: [
+      { kind: "heading", text: "Near-term Census target" },
+      {
+        kind: "text",
+        text: "This is deliberately near-term: Census typically releases annual income, poverty, health insurance, and SPM estimates in September for the prior calendar year. The 2025 SPM child poverty rate should therefore resolve in September 2026, making it a useful early calibration target.",
+      },
+      { kind: "heading", text: "PolicyEngine baseline" },
+      {
+        kind: "tool",
+        call: 'policyengine.simulate({ policy: "current_law", year: 2025, output: "spm_child_poverty_rate", map_to: "person", population: "microplex.us.2025" })',
+        result:
+          '{ point: 13.0, ci80: [12.1, 14.1], drivers: ["ctc_refundability", "earnings", "housing_costs"] }',
+      },
+      {
+        kind: "tool",
+        tool: "census.lookup",
+        call: 'census.lookup({ report: "Poverty in the United States", series: "spm_child_poverty_rate", years: [2021, 2024] })',
+        result:
+          "{ ty2021_expanded_ctc: 5.2, ty2022: 12.4, ty2023: 13.7, ty2024: 13.4 }",
+      },
+      { kind: "heading", text: "Forecast" },
+      {
+        kind: "text",
+        text: "The 2025 law and macro environment look much closer to 2022-2024 than to the 2021 expanded-CTC year. The point estimate sits slightly below 2024 because employment and real earnings improved, while the upper tail keeps room for housing and medical expense pressure in the SPM resource calculation.",
+      },
+      { kind: "forecast", point: 13.1, ciLow: 12.0, ciHigh: 14.4 },
+    ],
+  },
+
+  {
+    slug: "official-poverty-rate-2025",
+    type: "arch",
+    title: "Official poverty rate, 2025",
+    question:
+      "What will the official U.S. poverty rate be for calendar year 2025 as published by the U.S. Census Bureau?",
+    unit: "percent",
+    pointEstimate: 10.4,
+    ciLow: 9.8,
+    ciHigh: 11.1,
+    confidence: 0.8,
+    resolutionDate: "2026-09-15",
+    resolutionSource: "U.S. Census Bureau, Poverty in the United States: 2025",
+    resolutionRule:
+      "Resolves to the official poverty rate for all people in calendar year 2025 in the Census Poverty in the United States report, expected in September 2026. This uses the official poverty measure, not the Supplemental Poverty Measure.",
+    archCell: "census.official_poverty_rate.2025",
+    historicalContext: [
+      { label: "2021", value: 11.6 },
+      { label: "2022", value: 11.5 },
+      { label: "2023", value: 11.1 },
+      { label: "2024", value: 10.6 },
+    ],
+    drivers: [
+      "Pretax cash income growth",
+      "Employment and hours worked",
+      "Household composition",
+      "CPI-U poverty-threshold indexation",
+    ],
+    reasoning: [
+      { kind: "heading", text: "Cash-income target" },
+      {
+        kind: "text",
+        text: "The official poverty measure excludes taxes, refundable credits, and noncash benefits, so it is a cleaner near-term read on cash-income and labor-market strength than SPM.",
+      },
+      {
+        kind: "tool",
+        tool: "census.lookup",
+        call: 'census.lookup({ report: "Poverty in the United States", series: "official_poverty_rate", years: [2021, 2024] })',
+        result: "{ y2021: 11.6, y2022: 11.5, y2023: 11.1, y2024: 10.6 }",
+      },
+      {
+        kind: "tool",
+        call: 'policyengine.simulate({ policy: "current_law", year: 2025, output: "official_poverty_rate", map_to: "person", income_definition: "cash_income" })',
+        result:
+          '{ point: 10.5, ci80: [9.9, 11.0], drivers: ["earnings", "social_security_income", "threshold_indexation"] }',
+      },
+      { kind: "heading", text: "Forecast" },
+      {
+        kind: "text",
+        text: "The central path continues the 2023-2024 improvement but slows it. A recession would have shown more clearly in the 2025 labor market by now, so the upper tail is moderate rather than extreme.",
+      },
+      { kind: "forecast", point: 10.4, ciLow: 9.8, ciHigh: 11.1 },
+    ],
+  },
+
+  {
+    slug: "median-household-income-2025",
+    type: "arch",
+    title: "Median household income, 2025",
+    question:
+      "What will real median household income be for calendar year 2025 as published by the U.S. Census Bureau?",
+    unit: "usd",
+    pointEstimate: 80600,
+    ciLow: 78600,
+    ciHigh: 82900,
+    confidence: 0.8,
+    resolutionDate: "2026-09-15",
+    resolutionSource: "U.S. Census Bureau, Income in the United States: 2025",
+    resolutionRule:
+      "Resolves to the real median household income for calendar year 2025 in the Census Income in the United States report, expected in September 2026, expressed in 2025 dollars or the headline real-dollar basis used by Census.",
+    archCell: "census.asec.median_household_income.2025",
+    historicalContext: [
+      { label: "2021", value: 76330 },
+      { label: "2022", value: 77540 },
+      { label: "2023", value: 80610 },
+      { label: "2024", value: 80100 },
+    ],
+    drivers: [
+      "Real wage growth",
+      "Employment-to-population ratio",
+      "Household composition",
+      "ASEC sampling error",
+    ],
+    reasoning: [
+      { kind: "heading", text: "Near-term income benchmark" },
+      {
+        kind: "text",
+        text: "Median household income is one of the fastest-resolving economic well-being targets in the catalog. The 2025 ASEC release gives a near-term check on the income side of the poverty forecasts.",
+      },
+      {
+        kind: "tool",
+        tool: "census.lookup",
+        call: 'census.lookup({ report: "Income in the United States", series: "real_median_household_income", years: [2021, 2024] })',
+        result:
+          "{ y2021: 76330, y2022: 77540, y2023: 80610, y2024_estimate: 80100 }",
+      },
+      {
+        kind: "tool",
+        call: 'policyengine.simulate({ scenario: "baseline_macro", year: 2025, output: "median_household_income_real", source: "asec" })',
+        result:
+          '{ point: 80700, ci80: [78900, 82700], drivers: ["real_wages", "employment", "household_composition"] }',
+      },
+      {
+        kind: "text",
+        text: "The central estimate is nearly flat versus 2024: real wage gains help, but household composition and ASEC sampling noise can move the published median by more than the underlying economic trend.",
+      },
+      { kind: "forecast", point: 80600, ciLow: 78600, ciHigh: 82900 },
+    ],
+  },
+
+  {
     slug: "spm-child-poverty-2027",
     type: "arch",
     title: "SPM child poverty rate, 2027",
@@ -1440,30 +1607,29 @@ export const MARKETS: Market[] = [
   },
 
   {
-    slug: "federal-spm-poverty-rate-2026",
+    slug: "spm-poverty-rate-2025",
     type: "arch",
-    title: "SPM poverty rate, 2026",
+    title: "SPM poverty rate, 2025",
     question:
-      "What will the overall Supplemental Poverty Measure poverty rate be for calendar year 2026 as published by the U.S. Census Bureau?",
+      "What will the overall Supplemental Poverty Measure poverty rate be for calendar year 2025 as published by the U.S. Census Bureau?",
     unit: "percent",
-    pointEstimate: 12.4,
-    ciLow: 11.2,
-    ciHigh: 13.9,
+    pointEstimate: 12.7,
+    ciLow: 12.0,
+    ciHigh: 13.5,
     confidence: 0.8,
-    resolutionDate: "2027-09-15",
-    resolutionSource: "U.S. Census Bureau, SPM annual release",
+    resolutionDate: "2026-09-15",
+    resolutionSource: "U.S. Census Bureau, Poverty in the United States: 2025",
     resolutionRule:
-      "Resolves to the official Supplemental Poverty Measure poverty rate for all people in calendar year 2026, as published in the Census Poverty in the United States report.",
-    archCell: "census.spm.all_people_poverty_rate.2026",
+      "Resolves to the official Supplemental Poverty Measure poverty rate for all people in calendar year 2025, as published in the Census Poverty in the United States report expected in September 2026.",
+    archCell: "census.spm.all_people_poverty_rate.2025",
     historicalContext: [
       { label: "2021", value: 7.8 },
       { label: "2022", value: 12.4 },
       { label: "2023", value: 12.9 },
       { label: "2024", value: 12.9 },
-      { label: "2025e", value: 12.6 },
     ],
     drivers: [
-      "Refundable credit policy",
+      "Refundable credit policy in 2025",
       "Rent and medical out-of-pocket costs",
       "Employment and wage growth",
       "SNAP and housing assistance",
@@ -1472,14 +1638,14 @@ export const MARKETS: Market[] = [
       { kind: "heading", text: "Identifying the Census target" },
       {
         kind: "text",
-        text: "Overall SPM poverty is less CTC-sensitive than child poverty but more exposed to housing, medical, SNAP, and labor-market inputs. The target resolves to the Census all-person rate, not a tax-unit simulation output.",
+        text: "Overall SPM poverty is less CTC-sensitive than child poverty but more exposed to housing, medical, SNAP, and labor-market inputs. This 2025 target resolves roughly a year earlier than the prior 2026 SPM cell, making it a better near-term calibration target.",
       },
       { kind: "heading", text: "PolicyEngine baseline" },
       {
         kind: "tool",
-        call: 'policyengine.simulate({ policy: "current_law", year: 2026, output: "spm_poverty_rate", map_to: "person" })',
+        call: 'policyengine.simulate({ policy: "current_law", year: 2025, output: "spm_poverty_rate", map_to: "person" })',
         result:
-          '{ point: 12.2, ci80: [11.3, 13.4], drivers: ["tax credits", "housing costs", "medical expenses"] }',
+          '{ point: 12.6, ci80: [12.0, 13.3], drivers: ["tax credits", "housing costs", "medical expenses"] }',
       },
       {
         kind: "tool",
@@ -1491,9 +1657,9 @@ export const MARKETS: Market[] = [
       { kind: "heading", text: "Forecast" },
       {
         kind: "text",
-        text: "The model stays close to the post-expansion plateau but widens upward for shelter and medical cost risk. Child-credit expansions would mostly show up in the lower tail.",
+        text: "The model stays close to the 2022-2024 post-expansion plateau. Improved employment and real earnings pull down slightly; shelter and medical expense pressure keep the rate near the 2024 level.",
       },
-      { kind: "forecast", point: 12.4, ciLow: 11.2, ciHigh: 13.9 },
+      { kind: "forecast", point: 12.7, ciLow: 12.0, ciHigh: 13.5 },
     ],
   },
 

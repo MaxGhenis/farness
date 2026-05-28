@@ -37,10 +37,16 @@ const FILTERS: { key: Filter; label: string; description: string }[] = [
 
 export function MarketsBrowser() {
   const [filter, setFilter] = useState<Filter>("all");
+  const sortedMarkets = useMemo(
+    () => [...MARKETS].sort(compareByResolutionDate),
+    [],
+  );
   const filtered = useMemo(
     () =>
-      filter === "all" ? MARKETS : MARKETS.filter((m) => m.type === filter),
-    [filter],
+      filter === "all"
+        ? sortedMarkets
+        : sortedMarkets.filter((m) => m.type === filter),
+    [filter, sortedMarkets],
   );
   const description =
     FILTERS.find((f) => f.key === filter)?.description ??
@@ -81,7 +87,7 @@ export function MarketsBrowser() {
         })}
       </div>
       <p className="mb-8 max-w-[640px] text-[0.9rem] text-[var(--theme-text-muted)]">
-        {description}
+        {description} Sorted by earliest expected resolution.
       </p>
       <div className="grid grid-cols-1 gap-5 md:grid-cols-2 lg:grid-cols-3">
         {filtered.map((m: Market) => (
@@ -89,5 +95,11 @@ export function MarketsBrowser() {
         ))}
       </div>
     </div>
+  );
+}
+
+function compareByResolutionDate(a: Market, b: Market): number {
+  return (
+    new Date(a.resolutionDate).getTime() - new Date(b.resolutionDate).getTime()
   );
 }

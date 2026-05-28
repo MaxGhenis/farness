@@ -37,4 +37,13 @@ describe("forecast catalog", () => {
       expect(slugs.has(slug)).toBe(true);
     }
   });
+
+  it("prioritizes near-term 2025 Census release targets", () => {
+    const slugs = new Set(MARKETS.map((forecast) => forecast.slug));
+    expect(slugs.has("spm-child-poverty-2025")).toBe(true);
+    expect(slugs.has("spm-poverty-rate-2025")).toBe(true);
+    expect(slugs.has("official-poverty-rate-2025")).toBe(true);
+    expect(slugs.has("median-household-income-2025")).toBe(true);
+    expect(slugs.has("federal-spm-poverty-rate-2026")).toBe(false);
+  });
 });
