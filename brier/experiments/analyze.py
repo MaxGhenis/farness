@@ -133,7 +133,7 @@ def analyze_experiment(
         Analysis results dict
     """
     naive = [s for s in scores if s.condition == "naive"]
-    brier = [s for s in scores if s.condition == "brier"]
+    brier = [s for s in scores if s.condition == "farness"]
 
     n_naive, n_brier = len(naive), len(brier)
 
@@ -239,7 +239,7 @@ def analyze_experiment(
             {
                 "metric": t.metric,
                 "naive": round(t.naive_value, 3),
-                "brier": round(t.brier_value, 3),
+                "farness": round(t.brier_value, 3),
                 "difference": round(t.difference, 3),
                 "p_value": round(t.p_value, 4) if t.p_value else None,
                 "significant": t.significant,

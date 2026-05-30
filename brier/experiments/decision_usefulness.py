@@ -32,12 +32,12 @@ DECISION_USEFULNESS_CONDITIONS = [
     "naive",
     "format_control",
     "forecast_only",
-    "brier",
+    "farness",
 ]
 
 PRIMARY_PAIRWISE_COMPARISONS = [
-    ("brier", "naive"),
-    ("brier", "forecast_only"),
+    ("farness", "naive"),
+    ("farness", "forecast_only"),
     ("forecast_only", "naive"),
     ("format_control", "naive"),
 ]
@@ -214,7 +214,7 @@ Do the following:
 5. Briefly state the main assumptions behind the forecast.
 
 Do not explicitly cite cognitive biases, base rates, disconfirming evidence, or review dates unless they are strictly necessary to support the forecast.""",
-    "brier": """You are a decision analyst using the brier framework.
+    "farness": """You are a decision analyst using the brier framework.
 
 A user needs help with this decision:
 

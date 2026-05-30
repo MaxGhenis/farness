@@ -24,7 +24,7 @@ from brier.experiments.cases import DecisionCase
 
 DEFAULT_PROBE_BATTERY = "on_framework"
 PROBE_BATTERY_ORDER = ["on_framework", "off_framework"]
-CONDITION_ORDER = ["naive", "estimate_only", "format_control", "cot", "brier"]
+CONDITION_ORDER = ["naive", "estimate_only", "format_control", "cot", "farness"]
 PRIMARY_COMPARISON_METRIC = "relative_update"
 PRIMARY_COMPARISON_LABEL = "relative update"
 CONDITION_DISPLAY_NAMES = {
@@ -32,7 +32,7 @@ CONDITION_DISPLAY_NAMES = {
     "estimate_only": "Estimate Only",
     "format_control": "Format Control",
     "cot": "CoT",
-    "brier": "Brier",
+    "farness": "Brier",
 }
 PROBE_BATTERY_DISPLAY_NAMES = {
     "on_framework": "On-Framework Probes",
@@ -372,7 +372,7 @@ class StabilityResult:
     """Results from a stability-under-probing test."""
 
     case_id: str
-    condition: str  # "naive", "cot", or "brier"
+    condition: str  # "naive", "cot", or "farness"
     probe_battery: str = DEFAULT_PROBE_BATTERY
 
     # Model used
@@ -616,7 +616,7 @@ Question: {case.estimate_question} Think through this carefully step by step, th
 
 def generate_brier_prompt(case: QuantitativeCase) -> str:
     """Generate brier framework prompt."""
-    return f"""You are a decision analyst using the "brier" framework. This requires:
+    return f"""You are a decision analyst using the "Brier" framework. This requires:
 1. Cite base rates from research (outside view)
 2. Make numeric forecasts with confidence intervals
 3. Identify cognitive biases in the framing
@@ -633,7 +633,7 @@ def generate_initial_prompt(case: QuantitativeCase, condition: str) -> str:
         "estimate_only": generate_estimate_only_prompt,
         "format_control": generate_format_control_prompt,
         "cot": generate_cot_prompt,
-        "brier": generate_brier_prompt,
+        "farness": generate_brier_prompt,
     }
     try:
         return prompt_generators[condition](case)
@@ -1054,7 +1054,7 @@ class StabilityExperiment:
                 r for r in results if r.case_id == case.id and r.condition == "naive"
             ]
             brier_results = [
-                r for r in results if r.case_id == case.id and r.condition == "brier"
+                r for r in results if r.case_id == case.id and r.condition == "farness"
             ]
 
             if not naive_results or not brier_results:
@@ -1179,7 +1179,7 @@ class StabilityExperiment:
 
     def _summary_table_lines(self, analysis: dict) -> list[str]:
         """Render markdown lines for a single analysis block."""
-        conditions = analysis.get("conditions", ["naive", "brier"])
+        conditions = analysis.get("conditions", ["naive", "farness"])
         comparison_metric_label = analysis.get(
             "comparison_metric_label", PRIMARY_COMPARISON_LABEL
         )

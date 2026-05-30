@@ -14,7 +14,7 @@ class ResponseScore:
     """Scores for a single response."""
 
     case_id: str
-    condition: str  # "naive" or "brier"
+    condition: str  # "naive" or "farness"
     run_number: int
 
     # Primary metrics
@@ -117,7 +117,7 @@ class ResponseScorer:
 
         Args:
             response_text: The LLM's response
-            condition: "naive" or "brier"
+            condition: "naive" or "farness"
             run_number: Which run this is (1, 2, 3)
             correct_recommendation: Manual judgment of correctness (optional)
 
@@ -210,7 +210,7 @@ def aggregate_scores(scores: list[ResponseScore]) -> dict:
         return {}
 
     naive_scores = [s for s in scores if s.condition == "naive"]
-    brier_scores = [s for s in scores if s.condition == "brier"]
+    brier_scores = [s for s in scores if s.condition == "farness"]
 
     def calc_stats(score_list: list[ResponseScore]) -> dict:
         n = len(score_list)
@@ -236,7 +236,7 @@ def aggregate_scores(scores: list[ResponseScore]) -> dict:
 
     return {
         "naive": calc_stats(naive_scores),
-        "brier": calc_stats(brier_scores),
+        "farness": calc_stats(brier_scores),
         "by_case": _aggregate_by_case(scores),
     }
 
@@ -246,14 +246,14 @@ def _aggregate_by_case(scores: list[ResponseScore]) -> dict:
     cases = {}
     for score in scores:
         if score.case_id not in cases:
-            cases[score.case_id] = {"naive": [], "brier": []}
+            cases[score.case_id] = {"naive": [], "farness": []}
         cases[score.case_id][score.condition].append(score)
 
     result = {}
     for case_id, condition_scores in cases.items():
         result[case_id] = {
             "naive": _summarize_condition(condition_scores["naive"]),
-            "brier": _summarize_condition(condition_scores["brier"]),
+            "farness": _summarize_condition(condition_scores["farness"]),
         }
     return result
 

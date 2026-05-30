@@ -177,7 +177,7 @@ def run_stability_experiment(
         output_dir.mkdir(parents=True, exist_ok=True)
 
     if conditions is None:
-        conditions = ["naive", "brier"]
+        conditions = ["naive", "farness"]
     if probe_batteries is None:
         probe_batteries = [DEFAULT_PROBE_BATTERY]
 

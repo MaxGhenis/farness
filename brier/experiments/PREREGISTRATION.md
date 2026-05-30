@@ -6,7 +6,7 @@
 
 ## Research Question
 
-Does prompting an LLM with a structured decision framework ("brier") improve the quality of recommendations on well-studied decision problems, compared to naive prompting?
+Does prompting an LLM with a structured decision framework ("farness") improve the quality of recommendations on well-studied decision problems, compared to naive prompting?
 
 ## Hypotheses
 
@@ -66,7 +66,7 @@ Give your recommendation and reasoning.
 
 **Condition B (Brier):**
 ```
-You are a decision analyst using the "brier" framework. This framework requires you to:
+You are a decision analyst using the "Brier" framework. This framework requires you to:
 
 1. Define explicit, measurable KPIs for the decision
 2. Make numeric forecasts with confidence intervals for each option

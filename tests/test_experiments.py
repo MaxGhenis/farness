@@ -176,7 +176,7 @@ class TestPromptGeneration:
 
     def test_brier_prompt_has_framework(self, case):
         """Brier prompt should include framework instructions."""
-        prompt = generate_prompt(case, "brier")
+        prompt = generate_prompt(case, "farness")
         assert "brier" in prompt.lower()
         assert "KPI" in prompt or "kpi" in prompt.lower()
         assert "confidence interval" in prompt.lower()

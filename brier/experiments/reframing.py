@@ -191,7 +191,7 @@ COT_PROMPT = """You are a helpful advisor. Think through this step by step.
 
 Think through this carefully step by step, then give me your honest recommendation with reasoning."""
 
-BRIER_PROMPT = """You are a decision analyst using the "brier" framework. Apply this process:
+BRIER_PROMPT = """You are a decision analyst using the "Brier" framework. Apply this process:
 
 1. Define 2-3 explicit, measurable KPIs for this decision
 2. Identify the options (including ones not mentioned)
@@ -209,7 +209,7 @@ class ReframingResult:
     """Result from a single reframing trial."""
 
     case_id: str
-    condition: str  # "naive", "cot", or "brier"
+    condition: str  # "naive", "cot", or "farness"
     run_number: int
     response_text: str
     timestamp: str
@@ -336,7 +336,7 @@ def run_reframing_experiment(
     if cases is None:
         cases = REFRAMING_CASES
     if conditions is None:
-        conditions = ["naive", "brier"]
+        conditions = ["naive", "farness"]
 
     if output_dir:
         output_dir = Path(output_dir)
@@ -456,7 +456,7 @@ def analyze_reframing(results: list[ReframingResult]) -> dict:
 def summary_table(results: list[ReframingResult]) -> str:
     """Generate markdown summary table."""
     analysis = analyze_reframing(results)
-    conditions = analysis.get("conditions", ["naive", "brier"])
+    conditions = analysis.get("conditions", ["naive", "farness"])
 
     sizes = ", ".join(f"n_{c} = {analysis.get(c, {}).get('n', 0)}" for c in conditions)
     lines = [

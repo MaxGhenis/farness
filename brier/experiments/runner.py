@@ -33,7 +33,7 @@ NAIVE_TEMPLATE = """You are a helpful assistant. Answer this question directly:
 
 Give your recommendation and reasoning."""
 
-BRIER_TEMPLATE = """You are a decision analyst using the "brier" framework. This framework requires you to:
+BRIER_TEMPLATE = """You are a decision analyst using the "Brier" framework. This framework requires you to:
 
 1. Define explicit, measurable KPIs for the decision
 2. Make numeric forecasts with confidence intervals for each option
@@ -63,7 +63,7 @@ def run_single(
 
     Args:
         case: The test case
-        condition: "naive" or "brier"
+        condition: "naive" or "farness"
         run_number: Which run this is
         timeout: Max seconds to wait for response
 
@@ -115,7 +115,7 @@ def run_experiment(
     # Generate all trials
     trials = []
     for case in cases:
-        for condition in ["naive", "brier"]:
+        for condition in ["naive", "farness"]:
             for run_num in range(1, runs_per_condition + 1):
                 trials.append((case, condition, run_num))
 
@@ -205,7 +205,7 @@ def generate_prompts_for_manual_run(
 
     prompts = []
     for case in cases:
-        for condition in ["naive", "brier"]:
+        for condition in ["naive", "farness"]:
             prompts.append({
                 "case_id": case.id,
                 "condition": condition,

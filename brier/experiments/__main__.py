@@ -33,7 +33,7 @@ from brier.experiments.decision_usefulness import (
     default_output_dir_for_model as default_decision_usefulness_output_dir,
 )
 
-ALL_CONDITIONS = ["naive", "estimate_only", "format_control", "forecast_only", "cot", "brier"]
+ALL_CONDITIONS = ["naive", "estimate_only", "format_control", "forecast_only", "cot", "farness"]
 ALL_PROBE_BATTERIES = ["on_framework", "off_framework"]
 
 
@@ -391,7 +391,7 @@ def main():
 
         model = args.model
         if args.strongest_validation and args.conditions is None:
-            conditions = ["naive", "estimate_only", "format_control", "brier"]
+            conditions = ["naive", "estimate_only", "format_control", "farness"]
         else:
             conditions = args.conditions
         if args.strongest_validation and args.probe_batteries is None:

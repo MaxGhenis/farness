@@ -25,7 +25,7 @@ def test_prompt_generation_covers_forecast_only_and_brier():
     assert "80% confidence intervals" in forecast_only
     assert "Do not explicitly cite cognitive biases" in forecast_only
 
-    brier = du.generate_decision_usefulness_prompt(case, "brier")
+    brier = du.generate_decision_usefulness_prompt(case, "farness")
     assert "outside-view base rates" in brier
     assert "review date" in brier
 
