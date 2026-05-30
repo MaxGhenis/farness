@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta name="robots" content="noindex" />
+<title>Brier · Axiom universe</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@300;400;500;600&family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;500&family=Newsreader:ital,opsz,wght@0,6..72,300..600;1,6..72,400..500&display=swap" rel="stylesheet" />
+<style>
+  *,*::before,*::after { box-sizing: border-box; }
+  html,body { margin:0; height:100%; }
+  body {
+    background:#10171d;
+    font-family:"IBM Plex Sans",system-ui,sans-serif;
+    color:#1a1a1a;
+    overflow:hidden;
+  }
+
+  .stage {
+    position:relative;
+    width:100vw; height:100vh;
+    display:grid; grid-template-columns:1fr 1fr;
+    isolation:isolate;
+  }
+  .half { position:relative; overflow:hidden; padding:clamp(20px,3.2vh,40px) clamp(20px,2.6vw,52px); display:flex; flex-direction:column; }
+  .wires { position:absolute; inset:0; width:100%; height:100%; z-index:2; pointer-events:none; }
+  .nodes { position:relative; z-index:3; flex:1; display:flex; flex-direction:column; justify-content:space-between; padding-top:8px; padding-bottom:46px; }
+
+  /* ===================== AXIOM (real brand: Geist · amber · #faf9f6) ===================== */
+  .axiom {
+    --ink:#1c1917; --body:#57534e; --muted:#78716c; --accent:#92400e; --accent2:#b45309;
+    --paper:#ffffff; --line:#e7e5e4;
+    background:radial-gradient(120% 92% at 6% 0%, #fffefb 0%, #faf9f6 54%, #f3f1ea 100%);
+    color:var(--ink);
+  }
+  .axiom .nodes { align-items:flex-end; padding-right:clamp(20px,5.5vw,92px); }
+
+  .cite { position:absolute; inset:0; z-index:1; pointer-events:none; font-family:"JetBrains Mono",monospace; color:#78716c; }
+  .cite span { position:absolute; font-size:11px; letter-spacing:.01em; white-space:nowrap; }
+  .cite span::before { content:"●"; color:#b45309; opacity:.5; margin-right:6px; font-size:8px; vertical-align:1px; }
+
+  /* ===================== FARNESS (cool, Clear Horizon) ===================== */
+  .farness {
+    --ink:#0f1a24; --body:#46545f; --accent:#a94e80; --mist:#9fb6c6; --blue:#5e97c8;
+    --paper:#ffffff; --line:rgba(15,26,36,.12);
+    background:radial-gradient(120% 90% at 95% 0%, #ffffff 0%, #f4f8fb 55%, #e9f0f6 100%);
+    color:var(--ink);
+  }
+  .farness .nodes { align-items:flex-start; padding-left:clamp(20px,5.5vw,92px); }
+
+  .rails { position:absolute; right:0; top:0; bottom:0; width:42%; z-index:1; pointer-events:none; opacity:.5; }
+
+  .seam { position:absolute; top:0; bottom:0; left:50%; width:1px; z-index:4;
+    background:linear-gradient(#b45309 0%, #bf8a64 38%, #b08aa0 50%, #9aa9bf 62%, #a94e80 100%);
+    opacity:.5; transform:translateX(-.5px); }
+
+  /* ----- half headers ----- */
+  .head { position:relative; z-index:3; display:flex; flex-direction:column; gap:9px; min-height:94px; }
+  .axiom .axlogo { color:#1c1917; line-height:0; }
+  .axiom .axlogo svg { width:clamp(132px,11vw,164px); height:auto; display:block; }
+  .farness .head { align-items:flex-end; text-align:right; }
+  .farness .head .wm { display:flex; align-items:center; gap:22px; }
+  .farness .head .wm-name { font-family:"Newsreader",serif; font-weight:600; font-size:clamp(34.4px,2.87vw,42.8px); letter-spacing:-.01em; color:var(--ink); }
+  .farness .head .wm-name small { font-weight:400; color:#7c8a95; }
+  .farness .head .sub { font-family:"IBM Plex Mono",monospace; font-size:.6rem; letter-spacing:.28em; text-transform:uppercase; color:#7c93a3; }
+  .head .tagline { font-style:italic; font-size:1.04rem; }
+  .axiom .head .tagline { font-family:"Newsreader",serif; color:#92400e; }
+  .farness .head .tagline { font-family:"Instrument Serif",serif; color:#5a7184; }
+
+  /* ----- nodes ----- */
+  .node {
+    position:relative; border-radius:13px; padding:14px 16px;
+    background:var(--paper); border:1px solid var(--line);
+    box-shadow:0 1px 0 rgba(0,0,0,.02), 0 10px 26px -18px rgba(20,20,30,.4);
+    opacity:0; transform:translateY(10px);
+    animation:rise .6s cubic-bezier(.2,.7,.2,1) forwards;
+  }
+  @keyframes rise { to { opacity:1; transform:none; } }
+  @keyframes wfade { from { opacity:0; } to { opacity:1; } }
+  .node + .node { margin-top:clamp(8px,1.5vh,15px); }
+  .node .tag { font-size:.56rem; letter-spacing:.18em; text-transform:uppercase; opacity:.7; margin-bottom:5px; }
+  .node h3 { margin:0 0 4px; font-size:1.06rem; letter-spacing:-.01em; }
+  .node p { margin:0; font-size:.8rem; line-height:1.45; color:var(--body); }
+
+  .axiom .node { width:min(310px,86%); }
+  .axiom .node h3 { font-family:"Geist",sans-serif; font-weight:600; }
+  .axiom .node p { font-family:"Geist",sans-serif; }
+  .axiom .node .tag { font-family:"JetBrains Mono",monospace; color:var(--accent); opacity:.85; }
+  .axiom .node.spec { border-color:rgba(146,64,14,.38); background:linear-gradient(180deg,#fffdf9,#fdf6ec); box-shadow:0 10px 30px -16px rgba(146,64,14,.42); }
+
+  .farness .node { width:min(330px,94%); }
+  .farness .node h3 { font-family:"Newsreader",serif; font-weight:600; }
+  .farness .node .tag { font-family:"IBM Plex Mono",monospace; color:var(--blue); }
+  .farness .node.flag { border-color:rgba(169,78,128,.5); background:linear-gradient(180deg,#ffffff,#fdf6fa); box-shadow:0 12px 34px -16px rgba(169,78,128,.5); }
+  .farness .node.flag .tag { color:var(--accent); }
+
+  .chips { display:flex; flex-wrap:wrap; gap:6px; margin-top:10px; }
+  .chip { font-family:"IBM Plex Mono",monospace; font-size:.6rem; letter-spacing:.02em;
+    padding:3px 8px; border-radius:999px; background:rgba(94,151,200,.1); color:#3f6b8e; border:1px solid rgba(94,151,200,.22); }
+
+  /* ----- legend ----- */
+  .legend { position:absolute; left:50%; bottom:14px; transform:translateX(-50%); z-index:5;
+    display:flex; gap:16px; align-items:center; flex-wrap:wrap; justify-content:center;
+    font-family:"JetBrains Mono",monospace; font-size:.6rem; letter-spacing:.08em; text-transform:uppercase;
+    background:rgba(255,255,255,.7); backdrop-filter:blur(7px); -webkit-backdrop-filter:blur(7px);
+    border:1px solid rgba(80,80,90,.16); border-radius:999px; padding:8px 18px; color:#4a4a52;
+    box-shadow:0 10px 30px -18px rgba(0,0,0,.5); max-width:94vw; }
+  .legend .k { display:inline-flex; align-items:center; gap:7px; white-space:nowrap; }
+  .legend svg { display:block; }
+  .legend .title { font-weight:500; color:#222; letter-spacing:.12em; }
+  .legend .dot { width:7px;height:7px;border-radius:50%; }
+
+  @media (max-width:820px){
+    body{ overflow:auto; }
+    .stage{ grid-template-columns:1fr; height:auto; min-height:100vh; }
+    .wires, .seam, .rails{ display:none; }
+    .farness .head{ align-items:flex-start; text-align:left; }
+    .axiom .node, .farness .node{ width:100%; }
+    .legend{ position:static; transform:none; margin:18px auto; }
+  }
+</style>
+</head>
+<body>
+<div class="stage" id="stage">
+  <div class="seam"></div>
+  <svg class="wires" id="wires" aria-hidden="true"></svg>
+
+  <!-- ===================== AXIOM ===================== -->
+  <section class="half axiom">
+    <div class="cite" id="cite"></div>
+    <div class="head">
+      <span class="axlogo">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1180 440" role="img" aria-label="Axiom Foundation">
+          <defs>
+            <style>
+              @font-face{font-family:'AxiomGeist';font-style:normal;font-weight:100 900;src:url(data:font/woff2;base64,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) format('woff2');}
+              .wm{font-family:'AxiomGeist','Helvetica Neue',Helvetica,Arial,sans-serif;fill:url(#wg);}
+            </style>
+            <linearGradient id="wg" x1="0" y1="0" x2="1" y2="0">
+              <stop offset="0%" stop-color="#b45309"/>
+              <stop offset="100%" stop-color="#8a3d08"/>
+            </linearGradient>
+          </defs>
+          <g transform="translate(0,360) scale(1,-1)">
+            <text class="wm" x="0" y="290" font-size="310" font-weight="300">A</text>
+          </g>
+          <text class="wm" x="240" y="290" textLength="920" lengthAdjust="spacing" font-size="310" font-weight="300">XIOM</text>
+          <text class="wm" x="0" y="400" textLength="1160" lengthAdjust="spacing" font-size="80" font-weight="400" letter-spacing="0.25em">FOUNDATION</text>
+        </svg>
+      </span>
+      <div class="tagline">the rules — computable law for all</div>
+    </div>
+    <div class="nodes">
+      <div class="node spec" data-node="rulespec" style="animation-delay:.05s">
+        <div class="tag">standard</div>
+        <h3>RuleSpec</h3>
+        <p>Machine-readable rules — cited, time-aware, executable. The standard everything downstream runs on.</p>
+      </div>
+      <div class="node" data-node="encoder" style="animation-delay:.13s">
+        <div class="tag">encode</div>
+        <h3>Encoder</h3>
+        <p>AI-assisted encoding of source law into RuleSpec — reviewed, cited back to the statute.</p>
+      </div>
+      <div class="node" data-node="corpus" style="animation-delay:.21s">
+        <div class="tag">ingest</div>
+        <h3>Corpus</h3>
+        <p>Scrapers pulling source statutes, regulations, and rulings — the raw legal record.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== FARNESS ===================== -->
+  <section class="half farness">
+    <svg class="rails" viewBox="0 0 400 600" preserveAspectRatio="none" aria-hidden="true">
+      <line x1="10" y1="110" x2="380" y2="250" stroke="#9fb6c6" stroke-width="1" opacity=".5"/>
+      <line x1="10" y1="490" x2="380" y2="330" stroke="#9fb6c6" stroke-width="1.2" opacity=".55"/>
+      <circle cx="382" cy="290" r="4" fill="#a94e80" opacity=".5"/>
+    </svg>
+    <div class="head">
+      <div class="wm"><span class="wm-name">brier <small>institute</small></span>
+        <svg width="49" height="49" viewBox="0 0 28 28" fill="none" aria-hidden="true">
+          <circle cx="21.5" cy="14" r="5.5" fill="#a94e80" opacity=".10"/>
+          <line x1="2" y1="4.5" x2="17" y2="12" stroke="#9fb6c6" stroke-width="1.2" stroke-linecap="round" opacity=".55"/>
+          <line x1="2" y1="23.5" x2="17" y2="16" stroke="#9fb6c6" stroke-width="1.5" stroke-linecap="round" opacity=".65"/>
+          <circle cx="21.5" cy="14" r="3.2" fill="#a94e80"/>
+        </svg>
+      </div>
+      <div class="tagline">the forecasts — open, agentic predictions</div>
+    </div>
+    <div class="nodes">
+      <div class="node flag" data-node="almanac" style="animation-delay:.30s">
+        <div class="tag">flagship · the platform</div>
+        <h3>Brier Almanac</h3>
+        <p>The public forecasting platform — a docket of open forecasts and a ledger of resolved actuals, every prediction scored against reality.</p>
+        <div class="chips">
+          <span class="chip">docket</span>
+          <span class="chip">ledger</span>
+          <span class="chip">brier-1</span>
+        </div>
+      </div>
+      <div class="node" data-node="policyengine" style="animation-delay:.38s">
+        <div class="tag">mechanism</div>
+        <h3>PolicyEngine</h3>
+        <p>Microsimulation — applies the rules to populations for tax, benefit, and distributional outcomes.</p>
+      </div>
+      <div class="node" data-node="microplex" style="animation-delay:.46s">
+        <div class="tag">populations</div>
+        <h3>Microplex</h3>
+        <p>Calibrated synthetic populations — the substrate simulation and forecasting run on.</p>
+        <div class="chips">
+          <span class="chip">microcalibrate</span>
+          <span class="chip">microimpute</span>
+          <span class="chip">microunit</span>
+          <span class="chip">microdf</span>
+          <span class="chip">l0</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</div>
+
+<script>
+  const stage = document.getElementById('stage');
+  const svg = document.getElementById('wires');
+  const NS = 'http://www.w3.org/2000/svg';
+
+  // citation constellation on the Axiom side
+  (function(){
+    const cites = ['26 USC § 32','TCGA 1992 s.222','Pub. L. 116-260','ITA 2007 s.118',
+      '26 USC § 951A','FA 2024 s.27','20 USC § 1087','26 CFR § 1.1502','42 USC § 1396',
+      'ITEPA 2003 s.62','26 USC § 24'];
+    const box = document.getElementById('cite');
+    const pos = [[60,15],[72,29],[44,45],[66,57],[50,71],[74,81],[57,90],[80,51],[46,23],[68,67],[54,37]];
+    cites.forEach((c,i)=>{ const s=document.createElement('span');
+      s.textContent=c; s.style.left=pos[i][0]+'%'; s.style.top=pos[i][1]+'%';
+      s.style.opacity = (0.12 + (i%3)*0.05).toFixed(2);
+      box.appendChild(s); });
+  })();
+
+  const edges = [
+    ['corpus','encoder','flow'],
+    ['encoder','rulespec','flow'],
+    ['microplex','policyengine','spine'],
+    ['policyengine','almanac','spine'],
+    ['rulespec','almanac','cross',{i:0, f2:0.32}],
+    ['rulespec','policyengine','cross',{i:1, f2:0.52}],
+    ['rulespec','microplex','cross',{i:2, f2:0.50}],
+  ];
+
+  function el(id){ return document.querySelector('[data-node="'+id+'"]'); }
+  function rectIn(node){ const r=node.getBoundingClientRect(), s=stage.getBoundingClientRect();
+    return {x:r.left-s.left, y:r.top-s.top, w:r.width, h:r.height}; }
+  function pt(r,s,f){ f=(f==null?0.5:f); switch(s){
+    case 't': return [r.x+r.w*f, r.y];
+    case 'b': return [r.x+r.w*f, r.y+r.h];
+    case 'l': return [r.x, r.y+r.h*f];
+    case 'r': return [r.x+r.w, r.y+r.h*f]; } }
+
+  function marker(id,color){
+    return '<marker id="'+id+'" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6.4" markerHeight="6.4" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="'+color+'"/></marker>'; }
+
+  let firstDraw = true;
+  function draw(){
+    while(svg.firstChild) svg.removeChild(svg.firstChild);
+    const sr = stage.getBoundingClientRect();
+    svg.setAttribute('viewBox','0 0 '+sr.width+' '+sr.height);
+    const defs = document.createElementNS(NS,'defs');
+    defs.innerHTML = marker('ah','#7d868f');
+    svg.appendChild(defs);
+
+    let delay = 0.6;
+    edges.forEach(([from,to,kind,opts])=>{
+      opts = opts||{};
+      const rf = rectIn(el(from)), rt = rectIn(el(to));
+      let p1, p2, d, stroke, dash=null, mk;
+
+      if(kind==='flow' || kind==='spine'){
+        p1 = pt(rf,'t',0.5); p2 = pt(rt,'b',0.5);
+        const dy=p2[1]-p1[1];
+        d = `M${p1[0]},${p1[1]} C ${p1[0]},${p1[1]+dy*0.5} ${p2[0]},${p2[1]-dy*0.5} ${p2[0]},${p2[1]}`;
+      } else { // cross
+        const fy = rf.y + rf.h*(0.30 + 0.18*(opts.i||0));
+        p1 = [rf.x+rf.w, fy];
+        p2 = pt(rt,'l',opts.f2);
+        const dx = p2[0]-p1[0];
+        d = `M${p1[0]},${p1[1]} C ${p1[0]+dx*0.5},${p1[1]} ${p2[0]-dx*0.45},${p2[1]} ${p2[0]},${p2[1]}`;
+      }
+      stroke='#7d868f'; mk='ah';
+
+      const path=document.createElementNS(NS,'path');
+      path.setAttribute('d',d); path.setAttribute('fill','none');
+      path.setAttribute('stroke',stroke);
+      path.setAttribute('stroke-width', 1.7);
+      path.setAttribute('stroke-linecap','round');
+      if(dash) path.setAttribute('stroke-dasharray',dash);
+      path.setAttribute('marker-end','url(#'+mk+')');
+      if(firstDraw){ path.style.animation='wfade .55s ease '+delay.toFixed(2)+'s both'; }
+      svg.appendChild(path);
+      delay += 0.1;
+    });
+    firstDraw=false;
+  }
+
+  if(document.fonts && document.fonts.ready){ document.fonts.ready.then(()=>setTimeout(draw,40)); }
+  window.addEventListener('load',()=>setTimeout(draw,90));
+  let rt; window.addEventListener('resize',()=>{ clearTimeout(rt); rt=setTimeout(draw,120); });
+</script>
+</body>
+</html>
