@@ -2,28 +2,28 @@ import type { Metadata } from "next";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "Brier — Open Forecast Prototype",
+  title: "Brier Almanac — open forecasts on government data",
   description:
     "Open forecast cells for public policy, tax, benefit, poverty, and government data, with agent reasoning traces and calibrated uncertainty.",
   openGraph: {
     type: "website",
-    title: "Brier — Open Forecast Prototype",
+    title: "Brier Almanac",
     description:
       "Open forecast cells for public policy, tax, benefit, poverty, and government data, with agent reasoning traces and calibrated uncertainty.",
     url: "https://brieralmanac.org",
-    siteName: "brier",
+    siteName: "Brier Almanac",
     images: [
       {
         url: "https://brieralmanac.org/og-image.png",
         width: 1200,
         height: 630,
-        alt: "Brier — open forecast prototype for public policy and government data",
+        alt: "Brier Almanac — open forecasts for public policy and government data",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Brier — Open Forecast Prototype",
+    title: "Brier Almanac",
     description:
       "Open forecast cells for public policy, tax, benefit, poverty, and government data.",
     images: ["https://brieralmanac.org/og-image.png"],

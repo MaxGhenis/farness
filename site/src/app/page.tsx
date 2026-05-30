@@ -208,7 +208,7 @@ function ForecastPrototype() {
       <section className="mb-12 grid grid-cols-[minmax(0,760px)_minmax(240px,1fr)] gap-10 max-lg:grid-cols-1">
         <div>
           <p className="[font-family:var(--font-mono)] text-[0.62rem] uppercase tracking-[0.15em] text-[var(--color-accent)] mb-3">
-            Policy futures · prototype
+            Brier Almanac · policy futures
           </p>
           <h1 className="[font-family:var(--font-display)] text-[clamp(2rem,4.5vw,3.1rem)] font-light leading-[1.08] tracking-[-0.02em] text-[var(--theme-text)] mb-5">
             Forecasts on every consequential cell of government data

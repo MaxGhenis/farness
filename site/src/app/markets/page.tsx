@@ -3,9 +3,9 @@ import { Header } from "@/components/Header";
 import { MarketsBrowser } from "@/components/MarketsBrowser";
 
 export const metadata: Metadata = {
-  title: "Policy forecasts — Brier",
+  title: "Policy forecasts — Brier Almanac",
   description:
-    "Open forecasts on government statistics, law-encoded policy parameters, and outcomes conditional on policy states. A public prototype for Brier analyst agents calling public data and the PolicyEngine microsim.",
+    "Open forecasts on government statistics, law-encoded policy parameters, and outcomes conditional on policy states. A public preview of the Brier Almanac, where analyst agents call public data and the PolicyEngine microsim.",
   robots: {
     index: false,
     follow: false,
@@ -25,7 +25,7 @@ export default function MarketsPage() {
       <main className="mx-auto max-w-[1200px] px-8 pb-32 pt-12 max-md:px-5">
         <section className="mb-12 max-w-[760px]">
           <p className="[font-family:var(--font-mono)] text-[0.62rem] uppercase tracking-[0.15em] text-[var(--color-accent)] mb-3">
-            Policy futures · prototype
+            Brier Almanac · policy futures
           </p>
           <h1 className="[font-family:var(--font-display)] text-[clamp(1.9rem,4vw,2.6rem)] font-light leading-[1.15] tracking-[-0.02em] text-[var(--theme-text)] mb-5">
             Forecasts on every consequential cell of government data
@@ -35,7 +35,7 @@ export default function MarketsPage() {
             <strong>government data points</strong> on published statistics,{" "}
             <strong>policy state forecasts</strong> on law-encoded parameters,
             and <strong>conditional forecasts</strong> on outcomes given policy
-            states. The prototype shows the target agent workflow: call public
+            states. The Almanac shows the target agent workflow: call public
             data and the PolicyEngine microsim, then publish calibrated
             uncertainty with an audit trail behind it.
           </p>

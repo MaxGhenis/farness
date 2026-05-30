@@ -22,7 +22,7 @@ export function Header({
             style={{ color: "var(--theme-text)" }}
           >
             <BrierLogoMark size={26} />
-            <span>brier</span>
+            <span>brier almanac</span>
           </Link>
           <span
             className="inline-flex h-6 items-center rounded-md border border-[#DFA85A] bg-[#FFF5E6] px-2 [font-family:var(--font-mono)] text-[0.62rem] font-medium uppercase tracking-[0.08em] text-[#7A4B12] max-[380px]:hidden"
