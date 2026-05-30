@@ -16,17 +16,18 @@
     font-family:"IBM Plex Sans",system-ui,sans-serif;
     color:#1a1a1a;
     overflow:hidden;
+    display:flex; flex-direction:column;
   }
 
   .stage {
     position:relative;
-    width:100vw; height:100vh;
+    width:100%; flex:1 1 auto; min-height:0;
     display:grid; grid-template-columns:1fr 1fr;
     isolation:isolate;
   }
   .half { position:relative; overflow:hidden; padding:clamp(20px,3.2vh,40px) clamp(20px,2.6vw,52px); display:flex; flex-direction:column; }
   .wires { position:absolute; inset:0; width:100%; height:100%; z-index:2; pointer-events:none; }
-  .nodes { position:relative; z-index:3; flex:1; display:flex; flex-direction:column; justify-content:space-between; padding-top:8px; padding-bottom:46px; }
+  .nodes { position:relative; z-index:3; flex:1; display:flex; flex-direction:column; justify-content:space-between; padding-top:8px; padding-bottom:20px; }
 
   /* ===================== AXIOM (real brand: Geist · amber · #faf9f6) ===================== */
   .axiom {
@@ -99,6 +100,28 @@
   .chips { display:flex; flex-wrap:wrap; gap:6px; margin-top:10px; }
   .chip { font-family:"IBM Plex Mono",monospace; font-size:.6rem; letter-spacing:.02em;
     padding:3px 8px; border-radius:999px; background:rgba(94,151,200,.1); color:#3f6b8e; border:1px solid rgba(94,151,200,.22); }
+
+  /* ----- the Brier line (model lineage) ----- */
+  .brierline { position:relative; z-index:6; flex:0 0 auto;
+    background:linear-gradient(180deg,#0f1a24,#0a121a);
+    border-top:1px solid rgba(159,182,198,.16);
+    padding:15px clamp(20px,3vw,52px) 17px;
+    display:flex; align-items:center; gap:clamp(16px,2.4vw,34px); }
+  .brierline .bl-label { font-family:"IBM Plex Mono",monospace; font-size:.58rem; letter-spacing:.22em;
+    text-transform:uppercase; color:#7c93a3; white-space:nowrap; line-height:1.6; }
+  .brierline .bl-label b { display:block; color:#cdd9e2; font-weight:500; }
+  .bl-track { position:relative; flex:1; display:flex; justify-content:space-between; align-items:flex-start; }
+  .bl-track::before { content:""; position:absolute; left:1%; right:1%; top:6px; height:1.5px;
+    background:linear-gradient(90deg,#a94e80 0%,#5e97c8 55%,rgba(94,151,200,.2) 100%); }
+  .bl-stage { position:relative; display:flex; flex-direction:column; align-items:center; gap:6px; width:15.6%; text-align:center; }
+  .bl-dot { width:14px; height:14px; border-radius:50%; background:#16242f; border:2px solid #5e7a8d; }
+  .bl-stage.done .bl-dot { background:#a94e80; border-color:#a94e80; }
+  .bl-stage.now .bl-dot { background:#0f1a24; border-color:#a94e80; box-shadow:0 0 0 4px rgba(169,78,128,.28); }
+  .bl-num { font-family:"Newsreader",serif; font-weight:600; font-size:.9rem; color:#e8f0f5; line-height:1; }
+  .bl-stage:not(.done):not(.now) .bl-num { color:#9fb6c6; }
+  .bl-name { font-family:"IBM Plex Mono",monospace; font-size:.54rem; letter-spacing:.1em; text-transform:uppercase; color:#a94e80; }
+  .bl-stage:not(.done):not(.now) .bl-name { color:#5e97c8; }
+  .bl-desc { font-size:.6rem; line-height:1.4; color:#788f9d; max-width:135px; }
 
   /* ----- legend ----- */
   .legend { position:absolute; left:50%; bottom:14px; transform:translateX(-50%); z-index:5;
@@ -220,6 +243,18 @@
     </div>
   </section>
 
+</div>
+
+<div class="brierline">
+  <div class="bl-label">The Brier line<b>0 → 5</b></div>
+  <div class="bl-track">
+    <div class="bl-stage done"><span class="bl-dot"></span><span class="bl-num">Brier-0</span><span class="bl-name">reframer</span><span class="bl-desc">advice → forecasts; prompt-level disposition</span></div>
+    <div class="bl-stage now"><span class="bl-dot"></span><span class="bl-num">Brier-1</span><span class="bl-name">ensemble</span><span class="bl-desc">agents on the Almanac, scored vs the Ledger</span></div>
+    <div class="bl-stage"><span class="bl-dot"></span><span class="bl-num">Brier-2</span><span class="bl-name">fine-tune</span><span class="bl-desc">open weights on resolved-forecast traces</span></div>
+    <div class="bl-stage"><span class="bl-dot"></span><span class="bl-num">Brier-3</span><span class="bl-name">RL</span><span class="bl-desc">reward = calibration, not approval</span></div>
+    <div class="bl-stage"><span class="bl-dot"></span><span class="bl-num">Brier-4</span><span class="bl-name">foundation</span><span class="bl-desc">forecasting-native pretraining</span></div>
+    <div class="bl-stage"><span class="bl-dot"></span><span class="bl-num">Brier-5</span><span class="bl-name">vintages</span><span class="bl-desc">point-in-time corpora; backtestable by construction</span></div>
+  </div>
 </div>
 
 <script>
