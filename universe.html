@@ -96,32 +96,15 @@
   .brier .node .tag { font-family:"IBM Plex Mono",monospace; color:var(--blue); }
   .brier .node.flag { border-color:rgba(169,78,128,.5); background:linear-gradient(180deg,#ffffff,#fdf6fa); box-shadow:0 12px 34px -16px rgba(169,78,128,.5); }
   .brier .node.flag .tag { color:var(--accent); }
+  .brier .node.agent { border-color:rgba(94,151,200,.55); background:linear-gradient(180deg,#ffffff,#f1f7fc); box-shadow:0 12px 34px -16px rgba(94,151,200,.45); }
+  .brier .node.agent .tag { color:var(--blue); }
+  .brier .pair { display:flex; gap:14px; align-items:stretch; width:min(620px,98%); }
+  .brier .pair > .node { width:auto; flex:1 1 0; }
+  .brier .pair > .node p { font-size:.78rem; }
 
   .chips { display:flex; flex-wrap:wrap; gap:6px; margin-top:10px; }
   .chip { font-family:"IBM Plex Mono",monospace; font-size:.6rem; letter-spacing:.02em;
     padding:3px 8px; border-radius:999px; background:rgba(94,151,200,.1); color:#3f6b8e; border:1px solid rgba(94,151,200,.22); }
-
-  /* ----- the Brier line (model lineage) ----- */
-  .brierline { position:relative; z-index:6; flex:0 0 auto;
-    background:linear-gradient(180deg,#0f1a24,#0a121a);
-    border-top:1px solid rgba(159,182,198,.16);
-    padding:15px clamp(20px,3vw,52px) 17px;
-    display:flex; align-items:center; gap:clamp(16px,2.4vw,34px); }
-  .brierline .bl-label { font-family:"IBM Plex Mono",monospace; font-size:.58rem; letter-spacing:.22em;
-    text-transform:uppercase; color:#7c93a3; white-space:nowrap; line-height:1.6; }
-  .brierline .bl-label b { display:block; color:#cdd9e2; font-weight:500; }
-  .bl-track { position:relative; flex:1; display:flex; justify-content:space-between; align-items:flex-start; }
-  .bl-track::before { content:""; position:absolute; left:1%; right:1%; top:6px; height:1.5px;
-    background:linear-gradient(90deg,#a94e80 0%,#5e97c8 55%,rgba(94,151,200,.2) 100%); }
-  .bl-stage { position:relative; display:flex; flex-direction:column; align-items:center; gap:6px; width:15.6%; text-align:center; }
-  .bl-dot { width:14px; height:14px; border-radius:50%; background:#16242f; border:2px solid #5e7a8d; }
-  .bl-stage.done .bl-dot { background:#a94e80; border-color:#a94e80; }
-  .bl-stage.now .bl-dot { background:#0f1a24; border-color:#a94e80; box-shadow:0 0 0 4px rgba(169,78,128,.28); }
-  .bl-num { font-family:"Newsreader",serif; font-weight:600; font-size:.9rem; color:#e8f0f5; line-height:1; }
-  .bl-stage:not(.done):not(.now) .bl-num { color:#9fb6c6; }
-  .bl-name { font-family:"IBM Plex Mono",monospace; font-size:.54rem; letter-spacing:.1em; text-transform:uppercase; color:#a94e80; }
-  .bl-stage:not(.done):not(.now) .bl-name { color:#5e97c8; }
-  .bl-desc { font-size:.6rem; line-height:1.4; color:#788f9d; max-width:135px; }
 
   /* ----- legend ----- */
   .legend { position:absolute; left:50%; bottom:14px; transform:translateX(-50%); z-index:5;
@@ -141,6 +124,7 @@
     .wires, .seam, .rails{ display:none; }
     .brier .head{ align-items:flex-start; text-align:left; }
     .axiom .node, .brier .node{ width:100%; }
+    .brier .pair{ flex-direction:column; width:100%; }
     .legend{ position:static; transform:none; margin:18px auto; }
   }
 </style>
@@ -202,33 +186,44 @@
       <circle cx="382" cy="290" r="4" fill="#a94e80" opacity=".5"/>
     </svg>
     <div class="head">
-      <div class="wm"><span class="wm-name">brier <small>institute</small></span>
+      <div class="wm">
         <svg width="49" height="49" viewBox="0 0 28 28" fill="none" aria-hidden="true">
           <circle cx="21.5" cy="14" r="5.5" fill="#a94e80" opacity=".10"/>
           <line x1="2" y1="4.5" x2="17" y2="12" stroke="#9fb6c6" stroke-width="1.2" stroke-linecap="round" opacity=".55"/>
           <line x1="2" y1="23.5" x2="17" y2="16" stroke="#9fb6c6" stroke-width="1.5" stroke-linecap="round" opacity=".65"/>
           <circle cx="21.5" cy="14" r="3.2" fill="#a94e80"/>
-        </svg>
+        </svg><span class="wm-name">brier <small>institute</small></span>
       </div>
       <div class="tagline">the forecasts — open, agentic predictions</div>
     </div>
     <div class="nodes">
-      <div class="node flag" data-node="almanac" style="animation-delay:.30s">
-        <div class="tag">flagship · the platform</div>
-        <h3>Brier Almanac</h3>
-        <p>The public forecasting platform — a docket of open forecasts and a ledger of resolved actuals, every prediction scored against reality.</p>
-        <div class="chips">
-          <span class="chip">docket</span>
-          <span class="chip">ledger</span>
-          <span class="chip">brier-1</span>
+      <div class="pair">
+        <div class="node agent" data-node="agent" style="animation-delay:.34s">
+          <div class="tag">the forecaster</div>
+          <h3>Brier-1</h3>
+          <p>A general-purpose, calibration-native prediction agent — used the way today's LMs are.</p>
+          <div class="chips">
+            <span class="chip">decisions</span>
+            <span class="chip">api</span>
+            <span class="chip">anywhere</span>
+          </div>
+        </div>
+        <div class="node flag" data-node="almanac" style="animation-delay:.30s">
+          <div class="tag">the proving ground</div>
+          <h3>Brier Almanac</h3>
+          <p>The open, continuously-scored forecast platform — the agent's public scoreboard and training ground.</p>
+          <div class="chips">
+            <span class="chip">docket</span>
+            <span class="chip">ledger</span>
+          </div>
         </div>
       </div>
-      <div class="node" data-node="policyengine" style="animation-delay:.38s">
+      <div class="node" data-node="policyengine" style="animation-delay:.46s">
         <div class="tag">mechanism</div>
         <h3>PolicyEngine</h3>
         <p>Microsimulation — applies the rules to populations for tax, benefit, and distributional outcomes.</p>
       </div>
-      <div class="node" data-node="microplex" style="animation-delay:.46s">
+      <div class="node" data-node="microplex" style="animation-delay:.54s">
         <div class="tag">populations</div>
         <h3>Microplex</h3>
         <p>Calibrated synthetic populations — the substrate simulation and forecasting run on.</p>
@@ -243,18 +238,6 @@
     </div>
   </section>
 
-</div>
-
-<div class="brierline">
-  <div class="bl-label">The Brier line<b>0 → 5</b></div>
-  <div class="bl-track">
-    <div class="bl-stage done"><span class="bl-dot"></span><span class="bl-num">Brier-0</span><span class="bl-name">reframer</span><span class="bl-desc">advice → forecasts; prompt-level disposition</span></div>
-    <div class="bl-stage now"><span class="bl-dot"></span><span class="bl-num">Brier-1</span><span class="bl-name">ensemble</span><span class="bl-desc">agents on the Almanac, scored vs the Ledger</span></div>
-    <div class="bl-stage"><span class="bl-dot"></span><span class="bl-num">Brier-2</span><span class="bl-name">fine-tune</span><span class="bl-desc">open weights on resolved-forecast traces</span></div>
-    <div class="bl-stage"><span class="bl-dot"></span><span class="bl-num">Brier-3</span><span class="bl-name">RL</span><span class="bl-desc">reward = calibration, not approval</span></div>
-    <div class="bl-stage"><span class="bl-dot"></span><span class="bl-num">Brier-4</span><span class="bl-name">foundation</span><span class="bl-desc">forecasting-native pretraining</span></div>
-    <div class="bl-stage"><span class="bl-dot"></span><span class="bl-num">Brier-5</span><span class="bl-name">vintages</span><span class="bl-desc">point-in-time corpora; backtestable by construction</span></div>
-  </div>
 </div>
 
 <script>
@@ -279,10 +262,11 @@
     ['corpus','encoder','flow'],
     ['encoder','rulespec','flow'],
     ['microplex','policyengine','spine'],
-    ['policyengine','almanac','spine'],
-    ['rulespec','almanac','cross',{i:0, f2:0.32}],
-    ['rulespec','policyengine','cross',{i:1, f2:0.52}],
-    ['rulespec','microplex','cross',{i:2, f2:0.50}],
+    ['policyengine','agent','spine'],
+    ['agent','almanac','link'],
+    ['rulespec','agent','cross',{i:0, f2:0.42}],
+    ['rulespec','policyengine','cross',{i:1, f2:0.5}],
+    ['rulespec','microplex','cross',{i:2, f2:0.5}],
   ];
 
   function el(id){ return document.querySelector('[data-node="'+id+'"]'); }
@@ -316,6 +300,10 @@
         p1 = pt(rf,'t',0.5); p2 = pt(rt,'b',0.5);
         const dy=p2[1]-p1[1];
         d = `M${p1[0]},${p1[1]} C ${p1[0]},${p1[1]+dy*0.5} ${p2[0]},${p2[1]-dy*0.5} ${p2[0]},${p2[1]}`;
+      } else if(kind==='link'){
+        p1 = pt(rf,'r',0.5); p2 = pt(rt,'l',0.5);
+        const dx=p2[0]-p1[0];
+        d = `M${p1[0]},${p1[1]} C ${p1[0]+dx*0.4},${p1[1]} ${p2[0]-dx*0.4},${p2[1]} ${p2[0]},${p2[1]}`;
       } else { // cross
         const fy = rf.y + rf.h*(0.30 + 0.18*(opts.i||0));
         p1 = [rf.x+rf.w, fy];
@@ -323,15 +311,15 @@
         const dx = p2[0]-p1[0];
         d = `M${p1[0]},${p1[1]} C ${p1[0]+dx*0.5},${p1[1]} ${p2[0]-dx*0.45},${p2[1]} ${p2[0]},${p2[1]}`;
       }
-      stroke='#7d868f'; mk='ah';
+      stroke = (kind==='link') ? '#a94e80' : '#7d868f'; mk='ah';
 
       const path=document.createElementNS(NS,'path');
       path.setAttribute('d',d); path.setAttribute('fill','none');
       path.setAttribute('stroke',stroke);
-      path.setAttribute('stroke-width', 1.7);
+      path.setAttribute('stroke-width', kind==='link' ? 2.2 : 1.7);
       path.setAttribute('stroke-linecap','round');
       if(dash) path.setAttribute('stroke-dasharray',dash);
-      path.setAttribute('marker-end','url(#'+mk+')');
+      if(kind!=='link') path.setAttribute('marker-end','url(#'+mk+')');
       if(firstDraw){ path.style.animation='wfade .55s ease '+delay.toFixed(2)+'s both'; }
       svg.appendChild(path);
       delay += 0.1;
