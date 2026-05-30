@@ -41,14 +41,14 @@
   .cite span { position:absolute; font-size:11px; letter-spacing:.01em; white-space:nowrap; }
   .cite span::before { content:"●"; color:#b45309; opacity:.5; margin-right:6px; font-size:8px; vertical-align:1px; }
 
-  /* ===================== FARNESS (cool, Clear Horizon) ===================== */
-  .farness {
+  /* ===================== BRIER (cool, Clear Horizon) ===================== */
+  .brier {
     --ink:#0f1a24; --body:#46545f; --accent:#a94e80; --mist:#9fb6c6; --blue:#5e97c8;
     --paper:#ffffff; --line:rgba(15,26,36,.12);
     background:radial-gradient(120% 90% at 95% 0%, #ffffff 0%, #f4f8fb 55%, #e9f0f6 100%);
     color:var(--ink);
   }
-  .farness .nodes { align-items:flex-start; padding-left:clamp(20px,5.5vw,92px); }
+  .brier .nodes { align-items:flex-start; padding-left:clamp(20px,5.5vw,92px); }
 
   .rails { position:absolute; right:0; top:0; bottom:0; width:42%; z-index:1; pointer-events:none; opacity:.5; }
 
@@ -60,14 +60,14 @@
   .head { position:relative; z-index:3; display:flex; flex-direction:column; gap:9px; min-height:94px; }
   .axiom .axlogo { color:#1c1917; line-height:0; }
   .axiom .axlogo svg { width:clamp(132px,11vw,164px); height:auto; display:block; }
-  .farness .head { align-items:flex-end; text-align:right; }
-  .farness .head .wm { display:flex; align-items:center; gap:22px; }
-  .farness .head .wm-name { font-family:"Newsreader",serif; font-weight:600; font-size:clamp(34.4px,2.87vw,42.8px); letter-spacing:-.01em; color:var(--ink); }
-  .farness .head .wm-name small { font-weight:400; color:#7c8a95; }
-  .farness .head .sub { font-family:"IBM Plex Mono",monospace; font-size:.6rem; letter-spacing:.28em; text-transform:uppercase; color:#7c93a3; }
+  .brier .head { align-items:flex-end; text-align:right; }
+  .brier .head .wm { display:flex; align-items:center; gap:22px; }
+  .brier .head .wm-name { font-family:"Newsreader",serif; font-weight:600; font-size:clamp(34.4px,2.87vw,42.8px); letter-spacing:-.01em; color:var(--ink); }
+  .brier .head .wm-name small { font-weight:400; color:#7c8a95; }
+  .brier .head .sub { font-family:"IBM Plex Mono",monospace; font-size:.6rem; letter-spacing:.28em; text-transform:uppercase; color:#7c93a3; }
   .head .tagline { font-style:italic; font-size:1.04rem; }
   .axiom .head .tagline { font-family:"Newsreader",serif; color:#92400e; }
-  .farness .head .tagline { font-family:"Instrument Serif",serif; color:#5a7184; }
+  .brier .head .tagline { font-family:"Instrument Serif",serif; color:#5a7184; }
 
   /* ----- nodes ----- */
   .node {
@@ -90,11 +90,11 @@
   .axiom .node .tag { font-family:"JetBrains Mono",monospace; color:var(--accent); opacity:.85; }
   .axiom .node.spec { border-color:rgba(146,64,14,.38); background:linear-gradient(180deg,#fffdf9,#fdf6ec); box-shadow:0 10px 30px -16px rgba(146,64,14,.42); }
 
-  .farness .node { width:min(330px,94%); }
-  .farness .node h3 { font-family:"Newsreader",serif; font-weight:600; }
-  .farness .node .tag { font-family:"IBM Plex Mono",monospace; color:var(--blue); }
-  .farness .node.flag { border-color:rgba(169,78,128,.5); background:linear-gradient(180deg,#ffffff,#fdf6fa); box-shadow:0 12px 34px -16px rgba(169,78,128,.5); }
-  .farness .node.flag .tag { color:var(--accent); }
+  .brier .node { width:min(330px,94%); }
+  .brier .node h3 { font-family:"Newsreader",serif; font-weight:600; }
+  .brier .node .tag { font-family:"IBM Plex Mono",monospace; color:var(--blue); }
+  .brier .node.flag { border-color:rgba(169,78,128,.5); background:linear-gradient(180deg,#ffffff,#fdf6fa); box-shadow:0 12px 34px -16px rgba(169,78,128,.5); }
+  .brier .node.flag .tag { color:var(--accent); }
 
   .chips { display:flex; flex-wrap:wrap; gap:6px; margin-top:10px; }
   .chip { font-family:"IBM Plex Mono",monospace; font-size:.6rem; letter-spacing:.02em;
@@ -116,8 +116,8 @@
     body{ overflow:auto; }
     .stage{ grid-template-columns:1fr; height:auto; min-height:100vh; }
     .wires, .seam, .rails{ display:none; }
-    .farness .head{ align-items:flex-start; text-align:left; }
-    .axiom .node, .farness .node{ width:100%; }
+    .brier .head{ align-items:flex-start; text-align:left; }
+    .axiom .node, .brier .node{ width:100%; }
     .legend{ position:static; transform:none; margin:18px auto; }
   }
 </style>
@@ -171,8 +171,8 @@
     </div>
   </section>
 
-  <!-- ===================== FARNESS ===================== -->
-  <section class="half farness">
+  <!-- ===================== BRIER ===================== -->
+  <section class="half brier">
     <svg class="rails" viewBox="0 0 400 600" preserveAspectRatio="none" aria-hidden="true">
       <line x1="10" y1="110" x2="380" y2="250" stroke="#9fb6c6" stroke-width="1" opacity=".5"/>
       <line x1="10" y1="490" x2="380" y2="330" stroke="#9fb6c6" stroke-width="1.2" opacity=".55"/>

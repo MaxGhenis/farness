@@ -254,7 +254,7 @@ def fig_protocol():
         (0.26, 0.16),
         0.18,
         0.22,
-        "Farness prompt\n\nInitial estimate:\n10.5%",
+        "Brier prompt\n\nInitial estimate:\n10.5%",
         "#DDF0E1",
     )
     add_box(
@@ -278,7 +278,7 @@ def fig_protocol():
         (0.74, 0.16),
         0.20,
         0.22,
-        "Farness revised\nestimate:\n4.1%\n\nUpdate: 6.4 pp",
+        "Brier revised\nestimate:\n4.1%\n\nUpdate: 6.4 pp",
         "#DDF0E1",
     )
 
@@ -355,7 +355,7 @@ def fig_update_magnitude(data):
         ax.text(
             1.0,
             max(means) * 0.9,
-            f"Farness: {reduction:.0f}% lower than naive",
+            f"Brier: {reduction:.0f}% lower than naive",
             ha="center",
             va="bottom",
             fontsize=9,
@@ -568,7 +568,7 @@ def fig_convergence(data):
 
     handles = [
         Line2D([0], [0], color=COLORS["naive"], marker="o", linewidth=2.2, label="Naive"),
-        Line2D([0], [0], color=COLORS["farness"], marker="o", linewidth=2.2, label="Farness"),
+        Line2D([0], [0], color=COLORS["farness"], marker="o", linewidth=2.2, label="Brier"),
     ]
     fig.legend(handles=handles, loc="lower center", ncol=2, frameon=True, fontsize=10)
 
