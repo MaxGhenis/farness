@@ -18,8 +18,8 @@ ROOT = Path(__file__).resolve().parents[1]
 if str(ROOT) not in sys.path:
     sys.path.insert(0, str(ROOT))
 
-from farness.experiments.llm import call_llm
-from farness.experiments.stability import (
+from brier.experiments.llm import call_llm
+from brier.experiments.stability import (
     DEFAULT_PROBE_BATTERY,
     QuantitativeCase,
     StabilityExperiment,

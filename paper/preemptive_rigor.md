@@ -6,7 +6,7 @@ decision prompts in LLMs
 
 *Max Ghenis*[^1]
 
-**Disclosure:** The author created and maintains the farness framework
+**Disclosure:** The author created and maintains the Brier framework
 and website introduced and evaluated in this paper. All code, data, and
 analysis are open source to enable independent verification.
 
@@ -18,14 +18,14 @@ support when ground-truth outcomes are unavailable. The method compares
 how far different prompts move after a shared bundle of follow-up
 probes, and whether structured prompts begin closer to their post-probe
 values. Study 1 applies the method to a structured framework I introduce
-here (“farness”), comparing it with naive and chain-of-thought (CoT)
+here (“Brier”), comparing it with naive and chain-of-thought (CoT)
 prompting across 11 quantitative scenarios spanning planning, risk,
 investment, and adversarial domains on Claude Opus 4.6 (n=191) and
 GPT-5.4 (n=198), with 6 runs per scenario-condition pair. Because
 scenarios mix weeks, probabilities, and leads, pooled inference uses
 *relative update* rather than raw update magnitude.
 
-In Study 1, farness produces smaller relative updates under the original
+In Study 1, Brier produces smaller relative updates under the original
 shared probe battery than naive prompting (Claude: 43% vs 51%,
 mixed-effects coefficient = −0.080, p\<0.001; GPT-5.4: 36% vs 48%,
 coefficient = −0.128, p\<0.001). CoT provides little benefit on Claude
@@ -37,7 +37,7 @@ closer and therefore moves less.
 Study 2 then tests construct validity on Claude only across the 8
 primary scenarios, adding two control conditions and splitting probes
 into *on-framework* and *off-framework* batteries (n=384). On
-framework-aligned probes, farness remains more stable than naive (56% vs
+framework-aligned probes, Brier remains more stable than naive (56% vs
 68%, coefficient = −0.112, p\<0.001). On held-out probes, that advantage
 disappears and reverses (83% vs 70%, coefficient = +0.139, p=0.01),
 while a format-only control is descriptively the most stable
@@ -77,17 +77,17 @@ unavailable.
 This paper makes three contributions. First, it proposes
 stability-under-probing as a process-level evaluation method for
 decision prompts. Second, it demonstrates the method on a bounded case
-study using farness, naive prompting, and CoT prompting. Third, it shows
+study using Brier, naive prompting, and CoT prompting. Third, it shows
 why construct-validity checks matter: a follow-up probe split indicates
-that the farness advantage localizes to framework-aligned probes rather
+that the Brier advantage localizes to framework-aligned probes rather
 than general held-out robustness. The paper does **not** claim that
-farness has been shown to improve real-world decision quality in
+Brier has been shown to improve real-world decision quality in
 general; the current design is better suited to detecting systematic
 differences in prompt behavior than to validating outcome quality.
 
-### Case study: the farness framework
+### Case study: the Brier framework
 
-I introduce farness (“forecasting as a harness”),[^2] a structured
+I introduce Brier (“forecasting as a harness”),[^2] a structured
 decision framework that reframes subjective advice-seeking questions
 (“should I…?”) into forecasting problems with explicit metrics. The
 framework operates through six required steps:
@@ -236,7 +236,7 @@ work.
 For each decision scenario, I proceed in four steps. First, I present
 the scenario under two conditions: a *naive* condition (“You are a
 helpful assistant. \[Scenario\]. What is your estimate?”) and a
-*framework* condition (“You are a decision analyst using the farness
+*framework* condition (“You are a decision analyst using the Brier
 framework. \[Scenario\]. What is your estimate with confidence
 interval?”). Second, I record the initial response, including point
 estimate, confidence interval (if provided), and full response text.
@@ -257,7 +257,7 @@ estimate to its revised estimate.
 
 <a href="#fig-protocol" class="quarto-xref">Figure 1</a> provides the
 clearest single-example view of the design. In this scenario, the naive
-and farness conditions answer the same question, receive the same
+and Brier conditions answer the same question, receive the same
 probes, and end at nearly the same revised estimate. The key quantity is
 not which condition ends lower in absolute terms, but which one had
 already started closer to the post-probing value. The longer worked
@@ -375,12 +375,12 @@ The paper reports two related studies. **Study 1** is the original
 shared-battery case study. It uses Claude Opus 4.6 (Anthropic) and
 GPT-5.4 (OpenAI), accessed via their respective APIs with temperature
 1.0 to maximize response diversity across runs. Study 1 tests three
-conditions (naive, chain-of-thought, farness) with 6 runs per
+conditions (naive, chain-of-thought, Brier) with 6 runs per
 scenario-condition pair across the 11-scenario battery. **Study 2** is a
 construct-validity follow-up on Claude only. It uses the 8 primary
 non-adversarial scenarios, four conditions (naive, estimate_only,
-format_control, farness), and two probe batteries: *on-framework* probes
-that test considerations explicitly named in the farness prompt, and
+format_control, Brier), and two probe batteries: *on-framework* probes
+that test considerations explicitly named in the Brier prompt, and
 *off-framework* probes that target other considerations such as
 implementation fragility, incentives, and opportunity cost.
 
@@ -440,7 +440,7 @@ sample size for between-scenario generalization remains closer to 8 or
 
 I report two studies. Study 1 contains 191 stability results for Claude
 Opus 4.6 (7 missing due to transient API errors) and 198 for GPT-5.4,
-across 11 scenarios and 3 conditions (naive, chain-of-thought, farness)
+across 11 scenarios and 3 conditions (naive, chain-of-thought, Brier)
 with 6 runs per scenario-condition pair. Study 2 contains 384 Claude
 results across the 8 primary scenarios, 4 conditions, and 2 probe
 batteries. All bootstrap analyses use fixed random seeds (seed=42) for
@@ -469,7 +469,7 @@ Table 2: Study 1 stability metrics by condition and model. Relative
 update is the pooled primary metric; raw update magnitude is included as
 descriptive within-model context.
 
-| Metric | Claude naive | Claude CoT | Claude farness | GPT-5.4 naive | GPT-5.4 CoT | GPT-5.4 farness |
+| Metric | Claude naive | Claude CoT | Claude Brier | GPT-5.4 naive | GPT-5.4 CoT | GPT-5.4 Brier |
 |----|----|----|----|----|----|----|
 | n | 63 | 66 | 62 | 66 | 66 | 66 |
 | Mean relative update | 51% | 49% | 43% | 48% | 41% | 36% |
@@ -493,11 +493,11 @@ scenario is excluded.
 <a href="#fig-update-magnitude" class="quarto-xref">Figure 2</a>
 visualizes the unit-normalized condition means reported in
 <a href="#tbl-stability" class="quarto-xref">Table 2</a>. The pattern is
-clear on both models: farness has the lowest mean relative update, naive
+clear on both models: Brier has the lowest mean relative update, naive
 the highest, and CoT sits in between. For Claude, CoT is nearly
 indistinguishable from naive (49% vs 51%), so the practically meaningful
-separation is naive/CoT versus farness. For GPT-5.4, CoT improves
-modestly (41%), but farness still produces the smallest average relative
+separation is naive/CoT versus Brier. For GPT-5.4, CoT improves
+modestly (41%), but Brier still produces the smallest average relative
 update (36% vs 48% for naive). The raw-magnitude row in
 <a href="#tbl-stability" class="quarto-xref">Table 2</a> shows the same
 ordering within each model, but those raw values are not comparable
@@ -517,18 +517,18 @@ intercepts for scenario) using restricted maximum likelihood (REML)
 estimation.
 
 For Claude, the model converges with random-intercept variance of 0.115
-across 11 scenario groups (n=191). The farness coefficient is −0.080
+across 11 scenario groups (n=191). The Brier coefficient is −0.080
 (SE=0.021, p\<0.001), indicating lower relative updates than naive after
 accounting for scenario-level variation. The CoT coefficient is −0.024
 (SE=0.016, p=0.13), confirming little benefit from chain-of-thought
 prompting. The intercept (naive baseline) is 0.515 (SE=0.096, p\<0.001).
 
 For GPT-5.4, the model converges with random-intercept variance of 0.087
-(n=198). The farness coefficient is −0.128 (SE=0.033, p\<0.001) and the
+(n=198). The Brier coefficient is −0.128 (SE=0.033, p\<0.001) and the
 CoT coefficient is −0.074 (SE=0.027, p=0.006). The GPT-5.4 CoT effect is
-smaller than farness and does not replicate on Claude, so it should be
+smaller than Brier and does not replicate on Claude, so it should be
 treated as model-specific rather than a general CoT result. Across both
-models, the more consistent finding is that farness reduces relative
+models, the more consistent finding is that Brier reduces relative
 updating under the original shared probe battery.
 
 ### Non-parametric robustness check
@@ -545,11 +545,11 @@ robustness check).
 
 | Comparison | U | p (raw) | p (corrected) | Cohen’s d \[95% CI\] | Rank-biserial r \[95% CI\] |
 |----|----|----|----|----|----|
-| Claude: naive vs farness | 2192.5 | 0.243 | 0.709 | 0.24 \[−0.13, 0.58\] | −0.12 \[−0.32, 0.10\] |
-| Claude: CoT vs farness | 2226.5 | 0.391 | 0.782 | 0.20 \[−0.14, 0.55\] | −0.09 \[−0.29, 0.11\] |
+| Claude: naive vs Brier | 2192.5 | 0.243 | 0.709 | 0.24 \[−0.13, 0.58\] | −0.12 \[−0.32, 0.10\] |
+| Claude: CoT vs Brier | 2226.5 | 0.391 | 0.782 | 0.20 \[−0.14, 0.55\] | −0.09 \[−0.29, 0.11\] |
 | Claude: naive vs CoT | 2117.0 | 0.862 | 0.862 | 0.06 \[−0.31, 0.40\] | −0.02 \[−0.22, 0.18\] |
-| GPT-5.4: naive vs farness | 2505.5 | 0.137 | 0.412 | 0.36 \[0.04, 0.66\] | −0.15 \[−0.35, 0.03\] |
-| GPT-5.4: CoT vs farness | 2493.0 | 0.151 | 0.412 | 0.22 \[−0.12, 0.57\] | −0.14 \[−0.34, 0.05\] |
+| GPT-5.4: naive vs Brier | 2505.5 | 0.137 | 0.412 | 0.36 \[0.04, 0.66\] | −0.15 \[−0.35, 0.03\] |
+| GPT-5.4: CoT vs Brier | 2493.0 | 0.151 | 0.412 | 0.22 \[−0.12, 0.57\] | −0.14 \[−0.34, 0.05\] |
 | GPT-5.4: naive vs CoT | 2192.0 | 0.950 | 0.950 | 0.21 \[−0.14, 0.51\] | −0.01 \[−0.21, 0.18\] |
 
 </div>
@@ -557,7 +557,7 @@ robustness check).
 After Holm-Bonferroni correction, no comparison reaches conventional
 significance at alpha=0.05. The bootstrap effect sizes are nevertheless
 directionally consistent with the mixed-effects results, especially for
-GPT-5.4 naive versus farness. The weaker p-values reflect the
+GPT-5.4 naive versus Brier. The weaker p-values reflect the
 non-parametric test’s inability to account for the within-scenario
 correlation structure — it treats heterogeneous scenarios as a single
 pool rather than conditioning on scenario difficulty.
@@ -568,7 +568,7 @@ Claude and GPT-5.4 look closer on the normalized metric than the earlier
 Claude versus GPT-5.2 comparison did. In Study 1, mean relative updates
 range from 43-51% on Claude and 36-48% on GPT-5.4. The archival GPT-5.2
 rerun preserved the same ordering but was much more volatile in raw
-magnitude (naive 59.03, CoT 29.35, farness 22.03). The upward sycophancy
+magnitude (naive 59.03, CoT 29.35, Brier 22.03). The upward sycophancy
 scenario is the clearest example: GPT-5.2 naive responses moved by 466.7
 leads on average, versus 191.7 for GPT-5.4 and 0.0 for Claude. The
 qualitative ordering therefore appears more stable across model
@@ -582,8 +582,8 @@ generations than the absolute scale of updating.
 
 Figure 3: Selected scenarios illustrating convergence behavior. Points
 show mean initial and final estimates with bootstrap 95% confidence
-intervals. Within each panel, naive and farness usually end near similar
-final values, but farness starts closer.
+intervals. Within each panel, naive and Brier usually end near similar
+final values, but Brier starts closer.
 
 </div>
 
@@ -598,8 +598,8 @@ rather than toward it.
 <a href="#fig-convergence" class="quarto-xref">Figure 3</a> makes the
 mechanism clearer than the scalar ratio alone. In the plotted scenarios,
 the two conditions typically end at similar final values within a model,
-but farness begins closer to that shared endpoint. The pattern therefore
-reflects a shared destination with different starting points: farness
+but Brier begins closer to that shared endpoint. The pattern therefore
+reflects a shared destination with different starting points: Brier
 starts closer to where both conditions end up after probing.
 
 ### Adversarial resistance
@@ -617,7 +617,7 @@ when presented with phone numbers or weather forecasts.
 Figure 4: Run-level updates in the upward sycophancy scenario. Dots are
 individual runs; black bars show condition means with bootstrap 95%
 confidence intervals. Claude stays at zero across all runs, while
-GPT-5.4 shows upward shifts that farness reduces but does not eliminate.
+GPT-5.4 shows upward shifts that Brier reduces but does not eliminate.
 
 </div>
 
@@ -626,16 +626,16 @@ large model difference
 (<a href="#fig-sycophancy" class="quarto-xref">Figure 4</a>). Every
 Claude run stays at exactly zero, regardless of prompting condition.
 GPT-5.4 looks different: the naive condition contains several upward
-jumps, CoT reduces them modestly, and farness lowers the mean further
+jumps, CoT reduces them modestly, and Brier lowers the mean further
 while still leaving some non-zero runs. On average, GPT-5.4 naive
 responses update by 191.7 leads, compared with 158.3 for CoT and 48.3
-for farness. For historical context, the archival GPT-5.2 rerun on the
+for Brier. For historical context, the archival GPT-5.2 rerun on the
 same prompt battery was more volatile still (466.7 leads naive, 133.3
-CoT, 108.3 farness). The figure therefore shows that prompt structure
+CoT, 108.3 Brier). The figure therefore shows that prompt structure
 matters, but model generation matters at least as much.
 
 The false base rate scenario (adversarial_false_base_rate) produces
-mixed results: both models update somewhat, with Claude farness updating
+mixed results: both models update somewhat, with Claude Brier updating
 less (mean 13.0) than Claude naive (mean 19.8). The adversarial probes
 in this scenario cite misleading but plausible statistics, making
 appropriate resistance harder to distinguish from rational conservatism.
@@ -654,9 +654,9 @@ the denominator. This was not a differentiating metric.
 
 ![](figures/fig_forest_plot.png)
 
-Figure 5: Per-scenario effect sizes for farness versus naive on the
+Figure 5: Per-scenario effect sizes for Brier versus naive on the
 non-adversarial scenarios. Positive values indicate less updating under
-farness; intervals crossing zero indicate uncertain scenario-specific
+Brier; intervals crossing zero indicate uncertain scenario-specific
 effects.
 
 </div>
@@ -666,7 +666,7 @@ effects.
 show a mostly positive but clearly heterogeneous pattern. The forest
 plot standardizes across scenarios with different units, and most point
 estimates fall on the positive side of zero, indicating less updating
-under farness. But many intervals are wide with only six runs per
+under Brier. But many intervals are wide with only six runs per
 scenario-condition cell, so the scenario-level evidence is better
 summarized as “usually positive, sometimes negligible, occasionally
 negative” than as a uniform gain.
@@ -676,7 +676,7 @@ negative” than as a uniform gain.
 Table 4: Mean update magnitude by scenario and condition
 (non-adversarial scenarios only).
 
-| Scenario | Claude naive | Claude farness | Reduction | GPT-5.4 naive | GPT-5.4 farness | Reduction |
+| Scenario | Claude naive | Claude Brier | Reduction | GPT-5.4 naive | GPT-5.4 Brier | Reduction |
 |----|----|----|----|----|----|----|
 | Planning estimate | 4.2 | 3.4 | 18% | 4.7 | 2.3 | 51% |
 | Sunk cost project | 7.9 | 6.4 | 19% | 13.8 | 11.5 | 17% |
@@ -690,7 +690,7 @@ Table 4: Mean update magnitude by scenario and condition
 </div>
 
 The raw-magnitude table shows where those scenario-level effects come
-from. The farness effect is largest for investment- and launch-like
+from. The Brier effect is largest for investment- and launch-like
 scenarios (acquisition synergies, product launch, investment return) and
 smallest for scenarios where estimates are already fairly anchored
 (startup success on Claude, hiring success on GPT-5.4). Notably, the
@@ -718,7 +718,7 @@ and bias identification (integration testing hasn’t started).
 Across 6 Claude runs, naive responses all start at exactly 12% success
 probability — notably invariant despite temperature 1.0 — and update to
 a mean of 4.1% (range 3.5–4.5%, mean update magnitude 7.9 percentage
-points). Farness responses start lower and with more variation — mean
+points). Brier responses start lower and with more variation — mean
 10.5% (range 7–12%) — reflecting the framework’s base-rate anchoring
 producing a wider range of initial estimates. Both conditions converge
 to nearly identical final estimates (~4%), but the framework starts
@@ -726,13 +726,13 @@ closer (mean update magnitude 6.4 percentage points, a 19% reduction).
 
 GPT-5.4 tells a similar but slightly weaker version of the same story.
 Naive responses start higher (mean 25.0%, range 25–25%) and update to a
-mean of 11.2% (mean update magnitude 13.8 percentage points). Farness
+mean of 11.2% (mean update magnitude 13.8 percentage points). Brier
 responses start somewhat lower (mean 22.5%, range 18–28%) and update to
 a mean of 11.0% (mean update magnitude 11.5 percentage points). Both
 conditions again converge to similar final estimates (~11%), and the
 framework still reduces the size of the revision, though by less than on
 Claude. This illustrates the heterogeneity visible in
-<a href="#tbl-per-scenario" class="quarto-xref">Table 4</a>: the farness
+<a href="#tbl-per-scenario" class="quarto-xref">Table 4</a>: the Brier
 effect is not uniform across models or scenarios.
 
 This pattern — shared destination, different starting points — recurs
@@ -747,7 +747,7 @@ prompt-probe alignment. The follow-up design keeps the same 8 primary
 scenarios but adds two control conditions (`estimate_only` and
 `format_control`) and splits probes into *on-framework* and
 *off-framework* batteries. The on-framework probes test considerations
-explicitly named in the farness prompt, such as base rates and bias
+explicitly named in the Brier prompt, such as base rates and bias
 prompts. The off-framework probes target considerations not named in the
 prompt, such as implementation fragility, incentives, and opportunity
 cost.
@@ -758,7 +758,7 @@ cost.
 
 Figure 6: Claude construct-validity check using the Study 2 design.
 Points show mean relative updates and vertical bars show bootstrap 95%
-confidence intervals. Farness helps on framework-aligned probes, but its
+confidence intervals. Brier helps on framework-aligned probes, but its
 advantage disappears on held-out probes; the format-only control is
 descriptively the most stable off-framework condition.
 
@@ -766,20 +766,20 @@ descriptively the most stable off-framework condition.
 
 <a href="#fig-probe-validation" class="quarto-xref">Figure 6</a> is the
 most important construct-validity result in the paper. On
-framework-aligned probes, farness still looks better than naive: mean
+framework-aligned probes, Brier still looks better than naive: mean
 relative update falls from 68% under naive prompting to 56% under
-farness, and the mixed-effects coefficient is −0.112 (SE=0.024,
+Brier, and the mixed-effects coefficient is −0.112 (SE=0.024,
 p\<0.001). On held-out probes, however, that advantage disappears and
-reverses. Naive prompting averages 70% relative update, while farness
+reverses. Naive prompting averages 70% relative update, while Brier
 rises to 83%, with a mixed-effects coefficient of +0.139 (SE=0.056,
 p=0.01). The best off-framework condition is descriptively the
 `format_control` prompt at 60%, suggesting that some structured
-presentation helps, but the specific farness checklist does not
+presentation helps, but the specific Brier checklist does not
 generalize to held-out probes in this follow-up.
 
 This materially changes the interpretation of Study 1. The original
 shared-battery result is real, but the strongest validation currently
-supports a narrower explanation: farness helps most when the probes test
+supports a narrower explanation: Brier helps most when the probes test
 the same dimensions the framework explicitly primes. Once probes move to
 considerations outside that checklist, the stability advantage is not
 just attenuated; on the normalized metric it reverses. That pattern is
@@ -793,18 +793,18 @@ improvement.
 The central finding is now methodological more than substantive. Study 1
 shows that stability-under-probing can separate prompt structures under
 a shared probe battery. Study 2 shows that the same method can
-invalidate an over-broad interpretation of that separation. Farness
+invalidate an over-broad interpretation of that separation. Brier
 lowers relative updates on the original shared battery and on
 framework-aligned probes, but not on held-out probes. The strongest
-supported claim is therefore not that farness broadly improves
+supported claim is therefore not that Brier broadly improves
 decisions, or even that it is generally more stable, but that it
 prepares models for the particular considerations it explicitly names.
 
 One of the main construct-validity tests proposed in earlier drafts has
 now been run. The held-out probe split materially weakens the broad
-framework-validation interpretation: on Claude, the farness advantage
+framework-validation interpretation: on Claude, the Brier advantage
 survives on on-framework probes but disappears and reverses on
-off-framework probes. The remaining substantive case for farness would
+off-framework probes. The remaining substantive case for Brier would
 therefore need either replicated held-out gains on other models or
 better performance on outcome-linked tasks with known resolutions.
 
@@ -815,7 +815,7 @@ asking the model to “think step by step” — is weaker and less consistent
 than framework-specific prompting. On Claude, CoT is nearly
 indistinguishable from naive prompting on the normalized metric. On
 GPT-5.4, CoT provides a modest reduction in relative update, but still
-less than farness. This is consistent with prior findings that CoT
+less than Brier. This is consistent with prior findings that CoT
 primarily improves performance on tasks with clear logical structure
 (arithmetic, multi-step reasoning) and may be less decisive for judgment
 under uncertainty, where the relevant skill is not just reasoning more
@@ -824,7 +824,7 @@ carefully but foregrounding the right considerations.
 The shared-battery Study 1 result suggests that specific structure can
 matter more than generic “think carefully” prompting. But Study 2
 narrows that further: the specific structure seems to help mostly on the
-considerations farness explicitly names. That is a more limited claim
+considerations Brier explicitly names. That is a more limited claim
 than saying the framework is a general reasoning enhancer.
 
 One important caveat: recent frontier models may employ implicit
@@ -832,7 +832,7 @@ chain-of-thought reasoning even without explicit CoT prompting,
 potentially narrowing the gap between naive and CoT conditions. If
 models already reason step-by-step internally, the explicit CoT prompt
 adds little — which would explain the null CoT result observed here. The
-farness framework’s advantage would then derive not from encouraging
+Brier framework’s advantage would then derive not from encouraging
 reasoning per se but from directing it toward specific decision-relevant
 considerations (base rates, biases, uncertainty quantification) that
 implicit reasoning may not prioritize.
@@ -856,7 +856,7 @@ framework’s checklist.
 
 GPT-5.4 is materially calmer than the archival GPT-5.2 rerun, especially
 in raw update magnitude, but it preserves the same qualitative Study 1
-ordering: farness \< CoT \< naive. That suggests the shared-battery
+ordering: Brier \< CoT \< naive. That suggests the shared-battery
 pattern is not unique to one OpenAI model generation, even if absolute
 volatility is model-sensitive. At the same time, I do not claim that the
 held-out-probe result is robust across architectures, because Study 2
@@ -914,7 +914,7 @@ is to replicate the held-out-probe construct-validity test on GPT-5.4
 and other frontier models. A decisive follow-up would combine that
 replication with an outcome-linked benchmark with known resolutions,
 such as historical project timelines, hiring outcomes, or resolved
-forecasting questions. If farness improved realized outcomes or reduced
+forecasting questions. If Brier improved realized outcomes or reduced
 updates on held-out probes across multiple models, that would materially
 strengthen the substantive interpretation. If not, the framework should
 be understood more narrowly as a checklist that helps on the dimensions
@@ -926,7 +926,7 @@ could evaluate whether the framework improves decision-making when used
 as a scaffolding tool, rather than testing the LLM in isolation.
 Cross-framework comparison against other structured approaches
 (structured analytic techniques, red team/blue team, GRADE framework)
-would determine whether the observed effects are specific to farness or
+would determine whether the observed effects are specific to Brier or
 arise more generally from structured prompting. Finally, expanding the
 adversarial battery would test whether the framework provides
 differential protection against sycophantic pressure under newer model
@@ -939,12 +939,12 @@ This paper introduces stability-under-probing as a process-level method
 for evaluating decision prompts in LLMs when ground-truth outcomes are
 unavailable. Study 1 shows that the method can detect a consistent
 separation between prompt structures under a shared probe battery: on
-Claude Opus 4.6 and GPT-5.4, farness is more stable than naive
+Claude Opus 4.6 and GPT-5.4, Brier is more stable than naive
 prompting, while CoT is weaker and less consistent.
 
 The stronger claim is therefore about measurement, not framework
 validation. Study 2 shows why: once probes are split into
-framework-aligned and held-out batteries, the apparent farness advantage
+framework-aligned and held-out batteries, the apparent Brier advantage
 localizes to the aligned probes and disappears on the held-out ones.
 Stability-under-probing appears useful precisely because it can reveal
 both patterns: prompt differences under a given probe set, and the
@@ -1387,12 +1387,12 @@ experiments to illustrate the data structure.
 }
 ```
 
-**Planning scenario, farness condition (run 1):**
+**Planning scenario, Brier condition (run 1):**
 
 ``` json
 {
   "case_id": "planning_estimate",
-  "condition": "farness",
+  "condition": "Brier",
   "initial_estimate": 3.5,
   "initial_ci": [2.5, 6.0],
   "final_estimate": 6.0,
@@ -1428,13 +1428,13 @@ repository at `experiments/stability_results/`.
 ## Code availability
 
 All code for running stability-under-probing experiments is available at
-<https://github.com/MaxGhenis/farness> under an open-source license. The
+<https://github.com/MaxGhenis/brier> under an open-source license. The
 repository includes the complete experiment infrastructure, analysis
 pipeline, and raw results. To reproduce the experiments, install the
 package with `pip install -e ".[dev]"` and run
-`python -m farness.experiments.stability_runner`.
+`python -m brier.experiments.stability_runner`.
 
 [^1]: Independent researcher. Contact: max@maxghenis.com
 
-[^2]: Framework documentation: <https://farness.ai>. Source code and
-    experiment data: <https://github.com/MaxGhenis/farness>.
+[^2]: Framework documentation: <https://brier.institute>. Source code and
+    experiment data: <https://github.com/MaxGhenis/brier>.

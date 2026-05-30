@@ -33,9 +33,9 @@ def test_convergence_reframe_present():
 
 
 def test_introduce_brier_language():
-    """Paper should say 'I introduce brier' not 'I evaluate a specific framework called'."""
+    """Paper should say 'I introduce Brier' not 'I evaluate a specific framework called'."""
     text = _read_paper()
-    assert "I introduce brier" in text, "Missing 'I introduce brier'"
+    assert re.search(r"I introduce \*{0,2}Brier", text), "Missing 'I introduce Brier'"
     assert (
         "I evaluate a specific framework called" not in text
     ), "Old framework intro language still present"
