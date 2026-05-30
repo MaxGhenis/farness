@@ -1,6 +1,6 @@
 """Tests for shared LLM retry behavior."""
 
-from farness.experiments import llm
+from brier.experiments import llm
 
 
 def test_retryable_error_detection():

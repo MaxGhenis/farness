@@ -1,0 +1,13 @@
+interface:
+  display_name: "Brier"
+  short_description: "Turn decisions into tracked forecasts with MCP-backed structure"
+  default_prompt: "Use $brier to turn this decision into explicit KPIs, options, forecasts, and a review date, then persist it with the brier MCP tools."
+
+dependencies:
+  tools:
+    - type: "mcp"
+      value: "brier"
+      description: "Local brier MCP server"
+
+policy:
+  allow_implicit_invocation: true

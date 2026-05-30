@@ -3,14 +3,14 @@ from datetime import datetime
 from pathlib import Path
 from unittest.mock import patch
 
-from farness.cli import main
-from farness.framework import Decision, Forecast, KPI, Option
-from farness.market import (
+from brier.cli import main
+from brier.framework import Decision, Forecast, KPI, Option
+from brier.market import (
     MarketSource,
     draft_binary_policy_market,
     draft_markets_for_decision,
 )
-from farness.storage import DecisionStore
+from brier.storage import DecisionStore
 
 
 def test_binary_policy_market_draft_has_manifold_payload():
@@ -79,7 +79,7 @@ def test_market_draft_cli_for_standalone_question_outputs_json(capsys):
     with patch(
         "sys.argv",
         [
-            "farness",
+            "brier",
             "market-draft",
             "Will Waymo be legally permitted to offer driverless paid robotaxi rides in DC by 2026-12-31?",
             "--initial-prob",
@@ -99,7 +99,7 @@ def test_forecast_draft_cli_alias_outputs_json(capsys):
     with patch(
         "sys.argv",
         [
-            "farness",
+            "brier",
             "forecast-draft",
             "Will Waymo be legally permitted to offer driverless paid robotaxi rides in DC by 2026-12-31?",
             "--initial-prob",
@@ -145,11 +145,11 @@ def test_market_draft_cli_for_decision_writes_file(tmp_path, capsys):
     store.save(decision)
     output_path = tmp_path / "drafts.json"
 
-    with patch("farness.cli.DecisionStore", return_value=store):
+    with patch("brier.cli.DecisionStore", return_value=store):
         with patch(
             "sys.argv",
             [
-                "farness",
+                "brier",
                 "market-draft",
                 decision.id[:8],
                 "--output",
@@ -197,4 +197,4 @@ def test_waymo_example_uses_aggregate_safety_outcomes():
         in market["description_markdown"]
         for market in safety_markets
     )
-    assert all("Drafted by farness" not in market["description_markdown"] for market in safety_markets)
+    assert all("Drafted by brier" not in market["description_markdown"] for market in safety_markets)

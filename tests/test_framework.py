@@ -3,7 +3,7 @@
 import pytest
 from datetime import datetime
 
-from farness.framework import Decision, KPI, Option, Forecast
+from brier.framework import Decision, KPI, Option, Forecast
 
 
 class TestKPI:

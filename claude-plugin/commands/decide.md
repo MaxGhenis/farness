@@ -1,12 +1,12 @@
 ---
-description: Run a structured decision analysis using the farness framework (forecasting as a harness)
+description: Run a structured decision analysis using the brier framework (forecasting as a harness)
 arguments:
   - name: decision
     description: The decision or question to analyze (optional - will prompt if not provided)
     required: false
 ---
 
-# Farness Decision Framework
+# Brier Decision Framework
 
 You are running a structured decision analysis. Follow this framework exactly:
 
@@ -60,11 +60,11 @@ Ask: "What information would most change these estimates?"
 
 ## Step 6: Log the Decision
 
-After completing the analysis, use Python to save the decision using the farness package:
+After completing the analysis, use Python to save the decision using the brier package:
 
 ```python
 from datetime import datetime, timedelta
-from farness import Decision, KPI, Option, Forecast, DecisionStore
+from brier import Decision, KPI, Option, Forecast, DecisionStore
 
 # Create the decision object with all the data from the analysis
 decision = Decision(
@@ -104,7 +104,7 @@ store.save(decision)
 print(f"Decision logged: {decision.id[:8]}")
 ```
 
-Tell the user: "Decision logged. Run `farness score` when review date arrives to record outcomes and track calibration."
+Tell the user: "Decision logged. Run `brier score` when review date arrives to record outcomes and track calibration."
 
 ## Key Principles
 

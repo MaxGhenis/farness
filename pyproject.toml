@@ -3,7 +3,7 @@ requires = ["setuptools>=61.0", "wheel"]
 build-backend = "setuptools.build_meta"
 
 [project]
-name = "farness"
+name = "brier"
 version = "0.2.4"
 description = "Forecasting as a harness for decision-making"
 readme = "README.md"
@@ -24,14 +24,14 @@ keywords = ["forecasting", "decision-making", "calibration", "prediction"]
 dependencies = []
 
 [project.scripts]
-farness = "farness.cli:main"
-farness-mcp = "farness.mcp_server:main"
+brier = "brier.cli:main"
+brier-mcp = "brier.mcp_server:main"
 
 [project.urls]
-Homepage = "https://farness.ai"
-Documentation = "https://farness.ai/docs"
-Repository = "https://github.com/MaxGhenis/farness"
-Issues = "https://github.com/MaxGhenis/farness/issues"
+Homepage = "https://brier.institute"
+Documentation = "https://brier.institute/docs"
+Repository = "https://github.com/MaxGhenis/brier"
+Issues = "https://github.com/MaxGhenis/brier/issues"
 
 [project.optional-dependencies]
 experiments = [
@@ -54,10 +54,10 @@ dev = [
 ]
 
 [tool.setuptools.packages.find]
-include = ["farness*"]
+include = ["brier*"]
 
 [tool.setuptools.package-data]
-farness = [
+brier = [
     "assets/skills/codex/SKILL.md",
     "assets/skills/claude/SKILL.md",
 ]

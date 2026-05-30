@@ -1,4 +1,4 @@
-"""Tests for the farness MCP server helpers."""
+"""Tests for the brier MCP server helpers."""
 
 from __future__ import annotations
 
@@ -6,14 +6,14 @@ from pathlib import Path
 from tempfile import TemporaryDirectory
 from types import SimpleNamespace
 
-from farness.framework import Decision
-from farness.mcp_server import (
+from brier.framework import Decision
+from brier.mcp_server import (
     _parse_datetime,
     draft_market_pack_for_input,
     save_decision_analysis,
     score_decision_outcomes,
 )
-from farness.storage import DecisionStore
+from brier.storage import DecisionStore
 
 
 def _forecast(**overrides):

@@ -29,22 +29,22 @@ def test_convergence_reframe_present():
     ), "Missing convergence reframe language"
 
 
-# --- Task #8: Introduce farness properly ---
+# --- Task #8: Introduce brier properly ---
 
 
-def test_introduce_farness_language():
-    """Paper should say 'I introduce farness' not 'I evaluate a specific framework called'."""
+def test_introduce_brier_language():
+    """Paper should say 'I introduce Brier' not 'I evaluate a specific framework called'."""
     text = _read_paper()
-    assert "I introduce farness" in text, "Missing 'I introduce farness'"
+    assert re.search(r"I introduce \*{0,2}Brier", text), "Missing 'I introduce Brier'"
     assert (
         "I evaluate a specific framework called" not in text
     ), "Old framework intro language still present"
 
 
-def test_farness_ai_footnote():
-    """Paper should have a footnote referencing farness.ai."""
+def test_brier_ai_footnote():
+    """Paper should have a footnote referencing brier.institute."""
     text = _read_paper()
-    assert "farness.ai" in text, "Missing farness.ai footnote"
+    assert "brier.institute" in text, "Missing brier.institute footnote"
 
 
 # --- Task #9: Concrete example ---
@@ -62,10 +62,10 @@ def test_concrete_example_section():
 
 
 def test_sycophancy_gpt_numbers():
-    """Paper should report GPT sycophancy numbers: 466.7 naive, 108.3 farness."""
+    """Paper should report GPT sycophancy numbers: 466.7 naive, 108.3 brier."""
     text = _read_paper()
     assert "466.7" in text, "Missing GPT naive sycophancy mean (466.7)"
-    assert "108.3" in text, "Missing GPT farness sycophancy mean (108.3)"
+    assert "108.3" in text, "Missing GPT brier sycophancy mean (108.3)"
 
 
 # --- Task #11: Technical fixes ---
@@ -115,7 +115,7 @@ def test_prompt_probe_confound_in_discussion():
 
 
 def test_held_out_probe_result_present():
-    """Paper should report that held-out / off-framework probes weaken or reverse the farness advantage."""
+    """Paper should report that held-out / off-framework probes weaken or reverse the brier advantage."""
     text = _read_paper()
     assert re.search(
         r"off-framework|held-out probes", text, re.IGNORECASE

@@ -15,7 +15,7 @@ ROOT = Path(__file__).resolve().parents[1]
 if str(ROOT) not in sys.path:
     sys.path.insert(0, str(ROOT))
 
-from farness.experiments.decision_usefulness import (
+from brier.experiments.decision_usefulness import (
     DECISION_USEFULNESS_CONDITIONS,
     JUDGE_TASKS,
     PRIMARY_PAIRWISE_COMPARISONS,

@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Generate a 4K demo video from a real Codex + farness session."""
+"""Generate a 4K demo video from a real Codex + brier session."""
 
 from __future__ import annotations
 
@@ -20,8 +20,8 @@ from PIL import ImageFont
 
 ROOT = Path(__file__).resolve().parents[1]
 OUT_DIR = ROOT / "site" / "public" / "demo"
-VIDEO_PATH = OUT_DIR / "farness-demo.mp4"
-POSTER_PATH = OUT_DIR / "farness-demo-poster.png"
+VIDEO_PATH = OUT_DIR / "brier-demo.mp4"
+POSTER_PATH = OUT_DIR / "brier-demo-poster.png"
 
 WIDTH = 3840
 HEIGHT = 2160
@@ -100,11 +100,11 @@ def _env_with_local_bins() -> dict[str, str]:
     return env
 
 
-def _farness_command() -> list[str]:
-    binary = ROOT / ".venv" / "bin" / "farness"
+def _brier_command() -> list[str]:
+    binary = ROOT / ".venv" / "bin" / "brier"
     if binary.exists():
         return [str(binary)]
-    return [sys.executable, "-m", "farness.cli"]
+    return [sys.executable, "-m", "brier.cli"]
 
 
 def run_command(
@@ -191,7 +191,7 @@ def capture_real_session() -> DemoSession:
     if codex is None:
         raise RuntimeError("codex is required on PATH to generate the real demo.")
 
-    with tempfile.TemporaryDirectory(prefix="farness-demo-") as tmpdir:
+    with tempfile.TemporaryDirectory(prefix="brier-demo-") as tmpdir:
         temp_root = Path(tmpdir)
         store_path = temp_root / "decisions.jsonl"
         prompt_path = temp_root / "prompt.txt"
@@ -200,7 +200,7 @@ def capture_real_session() -> DemoSession:
         workdir.mkdir(parents=True, exist_ok=True)
 
         prompt = (
-            "Use $farness. Be concise. Analyze this decision: "
+            "Use $brier. Be concise. Analyze this decision: "
             "Should we rewrite the auth layer now? Context: 3 incidents this quarter, "
             "team strongest in Node, Q2 launch locked.\n"
         )
@@ -219,7 +219,7 @@ def capture_real_session() -> DemoSession:
             "-c",
             'model_reasoning_effort="low"',
             "-c",
-            f'mcp_servers.farness.env.FARNESS_STORE_PATH="{store_path}"',
+            f'mcp_servers.brier.env.BRIER_STORE_PATH="{store_path}"',
             "--output-last-message",
             str(last_path),
             "-",
@@ -228,13 +228,13 @@ def capture_real_session() -> DemoSession:
         last_path.read_text()
 
         if not store_path.exists():
-            raise RuntimeError("Expected the farness store file to exist after codex exec.")
+            raise RuntimeError("Expected the brier store file to exist after codex exec.")
         decision = json.loads(store_path.read_text().strip().splitlines()[-1])
         decision_prefix = decision["id"][:8]
 
         cli_env = env.copy()
-        cli_env["FARNESS_STORE_PATH"] = str(store_path)
-        run_command(_farness_command() + ["list"], env=cli_env)
+        cli_env["BRIER_STORE_PATH"] = str(store_path)
+        run_command(_brier_command() + ["list"], env=cli_env)
         chosen_option = next(
             option for option in decision["options"] if option["name"] == decision["chosen_option"]
         )
@@ -301,12 +301,12 @@ def build_events(session: DemoSession) -> list[Event]:
             hold=1.2,
         ),
         Event(
-            command="farness list",
+            command="brier list",
             output=session.list_lines,
             hold=1.0,
         ),
         Event(
-            command=f"farness show {session.decision_prefix}",
+            command=f"brier show {session.decision_prefix}",
             output=session.show_lines,
             hold=1.4,
         ),
@@ -325,7 +325,7 @@ def style_for_line(text: str) -> tuple[int, int, int]:
         return ACCENT
     if text.startswith("mcp:") or text.startswith("mcp startup:"):
         return SUCCESS
-    if text.startswith("tool farness.") or text.startswith("farness."):
+    if text.startswith("tool brier.") or text.startswith("brier."):
         return SUCCESS
     if text.startswith("OpenAI Codex") or text.startswith("workdir:") or text.startswith("model:"):
         return TEXT_DIM
@@ -384,10 +384,10 @@ def draw_intro(image: Image.Image, progress: float) -> None:
     title_y = 560 - int((1.0 - alpha) * 60)
     subtitle_y = 700 - int((1.0 - alpha) * 30)
 
-    draw.text((220, title_y), "farness.ai", font=DISPLAY_110, fill=(245, 247, 250))
+    draw.text((220, title_y), "brier.institute", font=DISPLAY_110, fill=(245, 247, 250))
     draw.text(
         (225, subtitle_y),
-        "Condensed from a real Codex run with the local farness skill and MCP",
+        "Condensed from a real Codex run with the local brier skill and MCP",
         font=DISPLAY_56,
         fill=(169, 184, 196),
     )
@@ -419,7 +419,7 @@ def draw_terminal_shell(image: Image.Image) -> None:
         (PANEL_X, PANEL_Y + HEADER_H - 42, PANEL_X + PANEL_W, PANEL_Y + HEADER_H),
         fill=PANEL_HEADER,
     )
-    draw.text((PANEL_X + 150, PANEL_Y + 26), "farness.ai", font=SANS_42, fill=PANEL_HEADER_TEXT)
+    draw.text((PANEL_X + 150, PANEL_Y + 26), "brier.institute", font=SANS_42, fill=PANEL_HEADER_TEXT)
     draw.text(
         (PANEL_X + PANEL_W - 540, PANEL_Y + 30),
         "condensed real run",
@@ -485,7 +485,7 @@ def main() -> None:
     total_frames = int(total_duration * FPS) + 1
     poster_index = max(0, min(total_frames - 1, int(total_frames * 0.72)))
 
-    with tempfile.TemporaryDirectory(prefix="farness-demo-frames-") as tmpdir:
+    with tempfile.TemporaryDirectory(prefix="brier-demo-frames-") as tmpdir:
         frame_dir = Path(tmpdir)
         for frame_index in range(total_frames):
             timestamp = frame_index / FPS

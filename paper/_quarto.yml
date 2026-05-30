@@ -12,11 +12,11 @@ csl: apa.csl
 
 format:
   html:
-    theme: [cosmo, farness-theme.scss]
+    theme: [cosmo, brier-theme.scss]
     toc: false
     number-sections: false
     title-block-style: none
     favicon: /favicon.svg
 
-repo-url: https://github.com/MaxGhenis/farness
+repo-url: https://github.com/MaxGhenis/brier
 license: MIT

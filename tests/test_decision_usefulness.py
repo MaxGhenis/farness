@@ -2,7 +2,7 @@
 
 import json
 
-from farness.experiments import decision_usefulness as du
+from brier.experiments import decision_usefulness as du
 
 
 def test_seed_cases_are_well_formed():
@@ -16,7 +16,7 @@ def test_seed_cases_are_well_formed():
         assert case.scenario
 
 
-def test_prompt_generation_covers_forecast_only_and_farness():
+def test_prompt_generation_covers_forecast_only_and_brier():
     """Prompts should reflect the intended mechanism split."""
     case = du.get_decision_usefulness_case("auth_rewrite")
     assert case is not None
@@ -25,9 +25,9 @@ def test_prompt_generation_covers_forecast_only_and_farness():
     assert "80% confidence intervals" in forecast_only
     assert "Do not explicitly cite cognitive biases" in forecast_only
 
-    farness = du.generate_decision_usefulness_prompt(case, "farness")
-    assert "outside-view base rates" in farness
-    assert "review date" in farness
+    brier = du.generate_decision_usefulness_prompt(case, "farness")
+    assert "outside-view base rates" in brier
+    assert "review date" in brier
 
     format_control = du.generate_decision_usefulness_prompt(case, "format_control")
     assert "Goal" in format_control
@@ -122,7 +122,7 @@ def test_judge_pairwise_decision_usefulness_maps_winner(monkeypatch):
 
     artifact_a = du.DecisionUsefulnessArtifact(
         case_id=case.id,
-        condition="farness",
+        condition="brier",
         model="gpt-5.4",
         run_number=1,
         prompt="p1",
@@ -179,7 +179,7 @@ def test_judge_pairwise_decision_usefulness_maps_winner(monkeypatch):
         representation="normalized",
     )
 
-    assert result.winner_condition in {"farness", "naive"}
+    assert result.winner_condition in {"brier", "naive"}
     assert result.winner_condition == result.left_condition
     assert result.confidence == 81
     assert result.scores_a["kpi_clarity"] == 5
@@ -266,7 +266,7 @@ def test_judge_pairwise_critique_survival_maps_less_undermined(monkeypatch):
 
     artifact_a = du.DecisionUsefulnessArtifact(
         case_id=case.id,
-        condition="farness",
+        condition="brier",
         model="gpt-5.4",
         run_number=1,
         prompt="p1",
@@ -317,7 +317,7 @@ def test_judge_pairwise_critique_survival_maps_less_undermined(monkeypatch):
     assert prompts
     assert "implementation fragility" in prompts[0]
     assert "opportunity cost" in prompts[0]
-    assert result.less_undermined_condition in {"farness", "forecast_only"}
+    assert result.less_undermined_condition in {"brier", "forecast_only"}
     assert result.confidence == 84
     assert "fragility" in result.most_damaging_critique_b
 
@@ -330,13 +330,13 @@ def test_summarize_decision_usefulness_judging_counts_wins():
             source_model="gpt-5.4",
             judge_model="claude-opus-4-6",
             run_number=1,
-            comparison="farness_vs_forecast_only",
+            comparison="brier_vs_forecast_only",
             representation="normalized",
-            condition_a="farness",
+            condition_a="brier",
             condition_b="forecast_only",
-            left_condition="farness",
+            left_condition="brier",
             right_condition="forecast_only",
-            winner_condition="farness",
+            winner_condition="brier",
             confidence=80,
             rationale="",
             scores_a={},
@@ -347,11 +347,11 @@ def test_summarize_decision_usefulness_judging_counts_wins():
             source_model="gpt-5.4",
             judge_model="claude-opus-4-6",
             run_number=2,
-            comparison="farness_vs_forecast_only",
+            comparison="brier_vs_forecast_only",
             representation="normalized",
-            condition_a="farness",
+            condition_a="brier",
             condition_b="forecast_only",
-            left_condition="farness",
+            left_condition="brier",
             right_condition="forecast_only",
             winner_condition="forecast_only",
             confidence=70,
@@ -366,11 +366,11 @@ def test_summarize_decision_usefulness_judging_counts_wins():
             source_model="gpt-5.4",
             judge_model="claude-opus-4-6",
             run_number=1,
-            comparison="farness_vs_forecast_only",
+            comparison="brier_vs_forecast_only",
             representation="normalized",
-            condition_a="farness",
+            condition_a="brier",
             condition_b="forecast_only",
-            left_condition="farness",
+            left_condition="brier",
             right_condition="forecast_only",
             more_serious_omission_condition="forecast_only",
             confidence=65,
@@ -385,13 +385,13 @@ def test_summarize_decision_usefulness_judging_counts_wins():
             source_model="gpt-5.4",
             judge_model="claude-opus-4-6",
             run_number=1,
-            comparison="farness_vs_forecast_only",
+            comparison="brier_vs_forecast_only",
             representation="normalized",
-            condition_a="farness",
+            condition_a="brier",
             condition_b="forecast_only",
-            left_condition="farness",
+            left_condition="brier",
             right_condition="forecast_only",
-            less_undermined_condition="farness",
+            less_undermined_condition="brier",
             confidence=75,
             rationale="",
             most_damaging_critique_a="timing",
@@ -404,14 +404,14 @@ def test_summarize_decision_usefulness_judging_counts_wins():
         omission_results,
         critique_results,
     )
-    assert summary["utility"]["normalized"]["farness_vs_forecast_only"]["wins"]["farness"] == 1
-    assert summary["utility"]["normalized"]["farness_vs_forecast_only"]["wins"]["forecast_only"] == 1
+    assert summary["utility"]["normalized"]["brier_vs_forecast_only"]["wins"]["brier"] == 1
+    assert summary["utility"]["normalized"]["brier_vs_forecast_only"]["wins"]["forecast_only"] == 1
     assert (
-        summary["omission"]["normalized"]["farness_vs_forecast_only"]["flagged_more_serious"]["forecast_only"]
+        summary["omission"]["normalized"]["brier_vs_forecast_only"]["flagged_more_serious"]["forecast_only"]
         == 1
     )
     assert (
-        summary["critique_survival"]["normalized"]["farness_vs_forecast_only"]["less_undermined"]["farness"]
+        summary["critique_survival"]["normalized"]["brier_vs_forecast_only"]["less_undermined"]["brier"]
         == 1
     )
 
@@ -422,7 +422,7 @@ def test_run_decision_usefulness_judging_can_select_critique_only(tmp_path, monk
     assert case is not None
 
     for condition, recommendation in (
-        ("farness", "Patch incrementally."),
+        ("brier", "Patch incrementally."),
         ("naive", "Rewrite now."),
     ):
         artifact = du.DecisionUsefulnessArtifact(
@@ -460,7 +460,7 @@ def test_run_decision_usefulness_judging_can_select_critique_only(tmp_path, monk
     utility_results, omission_results, critique_results = du.run_decision_usefulness_judging(
         output_dir=tmp_path,
         cases=[case],
-        comparisons=[("farness", "naive")],
+        comparisons=[("brier", "naive")],
         representations=["decision_memo"],
         judge_tasks=["critique_survival"],
         verbose=False,

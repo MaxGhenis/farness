@@ -386,7 +386,7 @@ export const MARKETS: Market[] = [
       },
       {
         kind: "text",
-        text: "The FOMC SEP median, CBO projection, and the farness structural-VAR all cluster between 4.27 and 4.40 for full-year 2026. December prints tend to run very slightly below the annual mean in expansions due to seasonal adjustment behavior in the household survey.",
+        text: "The FOMC SEP median, CBO projection, and the brier structural-VAR all cluster between 4.27 and 4.40 for full-year 2026. December prints tend to run very slightly below the annual mean in expansions due to seasonal adjustment behavior in the household survey.",
       },
       { kind: "heading", text: "Risk distribution" },
       {
@@ -908,8 +908,8 @@ export const MARKETS: Market[] = [
       { kind: "heading", text: "Calibration layer" },
       {
         kind: "tool",
-        tool: "farness.calibration",
-        call: 'farness.calibration.lookup({ domain: "policyengine_budget_scores", policy_area: "ctc", outcome: "federal_budget_cost" })',
+        tool: "brier.calibration",
+        call: 'brier.calibration.lookup({ domain: "policyengine_budget_scores", policy_area: "ctc", outcome: "federal_budget_cost" })',
         result:
           "{ raw_to_final_ratio: 1.04, additive_billions: 3.5, queued_uncertainty_multiplier: 1.4 }",
       },
@@ -971,8 +971,8 @@ export const MARKETS: Market[] = [
       },
       {
         kind: "tool",
-        tool: "farness.calibration",
-        call: 'farness.calibration.lookup({ domain: "policyengine_budget_scores", policy_area: "ctc", target: "irs_soi_outlays" })',
+        tool: "brier.calibration",
+        call: 'brier.calibration.lookup({ domain: "policyengine_budget_scores", policy_area: "ctc", target: "irs_soi_outlays" })',
         result:
           "{ ratio: 1.02, additive_billions: 0.5, widened_for_reporting_lag: true }",
       },

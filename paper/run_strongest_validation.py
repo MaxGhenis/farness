@@ -10,8 +10,8 @@ ROOT = Path(__file__).resolve().parents[1]
 if str(ROOT) not in sys.path:
     sys.path.insert(0, str(ROOT))
 
-from farness.experiments.stability import get_primary_stability_cases, get_stability_case
-from farness.experiments.stability_runner import run_stability_experiment
+from brier.experiments.stability import get_primary_stability_cases, get_stability_case
+from brier.experiments.stability_runner import run_stability_experiment
 
 
 DEFAULT_MODELS = ["claude-opus-4-6", "gpt-5.2"]

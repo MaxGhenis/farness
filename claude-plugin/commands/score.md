@@ -15,7 +15,7 @@ Review a past decision and score how the forecasts performed.
 Run the interactive scoring command:
 
 ```bash
-farness score $ARGUMENTS
+brier score $ARGUMENTS
 ```
 
 This will:
@@ -32,13 +32,13 @@ This will:
 List unscored decisions:
 
 ```bash
-farness list --unscored
+brier list --unscored
 ```
 
 Or show a specific decision:
 
 ```bash
-farness show <id>
+brier show <id>
 ```
 
 ### Step 2: Review Original Forecasts
@@ -60,7 +60,7 @@ Get specific numbers.
 
 ```python
 from datetime import datetime
-from farness import DecisionStore
+from brier import DecisionStore
 
 store = DecisionStore()
 decision = store.get("<decision_id>")
@@ -78,7 +78,7 @@ store.update(decision)
 ### Step 5: Show Calibration
 
 ```bash
-farness calibration
+brier calibration
 ```
 
 ## Reflection Questions

@@ -1,6 +1,6 @@
 const DEFAULT_ORIGINS = [
-  "https://farness.ai",
-  "https://www.farness.ai",
+  "https://brieralmanac.org",
+  "https://www.brieralmanac.org",
   "http://localhost:3000",
   "http://127.0.0.1:3000",
   "http://localhost:3001",
@@ -10,7 +10,7 @@ const DEFAULT_ORIGINS = [
 export function corsHeaders(request: Request): HeadersInit {
   const origin = request.headers.get("origin");
   const allowedOrigins = (
-    process.env.FARNESS_SITE_ORIGINS?.split(",") ?? DEFAULT_ORIGINS
+    process.env.BRIER_SITE_ORIGINS?.split(",") ?? DEFAULT_ORIGINS
   ).map((value) => value.trim());
   const allowOrigin =
     origin && allowedOrigins.includes(origin) ? origin : allowedOrigins[0];

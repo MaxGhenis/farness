@@ -23,9 +23,9 @@ export async function generateMetadata({
 }): Promise<Metadata> {
   const { slug } = await params;
   const m = getMarket(slug);
-  if (!m) return { title: "Forecast not found — Farness" };
+  if (!m) return { title: "Forecast not found — Brier" };
   return {
-    title: `${m.title} — Farness forecasts`,
+    title: `${m.title} — Brier forecasts`,
     description: m.question,
     robots: {
       index: false,

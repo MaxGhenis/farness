@@ -5,8 +5,8 @@ import tempfile
 from pathlib import Path
 from datetime import datetime, timedelta
 
-from farness.framework import Decision, KPI, Option, Forecast
-from farness.storage import DecisionStore
+from brier.framework import Decision, KPI, Option, Forecast
+from brier.storage import DecisionStore
 
 
 @pytest.fixture

@@ -6,10 +6,10 @@ from unittest.mock import patch
 
 import pytest
 
-from farness.cli import main
-from farness.framework import Decision, KPI
-from farness.skills import default_skill_dir
-from farness.storage import DecisionStore
+from brier.cli import main
+from brier.framework import Decision, KPI
+from brier.skills import default_skill_dir
+from brier.storage import DecisionStore
 
 
 @pytest.fixture
@@ -21,12 +21,12 @@ def temp_store():
 
 
 class TestNewCommand:
-    """Tests for `farness new` CLI command."""
+    """Tests for `brier new` CLI command."""
 
     def test_new_creates_decision(self, temp_store):
-        """farness new 'question' should create and save a decision."""
-        with patch("farness.cli.DecisionStore", return_value=temp_store):
-            with patch("sys.argv", ["farness", "new", "Should I take this job?"]):
+        """brier new 'question' should create and save a decision."""
+        with patch("brier.cli.DecisionStore", return_value=temp_store):
+            with patch("sys.argv", ["brier", "new", "Should I take this job?"]):
                 main()
 
         decisions = temp_store.list_all()
@@ -34,11 +34,11 @@ class TestNewCommand:
         assert decisions[0].question == "Should I take this job?"
 
     def test_new_with_context(self, temp_store):
-        """farness new 'question' --context 'details' should include context."""
-        with patch("farness.cli.DecisionStore", return_value=temp_store):
+        """brier new 'question' --context 'details' should include context."""
+        with patch("brier.cli.DecisionStore", return_value=temp_store):
             with patch(
                 "sys.argv",
-                ["farness", "new", "Which city?", "--context", "Considering SF vs NYC"],
+                ["brier", "new", "Which city?", "--context", "Considering SF vs NYC"],
             ):
                 main()
 
@@ -47,9 +47,9 @@ class TestNewCommand:
         assert decisions[0].context == "Considering SF vs NYC"
 
     def test_new_prints_id(self, temp_store, capsys):
-        """farness new should print the new decision ID."""
-        with patch("farness.cli.DecisionStore", return_value=temp_store):
-            with patch("sys.argv", ["farness", "new", "Test question"]):
+        """brier new should print the new decision ID."""
+        with patch("brier.cli.DecisionStore", return_value=temp_store):
+            with patch("sys.argv", ["brier", "new", "Test question"]):
                 main()
 
         output = capsys.readouterr().out
@@ -58,17 +58,17 @@ class TestNewCommand:
         assert decisions[0].id[:8] in output
 
     def test_new_without_question_fails(self, capsys):
-        """farness new without a question should fail."""
-        with patch("sys.argv", ["farness", "new"]):
+        """brier new without a question should fail."""
+        with patch("sys.argv", ["brier", "new"]):
             with pytest.raises(SystemExit):
                 main()
 
-    def test_new_respects_farness_store_env(self, monkeypatch, tmp_path):
-        """CLI commands should honor FARNESS_STORE_PATH when set."""
+    def test_new_respects_brier_store_env(self, monkeypatch, tmp_path):
+        """CLI commands should honor BRIER_STORE_PATH when set."""
         store_path = tmp_path / "env-store.jsonl"
-        monkeypatch.setenv("FARNESS_STORE_PATH", str(store_path))
+        monkeypatch.setenv("BRIER_STORE_PATH", str(store_path))
 
-        with patch("sys.argv", ["farness", "new", "Env-backed decision"]):
+        with patch("sys.argv", ["brier", "new", "Env-backed decision"]):
             main()
 
         store = DecisionStore(store_path)
@@ -81,13 +81,13 @@ class TestShowWithPrefix:
     """Tests for prefix matching in show command."""
 
     def test_show_finds_by_prefix(self, temp_store, capsys):
-        """farness show <prefix> should find decision by ID prefix."""
+        """brier show <prefix> should find decision by ID prefix."""
         d = Decision(question="Test decision for show")
         temp_store.save(d)
         prefix = d.id[:8]
 
-        with patch("farness.cli.DecisionStore", return_value=temp_store):
-            with patch("sys.argv", ["farness", "show", prefix]):
+        with patch("brier.cli.DecisionStore", return_value=temp_store):
+            with patch("sys.argv", ["brier", "show", prefix]):
                 main()
 
         output = capsys.readouterr().out
@@ -109,8 +109,8 @@ class TestShowWithPrefix:
         )
         temp_store.save(d)
 
-        with patch("farness.cli.DecisionStore", return_value=temp_store):
-            with patch("sys.argv", ["farness", "show", d.id[:8]]):
+        with patch("brier.cli.DecisionStore", return_value=temp_store):
+            with patch("sys.argv", ["brier", "show", d.id[:8]]):
                 main()
 
         output = capsys.readouterr().out
@@ -124,11 +124,11 @@ class TestInstallSkillCommand:
     """Tests for the packaged skill installer."""
 
     def test_install_skill_writes_codex_skill(self, tmp_path, capsys):
-        """farness install-skill codex should create a SKILL.md file."""
+        """brier install-skill codex should create a SKILL.md file."""
         target = tmp_path / "codex-skill"
 
         with patch(
-            "sys.argv", ["farness", "install-skill", "codex", "--target", str(target)]
+            "sys.argv", ["brier", "install-skill", "codex", "--target", str(target)]
         ):
             main()
 
@@ -148,7 +148,7 @@ class TestInstallSkillCommand:
         (target / "SKILL.md").write_text("different")
 
         with patch(
-            "sys.argv", ["farness", "install-skill", "claude", "--target", str(target)]
+            "sys.argv", ["brier", "install-skill", "claude", "--target", str(target)]
         ):
             with pytest.raises(SystemExit):
                 main()
@@ -165,11 +165,11 @@ class TestInstallSkillCommand:
 
         with patch(
             "sys.argv",
-            ["farness", "install-skill", "claude", "--target", str(target), "--force"],
+            ["brier", "install-skill", "claude", "--target", str(target), "--force"],
         ):
             main()
 
-        assert "Prefer the local `farness` MCP server" in skill_path.read_text()
+        assert "Prefer the local `brier` MCP server" in skill_path.read_text()
 
     def test_codex_default_skill_dir_respects_codex_home(self, monkeypatch, tmp_path):
         """Default Codex install path should use CODEX_HOME when it is set."""
@@ -177,7 +177,7 @@ class TestInstallSkillCommand:
 
         skill_dir = default_skill_dir("codex")
 
-        assert skill_dir == tmp_path / "codex-home" / "skills" / "farness"
+        assert skill_dir == tmp_path / "codex-home" / "skills" / "brier"
 
 
 class TestSetupCommand:
@@ -186,39 +186,39 @@ class TestSetupCommand:
     def test_setup_prints_success(self, capsys):
         result = SimpleNamespace(
             skill_path="/tmp/skill/SKILL.md",
-            mcp_server_name="farness",
+            mcp_server_name="brier",
             mcp_already_configured=False,
             agent_cli="codex",
             python_bin="/tmp/python",
         )
 
-        with patch("farness.cli.setup_agent", return_value=result):
-            with patch("sys.argv", ["farness", "setup", "codex"]):
+        with patch("brier.cli.setup_agent", return_value=result):
+            with patch("sys.argv", ["brier", "setup", "codex"]):
                 main()
 
         output = capsys.readouterr().out
         assert "Installed codex skill at /tmp/skill/SKILL.md" in output
-        assert "Configured MCP server `farness` in codex using /tmp/python." in output
+        assert "Configured MCP server `brier` in codex using /tmp/python." in output
 
     def test_setup_reports_existing_server(self, capsys):
         result = SimpleNamespace(
             skill_path="/tmp/skill/SKILL.md",
-            mcp_server_name="farness",
+            mcp_server_name="brier",
             mcp_already_configured=True,
             agent_cli="claude",
             python_bin="/tmp/python",
         )
 
-        with patch("farness.cli.setup_agent", return_value=result):
-            with patch("sys.argv", ["farness", "setup", "claude"]):
+        with patch("brier.cli.setup_agent", return_value=result):
+            with patch("sys.argv", ["brier", "setup", "claude"]):
                 main()
 
         output = capsys.readouterr().out
-        assert "MCP server `farness` is already configured in claude." in output
+        assert "MCP server `brier` is already configured in claude." in output
 
     def test_setup_exits_on_runtime_error(self, capsys):
-        with patch("farness.cli.setup_agent", side_effect=RuntimeError("boom")):
-            with patch("sys.argv", ["farness", "setup", "codex"]):
+        with patch("brier.cli.setup_agent", side_effect=RuntimeError("boom")):
+            with patch("sys.argv", ["brier", "setup", "codex"]):
                 with pytest.raises(SystemExit):
                     main()
 
@@ -235,17 +235,17 @@ class TestUninstallCommand:
             cli_path="/usr/local/bin/codex",
             skill_path="/tmp/skill/SKILL.md",
             skill_removed=True,
-            mcp_server_name="farness",
+            mcp_server_name="brier",
             mcp_removed=True,
         )
 
-        with patch("farness.cli.remove_agent_setup", return_value=result):
-            with patch("sys.argv", ["farness", "uninstall", "codex"]):
+        with patch("brier.cli.remove_agent_setup", return_value=result):
+            with patch("sys.argv", ["brier", "uninstall", "codex"]):
                 main()
 
         output = capsys.readouterr().out
         assert "Removed codex skill at /tmp/skill/SKILL.md" in output
-        assert "Removed MCP server `farness` from codex." in output
+        assert "Removed MCP server `brier` from codex." in output
 
     def test_uninstall_keep_mcp_reports_retained_server(self, capsys):
         result = SimpleNamespace(
@@ -253,17 +253,17 @@ class TestUninstallCommand:
             cli_path="/usr/local/bin/claude",
             skill_path="/tmp/skill/SKILL.md",
             skill_removed=False,
-            mcp_server_name="farness",
+            mcp_server_name="brier",
             mcp_removed=False,
         )
 
-        with patch("farness.cli.remove_agent_setup", return_value=result):
-            with patch("sys.argv", ["farness", "uninstall", "claude", "--keep-mcp"]):
+        with patch("brier.cli.remove_agent_setup", return_value=result):
+            with patch("sys.argv", ["brier", "uninstall", "claude", "--keep-mcp"]):
                 main()
 
         output = capsys.readouterr().out
         assert "No claude skill found" in output
-        assert "Left MCP server `farness` configured." in output
+        assert "Left MCP server `brier` configured." in output
 
 
 class TestDoctorCommand:
@@ -276,13 +276,13 @@ class TestDoctorCommand:
             skill_path="/tmp/skill/SKILL.md",
             skill_state="installed",
             skill_installed=True,
-            mcp_server_name="farness",
+            mcp_server_name="brier",
             mcp_configured=True,
-            manual_command="codex mcp add farness -- /tmp/python -m farness.mcp_server",
+            manual_command="codex mcp add brier -- /tmp/python -m brier.mcp_server",
         )
 
-        with patch("farness.cli.inspect_agent_setup", return_value=result):
-            with patch("sys.argv", ["farness", "doctor", "codex"]):
+        with patch("brier.cli.inspect_agent_setup", return_value=result):
+            with patch("sys.argv", ["brier", "doctor", "codex"]):
                 main()
 
         output = capsys.readouterr().out
@@ -297,18 +297,18 @@ class TestDoctorCommand:
             skill_path="/tmp/skill/SKILL.md",
             skill_state="missing",
             skill_installed=False,
-            mcp_server_name="farness",
+            mcp_server_name="brier",
             mcp_configured=False,
-            manual_command="claude mcp add --scope user farness -- /tmp/python -m farness.mcp_server",
+            manual_command="claude mcp add --scope user brier -- /tmp/python -m brier.mcp_server",
         )
 
-        with patch("farness.cli.inspect_agent_setup", return_value=result):
-            with patch("sys.argv", ["farness", "doctor", "claude"]):
+        with patch("brier.cli.inspect_agent_setup", return_value=result):
+            with patch("sys.argv", ["brier", "doctor", "claude"]):
                 main()
 
         output = capsys.readouterr().out
         assert "Recommended next step:" in output
-        assert "farness setup claude" in output
+        assert "brier setup claude" in output
 
     def test_doctor_fix_reports_actions(self, capsys):
         repaired = SimpleNamespace(
@@ -316,7 +316,7 @@ class TestDoctorCommand:
             cli_path="/usr/local/bin/codex",
             skill_path="/tmp/skill/SKILL.md",
             skill_action="updated",
-            mcp_server_name="farness",
+            mcp_server_name="brier",
             mcp_action="configured",
             python_bin="/tmp/python",
         )
@@ -326,14 +326,14 @@ class TestDoctorCommand:
             skill_path="/tmp/skill/SKILL.md",
             skill_state="installed",
             skill_installed=True,
-            mcp_server_name="farness",
+            mcp_server_name="brier",
             mcp_configured=True,
-            manual_command="codex mcp add farness -- /tmp/python -m farness.mcp_server",
+            manual_command="codex mcp add brier -- /tmp/python -m brier.mcp_server",
         )
 
-        with patch("farness.cli.repair_agent_setup", return_value=repaired):
-            with patch("farness.cli.inspect_agent_setup", return_value=result):
-                with patch("sys.argv", ["farness", "doctor", "codex", "--fix"]):
+        with patch("brier.cli.repair_agent_setup", return_value=repaired):
+            with patch("brier.cli.inspect_agent_setup", return_value=result):
+                with patch("sys.argv", ["brier", "doctor", "codex", "--fix"]):
                     main()
 
         output = capsys.readouterr().out

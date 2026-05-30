@@ -157,17 +157,17 @@ async function streamSpmChildPovertyForecast(send: SendEvent) {
   });
 
   const calibrationCall =
-    'farness.calibration.lookup({ domain: "poverty_forecasts", outcome: "spm_child_poverty_rate", targetYear: 2025 })';
+    'brier.calibration.lookup({ domain: "poverty_forecasts", outcome: "spm_child_poverty_rate", targetYear: 2025 })';
   send("status", {
     state: "tool_running",
     label: "Looking up SPM calibration prior",
   });
   send("tool_start", {
-    tool: "farness.calibration",
+    tool: "brier.calibration",
     call: calibrationCall,
   });
   send("tool_result", {
-    tool: "farness.calibration",
+    tool: "brier.calibration",
     call: calibrationCall,
     result: serializeSpmCalibrationToolResult(dataset),
   });
@@ -361,13 +361,13 @@ async function streamCtcCurrentLawOutlaysForecast(send: SendEvent) {
   });
 
   const calibrationCall =
-    'farness.calibration.lookup({ domain: "policyengine_budget_scores", policy_area: "ctc", outcome: "current_law_outlays" })';
+    'brier.calibration.lookup({ domain: "policyengine_budget_scores", policy_area: "ctc", outcome: "current_law_outlays" })';
   send("status", {
     state: "tool_running",
     label: "Looking up CTC outlay calibration",
   });
   send("tool_start", {
-    tool: "farness.calibration",
+    tool: "brier.calibration",
     call: calibrationCall,
   });
 
@@ -378,7 +378,7 @@ async function streamCtcCurrentLawOutlaysForecast(send: SendEvent) {
   const ciLow = 52.0;
   const ciHigh = 70.0;
   send("tool_result", {
-    tool: "farness.calibration",
+    tool: "brier.calibration",
     call: calibrationCall,
     result: JSON.stringify(
       {
@@ -489,17 +489,17 @@ async function streamCtcExpansionForecast(send: SendEvent) {
   });
 
   const calibrationCall =
-    'farness.calibration.lookup({ domain: "policyengine_budget_scores", policy_area: "ctc", outcome: "federal_budget_cost" })';
+    'brier.calibration.lookup({ domain: "policyengine_budget_scores", policy_area: "ctc", outcome: "federal_budget_cost" })';
   send("status", {
     state: "tool_running",
     label: "Looking up calibration prior",
   });
   send("tool_start", {
-    tool: "farness.calibration",
+    tool: "brier.calibration",
     call: calibrationCall,
   });
   send("tool_result", {
-    tool: "farness.calibration",
+    tool: "brier.calibration",
     call: calibrationCall,
     result: JSON.stringify(dataset.calibration, null, 2),
   });

@@ -3,9 +3,9 @@ import Link from "next/link";
 import { Header } from "@/components/Header";
 
 export const metadata: Metadata = {
-  title: "Farness vision — working document",
+  title: "Brier vision — working document",
   description:
-    "Working synthesis of the Farness Foundation vision: we build open AI forecasters that publish, explain, and score predictions on consequential outcomes.",
+    "Working synthesis of the Brier Institute vision: we build open AI forecasters that publish, explain, and score predictions on consequential outcomes.",
   robots: {
     index: false,
     follow: false,
@@ -32,7 +32,7 @@ export default function VisionPage() {
           </h1>
           <p className="text-[1.15rem] text-[var(--theme-text-muted)] max-w-[520px] mx-auto leading-[1.6]">
             <span className="[font-family:var(--font-editorial)] italic">
-              farness
+              brier
             </span>{" "}
             builds open AI forecasters. We make them predict consequential
             outcomes, show their work, call public tools, publish calibrated
@@ -70,7 +70,7 @@ export default function VisionPage() {
           <section>
             <h2>What we build</h2>
             <p>
-              Farness Foundation builds four connected pieces of public-good
+              Brier Institute builds four connected pieces of public-good
               forecasting infrastructure:
             </p>
             <h3>We run open forecasters on consequential questions</h3>
@@ -88,7 +88,7 @@ export default function VisionPage() {
               We maintain PolicyEngine as open-source microsimulation for US,
               UK, and Canadian tax-benefit systems. Governments, think tanks,
               advocacy organizations, and researchers use it for custom policy
-              analysis. Farness forecasters call PolicyEngine when they need
+              analysis. Brier forecasters call PolicyEngine when they need
               policy-conditional distributions, and PolicyEngine keeps serving
               the policy community through the brand and workflows people
               already know.
@@ -104,7 +104,7 @@ export default function VisionPage() {
             </p>
             <h3>We make everyday agent advice forecastable</h3>
             <p>
-              We maintain the open-source Farness Decisions package, CLI, MCP
+              We maintain the open-source Brier Decisions package, CLI, MCP
               server, and agent skills. They turn advice-seeking into explicit
               forecasts with KPIs, options, confidence intervals, resolution
               rules, and calibration tracking. This keeps the same discipline
@@ -124,7 +124,7 @@ export default function VisionPage() {
               for everyone who builds on the substrate.
             </p>
             <p>
-              The same dynamic that made Linux durable protects Farness's
+              The same dynamic that made Linux durable protects Brier's
               position. The compounding work happens across the whole community
               of users and contributors. The foundation maintains the core
               infrastructure, integrates the best contributions, sets direction,
@@ -146,7 +146,7 @@ export default function VisionPage() {
               already there when the demand shows up.
             </p>
             <p>
-              Farness is built with this in mind. Every capability is reachable
+              Brier is built with this in mind. Every capability is reachable
               through a clean machine-callable API; future agents will call
               tools directly. Every agent trace is structured for downstream
               consumption by other agents and human readers. Every tool in the
@@ -182,23 +182,23 @@ export default function VisionPage() {
                 shared substrate.
               </p>
               <p>
-                <strong>Farness Foundation</strong> — open-predictions platform,
+                <strong>Brier Institute</strong> — open-predictions platform,
                 microsimulation engine and custom policy analysis
                 (PolicyEngine), synthetic-population substrate (Microplex),
-                personal decision tool (Farness Decisions), and the research
+                personal decision tool (Brier Decisions), and the research
                 program on calibration-native foundation models and value
                 forecasting.
               </p>
             </blockquote>
             <p>
-              The Farness platform consumes encoded law, government data
+              The Brier platform consumes encoded law, government data
               architecture, and Microplex population substrate as inputs, runs
               ensembles through PolicyEngine and other computational engines,
               and publishes calibrated forecasts. Policy partners interact with
               PolicyEngine directly through its own brand and channels. New
               audiences — AI safety, agencies funding their own forecasts,
               prediction-market researchers, broader policy analysts — interact
-              with Farness as the umbrella platform.
+              with Brier as the umbrella platform.
             </p>
           </section>
 
@@ -235,7 +235,7 @@ export default function VisionPage() {
               Each step opens more of the epistemic process. Each step produces
               durable public goods and gives the next generation of builders
               more to start from. Open predictions is the natural next layer,
-              and Farness is the foundation building it.
+              and Brier is the foundation building it.
             </p>
           </section>
 
@@ -304,7 +304,7 @@ export default function VisionPage() {
               methods, and peer traces with the best calibration record.
             </p>
             <p>
-              This is how Farness can become an AI lab without becoming a closed
+              This is how Brier can become an AI lab without becoming a closed
               frontier company. Whether we train foundation models directly or
               specialize open models into forecasters, the purpose stays narrow
               and public: build systems whose job is to predict, explain,
@@ -375,7 +375,7 @@ export default function VisionPage() {
               </li>
             </ul>
             <p>
-              Farness funds the work through multiple channels. Foundation
+              Brier funds the work through multiple channels. Foundation
               grants fund the platform and research. Sponsored compute pays for
               specific question coverage. Custom analysis through PolicyEngine
               generates additional program revenue. The revenue mix keeps the
@@ -386,7 +386,7 @@ export default function VisionPage() {
           <section>
             <h2>What success looks like in five years</h2>
             <p>
-              At maturity, Farness produces continuously-updated calibrated
+              At maturity, Brier produces continuously-updated calibrated
               forecasts on every consequential government statistic, every
               encoded policy parameter, and every counterfactual conditional
               question stakeholders care about. The platform runs hundreds to
@@ -447,14 +447,14 @@ export default function VisionPage() {
               <strong>Open infrastructure depends on adoption.</strong>{" "}
               Organizations need workflows that integrate open predictions into
               real decisions. Building that institutional muscle across policy
-              shops, agencies, and other users takes years. Farness can lead the
+              shops, agencies, and other users takes years. Brier can lead the
               category and still has to earn adoption one workflow at a time.
             </p>
             <p>
               <strong>
                 Regulatory ambiguity if forecasts become market-moving.
               </strong>{" "}
-              Farness publishes forecasts rather than trades, which avoids most
+              Brier publishes forecasts rather than trades, which avoids most
               prediction-market regulatory complexity. If open forecasts become
               widely consumed by financial markets, the SEC or CFTC may still
               take interest in disclosure rules. Probably solvable through
@@ -466,17 +466,17 @@ export default function VisionPage() {
               continues operationally unchanged, but funders, board, and
               partners need to be brought along on the umbrella structure.
               Existing grants are to PolicyEngine via PSL Foundation fiscal
-              sponsorship; the cleanest path is incorporating Farness Foundation
+              sponsorship; the cleanest path is incorporating Brier Institute
               as the new 501(c)(3) and graduating PolicyEngine into it from PSL.
               Donor consent process is straightforward; the communications work
               requires care.
             </p>
             <p>
               <strong>
-                The "Farness" name has multiple uses to disambiguate.
+                The "Brier" name has multiple uses to disambiguate.
               </strong>{" "}
-              Farness Foundation (the org), Farness (the open-predictions
-              platform — the flagship), Farness Decisions (the personal decision
+              Brier Institute (the org), Brier (the open-predictions
+              platform — the flagship), Brier Decisions (the personal decision
               tool). Naming hierarchy needs to be settled before any public
               launch.
             </p>
@@ -486,7 +486,7 @@ export default function VisionPage() {
             <h2>The shape of the work, in priority order</h2>
             <ul>
               <li>
-                <strong>Incorporate Farness Foundation</strong> as a 501(c)(3)
+                <strong>Incorporate Brier Institute</strong> as a 501(c)(3)
                 upon graduating PolicyEngine from PSL fiscal sponsorship. Use
                 fiscal sponsorship during the application period.
               </li>

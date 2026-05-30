@@ -4,8 +4,8 @@ export function DemoVideo({
   caption?: string;
 }) {
   const assetRev = process.env.NEXT_PUBLIC_SITE_ASSET_REV || "dev";
-  const videoSrc = `/demo/farness-demo.mp4?v=${assetRev}`;
-  const posterSrc = `/demo/farness-demo-poster.png?v=${assetRev}`;
+  const videoSrc = `/demo/brier-demo.mp4?v=${assetRev}`;
+  const posterSrc = `/demo/brier-demo-poster.png?v=${assetRev}`;
 
   return (
     <figure className="m-0">
@@ -19,7 +19,7 @@ export function DemoVideo({
           playsInline
           poster={posterSrc}
           preload="metadata"
-          aria-label="End-to-end farness workflow demo for Codex"
+          aria-label="End-to-end brier workflow demo for Codex"
         >
           <source src={videoSrc} type="video/mp4" />
         </video>

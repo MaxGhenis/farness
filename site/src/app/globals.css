@@ -2,57 +2,7 @@
 
 /* ── Design tokens — "Clear Horizon" palette ── */
 
-@theme {
-  /* Core light palette */
-  --color-canvas: #F7FAFC;
-  --color-paper: #FCFDFE;
-  --color-section: #EEF4F8;
-  --color-card: #FFFFFF;
-
-  --color-border-soft: #D9E4EC;
-  --color-border-strong: #BED0DB;
-
-  --color-text-primary: #14202B;
-  --color-text-secondary: #415463;
-  --color-text-tertiary: #6B7C89;
-  --color-text-disabled: #94A3AF;
-
-  /* Atmospheric mist blues */
-  --color-mist-100: #E7EFF4;
-  --color-mist-200: #D6E3EB;
-  --color-mist-400: #9FB6C6;
-  --color-mist-600: #5E7A8D;
-
-  /* Horizon blues */
-  --color-horizon-300: #9FC4E6;
-  --color-horizon-500: #5E97C8;
-  --color-horizon-700: #356C99;
-
-  /* Rose accent system */
-  --color-rose-100: #F6E7F0;
-  --color-rose-300: #E7A6C8;
-  --color-rose-500: #C96B9C;
-  --color-rose-600: #A94E80;
-  --color-rose-700: #863A65;
-
-  /* Dark instrument panel colors */
-  --color-ink-dark: #0F1A24;
-  --color-slate-dark: #172633;
-  --color-ink-border: #2B3D4B;
-  --color-ink-text: #E8F0F5;
-  --color-ink-muted: #9DB1BF;
-
-  /* Semantic */
-  --color-accent: #A94E80;
-  --color-accent-hover: #8E456A;
-  --color-accent-subtle: #F6E7F0;
-
-  /* Fonts */
-  --font-display: "Newsreader", Georgia, serif;
-  --font-body: "IBM Plex Sans", -apple-system, sans-serif;
-  --font-editorial: "Instrument Serif", serif;
-  --font-mono: "IBM Plex Mono", monospace;
-}
+@import "brier-design/theme.css";
 
 @keyframes fade-up {
   from {
