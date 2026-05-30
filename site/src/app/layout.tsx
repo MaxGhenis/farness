@@ -2,31 +2,31 @@ import type { Metadata } from "next";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "Farness — Open Forecast Prototype",
+  title: "Brier — Open Forecast Prototype",
   description:
     "Open forecast cells for public policy, tax, benefit, poverty, and government data, with agent reasoning traces and calibrated uncertainty.",
   openGraph: {
     type: "website",
-    title: "Farness — Open Forecast Prototype",
+    title: "Brier — Open Forecast Prototype",
     description:
       "Open forecast cells for public policy, tax, benefit, poverty, and government data, with agent reasoning traces and calibrated uncertainty.",
-    url: "https://farness.ai",
-    siteName: "farness",
+    url: "https://brieralmanac.org",
+    siteName: "brier",
     images: [
       {
-        url: "https://farness.ai/og-image.png",
+        url: "https://brieralmanac.org/og-image.png",
         width: 1200,
         height: 630,
-        alt: "Farness — open forecast prototype for public policy and government data",
+        alt: "Brier — open forecast prototype for public policy and government data",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Farness — Open Forecast Prototype",
+    title: "Brier — Open Forecast Prototype",
     description:
       "Open forecast cells for public policy, tax, benefit, poverty, and government data.",
-    images: ["https://farness.ai/og-image.png"],
+    images: ["https://brieralmanac.org/og-image.png"],
   },
 };
 

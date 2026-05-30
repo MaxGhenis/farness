@@ -9,7 +9,7 @@ export default function ThesisPage() {
       <article className="max-w-[680px] mx-auto px-8">
         <header className="text-center py-24 border-b border-[var(--theme-border)] mb-24 animate-[fade-up_0.6s_ease-out] max-[600px]:py-16">
           <p className="[font-family:var(--font-mono)] text-[0.65rem] tracking-[0.15em] uppercase text-accent mb-4">
-            The Farness thesis
+            The Brier thesis
           </p>
           <h1 className="[font-family:var(--font-display)] text-[clamp(2rem,5vw,3rem)] font-light leading-[1.2] mb-8 tracking-[-0.02em]">
             Forecasting as a harness
@@ -130,7 +130,7 @@ export default function ThesisPage() {
               Meehl found that structured &quot;mechanical&quot; prediction
               equaled or outperformed unstructured expert judgment in every
               domain tested
-              <Cite id="17">17</Cite>. Farness applies this discipline to
+              <Cite id="17">17</Cite>. Brier applies this discipline to
               personal and professional decisions.
             </p>
           </section>
@@ -251,7 +251,7 @@ export default function ThesisPage() {
               <Cite id="22">22</Cite>.
             </p>
             <p>
-              Farness maps directly onto this chain. Defining KPIs addresses{" "}
+              Brier maps directly onto this chain. Defining KPIs addresses{" "}
               <em>frame</em> and <em>values</em>. Option expansion addresses{" "}
               <em>creative alternatives</em>. Forecasting with base rates
               addresses <em>reliable information</em> and{" "}
@@ -291,7 +291,7 @@ export default function ThesisPage() {
               interest so you choose the right rate yourself.
             </p>
             <p>
-              Farness is a boost, not a nudge. It doesn&apos;t tell you what to
+              Brier is a boost, not a nudge. It doesn&apos;t tell you what to
               decide. It teaches a way of thinking—probabilistic, structured,
               accountable—that transfers across domains. Julia Galef calls this
               the &quot;scout mindset&quot;: treating beliefs as provisional
@@ -312,7 +312,7 @@ export default function ThesisPage() {
           <section>
             <h2>The framework</h2>
             <p>
-              Farness implements a five-step process, drawing on structured
+              Brier implements a five-step process, drawing on structured
               analytic techniques from intelligence analysis
               <Cite id="11">11</Cite> and the superforecasting literature:
             </p>
@@ -356,7 +356,7 @@ export default function ThesisPage() {
 
           <section>
             <h2>When to use it</h2>
-            <p>Farness is valuable across a range of decisions:</p>
+            <p>Brier is valuable across a range of decisions:</p>
             <ul>
               <li>
                 <strong>High-stakes decisions</strong> where the cost of being
@@ -398,7 +398,7 @@ export default function ThesisPage() {
               forecasts instead of opinions.
             </p>
             <p>
-              Farness is an attempt to build that habit. Use it as a Python
+              Brier is an attempt to build that habit. Use it as a Python
               library, a CLI tool, or a Claude Code plugin. Log your decisions.
               Score your predictions. Get better over time.
             </p>
@@ -746,8 +746,8 @@ export default function ThesisPage() {
         <footer className="text-center py-24 mt-16 border-t border-[var(--theme-border)] text-[var(--theme-text-muted)] text-[0.85rem]">
           <p>
             Written by <a href="https://maxghenis.com">Max Ghenis</a>.
-            Farness is{" "}
-            <a href="https://github.com/MaxGhenis/farness">open source</a>.
+            Brier is{" "}
+            <a href="https://github.com/MaxGhenis/brier">open source</a>.
           </p>
         </footer>
       </article>

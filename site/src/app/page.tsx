@@ -35,7 +35,7 @@ function Hero() {
 
           <p className="text-[1.05rem] text-[#415463] max-w-[520px] mb-8 leading-[1.65] animate-[fade-up_0.8s_ease-out_0.12s_both]">
             <span className="[font-family:var(--font-editorial)] italic">
-              farness
+              brier
             </span>{" "}
             intercepts agent decisions and demands a forecast: a KPI, a
             confidence interval, a base rate, disconfirming evidence, and a
@@ -214,7 +214,7 @@ function ForecastPrototype() {
             Forecasts on every consequential cell of government data
           </h1>
           <p className="text-[1.05rem] leading-[1.65] text-[var(--theme-text-muted)]">
-            Farness analyst agents forecast published government statistics,
+            Brier analyst agents forecast published government statistics,
             law-encoded policy parameters, and outcomes conditional on policy
             states. Each cell carries a calibrated interval and an audit trail
             of the reasoning behind it.
@@ -241,7 +241,7 @@ function ForecastPrototype() {
                 Live API paths
               </dt>
               <dd className="text-[var(--theme-text)]">
-                CPI-U and two CTC cells stream through api.farness.ai.
+                CPI-U and two CTC cells stream through api.brieralmanac.org.
               </dd>
             </div>
             <div>
@@ -285,7 +285,7 @@ function HowItWorks() {
       num: "01",
       title: "Intercept",
       description:
-        "Catch decision-language before the model hardens into advice. When a prompt sounds like 'Should we...?' or 'Which is better?', farness reframes it as a forecastable choice.",
+        "Catch decision-language before the model hardens into advice. When a prompt sounds like 'Should we...?' or 'Which is better?', brier reframes it as a forecastable choice.",
     },
     {
       num: "02",
@@ -306,7 +306,7 @@ function HowItWorks() {
       <div className="max-w-[1200px] mx-auto">
         <div className="text-center mb-16">
           <span className="[font-family:var(--font-mono)] text-[0.68rem] tracking-[0.12em] uppercase text-[#A94E80] block mb-4 font-medium">
-            How farness works
+            How brier works
           </span>
           <h2 className="[font-family:var(--font-display)] text-[clamp(1.8rem,3.5vw,2.6rem)] font-medium leading-[1.08] tracking-[-0.03em] text-[#14202B]">
             From intuition to instrument
@@ -340,9 +340,9 @@ function HowItWorks() {
 
 function WorkflowDemo() {
   const steps = [
-    "python -m pip install 'farness[mcp]'",
-    "farness setup codex",
-    "$farness inside Codex, then review the saved decision locally",
+    "python -m pip install 'brier[mcp]'",
+    "brier setup codex",
+    "$brier inside Codex, then review the saved decision locally",
   ];
 
   return (
@@ -358,7 +358,7 @@ function WorkflowDemo() {
           <p className="text-[0.94rem] text-[#415463] leading-[1.7] mb-6">
             The clip below shows the current Codex path exactly the way the docs
             describe it: install the package, register the local MCP server, use
-            <span className="[font-family:var(--font-mono)]"> $farness </span>
+            <span className="[font-family:var(--font-mono)]"> $brier </span>
             in Codex, then pull the decision back out of the local store.
           </p>
           <div className="space-y-3 mb-6">
@@ -384,7 +384,7 @@ function WorkflowDemo() {
               Open install docs
             </a>
             <a
-              href="https://github.com/MaxGhenis/farness"
+              href="https://github.com/MaxGhenis/brier"
               className="inline-flex items-center gap-2 py-[0.72em] px-5 [font-family:var(--font-display)] text-[0.88rem] font-medium no-underline rounded-lg bg-white text-[#415463] border border-[#BED0DB] hover:no-underline hover:border-[#A94E80] hover:text-[#14202B] transition-all duration-200"
             >
               View source
@@ -392,7 +392,7 @@ function WorkflowDemo() {
           </div>
         </div>
 
-        <DemoVideo caption="Rendered from a real Codex session using the local farness skill and MCP server, then exported as a clean 4K terminal demo." />
+        <DemoVideo caption="Rendered from a real Codex session using the local brier skill and MCP server, then exported as a clean 4K terminal demo." />
       </div>
     </section>
   );
@@ -434,7 +434,7 @@ function ExampleTransformation() {
             }}
           >
             <span className="[font-family:var(--font-mono)] text-[0.65rem] tracking-[0.08em] uppercase text-[#7FB2DA] block mb-4">
-              Farness output
+              Brier output
             </span>
             <div className="[font-family:var(--font-mono)] text-[0.8rem] leading-[1.8] text-[#E8F0F5]">
               <div className="mb-2">
@@ -511,18 +511,18 @@ function ResearchProof() {
           <div className="relative text-[0.9rem] text-[#415463] leading-[1.65] max-w-[680px] mx-auto">
             <p className="mb-4">
               The paper introduces stability-under-probing as a way to evaluate
-              decision prompts without waiting for outcomes. In Study 1, farness
+              decision prompts without waiting for outcomes. In Study 1, brier
               looked more prepared for the shared probe battery on Claude Opus
               4.6 and GPT-5.4.
             </p>
             <p className="mb-4">
               Study 2 then added held-out probes and showed the broader claim
               weakens sharply off-framework. That makes the paper a methods
-              result first, not proof that farness is universally superior.
+              result first, not proof that brier is universally superior.
             </p>
             <p className="mb-6">
               The useful claim is narrower and better: structured decision
-              prompts can be tested empirically, and farness is one case study.
+              prompts can be tested empirically, and brier is one case study.
             </p>
           </div>
 
@@ -564,7 +564,7 @@ function StatBlock({
   );
 }
 
-/* ── Instrument Modules — What farness produces ── */
+/* ── Instrument Modules — What brier produces ── */
 
 function InstrumentModules() {
   const modules = [
@@ -608,7 +608,7 @@ function InstrumentModules() {
             Output primitives
           </span>
           <h2 className="[font-family:var(--font-display)] text-[clamp(1.8rem,3.5vw,2.6rem)] font-medium leading-[1.08] tracking-[-0.03em] text-[#14202B]">
-            What farness produces
+            What brier produces
           </h2>
         </div>
 
@@ -640,7 +640,7 @@ function WhyItMatters() {
       <div className="max-w-[680px] mx-auto text-center">
         <p className="[font-family:var(--font-editorial)] text-[clamp(1.4rem,3vw,2.2rem)] leading-[1.2] text-[#14202B] italic mb-8">
           AI is often fluent about decisions before it is rigorous about them.
-          farness adds structure before confidence hardens into action.
+          brier adds structure before confidence hardens into action.
         </p>
         <div className="w-12 h-px mx-auto bg-[#BED0DB]" />
       </div>
@@ -655,26 +655,26 @@ function Installation() {
     {
       title: "Codex",
       description:
-        "Install the package, run one setup command, then use $farness when a decision prompt shows up.",
-      code: `$ python -m pip install 'farness[mcp]'
-$ farness setup codex
-$ # restart Codex, then use $farness`,
+        "Install the package, run one setup command, then use $brier when a decision prompt shows up.",
+      code: `$ python -m pip install 'brier[mcp]'
+$ brier setup codex
+$ # restart Codex, then use $brier`,
     },
     {
       title: "Claude Code",
       description:
         "Use the same single-command setup flow for Claude. The plugin is still available if you prefer slash-command UX.",
-      code: `$ python -m pip install 'farness[mcp]'
-$ farness setup claude
+      code: `$ python -m pip install 'brier[mcp]'
+$ brier setup claude
 $ # restart Claude Code`,
     },
     {
       title: "CLI / Python",
       description:
         "Local decision log and calibration tool. No LLM API key required unless you run separate experiment code against external models.",
-      code: `$ python -m pip install farness
-$ farness new "Should we rewrite the auth layer?"
-$ farness calibration`,
+      code: `$ python -m pip install brier
+$ brier new "Should we rewrite the auth layer?"
+$ brier calibration`,
     },
   ];
 
@@ -692,11 +692,11 @@ $ farness calibration`,
         </h2>
 
         <p className="text-[0.9rem] text-[#415463] mb-8 leading-[1.65] max-w-[760px] mx-auto">
-          Farness now has a package-first agent path: a local MCP server for
+          Brier now has a package-first agent path: a local MCP server for
           persistence, packaged skills for Codex and Claude Code, and the same
           forecast structure used in the paper. The Claude plugin remains
           optional, and the CLI is a local store and calibration surface, not an
-          LLM client. If setup drifts, `farness doctor --fix` repairs the local
+          LLM client. If setup drifts, `brier doctor --fix` repairs the local
           integration.
         </p>
 
@@ -730,7 +730,7 @@ $ farness calibration`,
 
         <div className="flex gap-4 justify-center flex-wrap">
           <a
-            href="https://github.com/MaxGhenis/farness"
+            href="https://github.com/MaxGhenis/brier"
             className="inline-flex items-center gap-2 py-[0.75em] px-6 [font-family:var(--font-display)] text-[0.88rem] font-semibold no-underline rounded-lg cursor-pointer transition-all duration-200 hover:no-underline hover:translate-y-[-1px] bg-[#14202B] text-[#FCFDFE] shadow-[0_2px_8px_rgba(20,32,43,0.12)]"
           >
             <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
@@ -747,7 +747,7 @@ $ farness calibration`,
             </span>
           </a>
           <a
-            href="https://github.com/MaxGhenis/farness/blob/main/docs/agent-workflows.md"
+            href="https://github.com/MaxGhenis/brier/blob/main/docs/agent-workflows.md"
             className="inline-flex items-center gap-2 py-[0.75em] px-6 [font-family:var(--font-display)] text-[0.88rem] font-medium no-underline rounded-lg cursor-pointer transition-all duration-200 hover:no-underline bg-white text-[#415463] border border-[#BED0DB] hover:border-[#A94E80] hover:text-[#14202B]"
           >
             Agent workflows
@@ -770,7 +770,7 @@ function ClosingSection() {
         href="/docs#install"
         className="inline-flex items-center gap-2 py-[0.75em] px-6 [font-family:var(--font-display)] text-[0.88rem] font-semibold no-underline rounded-lg cursor-pointer transition-all duration-200 hover:no-underline hover:translate-y-[-1px] bg-[#A94E80] text-white shadow-[0_2px_8px_rgba(169,78,128,0.18)]"
       >
-        Start with farness
+        Start with brier
       </a>
     </section>
   );
@@ -781,7 +781,7 @@ function Footer() {
     <footer className="py-16 px-8 text-center bg-[#F7FAFC] border-t border-[#D9E4EC]">
       <div className="flex gap-6 justify-center text-[0.78rem] [font-family:var(--font-mono)]">
         <a
-          href="https://github.com/MaxGhenis/farness"
+          href="https://github.com/MaxGhenis/brier"
           className="text-[#6B7C89] no-underline hover:text-[#14202B] transition-colors"
         >
           GitHub

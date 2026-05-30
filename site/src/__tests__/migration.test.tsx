@@ -31,8 +31,8 @@ describe("Next.js migration", () => {
 
     it("renders header with logo", () => {
       render(<HomePage />);
-      const farnessElements = screen.getAllByText("farness");
-      expect(farnessElements.length).toBeGreaterThan(0);
+      const brierElements = screen.getAllByText("brier");
+      expect(brierElements.length).toBeGreaterThan(0);
     });
 
     it("renders hero headline", () => {
@@ -52,7 +52,7 @@ describe("Next.js migration", () => {
       expect(screen.getByText("Static mock traces")).toBeInTheDocument();
     });
 
-    it("renders hero subhead with farness mention", () => {
+    it("renders hero subhead with brier mention", () => {
       render(<HomePage />);
       expect(
         screen.getByText(/demands a forecast: a KPI, a confidence interval/),
@@ -75,7 +75,7 @@ describe("Next.js migration", () => {
         screen.getByText("Watch the packaged path end to end"),
       ).toBeInTheDocument();
       expect(
-        screen.getAllByLabelText("End-to-end farness workflow demo for Codex")
+        screen.getAllByLabelText("End-to-end brier workflow demo for Codex")
           .length,
       ).toBeGreaterThan(0);
     });
@@ -96,7 +96,7 @@ describe("Next.js migration", () => {
 
     it("renders instrument modules", () => {
       render(<HomePage />);
-      expect(screen.getByText("What farness produces")).toBeInTheDocument();
+      expect(screen.getByText("What brier produces")).toBeInTheDocument();
     });
 
     it("renders editorial pull quote", () => {
@@ -111,7 +111,7 @@ describe("Next.js migration", () => {
         screen.getByText("Use it natively or from the CLI"),
       ).toBeInTheDocument();
       expect(screen.getByText("Codex")).toBeInTheDocument();
-      expect(screen.getAllByText(/\$farness/).length).toBeGreaterThan(0);
+      expect(screen.getAllByText(/\$brier/).length).toBeGreaterThan(0);
     });
 
     it("renders closing CTA", () => {
@@ -175,17 +175,17 @@ describe("Next.js migration", () => {
       render(<DocsPage />);
       expect(
         screen.getByText(
-          "Use farness with Codex, Claude Code, or the local CLI.",
+          "Use brier with Codex, Claude Code, or the local CLI.",
         ),
       ).toBeInTheDocument();
       expect(
         screen.getByText("Install the package and choose a path"),
       ).toBeInTheDocument();
-      expect(screen.getAllByText(/farness setup codex/).length).toBeGreaterThan(
+      expect(screen.getAllByText(/brier setup codex/).length).toBeGreaterThan(
         0,
       );
       expect(
-        screen.getAllByText(/farness doctor codex/).length,
+        screen.getAllByText(/brier doctor codex/).length,
       ).toBeGreaterThan(0);
       expect(
         screen.getByText("See the packaged flow before you install"),
@@ -196,7 +196,7 @@ describe("Next.js migration", () => {
       expect(
         screen.getByText("Draft public forecast questions"),
       ).toBeInTheDocument();
-      expect(screen.getAllByText(/\$farness/).length).toBeGreaterThan(0);
+      expect(screen.getAllByText(/\$brier/).length).toBeGreaterThan(0);
     });
 
     it("explains that the CLI does not need an API key", () => {

@@ -1,12 +1,12 @@
 /**
- * Farness logo mark — "The Vanishing Point"
+ * Brier logo mark — "The Vanishing Point"
  *
  * Two perspective lines converging toward a luminous focal point.
  * Updated for the "Clear Horizon" palette:
  * - Lines use Mist-400 (#9FB6C6) — visible on light backgrounds
  * - Dot uses Rose-600 (#A94E80) — brand accent
  */
-export function FarnessLogoMark({
+export function BrierLogoMark({
   size = 28,
   className = "",
 }: {
@@ -21,7 +21,7 @@ export function FarnessLogoMark({
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
       className={className}
-      aria-label="Farness"
+      aria-label="Brier"
     >
       {/* Glow halo — rose at low opacity */}
       <circle
@@ -60,14 +60,14 @@ export function FarnessLogoMark({
 }
 
 /**
- * Full wordmark: logo mark + "farness" text.
+ * Full wordmark: logo mark + "brier" text.
  * Newsreader SemiBold, lowercase.
  */
-export function FarnessWordmark({ size = 28 }: { size?: number }) {
+export function BrierWordmark({ size = 28 }: { size?: number }) {
   return (
     <span className="inline-flex items-center gap-[0.4em]">
-      <FarnessLogoMark size={size} />
-      <span className="tracking-[0.02em] lowercase">farness</span>
+      <BrierLogoMark size={size} />
+      <span className="tracking-[0.02em] lowercase">brier</span>
     </span>
   );
 }

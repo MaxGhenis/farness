@@ -598,7 +598,7 @@ function Spinner() {
 }
 
 function resolveApiBase() {
-  const configured = process.env.NEXT_PUBLIC_FARNESS_API_BASE_URL?.replace(
+  const configured = process.env.NEXT_PUBLIC_BRIER_API_BASE_URL?.replace(
     /\/$/,
     "",
   );
@@ -609,7 +609,7 @@ function resolveApiBase() {
   ) {
     return "http://127.0.0.1:3002";
   }
-  return "https://api.farness.ai";
+  return "https://api.brieralmanac.org";
 }
 
 function parseEventData<T>(event: Event) {

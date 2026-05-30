@@ -3,9 +3,9 @@ import { Header } from "@/components/Header";
 import { MarketsBrowser } from "@/components/MarketsBrowser";
 
 export const metadata: Metadata = {
-  title: "Policy forecasts — Farness",
+  title: "Policy forecasts — Brier",
   description:
-    "Open forecasts on government statistics, law-encoded policy parameters, and outcomes conditional on policy states. A public prototype for Farness analyst agents calling public data and the PolicyEngine microsim.",
+    "Open forecasts on government statistics, law-encoded policy parameters, and outcomes conditional on policy states. A public prototype for Brier analyst agents calling public data and the PolicyEngine microsim.",
   robots: {
     index: false,
     follow: false,
@@ -49,7 +49,7 @@ export default function MarketsPage() {
             How forecasts are generated
           </p>
           <p className="text-[0.92rem] leading-[1.65] text-[var(--theme-text)]">
-            Every forecast cell is opened by the Farness analyst agent, which
+            Every forecast cell is opened by the Brier analyst agent, which
             decomposes the question, calls the PolicyEngine microsim against
             scenarios drawn from law-encoded statutes and MICROPLEX synthetic
             populations, integrates external baselines (CBO, FOMC SEP, JCT, BLS,

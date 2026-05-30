@@ -52,7 +52,7 @@ export default function DocsPage() {
             Documentation
           </div>
           <h1 className="[font-family:var(--font-display)] text-[clamp(2.1rem,5vw,3.4rem)] font-medium leading-[1.02] tracking-[-0.04em] text-[#14202B] max-w-[820px] mb-6">
-            Use farness with Codex, Claude Code, or the local CLI.
+            Use brier with Codex, Claude Code, or the local CLI.
           </h1>
           <p className="text-[1.02rem] text-[#415463] leading-[1.7] max-w-[760px] mb-8">
             The install story is package-first. The PyPI package now includes
@@ -70,7 +70,7 @@ export default function DocsPage() {
               </div>
               <p className="text-[0.88rem] leading-[1.6] text-[#415463] m-0">
                 Best path if you want native tools, persistent decisions, and
-                the `$farness` trigger.
+                the `$brier` trigger.
               </p>
             </div>
             <div className="rounded-2xl bg-white border border-[#D9E4EC] p-5">
@@ -111,11 +111,11 @@ export default function DocsPage() {
               </h3>
               <p className="text-[0.92rem] text-[#415463] leading-[1.65]">
                 This gives Codex native tools, access to stored decisions, and a
-                reusable `$farness` skill.
+                reusable `$brier` skill.
               </p>
-              <CodeBlock>{`python -m pip install 'farness[mcp]'
-farness setup codex
-# restart Codex, then use $farness`}</CodeBlock>
+              <CodeBlock>{`python -m pip install 'brier[mcp]'
+brier setup codex
+# restart Codex, then use $brier`}</CodeBlock>
             </div>
 
             <div className="space-y-4">
@@ -127,8 +127,8 @@ farness setup codex
                 Codex, but through Claude skills instead of the Codex skill
                 format.
               </p>
-              <CodeBlock>{`python -m pip install 'farness[mcp]'
-farness setup claude
+              <CodeBlock>{`python -m pip install 'brier[mcp]'
+brier setup claude
 # restart Claude Code`}</CodeBlock>
             </div>
 
@@ -140,10 +140,10 @@ farness setup claude
                 This path creates and scores decisions locally. No LLM API key
                 is required for these commands.
               </p>
-              <CodeBlock>{`python -m pip install farness
-farness new "Should we rewrite the auth layer?"
-farness list
-farness calibration`}</CodeBlock>
+              <CodeBlock>{`python -m pip install brier
+brier new "Should we rewrite the auth layer?"
+brier list
+brier calibration`}</CodeBlock>
             </div>
           </div>
 
@@ -158,9 +158,9 @@ farness calibration`}</CodeBlock>
               If you prefer the older plugin flow instead of local Claude
               skills, it still works:
             </p>
-            <CodeBlock>{`claude plugin marketplace add MaxGhenis/farness
-claude plugin install farness@maxghenis-plugins
-# then use /farness:decide`}</CodeBlock>
+            <CodeBlock>{`claude plugin marketplace add MaxGhenis/brier
+claude plugin install brier@maxghenis-plugins
+# then use /brier:decide`}</CodeBlock>
           </div>
         </Section>
 
@@ -169,7 +169,7 @@ claude plugin install farness@maxghenis-plugins
             {[
               [
                 "CLI",
-                "Creates, lists, reviews, and scores decisions in ~/.farness/decisions.jsonl.",
+                "Creates, lists, reviews, and scores decisions in ~/.brier/decisions.jsonl.",
               ],
               [
                 "MCP server",
@@ -177,7 +177,7 @@ claude plugin install farness@maxghenis-plugins
               ],
               [
                 "Codex skill",
-                "Tells Codex when to use the MCP tools and what the farness workflow should produce.",
+                "Tells Codex when to use the MCP tools and what the brier workflow should produce.",
               ],
               [
                 "Claude skill",
@@ -204,22 +204,22 @@ claude plugin install farness@maxghenis-plugins
           title="Two commands, then restart the client"
         >
           <div className="grid grid-cols-2 gap-6 max-md:grid-cols-1">
-            <CodeBlock>{`python -m pip install 'farness[mcp]'
-farness setup codex`}</CodeBlock>
-            <CodeBlock>{`python -m pip install 'farness[mcp]'
-farness setup claude`}</CodeBlock>
+            <CodeBlock>{`python -m pip install 'brier[mcp]'
+brier setup codex`}</CodeBlock>
+            <CodeBlock>{`python -m pip install 'brier[mcp]'
+brier setup claude`}</CodeBlock>
           </div>
           <p className="mt-5 text-[0.92rem] text-[#415463] leading-[1.7] max-w-[760px]">
-            `farness setup` installs the packaged skill and registers the local
-            MCP server with the same Python interpreter that launched `farness`.
+            `brier setup` installs the packaged skill and registers the local
+            MCP server with the same Python interpreter that launched `brier`.
             The last step is just restarting Codex or Claude Code.
           </p>
           <div className="mt-6 grid grid-cols-2 gap-6 max-md:grid-cols-1">
-            <CodeBlock>{`farness doctor codex`}</CodeBlock>
-            <CodeBlock>{`farness doctor claude`}</CodeBlock>
+            <CodeBlock>{`brier doctor codex`}</CodeBlock>
+            <CodeBlock>{`brier doctor claude`}</CodeBlock>
           </div>
           <p className="mt-5 text-[0.92rem] text-[#415463] leading-[1.7] max-w-[760px]">
-            `farness doctor` checks three things: whether the packaged skill is
+            `brier doctor` checks three things: whether the packaged skill is
             installed, whether the agent CLI is on `PATH`, and whether the local
             MCP server is already registered.
           </p>
@@ -236,15 +236,15 @@ farness setup claude`}</CodeBlock>
                 install, run setup, use
                 <span className="[font-family:var(--font-mono)]">
                   {" "}
-                  $farness{" "}
+                  $brier{" "}
                 </span>
                 in Codex, then confirm the decision landed in the local store.
               </p>
-              <CodeBlock>{`python -m pip install 'farness[mcp]'
-farness setup codex
-farness doctor codex`}</CodeBlock>
+              <CodeBlock>{`python -m pip install 'brier[mcp]'
+brier setup codex
+brier doctor codex`}</CodeBlock>
             </div>
-            <DemoVideo caption="Rendered from a real Codex session using the local farness skill and MCP server, then exported as a clean 4K terminal demo." />
+            <DemoVideo caption="Rendered from a real Codex session using the local brier skill and MCP server, then exported as a clean 4K terminal demo." />
           </div>
         </Section>
 
@@ -258,8 +258,8 @@ farness doctor codex`}</CodeBlock>
                 If the skill file drifted, the agent CLI moved, or MCP setup
                 only half-worked, let `doctor` repair what it can.
               </p>
-              <CodeBlock>{`farness doctor codex --fix
-farness doctor claude --fix`}</CodeBlock>
+              <CodeBlock>{`brier doctor codex --fix
+brier doctor claude --fix`}</CodeBlock>
             </div>
             <div className="space-y-4">
               <h3 className="[font-family:var(--font-display)] text-[1.2rem] font-semibold text-[#14202B]">
@@ -269,11 +269,11 @@ farness doctor claude --fix`}</CodeBlock>
                 Remove the local skill and MCP registration, then run setup
                 again.
               </p>
-              <CodeBlock>{`farness uninstall codex
-farness setup codex
+              <CodeBlock>{`brier uninstall codex
+brier setup codex
 
-farness uninstall claude
-farness setup claude`}</CodeBlock>
+brier uninstall claude
+brier setup claude`}</CodeBlock>
             </div>
           </div>
         </Section>
@@ -309,7 +309,7 @@ Review date: 2026-06-15`}</CodeBlock>
           <div className="grid grid-cols-2 gap-8 max-md:grid-cols-1">
             <div className="space-y-4">
               <p className="text-[0.94rem] text-[#415463] leading-[1.7]">
-                `farness forecast-draft` turns a stored decision forecast or a
+                `brier forecast-draft` turns a stored decision forecast or a
                 standalone policy question into Manifold-ready JSON. It is
                 intentionally draft-only: it does not publish anything, place a
                 bet, or require a Manifold API key.
@@ -323,7 +323,7 @@ Review date: 2026-06-15`}</CodeBlock>
                 traffic fatalities and serious injuries.
               </p>
             </div>
-            <CodeBlock>{`farness forecast-draft \\
+            <CodeBlock>{`brier forecast-draft \\
   "Will Waymo be legally permitted to offer fully driverless paid robotaxi rides in Washington, DC by 2026-12-31?" \\
   --initial-prob 52 \\
   --resolution-date 2026-12-31 \\
@@ -331,7 +331,7 @@ Review date: 2026-06-15`}</CodeBlock>
   --output waymo-dc-forecast-pack.json
 
 # From a stored decision with forecasts:
-farness forecast-draft abc123 --output forecast-pack.json`}</CodeBlock>
+brier forecast-draft abc123 --output forecast-pack.json`}</CodeBlock>
           </div>
         </Section>
 
@@ -395,7 +395,7 @@ Review date: 2026-09-01`,
                 MCP + skills
               </div>
               <p className="text-[0.9rem] leading-[1.6] text-[#415463] m-0">
-                No separate farness API key. Your agent client uses its own
+                No separate brier API key. Your agent client uses its own
                 normal model credentials.
               </p>
             </div>
@@ -416,15 +416,15 @@ Review date: 2026-09-01`,
             {[
               {
                 title: "Skill installed, not triggering",
-                body: "Run `farness doctor codex` or `farness doctor claude`, then restart the client. Skills are loaded at startup.",
+                body: "Run `brier doctor codex` or `brier doctor claude`, then restart the client. Skills are loaded at startup.",
               },
               {
                 title: "Agent CLI not found",
-                body: "Install the `codex` or `claude` CLI first, then rerun `farness doctor --fix` to register MCP with the right interpreter.",
+                body: "Install the `codex` or `claude` CLI first, then rerun `brier doctor --fix` to register MCP with the right interpreter.",
               },
               {
                 title: "Want a clean reset",
-                body: "Use `farness uninstall codex` or `farness uninstall claude`, then rerun `farness setup ...` instead of editing config by hand.",
+                body: "Use `brier uninstall codex` or `brier uninstall claude`, then rerun `brier setup ...` instead of editing config by hand.",
               },
             ].map((item) => (
               <div
@@ -451,13 +451,13 @@ Review date: 2026-09-01`,
               Read the paper
             </Link>
             <a
-              href="https://github.com/MaxGhenis/farness/blob/main/docs/agent-workflows.md"
+              href="https://github.com/MaxGhenis/brier/blob/main/docs/agent-workflows.md"
               className="inline-flex items-center gap-2 py-[0.75em] px-5 [font-family:var(--font-display)] text-[0.88rem] font-medium no-underline rounded-lg bg-white text-[#415463] border border-[#BED0DB]"
             >
               Agent workflow markdown
             </a>
             <a
-              href="https://github.com/MaxGhenis/farness"
+              href="https://github.com/MaxGhenis/brier"
               className="inline-flex items-center gap-2 py-[0.75em] px-5 [font-family:var(--font-display)] text-[0.88rem] font-medium no-underline rounded-lg bg-white text-[#415463] border border-[#BED0DB]"
             >
               Repository

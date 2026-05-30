@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { FarnessLogoMark } from "./FarnessLogo";
+import { BrierLogoMark } from "./BrierLogo";
 
 export function Header({
   activePage,
@@ -21,8 +21,8 @@ export function Header({
             className="flex items-center gap-[0.35em] no-underline [font-family:var(--font-display)] text-[1.1rem] font-semibold hover:no-underline tracking-[-0.01em]"
             style={{ color: "var(--theme-text)" }}
           >
-            <FarnessLogoMark size={26} />
-            <span>farness</span>
+            <BrierLogoMark size={26} />
+            <span>brier</span>
           </Link>
           <span
             className="inline-flex h-6 items-center rounded-md border border-[#DFA85A] bg-[#FFF5E6] px-2 [font-family:var(--font-mono)] text-[0.62rem] font-medium uppercase tracking-[0.08em] text-[#7A4B12] max-[380px]:hidden"
@@ -93,7 +93,7 @@ export function Header({
             Research
           </a>
           <a
-            href="https://github.com/MaxGhenis/farness"
+            href="https://github.com/MaxGhenis/brier"
             className="no-underline transition-colors duration-200 hover:no-underline"
             style={{ color: "var(--theme-text-muted)" }}
             aria-label="GitHub"
