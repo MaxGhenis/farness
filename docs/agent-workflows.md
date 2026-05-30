@@ -1,13 +1,13 @@
 # Agent Workflows
 
-`farness` is not tied to one assistant. The Claude Code plugin is the most integrated path today, but the framework also works with Codex, Cursor, Windsurf, ChatGPT, and any other agent that can follow structured instructions.
+`brier` is not tied to one assistant. The Claude Code plugin is the most integrated path today, but the framework also works with Codex, Cursor, Windsurf, ChatGPT, and any other agent that can follow structured instructions.
 
 ## Core instruction
 
-Give your agent this instruction when you want a decision analyzed with `farness`:
+Give your agent this instruction when you want a decision analyzed with `brier`:
 
 ```text
-Use the farness workflow for this decision.
+Use the brier workflow for this decision.
 1. Define the KPI or outcome that would make the decision successful.
 2. Expand the option set beyond the choices already mentioned.
 3. Anchor on a relevant reference class or base rate before using the inside view.
@@ -20,7 +20,7 @@ Do not answer with a vague recommendation until the forecasts are explicit.
 
 ## Codex and other coding agents
 
-This works well in tools like Codex because they already have the two things `farness` needs:
+This works well in tools like Codex because they already have the two things `brier` needs:
 
 - access to local context
 - the ability to log decisions through the CLI or Python package
@@ -28,18 +28,18 @@ This works well in tools like Codex because they already have the two things `fa
 Minimal workflow:
 
 ```bash
-python -m pip install farness
-farness new "Should we rewrite the auth layer?" --context "3 incidents this quarter; CTO prefers Rust; team is strongest in Node."
+python -m pip install brier
+brier new "Should we rewrite the auth layer?" --context "3 incidents this quarter; CTO prefers Rust; team is strongest in Node."
 ```
 
-Then ask the agent to use the core instruction above and to read or update the decision in `~/.farness/decisions.jsonl`.
+Then ask the agent to use the core instruction above and to read or update the decision in `~/.brier/decisions.jsonl`.
 
 If you want Codex to pick this workflow up as a native skill, install the packaged skill:
 
 ```bash
-python -m pip install 'farness[mcp]'
-farness setup codex
-farness doctor codex
+python -m pip install 'brier[mcp]'
+brier setup codex
+brier doctor codex
 ```
 
 Then restart Codex.
@@ -47,16 +47,16 @@ Then restart Codex.
 If the skill drifted or setup only half-worked:
 
 ```bash
-farness doctor codex --fix
+brier doctor codex --fix
 ```
 
 ## MCP server
 
-If you want a native tool surface instead of prompt copy-paste, `farness` ships an MCP server:
+If you want a native tool surface instead of prompt copy-paste, `brier` ships an MCP server:
 
 ```bash
-python -m pip install 'farness[mcp]'
-farness-mcp
+python -m pip install 'brier[mcp]'
+brier-mcp
 ```
 
 The server exposes:
@@ -68,9 +68,9 @@ The server exposes:
 Optional configuration:
 
 ```bash
-FARNESS_STORE_PATH=/path/to/decisions.jsonl farness-mcp
+BRIER_STORE_PATH=/path/to/decisions.jsonl brier-mcp
 # or
-farness-mcp --store /path/to/decisions.jsonl
+brier-mcp --store /path/to/decisions.jsonl
 ```
 
 The default transport is `stdio`, which is the right default for editor and agent integrations.
@@ -78,7 +78,7 @@ The default transport is `stdio`, which is the right default for editor and agen
 To register the local server in Codex:
 
 ```bash
-farness setup codex
+brier setup codex
 ```
 
 ## Claude Code
@@ -86,51 +86,51 @@ farness setup codex
 Claude Code can use the same local MCP server and a local skill wrapper:
 
 ```bash
-python -m pip install 'farness[mcp]'
-farness setup claude
-farness doctor claude
+python -m pip install 'brier[mcp]'
+brier setup claude
+brier doctor claude
 ```
 
-This gives Claude Code a local skill plus the `farness` MCP tools/resources/prompts.
+This gives Claude Code a local skill plus the `brier` MCP tools/resources/prompts.
 
 If the skill drifted or setup only half-worked:
 
 ```bash
-farness doctor claude --fix
+brier doctor claude --fix
 ```
 
 The plugin path is still available if you prefer slash commands:
 
 ```bash
-claude plugin marketplace add MaxGhenis/farness
-claude plugin install farness@maxghenis-plugins
+claude plugin marketplace add MaxGhenis/brier
+claude plugin install brier@maxghenis-plugins
 ```
 
-Then either use the local skill or run `/farness:decide` for the plugin flow.
+Then either use the local skill or run `/brier:decide` for the plugin flow.
 
 ## Python and CLI
 
-If you do not want any agent integration, `farness` still works as a local decision log and calibration tool. The CLI does not call an LLM and does not need an API key.
+If you do not want any agent integration, `brier` still works as a local decision log and calibration tool. The CLI does not call an LLM and does not need an API key.
 
 Useful commands:
 
 ```bash
-farness new "Should we rewrite the auth layer?"
-farness list
-farness show <id>
-farness pending
-farness calibration
+brier new "Should we rewrite the auth layer?"
+brier list
+brier show <id>
+brier pending
+brier calibration
 ```
 
 To draft forecast questions from a standalone policy question or a stored decision:
 
 ```bash
-farness forecast-draft "Will Waymo be legally permitted to offer fully driverless paid robotaxi rides in Washington, DC by 2026-12-31?" \
+brier forecast-draft "Will Waymo be legally permitted to offer fully driverless paid robotaxi rides in Washington, DC by 2026-12-31?" \
   --initial-prob 52 \
   --resolution-date 2026-12-31 \
   --output waymo-dc-forecast-pack.json
 
-farness forecast-draft <decision-id> --output forecast-pack.json
+brier forecast-draft <decision-id> --output forecast-pack.json
 ```
 
 This only writes Manifold-ready JSON. It does not publish questions, create Manifold entries,
@@ -139,8 +139,8 @@ place bets, or require a Manifold API key.
 If you want to fully reset a local integration:
 
 ```bash
-farness uninstall codex
-farness uninstall claude
+brier uninstall codex
+brier uninstall claude
 ```
 
 ## Recommended prompt shape

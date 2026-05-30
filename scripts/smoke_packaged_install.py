@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Smoke-test a built farness artifact in an isolated environment."""
+"""Smoke-test a built brier artifact in an isolated environment."""
 
 from __future__ import annotations
 
@@ -114,7 +114,7 @@ def main() -> None:
     if not artifact.exists():
         raise SystemExit(f"Artifact not found: {artifact}")
 
-    with tempfile.TemporaryDirectory(prefix="farness-smoke-") as tmpdir:
+    with tempfile.TemporaryDirectory(prefix="brier-smoke-") as tmpdir:
         root = Path(tmpdir)
         venv_dir = root / "venv"
         fake_bin = root / "fake-bin"
@@ -142,47 +142,47 @@ def main() -> None:
                 "-m",
                 "pip",
                 "install",
-                f"farness[mcp] @ {artifact.as_uri()}",
+                f"brier[mcp] @ {artifact.as_uri()}",
             ],
             env=env,
         )
 
-        farness = [str(venv_dir / "bin" / "farness")]
-        codex_skill = Path(env["CODEX_HOME"]) / "skills" / "farness" / "SKILL.md"
-        claude_skill = Path(env["HOME"]) / ".claude" / "skills" / "farness" / "SKILL.md"
+        brier = [str(venv_dir / "bin" / "brier")]
+        codex_skill = Path(env["CODEX_HOME"]) / "skills" / "brier" / "SKILL.md"
+        claude_skill = Path(env["HOME"]) / ".claude" / "skills" / "brier" / "SKILL.md"
 
-        codex_setup = run(farness + ["setup", "codex"], env=env)
-        assert "Configured MCP server `farness` in codex" in codex_setup.stdout
+        codex_setup = run(brier + ["setup", "codex"], env=env)
+        assert "Configured MCP server `brier` in codex" in codex_setup.stdout
         assert codex_skill.exists()
 
-        codex_doctor = run(farness + ["doctor", "codex"], env=env)
+        codex_doctor = run(brier + ["doctor", "codex"], env=env)
         assert "Skill status: installed" in codex_doctor.stdout
         assert "configured: yes" in codex_doctor.stdout
 
         codex_skill.write_text("drifted", encoding="utf-8")
-        codex_fix = run(farness + ["doctor", "codex", "--fix"], env=env)
+        codex_fix = run(brier + ["doctor", "codex", "--fix"], env=env)
         assert "Skill: updated" in codex_fix.stdout
         assert "MCP: unchanged" in codex_fix.stdout
 
-        codex_uninstall = run(farness + ["uninstall", "codex"], env=env)
+        codex_uninstall = run(brier + ["uninstall", "codex"], env=env)
         assert "Removed codex skill" in codex_uninstall.stdout
-        assert "Removed MCP server `farness` from codex." in codex_uninstall.stdout
+        assert "Removed MCP server `brier` from codex." in codex_uninstall.stdout
         assert not codex_skill.exists()
 
-        codex_post = run(farness + ["doctor", "codex"], env=env)
+        codex_post = run(brier + ["doctor", "codex"], env=env)
         assert "Skill status: missing" in codex_post.stdout
         assert "configured: no" in codex_post.stdout
 
-        claude_setup = run(farness + ["setup", "claude"], env=env)
-        assert "Configured MCP server `farness` in claude" in claude_setup.stdout
+        claude_setup = run(brier + ["setup", "claude"], env=env)
+        assert "Configured MCP server `brier` in claude" in claude_setup.stdout
         assert claude_skill.exists()
 
         decision_new = run(
-            farness + ["new", "Should we launch now?", "--context", "2 bugs left"],
+            brier + ["new", "Should we launch now?", "--context", "2 bugs left"],
             env=env,
         )
         assert "Created decision" in decision_new.stdout
-        decision_list = run(farness + ["list"], env=env)
+        decision_list = run(brier + ["list"], env=env)
         assert "Should we launch now?" in decision_list.stdout
 
         print("Packaged install smoke test passed.")

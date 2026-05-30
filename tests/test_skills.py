@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 
-from farness.skills import inspect_skill, remove_skill
+from brier.skills import inspect_skill, remove_skill
 
 
 def test_inspect_skill_reports_missing(tmp_path):

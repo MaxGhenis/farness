@@ -1,7 +1,7 @@
 """Tests for the reframing experiment module."""
 
 import pytest
-from farness.experiments.reframing import (
+from brier.experiments.reframing import (
     ReframingCase,
     ReframingResult,
     REFRAMING_CASES,
@@ -93,27 +93,27 @@ class TestAnalyzeReframing:
         results = [
             self._make_result("case1", "naive", 5, True),
             self._make_result("case2", "naive", 3, True),
-            self._make_result("case1", "farness", 1, False),
-            self._make_result("case2", "farness", 0, False),
+            self._make_result("case1", "brier", 1, False),
+            self._make_result("case2", "brier", 0, False),
         ]
         analysis = analyze_reframing(results)
-        assert analysis["naive"]["mean_reframe_count"] > analysis["farness"]["mean_reframe_count"]
-        assert analysis["naive"]["challenged_framing_rate"] > analysis["farness"]["challenged_framing_rate"]
+        assert analysis["naive"]["mean_reframe_count"] > analysis["brier"]["mean_reframe_count"]
+        assert analysis["naive"]["challenged_framing_rate"] > analysis["brier"]["challenged_framing_rate"]
 
     def test_equal_reframing(self):
         results = [
             self._make_result("case1", "naive", 2, True),
-            self._make_result("case1", "farness", 2, True),
+            self._make_result("case1", "brier", 2, True),
         ]
         analysis = analyze_reframing(results)
-        assert analysis["naive"]["mean_reframe_count"] == analysis["farness"]["mean_reframe_count"]
+        assert analysis["naive"]["mean_reframe_count"] == analysis["brier"]["mean_reframe_count"]
 
     def test_per_case_breakdown(self):
         results = [
             self._make_result("case1", "naive", 3, True),
-            self._make_result("case1", "farness", 1, False),
+            self._make_result("case1", "brier", 1, False),
             self._make_result("case2", "naive", 5, True),
-            self._make_result("case2", "farness", 2, False),
+            self._make_result("case2", "brier", 2, False),
         ]
         analysis = analyze_reframing(results)
         assert "case1" in analysis["by_case"]
@@ -140,7 +140,7 @@ class TestSummaryTable:
     def test_produces_markdown(self):
         results = [
             self._make_result("case1", "naive", 3, True),
-            self._make_result("case1", "farness", 1, False),
+            self._make_result("case1", "brier", 1, False),
         ]
         table = summary_table(results)
         assert "## Reframing experiment results" in table

@@ -2,7 +2,7 @@
 
 import pytest
 
-from farness.experiments.stability import (
+from brier.experiments.stability import (
     DEFAULT_PROBE_BATTERY,
     QuantitativeCase,
     StabilityResult,
@@ -12,7 +12,7 @@ from farness.experiments.stability import (
     generate_estimate_only_prompt,
     generate_format_control_prompt,
     generate_naive_prompt,
-    generate_farness_prompt,
+    generate_brier_prompt,
     generate_probe_prompt,
     get_all_stability_cases,
     get_primary_stability_cases,
@@ -176,10 +176,10 @@ class TestPromptGeneration:
         assert "framework" not in prompt.lower()
         assert case.estimate_question in prompt
 
-    def test_farness_prompt_has_framework(self, case):
-        """Farness prompt should include framework."""
-        prompt = generate_farness_prompt(case)
-        assert "farness" in prompt.lower()
+    def test_brier_prompt_has_framework(self, case):
+        """Brier prompt should include framework."""
+        prompt = generate_brier_prompt(case)
+        assert "brier" in prompt.lower()
         assert "base rate" in prompt.lower()
         assert "confidence interval" in prompt.lower()
 
@@ -190,12 +190,12 @@ class TestPromptGeneration:
         assert "framework" not in prompt.lower()
         assert "0-100 rather than 0-1" in prompt
 
-    def test_format_control_prompt_is_structured_without_farness(self, case):
+    def test_format_control_prompt_is_structured_without_brier(self, case):
         """Formatting-only control should preserve structure without framework content."""
         prompt = generate_format_control_prompt(case)
         assert "four-part structure" in prompt.lower()
         assert "do not use any named decision framework" in prompt.lower()
-        assert "farness" not in prompt.lower()
+        assert "brier" not in prompt.lower()
 
     def test_probe_prompt_includes_initial_estimate(self, case):
         """Probe prompt should reference initial estimate."""
@@ -232,7 +232,7 @@ class TestStabilityResult:
     def result_with_ci(self) -> StabilityResult:
         return StabilityResult(
             case_id="test",
-            condition="farness",
+            condition="brier",
             initial_estimate=10.0,
             initial_ci_low=5.0,
             initial_ci_high=15.0,
@@ -302,10 +302,10 @@ class TestStabilityExperiment:
             final_response_text="",
         ))
 
-        # Add farness result: smaller update
+        # Add brier result: smaller update
         exp.results.append(StabilityResult(
             case_id="planning_estimate",
-            condition="farness",
+            condition="brier",
             initial_estimate=5.0,
             initial_ci_low=3.0,
             initial_ci_high=7.0,
@@ -322,29 +322,29 @@ class TestStabilityExperiment:
         """Should return analysis metrics."""
         analysis = experiment.analyze()
         assert "n_naive" in analysis
-        assert "n_farness" in analysis
+        assert "n_brier" in analysis
         assert "naive" in analysis
-        assert "farness" in analysis
+        assert "brier" in analysis
         assert analysis["comparison_metric"] == "relative_update"
 
     def test_naive_has_larger_update(self, experiment):
         """Naive should have larger update in our mock data."""
         analysis = experiment.analyze()
         naive_update = analysis["naive"]["mean_update_magnitude"]
-        farness_update = analysis["farness"]["mean_update_magnitude"]
-        assert naive_update > farness_update
+        brier_update = analysis["brier"]["mean_update_magnitude"]
+        assert naive_update > brier_update
 
-    def test_farness_has_higher_ci_rate(self, experiment):
-        """Farness should have higher initial CI rate."""
+    def test_brier_has_higher_ci_rate(self, experiment):
+        """Brier should have higher initial CI rate."""
         analysis = experiment.analyze()
-        assert analysis["farness"]["initial_ci_rate"] == 1.0
+        assert analysis["brier"]["initial_ci_rate"] == 1.0
         assert analysis["naive"]["initial_ci_rate"] == 0.0
 
     def test_convergence_measured(self, experiment):
         """Should measure convergence."""
         analysis = experiment.analyze()
         assert "convergence" in analysis
-        # Naive went from 4→6, farness initial was 5
+        # Naive went from 4→6, brier initial was 5
         # Initial gap: |4-5| = 1, Final gap: |6-5| = 1
         # Convergence ratio: 1 - 1/1 = 0
 
@@ -353,7 +353,7 @@ class TestStabilityExperiment:
         table = experiment.summary_table()
         assert "Stability-under-probing results" in table
         assert "Naive" in table
-        assert "Farness" in table
+        assert "Brier" in table
         assert "Primary pooled comparison metric" in table
 
     def test_mixed_effects_uses_relative_update(self, experiment):
@@ -376,7 +376,7 @@ class TestStabilityExperiment:
             ),
             StabilityResult(
                 case_id="planning_estimate",
-                condition="farness",
+                condition="brier",
                 probe_battery="on_framework",
                 initial_estimate=5.0,
                 final_estimate=5.5,
@@ -390,7 +390,7 @@ class TestStabilityExperiment:
             ),
             StabilityResult(
                 case_id="planning_estimate",
-                condition="farness",
+                condition="brier",
                 probe_battery="off_framework",
                 initial_estimate=5.0,
                 final_estimate=5.2,

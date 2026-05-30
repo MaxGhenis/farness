@@ -1,8 +1,8 @@
-# Farness
+# Brier
 
 **Forecasting as a harness for decision-making.**
 
-Instead of asking "Is X good?" or "Should I do Y?", farness helps you:
+Instead of asking "Is X good?" or "Should I do Y?", brier helps you:
 1. Define what success looks like (KPIs)
 2. Expand your options (including ones you didn't consider)
 3. Make explicit forecasts (with confidence intervals and resolution rules)
@@ -11,7 +11,7 @@ Instead of asking "Is X good?" or "Should I do Y?", farness helps you:
 ## Installation
 
 ```bash
-python -m pip install 'farness[mcp]'
+python -m pip install 'brier[mcp]'
 ```
 
 ## Quick Start
@@ -19,17 +19,17 @@ python -m pip install 'farness[mcp]'
 ### Codex
 
 ```bash
-farness setup codex
-farness doctor codex
+brier setup codex
+brier doctor codex
 ```
 
-Then restart Codex and use `$farness` when a decision prompt appears.
+Then restart Codex and use `$brier` when a decision prompt appears.
 
 ### Claude Code
 
 ```bash
-farness setup claude
-farness doctor claude
+brier setup claude
+brier doctor claude
 ```
 
 Then restart Claude Code.
@@ -37,9 +37,9 @@ Then restart Claude Code.
 ### Local CLI
 
 ```bash
-farness new "Should we rewrite the auth layer?" --context "3 incidents this quarter"
-farness list
-farness calibration
+brier new "Should we rewrite the auth layer?" --context "3 incidents this quarter"
+brier list
+brier calibration
 ```
 
 The CLI is local-only and does not call an LLM or require an API key.
@@ -47,7 +47,7 @@ The CLI is local-only and does not call an LLM or require an API key.
 ### Python package
 
 ```python
-from farness import Decision, KPI, Option, Forecast, DecisionStore
+from brier import Decision, KPI, Option, Forecast, DecisionStore
 from datetime import datetime, timedelta
 
 # Create a decision
@@ -109,20 +109,20 @@ store.save(decision)
 ### Command Line
 
 ```bash
-farness new "Should we launch now?"
-farness show abc123
-farness pending
-farness calibration
+brier new "Should we launch now?"
+brier show abc123
+brier pending
+brier calibration
 ```
 
 ### Forecast Question Drafts
 
-`farness` can turn a stored decision forecast or standalone policy question into
+`brier` can turn a stored decision forecast or standalone policy question into
 Manifold-ready forecast question drafts. This is draft-only: it does not publish
 questions, place a bet, or require a Manifold API key.
 
 ```bash
-farness forecast-draft "Will Waymo be legally permitted to offer fully driverless paid robotaxi rides in Washington, DC by 2026-12-31?" \
+brier forecast-draft "Will Waymo be legally permitted to offer fully driverless paid robotaxi rides in Washington, DC by 2026-12-31?" \
   --initial-prob 52 \
   --resolution-date 2026-12-31 \
   --resolution-rule "Resolve YES if official DC law, regulation, or permit approval allows Waymo to offer fully driverless paid public rides in DC by 2026-12-31." \
@@ -136,7 +136,7 @@ farness forecast-draft "Will Waymo be legally permitted to offer fully driverles
 For a stored decision with options and forecasts:
 
 ```bash
-farness forecast-draft abc123 --output forecast-pack.json
+brier forecast-draft abc123 --output forecast-pack.json
 ```
 
 An example Waymo/DC draft pack lives at
@@ -148,7 +148,7 @@ way.
 
 ### AI Agent Workflows
 
-`farness` is not tied to Claude. The Claude Code plugin is the most integrated path today, but the framework also works with Codex and other coding agents that can follow structured instructions or run shell commands.
+`brier` is not tied to Claude. The Claude Code plugin is the most integrated path today, but the framework also works with Codex and other coding agents that can follow structured instructions or run shell commands.
 
 For agent-agnostic setup and prompt guidance, see [`docs/agent-workflows.md`](docs/agent-workflows.md).
 
@@ -157,15 +157,15 @@ For agent-agnostic setup and prompt guidance, see [`docs/agent-workflows.md`](do
 The default builder path is package-first:
 
 ```bash
-python -m pip install 'farness[mcp]'
-farness setup codex
-farness doctor codex
+python -m pip install 'brier[mcp]'
+brier setup codex
+brier doctor codex
 ```
 
 For source installs during development:
 
 ```bash
-python -m pip install -e /path/to/farness
+python -m pip install -e /path/to/brier
 ```
 
 #### MCP server
@@ -173,29 +173,29 @@ python -m pip install -e /path/to/farness
 If you want a native tool interface instead of prompt copy-paste, install the package and run the MCP server locally:
 
 ```bash
-python -m pip install 'farness[mcp]'
-farness-mcp
+python -m pip install 'brier[mcp]'
+brier-mcp
 ```
 
-It exposes tools for creating, listing, retrieving, saving, and scoring decisions, plus resources/prompts for the farness workflow.
+It exposes tools for creating, listing, retrieving, saving, and scoring decisions, plus resources/prompts for the brier workflow.
 
 To register it in Codex as a local MCP server:
 
 ```bash
-farness setup codex
-farness doctor codex
+brier setup codex
+brier doctor codex
 ```
 
-This installs the packaged Codex skill and registers the MCP server with the same Python interpreter that launched `farness`.
+This installs the packaged Codex skill and registers the MCP server with the same Python interpreter that launched `brier`.
 
 #### Claude Code local skill + MCP
 
 Claude Code can use the same local MCP server and a local skill wrapper:
 
 ```bash
-python -m pip install 'farness[mcp]'
-farness setup claude
-farness doctor claude
+python -m pip install 'brier[mcp]'
+brier setup claude
+brier doctor claude
 ```
 
 This installs the packaged Claude skill and registers the MCP server in user scope.
@@ -203,38 +203,38 @@ This installs the packaged Claude skill and registers the MCP server in user sco
 The plugin path still works if you prefer the slash-command workflow:
 
 ```bash
-claude plugin marketplace add MaxGhenis/farness
-claude plugin install farness@maxghenis-plugins
+claude plugin marketplace add MaxGhenis/brier
+claude plugin install brier@maxghenis-plugins
 ```
 
-Then either use the local `farness` skill or `/farness:decide` if you installed the plugin.
+Then either use the local `brier` skill or `/brier:decide` if you installed the plugin.
 
 #### Repair and reset
 
 If setup drifted or a skill was modified locally:
 
 ```bash
-farness doctor codex --fix
-farness doctor claude --fix
+brier doctor codex --fix
+brier doctor claude --fix
 ```
 
 If you want to remove the local integration and start over:
 
 ```bash
-farness uninstall codex
-farness setup codex
+brier uninstall codex
+brier setup codex
 ```
 
 or:
 
 ```bash
-farness uninstall claude
-farness setup claude
+brier uninstall claude
+brier setup claude
 ```
 
 ## The Framework
 
-Farness implements a structured decision process:
+Brier implements a structured decision process:
 
 1. **KPI Definition** - What outcomes actually matter? Make them measurable.
    Add outcome type, resolution date, resolution rule, and data source when possible.
@@ -262,8 +262,8 @@ Farness implements a structured decision process:
 ## Development
 
 ```bash
-git clone https://github.com/MaxGhenis/farness
-cd farness
+git clone https://github.com/MaxGhenis/brier
+cd brier
 pip install -e ".[dev,experiments]"
 pytest
 python -m build
@@ -277,7 +277,7 @@ Paper build:
 python3 paper/render_paper.py  # Regenerates figures, HTML, Markdown, and site/public/paper-raw
 python3 paper/run_strongest_validation.py  # Runs the strongest reviewer-facing validation on Claude Opus 4.6 and GPT-5.2
 python3 paper/run_study1_rerun.py --models gpt-5.4  # Reruns the original Study 1 design with legacy prompt wording
-python3 -m farness.experiments stability --strongest-validation --model gpt-5.2  # Single-model equivalent
+python3 -m brier.experiments stability --strongest-validation --model gpt-5.2  # Single-model equivalent
 ```
 
 ### Publishing to PyPI
@@ -285,11 +285,11 @@ python3 -m farness.experiments stability --strongest-validation --model gpt-5.2 
 The package is published to PyPI from GitHub Releases using PyPI Trusted Publishing.
 
 **Setup (one-time):**
-1. In PyPI, open the `farness` project publishing settings:
-   - `https://pypi.org/manage/project/farness/settings/publishing/`
+1. In PyPI, open the `brier` project publishing settings:
+   - `https://pypi.org/manage/project/brier/settings/publishing/`
 2. Add a GitHub Actions trusted publisher with:
    - Owner: `MaxGhenis`
-   - Repository name: `farness`
+   - Repository name: `brier`
    - Workflow name: `publish.yml`
    - Environment name: leave blank unless you later add a GitHub environment
 

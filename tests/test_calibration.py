@@ -3,8 +3,8 @@
 import pytest
 from datetime import datetime
 
-from farness.framework import Decision, KPI, Option, Forecast
-from farness.calibration import CalibrationTracker, ForecastScore
+from brier.framework import Decision, KPI, Option, Forecast
+from brier.calibration import CalibrationTracker, ForecastScore
 
 
 class TestForecastScore:

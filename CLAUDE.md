@@ -4,7 +4,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Project Overview
 
-Farness is a decision-making framework that reframes subjective questions ("Should I...?") into forecasting problems with explicit KPIs, confidence intervals, and calibration tracking. The core thesis: making numeric predictions forces mechanism thinking, creates accountability, and reduces sycophancy.
+Brier is a decision-making framework that reframes subjective questions ("Should I...?") into forecasting problems with explicit KPIs, confidence intervals, and calibration tracking. The core thesis: making numeric predictions forces mechanism thinking, creates accountability, and reduces sycophancy.
 
 ## Commands
 
@@ -21,24 +21,24 @@ pytest
 pytest tests/test_framework.py
 
 # Run with coverage
-pytest --cov=farness
+pytest --cov=brier
 
 # Format code
-black farness tests
-ruff check farness tests
+black brier tests
+ruff check brier tests
 ```
 
 ### CLI
 
 ```bash
-farness new "question"    # Create a new decision
-farness new "q" --context "details"  # With context
-farness list              # List all decisions
-farness list --pending    # Decisions past review date
-farness show <id>         # Show decision details (supports prefix match)
-farness score [id]        # Score a decision's actual outcomes (interactive)
-farness calibration       # Show calibration statistics
-farness pending           # Alias for list --pending
+brier new "question"    # Create a new decision
+brier new "q" --context "details"  # With context
+brier list              # List all decisions
+brier list --pending    # Decisions past review date
+brier show <id>         # Show decision details (supports prefix match)
+brier score [id]        # Score a decision's actual outcomes (interactive)
+brier calibration       # Show calibration statistics
+brier pending           # Alias for list --pending
 ```
 
 ### Site (Next.js)
@@ -57,15 +57,15 @@ bun run test     # Run vitest tests
 python3 paper/render_paper.py  # Generate figures, render HTML, sync preemptive_rigor.md and site/public/paper-raw
 python3 paper/run_strongest_validation.py  # Strongest reviewer-facing validation across Claude Opus 4.6 and GPT-5.2
 python3 paper/run_study1_rerun.py --models gpt-5.4  # Original Study 1 rerun with legacy prompt wording
-python3 -m farness.experiments stability --strongest-validation --model gpt-5.2  # Single-model strongest validation
+python3 -m brier.experiments stability --strongest-validation --model gpt-5.2  # Single-model strongest validation
 ```
 
 ## Architecture
 
-### Python Package (`farness/`)
+### Python Package (`brier/`)
 
 - **framework.py**: Core dataclasses (`Decision`, `KPI`, `Option`, `Forecast`) with serialization. `Option.expected_value()` computes weighted expected values across KPIs. `Decision.best_option()` and `sensitivity_analysis()` for analysis.
-- **storage.py**: `DecisionStore` persists decisions to `~/.farness/decisions.jsonl` in JSONL format. Supports CRUD and filtered queries (unscored, pending review, scored).
+- **storage.py**: `DecisionStore` persists decisions to `~/.brier/decisions.jsonl` in JSONL format. Supports CRUD and filtered queries (unscored, pending review, scored).
 - **calibration.py**: `CalibrationTracker` computes forecast accuracy metrics: coverage (% of actuals in CIs), calibration error (coverage vs stated confidence), MAE, MRE, Brier scores.
 - **cli.py**: Argparse CLI wrapping the above modules.
 

@@ -1,0 +1,662 @@
+"""Command-line interface for brier."""
+
+import argparse
+import json
+import os
+import sys
+from datetime import datetime
+from pathlib import Path
+
+from brier import Decision, DecisionStore, CalibrationTracker
+from brier.agent_setup import inspect_agent_setup, remove_agent_setup, repair_agent_setup, setup_agent
+from brier.market import (
+    MarketSource,
+    draft_binary_policy_market,
+    draft_markets_for_decision,
+    market_pack_to_dict,
+)
+from brier.skills import install_skill
+
+
+def main():
+    parser = argparse.ArgumentParser(
+        prog="brier",
+        description="Forecasting as a harness for decision-making",
+    )
+    parser.add_argument(
+        "--store",
+        help=(
+            "Optional path to the brier JSONL store. Defaults to "
+            "$BRIER_STORE_PATH or ~/.brier/decisions.jsonl."
+        ),
+    )
+    subparsers = parser.add_subparsers(dest="command", help="Commands")
+
+    # List decisions
+    list_parser = subparsers.add_parser("list", help="List decisions")
+    list_parser.add_argument(
+        "--unscored", action="store_true", help="Show only unscored decisions"
+    )
+    list_parser.add_argument(
+        "--pending", action="store_true", help="Show only decisions pending review"
+    )
+
+    # Show a decision
+    show_parser = subparsers.add_parser("show", help="Show decision details")
+    show_parser.add_argument("id", help="Decision ID (or prefix)")
+
+    # Calibration stats
+    subparsers.add_parser("calibration", help="Show calibration statistics")
+
+    # Pending reviews
+    subparsers.add_parser("pending", help="Show decisions pending review")
+
+    # Create a new decision
+    new_parser = subparsers.add_parser("new", help="Create a new decision")
+    new_parser.add_argument("question", help="The decision question")
+    new_parser.add_argument("--context", default="", help="Additional context")
+
+    # Score a decision
+    score_parser = subparsers.add_parser("score", help="Score a decision's outcomes")
+    score_parser.add_argument("id", nargs="?", help="Decision ID (or prefix)")
+
+    market_parser = subparsers.add_parser(
+        "forecast-draft",
+        aliases=["market-draft"],
+        help="Draft Manifold-ready forecast questions without posting or betting",
+    )
+    market_parser.add_argument(
+        "id_or_question",
+        help="Decision ID/prefix from the local store, or a standalone forecast question",
+    )
+    market_parser.add_argument(
+        "--context",
+        default="",
+        help="Additional context for standalone policy-question drafts",
+    )
+    market_parser.add_argument(
+        "--initial-prob",
+        type=int,
+        help="Initial probability for standalone binary markets, from 1 to 99",
+    )
+    market_parser.add_argument(
+        "--resolution-date",
+        help="Resolution date for standalone drafts, YYYY-MM-DD",
+    )
+    market_parser.add_argument(
+        "--close-date",
+        help="Close date for standalone drafts, YYYY-MM-DD",
+    )
+    market_parser.add_argument(
+        "--resolution-rule",
+        default="",
+        help="Resolution rule for standalone drafts",
+    )
+    market_parser.add_argument(
+        "--source",
+        action="append",
+        default=[],
+        help="Source as 'Title|URL'. Can be passed multiple times.",
+    )
+    market_parser.add_argument(
+        "--tag",
+        action="append",
+        default=[],
+        help="Draft tag/topic. Can be passed multiple times.",
+    )
+    market_parser.add_argument(
+        "--visibility",
+        choices=["public", "unlisted"],
+        default="unlisted",
+        help="Manifold visibility for draft payloads (default: unlisted)",
+    )
+    market_parser.add_argument(
+        "--output",
+        help="Write the market pack JSON to a file instead of stdout",
+    )
+
+    install_skill_parser = subparsers.add_parser(
+        "install-skill", help="Install the packaged Codex or Claude skill"
+    )
+    install_skill_parser.add_argument(
+        "agent", choices=["codex", "claude"], help="Agent skill to install"
+    )
+    install_skill_parser.add_argument(
+        "--target",
+        help=(
+            "Optional target skill directory. Defaults to "
+            "$CODEX_HOME/skills/brier (or ~/.codex/skills/brier) for Codex, "
+            "or ~/.claude/skills/brier for Claude."
+        ),
+    )
+    install_skill_parser.add_argument(
+        "--force",
+        action="store_true",
+        help="Overwrite an existing skill with different contents",
+    )
+
+    uninstall_parser = subparsers.add_parser(
+        "uninstall", help="Remove the packaged skill and MCP setup for Codex or Claude"
+    )
+    uninstall_parser.add_argument(
+        "agent", choices=["codex", "claude"], help="Agent to remove"
+    )
+    uninstall_parser.add_argument(
+        "--target",
+        help=(
+            "Optional target skill directory. Defaults to "
+            "$CODEX_HOME/skills/brier (or ~/.codex/skills/brier) for Codex, "
+            "or ~/.claude/skills/brier for Claude."
+        ),
+    )
+    uninstall_parser.add_argument(
+        "--keep-mcp",
+        action="store_true",
+        help="Remove the local skill only and leave the MCP server registration intact",
+    )
+
+    setup_parser = subparsers.add_parser(
+        "setup", help="Install the skill and configure MCP for Codex or Claude"
+    )
+    setup_parser.add_argument(
+        "agent", choices=["codex", "claude"], help="Agent to configure"
+    )
+    setup_parser.add_argument(
+        "--target",
+        help=(
+            "Optional target skill directory. Defaults to "
+            "$CODEX_HOME/skills/brier (or ~/.codex/skills/brier) for Codex, "
+            "or ~/.claude/skills/brier for Claude."
+        ),
+    )
+    setup_parser.add_argument(
+        "--force-skill",
+        action="store_true",
+        help="Overwrite an existing skill with different contents",
+    )
+    setup_parser.add_argument(
+        "--python-bin",
+        help=(
+            "Override the Python interpreter used for MCP registration. "
+            "Defaults to the current interpreter."
+        ),
+    )
+
+    doctor_parser = subparsers.add_parser(
+        "doctor", help="Check local Codex or Claude skill and MCP setup"
+    )
+    doctor_parser.add_argument(
+        "agent", choices=["codex", "claude"], help="Agent to inspect"
+    )
+    doctor_parser.add_argument(
+        "--target",
+        help=(
+            "Optional target skill directory. Defaults to "
+            "$CODEX_HOME/skills/brier (or ~/.codex/skills/brier) for Codex, "
+            "or ~/.claude/skills/brier for Claude."
+        ),
+    )
+    doctor_parser.add_argument(
+        "--python-bin",
+        help=(
+            "Override the Python interpreter shown in the manual MCP command. "
+            "Defaults to the current interpreter."
+        ),
+    )
+    doctor_parser.add_argument(
+        "--fix",
+        action="store_true",
+        help="Repair a missing or modified skill and register MCP if the agent CLI is available",
+    )
+
+    args = parser.parse_args()
+
+    if args.command == "install-skill":
+        try:
+            skill_path = install_skill(args.agent, args.target, args.force)
+        except FileExistsError as exc:
+            print(str(exc))
+            sys.exit(1)
+
+        print(f"Installed {args.agent} skill at {skill_path}")
+        print("Restart the agent so it picks up the new skill.")
+        return
+
+    if args.command == "uninstall":
+        try:
+            result = remove_agent_setup(
+                args.agent,
+                target_dir=args.target,
+                remove_mcp=not args.keep_mcp,
+            )
+        except RuntimeError as exc:
+            print(str(exc))
+            sys.exit(1)
+
+        if result.skill_removed:
+            print(f"Removed {args.agent} skill at {result.skill_path}")
+        else:
+            print(f"No {args.agent} skill found at {result.skill_path}")
+
+        if args.keep_mcp:
+            print(f"Left MCP server `{result.mcp_server_name}` configured.")
+        elif result.mcp_removed:
+            print(f"Removed MCP server `{result.mcp_server_name}` from {result.agent_cli}.")
+        elif result.cli_path is None:
+            print(
+                f"Could not verify MCP removal because the `{result.agent_cli}` CLI "
+                "was not found on PATH."
+            )
+        else:
+            print(f"No MCP server `{result.mcp_server_name}` was configured in {result.agent_cli}.")
+        return
+
+    if args.command == "setup":
+        try:
+            result = setup_agent(
+                args.agent,
+                target_dir=args.target,
+                force_skill=args.force_skill,
+                python_bin=args.python_bin,
+            )
+        except RuntimeError as exc:
+            print(str(exc))
+            sys.exit(1)
+
+        print(f"Installed {args.agent} skill at {result.skill_path}")
+        if result.mcp_already_configured:
+            print(
+                f"MCP server `{result.mcp_server_name}` is already configured "
+                f"in {result.agent_cli}."
+            )
+        else:
+            print(
+                f"Configured MCP server `{result.mcp_server_name}` in "
+                f"{result.agent_cli} using {result.python_bin}."
+            )
+        print("Restart the agent so it picks up the new skill and MCP server.")
+        return
+
+    if args.command == "doctor":
+        if args.fix:
+            try:
+                repaired = repair_agent_setup(
+                    args.agent,
+                    target_dir=args.target,
+                    python_bin=args.python_bin,
+                )
+            except RuntimeError as exc:
+                print(str(exc))
+                sys.exit(1)
+
+            print(f"Applied fixes for {args.agent}:")
+            print(f"  Skill: {repaired.skill_action}")
+            if repaired.mcp_action == "skipped":
+                print(f"  MCP: skipped ({repaired.agent_cli} CLI not found)")
+            else:
+                print(f"  MCP: {repaired.mcp_action}")
+
+        result = inspect_agent_setup(
+            args.agent,
+            target_dir=args.target,
+            python_bin=args.python_bin,
+        )
+
+        print(f"Agent: {args.agent}")
+        print(f"Skill path: {result.skill_path}")
+        print(f"Skill status: {result.skill_state}")
+        print(f"CLI found: {result.cli_path or 'no'}")
+        print(
+            f"MCP server `{result.mcp_server_name}` configured: "
+            f"{'yes' if result.mcp_configured else 'no'}"
+        )
+
+        if result.skill_state == "installed" and result.mcp_configured:
+            print("Status: ready. Restart the agent if it was already open.")
+            return
+
+        print("Recommended next step:")
+        if result.skill_state == "missing" and not result.mcp_configured and result.cli_path:
+            print(f"  brier setup {args.agent}")
+        elif result.skill_state == "missing":
+            print(f"  brier install-skill {args.agent}")
+            if result.cli_path is None:
+                print(f"  Then install the {args.agent} CLI and run:")
+                print(f"  {result.manual_command}")
+        elif result.skill_state == "modified":
+            print(f"  brier doctor {args.agent} --fix")
+        elif result.cli_path is None:
+            print(f"  Install the {args.agent} CLI and run:")
+            print(f"  {result.manual_command}")
+        elif not result.mcp_configured:
+            print(f"  {result.manual_command}")
+        return
+
+    store_path = args.store or os.environ.get("BRIER_STORE_PATH")
+    store = DecisionStore(Path(store_path).expanduser()) if store_path else DecisionStore()
+
+    if args.command == "list":
+        if args.pending:
+            decisions = store.list_pending_review()
+            print(f"Decisions pending review ({len(decisions)}):\n")
+        elif args.unscored:
+            decisions = store.list_unscored()
+            print(f"Unscored decisions ({len(decisions)}):\n")
+        else:
+            decisions = store.list_all()
+            print(f"All decisions ({len(decisions)}):\n")
+
+        for d in decisions:
+            status = (
+                "✓ scored"
+                if d.scored_at
+                else ("⏳ pending" if d.chosen_option else "○ open")
+            )
+            print(f"  [{d.id[:8]}] {d.question[:50]} ({status})")
+
+    elif args.command == "new":
+        decision = Decision(question=args.question, context=args.context)
+        store.save(decision)
+        print(f"Created decision [{decision.id[:8]}]: {decision.question}")
+
+    elif args.command in {"market-draft", "forecast-draft"}:
+        decision = store.get(args.id_or_question)
+        if decision:
+            drafts = draft_markets_for_decision(
+                decision,
+                visibility=args.visibility,
+                tags=args.tag,
+            )
+            if not drafts:
+                print(
+                    f"Decision [{decision.id[:8]}] has no option forecasts to turn into draft questions."
+                )
+                sys.exit(1)
+            pack = market_pack_to_dict(
+                drafts,
+                title=f"Forecast drafts for {decision.question}",
+                source=f"decision:{decision.id}",
+            )
+        else:
+            try:
+                sources = [_parse_market_source(source) for source in args.source]
+            except ValueError as exc:
+                print(str(exc))
+                sys.exit(1)
+            draft = draft_binary_policy_market(
+                args.id_or_question,
+                context=args.context,
+                initial_probability=args.initial_prob,
+                close_date=_parse_optional_date(args.close_date),
+                resolution_date=_parse_optional_date(args.resolution_date),
+                resolution_rule=args.resolution_rule,
+                visibility=args.visibility,
+                sources=sources,
+                tags=args.tag,
+            )
+            pack = market_pack_to_dict(
+                [draft],
+                title=f"Forecast draft: {args.id_or_question}",
+                source="standalone-question",
+            )
+
+        if args.output:
+            output_path = Path(args.output).expanduser()
+            output_path.parent.mkdir(parents=True, exist_ok=True)
+            with open(output_path, "w") as fh:
+                json.dump(pack, fh, indent=2)
+                fh.write("\n")
+            print(f"Wrote {len(pack['markets'])} forecast draft(s) to {output_path}")
+        else:
+            print(json.dumps(pack, indent=2))
+
+    elif args.command == "show":
+        d = store.get(args.id)
+        if not d:
+            # Check if multiple matches for better error message
+            all_decisions = store.list_all()
+            matches = [dd for dd in all_decisions if dd.id.startswith(args.id)]
+            if len(matches) > 1:
+                print(f"Multiple matches for '{args.id}':")
+                for dd in matches:
+                    print(f"  {dd.id}")
+            else:
+                print(f"No decision found with ID starting with '{args.id}'")
+            sys.exit(1)
+        print(f"Decision: {d.question}")
+        print(f"ID: {d.id}")
+        print(f"Created: {d.created_at.strftime('%Y-%m-%d %H:%M')}")
+
+        if d.kpis:
+            print(f"\nKPIs:")
+            for k in d.kpis:
+                unit = f" ({k.unit})" if k.unit else ""
+                print(f"  - {k.name}{unit}: {k.description}")
+                if k.target is not None or k.weight != 1.0:
+                    details = []
+                    if k.target is not None:
+                        details.append(f"target {k.target}")
+                    if k.weight != 1.0:
+                        details.append(f"weight {k.weight:g}")
+                    print(f"      {', '.join(details)}")
+                if k.outcome_type:
+                    print(f"      outcome type: {k.outcome_type}")
+                if k.resolution_date:
+                    print(
+                        "      resolution date: "
+                        f"{k.resolution_date.strftime('%Y-%m-%d')}"
+                    )
+                if k.resolution_rule:
+                    print(f"      resolution rule: {k.resolution_rule}")
+                if k.data_source:
+                    print(f"      data source: {k.data_source}")
+
+        if d.options:
+            print(f"\nOptions:")
+            for o in d.options:
+                print(f"\n  {o.name}: {o.description}")
+                for kpi_name, f in o.forecasts.items():
+                    ci_low, ci_high = f.confidence_interval
+                    print(
+                        f"    {kpi_name}: {f.point_estimate} ({ci_low}-{ci_high} @ {f.confidence_level:.0%})"
+                    )
+
+        if d.chosen_option:
+            print(f"\nChosen: {d.chosen_option}")
+
+        if d.actual_outcomes:
+            print(f"\nActual outcomes:")
+            for k, v in d.actual_outcomes.items():
+                print(f"  {k}: {v}")
+
+    elif args.command == "calibration":
+        tracker = CalibrationTracker(store.list_all())
+        summary = tracker.summary()
+
+        print("Calibration Summary")
+        print("=" * 40)
+        print(f"Decisions scored: {summary['n_decisions']}")
+        print(f"Forecasts scored: {summary['n_forecasts']}")
+
+        if summary["coverage"] is not None:
+            print(f"\nCoverage: {summary['coverage']:.1%}")
+            print(f"Expected: {summary['expected_coverage']:.1%}")
+            print(f"\n{summary['interpretation']}")
+
+        if summary["mean_absolute_error"] is not None:
+            print(f"\nMean absolute error: {summary['mean_absolute_error']:.2f}")
+
+        if summary["mean_relative_error"] is not None:
+            print(f"Mean relative error: {summary['mean_relative_error']:.1%}")
+
+    elif args.command == "pending":
+        pending = store.list_pending_review()
+        if not pending:
+            print("No decisions pending review.")
+        else:
+            print(f"{len(pending)} decision(s) ready for review:\n")
+            for d in pending:
+                days_past = (
+                    (datetime.now() - d.review_date).days if d.review_date else 0
+                )
+                print(f"  [{d.id[:8]}] {d.question[:50]}")
+                print(f"           Review was {days_past} days ago")
+
+    elif args.command == "score":
+        # Find the decision to score
+        if args.id:
+            decisions = store.list_all()
+            matches = [d for d in decisions if d.id.startswith(args.id)]
+        else:
+            # Show unscored decisions and prompt
+            matches = store.list_unscored()
+            if not matches:
+                print("No unscored decisions to score.")
+                sys.exit(0)
+            print("Unscored decisions:\n")
+            for i, d in enumerate(matches, 1):
+                print(f"  {i}. [{d.id[:8]}] {d.question[:50]}")
+            print()
+            try:
+                choice = input("Enter number to score (or q to quit): ").strip()
+                if choice.lower() == "q":
+                    sys.exit(0)
+                idx = int(choice) - 1
+                if 0 <= idx < len(matches):
+                    matches = [matches[idx]]
+                else:
+                    print("Invalid selection.")
+                    sys.exit(1)
+            except (ValueError, EOFError):
+                print("Invalid input.")
+                sys.exit(1)
+
+        if not matches:
+            print(f"No decision found with ID starting with '{args.id}'")
+            sys.exit(1)
+        if len(matches) > 1:
+            print(f"Multiple matches for '{args.id}':")
+            for d in matches:
+                print(f"  {d.id}")
+            sys.exit(1)
+
+        d = matches[0]
+
+        if d.scored_at:
+            print(f"Decision [{d.id[:8]}] has already been scored.")
+            sys.exit(1)
+
+        if not d.chosen_option:
+            print(f"Decision [{d.id[:8]}] has no chosen option yet.")
+            sys.exit(1)
+
+        # Find the chosen option
+        chosen = None
+        for opt in d.options:
+            if opt.name == d.chosen_option:
+                chosen = opt
+                break
+
+        if not chosen:
+            print(f"Chosen option '{d.chosen_option}' not found in decision.")
+            sys.exit(1)
+
+        # Display decision and forecasts
+        print(f"\nScoring: {d.question}")
+        print(f"Chosen option: {d.chosen_option}")
+        print(f"\nOriginal forecasts:")
+        for kpi in d.kpis:
+            if kpi.name in chosen.forecasts:
+                f = chosen.forecasts[kpi.name]
+                ci_low, ci_high = f.confidence_interval
+                unit = f" {kpi.unit}" if kpi.unit else ""
+                print(
+                    f"  {kpi.name}: {f.point_estimate}{unit} ({ci_low}-{ci_high} @ {f.confidence_level:.0%})"
+                )
+                if kpi.resolution_date:
+                    print(
+                        "    resolves: "
+                        f"{kpi.resolution_date.strftime('%Y-%m-%d')}"
+                    )
+                if kpi.resolution_rule:
+                    print(f"    rule: {kpi.resolution_rule}")
+                if kpi.data_source:
+                    print(f"    data source: {kpi.data_source}")
+
+        # Gather actual outcomes
+        print(f"\nEnter actual outcomes:")
+        actual_outcomes = {}
+        for kpi in d.kpis:
+            if kpi.name in chosen.forecasts:
+                unit = f" ({kpi.unit})" if kpi.unit else ""
+                try:
+                    value = input(f"  {kpi.name}{unit}: ").strip()
+                    if value:
+                        actual_outcomes[kpi.name] = float(value)
+                except (ValueError, EOFError):
+                    print(f"  Skipping {kpi.name} (invalid input)")
+
+        if not actual_outcomes:
+            print("\nNo outcomes entered. Aborting.")
+            sys.exit(1)
+
+        # Optional reflections
+        print()
+        try:
+            reflections = input("Reflections (optional, press Enter to skip): ").strip()
+        except EOFError:
+            reflections = ""
+
+        # Update decision
+        d.actual_outcomes = actual_outcomes
+        d.scored_at = datetime.now()
+        d.reflections = reflections
+        store.update(d)
+
+        # Show results
+        print(f"\nDecision scored!")
+        print(f"\nResults:")
+        for kpi_name, actual in actual_outcomes.items():
+            f = chosen.forecasts[kpi_name]
+            ci_low, ci_high = f.confidence_interval
+            in_ci = "✓" if ci_low <= actual <= ci_high else "✗"
+            error = actual - f.point_estimate
+            print(
+                f"  {kpi_name}: predicted {f.point_estimate}, actual {actual} (error: {error:+.2f}) {in_ci}"
+            )
+
+        # Show updated calibration
+        tracker = CalibrationTracker(store.list_all())
+        if tracker.scores:
+            print(
+                f"\nCalibration: {tracker.coverage:.0%} coverage ({tracker.expected_coverage:.0%} expected)"
+            )
+
+    else:
+        parser.print_help()
+
+
+def _parse_optional_date(value: str | None) -> datetime | None:
+    """Parse a CLI date value in YYYY-MM-DD form."""
+    if not value:
+        return None
+    try:
+        return datetime.fromisoformat(value)
+    except ValueError:
+        raise SystemExit(f"Invalid date: {value}. Use YYYY-MM-DD.")
+
+
+def _parse_market_source(value: str) -> MarketSource:
+    """Parse a source argument of the form 'Title|URL'."""
+    if "|" not in value:
+        raise ValueError("Sources must be passed as 'Title|URL'.")
+    title, url = value.split("|", 1)
+    title = title.strip()
+    url = url.strip()
+    if not title or not url:
+        raise ValueError("Sources must include both a title and URL.")
+    return MarketSource(title=title, url=url)
+
+
+if __name__ == "__main__":
+    main()
