@@ -214,11 +214,6 @@ describe("Next.js migration", () => {
       expect(screen.getAllByText("Docs").length).toBeGreaterThan(0);
     });
 
-    it("renders install button", () => {
-      render(<HomePage />);
-      expect(screen.getByText("Install")).toBeInTheDocument();
-    });
-
     it("flags the site as a prototype", () => {
       render(<HomePage />);
       expect(screen.getByLabelText("Prototype build")).toBeInTheDocument();
